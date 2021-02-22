@@ -50,3 +50,4 @@ Slackと連携するリフルリモート会社向けWebサービス
 [show_profile](https://xd.adobe.com/view/cb862b4a-0de1-4758-85b3-3f0a00068cf6-9ed5/)
 
 # ER図
+[プロフィール公開機能のER図](https://drive.google.com/file/d/1pW12b2TSxHrzDs3K9VegpUCwETd3dkdx/view)
