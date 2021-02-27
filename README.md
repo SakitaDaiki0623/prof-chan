@@ -39,7 +39,7 @@ Slackと連携するリフルリモート会社向けWebサービス
 - 新入社員がその人への印象などをメモできる（相手には分からないように）
 - 趣味、趣向などから検索できる
 
-[オプション]  
+[オプション]
 
 ※技術的再現性は考慮してません。
 
@@ -48,3 +48,6 @@ Slackと連携するリフルリモート会社向けWebサービス
 
 # 画面遷移図
 [show_profile](https://xd.adobe.com/view/cb862b4a-0de1-4758-85b3-3f0a00068cf6-9ed5/)
+
+# ER図
+[プロフィール公開機能のER図](https://drive.google.com/file/d/1pW12b2TSxHrzDs3K9VegpUCwETd3dkdx/view)
