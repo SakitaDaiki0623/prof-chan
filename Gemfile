@@ -9,6 +9,9 @@ gem 'rails', '6.0.3.5'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
+# Config
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+
 # Database
 gem 'mysql2', '>= 0.4.4'
 gem 'redis-rails'
