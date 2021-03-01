@@ -21,7 +21,10 @@ gem 'puma', '~> 4.1'
 
 # UI/UX
 gem 'jbuilder', '~> 2.7'
+gem "tailwindcss-rails", "~> 0.3.3"
 # gem 'turbolinks', '~> 5'
+gem 'slim-rails'
+gem 'html2slim'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
