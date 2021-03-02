@@ -10,7 +10,10 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
 # Config
+gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+# 使用しているrubyのバージョンに合わせるためにparserのバージョンを下げる
+gem 'parser', '< 2.6.6.0'
 
 # Database
 gem 'mysql2', '>= 0.4.4'
@@ -56,6 +59,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
   gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do
