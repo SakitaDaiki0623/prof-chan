@@ -35,5 +35,9 @@ module ShowProfile
       g.skip_routes true
       g.test_framework false
     end
+
+    # i18nによる日本語対応----------
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]
   end
 end
