@@ -17,3 +17,7 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 import "stylesheets/application"
+
+// app/javascript/packs/application.js
+// Tailwindの読み込み----------------------
+import '../css/tailwind.scss';

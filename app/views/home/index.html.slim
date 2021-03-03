@@ -3,8 +3,12 @@
     | あなたと社員をより近く
   h1.text-8xl.home-title
     | Show Profile
-  .mt-24.text-4xl.text-white.font-bold
-    = link_to  "Slackログインする", root_path, class: 'bg-green-700 hover:bg-green-500 py-4 px-8 rounded-lg'
+  - if current_user
+    .mt-24.text-4xl.text-white.font-bold
+      = link_to  "Logout", logout_path, method: :delete, class: 'slack-green-btn'
+  - else
+    .mt-24.text-4xl.font-bold
+      = link_to  "Slackログインする", login_path, class: 'slack-green-btn'
 
 .mt-32.text-center
   = link_to  "Show Profile とは", '#', class: 'text-2xl font-bold hover:opacity-70'
