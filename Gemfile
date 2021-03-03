@@ -9,6 +9,9 @@ gem 'rails', '6.0.3.5'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
+# Authentication
+gem 'sorcery'
+
 # Config
 gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
