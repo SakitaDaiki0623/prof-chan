@@ -1,0 +1,14 @@
+# config/locales/views.ja.yml
+ja:
+  defaults:
+  home:
+    index:
+      about_show_profile: "Show Profile とは"
+      app_name: "Show Profile"
+      catchphrase: "あなたと社員をより近く"
+      logout: "ログアウト"
+      slack_login: "Slackログイン"
+      terms_of_use: "利用規約"
+  user_sessions:
+    new:
+      title: "ログイン"
