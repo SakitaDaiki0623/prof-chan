@@ -1,0 +1,50 @@
+// app/javascript/css/tailwind.scss
+//  Use Tailwind
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// 入力フォーム
+.input-form {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-yellow-500;
+    @apply ring-2;
+    @apply ring-yellow-200;
+  }
+}
+
+// 入力フォームラベル
+.form-label {
+  @apply leading-7;
+  @apply text-sm;
+  @apply text-gray-600;
+}
+
+// 緑色slackボタン
+.slack-green-btn {
+  @apply bg-green-700;
+  @apply py-4;
+  @apply px-8;
+  @apply rounded-lg;
+  @apply text-white;
+  @apply text-white;
+
+  &:hover {
+    @apply bg-green-500;
+  }
+}
