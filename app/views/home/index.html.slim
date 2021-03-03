@@ -1,17 +1,11 @@
-.mt-64.text-center
+.mt-20.text-center
   p.mb-6.font-mono.tracking-widest
     = t '.catchphrase'
   h1.text-8xl.home-title
     = t '.app_name'
   - if current_user
-    .mt-24.text-4xl.text-white.font-bold
-      = link_to  (t '.logout'), logout_path, method: :delete, class: 'slack-green-btn'
   - else
     .mt-24.text-4xl.font-bold
       = link_to (t '.slack_login'), login_path, class: 'slack-green-btn'
-
-.mt-32.text-center
-  = link_to  (t '.about_show_profile'), '#', class: 'text-2xl font-bold hover:opacity-70'
-  br
-  br
-  = link_to  (t '.terms_of_use'), '#', class: 'text-sm hover:opacity-70'
+    .mt-32.text-center
+      = link_to  (t '.about_show_profile'), '#', class: 'text-2xl font-bold hover:opacity-70'

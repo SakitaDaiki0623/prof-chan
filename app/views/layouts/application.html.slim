@@ -10,4 +10,10 @@ html
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    - if logged_in?
+      = render 'shared/header'
+    - else
+      = render 'shared/before_login_header'
+
     = yield
+    = render  "shared/footer"

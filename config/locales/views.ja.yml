@@ -1,6 +1,8 @@
 # config/locales/views.ja.yml
 ja:
   defaults:
+    logout: "ログアウト"
+    slack_login: "Slackログイン"
   home:
     index:
       about_show_profile: "Show Profile とは"
