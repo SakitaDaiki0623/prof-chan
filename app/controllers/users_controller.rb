@@ -1,4 +1,4 @@
-# TODO:後ほど削除予定
+# TODO: 後ほど削除予定
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
