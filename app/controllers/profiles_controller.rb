@@ -1,13 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :check_profile_present, only: %i[new create]
 
-  def index
-  end
+  def index; end
 
   def create
     @profile = current_user.build_profile(profile_params)
-
-    binding.pry
 
     if @profile.save
       flash[:success] = 'プロフィール作成が完了しました'
@@ -18,17 +15,13 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
-  def show
-  end
+  def show; end
 
-  def update
-  end
+  def update; end
 
-  def destroy
-  end
+  def destroy; end
 
   def new
     @profile = current_user.build_profile
