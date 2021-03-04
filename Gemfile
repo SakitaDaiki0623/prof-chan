@@ -12,6 +12,9 @@ gem 'webpacker', '~> 4.0'
 # Authentication
 gem 'sorcery'
 
+# Application server
+gem 'puma', '~> 4.1'
+
 # Config
 gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
@@ -22,8 +25,8 @@ gem 'parser', '< 2.6.6.0'
 gem 'mysql2', '>= 0.4.4'
 gem 'redis-rails'
 
-# Application server
-gem 'puma', '~> 4.1'
+# Model
+gem 'enum_help'
 
 # UI/UX
 gem 'rails-i18n'
