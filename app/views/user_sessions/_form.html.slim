@@ -1,8 +1,8 @@
 = form_with(model: user, local: true) do |f|
-  .form-group
+  div
     = f.label :email, User.human_attribute_name(:email), class: 'form-label'
     = f.email_field :email, class: 'input-form'
-  .form-group
+  div
     = f.label :password, User.human_attribute_name(:password), class: 'form-label'
     = f.password_field :password, class: 'input-form'
   .mt-10.text-center
