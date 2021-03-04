@@ -1,6 +1,7 @@
 # config/locales/views.ja.yml
 ja:
   defaults:
+    create: "作成"
     logout: "ログアウト"
     slack_login: "Slackログイン"
   home:
@@ -14,3 +15,6 @@ ja:
   user_sessions:
     new:
       title: "ログイン"
+  profiles:
+    new:
+      title: "プロフィール作成画面"
