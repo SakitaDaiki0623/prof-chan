@@ -1,10 +1,14 @@
 # app/controllers/user_sessions_controller.rb
 class UserSessionsController < ApplicationController
+  skip_before_action :require_login, only: %i[create new]
+
+  def new; end
+
   def create
     @user = login(params[:email], params[:password])
 
     if @user
-      redirect_back_or_to(:root, notice: 'Login successful')
+      redirect_back_or_to(new_profile_path, notice: 'Login successful')
     else
       flash.now[:alert] = 'Login failed'
       render action: 'new'
