@@ -1,6 +1,5 @@
 // app/views/shared/_flash_message.html.slim
-/ TODO: メッセージタイプによってフラッシュメッセージの色を切り替えられるように実装
 -  if flash.present?
   - flash.each do |message_type, message|
-    .text-white.px-6.py-4.border-0.rounded.relative.mb-4.bg-green-300.text-center.font-bold
+    .text-center.font-bold class="#{message_type}"
       = message

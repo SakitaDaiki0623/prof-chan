@@ -47,3 +47,21 @@
     @apply bg-green-500;
   }
 }
+
+// フラッシュメッセージ
+
+.notice {
+  @apply bg-yellow-100;
+  @apply border-l-4;
+  @apply border-yellow-500;
+  @apply text-yellow-700;
+  @apply p-4;
+}
+
+.alert {
+  @apply bg-red-100;
+  @apply border-l-4;
+  @apply border-red-500;
+  @apply text-red-700;
+  @apply p-4;
+}
