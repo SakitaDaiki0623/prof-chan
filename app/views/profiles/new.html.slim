@@ -1,0 +1,6 @@
+// TODO:Vue.jsを用いて一問一答形式のSPA化
+.min-h-screen.flex.flex-col.items-center.justify-center
+  .flex.flex-col.bg-beaver-50.font-light.shadow-md.px-4.sm:w-full.md:lg:px-10.py-8.rounded-md.w-full.max-w-md
+    h2.text-gray-600.text-lg.font-medium.title-font.mb-3.self-center
+      = t '.title'
+      = render  "form", profile: @profile

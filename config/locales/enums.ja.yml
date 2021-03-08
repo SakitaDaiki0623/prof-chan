@@ -1,0 +1,7 @@
+# config/locales/enums.ja.yml
+ja:
+  enums:
+    profile:
+      gender:
+        male: "男性"
+        female: "女性"

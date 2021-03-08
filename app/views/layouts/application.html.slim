@@ -9,11 +9,12 @@ html
     / = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body.flex.flex-col.min-h-screen
     - if logged_in?
       = render 'shared/header'
     - else
       = render 'shared/before_login_header'
-
-    = yield
+    .flex-grow
+      = render  "shared/flash_message"
+      = yield
     = render  "shared/footer"

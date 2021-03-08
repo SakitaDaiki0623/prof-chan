@@ -1,3 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper TailwindHelper
+  before_action :require_login
+
+  # helper TailwindHelper
 end

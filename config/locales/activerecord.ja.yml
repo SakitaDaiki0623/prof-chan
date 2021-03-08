@@ -3,9 +3,16 @@ ja:
   activerecord:
     models:
       user: 'ユーザー'
+      profile: 'プロフィール'
     attributes:
       user:
         name: '名前'
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
+      profile:
+        birthday: '生年月日'
+        day_of_joinning: '入社日'
+        introduction: '自己紹介'
+        height: '身長'
+        gender: '性別'
