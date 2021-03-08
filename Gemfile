@@ -11,6 +11,8 @@ gem 'webpacker', '~> 4.0'
 
 # Authentication
 gem 'sorcery'
+gem 'omniauth'
+gem 'omniauth-slack'
 
 # Application server
 gem 'puma', '~> 4.1'
