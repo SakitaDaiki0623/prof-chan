@@ -93,3 +93,6 @@ yarn-debug.log*
 
 # ignore app/assets/images
 /app/assets/images/
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
