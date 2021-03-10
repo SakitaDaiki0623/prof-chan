@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = []
+Rails.application.config.sorcery.submodules = [:external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -80,7 +80,7 @@ Rails.application.config.sorcery.configure do |config|
   # i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack, :line].
   # Default: `[]`
   #
-  # config.external_providers =
+  config.external_providers = [:slack]
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
@@ -181,10 +181,18 @@ Rails.application.config.sorcery.configure do |config|
   # config.vk.user_info_mapping = {:login => "domain", :name => "full_name"}
   # config.vk.api_version = "5.71"
   #
+  config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
+  config.slack.key = Rails.application.credentials.dig(:slack, :client_id)
+  config.slack.secret = Rails.application.credentials.dig(:slack, :client_secret)
+  config.slack.user_info_mapping = {
+    email: 'email'
+  }
+  # 元々のコメントアウトされていたsorceryのslackログインの設定----------------------
   # config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
   # config.slack.key = ''
   # config.slack.secret = ''
   # config.slack.user_info_mapping = {email: 'email'}
+
   #
   # To use liveid in development mode you have to replace mydomain.com with
   # a valid domain even in development. To use a valid domain in development
@@ -533,7 +541,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
     # User's identifier in the `authentications` class.
     # Default: `:user_id`
