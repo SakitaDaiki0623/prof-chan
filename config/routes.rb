@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
 
   # oauthログイン用のルーティング
-  post "oauth/callback", to: "oauths#callback"
-  get "oauth/callback", to: "oauths#callback"
-  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+  # post "oauth/callback", to: "oauths#callback"
+  # get "oauth/callback", to: "oauths#callback"
+  # get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+
+  # omniauthのルーティング
+  get 'auth/slack/callback', to: 'auth#callback'
 end
