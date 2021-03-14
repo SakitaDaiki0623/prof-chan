@@ -181,12 +181,12 @@ Rails.application.config.sorcery.configure do |config|
   # config.vk.user_info_mapping = {:login => "domain", :name => "full_name"}
   # config.vk.api_version = "5.71"
   #
-  config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
-  config.slack.key = Rails.application.credentials.dig(:slack, :client_id)
-  config.slack.secret = Rails.application.credentials.dig(:slack, :client_secret)
-  config.slack.user_info_mapping = {
-    email: 'email'
-  }
+  # config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
+  # config.slack.key = Rails.application.credentials.dig(:slack, :client_id)
+  # config.slack.secret = Rails.application.credentials.dig(:slack, :client_secret)
+  # config.slack.user_info_mapping = {
+  #   email: 'email'
+  # }
   # 元々のコメントアウトされていたsorceryのslackログインの設定----------------------
   # config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
   # config.slack.key = ''
