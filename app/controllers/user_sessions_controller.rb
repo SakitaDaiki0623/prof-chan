@@ -1,6 +1,6 @@
 # app/controllers/user_sessions_controller.rb
 class UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[create new]
+  # skip_before_action :require_login, only: %i[create new]
 
   def new; end
 

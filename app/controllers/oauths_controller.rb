@@ -1,6 +1,6 @@
 # app/controllers/oauths_controller.rb
 class OauthsController < ApplicationController
-  skip_before_action :require_login
+  # skip_before_action :require_login
 
   def oauth
     login_at(auth_params[:provider])
@@ -8,7 +8,6 @@ class OauthsController < ApplicationController
 
   def callback
     provider = auth_params[:provider]
-    binding.pry
     if (@user = login_from(provider))
       redirect_to root_path, notice: "#{provider.titleize}でログインしました"
     else
