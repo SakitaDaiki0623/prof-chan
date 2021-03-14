@@ -3,11 +3,10 @@
     = t '.catchphrase'
   h1.text-8xl.home-title
     = t '.app_name'
-  - if current_user
-    h3
-    | ログイン成功
-  - else
-    .mt-24
-      = link_to (t '.slack_login'), auth_at_provider_path(:provider => :slack), class: 'slack-green-btn'
-    .mt-32.text-center
-      = link_to  (t '.about_show_profile'), '#', class: 'text-2xl font-bold hover:opacity-70'
+  .mt-24.inline-block
+    / = slack_sign_in_link proceed_to: create_session_url do
+    /   div.inline-block
+    /     = slack_sign_in_image
+    = sign_in_with_slack_button
+  .mt-32.text-center
+    = link_to  (t '.about_show_profile'), '#', class: 'text-2xl font-bold hover:opacity-70'
