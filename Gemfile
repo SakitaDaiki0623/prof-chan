@@ -12,6 +12,14 @@ gem 'webpacker', '~> 4.0'
 # Authentication
 gem 'sorcery'
 
+# Oauth2 strategy for Slack
+gem 'oauth2', '>= 1.4.4'
+gem 'ginjo-omniauth-slack', require:'omniauth-slack'
+gem 'omniauth-oauth2', '>= 1.4.0'
+gem "omniauth-rails_csrf_protection"
+# インストールのみ
+gem 'slack-ruby-client'
+
 # Application server
 gem 'puma', '~> 4.1'
 
