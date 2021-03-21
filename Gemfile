@@ -9,14 +9,15 @@ gem 'rails', '6.0.3.5'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
-# Authentication
-gem 'sorcery'
+# Authentication for Slack
 
-# Oauth2 strategy for Slack
-gem 'oauth2', '>= 1.4.4'
+# Oauth strategy for Slack
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
-gem 'omniauth-oauth2', '>= 1.4.0'
+gem 'oauth2', '>= 1.4.4'
+gem 'omniauth-oauth2'
 gem "omniauth-rails_csrf_protection"
+
 # インストールのみ
 gem 'slack-ruby-client'
 
@@ -26,7 +27,6 @@ gem 'puma', '~> 4.1'
 # Config
 gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
-# 使用しているrubyのバージョンに合わせるためにparserのバージョンを下げる
 gem 'parser', '< 2.6.6.0'
 
 # Database
@@ -93,10 +93,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# -----------------使用するか決めていないgem-----------------
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'	# gem 'redis', '~> 4.0'
-
-# Use Active Model has_secure_password	# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'	# gem 'bcrypt', '~> 3.1.7'
