@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :check_profile_present, only: %i[new create]
 
   def index; end
 
@@ -27,6 +28,10 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def check_profile_present
+    redirect_to profiles_path if current_user.profile.present?
+  end
 
   def profile_params
     params.require(:profile).permit(:birthday, :day_of_joinning, :introduction, :height, :gender)
