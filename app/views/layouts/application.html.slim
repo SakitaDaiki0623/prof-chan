@@ -10,7 +10,7 @@ html
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body.flex.flex-col.min-h-screen
-    - if logged_in?
+    - if user_signed_in?
       = render 'shared/header'
     - else
       = render 'shared/before_login_header'
