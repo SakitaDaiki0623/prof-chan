@@ -10,15 +10,13 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
 # Authentication for Slack
-
-# Oauth strategy for Slack
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 gem 'oauth2', '>= 1.4.4'
 gem 'omniauth-oauth2'
 gem "omniauth-rails_csrf_protection"
 
-# インストールのみ
+# General Gem fof Slack API
 gem 'slack-ruby-client'
 
 # Application server
@@ -38,9 +36,9 @@ gem 'enum_help'
 
 # UI/UX
 gem 'rails-i18n'
+gem 'devise-i18n'
 gem 'jbuilder', '~> 2.7'
 gem "tailwindcss-rails", "~> 0.3.3"
-# gem 'turbolinks', '~> 5'
 gem 'slim-rails'
 gem 'html2slim'
 
