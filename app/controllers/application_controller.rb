@@ -1,5 +1,16 @@
 class ApplicationController < ActionController::Base
-  # before_action :require_login
+  before_action :authenticate_user!
+# helper TailwindHelper
 
-  # helper TailwindHelper
+  # Divise認証時に分岐
+  # TODO: フラッシュメッセージが反映されない
+  def after_sign_in_path_for(resource)
+    if current_user.profile
+      flash[:notice] = "ログインに成功しました"
+      profiles_path
+    else
+      flash[:notice] = "新規登録完了しました。次にプロフィールを作成してください"
+      new_profile_path
+    end
+  end
 end

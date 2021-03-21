@@ -1,3 +1,15 @@
+GIT
+  remote: https://github.com/heartcombo/devise.git
+  revision: e16d60d0fedc5f5e6f541b2b9e901a2d53f8ceda
+  branch: ca-omniauth-2
+  specs:
+    devise (4.7.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,6 +102,8 @@ GEM
     crass (1.0.6)
     debug_inspector (1.0.0)
     deep_merge (1.2.1)
+    devise-i18n (1.9.3)
+      devise (>= 4.7.1)
     diff-lcs (1.4.4)
     docile (1.3.5)
     dotenv (2.7.6)
@@ -196,23 +210,22 @@ GEM
     nio4r (2.5.5)
     nokogiri (1.11.1-x86_64-darwin)
       racc (~> 1.4)
-    oauth (0.5.5)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    omniauth (2.0.3)
+    omniauth (1.9.1)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
-      rack-protection
     omniauth-oauth2 (1.7.1)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
-    omniauth-rails_csrf_protection (1.0.0)
+    omniauth-rails_csrf_protection (0.1.2)
       actionpack (>= 4.2)
-      omniauth (~> 2.0)
+      omniauth (>= 1.3.1)
+    orm_adapter (0.5.0)
     parallel (1.20.1)
     parser (2.6.5.0)
       ast (~> 2.4.0)
@@ -232,8 +245,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
-    rack-protection (2.1.0)
-      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -299,6 +310,9 @@ GEM
       redis (>= 4, < 5)
     regexp_parser (2.1.1)
     require_all (3.0.0)
+    responders (3.0.1)
+      actionpack (>= 5.0)
+      railties (>= 5.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -367,10 +381,6 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
-    sorcery (0.16.0)
-      bcrypt (~> 3.1)
-      oauth (~> 0.4, >= 0.4.4)
-      oauth2 (~> 1.0, >= 0.8.0)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -393,6 +403,8 @@ GEM
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.1)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -424,6 +436,8 @@ DEPENDENCIES
   byebug
   capybara
   config
+  devise!
+  devise-i18n
   dotenv-rails
   enum_help
   factory_bot_rails
@@ -436,7 +450,7 @@ DEPENDENCIES
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
   oauth2 (>= 1.4.4)
-  omniauth-oauth2 (>= 1.4.0)
+  omniauth-oauth2
   omniauth-rails_csrf_protection
   parser (< 2.6.6.0)
   pry
@@ -457,7 +471,6 @@ DEPENDENCIES
   simplecov
   slack-ruby-client
   slim-rails
-  sorcery
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)

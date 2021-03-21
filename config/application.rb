@@ -28,6 +28,9 @@ module ShowProfile
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # Load CustomFailure for Devise Authentication
+    config.autoload_paths << Rails.root.join('lib')
+
     # Prevent the $ rails g from generating assets, helper, test files and routing
     config.generators do |g|
       g.assets false

@@ -4,9 +4,7 @@
   h1.text-8xl.home-title
     = t '.app_name'
   .mt-24.inline-block
-    / = slack_sign_in_link proceed_to: create_session_url do
-    /   div.inline-block
-    /     = slack_sign_in_image
-    = sign_in_with_slack_button
+    = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png", width: '200', alt: "Sign in with Slack"), user_slack_omniauth_authorize_path, method: :post
+
   .mt-32.text-center
     = link_to  (t '.about_show_profile'), '#', class: 'text-2xl font-bold hover:opacity-70'
