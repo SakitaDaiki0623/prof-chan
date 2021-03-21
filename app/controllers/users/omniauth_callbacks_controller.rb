@@ -1,18 +1,13 @@
 # User callbacks
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :authenticate_user!
   def slack
-    
-    binding.pry
-    
-    @user = User.from_omniauth(request.env['omniauth.auth'], request.env['omniauth.strategy'])
+
+    @user_token = request.env['omniauth.strategy'].access_token.user_token
+    @user = User.from_omniauth(request.env['omniauth.auth'], @user_token)
 
     if @user.persisted?
-      if @user.profile.present?
-        sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: 'Slack') if is_navigational_format?
-      else
-        redirect_to new_profile_path
-      end
+      sign_in_and_redirect @user, event: :authentication
     else
       redirect_to root_path
     end
