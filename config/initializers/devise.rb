@@ -288,8 +288,7 @@ Devise.setup do |config|
 #                   'channels:history,channels:read,reactions:read,users:read.email,users.profile:read',
 #                 strategy_class: OmniAuth::Strategies::Slack
 
-  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic,identity.email,identity.avatar,identity.team'
-  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], scope: 'team:read,users:read,users.profile:read,'
+  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic,identity.email,identity.avatar,identity.team', scope: 'team:read,users:read'
 
   # scope: 'team:read,users:read,identify,bot'
 
@@ -297,10 +296,11 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.failure_app = CustomFailure
+    # manager.intercept_401 = false
+    # manager.default_strategies(scope: :user).unshift :some_external_strategy
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
