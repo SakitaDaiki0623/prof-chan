@@ -273,24 +273,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-#   config.omniauth :slack_app,
-#                 ENV['SLACK_CLIENT_ID'],
-#                 ENV['SLACK_CLIENT_SECRET'],
-#                 name: 'slack_app',
-#                 scope: 'identity.basic',
-#                 strategy_class: OmniAuth::Strategies::Slack
-
-# config.omniauth :slack_integration,
-#                 ENV['SLACK_INTEGRATION_CLIENT_ID'],
-#                 ENV['SLACK_INTEGRATION_CLIENT_SECRET'],
-#                 name: 'slack_integration',
-#                 scope:
-#                   'channels:history,channels:read,reactions:read,users:read.email,users.profile:read',
-#                 strategy_class: OmniAuth::Strategies::Slack
-
-  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic,identity.email,identity.avatar,identity.team', scope: 'team:read,users:read'
-
-  # scope: 'team:read,users:read,identify,bot'
+  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic,identity.email,identity.avatar,identity.team ', scope: 'team:read,users:read'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
