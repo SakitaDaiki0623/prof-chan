@@ -42,16 +42,14 @@ class User < ApplicationRecord
 
 
   # Deviseによる外部認証時にAPI情報をUserのカラムに格納
-  def self.from_omniauth(auth, user_token)
+  def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
-    user_info = user_token.get("/api/users.identity").parsed.dig("user")
-    user.name = user_info["name"]
-    user.image = user_info["image_72"]
-    user.email = user_info["email"]
-    user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
-    user.provider = auth.provider
     user.slack_credential_token = auth.credentials.token
-    user.team_id = auth.extra.raw_info.team.id
+    user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
+    user.name = user_info.dig("user", "name")
+    user.email = user_info.dig("user","email")
+    user.image = user_info.dig("user", "image_192")
+    user.team_id = user_info.dig("team", "id")
     user.save
     user
   end
