@@ -20,7 +20,11 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+# Turn on "test mode" for OmniAuth
+OmniAuth.config.test_mode = true
+
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -61,4 +65,10 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # settings to let developers use FactoryBot without writing "FactoryBot"
+  config.include FactoryBot::Syntax::Methods
+
+  # Include Helper --------------------
+  config.include OmniAuthHelpers
 end
