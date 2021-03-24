@@ -3,7 +3,7 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Slack < OmniAuth::Strategies::OAuth2
-      option :client_options, site: 'https://slack.com', authorize_url: 'oauth/v2/authorize', token_url: 'api/oauth.v2.access', auth_scheme: :basic_auth, raise_errors: false, history: Array.new
+      option :client_options, site: 'https://slack.com', authorize_url: 'oauth/v2/authorize', token_url: 'api/oauth.v2.access', auth_scheme: :basic_auth, raise_errors: false, history: []
       option :authorize_options, %i[scope state user_scope]
 
       uid do

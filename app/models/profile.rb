@@ -30,8 +30,6 @@ class Profile < ApplicationRecord
   validates :day_of_joinning, presence: true
 
   def birthday_cannot_be_in_the_future
-    if birthday.present? && birthday > Date.today
-      errors.add(:birthday, "に未来の日付は使えません")
-    end
+    errors.add(:birthday, 'に未来の日付は使えません') if birthday.present? && birthday > Time.zone.today
   end
 end
