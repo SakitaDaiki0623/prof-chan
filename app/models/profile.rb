@@ -21,9 +21,11 @@ class Profile < ApplicationRecord
   belongs_to :user
 
   enum gender: { male: 0, female: 1 }
+  enum blood_type: { A: 0, B: 1, AB: 2, O: 3 }
 
   validates :height, presence: true, numericality: true
   validates :gender, presence: true
+  validates :blood_type, presence: true
   validates :introduction, length: { maximum: 2000 }
   validates :birthday, presence: true
   validate  :birthday_cannot_be_in_the_future
