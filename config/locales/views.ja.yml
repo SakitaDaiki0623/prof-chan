@@ -4,11 +4,12 @@ ja:
     create: "作成"
     logout: "ログアウト"
     slack_login: "Slackログイン"
+    about_prof: "プロフちゃん とは"
   home:
     index:
-      about_show_profile: "Show Profile とは"
-      app_name: "Show Profile"
+      app_name: "プロフちゃん"
       catchphrase: "あなたと社員をより近く"
+      description: "Withコロナ時代のフルリモート社員に贈る社員プロフィール公開サービス"
       logout: "ログアウト"
       slack_login: "Slackログイン"
       terms_of_use: "利用規約"
