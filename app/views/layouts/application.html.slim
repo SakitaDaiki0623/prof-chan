@@ -8,7 +8,7 @@ html
     = csp_meta_tag
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body.flex.flex-col.min-h-screen
+  body
     - if user_signed_in?
       = render 'shared/header'
     - else
@@ -16,4 +16,3 @@ html
     .flex-grow
       = render  "shared/flash_message"
       = yield
-    = render  "shared/footer"
