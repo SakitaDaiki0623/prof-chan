@@ -449,8 +449,6 @@ DEPENDENCIES
   letter_opener_web
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
-  oauth2 (>= 1.4.4)
-  omniauth-oauth2
   omniauth-rails_csrf_protection
   parser (< 2.6.6.0)
   pry
