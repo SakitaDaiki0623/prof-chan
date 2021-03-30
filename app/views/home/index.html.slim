@@ -1,10 +1,20 @@
-.mt-20.text-center
-  p.mb-6.font-mono.tracking-widest
-    = t '.catchphrase'
-  h1.text-8xl.home-title
-    = t '.app_name'
-  .mt-24.inline-block
-    = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png", width: '200', alt: "Sign in with Slack"), user_slack_omniauth_authorize_path, method: :post
+// トップ画面
+.bg-indigo-100.pl-40.pt-32
+  .text-left
+    p.font-mono.tracking-widest
+      = t '.catchphrase'
+    h1.text-8xl.mt-6
+      = t '.app_name'
+    p.mt-6
+      = t '.description'
+    .mt-20.inline-block
+      = link_to 'Slackでログインする', user_slack_omniauth_authorize_path, method: :post, class: 'slack-btn'
+  // トップ画像
+  = image_tag "top_bg", class: 'absolute right-20 top-20 w-1/5 mr-48'
 
-  .mt-32.text-center
-    = link_to  (t '.about_show_profile'), '#', class: 'text-2xl font-bold hover:opacity-70'
+// アプリ説明: 概要
+
+
+
+
+// アプリ説明2

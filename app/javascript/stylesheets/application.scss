@@ -4,17 +4,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-// FIXME: Google Fontsのインストール方法が正しいかどうかが不明
-// Use Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
-
-//TODO: フォントやテキストカラー等の全体に提供するスタイルが未完了
 body {
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
+  font-family: "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro",
+    "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
+    sans-serif;
   --tw-text-opacity: 1;
   color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
 
-.home-title {
-  font-family: 'Noto Serif';
-}
