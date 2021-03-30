@@ -8,7 +8,11 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'prof-default': ['TsukuARdGothic-Regular','klee','Hannotate SC','Chalkboard SE','Comic Sans MS', 'sans-serif'],
+      }
+    },
   },
   variants: {
     extend: {},
