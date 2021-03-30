@@ -8,11 +8,8 @@ html
     = csp_meta_tag
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    - if user_signed_in?
-      = render 'shared/header'
-    - else
-      = render 'shared/before_login_header'
+  body.text-gray-600
+    = render 'shared/header'
     .flex-grow
       = render  "shared/flash_message"
       = yield
