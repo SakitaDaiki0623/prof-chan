@@ -31,6 +31,7 @@ gem 'redis-rails'
 
 # Model
 gem 'enum_help'
+gem 'active_hash'
 
 # UI/UX
 gem 'rails-i18n'

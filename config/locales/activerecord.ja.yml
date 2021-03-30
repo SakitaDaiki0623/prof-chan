@@ -17,3 +17,4 @@ ja:
         height: '身長'
         gender: '性別'
         blood_type: '血液型'
+        prefecture_id: '県名'
