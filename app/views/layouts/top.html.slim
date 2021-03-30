@@ -1,0 +1,14 @@
+/ app/views/layouts/application.html.slim
+doctype html
+html
+  head
+    title
+      | ShowProfile
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag "application", "data-turbo-track": "reload"
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .flex-grow
+      = render  "shared/flash_message"
+      = yield
