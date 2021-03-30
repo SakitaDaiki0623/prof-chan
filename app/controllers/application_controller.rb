@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   # helper TailwindHelper
 
   # Divise認証時に分岐
-  # TODO: フラッシュメッセージが反映されない
   def after_sign_in_path_for(user)
     if user.profile
       flash[:notice] = 'ログインに成功しました'
