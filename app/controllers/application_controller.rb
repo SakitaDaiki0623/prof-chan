@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   # Divise認証時に分岐
   # TODO: フラッシュメッセージが反映されない
-  def after_sign_in_path_for
-    if current_user.profile
+  def after_sign_in_path_for(user)
+    if user.profile
       flash[:notice] = 'ログインに成功しました'
       profiles_path
     else
