@@ -13,9 +13,6 @@ ja:
       logout: ログアウト
       slack_login: Slackログイン
       terms_of_use: 利用規約
-  user_sessions:
-    new:
-      title: ログイン
   profiles:
     new:
       basic_info: ★基本情報★

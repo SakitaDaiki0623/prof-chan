@@ -8,7 +8,7 @@
     p.mt-6
       = t '.description'
     .mt-20.inline-block
-      = link_to 'Slackでログインする', user_slack_omniauth_authorize_path, method: :post, class: 'slack-btn'
+      = link_to ( t'.slack_login'), user_slack_omniauth_authorize_path, method: :post, class: 'slack-btn'
   // トップ画像
   = image_tag "top_bg", class: 'absolute right-20 top-20 w-1/5 mr-48'
 
