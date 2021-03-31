@@ -1,2 +1,29 @@
-h1 Profiles#index
-p Find me in app/views/profiles/index.html.slim
+.flex.items-center.h-screen.w-full.justify-center
+  .max-w-xs
+    - @profiles.each do |profile|
+      .bg-white.shadow-xl.rounded-lg.py-3.w-64
+        .photo-wrapper.p-2
+          = image_tag  profile.user.image, class: 'w-32 h-32 rounded-full mx-auto'
+        .p-2
+          h3.text-center.text-xl.text-gray-900.font-medium.leading-8
+            = profile.user.name
+          table.text-xs.my-3
+            tbody
+              tr
+                td.px-2.py-2.text-gray-500.font-semibold
+                  = Profile.human_attribute_name(:height)
+                td.px-2.py-2
+                  = profile.height
+              tr
+                td.px-2.py-2.text-gray-500.font-semibold
+                  = Profile.human_attribute_name(:blood_type)
+                td.px-2.py-2
+                  = profile.blood_type
+              tr
+                td.px-2.py-2.text-gray-500.font-semibold
+                  = Profile.human_attribute_name(:prefecture_id)
+                td.px-2.py-2
+                  = profile.prefecture.name
+          .text-center.my-3
+            a.text-xs.text-indigo-500.italic.hover:underline.hover:text-indigo-600.font-medium[href="#"]
+              = t '.view_profile'
