@@ -12,8 +12,6 @@ gem 'webpacker', '~> 4.0'
 # Authentication for Slack
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
-gem 'oauth2', '>= 1.4.4'
-gem 'omniauth-oauth2'
 gem "omniauth-rails_csrf_protection"
 
 # General Gem fof Slack API
@@ -33,6 +31,7 @@ gem 'redis-rails'
 
 # Model
 gem 'enum_help'
+gem 'active_hash'
 
 # UI/UX
 gem 'rails-i18n'
@@ -87,6 +86,7 @@ group :test do
   gem 'capybara'
   gem 'faker'
   gem 'webdrivers'
+  gem "webmock"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
