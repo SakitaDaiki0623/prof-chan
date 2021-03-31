@@ -8,7 +8,7 @@ html
     = csp_meta_tag
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body.flex.flex-col.min-h-screen.text-gray-600
     .flex-grow
-      = render  "shared/flash_message"
       = yield
+    = render  "shared/footer"
