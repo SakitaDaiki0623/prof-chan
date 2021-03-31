@@ -49,7 +49,7 @@ class User < ApplicationRecord
     user.email = user_info.dig('user', 'email')
     user.image = user_info.dig('user', 'image_192')
     user.team_id = user_info.dig('team', 'id')
-    user.save
+    user.save!
     user
   end
 end
