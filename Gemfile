@@ -86,6 +86,7 @@ group :test do
   gem 'capybara'
   gem 'faker'
   gem 'webdrivers'
+  gem "webmock"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
