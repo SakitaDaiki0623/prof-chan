@@ -19,10 +19,7 @@
 # app/models/profile.rb
 class Profile < ApplicationRecord
 
-  # active hash =============
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :prefecture
-
+  # association
   belongs_to :user
 
   # enum =============
@@ -32,6 +29,7 @@ class Profile < ApplicationRecord
   # validation =============
   validates :height, presence: true, numericality: true
   validates :gender, presence: true
+  validates :prefecture_id, presence: true
   validates :blood_type, presence: true
   validates :introduction, length: { maximum: 2000 }
   validates :birthday, presence: true
@@ -42,4 +40,8 @@ class Profile < ApplicationRecord
   def birthday_cannot_be_in_the_future
     errors.add(:birthday, 'に未来の日付は使えません') if birthday.present? && birthday > Time.zone.today
   end
+
+  # active hash =============
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :prefecture
 end
