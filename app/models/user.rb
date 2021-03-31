@@ -28,7 +28,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
+
+  # association
   has_one :profile, dependent: :destroy
+  belongs_to :team
 
   #  Validation
   validates :name,                      presence: true, length: { in: 1..15 }
@@ -48,8 +51,17 @@ class User < ApplicationRecord
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
     user.image = user_info.dig('user', 'image_192')
-    user.team_id = user_info.dig('team', 'id')
+    user.check_team_existence(user_info.dig('team'))
     user.save!
     user
+  end
+
+  # userが所属するチームがTeamテーブルにあるかどうか
+  def check_team_existence(team_info)
+    workspace_id = team_info.dig('id')
+    name = team_info.dig('name')
+    image = team_info.dig('image_34')
+    return if Team.exists?(workspace_id: workspace_id)
+    self.team = Team.create!(name: name, workspace_id: workspace_id, image: image)
   end
 end
