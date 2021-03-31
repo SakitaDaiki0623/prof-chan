@@ -18,7 +18,6 @@
 
 # app/models/profile.rb
 class Profile < ApplicationRecord
-
   # association
   belongs_to :user
 
