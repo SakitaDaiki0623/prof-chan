@@ -61,7 +61,11 @@ class User < ApplicationRecord
     workspace_id = team_info.dig('id')
     name = team_info.dig('name')
     image = team_info.dig('image_34')
-    return if Team.exists?(workspace_id: workspace_id)
-    self.team = Team.create!(name: name, workspace_id: workspace_id, image: image)
+
+    if Team.exists?(workspace_id: workspace_id)
+      self.team = Team.find_by(workspace_id: workspace_id)
+    else
+      self.team = Team.create!(name: name, workspace_id: workspace_id, image: image)
+    end
   end
 end
