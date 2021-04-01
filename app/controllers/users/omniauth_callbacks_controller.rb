@@ -5,8 +5,7 @@ module Users
     def slack
       raise 'request.env[omniauth.auth]がありません' if request.env['omniauth.auth'].nil?
 
-      # binding.pry
-      user_info = request.env['omniauth.strategy'].access_token.user_token.get('/api/users.identity').parsed
+      user_info = get_user_info(request.env['omniauth.strategy'])
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info)
 
       if @user.persisted?
