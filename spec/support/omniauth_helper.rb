@@ -2,7 +2,7 @@
 # spec/support/omniauth_helper.rb
 # TODO: API認証時のテストを追加(未実装)
 module OmniauthHelpers
-  def slack_omniauth
+  def set_slack_omniauth
     OmniAuth.config.mock_auth[:slack] =
         OmniAuth::AuthHash.new(
             {
