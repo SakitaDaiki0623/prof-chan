@@ -90,8 +90,15 @@ yarn-debug.log*
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# ignore app/assets/images
-# /app/assets/images/
+
+# TODO: 不要かもしれないので後で確認
+# ignore config files
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+# IMAGES ==========
+# ignore app/assets/images
+/app/assets/images/
+# ignore app/javascript/tail_images
+app/javascript/tail_images
