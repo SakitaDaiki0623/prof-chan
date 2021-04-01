@@ -14,6 +14,8 @@ ja:
       slack_login: Slackログイン
       terms_of_use: 利用規約
   profiles:
+    index:
+      view_profile: 'プロフィールを見る'
     new:
       basic_info: ★基本情報★
       write_basic_info: 基本情報を入力してね♬

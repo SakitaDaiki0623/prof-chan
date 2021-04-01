@@ -18,7 +18,7 @@
 
 # app/models/profile.rb
 class Profile < ApplicationRecord
-  # association
+  # association =============
   belongs_to :user
 
   # enum =============

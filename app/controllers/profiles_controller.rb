@@ -1,16 +1,19 @@
 class ProfilesController < ApplicationController
   before_action :check_profile_present, only: %i[new create]
 
-  def index; end
+  def index
+    user = User.find(current_user.id)
+    @profiles = Profile.includes(user: :team).where(teams: { workspace_id: user.team.workspace_id })
+  end
 
   def create
     @profile = current_user.build_profile(profile_params)
 
-    if @profile.save
-      flash[:success] = 'プロフィール作成が完了しました'
+    if @profile.save!
+      flash[:notice] = 'プロフィール作成が完了しました'
       redirect_to profiles_path
     else
-      flash.now[:danger] = 'プロフィール作成に失敗しました'
+      flash.now[:alert] = 'プロフィール作成に失敗しました'
       render :new
     end
   end
