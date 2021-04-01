@@ -10,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        "note": "url('/app/assets/images/note_bg.jpg')",
+        "backimage": "url('../tail_images/backimage01.jpg')",
+        "prof-card": "url('../tail_images/prof_card.jpg')",
       }),
       fontFamily: {
         "prof-default": [
