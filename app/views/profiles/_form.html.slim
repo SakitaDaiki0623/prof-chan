@@ -18,5 +18,5 @@
   div
     = f.label :day_of_joinning, Profile.human_attribute_name(:day_of_joinning), class: 'form-label'
     = f.date_field :day_of_joinning, class: 'input-form'
-  .mt-10.text-center
-    = f.submit (t 'defaults.create'), class: "bg-green-700 hover:bg-green-500 text-white text-normal h-24 w-24  border rounded-full"
+  .text-center.mt-3
+    = f.submit (t 'defaults.done_enter'), class: "text-gray-600 font-bold hover:text-white hover:bg-gray-600 py-3 px-8 border border-gray-600 hover:border-transparent rounded focus:outline-none bg-transparent", id: 'creation_button'

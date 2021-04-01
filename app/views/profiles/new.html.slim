@@ -4,6 +4,7 @@
   .w-3/5.bg-prof-card.bg-cover.shadow.rounded-2xl
     .flex
       .w-full.md:w-2/5.p-4.sm:p-6.lg:p-8
+        / = image_tag  current_user.team.image, class: 'rounded-full border-2 border-gray-600 w-12'
         .border-b-2.border-gray-600.inline-block.text-3xl
           = t '.basic_info'
         .w-full.mt-10.ml-10
@@ -12,8 +13,6 @@
           = User.human_attribute_name(:name)
         .text-4xl.border-b-2.border-gray-600.inline-block
           = current_user.name
-        .w-20.mt-10.ml-10
-          = image_tag  current_user.team.image, class: 'rounded-full border-4 border-gray-600'
       .md:w-3/5.p-8.lg:ml-4
         .p-6
           = render  "form", profile: @profile
