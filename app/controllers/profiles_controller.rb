@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :check_profile_present, only: %i[new create]
 
+  layout 'new_profiles', only: %i[new]
+
   def index
     user = User.find(current_user.id)
     @profiles = Profile.includes(user: :team).where(teams: { workspace_id: user.team.workspace_id })

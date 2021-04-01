@@ -1,0 +1,15 @@
+/ app/views/layouts/new_profiles.html.slim
+doctype html
+html
+  head
+    title
+      | ShowProfile
+    = csrf_meta_tags
+    = csp_meta_tag
+    = render "shared/favicon"
+    = stylesheet_pack_tag "application", "data-turbo-track": "reload"
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body.text-gray-600
+    .flex-grow
+      = render  "shared/flash_message"
+      = yield
