@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def index
     user = User.find(current_user.id)
-    @profiles = Profile.includes(user: :team).where( teams: { workspace_id: user.team.workspace_id  } )
+    @profiles = Profile.includes(user: :team).where(teams: { workspace_id: user.team.workspace_id })
   end
 
   def create

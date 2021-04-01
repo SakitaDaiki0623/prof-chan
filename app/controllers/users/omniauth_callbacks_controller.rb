@@ -3,8 +3,9 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate_user!
     def slack
-      raise "request.env[omniauth.auth]がありません" if request.env['omniauth.auth'].nil?
-      binding.pry
+      raise 'request.env[omniauth.auth]がありません' if request.env['omniauth.auth'].nil?
+
+      # binding.pry
       user_info = request.env['omniauth.strategy'].access_token.user_token.get('/api/users.identity').parsed
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info)
 
