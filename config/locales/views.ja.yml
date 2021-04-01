@@ -17,5 +17,6 @@ ja:
     index:
       view_profile: 'プロフィールを見る'
     new:
+      title: プロフィールづくり - プロフちゃん
       basic_info: ★基本情報★
       write_basic_info: 基本情報を入力してね♬

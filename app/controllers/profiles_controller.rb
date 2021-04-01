@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :check_profile_present, only: %i[new create]
+  before_action :check_profile_presence, only: %i[new create]
 
   layout 'new_profiles', only: %i[new]
 
@@ -34,7 +34,7 @@ class ProfilesController < ApplicationController
 
   private
 
-  def check_profile_present
+  def check_profile_presence
     redirect_to profiles_path if current_user.profile.present?
   end
 
