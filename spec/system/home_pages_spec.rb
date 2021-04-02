@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "HomePages", type: :system do
 
-  context 'ホームページにアクセス', focus: true do
+  context 'ホームページにアクセス' do
     before { visit root_path }
     it 'slackログインボタンが表示されていること' do
       expect(page).to have_content('Slackログイン'), '「Slackログイン」ボタンが表示されていません'

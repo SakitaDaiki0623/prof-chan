@@ -42,7 +42,7 @@ RSpec.describe "SlackLogin", type: :system do
       expect(current_path).to eq(root_path), 'パスがroot_pathではありません'
       expect{ click_on "Slackログイン" }.to change(User, :count).by(0), 'ユーザー数が1人増えていません'
     end
-    fit 'プロフィール一覧画面にリダイレクトされること' do
+    it 'プロフィール一覧画面にリダイレクトされること' do
       expect(page).to have_content('ログインに成功しました'), '意図したフラッシュメッセージが表示されていません'
       expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
     end

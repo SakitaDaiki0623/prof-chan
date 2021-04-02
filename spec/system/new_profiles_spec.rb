@@ -6,6 +6,16 @@ RSpec.describe "NewProfiles", type: :system do
 
   before { slack_login_first_time }
 
+  context 'ページの基本検証' do
+    it 'タイトルが「プロフィールづくり - プロフちゃん」であること' do
+      expect(page).to have_title('プロフィールづくり - プロフちゃん'), '意図したタイトルが表示されていません'
+    end
+
+    it 'ログアウトボタンが表示されていないこと' do
+      expect(page).not_to have_content('ログアウト'), 'ログアウトボタンが表示されています' 
+    end
+  end
+
   context 'プロフィール情報が正確に入力された時' do
     before do
       fill_in 'profile_height',	with: profile.height
