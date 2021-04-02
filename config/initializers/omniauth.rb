@@ -1,3 +1,3 @@
-OmniAuth.config.on_failure = Proc.new { |env|
-  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
-}
+Rails.application.config.middleware.use OmniAuth::Builder do
+  on_failure { |env| Users::OmniauthCallbacksController.action(:failure).call(env) }
+end
