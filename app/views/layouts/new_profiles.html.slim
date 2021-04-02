@@ -1,16 +1,15 @@
-/ app/views/layouts/top.html.slim
+/ app/views/layouts/new_profiles.html.slim
 doctype html
 html
   head
     title
-      = page_title(yield(:title))
+      = t 'profiles.new.title'
     = csrf_meta_tags
     = csp_meta_tag
     = render "shared/favicon"
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body.flex.flex-col.min-h-screen.text-gray-600
+  body.text-gray-600
     .flex-grow
       = render  "shared/flash_message"
       = yield
-    = render  "shared/footer"
