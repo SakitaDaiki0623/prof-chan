@@ -72,4 +72,5 @@ RSpec.configure do |config|
   # Include Omniaut Helper --------------------
   config.include OmniauthHelpers
   config.include SlackLoginHelper
+  config.include CreateProfileSupport
 end
