@@ -3,7 +3,6 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate_user!
     def slack
-      raise 'request.env[omniauth.auth]がありません' if request.env['omniauth.auth'].nil?
 
       user_info = get_user_info(request.env['omniauth.strategy'])
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info)
@@ -16,6 +15,7 @@ module Users
     end
 
     def failure
+      flash[:alert] = 'Slack認証に失敗しました。'
       redirect_to root_path
     end
   end
