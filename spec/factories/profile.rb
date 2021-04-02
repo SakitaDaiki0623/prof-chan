@@ -24,7 +24,7 @@ FactoryBot.define do
     height { rand(130..210) }
     gender { rand(0..1) }
     prefecture_id { rand(1..47) }
-    blood_type { rand(0..3) }
+    blood_type { 'AB' }
     birthday { Faker::Date.birthday(min_age: 18, max_age: 65) }
     day_of_joinning { Faker::Date.between(from: 20.years.ago, to: 1.years.from_now) }
     association :user

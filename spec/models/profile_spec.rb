@@ -38,7 +38,7 @@ RSpec.describe Profile, type: :model do
       expect(profile.errors[:gender]).to include("を入力してください")
     end
 
-    fit 'prefecture_idがなかったら、ユーザー登録に失敗すること' do
+    it 'prefecture_idがなかったら、ユーザー登録に失敗すること' do
       profile = build(:profile, prefecture_id: nil)
       profile.valid?
       expect(profile.errors[:prefecture_id]).to include("を入力してください")

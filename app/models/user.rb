@@ -60,7 +60,7 @@ class User < ApplicationRecord
   def check_team_existence(team_info)
     workspace_id = team_info.dig('id')
     name = team_info.dig('name')
-    image = team_info.dig('image_34')
+    image = team_info.dig('image_230')
 
     self.team = if Team.exists?(workspace_id: workspace_id)
                   Team.find_by(workspace_id: workspace_id)
