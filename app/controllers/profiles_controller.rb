@@ -1,7 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :check_profile_presence, only: %i[new create]
+  skip_before_action :check_profile_nil, only: %i[new create]
 
-  layout 'new_profiles', only: %i[new]
+  layout 'new_profiles', only: %i[new create]
 
   def index
     user = User.find(current_user.id)
@@ -15,8 +16,8 @@ class ProfilesController < ApplicationController
       flash[:notice] = 'プロフィール作成が完了しました'
       redirect_to profiles_path
     else
-      flash[:alert] = 'プロフィール作成に失敗しました'
-      redirect_to new_profile_path
+      flash.now[:alert] = 'プロフィール作成に失敗しました'
+      render :new
     end
   end
 

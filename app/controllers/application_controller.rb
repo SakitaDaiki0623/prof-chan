@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :check_profile_nil
   # helper TailwindHelper
 
   def get_user_info(request)
@@ -14,6 +15,13 @@ class ApplicationController < ActionController::Base
     else
       flash[:notice] = '新規登録完了しました。次にプロフィールを作成してください。'
       new_profile_path
+    end
+  end
+
+  def check_profile_nil
+    if current_user.profile.nil?
+      flash[:alert] = 'まずは基本情報を作ろう！'
+      redirect_to new_profile_path
     end
   end
 end
