@@ -12,7 +12,6 @@
 #  encrypted_password :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  slack_credential_token  :string(255)     not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :string(255)
 #  remember_created_at     :string(255)
@@ -28,7 +27,6 @@ FactoryBot.define do
     sequence(:name, 'user_1')
     sequence(:email)   { |n| "sample#{n}@example.com" }
     uid     { rand(10 ** 19).to_s }
-    slack_credential_token { rand(10 ** 19).to_s }
     provider { 'slack' }
     password { 'password' }
     image { 'https://avatars.slack-edge.com/2021-03-08/1825255374918_7955fb79fef81b734c2a_34.jpg' }

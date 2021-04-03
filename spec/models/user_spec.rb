@@ -12,7 +12,6 @@
 #  encrypted_password :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  slack_credential_token  :string(255)     not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :string(255)
 #  remember_created_at     :string(255)
@@ -69,12 +68,6 @@ RSpec.describe User, type: :model do
       user2.uid = user1.uid
       user2.valid?
       expect(user2.errors[:uid]).to include("はすでに存在します")
-    end
-
-    it 'slack_credential_tokenがなかったら、ユーザー登録に失敗すること' do
-      user = build(:user, slack_credential_token: nil)
-      user.valid?
-      expect(user.errors[:slack_credential_token]).to include("を入力してください")
     end
 
     it 'providerがなかったら、ユーザー登録に失敗すること' do
