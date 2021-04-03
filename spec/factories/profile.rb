@@ -4,7 +4,6 @@
 #
 #  id                 :bigint           not null, primary key
 #  user_id            :bigint           not null, foreign_key
-#  introduction       :text
 #  height             :integer          not null
 #  gender             :integer          not null
 #  blood_type         :integer          not null
@@ -20,7 +19,6 @@
 
 FactoryBot.define do
   factory :profile do
-    introduction { Faker::Lorem.sentence(word_count: 20) }
     height { rand(130..210) }
     gender { rand(0..1) }
     prefecture_id { rand(1..47) }

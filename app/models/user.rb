@@ -12,7 +12,6 @@
 #  encrypted_password :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  slack_credential_token  :string(255)     not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :string(255)
 #  remember_created_at     :string(255)
@@ -40,13 +39,11 @@ class User < ApplicationRecord
   validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
-  validates :slack_credential_token,    presence: true
   # TODO: imageカラムにバリデーションを追加
 
   # Deviseによる外部認証時にAPI情報をUserのカラムに格納
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
-    user.slack_credential_token = auth.credentials.token
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
