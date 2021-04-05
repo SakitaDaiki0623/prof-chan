@@ -1,11 +1,24 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  #TODO: 不具合が出てくる可能性あり
+
+  # ROOT_PATH
+  root to: 'home#index'
+
+  # Authetication
   devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   devise_scope :user do
     delete 'logout' => 'devise/sessions#destroy', as: :destroy_user_session
   end
-  root to: 'home#index'
-  resources :users,  only: %i[new create]
-  resources :profiles
+
+  # redirect path after authentication
+  resources :profiles,  only: %i[new index]
+
+  # API
+  namespace :api, {format: 'json'} do
+    namespace :v1 do
+      resources :profiles, only: %i[new create]
+    end
+  end
+
+  get '*path', to: 'home#index'
 end
