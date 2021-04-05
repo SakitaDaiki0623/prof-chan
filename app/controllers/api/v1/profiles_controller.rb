@@ -1,6 +1,7 @@
 class Api::V1::ProfilesController < ApplicationController
   before_action :check_profile_presence, only: %i[new create]
   skip_before_action :check_profile_nil, only: %i[new create]
+  skip_before_action :verify_authenticity_token
 
   def index
     user = User.find(current_user.id)
@@ -8,14 +9,13 @@ class Api::V1::ProfilesController < ApplicationController
   end
 
   def create
+
     @profile = current_user.build_profile(profile_params)
 
     if @profile.save
-      flash[:notice] = 'プロフィール作成が完了しました'
-      redirect_to profiles_path
+      render json: @profile
     else
-      flash.now[:alert] = 'プロフィール作成に失敗しました'
-      render :new
+      render json: @profile.errors, status: :bad_request
     end
   end
 
@@ -31,8 +31,6 @@ class Api::V1::ProfilesController < ApplicationController
     user = User.select(:name, :image).find(current_user.id)
     render json: user
   end
-
-  private
 
   def check_profile_presence
     if current_user.profile.present?
