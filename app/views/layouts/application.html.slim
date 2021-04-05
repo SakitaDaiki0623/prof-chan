@@ -9,8 +9,6 @@ html
     = render "shared/favicon"
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body.text-gray-600
-    = render 'shared/header'
-    .flex-grow
-      = render  "shared/flash_message"
-      = yield
+  body
+    = javascript_pack_tag 'hello_vue'
+    = stylesheet_pack_tag 'hello_vue'
