@@ -1,13 +1,5 @@
 <template>
   <div class="text-gray-600 font-prof-default">
-    <!-- <div v-if="errors.length != 0">
-      <ul v-for="e in errors" :key="e">
-        <li>
-          <font color="red">{{ e }}</font>
-        </li>
-      </ul>
-    </div> -->
-
     <div class="flex-grow">
       <div
         class="min-h-screen flex flex-col items-center justify-center bg-backimage bg-cover"
