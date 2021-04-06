@@ -7,6 +7,15 @@ RSpec.describe "HomePages", type: :system do
     it 'slackログインボタンが表示されていること' do
       expect(page).to have_content('Slackログイン'), '「Slackログイン」ボタンが表示されていません'
     end
+
+    it 'フッターが表示されていること' do
+      expect(page).to have_content('プロフちゃんとは'), 'プロフちゃんとはが表示されていません'
+      expect(page).to have_content('利用規約'), '「利用規約」が表示されていません'
+    end
+
+    it 'タイトルが「プロフちゃん」であること' do
+      expect(page).to have_title('プロフちゃん'), '意図したタイトルが表示されていません'
+    end
   end
 
   describe 'ログイン前' do

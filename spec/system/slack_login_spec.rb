@@ -31,4 +31,21 @@ RSpec.describe "SlackLogin", type: :system do
       expect(current_path).to eq(new_profile_path), 'プロフィール新規作成画面にアクセスしていません'
     end
   end
+
+  context 'プロフィールを作成して再度ログインする時' do
+    before do
+      slack_login_first_time
+      create_profile
+      expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+      expect(page).to have_content('ログアウト'), 'ログアウトボタンが表示されていません'
+      click_on 'ログアウト'
+      expect(current_path).to eq(root_path), 'パスがroot_pathではありません'
+      expect{ click_on "Slackログイン" }.to change(User, :count).by(0), 'ユーザー数が1人増えていません'
+    end
+    it 'プロフィール一覧画面にリダイレクトされること' do
+      expect(page).to have_content('ログインに成功しました'), '意図したフラッシュメッセージが表示されていません'
+      expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+    end
+  end
+
 end

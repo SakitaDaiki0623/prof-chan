@@ -4,7 +4,6 @@
 #
 #  id                 :bigint           not null, primary key
 #  user_id            :bigint           not null, foreign_key
-#  introduction       :text
 #  height             :integer          not null
 #  gender             :integer          not null
 #  birthday           :datetime         not null
@@ -30,7 +29,6 @@ class Profile < ApplicationRecord
   validates :gender, presence: true
   validates :prefecture_id, presence: true
   validates :blood_type, presence: true
-  validates :introduction, length: { maximum: 2000 }
   validates :birthday, presence: true
   validate  :birthday_cannot_be_in_the_future
   validates :day_of_joinning, presence: true

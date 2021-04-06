@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :check_profile_nil
-  # helper TailwindHelper
 
   def get_user_info(request)
     request.access_token.user_token.get('/api/users.identity').parsed
