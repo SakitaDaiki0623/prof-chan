@@ -14,14 +14,13 @@
                 ★基本情報★
               </div>
               <div class="w-full mt-10 ml-10">
-                <img
-                  class="ring-4 ring-gray-600	"
-                  :src="user.image"
-                />
+                <img class="ring-4 ring-gray-600	" :src="user.image" />
               </div>
               <div class="ml-8">
                 <div class="text-2xl mt-5">名前</div>
-                <div class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold">
+                <div
+                  class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold"
+                >
                   {{ user.name }}
                 </div>
               </div>
@@ -29,7 +28,7 @@
             <div class="md:w-3/5 p-8 lg:ml-4">
               <div class="p-6">
                 <ProfileFormPane
-                  @hundle-submit-basic-profile-info="openDialog"
+                  @hundle-submit-basic-profile-info="submitBasicProfileInfo"
                 />
               </div>
             </div>

@@ -61,8 +61,8 @@ export default {
   },
   methods: {
     moveToProfilesPage() {
-      this.$router.push('/profiles')
-    }
-  }
+      this.$router.push("/profiles");
+    },
+  },
 };
 </script>

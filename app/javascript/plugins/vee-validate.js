@@ -1,9 +1,15 @@
+// app/javascript/plugins/vee-validate.js
 import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
 import { required, max } from "vee-validate/dist/rules";
 
-extend("required", {
+extend("input_required", {
   ...required,
   message: "{_field_}を入力してください",
+});
+
+extend("select_required", {
+  ...required,
+  message: "{_field_}を選択してください",
 });
 
 extend("max", {
