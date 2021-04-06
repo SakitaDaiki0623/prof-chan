@@ -8,18 +8,22 @@
         <div class="w-3/5 bg-prof-card bg-cover shadow rounded-2xl">
           <div class="flex">
             <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
-              <div class="border-b-2 border-gray-600 inline-block text-3xl">
+              <div
+                class="border-b-2 border-gray-600 inline-block text-3xl mt-10 ml-10 border-4 border-gray-300"
+              >
                 ★基本情報★
               </div>
               <div class="w-full mt-10 ml-10">
                 <img
-                  class="rounded-full border-4 border-gray-600"
+                  class="ring-4 ring-gray-600	"
                   :src="user.image"
                 />
               </div>
-              <div class="text-2xl mt-5">名前</div>
-              <div class="text-4xl border-b-2 border-gray-600 inline-block">
-                {{ user.name }}
+              <div class="ml-8">
+                <div class="text-2xl mt-5">名前</div>
+                <div class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold">
+                  {{ user.name }}
+                </div>
               </div>
             </div>
             <div class="md:w-3/5 p-8 lg:ml-4">
