@@ -35,7 +35,7 @@
   @apply text-gray-600;
 }
 
-// 緑色slackボタン
+// slackログインボタン
 .slack-btn {
   @apply bg-indigo-900;
   @apply py-4;
@@ -47,8 +47,8 @@
   }
 }
 
-// フラッシュメッセージ
 
+// フラッシュメッセージ
 .notice {
   @apply bg-yellow-100;
   @apply border-l-4;

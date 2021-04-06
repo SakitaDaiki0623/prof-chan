@@ -12,7 +12,6 @@
 #  encrypted_password :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  slack_credential_token  :string(255)     not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :string(255)
 #  remember_created_at     :string(255)
@@ -28,7 +27,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
+
+  # association
   has_one :profile, dependent: :destroy
+  belongs_to :team
 
   #  Validation
   validates :name,                      presence: true, length: { in: 1..15 }
@@ -37,19 +39,30 @@ class User < ApplicationRecord
   validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
-  validates :slack_credential_token,    presence: true
   # TODO: imageカラムにバリデーションを追加
 
   # Deviseによる外部認証時にAPI情報をUserのカラムに格納
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
-    user.slack_credential_token = auth.credentials.token
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
     user.image = user_info.dig('user', 'image_192')
-    user.team_id = user_info.dig('team', 'id')
-    user.save
+    user.check_team_existence(user_info.dig('team'))
+    user.save!
     user
+  end
+
+  # userが所属するチームがTeamテーブルにあるかどうか
+  def check_team_existence(team_info)
+    workspace_id = team_info.dig('id')
+    name = team_info.dig('name')
+    image = team_info.dig('image_230')
+
+    self.team = if Team.exists?(workspace_id: workspace_id)
+                  Team.find_by(workspace_id: workspace_id)
+                else
+                  Team.create!(name: name, workspace_id: workspace_id, image: image)
+                end
   end
 end

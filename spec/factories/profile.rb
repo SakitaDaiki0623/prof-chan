@@ -4,7 +4,6 @@
 #
 #  id                 :bigint           not null, primary key
 #  user_id            :bigint           not null, foreign_key
-#  introduction       :text
 #  height             :integer          not null
 #  gender             :integer          not null
 #  blood_type         :integer          not null
@@ -20,11 +19,10 @@
 
 FactoryBot.define do
   factory :profile do
-    introduction { Faker::Lorem.sentence(word_count: 20) }
     height { rand(130..210) }
     gender { rand(0..1) }
     prefecture_id { rand(1..47) }
-    blood_type { rand(0..3) }
+    blood_type { 'AB' }
     birthday { Faker::Date.birthday(min_age: 18, max_age: 65) }
     day_of_joinning { Faker::Date.between(from: 20.years.ago, to: 1.years.from_now) }
     association :user
