@@ -2,7 +2,7 @@
   <div class="text-gray-600 font-prof-default">
     <div class="flex-grow">
       <div
-        class="min-h-screen flex flex-col items-center justify-center bg-backimage bg-cover"
+        class="min-h-screen flex flex-col items-center justify-center bg-backimage bg-cover bg-fixed"
       >
         <h2 class="text-5xl mb-10">基本情報を入力してね♬</h2>
         <div class="w-3/5 bg-prof-card bg-cover shadow rounded-2xl">
