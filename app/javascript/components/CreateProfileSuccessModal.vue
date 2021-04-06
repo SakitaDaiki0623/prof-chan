@@ -1,34 +1,53 @@
 <template>
-  <div class="font-prof-default">
-    <v-row justify="center">
-      <v-dialog
-        v-model="isShownCreateProfileSuccessDialog"
-        persistent
-        max-width="800"
-      >
-        <v-card height="450" :img="require('../tail_images/card_bg.jpg')">
-          <v-card-title class="headline">
-            基本情報の登録が完了しました！
-          </v-card-title>
-          <v-card-text>
+  <div>
+    <v-dialog
+      v-model="isShownCreateProfileSuccessDialog"
+      persistent
+      max-width="800"
+    >
+      <v-card height="450" :img="require('../tail_images/card_bg.jpg')">
+        <p
+          class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-20 mb-10"
+        >
+          基本情報の登録が完了しました！
+        </p>
+        <v-row justify="space-around">
+          <v-card-actions>
+            <div>
+              <v-btn
+                x-large
+                color="blue-grey darken-2"
+                class="font-prof-default white--text"
+              >
+                <v-icon left>
+                  mdi-pencil
+                </v-icon>
+                他の情報も入力する
+              </v-btn>
+            </div>
+          </v-card-actions>
+          <v-card-text class="font-prof-default text-gray-600 text-center mb-5">
             趣味、住所などあなたに関わるプロフィールを追加します。
           </v-card-text>
           <v-card-actions>
-            <div class="text-center mt-3">
-              <v-btn
-                id="creation_button"
-                type="submit"
-                depressed
-                elevation="4"
-                large
-                color="lime lighten-5"
-                >入力完了！</v-btn
-              >
-            </div>
+            <v-btn
+              x-large
+              color="light-green accent-2"
+              class="font-prof-default black--text"
+              @click="moveToProfilesPage"
+            >
+              <v-icon left>
+                mdi-account-circle
+              </v-icon>
+              プロフィール閲覧
+            </v-btn>
           </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
+          <v-card-text class="font-prof-default text-gray-600 text-center mb-5">
+            他の社員プロフィールを閲覧します。
+          </v-card-text>
+        </v-row>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 

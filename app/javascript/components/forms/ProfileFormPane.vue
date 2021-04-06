@@ -130,8 +130,10 @@
           type="submit"
           depressed
           elevation="4"
-          large
-          color="lime lighten-5"
+          x-large
+          :disabled="invalid"
+          color="blue-grey darken-2"
+          class="white--text"
           >入力完了！</v-btn
         >
       </div>
