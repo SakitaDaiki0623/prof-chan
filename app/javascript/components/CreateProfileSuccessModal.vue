@@ -59,5 +59,10 @@ export default {
       required: true,
     },
   },
+  methods: {
+    moveToProfilesPage() {
+      this.$router.push('/profiles')
+    }
+  }
 };
 </script>

@@ -1,6 +1,7 @@
 // app/javascript/router/index.js
 import Vue from "vue";
 import VueRouter from "vue-router";
+import ProfilesPage from "../pages/profile/index";
 import NewProfilesPage from "../pages/profile/new";
 
 Vue.use(VueRouter);
@@ -8,8 +9,13 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/profiles/new",
-    name: "new_profile",
+    name: "NewProfilesPage",
     component: NewProfilesPage,
+  },
+  {
+    path: "/profiles",
+    name: "ProfilesPage",
+    component: ProfilesPage,
   },
 ];
 
