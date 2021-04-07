@@ -5,7 +5,7 @@
         class="min-h-screen flex flex-col items-center justify-center bg-backimage bg-cover bg-fixed"
       >
         <h2 class="text-5xl mb-10">基本情報を入力してね♬</h2>
-        <div class="w-3/5 bg-prof-card bg-cover shadow rounded-2xl">
+        <div class="w-3/5 shadow rounded-2xl">
           <div class="flex">
             <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
               <div
@@ -45,9 +45,11 @@
 
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
+
+// Component ----------
 import ProfileFormPane from "../../components/forms/ProfileFormPane";
 import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
-import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -68,7 +70,6 @@ export default {
         birthday: "",
         day_of_joinning: "",
       },
-      errors: "",
       isShownCreateProfileSuccessDialog: false,
     };
   },
