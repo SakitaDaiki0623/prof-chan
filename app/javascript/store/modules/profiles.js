@@ -7,11 +7,14 @@ export const profiles = {
     profiles: [],
   },
   getters: {
-    profiles: (state) => state.profiles,
+    getProfiles: (state) => state.profiles,
   },
   mutations: {
     addProfile: (state, profile) => {
       state.profiles.push(profile);
+    },
+    loadProfiles(state, profiles) {
+      state.profiles = profiles;
     },
   },
   actions: {
@@ -22,6 +25,15 @@ export const profiles = {
           commit("addProfile", response.data);
         })
         .catch((err) => console.log(err.status));
+    },
+    fetchProfiles({ commit }) {
+      axios
+        .get("profiles")
+        .then((response) => {
+          console.log(response);
+          commit("loadProfiles", response.data);
+        })
+        .catch((error) => console.log(error.status));
     },
   },
 };
