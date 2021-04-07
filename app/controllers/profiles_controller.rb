@@ -1,6 +1,5 @@
 class ProfilesController < ApplicationController
   before_action :check_profile_presence, only: %i[new create]
-  skip_before_action :check_profile_nil, only: %i[new create]
 
   def index; end
 
