@@ -9,7 +9,6 @@ module OmniauthHelpers
                 'provider'  => 'slack',
                 'uid'       => 'mock_uid_1234',
                 },
-            }
         )
   end
 

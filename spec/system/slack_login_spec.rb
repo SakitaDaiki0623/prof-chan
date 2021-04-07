@@ -27,7 +27,6 @@ RSpec.describe "SlackLogin", type: :system do
     end
     it 'プロフィール新規作成画面にアクセスする' do
       expect{ click_on "Slackログイン" }.to change(User, :count).by(1), 'ユーザー数が1人増えていません'
-      expect(page).to have_content('新規登録完了しました。次にプロフィールを作成してください。'), '意図したフラッシュメッセージが表示されていません'
       expect(current_path).to eq(new_profile_path), 'プロフィール新規作成画面にアクセスしていません'
     end
   end
