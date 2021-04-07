@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
 
   def check_profile_nil
     if current_user.profile.nil?
-      binding.pry
       flash[:alert] = 'まずは基本情報を作ろう！'
       redirect_to new_profile_path
     end
