@@ -102,7 +102,6 @@
                 name="profile[birthday]"
                 id="profile_birthday"
                 label="生年月日"
-                readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
@@ -143,7 +142,6 @@
                 id="profile_day_of_joinning"
                 v-model="profile.day_of_joinning"
                 label="入社日"
-                readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
