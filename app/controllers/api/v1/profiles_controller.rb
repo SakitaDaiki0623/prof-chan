@@ -2,7 +2,6 @@ module Api
   module V1
     class ProfilesController < ApplicationController
       skip_before_action :verify_authenticity_token
-      # skip_before_action :check_profile_nil, only: %i[index new]
 
       def index
         @user = User.find(current_user.id)
@@ -33,13 +32,6 @@ module Api
         @user = User.find(current_user.id)
         render json: @user
       end
-
-      # def check_profile_presence
-      #   if current_user.profile.present?
-      #     flash[:notice] = '基本情報はもう作ったよ！'
-      #     redirect_to profiles_path
-      #   end
-      # end
 
       def profile_params
         params.require(:profile).permit(:birthday, :day_of_joinning, :height, :gender, :blood_type, :prefecture_id)
