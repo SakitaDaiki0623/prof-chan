@@ -1,5 +1,10 @@
+# app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
+  include Pundit
   before_action :authenticate_user!
+
+  # エラーハンドリング =============
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def get_user_info(request)
     request.access_token.user_token.get('/api/users.identity').parsed
@@ -14,10 +19,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_profile_nil
-    if current_user.profile.nil?
-      flash[:alert] = 'まずは基本情報を作ろう！'
-      redirect_to new_profile_path
-    end
+  private
+
+  def user_not_authorized
+    redirect_to(request.referrer || root_path)
   end
 end
