@@ -1,6 +1,5 @@
 # app/controllers/profiles_controller.rb
 class ProfilesController < ApplicationController
-
   def index
     authorize Profile
   end

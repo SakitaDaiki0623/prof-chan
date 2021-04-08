@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "NewProfiles", type: :system do
+RSpec.describe 'NewProfiles', type: :system do
 
+  # let
   let(:profile) { create(:profile) }
 
   before { slack_login_first_time }
@@ -28,7 +29,7 @@ RSpec.describe "NewProfiles", type: :system do
       click_on '入力完了！'
       sleep 1
     end
-    it "プロフィール一覧にアクセスすること" do
+    it 'プロフィール一覧にアクセスすること' do
       expect(page).to have_content('基本情報の登録が完了しました！'), '意図したメッセージが表示されていません'
       expect(page).to have_button('他の情報も入力する'), 'プロフィール編集画面へのボタンがありません'
       expect(page).to have_button('プロフィール閲覧'), 'プロフィール一覧画面へのボタンがありません'
@@ -36,13 +37,13 @@ RSpec.describe "NewProfiles", type: :system do
   end
 
   # TODO: selectについてはバリデーションエラーの表示をさせる方法が不明
-  describe "バリデーション" do
-    context "何も入力していないとき" do
+  describe 'バリデーション' do
+    context '何も入力していないとき' do
       it 'ボタンがdisabledであること' do
         expect(page).to have_button '入力完了！', disabled: true
       end
     end
-    context "性別が未入力の時" do
+    context '性別が未入力の時' do
       before do
         fill_in 'profile_height',    with: ''
         # 別項目の入力
@@ -53,7 +54,7 @@ RSpec.describe "NewProfiles", type: :system do
         expect(page).to have_button '入力完了！', disabled: true
       end
     end
-    context "誕生日が未入力の時" do
+    context '誕生日が未入力の時' do
       before do
         fill_in 'profile_birthday',	with: ''
         select profile.blood_type, from: 'profile_blood_type'
@@ -63,7 +64,7 @@ RSpec.describe "NewProfiles", type: :system do
         expect(page).to have_button '入力完了！', disabled: true
       end
     end
-    context "入社日が未入力の時" do
+    context '入社日が未入力の時' do
       before do
         fill_in 'profile_day_of_joinning', with: ''
         select profile.blood_type, from: 'profile_blood_type'
@@ -75,13 +76,19 @@ RSpec.describe "NewProfiles", type: :system do
     end
   end
 
-  # TODO: pundit or banken導入後にテスト
-  # describe "プロフィールを作成せずに他のページにアクセスする" do
-  #   context 'profiles_path' do
-  #     before { visit profiles_path }
-  #     it "プロフィール一覧にアクセスすること" do
-  #       expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
-  #     end
-  #   end
-  # end
+  describe 'Authorization' do
+    context 'ホーム画面に遷移したと場合' do
+      before { visit root_path }
+      it 'プロフィール作成画面にアクセスすること' do
+        expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
+      end
+    end
+
+    context 'プロフィール一覧画面に遷移したと場合' do
+      before { visit profiles_path }
+      it 'プロフィール作成画面にアクセスすること' do
+        expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
+      end
+    end
+  end
 end
