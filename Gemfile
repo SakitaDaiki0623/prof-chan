@@ -14,6 +14,9 @@ gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 gem "omniauth-rails_csrf_protection"
 
+# Authorization
+gem "pundit"
+
 # API
 gem 'slack-ruby-client'
 gem 'active_model_serializers', '~> 0.10.0'
