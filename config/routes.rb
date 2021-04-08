@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
-      resources :profiles, only: %i[new create]
+      resources :profiles, only: %i[index new create]
+      resources :users,    only: %i[index show]
+      resources :teams,    only: %i[show]
     end
   end
 

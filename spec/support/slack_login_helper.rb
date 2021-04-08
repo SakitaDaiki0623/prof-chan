@@ -5,7 +5,6 @@ module SlackLoginHelper
     allow_any_instance_of(ApplicationController).to receive(:get_user_info).and_return(set_user_info) # strategy.authの値を代入
     visit root_path
     click_on 'Slackログイン'
-    expect(page).to have_content('新規登録完了しました。次にプロフィールを作成してください。'), '意図したフラッシュメッセージが表示されていません'
     expect(current_path).to eq(new_profile_path), 'プロフィール新規作成画面にアクセスしていません'
   end
 end
