@@ -15,7 +15,7 @@ RSpec.describe "SlackLogin", type: :system do
       visit root_path
       click_on 'Slackログイン'
     end
-    it "トップページにリダイレクトされる" do
+    it "トップページにリダイレクトされること" do
       expect(current_path).to eq(root_path), 'ルートパスにリダイレクトされていません'
       expect(page).to have_content('Slack認証に失敗しました。'), 'フラッシュメッセージが表示されていません'
     end
@@ -25,9 +25,9 @@ RSpec.describe "SlackLogin", type: :system do
     before do
       visit root_path
     end
-    fit 'プロフィール新規作成画面にアクセスする' do
+    it 'プロフィール新規作成画面にアクセスすること' do
       expect{ click_on "Slackログイン" }.to change(User, :count).by(1), 'ユーザー数が1人増えていません'
-      expect(current_path).to eq(new_profile_path), 'プロフィール新規作成画面にアクセスしていません'
+      expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
       expect(page).to have_selector("img[src$='-192.png']")
       expect(page).to have_content("sample_name")
     end

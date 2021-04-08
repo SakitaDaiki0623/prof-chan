@@ -31,13 +31,5 @@ FactoryBot.define do
     password { 'password' }
     image { 'https://avatars.slack-edge.com/2021-03-08/1825255374918_7955fb79fef81b734c2a_34.jpg' }
     association :team
-
-    trait :in_real_team do
-      association :team, :real_team
-    end
-
-    after(:build) do |user|
-      create(:profile, user: user)
-    end
   end
 end
