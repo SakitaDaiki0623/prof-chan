@@ -7,7 +7,7 @@ RSpec.describe 'NewProfiles', type: :system do
 
   before { slack_login_first_time }
 
-  context 'ページの基本検証' do
+  describe 'ページの基本検証' do
     it 'タイトルが「プロフィールづくり - プロフちゃん」であること' do
       expect(page).to have_title('プロフィールづくり - プロフちゃん'), '意図したタイトルが表示されていません'
     end
@@ -17,7 +17,7 @@ RSpec.describe 'NewProfiles', type: :system do
     end
   end
 
-  context 'プロフィール情報が正確に入力された時' do
+  describe 'プロフィール情報を正確に入力' do
     before do
       select '男性', from: 'profile_gender'
       fill_in 'profile_height',	with: profile.height
