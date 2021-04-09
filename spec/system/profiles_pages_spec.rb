@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'ProfilesPage', type: :system do
 
-  # let
-
   before { slack_login_til_access_profiles_path }
 
   describe 'ページの基本検証' do

@@ -1,8 +1,10 @@
 <template>
   <div>
     <v-dialog
+      :value="isShownCreateProfileSuccessDialog"
       persistent
       max-width="800"
+      @input="$emit('input', $event.target.isShownCreateProfileSuccessDialog)"
     >
       <v-card
         height="450"

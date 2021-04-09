@@ -36,7 +36,7 @@ class User < ApplicationRecord
   validates :name,                      presence: true, length: { in: 1..15 }
   validates :email,                     presence: true, uniqueness: { case_sensitive: true }
   validates :provider,                  presence: true
-  validates :uid,                       presence: true
+  validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
   # TODO: imageカラムにバリデーションを追加
