@@ -4,12 +4,12 @@ import { required, max } from "vee-validate/dist/rules";
 
 extend("input_required", {
   ...required,
-  message: "{_field_}を入力してください",
+  message: "{_field_}を入力してね",
 });
 
 extend("select_required", {
   ...required,
-  message: "{_field_}を選択してください",
+  message: "{_field_}を選択してね",
 });
 
 extend("max", {

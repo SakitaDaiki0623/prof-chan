@@ -19,17 +19,19 @@ RSpec.describe "HomePages", type: :system do
   end
 
   describe 'ログイン前' do
-    context 'プロフィール新規作成画面にアクセス' do
-      before { visit new_profile_path }
-      it 'ホームページにリダイレクトされること' do
-        expect(current_path).to eq(root_path), 'ホームページにリダイレクトされていません'
+    describe 'Authorization' do
+      context 'プロフィール新規作成画面にアクセス' do
+        before { visit new_profile_path }
+        it 'ホームページにリダイレクトされること' do
+          expect(current_path).to eq(root_path), 'ホームページにリダイレクトされていません'
+        end
       end
-    end
 
-    context 'プロフィール一覧画面にアクセス' do
-      before { visit new_profile_path }
-      it 'ホームページにリダイレクトされること' do
-        expect(current_path).to eq(root_path), 'ホームページにリダイレクトされていません'
+      context 'プロフィール一覧画面にアクセス' do
+        before { visit new_profile_path }
+        it 'ホームページにリダイレクトされること' do
+          expect(current_path).to eq(root_path), 'ホームページにリダイレクトされていません'
+        end
       end
     end
   end

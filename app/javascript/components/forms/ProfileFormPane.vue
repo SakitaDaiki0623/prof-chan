@@ -2,6 +2,25 @@
   <ValidationObserver ref="observer" v-slot="{ invalid }">
     <form @submit.prevent="hundleSubmitBasicProfileInfo">
       <div>
+        <label class="form-label" for="profile_gender">性別</label>
+        <ValidationProvider
+          v-slot="{ errors }"
+          name="性別"
+          rules="select_required"
+        >
+          <select
+            class="input-form"
+            name="profile[gender]"
+            id="profile_gender"
+            v-model="profile.gender"
+          >
+            <option value="male">男性</option>
+            <option value="female">女性</option>
+          </select>
+          <span class="text-red-400">{{ errors[0] }}</span>
+        </ValidationProvider>
+      </div>
+      <div>
         <label class="form-label" for="profile_height">身長</label>
         <ValidationProvider
           v-slot="{ errors }"
@@ -63,25 +82,6 @@
         </ValidationProvider>
       </div>
       <div>
-        <label class="form-label" for="profile_gender">性別</label>
-        <ValidationProvider
-          v-slot="{ errors }"
-          name="性別"
-          rules="select_required"
-        >
-          <select
-            class="input-form"
-            name="profile[gender]"
-            id="profile_gender"
-            v-model="profile.gender"
-          >
-            <option value="male">男性</option>
-            <option value="female">女性</option>
-          </select>
-          <span class="text-red-400">{{ errors[0] }}</span>
-        </ValidationProvider>
-      </div>
-      <div>
         <v-menu
           ref="menu"
           v-model="birthMenu"
@@ -91,6 +91,7 @@
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
+            <!-- TODO: 入力値のフォーマットを設定 -->
             <ValidationProvider
               v-slot="{ errors }"
               name="生年月日"
@@ -101,7 +102,6 @@
                 name="profile[birthday]"
                 id="profile_birthday"
                 label="生年月日"
-                readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
@@ -112,6 +112,8 @@
             ref="picker"
             color="blue-grey darken-3"
             header-color="blue-grey darken-2"
+            locale="ja-jp"
+            :day-format="(date) => new Date(date).getDate()"
             v-model="profile.birthday"
             :max="new Date().toISOString().substr(0, 10)"
             min="1950-01-01"
@@ -129,6 +131,7 @@
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
+            <!-- TODO: 入力値のフォーマットを設定 -->
             <ValidationProvider
               v-slot="{ errors }"
               name="入社日"
@@ -139,7 +142,6 @@
                 id="profile_day_of_joinning"
                 v-model="profile.day_of_joinning"
                 label="入社日"
-                readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
@@ -150,6 +152,8 @@
             ref="picker"
             color="blue-grey darken-3"
             header-color="blue-grey darken-2"
+            locale="ja-jp"
+            :day-format="(date) => new Date(date).getDate()"
             v-model="profile.day_of_joinning"
             @change="saveJoinedDate"
           ></v-date-picker>
@@ -260,3 +264,23 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* TODO: 色が適用されていない */
+.v-date-picker-table.v-date-picker-table--date
+  > table
+  > tbody
+  tr
+  td:nth-child(7)
+  .v-btn__content {
+  color: blue;
+}
+.v-date-picker-table.v-date-picker-table--date
+  > table
+  > tbody
+  tr
+  td:nth-child(1)
+  .v-btn__content {
+  color: red;
+}
+</style>
