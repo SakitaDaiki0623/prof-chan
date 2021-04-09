@@ -3,7 +3,9 @@
   <div class="bg-backimage bg-cover bg-fixed text-gray-600 font-prof-default">
     <TheHeader />
     <v-container class="note shadow-lg mb-20">
-      <p class="text-5xl font-bold pt-10 pb-10">社員プロフィール一覧</p>
+      <p class="text-5xl font-bold pt-10 pb-10">
+        社員プロフィール一覧
+      </p>
       <v-row class="mb-10">
         <v-col
           v-for="profile in getProfiles"
@@ -15,14 +17,16 @@
             <div class="flex">
               <div class="md:w-2/5 ml-4">
                 <div class="w-full mt-10">
-                  <img class="ring-4 ring-gray-600" :src="profile.user.image" />
+                  <img
+                    class="ring-4 ring-gray-600"
+                    :src="profile.user.image"
+                  >
                 </div>
                 <div>
                   <label
                     for="name"
                     class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >名前</label
-                  >
+                  >名前</label>
                   <div class="text-lg font-bold inline-block">
                     {{ profile.user.name }}
                   </div>
@@ -33,47 +37,41 @@
                   <label
                     for="birthday"
                     class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >性別</label
-                  >{{ profile.gender }}
+                  >性別</label>{{ profile.gender }}
                 </div>
 
                 <div class="p-1">
                   <label
                     for="birthday"
                     class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >身長</label
-                  >{{ profile.height }} cm
+                  >身長</label>{{ profile.height }} cm
                 </div>
 
                 <div class="p-1">
                   <label
                     for="birthday"
                     class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >血液型</label
-                  >{{ profile.blood_type }} 型
+                  >血液型</label>{{ profile.blood_type }} 型
                 </div>
 
                 <div class="p-1">
                   <label
                     for="birthday"
                     class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >出身地</label
-                  >{{ profile.prefecture_id }}
+                  >出身地</label>{{ profile.prefecture_id }}
                 </div>
                 <div class="p-1">
                   <label
                     for="birthday"
                     class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >誕生日</label
-                  >
+                  >誕生日</label>
                   <div>{{ profile.birthday | moment }}</div>
                 </div>
                 <div class="p-1">
                   <label
                     for="birthday"
                     class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-                    >入社日</label
-                  >
+                  >入社日</label>
                   <div>
                     {{ profile.day_of_joinning | moment }}
                   </div>
@@ -99,10 +97,18 @@ export default {
   components: {
     TheHeader,
   },
+  filters: {
+    moment: function(date) {
+      return moment(date).format("YYYY年/MM月/DD日");
+    },
+  },
   data() {
     return {
       profiles: [],
     };
+  },
+  computed: {
+    ...mapGetters("profiles", ["getProfiles"]),
   },
   mounted() {
     document.title = "プロフィール一覧 - プロフちゃん";
@@ -111,16 +117,8 @@ export default {
     console.log("fetchProfiles");
     this.fetchProfiles();
   },
-  computed: {
-    ...mapGetters("profiles", ["getProfiles"]),
-  },
   methods: {
     ...mapActions("profiles", ["fetchProfiles"]),
-  },
-  filters: {
-    moment: function (date) {
-      return moment(date).format("YYYY年/MM月/DD日");
-    },
   },
 };
 </script>
