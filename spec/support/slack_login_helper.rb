@@ -20,7 +20,7 @@ module SlackLoginHelper
     expect{ click_on '入力完了！' }.to change(Profile, :count).by(1), 'プロフィール数が1つ増えていません'
   end
 
-  def slack_login_til_access_profiles_path
+  def slack_login_till_access_profiles_path
     slack_login_first_time
     create_profile
     click_button 'プロフィール閲覧'

@@ -69,7 +69,8 @@ RSpec.configure do |config|
   # settings to let developers use FactoryBot without writing "FactoryBot"
   config.include FactoryBot::Syntax::Methods
 
-  # Include Omniaut Helper --------------------
+  # Include Helpers --------------------
   config.include OmniauthHelpers
   config.include SlackLoginHelper
+  config.include FactoryHelper
 end

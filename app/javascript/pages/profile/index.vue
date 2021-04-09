@@ -27,8 +27,9 @@
                     for="name"
                     class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
                   >名前</label>
+                  <br>
                   <div class="text-lg font-bold inline-block">
-                    {{ profile.user.name }}
+                    <p>{{ profile.user.name }}</p>
                   </div>
                 </div>
               </div>
@@ -99,7 +100,7 @@ export default {
   },
   filters: {
     moment: function(date) {
-      return moment(date).format("YYYY年/MM月/DD日");
+      return moment(date).format("YYYY/MM/DD");
     },
   },
   data() {
