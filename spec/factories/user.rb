@@ -29,7 +29,17 @@ FactoryBot.define do
     uid     { rand(10 ** 19).to_s }
     provider { 'slack' }
     password { 'password' }
-    image { 'https://avatars.slack-edge.com/2021-03-08/1825255374918_7955fb79fef81b734c2a_34.jpg' }
+    image { ENV['USER_IMAGE'] }
     association :team
+
+    trait :real_workspace_id do
+      image { ENV['TEAM_IMAGE'] }
+      association :team, workspace_id: ENV['TEAM_ID']
+    end
+
+    after(:create) do |user|
+      create(:profile, user: user)
+    end
   end
 end
+
