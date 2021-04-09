@@ -4,7 +4,9 @@
       <div
         class="min-h-screen flex flex-col items-center justify-center bg-backimage bg-cover bg-fixed"
       >
-        <h2 class="text-5xl mb-10">基本情報を入力してね♬</h2>
+        <h2 class="text-5xl mb-10">
+          基本情報を入力してね♬
+        </h2>
         <div class="w-3/5 shadow rounded-2xl bg-prof-card">
           <div class="flex">
             <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
@@ -14,10 +16,15 @@
                 ★基本情報★
               </div>
               <div class="w-full mt-10 ml-10">
-                <img class="ring-4 ring-gray-600	" :src="user.image" />
+                <img
+                  class="ring-4 ring-gray-600	"
+                  :src="user.image"
+                >
               </div>
               <div class="ml-8">
-                <div class="text-2xl mt-5">名前</div>
+                <div class="text-2xl mt-5">
+                  名前
+                </div>
                 <div
                   class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold"
                 >
@@ -37,8 +44,8 @@
       </div>
     </div>
     <CreateProfileSuccessModal
-      :isShownCreateProfileSuccessDialog="isShownCreateProfileSuccessDialog"
       v-show="isShownCreateProfileSuccessDialog"
+      :is-shown-create-profile-success-dialog="isShownCreateProfileSuccessDialog"
     />
   </div>
 </template>
