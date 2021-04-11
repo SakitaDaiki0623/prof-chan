@@ -1,24 +1,19 @@
 <template>
-  <div
-    class="bg-prof-card bg-cover shadow rounded-2xl duration-300 hover:shadow-xl transform hover:scale-105"
-    @click="handleOpenProfileShowPage(profile)"
-  >
+  <v-card class="bg-prof-card bg-cover shadow rounded-2xl">
     <div class="flex">
       <div class="md:w-2/5 ml-4">
         <div class="w-full mt-10">
-          <img
-            class="ring-4 ring-gray-600"
-            :src="profile.user.image"
-          >
+          <img class="ring-4 ring-gray-600" :src="profile.user.image" />
         </div>
         <div>
-          <label
-            for="name"
-            class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >名前</label>
-          <br>
           <div class="text-lg font-bold inline-block">
-            <p>{{ profile.user.name }}</p>
+            <label
+              for="name"
+              class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
+              >名前</label
+            >
+            <br />
+            {{ profile.user.name }}
           </div>
         </div>
       </div>
@@ -27,7 +22,8 @@
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >性別</label>
+            >性別</label
+          >
           {{ translateGender }}
         </div>
 
@@ -35,40 +31,45 @@
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >身長</label>{{ profile.height }} cm
+            >身長</label
+          >{{ profile.height }} cm
         </div>
 
         <div class="p-1">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >血液型</label>{{ profile.blood_type }} 型
+            >血液型</label
+          >{{ profile.blood_type }} 型
         </div>
 
         <div class="p-1">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >出身地</label>{{ profile.prefecture_id }}
+            >出身地</label
+          >{{ profile.prefecture_id }}
         </div>
         <div class="p-1">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >誕生日</label>
+            >誕生日</label
+          >
           {{ profile.birthday | moment }}
         </div>
         <div class="p-1">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >入社日</label>
+            >入社日</label
+          >
 
           {{ profile.day_of_joinning | moment }}
         </div>
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -90,12 +91,7 @@ export default {
     translateGender() {
       return this.profile.gender == "male" ? "男性" : "女性";
     },
-    // convertPrefecture(prefecture_id) {},
   },
-  methods: {
-    handleOpenProfileShowPage(profile) {
-      this.$emit("handleOpenProfileShowPage", profile);
-    },
-  },
+  methods: {},
 };
 </script>
