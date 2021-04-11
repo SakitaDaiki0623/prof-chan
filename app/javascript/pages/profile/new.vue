@@ -55,7 +55,7 @@ import axios from "axios";
 import { mapActions } from "vuex";
 
 // Component ----------
-import ProfileFormPane from "../../components/forms/ProfileFormPane";
+import ProfileFormPane from "../../components/ProfileFormPane";
 import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
 
 export default {
