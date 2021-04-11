@@ -22,6 +22,7 @@ RSpec.describe 'ProfilesPage', type: :system do
 
   describe '他のチームのプロフィールが閲覧できないことを確認確認' do
     it '他のチームのプロフィールが表示されていないこと' do
+      sleep 1
       team_profile_size = Profile.includes(user: :team).where(teams: { workspace_id: user.team.workspace_id }).count
       expect(team_profile_size).to eq(all('.bg-prof-card').count), '画面に表示されているプロフィールが意図した数と異なります'
     end

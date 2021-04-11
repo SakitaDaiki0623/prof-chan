@@ -13,7 +13,7 @@ RSpec.describe 'NewProfiles', type: :system do
     end
 
     it 'ログアウトボタンが表示されていないこと' do
-      expect(page).not_to have_content('ログアウト'), 'ログアウトボタンが表示されています' 
+      expect(page).not_to have_content('ログアウト'), 'ログアウトボタンが表示されています'
     end
   end
 
