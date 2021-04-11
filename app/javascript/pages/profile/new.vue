@@ -107,7 +107,6 @@ export default {
       this.openDialog();
     },
     openDialog() {
-      console.log("openDialog");
       this.isShownCreateProfileSuccessDialog = true;
     },
   },

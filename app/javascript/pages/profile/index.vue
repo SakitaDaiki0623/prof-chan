@@ -42,7 +42,6 @@ export default {
     document.title = "プロフィール一覧 - プロフちゃん";
   },
   created() {
-    console.log("fetchProfiles");
     this.fetchProfiles();
   },
   methods: {

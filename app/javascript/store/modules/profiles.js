@@ -30,7 +30,6 @@ export const profiles = {
       axios
         .get("profiles")
         .then((response) => {
-          console.log(response);
           commit("loadProfiles", response.data);
         })
         .catch((error) => console.log(error.status));

@@ -281,7 +281,6 @@ export default {
   },
   methods: {
     hundleSubmitBasicProfileInfo() {
-      console.log("hundleSubmitBasicProfileInfo");
       this.$emit("hundle-submit-basic-profile-info", this.profile);
     },
     saveBirthDate(date) {
