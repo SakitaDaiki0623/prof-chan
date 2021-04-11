@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="'profile-index-card-' + profile.id"
     class="bg-prof-card bg-cover shadow rounded-2xl duration-300 hover:shadow-xl transform hover:scale-105"
     @click="openProfileShowPage(profile)"
   >

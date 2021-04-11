@@ -13,7 +13,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-row justify="space-around mt-10">
+    <v-row justify="space-around">
       <v-card-actions>
         <v-btn
           x-large
@@ -61,12 +61,17 @@ export default {
       },
     };
   },
-  mounted() {
+  created() {
     // [TODO: Refactor] vuexから値を取得できるように変更
     this.$axios
       .get(`/profiles/${this.id}`)
       .then((response) => (this.profile = response.data))
       .catch((err) => console.log(err.status));
+  },
+  mounted() {
+    // [TODO: Refactor] ページごとにタイトルを変更(下記メソッドで実装)
+    // document.title = `${ this.profile.user.name } - プロフちゃん`;
+    document.title = `プロフィール詳細 - プロフちゃん`;
   },
   methods: {
     moveToProfilesPage() {
