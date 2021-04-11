@@ -1,7 +1,9 @@
+# app/controllers/api/v1/profiles_controller.rb
 module Api
   module V1
     class ProfilesController < ApplicationController
       skip_before_action :verify_authenticity_token
+      before_action :set_profile, only: %i[show update destroy]
 
       def index
         @user = User.find(current_user.id)
@@ -22,15 +24,19 @@ module Api
         end
       end
 
-      def show; end
+      def show
+        render json: @profile
+      end
+
 
       def update; end
 
       def destroy; end
 
-      def new
-        @user = User.find(current_user.id)
-        render json: @user
+      private
+
+      def set_profile
+        @profile = Profile.find(params[:id])
       end
 
       def profile_params

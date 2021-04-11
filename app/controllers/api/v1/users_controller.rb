@@ -12,7 +12,10 @@ module Api
         ).to_json
       end
 
-      def show
+      def show; end
+
+      # [TODO: Refactor] current_userの取得するメソッド名を変更
+      def new
         @user = User.find(current_user.id)
         render json: @user
       end
