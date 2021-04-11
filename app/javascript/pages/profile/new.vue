@@ -55,7 +55,7 @@ import axios from "axios";
 import { mapActions } from "vuex";
 
 // Component ----------
-import ProfileFormPane from "../../components/forms/ProfileFormPane";
+import ProfileFormPane from "../../components/ProfileFormPane";
 import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
 
 export default {
@@ -84,15 +84,16 @@ export default {
     document.title = "プロフィールづくり - プロフちゃん";
   },
   created() {
+    // [TODO: リファクタリング] axiosのモジュールに移すか考える
     this.$axios
-      .get("/profiles/new")
+      .get("/users/new")
       .then((response) => (this.user = response.data))
       .catch((err) => console.log(err.status));
   },
   methods: {
     ...mapActions("profiles", ["createBasicProfile"]),
     submitBasicProfileInfo(profile) {
-      // TODO: [FIX] リファクタリング
+      // [TODO: リファクタリング] メソッドが冗長なのでリファクタリングできるか考える
       if (
         profile.height == "" ||
         profile.gender == "" ||
