@@ -8,7 +8,10 @@
         {{ profile.user.name }} さんのプロフィール
       </p>
       <v-row class="mb-10">
-        <v-col cols="12" sm="6">
+        <v-col
+          cols="12"
+          sm="6"
+        >
           <BasicProfCard :profile="profile" />
         </v-col>
       </v-row>

@@ -12,9 +12,7 @@
           cols="12"
           sm="4"
         >
-          <IndexProfCard
-            :profile="profile"
-          />
+          <IndexProfCard :profile="profile" />
         </v-col>
       </v-row>
     </v-container>
