@@ -1,12 +1,15 @@
 <template>
   <v-app id="app">
+    <TheHeader />
     <router-view />
   </v-app>
 </template>
 
 <script>
+import TheHeader from "./components/TheHeader";
+
 export default {
-  components: {},
+  components: { TheHeader },
   data: function() {
     return {};
   },
