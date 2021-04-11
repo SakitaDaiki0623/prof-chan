@@ -1,7 +1,6 @@
 <!-- app/javascript/pages/profile/index.vue -->
 <template>
   <div class="bg-backimage bg-cover bg-fixed text-gray-600 font-prof-default">
-    <TheHeader />
     <v-container class="note shadow-lg mb-20 mt-20">
       <p class="text-5xl font-bold pt-10 pb-10">
         社員プロフィール一覧
@@ -13,9 +12,8 @@
           cols="12"
           sm="4"
         >
-          <ProfCard
+          <IndexProfCard
             :profile="profile"
-            @handleOpenProfileShowPage="openProfileShowPage"
           />
         </v-col>
       </v-row>
@@ -28,13 +26,11 @@ import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 
 // Component ----------
-import TheHeader from "../../components/TheHeader";
-import ProfCard from "../../components/ProfCard";
+import IndexProfCard from "../../components/IndexProfCard";
 
 export default {
   components: {
-    TheHeader,
-    ProfCard,
+    IndexProfCard,
   },
   data() {
     return {
@@ -53,9 +49,6 @@ export default {
   },
   methods: {
     ...mapActions("profiles", ["fetchProfiles"]),
-    openProfileShowPage(profile) {
-      console.log(profile);
-    },
   },
 };
 </script>
