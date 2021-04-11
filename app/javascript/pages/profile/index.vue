@@ -3,7 +3,9 @@
   <div class="bg-backimage bg-cover bg-fixed text-gray-600 font-prof-default">
     <TheHeader />
     <v-container class="note shadow-lg mb-20 mt-20">
-      <p class="text-5xl font-bold pt-10 pb-10">社員プロフィール一覧</p>
+      <p class="text-5xl font-bold pt-10 pb-10">
+        社員プロフィール一覧
+      </p>
       <v-row class="mb-10">
         <v-col
           v-for="profile in getProfiles"
