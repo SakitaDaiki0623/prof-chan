@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         "backimage": "url('../tail_images/backimage01.jpg')",
-        "backimage-02": "url('../tail_images/backimage02.jpg')",
+        "backimage-02": "url('../tail_images/backimage_kari.jpg')",
         "prof-card": "url('../tail_images/prof_card.jpg')",
       }),
       fontFamily: {

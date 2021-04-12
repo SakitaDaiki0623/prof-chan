@@ -1,38 +1,40 @@
 <template>
-  <div class="text-gray-600 font-prof-default">
-    <div class="flex-grow">
+  <div :id="'edit-basic-profile-modal-' + profile.id">
+    <v-dialog
+      :value="isShownEditBasicProfModal"
+      max-width="800"
+      persistent
+      @input="$emit('input', $event.target.isShownEditBasicProfModal)"
+    >
       <div
-        class="min-h-screen flex flex-col items-center justify-center bg-backimage bg-cover bg-fixed"
+        class="w-3/5 shadow rounded-2xl bg-prof-card text-gray-600 font-prof-default"
       >
-        <h2 class="text-5xl mb-10">
-          基本情報を入力してね♬
-        </h2>
-        <div class="w-3/5 shadow rounded-2xl bg-prof-card">
-          <div class="flex">
-            <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
-              <div
-                class="border-b-2 border-gray-600 inline-block text-3xl mt-10 ml-10 border-4 border-gray-300"
+        <div class="flex">
+          <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
+            <div
+              class="border-b-2 border-gray-600 inline-block text-3xl mt-10 ml-10 border-4 border-gray-300"
+            >
+              ★基本情報★
+            </div>
+            <div class="w-full mt-10 ml-10">
+              <img
+                class="ring-4 ring-gray-600	"
+                :src="user.image"
               >
-                ★基本情報★
+            </div>
+            <div class="ml-8">
+              <div class="text-2xl mt-5">
+                名前
               </div>
-              <div class="w-full mt-10 ml-10">
-                <img
-                  class="ring-4 ring-gray-600	"
-                  :src="user.image"
-                >
-              </div>
-              <div class="ml-8">
-                <div class="text-2xl mt-5">
-                  名前
-                </div>
-                <div
-                  class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold"
-                >
-                  {{ user.name }}
-                </div>
+              <div
+                class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold"
+              >
+                {{ user.name }}
               </div>
             </div>
-            <div class="md:w-3/5 p-8 lg:ml-4">
+          </div>
+          <div class="md:w-3/5 p-8 lg:ml-4">
+            <div class="p-6">
               <!-- FORM -->
               <div
                 id="profile-basic-form"
@@ -42,7 +44,7 @@
                   ref="observer"
                   v-slot="{ invalid }"
                 >
-                  <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
+                  <form @submit.prevent="hundleUpdateBasicProfile(profile)">
                     <div>
                       <label
                         class="form-label"
@@ -158,7 +160,6 @@
                         min-width="auto"
                       >
                         <template #activator="{ on, attrs }">
-                          <!-- TODO: 入力値のフォーマットを設定 -->
                           <ValidationProvider
                             v-slot="{ errors }"
                             name="生年月日"
@@ -181,7 +182,6 @@
                           color="blue-grey darken-3"
                           header-color="blue-grey darken-2"
                           locale="ja-jp"
-                          :day-format="(date) => new Date(date).getDate()"
                           :max="new Date().toISOString().substr(0, 10)"
                           min="1950-01-01"
                           @change="saveBirthDate"
@@ -228,7 +228,7 @@
                     </div>
                     <div class="text-center mt-3">
                       <v-btn
-                        id="creation_button"
+                        id="creation-button"
                         type="submit"
                         depressed
                         elevation="4"
@@ -237,7 +237,16 @@
                         color="blue-grey darken-2"
                         class="white--text"
                       >
-                        入力完了！
+                        編集完了！
+                      </v-btn>
+                      <v-btn
+                        id="cancel-button"
+                        x-large
+                        color="error"
+                        class="white--text"
+                        @click="closeEditBasicProfModal"
+                      >
+                        キャンセル
                       </v-btn>
                     </div>
                   </form>
@@ -248,45 +257,39 @@
           </div>
         </div>
       </div>
-    </div>
-    <CreateProfileSuccessModal
-      v-show="isShownCreateProfileSuccessDialog"
-      :is-shown-create-profile-success-dialog="
-        isShownCreateProfileSuccessDialog
-      "
-    />
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { mapActions } from "vuex";
-
-// Component ----------
-import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
+import moment from "moment";
 
 export default {
-  components: {
-    CreateProfileSuccessModal,
+  name: "EditBasicProfModal",
+  filters: {
+    moment: function(date) {
+      return moment(date).format("YYYY-MM-DD");
+    },
+  },
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
+    user: {
+      type: Object,
+      required: true,
+    },
+    isShownEditBasicProfModal: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
-      user: {},
-      team: {
-        image: "",
-      },
-      profile: {
-        height: "",
-        gender: "",
-        blood_type: "",
-        prefecture_id: "",
-        birthday: "",
-        day_of_joinning: "",
-      },
       date: null,
       birthMenu: false,
       joinedMenu: false,
-      isShownCreateProfileSuccessDialog: false,
       prefectures: [
         { text: "北海道", value: "1" },
         { text: "青森県", value: "2" },
@@ -338,45 +341,35 @@ export default {
       ],
     };
   },
+  computed: {
+    computedDateFormattedMomentJsForBirthday() {
+      return this.profile.birthday
+        ? moment(this.profile.birthday).format("MMMM Do, YYYY")
+        : "";
+    },
+    computedDateFormattedMomentJsForJoinnedday() {
+      return this.profile.day_of_joinning
+        ? moment(this.profile.day_of_joinning).format("MMMM Do, YYYY")
+        : "";
+    },
+  },
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
   },
-  mounted() {
-    document.title = "プロフィールづくり - プロフちゃん";
-  },
-  created() {
-    // [TODO: リファクタリング] axiosのモジュールに移すか考える
-    this.$axios
-      .get("/users/new")
-      .then((response) => (this.user = response.data))
-      .catch((err) => console.log(err.status));
-  },
   methods: {
-    ...mapActions("profiles", ["createBasicProfile"]),
-    hundleSubmitBasicProfileInfo(profile) {
-      // [TODO: リファクタリング] メソッドが冗長なのでリファクタリングできるか考える
-      if (
-        profile.height == "" ||
-        profile.gender == "" ||
-        profile.blood_type == "" ||
-        profile.prefecture_id == "" ||
-        profile.birthday == "" ||
-        profile.day_of_joinning == ""
-      )
-        return;
-      this.createBasicProfile(profile);
-      this.openDialog();
-    },
-    openDialog() {
-      this.isShownCreateProfileSuccessDialog = true;
-    },
     saveBirthDate(date) {
       this.$refs.menu.save(date);
     },
     saveJoinedDate(date) {
       this.$refs.menu.save(date);
+    },
+    hundleUpdateBasicProfile() {
+      this.$emit("update-basic-profile", this.profile);
+    },
+    closeEditBasicProfModal() {
+      this.$emit("close-basic-prof-modal");
     },
   },
 };

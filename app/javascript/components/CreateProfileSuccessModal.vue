@@ -6,7 +6,10 @@
       max-width="800"
       @input="$emit('input', $event.target.isShownCreateProfileSuccessDialog)"
     >
-      <v-card height="450" :img="require('../tail_images/card_bg.jpg')">
+      <v-card
+        height="450"
+        :img="require('../tail_images/card_bg.jpg')"
+      >
         <p
           class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-20 mb-10"
         >

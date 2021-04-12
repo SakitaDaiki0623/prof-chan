@@ -8,8 +8,18 @@
         {{ profile.user.name }} さんのプロフィール
       </p>
       <v-row class="mb-10">
-        <v-col cols="12" sm="6">
+        <v-col
+          cols="12"
+          sm="6"
+        >
           <BasicProfCard :profile="profile" />
+          <v-btn
+           id="edit-basic-profile-btn"
+            v-show="isCurrentUser"
+            @click="openEditBasicProfModal(profile)"
+          >
+            編集する
+          </v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -28,44 +38,57 @@
         </v-btn>
       </v-card-actions>
     </v-row>
+    <EditBasicProfModal
+      :is-shown-edit-basic-prof-modal="isShownEditBasicProfModal"
+      :profile="profile"
+      :user="profile.user"
+      @update-basic-profile="updateBasicProfile"
+      @close-basic-prof-modal="closeBasicProfModal"
+    />
   </div>
 </template>
 
 <script>
 // plugins
 import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
 // Component ----------
 import BasicProfCard from "../../components/BasicProfCard";
+import EditBasicProfModal from "../../components/EditBasicProfModal";
 
 export default {
   components: {
     BasicProfCard,
+    EditBasicProfModal,
   },
   props: {
-    id: String,
+    id: {
+      type: String,
+      require: true,
+      default: "",
+    },
   },
   data() {
     return {
-      profile: {
-        height: "",
-        gender: "",
-        blood_type: "",
-        prefecture_id: "",
-        birthday: "",
-        day_of_joinning: "",
-        user: {
-          name: "",
-          image: "",
-        },
-      },
+      user: {},
+      isShownEditBasicProfModal: false,
     };
   },
+  computed: {
+    ...mapState("profiles", ["profiles"]),
+    profile() {
+      return this.profiles.find((profile) => profile.id == this.id) || {};
+    },
+    isCurrentUser() {
+      return this.profile.user.id === this.user.id;
+    },
+  },
   created() {
-    // [TODO: Refactor] vuexから値を取得できるように変更
+    // [TODO: リファクタリング] axiosのモジュールに移すか考える
     this.$axios
-      .get(`/profiles/${this.id}`)
-      .then((response) => (this.profile = response.data))
+      .get("/users/new")
+      .then((response) => (this.user = response.data))
       .catch((err) => console.log(err.status));
   },
   mounted() {
@@ -74,23 +97,22 @@ export default {
     document.title = `プロフィール詳細 - プロフちゃん`;
   },
   methods: {
+    ...mapActions("profiles", ["patchProfile"]),
     moveToProfilesPage() {
       this.$router.push("/profiles");
+    },
+    openEditBasicProfModal(profile) {
+      this.isShownEditBasicProfModal = true;
+    },
+    closeBasicProfModal() {
+      this.isShownEditBasicProfModal = false;
+    },
+    updateBasicProfile(profile) {
+      this.patchProfile(profile);
+      this.closeBasicProfModal();
     },
   },
 };
 </script>
 
-<style scoped>
-.note {
-  width: 80%;
-  padding: 0 1em;
-  background: linear-gradient(#ccc 0.1px, transparent 0.6px) #fffbf2;
-  background-size: auto 2.5em;
-  line-height: 2.5em;
-  border-bottom: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  overflow: hidden;
-}
-</style>
+<style scoped></style>
