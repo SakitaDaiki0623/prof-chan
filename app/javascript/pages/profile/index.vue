@@ -12,9 +12,7 @@
           cols="12"
           sm="4"
         >
-          <IndexProfCard
-            :profile="profile"
-          />
+          <IndexProfCard :profile="profile" />
         </v-col>
       </v-row>
     </v-container>
@@ -44,7 +42,6 @@ export default {
     document.title = "プロフィール一覧 - プロフちゃん";
   },
   created() {
-    console.log("fetchProfiles");
     this.fetchProfiles();
   },
   methods: {

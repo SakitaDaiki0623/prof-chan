@@ -1,6 +1,5 @@
 # app/models/team.rb
 class Team < ApplicationRecord
-
   # association ==========
   has_many :users, dependent: :destroy
 
