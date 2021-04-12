@@ -14,6 +14,7 @@
         >
           <BasicProfCard :profile="profile" />
           <v-btn
+           id="edit-basic-profile-btn"
             v-show="isCurrentUser"
             @click="openEditBasicProfModal(profile)"
           >

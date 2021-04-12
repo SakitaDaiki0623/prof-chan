@@ -8,17 +8,37 @@ RSpec.describe 'ShowProfile', type: :system do
     slack_login_till_access_profiles_path
   end
 
-  describe 'ページの基本検証' do
-    let(:profile) { Profile.last }
+  let(:my_profile) { Profile.last }
+  let(:others_profile) { Profile.first }
 
-    before { find("#profile-index-card-#{profile.id}").click }
+  describe 'ページの基本検証' do
+
+    before { find("#profile-index-card-#{my_profile.id}").click }
 
     it 'タイトルが「プロフィール詳細 - プロフちゃん」であること' do
       expect(page).to have_title('プロフィール詳細 - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
     it '指定のプロフィールが表示されていること' do
-      expect(page).to have_content("#{profile.user.name} さんのプロフィール")
+      expect(page).to have_content("#{my_profile.user.name} さんのプロフィール")
+    end
+  end
+
+  describe '自分の詳細ページ' do
+
+    before { find("#profile-index-card-#{my_profile.id}").click }
+
+    it '編集ボタンが表示されていること' do
+      expect(page).to have_button('編集する')
+    end
+  end
+
+  describe '他人の詳細ページ' do
+
+    before { find("#profile-index-card-#{others_profile.id}").click }
+
+    it '編集ボタンが表示されていないこと' do
+      expect(page).not_to have_button('編集する')
     end
   end
 end

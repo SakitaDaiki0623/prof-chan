@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :id="'edit-basic-profile-modal-' + profile.id">
     <v-dialog
       :value="isShownEditBasicProfModal"
       max-width="800"
