@@ -8,13 +8,10 @@
         {{ profile.user.name }} さんのプロフィール
       </p>
       <v-row class="mb-10">
-        <v-col
-          cols="12"
-          sm="6"
-        >
+        <v-col cols="12" sm="6">
           <BasicProfCard :profile="profile" />
           <v-btn
-           id="edit-basic-profile-btn"
+            id="edit-basic-profile-btn"
             v-show="isCurrentUser"
             @click="openEditBasicProfModal(profile)"
           >
@@ -31,9 +28,7 @@
           class="font-prof-default black--text"
           @click="moveToProfilesPage"
         >
-          <v-icon left>
-            mdi-account-circle
-          </v-icon>
+          <v-icon left> mdi-account-circle </v-icon>
           プロフィール閲覧
         </v-btn>
       </v-card-actions>
