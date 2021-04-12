@@ -3,16 +3,18 @@
     <div class="flex">
       <div class="md:w-2/5 ml-4">
         <div class="w-full mt-10">
-          <img class="ring-4 ring-gray-600" :src="profile.user.image" />
+          <img
+            class="ring-4 ring-gray-600"
+            :src="profile.user.image"
+          >
         </div>
         <div>
           <div class="text-lg font-bold inline-block">
             <label
               for="name"
               class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-              >名前</label
-            >
-            <br />
+            >名前</label>
+            <br>
             {{ profile.user.name }}
           </div>
         </div>

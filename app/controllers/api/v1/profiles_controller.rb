@@ -28,7 +28,6 @@ module Api
         render json: @profile
       end
 
-
       def update
         if @profile.update(profile_params)
           render json: @profile

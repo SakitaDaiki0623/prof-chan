@@ -8,11 +8,17 @@
         {{ profile.user.name }} さんのプロフィール
       </p>
       <v-row class="mb-10">
-        <v-col cols="12" sm="6">
+        <v-col
+          cols="12"
+          sm="6"
+        >
           <BasicProfCard :profile="profile" />
-          <v-btn v-show="isCurrentUser" @click="openEditBasicProfModal(profile)"
-            >編集する</v-btn
+          <v-btn
+            v-show="isCurrentUser"
+            @click="openEditBasicProfModal(profile)"
           >
+            編集する
+          </v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -32,7 +38,7 @@
       </v-card-actions>
     </v-row>
     <EditBasicProfModal
-      :isShownEditBasicProfModal="isShownEditBasicProfModal"
+      :is-shown-edit-basic-prof-modal="isShownEditBasicProfModal"
       :profile="profile"
       :user="profile.user"
       @update-basic-profile="updateBasicProfile"
@@ -56,7 +62,11 @@ export default {
     EditBasicProfModal,
   },
   props: {
-    id: String,
+    id: {
+      type: String,
+      require: true,
+      default: "",
+    },
   },
   data() {
     return {

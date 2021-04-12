@@ -1,15 +1,19 @@
 <!-- app/javascript/pages/profile/show.vue -->
+<!-- TODO: 編集画面は後ほど削除予定 -->
 <template>
   <div
     class="bg-backimage-02 bg-cover bg-fixed text-gray-600 font-prof-default"
   >
     <v-container>
       <p class="text-5xl font-bold note mb-10">
-        {{ profile.user.name }} さんのプロフィール編集
+        プロフィール編集
       </p>
       <v-row class="mb-10">
-        <v-col cols="12" sm="6">
-          <BasicProfCard :profile="profile" />
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <EditBasicProfCard :profile="profile" />
         </v-col>
       </v-row>
     </v-container>
@@ -22,14 +26,18 @@ import axios from "axios";
 import { mapState } from "vuex";
 
 // Component ----------
-import BasicProfCard from "../../components/BasicProfCard";
+import EditBasicProfCard from "../../components/EditBasicProfCard";
 
 export default {
   components: {
-    BasicProfCard,
+    EditBasicProfCard,
   },
   props: {
-    id: String,
+    id: {
+      type: String,
+      require: true,
+      default: "",
+    },
   },
   data() {
     return {};
@@ -41,9 +49,7 @@ export default {
     },
   },
   mounted() {
-    // [TODO: Refactor] ページごとにタイトルを変更(下記メソッドで実装)
-    // document.title = `${ this.profile.user.name } - プロフちゃん`;
-    document.title = `プロフィール詳細 - プロフちゃん`;
+    document.title = `プロフィール編集 - プロフちゃん`;
   },
   methods: {
     moveToProfilesPage() {

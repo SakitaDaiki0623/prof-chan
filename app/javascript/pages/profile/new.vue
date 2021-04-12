@@ -16,7 +16,10 @@
                 ★基本情報★
               </div>
               <div class="w-full mt-10 ml-10">
-                <img class="ring-4 ring-gray-600	" :src="user.image" />
+                <img
+                  class="ring-4 ring-gray-600	"
+                  :src="user.image"
+                >
               </div>
               <div class="ml-8">
                 <div class="text-2xl mt-5">
@@ -30,211 +33,217 @@
               </div>
             </div>
             <div class="md:w-3/5 p-8 lg:ml-4">
-              <div class="p-6">
-                <!-- FORM -->
-                <template>
-                  <ValidationObserver ref="observer" v-slot="{ invalid }">
-                    <form
-                      @submit.prevent="hundleSubmitBasicProfileInfo(profile)"
-                    >
-                      <div>
-                        <label class="form-label" for="profile_gender"
-                          >性別</label
+              <!-- FORM -->
+              <div
+                id="profile-basic-form"
+                class="p-6"
+              >
+                <ValidationObserver
+                  ref="observer"
+                  v-slot="{ invalid }"
+                >
+                  <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
+                    <div>
+                      <label
+                        class="form-label"
+                        for="profile_gender"
+                      >性別</label>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        name="性別"
+                        rules="select_required"
+                      >
+                        <select
+                          id="profile_gender"
+                          v-model="profile.gender"
+                          class="input-form"
+                          name="profile[gender]"
                         >
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="性別"
-                          rules="select_required"
+                          <option value="male">
+                            男性
+                          </option>
+                          <option value="female">
+                            女性
+                          </option>
+                        </select>
+                        <span class="text-red-400">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                    <div>
+                      <label
+                        class="form-label"
+                        for="profile_height"
+                      >身長</label>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        name="身長"
+                        rules="input_required"
+                      >
+                        <input
+                          id="profile_height"
+                          v-model="profile.height"
+                          class="input-form"
+                          type="number"
+                          name="profile[height]"
                         >
-                          <select
-                            id="profile_gender"
-                            v-model="profile.gender"
-                            class="input-form"
-                            name="profile[gender]"
+                        <span class="text-red-400">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                    <div>
+                      <label
+                        class="form-label"
+                        for="profile_blood_type"
+                      >血液型</label>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        name="血液型"
+                        rules="select_required"
+                      >
+                        <select
+                          id="profile_blood_type"
+                          v-model="profile.blood_type"
+                          class="input-form"
+                          name="profile[blood_type]"
+                        >
+                          <option value="A">
+                            A型
+                          </option>
+                          <option value="B">
+                            B型
+                          </option>
+                          <option value="AB">
+                            AB型
+                          </option>
+                          <option value="O">
+                            O型
+                          </option>
+                        </select>
+                        <span class="text-red-400">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                    <div>
+                      <label
+                        class="form-label"
+                        for="profile_prefecture_id"
+                      >出身地</label>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        name="出身地"
+                        rules="select_required"
+                      >
+                        <select
+                          id="profile_prefecture_id"
+                          v-model="profile.prefecture_id"
+                          name="profile[prefecture_id]"
+                          class="input-form"
+                        >
+                          <option
+                            v-for="prefecture in prefectures"
+                            :key="prefecture.value"
+                            :value="prefecture.value"
                           >
-                            <option value="male">
-                              男性
-                            </option>
-                            <option value="female">
-                              女性
-                            </option>
-                          </select>
-                          <span class="text-red-400">{{ errors[0] }}</span>
-                        </ValidationProvider>
-                      </div>
-                      <div>
-                        <label class="form-label" for="profile_height"
-                          >身長</label
-                        >
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="身長"
-                          rules="input_required"
-                        >
-                          <input
-                            id="profile_height"
-                            v-model="profile.height"
-                            class="input-form"
-                            type="number"
-                            name="profile[height]"
-                          />
-                          <span class="text-red-400">{{ errors[0] }}</span>
-                        </ValidationProvider>
-                      </div>
-                      <div>
-                        <label class="form-label" for="profile_blood_type"
-                          >血液型</label
-                        >
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="血液型"
-                          rules="select_required"
-                        >
-                          <select
-                            id="profile_blood_type"
-                            v-model="profile.blood_type"
-                            class="input-form"
-                            name="profile[blood_type]"
+                            {{ prefecture.text }}
+                          </option>
+                        </select>
+                        <span class="text-red-400">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </div>
+                    <div>
+                      <v-menu
+                        ref="menu"
+                        v-model="birthMenu"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <!-- TODO: 入力値のフォーマットを設定 -->
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            name="生年月日"
+                            rules="input_required"
                           >
-                            <option value="A">
-                              A型
-                            </option>
-                            <option value="B">
-                              B型
-                            </option>
-                            <option value="AB">
-                              AB型
-                            </option>
-                            <option value="O">
-                              O型
-                            </option>
-                          </select>
-                          <span class="text-red-400">{{ errors[0] }}</span>
-                        </ValidationProvider>
-                      </div>
-                      <div>
-                        <label class="form-label" for="profile_prefecture_id"
-                          >出身地</label
-                        >
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="出身地"
-                          rules="select_required"
-                        >
-                          <select
-                            id="profile_prefecture_id"
-                            v-model="profile.prefecture_id"
-                            name="profile[prefecture_id]"
-                            class="input-form"
+                            <v-text-field
+                              id="profile_birthday"
+                              v-model="profile.birthday"
+                              name="profile[birthday]"
+                              label="生年月日"
+                              v-bind="attrs"
+                              v-on="on"
+                            />
+                            <span class="text-red-400">{{ errors[0] }}</span>
+                          </ValidationProvider>
+                        </template>
+                        <v-date-picker
+                          ref="picker"
+                          v-model="profile.birthday"
+                          color="blue-grey darken-3"
+                          header-color="blue-grey darken-2"
+                          locale="ja-jp"
+                          :day-format="(date) => new Date(date).getDate()"
+                          :max="new Date().toISOString().substr(0, 10)"
+                          min="1950-01-01"
+                          @change="saveBirthDate"
+                        />
+                      </v-menu>
+                    </div>
+                    <div>
+                      <v-menu
+                        ref="menu"
+                        v-model="joinedMenu"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <!-- TODO: 入力値のフォーマットを設定 -->
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            name="入社日"
+                            rules="input_required"
                           >
-                            <option
-                              v-for="prefecture in prefectures"
-                              :key="prefecture.value"
-                              :value="prefecture.value"
-                            >
-                              {{ prefecture.text }}
-                            </option>
-                          </select>
-                          <span class="text-red-400">{{ errors[0] }}</span>
-                        </ValidationProvider>
-                      </div>
-                      <div>
-                        <v-menu
-                          ref="menu"
-                          v-model="birthMenu"
-                          :close-on-content-click="false"
-                          transition="scale-transition"
-                          offset-y
-                          min-width="auto"
-                        >
-                          <template #activator="{ on, attrs }">
-                            <!-- TODO: 入力値のフォーマットを設定 -->
-                            <ValidationProvider
-                              v-slot="{ errors }"
-                              name="生年月日"
-                              rules="input_required"
-                            >
-                              <v-text-field
-                                id="profile_birthday"
-                                v-model="profile.birthday"
-                                name="profile[birthday]"
-                                label="生年月日"
-                                v-bind="attrs"
-                                v-on="on"
-                              />
-                              <span class="text-red-400">{{ errors[0] }}</span>
-                            </ValidationProvider>
-                          </template>
-                          <v-date-picker
-                            ref="picker"
-                            v-model="profile.birthday"
-                            color="blue-grey darken-3"
-                            header-color="blue-grey darken-2"
-                            locale="ja-jp"
-                            :day-format="(date) => new Date(date).getDate()"
-                            :max="new Date().toISOString().substr(0, 10)"
-                            min="1950-01-01"
-                            @change="saveBirthDate"
-                          />
-                        </v-menu>
-                      </div>
-                      <div>
-                        <v-menu
-                          ref="menu"
-                          v-model="joinedMenu"
-                          :close-on-content-click="false"
-                          transition="scale-transition"
-                          offset-y
-                          min-width="auto"
-                        >
-                          <template #activator="{ on, attrs }">
-                            <!-- TODO: 入力値のフォーマットを設定 -->
-                            <ValidationProvider
-                              v-slot="{ errors }"
-                              name="入社日"
-                              rules="input_required"
-                            >
-                              <v-text-field
-                                id="profile_day_of_joinning"
-                                v-model="profile.day_of_joinning"
-                                name="profile[day_of_joinning]"
-                                label="入社日"
-                                v-bind="attrs"
-                                v-on="on"
-                              />
-                              <span class="text-red-400">{{ errors[0] }}</span>
-                            </ValidationProvider>
-                          </template>
-                          <v-date-picker
-                            ref="picker"
-                            v-model="profile.day_of_joinning"
-                            color="blue-grey darken-3"
-                            header-color="blue-grey darken-2"
-                            locale="ja-jp"
-                            :day-format="(date) => new Date(date).getDate()"
-                            @change="saveJoinedDate"
-                          />
-                        </v-menu>
-                      </div>
-                      <div class="text-center mt-3">
-                        <v-btn
-                          id="creation_button"
-                          type="submit"
-                          depressed
-                          elevation="4"
-                          x-large
-                          :disabled="invalid"
-                          color="blue-grey darken-2"
-                          class="white--text"
-                        >
-                          入力完了！
-                        </v-btn>
-                      </div>
-                    </form>
-                  </ValidationObserver>
-                </template>
-                <!-- /FORM -->
+                            <v-text-field
+                              id="profile_day_of_joinning"
+                              v-model="profile.day_of_joinning"
+                              name="profile[day_of_joinning]"
+                              label="入社日"
+                              v-bind="attrs"
+                              v-on="on"
+                            />
+                            <span class="text-red-400">{{ errors[0] }}</span>
+                          </ValidationProvider>
+                        </template>
+                        <v-date-picker
+                          ref="picker"
+                          v-model="profile.day_of_joinning"
+                          color="blue-grey darken-3"
+                          header-color="blue-grey darken-2"
+                          locale="ja-jp"
+                          :day-format="(date) => new Date(date).getDate()"
+                          @change="saveJoinedDate"
+                        />
+                      </v-menu>
+                    </div>
+                    <div class="text-center mt-3">
+                      <v-btn
+                        id="creation_button"
+                        type="submit"
+                        depressed
+                        elevation="4"
+                        x-large
+                        :disabled="invalid"
+                        color="blue-grey darken-2"
+                        class="white--text"
+                      >
+                        入力完了！
+                      </v-btn>
+                    </div>
+                  </form>
+                </ValidationObserver>
               </div>
+              <!-- /FORM -->
             </div>
           </div>
         </div>
