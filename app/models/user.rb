@@ -29,17 +29,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   # association
-  has_one :profile, dependent: :destroy
+  has_one :profile,       dependent: :destroy
+  has_one :profile_block, dependent: :destroy
   belongs_to :team
 
-  #  Validation
+  # validation
   validates :name,                      presence: true, length: { in: 1..15 }
   validates :email,                     presence: true, uniqueness: { case_sensitive: true }
   validates :provider,                  presence: true
   validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
-  # TODO: imageカラムにバリデーションを追加
 
   # Deviseによる外部認証時にAPI情報をUserのカラムに格納
   def self.from_omniauth(auth, user_info)
