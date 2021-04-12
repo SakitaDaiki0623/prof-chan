@@ -3,7 +3,7 @@ module Api
   module V1
     class ProfilesController < ApplicationController
       skip_before_action :verify_authenticity_token
-      before_action :set_profile, only: %i[show update destroy]
+      before_action :set_profile, only: %i[show update]
 
       def index
         @user = User.find(current_user.id)
@@ -29,7 +29,13 @@ module Api
       end
 
 
-      def update; end
+      def update
+        if @profile.update(profile_params)
+          render json: @profile
+        else
+          render json: @profile.errors, status: :bad_request
+        end
+      end
 
       def destroy; end
 

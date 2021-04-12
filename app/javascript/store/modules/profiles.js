@@ -16,6 +16,13 @@ export const profiles = {
     loadProfiles(state, profiles) {
       state.profiles = profiles;
     },
+    updateProfile(state, data) {
+      // findIndex ・・・ 配列の中から条件を満たした要素のindex番号を返す
+      const index = state.profiles.findIndex((profile) => {
+        return profile.id == data.id;
+      });
+      state.profiles.splice(index, 1, data);
+    },
   },
   actions: {
     createBasicProfile({ commit }, profile) {
@@ -33,6 +40,15 @@ export const profiles = {
           commit("loadProfiles", response.data);
         })
         .catch((error) => console.log(error.status));
+    },
+    patchProfile({ commit }, payload) {
+      console.log(payload)
+      axios
+        .patch(`profiles/${payload.id}`, payload)
+        .then((response) => {
+          commit("updateProfile", response.data);
+        })
+        .catch((err) => console.log(err));
     },
   },
 };

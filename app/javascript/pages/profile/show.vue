@@ -10,6 +10,9 @@
       <v-row class="mb-10">
         <v-col cols="12" sm="6">
           <BasicProfCard :profile="profile" />
+          <v-btn v-show="isCurrentUser" @click="openEditBasicProfModal(profile)"
+            >編集する</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>
@@ -28,32 +31,54 @@
         </v-btn>
       </v-card-actions>
     </v-row>
+    <EditBasicProfModal
+      :isShownEditBasicProfModal="isShownEditBasicProfModal"
+      :profile="profile"
+      :user="profile.user"
+      @update-basic-profile="updateBasicProfile"
+      @close-basic-prof-modal="closeBasicProfModal"
+    />
   </div>
 </template>
 
 <script>
 // plugins
 import axios from "axios";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 // Component ----------
 import BasicProfCard from "../../components/BasicProfCard";
+import EditBasicProfModal from "../../components/EditBasicProfModal";
 
 export default {
   components: {
     BasicProfCard,
+    EditBasicProfModal,
   },
   props: {
     id: String,
   },
   data() {
-    return {};
+    return {
+      user: {},
+      isShownEditBasicProfModal: false,
+    };
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
     },
+    isCurrentUser() {
+      return this.profile.user.id === this.user.id;
+    },
+  },
+  created() {
+    // [TODO: リファクタリング] axiosのモジュールに移すか考える
+    this.$axios
+      .get("/users/new")
+      .then((response) => (this.user = response.data))
+      .catch((err) => console.log(err.status));
   },
   mounted() {
     // [TODO: Refactor] ページごとにタイトルを変更(下記メソッドで実装)
@@ -61,8 +86,19 @@ export default {
     document.title = `プロフィール詳細 - プロフちゃん`;
   },
   methods: {
+    ...mapActions("profiles", ["patchProfile"]),
     moveToProfilesPage() {
       this.$router.push("/profiles");
+    },
+    openEditBasicProfModal(profile) {
+      this.isShownEditBasicProfModal = true;
+    },
+    closeBasicProfModal() {
+      this.isShownEditBasicProfModal = false;
+    },
+    updateBasicProfile(profile) {
+      this.patchProfile(profile);
+      this.closeBasicProfModal();
     },
   },
 };
