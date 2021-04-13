@@ -5,5 +5,21 @@ export const users = {
   namespaced: true,
   state: {
     users: [],
+    currentUser: {},
+  },
+  mutations: {
+    loadCurrentUser(state, currentUser) {
+      state.currentUser = currentUser;
+    },
+  },
+  actions: {
+    fetchCurrentUser({ commit }) {
+      axios
+        .get("/users/new")
+        .then((response) => {
+          commit("loadCurrentUser", response.data);
+        })
+        .catch((err) => console.log(err.status));
+    },
   },
 };

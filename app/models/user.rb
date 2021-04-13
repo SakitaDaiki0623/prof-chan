@@ -29,19 +29,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   # association
-  has_one :profile, dependent: :destroy
+  has_one :profile,       dependent: :destroy
+  has_one :profile_block, dependent: :destroy
   belongs_to :team
 
-  #  Validation
+  # validation
   validates :name,                      presence: true, length: { in: 1..15 }
   validates :email,                     presence: true, uniqueness: { case_sensitive: true }
   validates :provider,                  presence: true
   validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
-  # TODO: imageカラムにバリデーションを追加
 
-  # Deviseによる外部認証時にAPI情報をUserのカラムに格納
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
@@ -50,10 +49,11 @@ class User < ApplicationRecord
     user.image = user_info.dig('user', 'image_192')
     user.check_team_existence(user_info.dig('team'))
     user.save!
+    user.check_profile_block_existence
     user
   end
 
-  # userが所属するチームがTeamテーブルにあるかどうか
+  # ユーザーが所属するチームがTeamテーブルにあるかどうかを確認
   def check_team_existence(team_info)
     workspace_id = team_info.dig('id')
     name = team_info.dig('name')
@@ -62,7 +62,16 @@ class User < ApplicationRecord
     self.team = if Team.exists?(workspace_id: workspace_id)
                   Team.find_by(workspace_id: workspace_id)
                 else
+                  # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
                   Team.create!(name: name, workspace_id: workspace_id, image: image)
                 end
+  end
+
+  # ユーザーにprofile_blockがなければ作成
+  def check_profile_block_existence
+    if profile_block.nil?
+      build_profile_block
+      profile_block.save!
+    end
   end
 end

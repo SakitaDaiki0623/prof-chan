@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id                 :bigint           not null, primary key
+#  name               :string(255)      not null
+#  image              :string(255)      not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+
+# Indexes
+#
+#  index_users_on_workspace_id          (workspace_id)
+
 # app/models/team.rb
 class Team < ApplicationRecord
   # association ==========

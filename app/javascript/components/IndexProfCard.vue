@@ -29,7 +29,7 @@
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
           >性別</label>
-          {{ translateGender }}
+          {{ profile.gender }}
         </div>
 
         <div class="p-1">
