@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_030215) do
+ActiveRecord::Schema.define(version: 2021_04_13_111303) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 2021_04_03_030215) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "profile_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profile_blocks_on_user_id"
+  end
+
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "height", null: false
@@ -46,6 +53,39 @@ ActiveRecord::Schema.define(version: 2021_04_03_030215) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "question_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "profile_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_block_id"], name: "index_question_blocks_on_profile_block_id"
+  end
+
+  create_table "question_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "content", null: false
+    t.string "answer"
+    t.bigint "question_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_block_id"], name: "index_question_items_on_question_block_id"
+  end
+
+  create_table "ranking_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "profile_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_block_id"], name: "index_ranking_blocks_on_profile_block_id"
+  end
+
+  create_table "ranking_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "answer"
+    t.bigint "ranking_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ranking_block_id"], name: "index_ranking_items_on_ranking_block_id"
+  end
+
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "workspace_id", null: false
@@ -53,6 +93,15 @@ ActiveRecord::Schema.define(version: 2021_04_03_030215) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["workspace_id"], name: "index_teams_on_workspace_id", unique: true
+  end
+
+  create_table "text_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "text", null: false
+    t.bigint "profile_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_block_id"], name: "index_text_blocks_on_profile_block_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -76,7 +125,32 @@ ActiveRecord::Schema.define(version: 2021_04_03_030215) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  create_table "yes_or_no_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "profile_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_block_id"], name: "index_yes_or_no_blocks_on_profile_block_id"
+  end
+
+  create_table "yes_or_no_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "content", null: false
+    t.boolean "answer"
+    t.bigint "yes_or_no_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["yes_or_no_block_id"], name: "index_yes_or_no_items_on_yes_or_no_block_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "profile_blocks", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "question_blocks", "profile_blocks"
+  add_foreign_key "question_items", "question_blocks"
+  add_foreign_key "ranking_blocks", "profile_blocks"
+  add_foreign_key "ranking_items", "ranking_blocks"
+  add_foreign_key "text_blocks", "profile_blocks"
   add_foreign_key "users", "teams"
+  add_foreign_key "yes_or_no_blocks", "profile_blocks"
+  add_foreign_key "yes_or_no_items", "yes_or_no_blocks"
 end

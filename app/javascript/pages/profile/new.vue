@@ -259,10 +259,11 @@
 </template>
 
 <script>
+// plugins
 import axios from "axios";
 import { mapActions } from "vuex";
 
-// Component ----------
+// components ----------
 import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
 
 export default {

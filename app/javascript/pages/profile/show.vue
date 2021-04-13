@@ -7,17 +7,10 @@
       <p class="text-5xl font-bold note mb-10">
         {{ profile.user.name }} さんのプロフィール
       </p>
-      <v-row class="mb-10">
-        <v-col
-          cols="12"
-          sm="6"
-        >
-          <BasicProfCard :profile="profile" />
-          <v-btn
-           id="edit-basic-profile-btn"
-            v-show="isCurrentUser"
-            @click="openEditBasicProfModal(profile)"
-          >
+      <v-row class="mb-10" justify="center">
+        <v-col cols="12" sm="6">
+          <BasicProfCard :profile="profile" :currentUser="currentUser" />
+          <v-btn v-show="isCurrentUser" id="edit-basic-profile-btn">
             編集する
           </v-btn>
         </v-col>
@@ -31,20 +24,11 @@
           class="font-prof-default black--text"
           @click="moveToProfilesPage"
         >
-          <v-icon left>
-            mdi-account-circle
-          </v-icon>
+          <v-icon left> mdi-account-circle </v-icon>
           プロフィール閲覧
         </v-btn>
       </v-card-actions>
     </v-row>
-    <EditBasicProfModal
-      :is-shown-edit-basic-prof-modal="isShownEditBasicProfModal"
-      :profile="profile"
-      :user="profile.user"
-      @update-basic-profile="updateBasicProfile"
-      @close-basic-prof-modal="closeBasicProfModal"
-    />
   </div>
 </template>
 
@@ -55,12 +39,10 @@ import { mapState, mapActions } from "vuex";
 
 // Component ----------
 import BasicProfCard from "../../components/BasicProfCard";
-import EditBasicProfModal from "../../components/EditBasicProfModal";
 
 export default {
   components: {
     BasicProfCard,
-    EditBasicProfModal,
   },
   props: {
     id: {
@@ -70,49 +52,38 @@ export default {
     },
   },
   data() {
-    return {
-      user: {},
-      isShownEditBasicProfModal: false,
-    };
+    return {};
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
+    ...mapState("users", ["currentUser"]),
+    ...mapState("textBlocks", ["textBlocks"]),
+
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
     },
     isCurrentUser() {
-      return this.profile.user.id === this.user.id;
+      return this.profile.user.id === this.currentUser.id;
     },
   },
-  created() {
-    // [TODO: リファクタリング] axiosのモジュールに移すか考える
-    this.$axios
-      .get("/users/new")
-      .then((response) => (this.user = response.data))
-      .catch((err) => console.log(err.status));
-  },
   mounted() {
-    // [TODO: Refactor] ページごとにタイトルを変更(下記メソッドで実装)
-    // document.title = `${ this.profile.user.name } - プロフちゃん`;
+    this.fetchProfiles();
+    this.fetchTextBlocks();
+    this.fetchCurrentUser();
     document.title = `プロフィール詳細 - プロフちゃん`;
   },
   methods: {
-    ...mapActions("profiles", ["patchProfile"]),
+    ...mapActions("profiles", ["patchProfile", "fetchProfiles"]),
+    ...mapActions("textBlocks", ["fetchTextBlocks"]),
+    ...mapActions("users", ["fetchCurrentUser"]),
+
     moveToProfilesPage() {
       this.$router.push("/profiles");
-    },
-    openEditBasicProfModal(profile) {
-      this.isShownEditBasicProfModal = true;
-    },
-    closeBasicProfModal() {
-      this.isShownEditBasicProfModal = false;
-    },
-    updateBasicProfile(profile) {
-      this.patchProfile(profile);
-      this.closeBasicProfModal();
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
