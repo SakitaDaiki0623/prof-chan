@@ -6,22 +6,18 @@
       persistent
       @input="$emit('input', $event.target.isShownProfileBlockSelectDialog)"
     >
-      <v-card class="bg-prof-card bg-top">
+      <v-card>
         <p
           class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-10 mb-10"
         >
           フォーマットを選択してください
         </p>
-        <v-row>
+        <v-row class="p-8">
           <v-col
-            v-for="n in 1"
-            :key="n"
             cols="12"
             sm="6"
           >
             <v-card
-              class="mx-auto"
-              max-width="400"
             >
               <v-img
                 class="white--text align-end"

@@ -1,8 +1,6 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div
-    class="bg-backimage-02 bg-cover bg-fixed text-gray-600 font-prof-default"
-  >
+  <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
     <v-container>
       <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
       <v-row class="mb-10">
@@ -10,22 +8,45 @@
           <BasicProfCard :currentUser="currentUser" :profile="profile" />
         </v-col>
       </v-row>
-      <v-row justify="center">
-        <v-btn tile color="success" @click="openProfileBlockSelectDialog">
-          <v-icon left> mdi-plus </v-icon>
-          ブロックを追加する
-        </v-btn>
-      </v-row>
     </v-container>
-    <TextProfCardList :myTextBlocks="myTextBlocks" />
-    <ProfileBlockSelectDialog
-      :is-shown-profile-block-select-dialog="isShownProfileBlockSelectDialog"
+
+    <!-- Text Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-text-block-btn"
+        tile
+        color="success"
+        @click="openTextBlockSelectDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        テキストブロックを追加する
+      </v-btn>
+    </v-row>
+    <TextProfCardList :myTextBlocks="myTextBlocks" class="mb-10" />
+
+    <!-- Questioin Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn id="add-question-block-btn" tile color="secondary">
+        <v-icon left> mdi-plus </v-icon>
+        クエスチョンブロックを追加する
+      </v-btn>
+    </v-row>
+    <TextProfCardList
+      :myTextBlocks="myTextBlocks"
+      class="mb-10"
+      @click="openQuestionBlockSelectDialog"
+    />
+
+    <!-- Dialogs -->
+    <TextBlockSelectDialog
+      :is-shown-text-block-select-dialog="isShownTextBlockSelectDialog"
       @open-text-format-dialog="openTextFormatDialog"
     />
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
       @close-text-format-dialog="closeTextFormatDialog"
     />
+    <!-- /Dialogs -->
   </div>
 </template>
 
@@ -36,14 +57,14 @@ import { mapState, mapActions } from "vuex";
 
 // components ----------
 import BasicProfCard from "../../components/BasicProfCard";
-import ProfileBlockSelectDialog from "../../components/ProfileBlockSelectDialog";
+import TextBlockSelectDialog from "../../components/TextBlockSelectDialog";
 import TextFormatDialog from "../../components/TextFormatDialog";
 import TextProfCardList from "../../components/TextProfCardList";
 
 export default {
   components: {
     BasicProfCard,
-    ProfileBlockSelectDialog,
+    TextBlockSelectDialog,
     TextFormatDialog,
     TextProfCardList,
   },
@@ -56,14 +77,18 @@ export default {
   },
   data() {
     return {
-      isShownProfileBlockSelectDialog: false,
+      // Text Block
+      isShownTextBlockSelectDialog: false,
       isShownTextFormatDialog: false,
+
+      // Question Block
+      isShownQuestionBlockSelectDialog: false,
     };
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
-    ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
+    ...mapState("textBlocks", ["textBlocks"]),
 
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
@@ -85,21 +110,27 @@ export default {
   },
   methods: {
     ...mapActions("profiles", ["fetchProfiles"]),
-    ...mapActions("textBlocks", ["fetchTextBlocks"]),
     ...mapActions("users", ["fetchCurrentUser"]),
+    ...mapActions("textBlocks", ["fetchTextBlocks"]),
 
-    openProfileBlockSelectDialog() {
-      this.isShownProfileBlockSelectDialog = true;
+    // Text Block
+    openTextBlockSelectDialog() {
+      this.isShownTextBlockSelectDialog = true;
     },
-    closeProfileBlockSelectDialog() {
-      this.isShownProfileBlockSelectDialog = false;
+    closeTextBlockSelectDialog() {
+      this.isShownTextBlockSelectDialog = false;
     },
     openTextFormatDialog() {
-      this.closeProfileBlockSelectDialog();
+      this.closeTextBlockSelectDialog();
       this.isShownTextFormatDialog = true;
     },
     closeTextFormatDialog() {
       this.isShownTextFormatDialog = false;
+    },
+
+    // Question Block
+    openQuestionBlockSelectDialog() {
+      this.isShownQuestionBlockSelectDialog = true;
     },
   },
 };
