@@ -39,6 +39,7 @@ FactoryBot.define do
 
     after(:create) do |user|
       create(:profile, user: user)
+      create(:profile_block, user: user)
     end
   end
 end
