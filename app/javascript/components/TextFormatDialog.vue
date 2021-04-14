@@ -9,11 +9,11 @@
     >
       <v-card color="grey">
         <p
-          class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-10 mb-10"
+          class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10 mb-10"
         >
           テキストブロック
         </p>
-        <div id="text-block-form" class="p-10 bg-prof-card bg-top">
+        <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateTextBlock(textBlock)">
               <div>

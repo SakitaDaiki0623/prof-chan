@@ -7,7 +7,7 @@
         v-for="textBlock in myTextBlocks"
         :key="textBlock.id"
       >
-        <v-card class="bg-prof-card bg-cover shadow rounded-2xl p-10" height="320" width="500">
+        <v-card class="bg-text-prof-block bg-cover shadow rounded-2xl p-10" height="320" width="500">
           <p class="text-4xl font-bold text-gray-600">
             {{ textBlock.title }}
           </p>
