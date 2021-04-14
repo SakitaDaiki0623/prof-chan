@@ -13,7 +13,4 @@ class QuestionBlock < ApplicationRecord
   # association =============
   belongs_to :profile_block
   has_many :question_items, dependent: :destroy
-
-  # validation =============
-  validates :title, presence: true,      length: { maximum: 30 }
 end
