@@ -2,25 +2,28 @@
 <template>
   <div>
     <v-dialog
-      :value="isShownTextFormatDialog"
+      :value="isShownEditTextFormatDialog"
       max-width="800"
       persistent
-      @input="$emit('input', $event.target.isShownTextFormatDialog)"
+      @input="$emit('input', $event.target.isShownEditTextFormatDialog)"
     >
       <v-card color="teal lighten-3">
         <v-row justify="end" class="mr-2 mt-2">
-          <v-btn color="teal lighten-4" @click="hundleCloseTextFormatDialog">
+          <v-btn
+            color="teal lighten-4"
+            @click="hundleCloseEditTextFormatDialog"
+          >
             ✖︎
           </v-btn>
         </v-row>
         <p
           class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10 mb-10"
         >
-          テキストブロック作成
+          テキストブロックを編集
         </p>
         <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
-            <form @submit.prevent="hundleCreateTextBlock(textBlock)">
+            <form @submit.prevent="hundleEditTextBlock(editTextBlock)">
               <div>
                 <label class="form-label-text-block" for="text_block_title"
                   >タイトル</label
@@ -32,7 +35,7 @@
                 >
                   <input
                     id="text_block_title"
-                    v-model="textBlock.title"
+                    v-model="editTextBlock.title"
                     class="input-form-text-block"
                     name="text_block[text_block_title]"
                     type="text"
@@ -51,7 +54,7 @@
                 >
                   <textarea
                     id="text_block_text"
-                    v-model="textBlock.text"
+                    v-model="editTextBlock.text"
                     class="input-form-text-block"
                     name="text_block[text_block_text]"
                     rows="7"
@@ -70,7 +73,7 @@
                   color="teal lighten-3"
                   class="white--text"
                 >
-                  テキストブロックを作成！
+                  テキストブロックを更新！
                 </v-btn>
               </div>
             </form>
@@ -90,34 +93,24 @@ import { mapActions } from "vuex";
 
 export default {
   props: {
-    isShownTextFormatDialog: {
+    isShownEditTextFormatDialog: {
       type: Boolean,
       required: true,
     },
-  },
-  data() {
-    return {
-      textBlock: {
-        title: "",
-        text: "",
-      },
-    };
+    editTextBlock: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
-    ...mapActions("textBlocks", ["createTextBlock"]),
+    ...mapActions("textBlocks", ["patchTextBlock"]),
+    hundleEditTextBlock(editTextBlock) {
+      this.patchTextBlock(editTextBlock);
+      this.hundleCloseEditTextFormatDialog();
+    },
 
-    hundleCreateTextBlock(textBlock) {
-      if (textBlock.title == "" || textBlock.title == "") return;
-      this.createTextBlock(textBlock);
-      this.hundleCloseTextFormatDialog();
-    },
-    hundleCloseTextFormatDialog() {
-      this.$emit("close-text-format-dialog");
-      this.clearTextBlock();
-    },
-    clearTextBlock() {
-      this.textBlock = {};
-      this.$refs.observer.reset();
+    hundleCloseEditTextFormatDialog() {
+      this.$emit("close-edit-text-format-dialog");
     },
   },
 };

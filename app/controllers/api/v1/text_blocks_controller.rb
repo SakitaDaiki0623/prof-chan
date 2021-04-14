@@ -3,6 +3,7 @@ module Api
   module V1
     class TextBlocksController < ApplicationController
       skip_before_action :verify_authenticity_token
+      before_action :set_text_block, only: %i[show update destroy]
 
       def index
         @user = User.find(current_user.id)
@@ -23,10 +24,29 @@ module Api
         end
       end
 
+      def update
+        if @text_block.update(text_block_params)
+          render json: @text_block
+        else
+          render json: @text_block.errors, status: :bad_request
+        end
+      end
+
+      def show; end
+
+      def destroy
+        @text_block.destroy!
+        render json: @text_block
+      end
+
       private
 
       def text_block_params
         params.require(:text_block).permit(:title, :text)
+      end
+
+      def set_text_block
+        @text_block = TextBlock.find(params[:id])
       end
     end
   end

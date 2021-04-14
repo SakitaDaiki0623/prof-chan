@@ -9,12 +9,33 @@
         </v-col>
       </v-row>
     </v-container>
+    <!-- Text Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-text-block-btn"
+        tile
+        color="teal lighten-3"
+        class="ma-2 white--text"
+        @click="openTextFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        テキストブロックを追加する
+      </v-btn>
+    </v-row>
+    <TextProfCardList
+      :myTextBlocks="myTextBlocks"
+      class="mb-10"
+      @open-edit-text-format-dialog="openEditTextFormatDialog"
+      @delete-text-block="hundleDeleteTextBlock"
+    />
+
     <!-- Questioin Blocks -->
     <v-row justify="center" class="mb-10">
       <v-btn
         id="add-question-block-btn"
         tile
-        color="secondary"
+        color="red lighten-3"
+        class="ma-2 white--text"
         @click="openQuestionBlockSelectDialog"
       >
         <v-icon left> mdi-plus </v-icon>
@@ -22,22 +43,6 @@
       </v-btn>
     </v-row>
     <TextProfCardList :myTextBlocks="myTextBlocks" class="mb-10" />
-
-    <!-- Text Blocks -->
-    <v-row justify="center" class="mb-10">
-      <v-btn
-        id="add-text-block-btn"
-        tile
-        color="blue-grey"
-        class="ma-2 white--text"
-        @click="openTextBlockSelectDialog"
-      >
-        <v-icon left> mdi-plus </v-icon>
-        テキストブロックを追加する
-      </v-btn>
-    </v-row>
-    <TextProfCardList :myTextBlocks="myTextBlocks" class="mb-10" />
-
 
     <!-- Dialogs -->
     <!-- Question Block -->
@@ -49,17 +54,17 @@
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
       @close-question-format-dialog="closeQuestionFormatDialog"
     />
+
     <!-- Text Block -->
-    <TextBlockSelectDialog
-      :is-shown-text-block-select-dialog="isShownTextBlockSelectDialog"
-      @open-text-format-dialog="openTextFormatDialog"
-    />
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
       @close-text-format-dialog="closeTextFormatDialog"
     />
-
-
+    <EditTextFormatDialog
+      :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
+      :editTextBlock="editTextBlock"
+      @close-edit-text-format-dialog="closeEditTextFormatDialog"
+    />
     <!-- /Dialogs -->
   </div>
 </template>
@@ -72,8 +77,8 @@ import { mapState, mapActions } from "vuex";
 // components ----------
 import BasicProfCard from "../../components/BasicProfCard";
 import TextProfCardList from "../../components/TextProfCardList";
-import TextBlockSelectDialog from "../../components/TextBlockSelectDialog";
 import TextFormatDialog from "../../components/TextFormatDialog";
+import EditTextFormatDialog from "../../components/EditTextFormatDialog";
 import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
@@ -83,13 +88,13 @@ export default {
     BasicProfCard,
 
     // Text Block
-    TextBlockSelectDialog,
     TextFormatDialog,
     TextProfCardList,
+    EditTextFormatDialog,
 
     // Question Block
     QuestionBlockSelectDialog,
-    QuestionFormatDialog
+    QuestionFormatDialog,
   },
   props: {
     id: {
@@ -101,8 +106,9 @@ export default {
   data() {
     return {
       // Text Block
-      isShownTextBlockSelectDialog: false,
       isShownTextFormatDialog: false,
+      isShownEditTextFormatDialog: false,
+      editTextBlock: {},
 
       // Question Block
       isShownQuestionBlockSelectDialog: false,
@@ -135,21 +141,24 @@ export default {
   methods: {
     ...mapActions("profiles", ["fetchProfiles"]),
     ...mapActions("users", ["fetchCurrentUser"]),
-    ...mapActions("textBlocks", ["fetchTextBlocks"]),
+    ...mapActions("textBlocks", ["fetchTextBlocks", "deleteTextBlock"]),
 
     // Text Block
-    openTextBlockSelectDialog() {
-      this.isShownTextBlockSelectDialog = true;
-    },
-    closeTextBlockSelectDialog() {
-      this.isShownTextBlockSelectDialog = false;
-    },
     openTextFormatDialog() {
-      this.closeTextBlockSelectDialog();
       this.isShownTextFormatDialog = true;
     },
     closeTextFormatDialog() {
       this.isShownTextFormatDialog = false;
+    },
+    openEditTextFormatDialog(textBlock) {
+      this.editTextBlock = Object.assign({}, textBlock);
+      this.isShownEditTextFormatDialog = true;
+    },
+    closeEditTextFormatDialog() {
+      this.isShownEditTextFormatDialog = false;
+    },
+    hundleDeleteTextBlock(textBlock) {
+      this.deleteTextBlock(textBlock);
     },
 
     // Question Block
