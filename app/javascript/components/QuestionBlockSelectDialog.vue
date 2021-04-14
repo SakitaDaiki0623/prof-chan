@@ -1,3 +1,4 @@
+<!-- app/javascript/components/QuestionBlockSelectDialog.vue -->
 <template>
   <div>
     <v-dialog
