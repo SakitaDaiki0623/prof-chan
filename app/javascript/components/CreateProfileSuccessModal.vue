@@ -13,7 +13,7 @@
           基本情報の登録が完了しました！
         </p>
         <v-card-actions>
-          <div>
+          <v-row justify="center" class="p-8">
             <v-btn
               x-large
               color="blue-grey darken-2"
@@ -22,21 +22,23 @@
               <v-icon left> mdi-pencil </v-icon>
               他の情報も入力する
             </v-btn>
-          </div>
+          </v-row>
         </v-card-actions>
         <v-card-text class="font-prof-default text-gray-600 text-center mb-5">
           趣味、住所などあなたに関わるプロフィールを追加します。
         </v-card-text>
         <v-card-actions>
-          <v-btn
-            x-large
-            color="light-green accent-2"
-            class="font-prof-default black--text"
-            @click="moveToProfilesPage"
-          >
-            <v-icon left> mdi-account-circle </v-icon>
-            プロフィール閲覧
-          </v-btn>
+          <v-row justify="center" class="p-8">
+            <v-btn
+              x-large
+              color="light-green accent-2"
+              class="font-prof-default black--text"
+              @click="moveToProfilesPage"
+            >
+              <v-icon left> mdi-account-circle </v-icon>
+              プロフィール閲覧
+            </v-btn>
+          </v-row>
         </v-card-actions>
         <v-card-text class="font-prof-default text-gray-600 text-center mb-5">
           他の社員プロフィールを閲覧します。

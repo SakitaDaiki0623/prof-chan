@@ -7,7 +7,7 @@
         <h2 class="text-5xl mb-10">
           基本情報を入力してね♬
         </h2>
-        <div class="w-3/5 shadow rounded-2xl bg-prof-card">
+        <div class="w-3/5 shadow rounded-2xl bg-question-prof-block bg-cover">
           <div class="flex">
             <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
               <div
