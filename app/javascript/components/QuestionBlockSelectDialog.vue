@@ -1,55 +1,49 @@
 <template>
   <div>
     <v-dialog
-      :value="isShownProfileBlockSelectDialog"
+      :value="isShownQuestionBlockSelectDialog"
       max-width="800"
       persistent
-      @input="$emit('input', $event.target.isShownProfileBlockSelectDialog)"
+      @input="$emit('input', $event.target.isShownQuestionBlockSelectDialog)"
     >
-      <v-card>
+      <v-card color="red lighten-3">
         <p
-          class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-10 mb-10"
+          class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10"
         >
           フォーマットを選択してください
         </p>
-        <v-row class="p-8">
-          <v-col
-            cols="12"
-            sm="6"
-          >
-            <v-card
-            >
-              <v-img
-                class="white--text align-end"
-                height="200px"
-                :src="require('../tail_images/text_block.png')"
-              >
-                <v-card-title
-                  class="font-prof-default"
+        <div class="p-8 bg-question-prof-block bg-center">
+          <v-row>
+            <v-col cols="12" sm="6">
+              <v-card>
+                <v-img
+                  class="white--text align-end"
+                  height="200px"
+                  :src="require('../tail_images/question_block.png')"
                 >
-                  テキストフォーマット
-                </v-card-title>
-              </v-img>
+                  <v-card-title class="font-prof-default">
+                    クエスチョンフォーマット
+                  </v-card-title>
+                </v-img>
 
-              <v-card-text class="font-prof-default text-gray-600">
-                <div>用途: 自己紹介などの長い文章を書く</div>
-              </v-card-text>
+                <v-card-text class="font-prof-default text-gray-600">
+                  <div>★使い方: 質問を作ってそれを自分で答えるよ！</div>
+                </v-card-text>
 
-              <v-card-actions>
-                <v-btn
-                  color="blue-grey darken-2"
-                  class="font-prof-default white--text"
-                  @click="openTextFormatDialog"
-                >
-                  <v-icon left>
-                    mdi-pencil
-                  </v-icon>
-                  このフォーマットを使う
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
+                <v-card-actions>
+                  <v-btn
+                    color="red lighten-3"
+                    class="font-prof-default white--text"
+                    @click="openQuestionFormatDialog"
+                  >
+                    <v-icon left> mdi-pencil </v-icon>
+                    このフォーマットを使う
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
       </v-card>
     </v-dialog>
   </div>
@@ -58,15 +52,15 @@
 <script>
 export default {
   props: {
-    isShownProfileBlockSelectDialog: {
+    isShownQuestionBlockSelectDialog: {
       type: Boolean,
       required: true,
     },
   },
   methods: {
-    openTextFormatDialog() {
-      this.$emit("open-text-format-dialog");
-    }
+    openQuestionFormatDialog() {
+      this.$emit("open-question-format-dialog");
+    },
   },
 };
 </script>
