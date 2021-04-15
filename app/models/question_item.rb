@@ -13,8 +13,4 @@
 class QuestionItem < ApplicationRecord
   # association =============
   belongs_to :question_block
-
-  # validation =============
-  validates :content, presence: true,      length: { maximum: 30 }
-  validates :answer,                       length: { maximum: 30 }
 end

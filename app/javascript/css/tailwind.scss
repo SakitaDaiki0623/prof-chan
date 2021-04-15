@@ -28,11 +28,46 @@
   }
 }
 
+.input-form-text-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-gray-500;
+    @apply ring-2;
+    @apply ring-gray-200;
+  }
+}
+
 // 入力フォームラベル
 .form-label {
   @apply leading-7;
   @apply text-sm;
   @apply text-gray-600;
+}
+
+.form-label-text-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
+  @apply font-prof-default;
 }
 
 // slackログインボタン

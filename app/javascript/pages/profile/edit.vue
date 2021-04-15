@@ -1,8 +1,6 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div
-    class="bg-backimage-02 bg-cover bg-fixed text-gray-600 font-prof-default"
-  >
+  <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
     <v-container>
       <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
       <v-row class="mb-10">
@@ -10,22 +8,63 @@
           <BasicProfCard :currentUser="currentUser" :profile="profile" />
         </v-col>
       </v-row>
-      <v-row justify="center">
-        <v-btn tile color="success" @click="openProfileBlockSelectDialog">
-          <v-icon left> mdi-plus </v-icon>
-          ブロックを追加する
-        </v-btn>
-      </v-row>
     </v-container>
-    <TextProfCardList :myTextBlocks="myTextBlocks" />
-    <ProfileBlockSelectDialog
-      :is-shown-profile-block-select-dialog="isShownProfileBlockSelectDialog"
-      @open-text-format-dialog="openTextFormatDialog"
+    <!-- Text Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-text-block-btn"
+        tile
+        color="teal lighten-3"
+        class="ma-2 white--text"
+        @click="openTextFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        テキストブロックを追加する
+      </v-btn>
+    </v-row>
+    <TextProfCardList
+      :myTextBlocks="myTextBlocks"
+      class="mb-10"
+      @open-edit-text-format-dialog="openEditTextFormatDialog"
+      @delete-text-block="hundleDeleteTextBlock"
     />
+
+    <!-- Questioin Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-question-block-btn"
+        tile
+        color="red lighten-3"
+        class="ma-2 white--text"
+        @click="openQuestionBlockSelectDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        クエスチョンブロックを追加する
+      </v-btn>
+    </v-row>
+
+    <!-- Dialogs -->
+    <!-- Question Block -->
+    <QuestionBlockSelectDialog
+      :is-shown-question-block-select-dialog="isShownQuestionBlockSelectDialog"
+      @open-question-format-dialog="openQuestionFormatDialog"
+    />
+    <QuestionFormatDialog
+      :is-shown-question-format-dialog="isShownQuestionFormatDialog"
+      @close-question-format-dialog="closeQuestionFormatDialog"
+    />
+
+    <!-- Text Block -->
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
       @close-text-format-dialog="closeTextFormatDialog"
     />
+    <EditTextFormatDialog
+      :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
+      :editTextBlock="editTextBlock"
+      @close-edit-text-format-dialog="closeEditTextFormatDialog"
+    />
+    <!-- /Dialogs -->
   </div>
 </template>
 
@@ -36,16 +75,25 @@ import { mapState, mapActions } from "vuex";
 
 // components ----------
 import BasicProfCard from "../../components/BasicProfCard";
-import ProfileBlockSelectDialog from "../../components/ProfileBlockSelectDialog";
-import TextFormatDialog from "../../components/TextFormatDialog";
 import TextProfCardList from "../../components/TextProfCardList";
+import TextFormatDialog from "../../components/TextFormatDialog";
+import EditTextFormatDialog from "../../components/EditTextFormatDialog";
+import QuestionFormatDialog from "../../components/QuestionFormatDialog";
+
+import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
 
 export default {
   components: {
     BasicProfCard,
-    ProfileBlockSelectDialog,
+
+    // Text Block
     TextFormatDialog,
     TextProfCardList,
+    EditTextFormatDialog,
+
+    // Question Block
+    QuestionBlockSelectDialog,
+    QuestionFormatDialog,
   },
   props: {
     id: {
@@ -56,14 +104,20 @@ export default {
   },
   data() {
     return {
-      isShownProfileBlockSelectDialog: false,
+      // Text Block
       isShownTextFormatDialog: false,
+      isShownEditTextFormatDialog: false,
+      editTextBlock: {},
+
+      // Question Block
+      isShownQuestionBlockSelectDialog: false,
+      isShownQuestionFormatDialog: false,
     };
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
-    ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
+    ...mapState("textBlocks", ["textBlocks"]),
 
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
@@ -71,7 +125,7 @@ export default {
     myTextBlocks() {
       return (
         this.textBlocks.filter(
-          (textBlock) => textBlock.profile_block.id == this.currentUser.id
+          (textBlock) => textBlock.profile_block.id == this.currentUser.profile_block.id
         ) || {}
       );
     },
@@ -85,21 +139,40 @@ export default {
   },
   methods: {
     ...mapActions("profiles", ["fetchProfiles"]),
-    ...mapActions("textBlocks", ["fetchTextBlocks"]),
     ...mapActions("users", ["fetchCurrentUser"]),
+    ...mapActions("textBlocks", ["fetchTextBlocks", "deleteTextBlock"]),
 
-    openProfileBlockSelectDialog() {
-      this.isShownProfileBlockSelectDialog = true;
-    },
-    closeProfileBlockSelectDialog() {
-      this.isShownProfileBlockSelectDialog = false;
-    },
+    // Text Block
     openTextFormatDialog() {
-      this.closeProfileBlockSelectDialog();
       this.isShownTextFormatDialog = true;
     },
     closeTextFormatDialog() {
       this.isShownTextFormatDialog = false;
+    },
+    openEditTextFormatDialog(textBlock) {
+      this.editTextBlock = Object.assign({}, textBlock);
+      this.isShownEditTextFormatDialog = true;
+    },
+    closeEditTextFormatDialog() {
+      this.isShownEditTextFormatDialog = false;
+    },
+    hundleDeleteTextBlock(textBlock) {
+      this.deleteTextBlock(textBlock);
+    },
+
+    // Question Block
+    openQuestionBlockSelectDialog() {
+      this.isShownQuestionBlockSelectDialog = true;
+    },
+    closeQuestionBlockSelectDialog() {
+      this.isShownQuestionBlockSelectDialog = false;
+    },
+    openQuestionFormatDialog() {
+      this.closeQuestionBlockSelectDialog();
+      this.isShownQuestionFormatDialog = true;
+    },
+    closeQuestionFormatDialog() {
+      this.isShownQuestionFormatDialog = false;
     },
   },
 };
