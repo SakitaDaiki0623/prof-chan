@@ -42,7 +42,6 @@
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
-    <TextProfCardList :myTextBlocks="myTextBlocks" class="mb-10" />
 
     <!-- Dialogs -->
     <!-- Question Block -->
@@ -126,7 +125,7 @@ export default {
     myTextBlocks() {
       return (
         this.textBlocks.filter(
-          (textBlock) => textBlock.profile_block.id == this.currentUser.id
+          (textBlock) => textBlock.profile_block.id == this.currentUser.profile_block.id
         ) || {}
       );
     },
