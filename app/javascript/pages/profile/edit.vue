@@ -10,7 +10,6 @@
         @open-edit-basic-prof-card="openEditBasicProfCard"
       />
     </div>
-    <!-- /Basic Prof Card -->
 
     <!-- Text Blocks -->
     <v-row justify="center" class="mb-10">
