@@ -17,7 +17,7 @@ module Api
       # [TODO: Refactor] current_userの取得するメソッド名を変更
       def new
         @user = User.find(current_user.id)
-        render json: @user
+        render json: @user, serializer: UserSerializer
       end
     end
   end

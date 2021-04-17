@@ -26,7 +26,7 @@ module Api
 
       def update
         if @text_block.update(text_block_params)
-          render json: @text_block
+          render json: @text_block, serializer: TextBlockSerializer
         else
           render json: @text_block.errors, status: :bad_request
         end
