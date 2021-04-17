@@ -98,10 +98,6 @@ import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
 
 export default {
-  // ナビゲーションガード
-  beforeRouteEnter(to, from, next) {
-    console.log(this.$store.state.currentUser)
-  },
 
   components: {
     // Basic Prof Card

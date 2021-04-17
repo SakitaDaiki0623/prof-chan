@@ -32,10 +32,11 @@ const routes = [
     component: EditProfilesPage,
     props: true,
     beforeEnter: (to, from, next) => {
+      if (store.state == undefined) return;
       if (store.state.users.currentUser.profile.id == to.params.id) {
         next();
       } else {
-        next({path: '/profiles'});
+        next({ path: "/profiles" });
       }
     },
   },
