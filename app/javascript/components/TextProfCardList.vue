@@ -7,12 +7,34 @@
         v-for="textBlock in myTextBlocks"
         :key="textBlock.id"
       >
-        <v-card class="bg-prof-card bg-cover shadow rounded-2xl p-10" height="320" width="500">
-          <p class="text-4xl font-bold text-gray-600">
+        <v-card
+          class="bg-text-prof-block bg-cover shadow rounded-2xl p-5"
+          height="320"
+          width="500"
+        >
+          <v-row justify="end">
+            <v-btn
+              tile
+              small
+              color="teal lighten-4"
+              @click="openEditTextFormatDialog(textBlock)"
+            >
+              <v-icon> mdi-pencil </v-icon>
+            </v-btn>
+            <v-btn
+              tile
+              small
+              color="teal lighten-1"
+              @click="hundleDeleteTextBlock(textBlock)"
+            >
+              <v-icon> mdi-delete </v-icon>
+            </v-btn>
+          </v-row>
+          <p class="text-2xl font-bold text-gray-600 pt-3">
             {{ textBlock.title }}
           </p>
           <v-card height="200" class="p-5 rounded-lg" outlined>
-          {{ textBlock.text }}
+            {{ textBlock.text }}
           </v-card>
         </v-card>
       </v-col>
@@ -26,6 +48,14 @@ export default {
     myTextBlocks: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    openEditTextFormatDialog(textBlock) {
+      this.$emit("open-edit-text-format-dialog", textBlock);
+    },
+    hundleDeleteTextBlock(textBlock) {
+      this.$emit("delete-text-block", textBlock);
     },
   },
 };

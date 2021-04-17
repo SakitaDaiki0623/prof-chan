@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       # プロフブロック
       resources :profile_blocks,    only: %i[index show]
       resources :text_blocks,       only: %i[index create show update destroy]
+      resources :question_blocks,   only: %i[index create show update destroy]
     end
   end
 
