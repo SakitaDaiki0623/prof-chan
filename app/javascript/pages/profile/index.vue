@@ -21,7 +21,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 // Component ----------
 import IndexProfCard from "../../components/IndexProfCard";
@@ -36,16 +36,19 @@ export default {
     };
   },
   computed: {
+    ...mapState("users", ["currentUser"]),
     ...mapGetters("profiles", ["getProfiles"]),
   },
   mounted() {
     document.title = "プロフィール一覧 - プロフちゃん";
   },
   created() {
+    this.fetchCurrentUser();
     this.fetchProfiles();
   },
   methods: {
     ...mapActions("profiles", ["fetchProfiles"]),
+    ...mapActions("users", ["fetchCurrentUser"]),
   },
 };
 </script>

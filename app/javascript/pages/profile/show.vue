@@ -7,10 +7,22 @@
       <p class="text-5xl font-bold note mb-10">
         {{ profile.user.name }} さんのプロフィール
       </p>
-      <v-row class="mb-10" justify="center">
-        <v-col cols="12" sm="6">
-          <BasicProfCard :profile="profile" :currentUser="currentUser" />
-          <v-btn v-show="isCurrentUser" id="edit-basic-profile-btn">
+      <v-row
+        class="mb-10"
+        justify="center"
+      >
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <BasicProfCard
+            :profile="profile"
+            :current-user="currentUser"
+          />
+          <v-btn
+            v-show="isCurrentUser"
+            id="edit-basic-profile-btn"
+          >
             編集する
           </v-btn>
         </v-col>
@@ -24,7 +36,9 @@
           class="font-prof-default black--text"
           @click="moveToProfilesPage"
         >
-          <v-icon left> mdi-account-circle </v-icon>
+          <v-icon left>
+            mdi-account-circle
+          </v-icon>
           プロフィール閲覧
         </v-btn>
       </v-card-actions>
