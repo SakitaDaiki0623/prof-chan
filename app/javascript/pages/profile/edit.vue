@@ -1,7 +1,9 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
-    <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
+    <p class="text-5xl font-bold note mb-10">
+      プロフィール編集
+    </p>
 
     <!-- Basic Prof Card -->
     <div class="flex justify-center mb-10">
@@ -13,7 +15,10 @@
     <!-- /Basic Prof Card -->
 
     <!-- Text Blocks -->
-    <v-row justify="center" class="mb-10">
+    <v-row
+      justify="center"
+      class="mb-10"
+    >
       <v-btn
         id="add-text-block-btn"
         tile
@@ -21,7 +26,9 @@
         class="ma-2 white--text"
         @click="openTextFormatDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         テキストブロックを追加する
       </v-btn>
     </v-row>
@@ -33,7 +40,10 @@
     />
 
     <!-- Questioin Blocks -->
-    <v-row justify="center" class="mb-10">
+    <v-row
+      justify="center"
+      class="mb-10"
+    >
       <v-btn
         id="add-question-block-btn"
         tile
@@ -41,7 +51,9 @@
         class="ma-2 white--text"
         @click="openQuestionBlockSelectDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
@@ -65,12 +77,12 @@
     <!-- Text Block -->
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
-      :textBlockColorForFlashMessage="textBlockColorForFlashMessage"
+      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
       @close-text-format-dialog="closeTextFormatDialog"
     />
     <EditTextFormatDialog
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
-      :textBlockColorForFlashMessage="textBlockColorForFlashMessage"
+      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
       :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
     />

@@ -17,7 +17,10 @@
                 ★基本情報★
               </div>
               <div class="w-full mt-10 ml-10">
-                <img class="ring-4 ring-gray-600" :src="user.image" />
+                <img
+                  class="ring-4 ring-gray-600"
+                  :src="user.image"
+                >
               </div>
               <div class="mt-10">
                 <label class="form-label-basic-block">名前</label>
@@ -30,13 +33,20 @@
             </div>
             <div class="md:w-3/5 p-8 lg:ml-4">
               <!-- FORM -->
-              <div id="profile-basic-form" class="p-6">
-                <ValidationObserver ref="observer" v-slot="{ invalid }">
+              <div
+                id="profile-basic-form"
+                class="p-6"
+              >
+                <ValidationObserver
+                  ref="observer"
+                  v-slot="{ invalid }"
+                >
                   <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
                     <div>
-                      <label class="form-label-basic-block" for="profile_gender"
-                        >性別</label
-                      >
+                      <label
+                        class="form-label-basic-block"
+                        for="profile_gender"
+                      >性別</label>
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="性別"
@@ -59,9 +69,10 @@
                       </ValidationProvider>
                     </div>
                     <div>
-                      <label class="form-label-basic-block" for="profile_height"
-                        >身長</label
-                      >
+                      <label
+                        class="form-label-basic-block"
+                        for="profile_height"
+                      >身長</label>
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="身長"
@@ -73,7 +84,7 @@
                           class="input-form"
                           type="number"
                           name="profile[height]"
-                        />
+                        >
                         <span class="text-red-400">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </div>
@@ -81,8 +92,7 @@
                       <label
                         class="form-label-basic-block"
                         for="profile_blood_type"
-                        >血液型</label
-                      >
+                      >血液型</label>
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="血液型"
@@ -114,8 +124,7 @@
                       <label
                         class="form-label-basic-block"
                         for="profile_prefecture_id"
-                        >出身地</label
-                      >
+                      >出身地</label>
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="出身地"
@@ -142,8 +151,7 @@
                       <label
                         class="form-label-basic-block"
                         for="profile_birthday"
-                        >生年月日</label
-                      >
+                      >生年月日</label>
                       <v-menu
                         ref="menu"
                         v-model="birthMenu"
@@ -166,7 +174,7 @@
                               name="profile[birthday]"
                               v-bind="attrs"
                               v-on="on"
-                            />
+                            >
                             <span class="text-red-400">{{ errors[0] }}</span>
                           </ValidationProvider>
                         </template>
@@ -187,8 +195,7 @@
                       <label
                         class="form-label-basic-block"
                         for="profile_day_of_joinning"
-                        >入社日</label
-                      >
+                      >入社日</label>
                       <v-menu
                         ref="menu"
                         v-model="joinedMenu"
@@ -211,7 +218,7 @@
                               v-bind="attrs"
                               class="input-form"
                               v-on="on"
-                            />
+                            >
                             <span class="text-red-400">{{ errors[0] }}</span>
                           </ValidationProvider>
                         </template>

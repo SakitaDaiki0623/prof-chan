@@ -7,8 +7,9 @@
         border="left"
         :color="flash.color"
         :type="flash.type"
-        >{{ flash.message }}</v-alert
       >
+        {{ flash.message }}
+      </v-alert>
     </div>
   </v-fade-transition>
 </template>
