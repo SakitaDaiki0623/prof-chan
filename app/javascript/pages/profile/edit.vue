@@ -1,14 +1,19 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
-    <v-container>
-      <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
-      <v-row class="mb-10">
-        <v-col cols="12" sm="6">
-          <BasicProfCard :currentUser="currentUser" :profile="profile" />
-        </v-col>
-      </v-row>
-    </v-container>
+    <p class="text-5xl font-bold note mb-10">
+      プロフィール編集
+    </p>
+
+    <!-- Basic Prof Card -->
+    <div class="flex justify-center mb-10">
+      <BasicProfCard
+        :profile="profile"
+        @open-edit-basic-prof-card="openEditBasicProfCard"
+      />
+    </div>
+    <!-- /Basic Prof Card -->
+
     <!-- Text Blocks -->
     <v-row justify="center" class="mb-10">
       <v-btn
@@ -18,12 +23,14 @@
         class="ma-2 white--text"
         @click="openTextFormatDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         テキストブロックを追加する
       </v-btn>
     </v-row>
     <TextProfCardList
-      :myTextBlocks="myTextBlocks"
+      :my-text-blocks="myTextBlocks"
       class="mb-10"
       @open-edit-text-format-dialog="openEditTextFormatDialog"
       @delete-text-block="hundleDeleteTextBlock"
@@ -38,12 +45,19 @@
         class="ma-2 white--text"
         @click="openQuestionBlockSelectDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
 
     <!-- Dialogs -->
+    <!-- Basic Prof Card -->
+    <EditBasicProfCardDialog
+      :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
+    />
+
     <!-- Question Block -->
     <QuestionBlockSelectDialog
       :is-shown-question-block-select-dialog="isShownQuestionBlockSelectDialog"
@@ -61,7 +75,7 @@
     />
     <EditTextFormatDialog
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
-      :editTextBlock="editTextBlock"
+      :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
     />
     <!-- /Dialogs -->
@@ -71,10 +85,11 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, Store } from "vuex";
 
 // components ----------
 import BasicProfCard from "../../components/BasicProfCard";
+import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
 import TextProfCardList from "../../components/TextProfCardList";
 import TextFormatDialog from "../../components/TextFormatDialog";
 import EditTextFormatDialog from "../../components/EditTextFormatDialog";
@@ -83,8 +98,15 @@ import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
 
 export default {
+  // ナビゲーションガード
+  beforeRouteEnter(to, from, next) {
+    console.log(this.$store.state.currentUser)
+  },
+
   components: {
+    // Basic Prof Card
     BasicProfCard,
+    EditBasicProfCardDialog,
 
     // Text Block
     TextFormatDialog,
@@ -104,6 +126,9 @@ export default {
   },
   data() {
     return {
+      // Basic Prof Card
+      isShownEditBasicProfCardDialog: false,
+
       // Text Block
       isShownTextFormatDialog: false,
       isShownEditTextFormatDialog: false,
@@ -125,7 +150,8 @@ export default {
     myTextBlocks() {
       return (
         this.textBlocks.filter(
-          (textBlock) => textBlock.profile_block.id == this.currentUser.profile_block.id
+          (textBlock) =>
+            textBlock.profile_block.id == this.currentUser.profile_block.id
         ) || {}
       );
     },
@@ -133,7 +159,6 @@ export default {
   mounted() {
     this.fetchProfiles();
     this.fetchTextBlocks();
-    this.fetchCurrentUser();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },
@@ -141,6 +166,11 @@ export default {
     ...mapActions("profiles", ["fetchProfiles"]),
     ...mapActions("users", ["fetchCurrentUser"]),
     ...mapActions("textBlocks", ["fetchTextBlocks", "deleteTextBlock"]),
+
+    // Basic Prof Card
+    openEditBasicProfCard(profile) {
+      this.isShownEditBasicProfCardDialog = true;
+    },
 
     // Text Block
     openTextFormatDialog() {

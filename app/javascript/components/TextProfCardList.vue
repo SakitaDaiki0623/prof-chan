@@ -2,10 +2,10 @@
   <v-container>
     <v-row>
       <v-col
-        cols="12"
-        sm="4"
         v-for="textBlock in myTextBlocks"
         :key="textBlock.id"
+        cols="12"
+        sm="4"
       >
         <v-card
           class="bg-text-prof-block bg-cover shadow rounded-2xl p-5"
@@ -33,7 +33,11 @@
           <p class="text-2xl font-bold text-gray-600 pt-3">
             {{ textBlock.title }}
           </p>
-          <v-card height="200" class="p-5 rounded-lg" outlined>
+          <v-card
+            height="200"
+            class="p-5 rounded-lg"
+            outlined
+          >
             {{ textBlock.text }}
           </v-card>
         </v-card>

@@ -8,7 +8,10 @@
       @input="$emit('input', $event.target.isShownEditTextFormatDialog)"
     >
       <v-card color="teal lighten-3">
-        <v-row justify="end" class="mr-2 mt-2">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
           <v-btn
             color="teal lighten-4"
             @click="hundleCloseEditTextFormatDialog"
@@ -21,13 +24,20 @@
         >
           テキストブロックを編集
         </p>
-        <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <div
+          id="text-block-form"
+          class="p-10 bg-text-prof-block bg-top"
+        >
+          <ValidationObserver
+            ref="observer"
+            v-slot="{ invalid }"
+          >
             <form @submit.prevent="hundleEditTextBlock(editTextBlock)">
               <div>
-                <label class="form-label-text-block" for="text_block_title"
-                  >タイトル</label
-                >
+                <label
+                  class="form-label-text-block"
+                  for="text_block_title"
+                >タイトル</label>
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -39,14 +49,15 @@
                     class="input-form-text-block"
                     name="text_block[text_block_title]"
                     type="text"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
-                <label class="form-label-text-block" for="text_block_text"
-                  >テキスト</label
-                >
+                <label
+                  class="form-label-text-block"
+                  for="text_block_text"
+                >テキスト</label>
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="テキスト"
