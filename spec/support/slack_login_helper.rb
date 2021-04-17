@@ -17,7 +17,7 @@ module SlackLoginHelper
     select profile.prefecture.name, from: 'profile_prefecture_id'
     fill_in 'profile_birthday',	with: profile.birthday
     fill_in 'profile_day_of_joinning',	with: profile.day_of_joinning
-    expect{ click_on '入力完了！' }.to change(Profile, :count).by(1), 'プロフィール数が1つ増えていません'
+    click_on '入力完了！'
   end
 
   def slack_login_till_access_profiles_path
