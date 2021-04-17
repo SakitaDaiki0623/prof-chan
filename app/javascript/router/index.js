@@ -38,6 +38,11 @@ const routes = [
         next();
       } else {
         next({ path: "/profiles" });
+        store.dispatch("flash/setFlash", {
+          type: "error",
+          message: "他の人のプロフィールは編集できないよ！",
+          color: "red lighten-3",
+        });
       }
     },
   },
