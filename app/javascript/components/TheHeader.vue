@@ -1,6 +1,7 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <v-app-bar
+    v-show="isCurrentUserProfile"
     class="font-prof-default"
     color="gray accent-4"
     dark
@@ -14,41 +15,25 @@
     </v-toolbar-title>
 
     <div class="flex-grow-1" />
-    <a
-      href="/logout"
-      data-method="delete"
-    >ログアウト</a>
+    <a href="/logout" data-method="delete">ログアウト</a>
 
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
-    <v-btn
-      icon
-      @click="openProfileEditPage"
-    >
+    <v-btn id="profile-edit-button" icon @click="openProfileEditPage">
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
 
-    <v-menu
-      left
-      bottom
-    >
+    <v-menu left bottom>
       <template #activator="{ on }">
-        <v-btn
-          icon
-          v-on="on"
-        >
+        <v-btn icon v-on="on">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </template>
 
       <v-list>
-        <v-list-item
-          v-for="n in 1"
-          :key="n"
-          @click="() => {}"
-        >
+        <v-list-item v-for="n in 1" :key="n" @click="() => {}">
           <v-list-item-title />
         </v-list-item>
       </v-list>
@@ -58,6 +43,7 @@
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -65,17 +51,22 @@ export default {
       user: {},
     };
   },
-  computed: {},
-  created() {
-    // [TODO: リファクタリング] axiosのモジュールに移すか考える
-    this.$axios
-      .get("/users/new")
-      .then((response) => (this.user = response.data))
-      .catch((err) => console.log(err.status));
+  computed: {
+    ...mapState("users", ["currentUser"]),
+    isCurrentUserProfile() {
+      if (this.currentUser.profile === null) {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
+  created() {},
   methods: {
     openProfileEditPage() {
-      this.$router.push(`/profiles/${this.user.profile.id}/edit`);
+      this.$router
+        .push(`/profiles/${this.currentUser.profile.id}/edit`)
+        .catch((err) => {});
     },
   },
 };
