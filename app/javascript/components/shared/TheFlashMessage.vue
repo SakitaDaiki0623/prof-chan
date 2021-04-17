@@ -1,7 +1,14 @@
 <template>
   <v-fade-transition>
-    <div class="flash">
-      <v-alert dense outlined :type="flash.type">{{ flash.message }}</v-alert>
+    <div class="flash font-prof-default">
+      <v-alert
+        dense
+        outlined
+        border="left"
+        :color="flash.color"
+        :type="flash.type"
+        >{{ flash.message }}</v-alert
+      >
     </div>
   </v-fade-transition>
 </template>
@@ -23,6 +30,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "",
         message: "",
+        color: "",
       });
     }, 3000);
   },
@@ -32,16 +40,16 @@ export default {
 <style scoped>
 .flash {
   position: fixed;
-  bottom: 10px;
+  top: 10px;
   left: 20px;
   max-width: 350px;
   z-index: 100;
-  /* z-index:は、フッターが3, オーバーレイが200 */
 }
 .v-alert--outlined {
   background: rgba(255, 255, 255, 0.9) !important;
 }
 .v-alert {
   font-size: 14px;
+  font: bold;
 }
 </style>
