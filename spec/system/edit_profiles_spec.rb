@@ -14,12 +14,12 @@ RSpec.describe 'EditProfile', type: :system do
   describe 'ページの基本検証' do
     before {find("#profile-edit-button").click}
 
-    fit 'タイトルが「プロフィール編集 - プロフちゃん」であること' do
+    it 'タイトルが「プロフィール編集 - プロフちゃん」であること' do
       expect(page).to have_title('プロフィール編集 - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
     it '自分のプロフィール編集画面であること' do
-      expect(page).to have_content(my_profile)
+      expect(page).to have_content(my_profile.user.name)
     end
   end
 end
