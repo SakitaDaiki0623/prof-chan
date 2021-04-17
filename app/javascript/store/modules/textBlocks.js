@@ -52,13 +52,12 @@ export const textBlocks = {
         .catch((err) => console.log(err));
     },
     deleteTextBlock({ commit }, payload) {
-      if (confirm("削除してよろしいですか?"))
-        axios
-          .delete(`text_blocks/${payload.id}`, payload)
-          .then((response) => {
-            commit("retrieveTextBlock", response.data);
-          })
-          .catch((err) => console.log(err));
+      axios
+        .delete(`text_blocks/${payload.id}`, payload)
+        .then((response) => {
+          commit("retrieveTextBlock", response.data);
+        })
+        .catch((err) => console.log(err));
     },
   },
 };

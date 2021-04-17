@@ -14,6 +14,7 @@
         >
           <v-row justify="end">
             <v-btn
+              :id="'edit-text-block-button-' + textBlock.id"
               tile
               small
               color="teal lighten-4"
@@ -22,6 +23,7 @@
               <v-icon> mdi-pencil </v-icon>
             </v-btn>
             <v-btn
+              :id="'delete-text-block-button-' + textBlock.id"
               tile
               small
               color="teal lighten-1"
@@ -33,11 +35,7 @@
           <p class="text-2xl font-bold text-gray-600 pt-3">
             {{ textBlock.title }}
           </p>
-          <v-card
-            height="200"
-            class="p-5 rounded-lg"
-            outlined
-          >
+          <v-card height="200" class="p-5 rounded-lg" outlined>
             {{ textBlock.text }}
           </v-card>
         </v-card>

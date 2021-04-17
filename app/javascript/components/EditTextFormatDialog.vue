@@ -7,13 +7,13 @@
       persistent
       @input="$emit('input', $event.target.isShownEditTextFormatDialog)"
     >
-      <v-card color="teal lighten-3">
+      <v-card :color="textBlockColorForFlashMessage">
         <v-row
           justify="end"
           class="mr-2 mt-2"
         >
           <v-btn
-            color="teal lighten-4"
+            :color="textBlockColorForFlashMessage"
             @click="hundleCloseEditTextFormatDialog"
           >
             ✖︎
@@ -45,10 +45,11 @@
                 >
                   <input
                     id="text_block_title"
-                    v-model="editTextBlock.title"
+                    :value="editTextBlock.title"
                     class="input-form-text-block"
                     name="text_block[text_block_title]"
                     type="text"
+                    @input="editTextBlock.title = $event.target.value"
                   >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -65,10 +66,11 @@
                 >
                   <textarea
                     id="text_block_text"
-                    v-model="editTextBlock.text"
+                    :value="editTextBlock.text"
                     class="input-form-text-block"
                     name="text_block[text_block_text]"
                     rows="7"
+                    @input="editTextBlock.text = $event.target.value"
                   />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -81,7 +83,7 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  color="teal lighten-3"
+                  :color="textBlockColorForFlashMessage"
                   class="white--text"
                 >
                   テキストブロックを更新！
@@ -112,12 +114,24 @@ export default {
       type: Object,
       required: true,
     },
+    textBlockColorForFlashMessage: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {};
   },
   methods: {
     ...mapActions("textBlocks", ["patchTextBlock"]),
     hundleEditTextBlock(editTextBlock) {
       this.patchTextBlock(editTextBlock);
       this.hundleCloseEditTextFormatDialog();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "テキストブロックを更新したよ！",
+        color: this.textBlockColorForFlashMessage,
+      });
     },
 
     hundleCloseEditTextFormatDialog() {

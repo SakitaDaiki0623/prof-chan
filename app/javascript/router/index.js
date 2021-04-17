@@ -32,10 +32,17 @@ const routes = [
     component: EditProfilesPage,
     props: true,
     beforeEnter: (to, from, next) => {
-      if (store.state.users.currentUser.profile.id == to.params.id) {
+      if (store.state == undefined) return;
+      const currentUserProfileId = store.state.users.currentUser.profile.id;
+      if (currentUserProfileId == to.params.id) {
         next();
       } else {
-        next({path: '/profiles'});
+        next({ path: "/profiles" });
+        store.dispatch("flash/setFlash", {
+          type: "error",
+          message: "他の人のプロフィールは編集できないよ！",
+          color: "red lighten-3",
+        });
       }
     },
   },

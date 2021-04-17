@@ -1,7 +1,7 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <v-app-bar
-    v-show="isCurrentUserProfile"
+    v-show="doesCurrentUserhaveProfile"
     class="font-prof-default"
     color="gray accent-4"
     dark
@@ -15,25 +15,42 @@
     </v-toolbar-title>
 
     <div class="flex-grow-1" />
-    <a href="/logout" data-method="delete">ログアウト</a>
+    <a
+      href="/logout"
+      data-method="delete"
+    >ログアウト</a>
 
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
-    <v-btn id="profile-edit-button" icon @click="openProfileEditPage">
+    <v-btn
+      id="profile-edit-button"
+      icon
+      @click="openProfileEditPage"
+    >
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
 
-    <v-menu left bottom>
+    <v-menu
+      left
+      bottom
+    >
       <template #activator="{ on }">
-        <v-btn icon v-on="on">
+        <v-btn
+          icon
+          v-on="on"
+        >
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </template>
 
       <v-list>
-        <v-list-item v-for="n in 1" :key="n" @click="() => {}">
+        <v-list-item
+          v-for="n in 1"
+          :key="n"
+          @click="() => {}"
+        >
           <v-list-item-title />
         </v-list-item>
       </v-list>
@@ -53,7 +70,7 @@ export default {
   },
   computed: {
     ...mapState("users", ["currentUser"]),
-    isCurrentUserProfile() {
+    doesCurrentUserhaveProfile() {
       if (this.currentUser.profile === null) {
         return false;
       } else {

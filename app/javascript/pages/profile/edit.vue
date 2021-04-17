@@ -1,9 +1,7 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
-    <p class="text-5xl font-bold note mb-10">
-      プロフィール編集
-    </p>
+    <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
     <div class="flex justify-center mb-10">
@@ -12,7 +10,6 @@
         @open-edit-basic-prof-card="openEditBasicProfCard"
       />
     </div>
-    <!-- /Basic Prof Card -->
 
     <!-- Text Blocks -->
     <v-row justify="center" class="mb-10">
@@ -23,9 +20,7 @@
         class="ma-2 white--text"
         @click="openTextFormatDialog"
       >
-        <v-icon left>
-          mdi-plus
-        </v-icon>
+        <v-icon left> mdi-plus </v-icon>
         テキストブロックを追加する
       </v-btn>
     </v-row>
@@ -45,9 +40,7 @@
         class="ma-2 white--text"
         @click="openQuestionBlockSelectDialog"
       >
-        <v-icon left>
-          mdi-plus
-        </v-icon>
+        <v-icon left> mdi-plus </v-icon>
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
@@ -71,10 +64,12 @@
     <!-- Text Block -->
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
+      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
       @close-text-format-dialog="closeTextFormatDialog"
     />
     <EditTextFormatDialog
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
+      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
       :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
     />
@@ -98,11 +93,6 @@ import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
 
 export default {
-  // ナビゲーションガード
-  beforeRouteEnter(to, from, next) {
-    console.log(this.$store.state.currentUser)
-  },
-
   components: {
     // Basic Prof Card
     BasicProfCard,
@@ -133,6 +123,7 @@ export default {
       isShownTextFormatDialog: false,
       isShownEditTextFormatDialog: false,
       editTextBlock: {},
+      textBlockColorForFlashMessage: "teal lighten-3", // text block image color
 
       // Question Block
       isShownQuestionBlockSelectDialog: false,
@@ -186,8 +177,14 @@ export default {
     closeEditTextFormatDialog() {
       this.isShownEditTextFormatDialog = false;
     },
-    hundleDeleteTextBlock(textBlock) {
-      this.deleteTextBlock(textBlock);
+    hundleDeleteTextBlock(TextBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteTextBlock(TextBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "テキストブロックを削除したよ！",
+        color: this.textBlockColorForFlashMessage,
+      });
     },
 
     // Question Block

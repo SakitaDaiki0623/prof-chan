@@ -14,7 +14,10 @@
       </p>
       <div class="p-8 bg-question-prof-block bg-center">
         <v-row>
-          <v-col cols="12" sm="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <v-card>
               <v-img
                 class="white--text align-end"
