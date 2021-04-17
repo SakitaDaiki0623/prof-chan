@@ -1,7 +1,7 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <v-app-bar
-    v-show="isCurrentUserProfile"
+    v-show="doesCurrentUserhaveProfile"
     class="font-prof-default"
     color="gray accent-4"
     dark
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     ...mapState("users", ["currentUser"]),
-    isCurrentUserProfile() {
+    doesCurrentUserhaveProfile() {
       if (this.currentUser.profile === null) {
         return false;
       } else {
