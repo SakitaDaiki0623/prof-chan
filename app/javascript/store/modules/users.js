@@ -7,6 +7,9 @@ export const users = {
     users: [],
     currentUser: {},
   },
+  getters: {
+    currentUser: (state) => state.currentUser,
+  },
   mutations: {
     loadCurrentUser(state, currentUser) {
       state.currentUser = currentUser;
