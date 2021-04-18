@@ -6,6 +6,7 @@ import ProfilesPage from "../pages/profile/index";
 import ShowProfilesPage from "../pages/profile/show";
 import NewProfilesPage from "../pages/profile/new";
 import EditProfilesPage from "../pages/profile/edit";
+import NotFound from "../pages/shared/NotFound";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,12 @@ const routes = [
         });
       }
     },
+  },
+  {
+    name: "NotFound",
+    path: "*",
+    component: NotFound,
+    meta: { title: "お探しのページは見つかりませんでした" },
   },
 ];
 

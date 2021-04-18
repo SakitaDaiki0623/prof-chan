@@ -13,6 +13,6 @@ class QuestionBlockItem
     profile_block = ProfileBlock.find_by(user_id: current_user.id)
 
     question_block = QuestionBlock.create(title: title, profile_block_id: profile_block.id)
-    QuestionItem.create(content: content, answer: answer, question_block_id: question_block.id )
+    QuestionItem.create(content: content, answer: answer, question_block_id: question_block.id)
   end
 end

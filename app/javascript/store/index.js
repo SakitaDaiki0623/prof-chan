@@ -8,6 +8,7 @@ import { users } from "./modules/users";
 import { textBlocks } from "./modules/textBlocks";
 import { profileBlocks } from "./modules/profileBlocks";
 import { flash } from "./modules/flash";
+import { isNotFound } from "./modules/isNotFound";
 
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   modules: {
     users,
     flash,
+    isNotFound,
 
     // Blocks
     profiles,

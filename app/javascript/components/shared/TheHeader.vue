@@ -1,61 +1,29 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
-  <v-app-bar
-    v-show="doesCurrentUserhaveProfile"
-    class="font-prof-default"
-    color="gray accent-4"
-    dark
-  >
-    <v-app-bar-nav-icon />
-
-    <v-toolbar-title>
-      <router-link to="/profiles">
-        プロフちゃん
-      </router-link>
-    </v-toolbar-title>
-
-    <div class="flex-grow-1" />
-    <a
-      href="/logout"
-      data-method="delete"
-    >ログアウト</a>
-
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
-
-    <v-btn
-      id="profile-edit-button"
-      icon
-      @click="openProfileEditPage"
+  <header>
+    <v-app-bar
+      v-show="doesCurrentUserhaveProfile"
+      class="font-prof-default bg-header"
     >
-      <v-icon>mdi-pencil</v-icon>
-    </v-btn>
+      <v-toolbar-title>
+        <router-link to="/profiles"> プロフちゃん(ロゴ) </router-link>
+      </v-toolbar-title>
 
-    <v-menu
-      left
-      bottom
-    >
-      <template #activator="{ on }">
-        <v-btn
-          icon
-          v-on="on"
-        >
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </template>
+      <div class="flex-grow-1" />
 
-      <v-list>
-        <v-list-item
-          v-for="n in 1"
-          :key="n"
-          @click="() => {}"
-        >
-          <v-list-item-title />
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </v-app-bar>
+      <v-btn
+        id="profile-edit-button"
+        @click="openProfileEditPage"
+        class="m-2 white--text"
+        color="blue-grey darken-2"
+      >
+        <v-icon left> mdi-pencil </v-icon>
+        プロフ編集
+      </v-btn>
+
+      <a href="/logout" data-method="delete">ログアウト</a>
+    </v-app-bar>
+  </header>
 </template>
 
 <script>
@@ -88,3 +56,18 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-header {
+  background-image: linear-gradient(
+    -45deg,
+    #bfffa8 25%,
+    #fbffcc 25%,
+    #fbffcc 50%,
+    #bfffa8 50%,
+    #bfffa8 75%,
+    #fbffcc 75%,
+    #fbffcc
+  );
+}
+</style>

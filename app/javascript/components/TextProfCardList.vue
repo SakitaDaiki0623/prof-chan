@@ -9,8 +9,6 @@
       >
         <v-card
           class="bg-text-prof-block bg-cover shadow rounded-2xl p-5"
-          height="320"
-          width="500"
         >
           <v-row justify="end">
             <v-btn
@@ -35,7 +33,7 @@
           <p class="text-2xl font-bold text-gray-600 pt-3">
             {{ textBlock.title }}
           </p>
-          <v-card height="200" class="p-5 rounded-lg" outlined>
+          <v-card class="p-5 rounded-lg" outlined>
             {{ textBlock.text }}
           </v-card>
         </v-card>

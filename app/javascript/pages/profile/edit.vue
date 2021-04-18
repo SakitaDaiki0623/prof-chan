@@ -4,7 +4,7 @@
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
-    <div class="flex justify-center mb-10">
+    <div class="mb-10">
       <BasicProfCard
         :profile="profile"
         @open-edit-basic-prof-card="openEditBasicProfCard"
