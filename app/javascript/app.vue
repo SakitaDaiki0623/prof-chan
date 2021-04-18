@@ -1,24 +1,24 @@
 <template>
   <v-app id="app">
-    <v-app>
-      <TheHeader />
-      <v-main>
-        <TheNotFound v-if="isNotFound" />
-        <TheFlashMessage v-if="isFlash" />
-        <router-view />
-      </v-main>
-    </v-app>
+    <TheHeader />
+    <v-main>
+      <TheNotFound v-if="isNotFound" />
+      <TheFlashMessage v-if="isFlash" />
+      <router-view />
+    </v-main>
+    <TheFooter />
   </v-app>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import TheHeader from "./components/shared/TheHeader";
+import TheFooter from "./components/shared/TheFooter";
 import TheFlashMessage from "./components/shared/TheFlashMessage";
 import TheNotFound from "./pages/shared/NotFound";
 
 export default {
-  components: { TheHeader, TheFlashMessage, TheNotFound },
+  components: { TheHeader, TheFlashMessage, TheNotFound, TheFooter },
   data() {
     return {};
   },
