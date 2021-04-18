@@ -13,4 +13,12 @@
 class QuestionItem < ApplicationRecord
   # association =============
   belongs_to :question_block
+
+  # カスタムバリデーション
+  MAX_QUESTION_ITEMS_COUNT = 3
+  validate :question_items_count_must_be_within_limit
+
+  def question_items_count_must_be_within_limit
+    errors.add(:base, "question_items count limit: #{MAX_QUESTION_ITEMS_COUNT}") if profile_block.question_items.count >= MAX_QUESTION_ITEMS_COUNT
+  end
 end
