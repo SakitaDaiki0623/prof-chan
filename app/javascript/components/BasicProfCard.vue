@@ -3,10 +3,10 @@
     <v-row justify="center">
       <v-col cols="12" sm="6">
         <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
-          <div class="flex p-3">
+          <div class="flex p-3 text-gray-600 font-bold">
             <div class="md:w-2/4 text-center">
               <div
-                class="border-b-2 border-gray-600 border-4 border-gray-300 m-5"
+                class="border-b-2 border-gray-600 border-4 border-gray-300 m-5 "
               >
                 ★基本情報★
               </div>

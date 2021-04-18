@@ -47,7 +47,7 @@
                     <select
                       id="profile_gender"
                       v-model="profile.gender"
-                      class="input-form"
+                      class="input-form-basic-block"
                       name="profile[gender]"
                     >
                       <option value="male">男性</option>
@@ -68,7 +68,7 @@
                     <input
                       id="profile_height"
                       v-model="profile.height"
-                      class="input-form"
+                      class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
                     />
@@ -87,7 +87,7 @@
                     <select
                       id="profile_blood_type"
                       v-model="profile.blood_type"
-                      class="input-form"
+                      class="input-form-basic-block"
                       name="profile[blood_type]"
                     >
                       <option value="A">A型</option>
@@ -113,7 +113,7 @@
                       id="profile_prefecture_id"
                       v-model="profile.prefecture_id"
                       name="profile[prefecture_id]"
-                      class="input-form"
+                      class="input-form-basic-block"
                     >
                       <option
                         v-for="prefecture in prefectures"
@@ -148,7 +148,7 @@
                           id="profile_birthday"
                           v-model="profile.birthday"
                           type="date"
-                          class="input-form"
+                          class="input-form-basic-block"
                           name="profile[birthday]"
                           v-bind="attrs"
                           v-on="on"
@@ -195,7 +195,7 @@
                           type="date"
                           name="profile[day_of_joinning]"
                           v-bind="attrs"
-                          class="input-form"
+                          class="input-form-basic-block"
                           v-on="on"
                         />
                         <span class="text-red-400">{{ errors[0] }}</span>
