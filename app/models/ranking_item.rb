@@ -14,5 +14,5 @@ class RankingItem < ApplicationRecord
   belongs_to :ranking_block
 
   # validation =============
-  validates :answer, presence: true,      length: { maximum: 30 }
+  validates :answer, presence: true, length: { maximum: 30 }
 end

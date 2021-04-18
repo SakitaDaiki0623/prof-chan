@@ -1,9 +1,7 @@
 module Api
   module V1
     class QuestionBlocksController < ApplicationController
-
-      def index
-      end
+      def index; end
 
       def create
         @question_block = QuestionBlockItem.new(format_params)
@@ -15,21 +13,17 @@ module Api
         end
       end
 
-      def show
-      end
+      def show; end
 
-      def update
-      end
+      def update; end
 
-      def destroy
-      end
+      def destroy; end
 
       private
 
       def format_params
-        params.require(:question_block_item).permit(title:, :content, :answer)
+        params.require(:question_block_item).permit(:title, :content, :answer)
       end
     end
   end
 end
-

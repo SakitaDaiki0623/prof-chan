@@ -15,5 +15,5 @@ class RankingBlock < ApplicationRecord
   has_many :ranking_items, dependent: :destroy
 
   # validation =============
-  validates :title, presence: true,      length: { maximum: 30 }
+  validates :title, presence: true, length: { maximum: 30 }
 end
