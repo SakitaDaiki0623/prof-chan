@@ -22,6 +22,10 @@ RSpec.describe 'ShowProfile', type: :system do
     it '指定のプロフィールが表示されていること' do
       expect(page).to have_content("#{my_profile.user.name} さんのプロフィール")
     end
+
+    it 'ヘッダーが表示されていること' do
+      expect(page).to have_selector('header'), 'ヘッダーが表示されていません'
+    end
   end
 
   describe '自分の詳細ページ' do

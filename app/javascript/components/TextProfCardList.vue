@@ -2,10 +2,10 @@
   <v-container>
     <v-row>
       <v-col
-        cols="12"
-        sm="4"
         v-for="textBlock in myTextBlocks"
         :key="textBlock.id"
+        cols="12"
+        sm="4"
       >
         <v-card
           class="bg-text-prof-block bg-cover shadow rounded-2xl p-5"
@@ -14,6 +14,7 @@
         >
           <v-row justify="end">
             <v-btn
+              :id="'edit-text-block-button-' + textBlock.id"
               tile
               small
               color="teal lighten-4"
@@ -22,6 +23,7 @@
               <v-icon> mdi-pencil </v-icon>
             </v-btn>
             <v-btn
+              :id="'delete-text-block-button-' + textBlock.id"
               tile
               small
               color="teal lighten-1"

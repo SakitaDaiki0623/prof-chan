@@ -11,6 +11,10 @@ RSpec.describe 'NewProfiles', type: :system do
     it 'タイトルが「プロフィールづくり - プロフちゃん」であること' do
       expect(page).to have_title('プロフィールづくり - プロフちゃん'), '意図したタイトルが表示されていません'
     end
+
+    it 'ヘッダーが表示されていないこと' do
+      expect(page).not_to have_selector('header'), 'ヘッダーが表示されています'
+    end
   end
 
   describe 'プロフィール情報を正確に入力' do

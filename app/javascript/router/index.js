@@ -1,6 +1,7 @@
 // app/javascript/router/index.js
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store/index.js";
 import ProfilesPage from "../pages/profile/index";
 import ShowProfilesPage from "../pages/profile/show";
 import NewProfilesPage from "../pages/profile/new";
@@ -23,13 +24,27 @@ const routes = [
     path: "/profiles/:id(\\d+)",
     name: "ShowProfilesPage",
     component: ShowProfilesPage,
-    props: true
+    props: true,
   },
   {
     path: "/profiles/:id(\\d+)/edit",
     name: "EditProfilesPage",
     component: EditProfilesPage,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (store.state == undefined) return;
+      const currentUserProfileId = store.state.users.currentUser.profile.id;
+      if (currentUserProfileId == to.params.id) {
+        next();
+      } else {
+        next({ path: "/profiles" });
+        store.dispatch("flash/setFlash", {
+          type: "error",
+          message: "他の人のプロフィールは編集できないよ！",
+          color: "red lighten-3",
+        });
+      }
+    },
   },
 ];
 

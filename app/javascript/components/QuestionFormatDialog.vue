@@ -13,13 +13,20 @@
         >
           クエスチョンブロック
         </p>
-        <div id="text-block-form" class="p-10 bg-question-prof-block bg-center">
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <div
+          id="text-block-form"
+          class="p-10 bg-question-prof-block bg-center"
+        >
+          <ValidationObserver
+            ref="observer"
+            v-slot="{ invalid }"
+          >
             <form @submit.prevent="hundleCreateTextBlock(questionBlock)">
               <div>
-                <label class="form-label" for="question_block_title"
-                  >タイトル</label
-                >
+                <label
+                  class="form-label"
+                  for="question_block_title"
+                >タイトル</label>
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -31,7 +38,7 @@
                     class="input-form"
                     name="question_block[question_block_title]"
                     type="text"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>

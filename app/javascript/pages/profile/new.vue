@@ -7,8 +7,9 @@
         <h2 class="text-5xl mb-10">
           基本情報を入力してね♬
         </h2>
-        <div class="w-3/5 shadow rounded-2xl bg-question-prof-block bg-cover">
-          <div class="flex">
+        <!-- Basic Info Card -->
+        <div class="w-3/5 shadow rounded-2xl bg-question-prof-block bg-top">
+          <div class="flex p-6">
             <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
               <div
                 class="border-b-2 border-gray-600 inline-block text-3xl mt-10 ml-10 border-4 border-gray-300"
@@ -17,16 +18,14 @@
               </div>
               <div class="w-full mt-10 ml-10">
                 <img
-                  class="ring-4 ring-gray-600	"
+                  class="ring-4 ring-gray-600"
                   :src="user.image"
                 >
               </div>
-              <div class="ml-8">
-                <div class="text-2xl mt-5">
-                  名前
-                </div>
+              <div class="mt-10">
+                <label class="form-label-basic-block">名前</label>
                 <div
-                  class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold"
+                  class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold text-center"
                 >
                   {{ user.name }}
                 </div>
@@ -45,7 +44,7 @@
                   <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
                     <div>
                       <label
-                        class="form-label"
+                        class="form-label-basic-block"
                         for="profile_gender"
                       >性別</label>
                       <ValidationProvider
@@ -71,7 +70,7 @@
                     </div>
                     <div>
                       <label
-                        class="form-label"
+                        class="form-label-basic-block"
                         for="profile_height"
                       >身長</label>
                       <ValidationProvider
@@ -91,7 +90,7 @@
                     </div>
                     <div>
                       <label
-                        class="form-label"
+                        class="form-label-basic-block"
                         for="profile_blood_type"
                       >血液型</label>
                       <ValidationProvider
@@ -123,7 +122,7 @@
                     </div>
                     <div>
                       <label
-                        class="form-label"
+                        class="form-label-basic-block"
                         for="profile_prefecture_id"
                       >出身地</label>
                       <ValidationProvider
@@ -149,6 +148,10 @@
                       </ValidationProvider>
                     </div>
                     <div>
+                      <label
+                        class="form-label-basic-block"
+                        for="profile_birthday"
+                      >生年月日</label>
                       <v-menu
                         ref="menu"
                         v-model="birthMenu"
@@ -158,20 +161,20 @@
                         min-width="auto"
                       >
                         <template #activator="{ on, attrs }">
-                          <!-- TODO: 入力値のフォーマットを設定 -->
                           <ValidationProvider
                             v-slot="{ errors }"
                             name="生年月日"
                             rules="input_required"
                           >
-                            <v-text-field
+                            <input
                               id="profile_birthday"
                               v-model="profile.birthday"
+                              type="date"
+                              class="input-form"
                               name="profile[birthday]"
-                              label="生年月日"
                               v-bind="attrs"
                               v-on="on"
-                            />
+                            >
                             <span class="text-red-400">{{ errors[0] }}</span>
                           </ValidationProvider>
                         </template>
@@ -189,6 +192,10 @@
                       </v-menu>
                     </div>
                     <div>
+                      <label
+                        class="form-label-basic-block"
+                        for="profile_day_of_joinning"
+                      >入社日</label>
                       <v-menu
                         ref="menu"
                         v-model="joinedMenu"
@@ -198,20 +205,20 @@
                         min-width="auto"
                       >
                         <template #activator="{ on, attrs }">
-                          <!-- TODO: 入力値のフォーマットを設定 -->
                           <ValidationProvider
                             v-slot="{ errors }"
                             name="入社日"
                             rules="input_required"
                           >
-                            <v-text-field
+                            <input
                               id="profile_day_of_joinning"
                               v-model="profile.day_of_joinning"
+                              type="date"
                               name="profile[day_of_joinning]"
-                              label="入社日"
                               v-bind="attrs"
+                              class="input-form"
                               v-on="on"
-                            />
+                            >
                             <span class="text-red-400">{{ errors[0] }}</span>
                           </ValidationProvider>
                         </template>
@@ -246,7 +253,7 @@
               <!-- /FORM -->
             </div>
           </div>
-        </div>
+        </div><!-- Basic Info Card -->
       </div>
     </div>
     <CreateProfileSuccessModal
@@ -261,7 +268,7 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 // components ----------
 import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
@@ -272,7 +279,6 @@ export default {
   },
   data() {
     return {
-      user: {},
       team: {
         image: "",
       },
@@ -339,6 +345,12 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapState("users", ["currentUser"]),
+    user() {
+      return this.currentUser;
+    },
+  },
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
@@ -348,14 +360,11 @@ export default {
     document.title = "プロフィールづくり - プロフちゃん";
   },
   created() {
-    // [TODO: リファクタリング] axiosのモジュールに移すか考える
-    this.$axios
-      .get("/users/new")
-      .then((response) => (this.user = response.data))
-      .catch((err) => console.log(err.status));
+    this.fetchCurrentUser();
   },
   methods: {
     ...mapActions("profiles", ["createBasicProfile"]),
+    ...mapActions("users", ["fetchCurrentUser"]),
     hundleSubmitBasicProfileInfo(profile) {
       // [TODO: リファクタリング] メソッドが冗長なのでリファクタリングできるか考える
       if (
@@ -382,3 +391,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/*  input type="date"のアイコンを非表示にする  */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+</style>

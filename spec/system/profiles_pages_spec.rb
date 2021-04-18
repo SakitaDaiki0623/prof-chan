@@ -15,8 +15,8 @@ RSpec.describe 'ProfilesPage', type: :system do
       expect(page).to have_title('プロフィール一覧 - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
-    it 'ログアウトが表示されていること' do
-      expect(page).to have_content('ログアウト'), 'ログアウトボタンが表示されていません'
+    it 'ヘッダーが表示されていること' do
+      expect(page).to have_selector('header'), 'ヘッダーが表示されていません'
     end
   end
 

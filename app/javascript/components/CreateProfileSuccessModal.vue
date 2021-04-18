@@ -6,20 +6,28 @@
       max-width="800"
       @input="$emit('input', $event.target.isShownCreateProfileSuccessDialog)"
     >
-      <v-card height="450" :img="require('../tail_images/card_bg.jpg')">
+      <v-card
+        height="550"
+        :img="require('../tail_images/card_bg.jpg')"
+      >
         <p
           class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-20 mb-10"
         >
           基本情報の登録が完了しました！
         </p>
         <v-card-actions>
-          <v-row justify="center" class="p-8">
+          <v-row
+            justify="center"
+            class="p-8"
+          >
             <v-btn
               x-large
               color="blue-grey darken-2"
               class="font-prof-default white--text"
             >
-              <v-icon left> mdi-pencil </v-icon>
+              <v-icon left>
+                mdi-pencil
+              </v-icon>
               他の情報も入力する
             </v-btn>
           </v-row>
@@ -28,14 +36,19 @@
           趣味、住所などあなたに関わるプロフィールを追加します。
         </v-card-text>
         <v-card-actions>
-          <v-row justify="center" class="p-8">
+          <v-row
+            justify="center"
+            class="p-8"
+          >
             <v-btn
               x-large
               color="light-green accent-2"
               class="font-prof-default black--text"
               @click="moveToProfilesPage"
             >
-              <v-icon left> mdi-account-circle </v-icon>
+              <v-icon left>
+                mdi-account-circle
+              </v-icon>
               プロフィール閲覧
             </v-btn>
           </v-row>

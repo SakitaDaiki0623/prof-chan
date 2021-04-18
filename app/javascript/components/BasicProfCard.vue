@@ -1,101 +1,108 @@
 <template>
-  <v-card class="bg-prof-card bg-cover shadow rounded-2xl">
-    <div class="flex">
-      <div class="md:w-2/5 ml-4">
-        <div class="w-full mt-10">
-          <img class="ring-4 ring-gray-600" :src="currentUser.image" />
+  <div
+    class="w-2/6 shadow rounded-2xl bg-question-prof-block bg-cover pr-2 pl-2"
+  >
+    <div class="flex p-3">
+      <div class="md:w-2/4 text-center">
+        <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
+          ★基本情報★
+        </div>
+        <div class="flex justify-center">
+          <img
+            class="ring-4 ring-gray-600 w-9/12"
+            :src="profile.user.image"
+          >
         </div>
         <div>
-          <div class="text-lg font-bold inline-block">
+          <div class="text-xl font-bold inline-block mt-4">
             <label
               for="name"
               class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-              >名前</label
-            >
-            <br />
-            {{ currentUser.name }}
+            >名前</label>
+            {{ profile.user.name }}
           </div>
         </div>
       </div>
-      <div class="p-8 text-sm">
-        <div class="p-1">
+      <div class="p-2 text-md md:w-2/4">
+        <v-row justify="end">
+          <v-btn
+            tile
+            small
+            color="red lighten-4"
+            @click="openEditBasicProfCard"
+          >
+            <v-icon> mdi-pencil </v-icon>
+          </v-btn>
+        </v-row>
+        <div class="p-2">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >性別</label
-          >
+          >性別</label>
           {{ profile.gender }}
         </div>
 
-        <div class="p-1">
+        <div class="p-2">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >身長</label
-          >{{ profile.height }} cm
+          >身長</label>{{ profile.height }} cm
         </div>
 
-        <div class="p-1">
+        <div class="p-2">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >血液型</label
-          >{{ profile.blood_type }} 型
+          >血液型</label>{{ profile.blood_type }} 型
         </div>
 
-        <div class="p-1">
+        <div class="p-2">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >出身地</label
-          >{{ profile.prefecture_id }}
+          >出身地</label>{{ profile.prefecture_id }}
         </div>
-        <div class="p-1">
+        <div class="p-2">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >誕生日</label
-          >
+          >誕生日</label>
           {{ profile.birthday | moment }}
         </div>
-        <div class="p-1">
+        <div class="p-2">
           <label
             for="birthday"
             class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >入社日</label
-          >
+          >入社日</label>
 
           {{ profile.day_of_joinning | moment }}
         </div>
       </div>
     </div>
-  </v-card>
+  </div>
 </template>
 
 <script>
 import moment from "moment";
+import { mapState } from "vuex";
 
 export default {
   filters: {
-    moment: function (date) {
+    moment: function(date) {
       return moment(date).format("YYYY/MM/DD");
     },
   },
   props: {
-    currentUser: {
-      type: Object,
-      required: true,
-    },
     profile: {
       type: Object,
       required: true,
     },
   },
-  computed: {
-    translateGender() {
-      return this.profile.gender == "male" ? "男性" : "女性";
+  computed: {},
+  methods: {
+    openEditBasicProfCard() {
+      this.$emit("open-edit-basic-prof-card", this.profile);
     },
   },
-  methods: {},
 };
 </script>

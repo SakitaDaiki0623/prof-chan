@@ -1,5 +1,5 @@
 // app/javascript/css/tailwind.scss
-//  Use Tailwind
+//  カスタムクラスファイル
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -70,6 +70,18 @@
   @apply font-prof-default;
 }
 
+.form-label-basic-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
+  @apply font-prof-default;
+}
+
 // slackログインボタン
 .slack-btn {
   @apply bg-indigo-900;
@@ -81,7 +93,6 @@
     @apply bg-indigo-700;
   }
 }
-
 
 // フラッシュメッセージ
 .notice {

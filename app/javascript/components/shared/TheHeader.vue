@@ -1,6 +1,7 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <v-app-bar
+    v-show="doesCurrentUserhaveProfile"
     class="font-prof-default"
     color="gray accent-4"
     dark
@@ -24,6 +25,7 @@
     </v-btn>
 
     <v-btn
+      id="profile-edit-button"
       icon
       @click="openProfileEditPage"
     >
@@ -58,6 +60,7 @@
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -65,17 +68,22 @@ export default {
       user: {},
     };
   },
-  computed: {},
-  created() {
-    // [TODO: リファクタリング] axiosのモジュールに移すか考える
-    this.$axios
-      .get("/users/new")
-      .then((response) => (this.user = response.data))
-      .catch((err) => console.log(err.status));
+  computed: {
+    ...mapState("users", ["currentUser"]),
+    doesCurrentUserhaveProfile() {
+      if (this.currentUser.profile === null) {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
+  created() {},
   methods: {
     openProfileEditPage() {
-      this.$router.push(`/profiles/${this.user.profile.id}/edit`);
+      this.$router
+        .push(`/profiles/${this.currentUser.profile.id}/edit`)
+        .catch((err) => {});
     },
   },
 };

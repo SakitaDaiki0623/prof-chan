@@ -9,21 +9,32 @@ RSpec.describe 'EditProfile', type: :system do
   end
 
   let(:my_profile) { Profile.last }
-  let(:others_profile) { Profile.first }
+  let(:other_profile) { Profile.first }
 
-  describe '基本プロフィール編集機能' do
-    before do
-      find("#profile-index-card-#{my_profile.id}").click
-      find('#edit-basic-profile-btn').click
+  let(:other_profile_edit_path) { "profiles/#{other_profile.id}/edit" }
+
+  describe 'ページの基本検証' do
+    before {find("#profile-edit-button").click}
+
+    it 'タイトルが「プロフィール編集 - プロフちゃん」であること' do
+      expect(page).to have_title('プロフィール編集 - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
-    it '編集モーダルが表示されること' do
-      # expect(page).to have_selector("#edit-basic-profile-modal-#{my_profile.id}")
+    it 'ヘッダーが表示されていないこと' do
+      expect(page).to have_selector('header'), 'ヘッダーが表示されています'
     end
 
-    context '性別を更新した時' do
-      it '更新した値が一覧画面と詳細画面に反映されていること' do
-        expect(page).to have_content("#{my_profile.user.name} さんのプロフィール")
+    it '自分のプロフィール編集画面であること' do
+      expect(page).to have_content(my_profile.user.name)
+    end
+  end
+
+  describe 'Authorization' do
+    context '他人の編集ページにアクセスしようとした時' do
+      before { visit other_profile_edit_path }
+      it 'プロフィールページにリダイレクトすること' do
+        expect(current_path).to eq(profiles_path)
+        expect(page).to have_content('他の人のプロフィールは編集できないよ！')
       end
     end
   end
