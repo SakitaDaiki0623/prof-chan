@@ -15,5 +15,5 @@ class YesOrNoBlock < ApplicationRecord
   has_many :yes_or_no_items, dependent: :destroy
 
   # validation =============
-  validates :title, presence: true,      length: { maximum: 30 }
+  validates :title, presence: true, length: { maximum: 30 }
 end

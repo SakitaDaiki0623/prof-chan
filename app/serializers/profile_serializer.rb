@@ -13,10 +13,10 @@ class ProfileSerializer < ActiveModel::Serializer
   end
 
   def birthday
-    object.birthday.strftime("%F")
+    object.birthday.strftime('%F')
   end
 
   def day_of_joinning
-    object.day_of_joinning.strftime("%F")
+    object.day_of_joinning.strftime('%F')
   end
 end

@@ -7,24 +7,24 @@
     @input="$emit('input', $event.target.isShownEditBasicProfCardDialog)"
   >
     <!-- Basic Info Card -->
-    <div class="w-3/5 shadow rounded-2xl bg-question-prof-block bg-top">
-      <div class="flex p-6">
-        <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8">
+    <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
+      <div class="flex p-3 text-gray-600 font-prof-default">
+        <div class="md:w-2/4 p-4 text-center mt-10">
           <div
-            class="border-b-2 border-gray-600 inline-block text-3xl mt-10 ml-10 border-4 border-gray-300"
+            class="border-b-2 border-gray-600 border-4 border-gray-300 m-5"
           >
             ★基本情報★
           </div>
-          <div class="w-full mt-10 ml-10">
-            <img
-              class="ring-4 ring-gray-600"
-              :src="user.image"
-            >
+          <div class="flex justify-center">
+            <img class="ring-4 ring-gray-600 w-9/12" :src="user.image" />
           </div>
-          <div class="mt-10">
-            <label class="form-label-basic-block">名前</label>
+          <div class="text-xl font-bold inline-block mt-4">
+            <label
+              class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
+              >名前</label
+            >
             <div
-              class="text-4xl pb-2 border-b-2 border-gray-600 inline-block font-bold text-center"
+              class="text-2xl pb-2 border-b-2 border-gray-600 inline-block font-bold text-center"
             >
               {{ user.name }}
             </div>
@@ -32,20 +32,13 @@
         </div>
         <div class="md:w-3/5 p-8 lg:ml-4">
           <!-- FORM -->
-          <div
-            id="profile-basic-form"
-            class="p-6"
-          >
-            <ValidationObserver
-              ref="observer"
-              v-slot="{ invalid }"
-            >
+          <div id="profile-basic-form" class="p-6">
+            <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_gender"
-                  >性別</label>
+                  <label class="form-label-basic-block" for="profile_gender"
+                    >性別</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="性別"
@@ -54,24 +47,19 @@
                     <select
                       id="profile_gender"
                       v-model="profile.gender"
-                      class="input-form"
+                      class="input-form-basic-block"
                       name="profile[gender]"
                     >
-                      <option value="male">
-                        男性
-                      </option>
-                      <option value="female">
-                        女性
-                      </option>
+                      <option value="male">男性</option>
+                      <option value="female">女性</option>
                     </select>
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_height"
-                  >身長</label>
+                  <label class="form-label-basic-block" for="profile_height"
+                    >身長</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="身長"
@@ -80,18 +68,17 @@
                     <input
                       id="profile_height"
                       v-model="profile.height"
-                      class="input-form"
+                      class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
-                    >
+                    />
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_blood_type"
-                  >血液型</label>
+                  <label class="form-label-basic-block" for="profile_blood_type"
+                    >血液型</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="血液型"
@@ -100,21 +87,13 @@
                     <select
                       id="profile_blood_type"
                       v-model="profile.blood_type"
-                      class="input-form"
+                      class="input-form-basic-block"
                       name="profile[blood_type]"
                     >
-                      <option value="A">
-                        A型
-                      </option>
-                      <option value="B">
-                        B型
-                      </option>
-                      <option value="AB">
-                        AB型
-                      </option>
-                      <option value="O">
-                        O型
-                      </option>
+                      <option value="A">A型</option>
+                      <option value="B">B型</option>
+                      <option value="AB">AB型</option>
+                      <option value="O">O型</option>
                     </select>
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -123,7 +102,8 @@
                   <label
                     class="form-label-basic-block"
                     for="profile_prefecture_id"
-                  >出身地</label>
+                    >出身地</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="出身地"
@@ -133,7 +113,7 @@
                       id="profile_prefecture_id"
                       v-model="profile.prefecture_id"
                       name="profile[prefecture_id]"
-                      class="input-form"
+                      class="input-form-basic-block"
                     >
                       <option
                         v-for="prefecture in prefectures"
@@ -147,10 +127,9 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_birthday"
-                  >生年月日</label>
+                  <label class="form-label-basic-block" for="profile_birthday"
+                    >生年月日</label
+                  >
                   <v-menu
                     ref="menu"
                     v-model="birthMenu"
@@ -169,11 +148,11 @@
                           id="profile_birthday"
                           v-model="profile.birthday"
                           type="date"
-                          class="input-form"
+                          class="input-form-basic-block"
                           name="profile[birthday]"
                           v-bind="attrs"
                           v-on="on"
-                        >
+                        />
                         <span class="text-red-400">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
@@ -194,7 +173,8 @@
                   <label
                     class="form-label-basic-block"
                     for="profile_day_of_joinning"
-                  >入社日</label>
+                    >入社日</label
+                  >
                   <v-menu
                     ref="menu"
                     v-model="joinedMenu"
@@ -215,9 +195,9 @@
                           type="date"
                           name="profile[day_of_joinning]"
                           v-bind="attrs"
-                          class="input-form"
+                          class="input-form-basic-block"
                           v-on="on"
-                        >
+                        />
                         <span class="text-red-400">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
@@ -252,7 +232,7 @@
           <!-- /FORM -->
         </div>
       </div>
-    </div>
+    </v-card>
     <!-- Basic Info Card -->
   </v-dialog>
 </template>

@@ -4,7 +4,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-// 入力フォーム
+// 入力フォーム ====================
 .input-form {
   @apply w-full;
   @apply bg-white;
@@ -25,6 +25,29 @@
     @apply border-yellow-500;
     @apply ring-2;
     @apply ring-yellow-200;
+  }
+}
+
+.input-form-basic-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-red-500;
+    @apply ring-2;
+    @apply ring-red-200;
   }
 }
 
@@ -51,7 +74,8 @@
   }
 }
 
-// 入力フォームラベル
+// 入力フォームラベル ====================
+// 雛形
 .form-label {
   @apply leading-7;
   @apply text-sm;

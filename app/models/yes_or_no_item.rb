@@ -14,5 +14,5 @@ class YesOrNoItem < ApplicationRecord
   belongs_to :yes_or_no_block
 
   # validation
-  validates :answer, inclusion: {in: [true, false]}
+  validates :answer, inclusion: { in: [true, false] }
 end
