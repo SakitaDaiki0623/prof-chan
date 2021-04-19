@@ -1,6 +1,6 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
+  <div class="text-gray-600 font-prof-default">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
@@ -24,7 +24,7 @@
         テキストブロックを追加する
       </v-btn>
     </v-row>
-    <TextProfCardList
+    <TextBlockList
       :my-text-blocks="myTextBlocks"
       class="mb-10"
       @open-edit-text-format-dialog="openEditTextFormatDialog"
@@ -44,6 +44,11 @@
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
+    <QuestionBlockList
+      :myQuestionBlocks="myQuestionBlocks"
+      class="mb-10"
+      @delete-question-block="hundleDeleteQuestionBlock"
+    />
 
     <!-- Dialogs -->
     <!-- Basic Prof Card -->
@@ -55,6 +60,7 @@
     <QuestionBlockSelectDialog
       :is-shown-question-block-select-dialog="isShownQuestionBlockSelectDialog"
       @open-question-format-dialog="openQuestionFormatDialog"
+      @close-question-block-select-dialog="closeQuestionBlockSelectDialog"
     />
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
@@ -83,13 +89,18 @@ import axios from "axios";
 import { mapState, mapActions, Store } from "vuex";
 
 // components ----------
+// Basic Prof Card
 import BasicProfCard from "../../components/BasicProfCard";
 import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
-import TextProfCardList from "../../components/TextProfCardList";
+
+// Text Block
+import TextBlockList from "../../components/TextBlockList";
 import TextFormatDialog from "../../components/TextFormatDialog";
 import EditTextFormatDialog from "../../components/EditTextFormatDialog";
-import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 
+// Question Block
+import QuestionBlockList from "../../components/QuestionBlockList";
+import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
 
 export default {
@@ -100,10 +111,11 @@ export default {
 
     // Text Block
     TextFormatDialog,
-    TextProfCardList,
+    TextBlockList,
     EditTextFormatDialog,
 
     // Question Block
+    QuestionBlockList,
     QuestionBlockSelectDialog,
     QuestionFormatDialog,
   },
@@ -134,6 +146,7 @@ export default {
     ...mapState("profiles", ["profiles"]),
     ...mapState("users", ["currentUser"]),
     ...mapState("textBlocks", ["textBlocks"]),
+    ...mapState("questionBlocks", ["questionBlocks"]),
 
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
@@ -146,17 +159,31 @@ export default {
         ) || {}
       );
     },
+    myQuestionBlocks() {
+      return (
+        this.questionBlocks.filter(
+          (questionBlock) =>
+            questionBlock.profile_block.id == this.currentUser.profile_block.id
+        ) || {}
+      );
+    },
   },
   mounted() {
     this.fetchProfiles();
     this.fetchTextBlocks();
+    this.fetchQuestionBlocks();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },
   methods: {
-    ...mapActions("profiles", ["fetchProfiles"]),
-    ...mapActions("users", ["fetchCurrentUser"]),
-    ...mapActions("textBlocks", ["fetchTextBlocks", "deleteTextBlock"]),
+    ...mapActions({
+      fetchProfiles: "profiles/fetchProfiles",
+      fetchCurrentUser: "users/fetchCurrentUser",
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
+      fetchTextBlocks: "textBlocks/fetchTextBlocks",
+      deleteTextBlock: "textBlocks/deleteTextBlock",
+    }),
 
     // Basic Prof Card
     openEditBasicProfCard(profile) {
@@ -200,6 +227,15 @@ export default {
     },
     closeQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = false;
+    },
+    hundleDeleteQuestionBlock(QuestionBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteQuestionBlock(QuestionBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンブロックを削除したよ！",
+        color: "red lighten-3",
+      });
     },
   },
 };
