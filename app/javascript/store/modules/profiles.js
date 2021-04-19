@@ -42,7 +42,6 @@ export const profiles = {
         .catch((error) => console.log(error.status));
     },
     patchProfile({ commit }, payload) {
-      console.log(payload)
       axios
         .patch(`profiles/${payload.id}`, payload)
         .then((response) => {
