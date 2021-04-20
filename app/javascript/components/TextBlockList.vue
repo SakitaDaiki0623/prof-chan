@@ -5,7 +5,7 @@
         v-for="textBlock in myTextBlocks"
         :key="textBlock.id"
         cols="12"
-        sm="4"
+        sm="6"
       >
         <v-card
           class="bg-text-prof-block bg-cover shadow rounded-2xl p-5"
