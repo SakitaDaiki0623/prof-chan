@@ -47,6 +47,7 @@
     <QuestionBlockList
       :myQuestionBlocks="myQuestionBlocks"
       class="mb-10"
+      @open-question-text-format-dialog="openEditQuestionFormatDialog"
       @delete-question-block="hundleDeleteQuestionBlock"
     />
 
@@ -65,6 +66,12 @@
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
       @close-question-format-dialog="closeQuestionFormatDialog"
+    />
+    <EditQuestionFormatDialog
+      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
+      :edit-question-block="editQuestionBlock"
+      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
+      @cancel-question-format-update="cancelQuestionFormatUpdate"
     />
 
     <!-- Text Block -->
@@ -96,12 +103,13 @@ import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
 // Text Block
 import TextBlockList from "../../components/TextBlockList";
 import TextFormatDialog from "../../components/TextFormatDialog";
-import EditTextFormatDialog from "../../components/EditTextFormatDialog";
+import EditTextFormatDialog from "../../components/edit_dialog/EditTextFormatDialog";
 
 // Question Block
 import QuestionBlockList from "../../components/QuestionBlockList";
 import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
+import EditQuestionFormatDialog from "../../components/edit_dialog/EditQuestionFormatDialog";
 
 export default {
   components: {
@@ -118,6 +126,7 @@ export default {
     QuestionBlockList,
     QuestionBlockSelectDialog,
     QuestionFormatDialog,
+    EditQuestionFormatDialog,
   },
   props: {
     id: {
@@ -140,6 +149,8 @@ export default {
       // Question Block
       isShownQuestionBlockSelectDialog: false,
       isShownQuestionFormatDialog: false,
+      isShownEditQuestionFormatDialog: false,
+      editQuestionBlock: {},
     };
   },
   computed: {
@@ -227,6 +238,16 @@ export default {
     },
     closeQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = false;
+    },
+    openEditQuestionFormatDialog(questionBlock) {
+      this.editQuestionBlock = Object.assign({}, questionBlock);
+      this.isShownEditQuestionFormatDialog = true;
+    },
+    closeEditQuestionFormatDialog() {
+      this.isShownEditQuestionFormatDialog = false;
+    },
+    cancelQuestionFormatUpdate() {
+
     },
     hundleDeleteQuestionBlock(QuestionBlock) {
       if (!confirm("削除してよろしいですか?")) return;

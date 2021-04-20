@@ -55,9 +55,55 @@ export const questionBlocks = {
         })
         .catch((err) => console.log(err.status));
     },
-    patchQuestionBlock({ commit }, payload) {
+    patchQuestionBlockWithOneItems(
+      { commit },
+      { questionBlock, questionItem1 }
+    ) {
+      const params = {
+        question_title: questionBlock.title,
+        question_item_content1: questionItem1.content,
+        question_item_answer1: questionItem1.answer,
+      };
       axios
-        .patch(`question_blocks/${payload.id}`, payload)
+        .patch(`question_blocks/${questionBlock.id}`, params)
+        .then((response) => {
+          commit("updateQuestionBlock", response.data);
+        })
+        .catch((err) => console.log(err));
+    },
+    patchQuestionBlockWithTwoItems(
+      { commit },
+      { questionBlock, questionItem1, questionItem2 }
+    ) {
+      const params = {
+        question_title: questionBlock.title,
+        question_item_content1: questionItem1.content,
+        question_item_answer1: questionItem1.answer,
+        question_item_content2: questionItem2.content,
+        question_item_answer2: questionItem2.answer,
+      };
+      axios
+        .patch(`question_blocks/${questionBlock.id}`, params)
+        .then((response) => {
+          commit("updateQuestionBlock", response.data);
+        })
+        .catch((err) => console.log(err));
+    },
+    patchQuestionBlockWithThreeItems(
+      { commit },
+      { questionBlock, questionItem1, questionItem2, questionItem3 }
+    ) {
+      const params = {
+        question_title: questionBlock.title,
+        question_item_content1: questionItem1.content,
+        question_item_answer1: questionItem1.answer,
+        question_item_content2: questionItem2.content,
+        question_item_answer2: questionItem2.answer,
+        question_item_content3: questionItem3.content,
+        question_item_answer3: questionItem3.answer,
+      };
+      axios
+        .patch(`question_blocks/${questionBlock.id}`, params)
         .then((response) => {
           commit("updateQuestionBlock", response.data);
         })

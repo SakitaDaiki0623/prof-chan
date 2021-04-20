@@ -27,7 +27,16 @@ module Api
 
       def show; end
 
-      def update; end
+      def update
+        @question_block_item_register = QuestionBlockItemRegister.new(set_params, question_block: @question_block)
+
+        if @question_block_item_register.update
+          @question_block = current_user.profile_block.question_blocks.find(@question_block.id)
+          render json: @question_block
+        else
+          render json: @question_block_item_register.errors, status: :bad_request
+        end
+      end
 
       def destroy
         @question_block.destroy!
@@ -44,7 +53,7 @@ module Api
       end
 
       def set_question_block
-        @question_block = QuestionBlock.find(params[:id])
+        @question_block = current_user.profile_block.question_blocks.find(params[:id])
       end
     end
   end
