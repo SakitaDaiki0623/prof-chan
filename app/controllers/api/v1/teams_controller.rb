@@ -1,7 +1,6 @@
 module Api
   module V1
-    class TeamsController < ApplicationController
-      skip_before_action :verify_authenticity_token
+    class TeamsController < ApiController
 
       def show
         @user = User.find(current_user.id)

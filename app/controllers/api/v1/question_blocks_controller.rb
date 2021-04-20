@@ -1,8 +1,7 @@
 # app/controllers/api/v1/question_blocks_controller.rb
 module Api
   module V1
-    class QuestionBlocksController < ApplicationController
-      skip_before_action :verify_authenticity_token
+    class QuestionBlocksController < ApiController
       before_action :set_question_block, only: %i[show update destroy]
 
       def index
