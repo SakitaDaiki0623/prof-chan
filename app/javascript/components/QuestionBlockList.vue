@@ -13,8 +13,8 @@
               :id="'edit-text-block-button-' + questionBlock.id"
               tile
               small
-              color="teal lighten-4"
-              @click="openEditTextFormatDialog(questionBlock)"
+              color="red lighten-4"
+              @click="openEditQuestionFormatDialog(questionBlock)"
             >
               <v-icon> mdi-pencil </v-icon>
             </v-btn>
@@ -22,7 +22,7 @@
               :id="'delete-text-block-button-' + questionBlock.id"
               tile
               small
-              color="teal lighten-1"
+              color="red lighten-1"
               @click="hundleDeleteQuestionBlock(questionBlock)"
             >
               <v-icon> mdi-delete </v-icon>
@@ -60,8 +60,8 @@ export default {
     },
   },
   methods: {
-    openEditTextFormatDialog(questionBlock) {
-      this.$emit("open-edit-text-format-dialog", questionBlock);
+    openEditQuestionFormatDialog(questionBlock) {
+      this.$emit("open-question-text-format-dialog", questionBlock);
     },
     hundleDeleteQuestionBlock(questionBlock) {
       this.$emit("delete-question-block", questionBlock);

@@ -22,7 +22,10 @@
           クエスチョンブロック
         </p>
 
-        <div id="text-block-form" class="p-10 bg-question-prof-block bg-fixed">
+        <div
+          id="question-block-form"
+          class="p-10 bg-question-prof-block bg-fixed"
+        >
           <div class="pb-2">
             <v-btn
               id="add_button"
@@ -89,14 +92,22 @@
               </div>
 
               <!-- Item Form -->
-              <QuestionBlockItem :questionItem="questionItem1" />
+              <QuestionBlockItem
+                :questionItem="questionItem1"
+                :questionNameForValidation="questionNameForValidation1"
+                :answerNameForValidation="answerNameForValidation1"
+              />
               <QuestionBlockItem
                 :questionItem="questionItem2"
                 v-if="questionItemNum >= 2"
+                :questionNameForValidation="questionNameForValidation2"
+                :answerNameForValidation="answerNameForValidation2"
               />
               <QuestionBlockItem
                 :questionItem="questionItem3"
                 v-if="questionItemNum >= 3"
+                :questionNameForValidation="questionNameForValidation3"
+                :answerNameForValidation="answerNameForValidation3"
               />
 
               <div class="text-center p-10">
@@ -158,6 +169,14 @@ export default {
         content: "",
         answer: "",
       },
+
+      // Validator
+      questionNameForValidation1: "1番目の質問",
+      answerNameForValidation1: "1番目の答え",
+      questionNameForValidation2: "2番目の質問",
+      answerNameForValidation2: "2番目の答え",
+      questionNameForValidation3: "3番目の質問",
+      answerNameForValidation3: "3番目の答え",
     };
   },
   computed: {

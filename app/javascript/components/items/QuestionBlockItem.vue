@@ -8,11 +8,12 @@
         >
         <ValidationProvider
           v-slot="{ errors }"
-          name="質問"
+          :name="questionNameForValidation"
           rules="input_required|max:30"
         >
           <input
-            v-model="questionItem.content"
+            :value="questionItem.content"
+            @input="questionItem.content = $event.target.value"
             class="input-form-question-block"
             name="question_item[question_item_content]"
             type="text"
@@ -26,11 +27,12 @@
         >
         <ValidationProvider
           v-slot="{ errors }"
-          name="答え"
+          :name="answerNameForValidation"
           rules="input_required|max:30"
         >
           <input
-            v-model="questionItem.answer"
+            :value="questionItem.answer"
+            @input="questionItem.answer = $event.target.value"
             class="input-form-question-block"
             name="question_item[question_item_answer]"
             type="text"
@@ -47,6 +49,14 @@ export default {
   props: {
     questionItem: {
       type: Object,
+      require: true,
+    },
+    questionNameForValidation: {
+      type: String,
+      require: true,
+    },
+    answerNameForValidation: {
+      type: String,
       require: true,
     },
   },
