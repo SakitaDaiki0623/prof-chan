@@ -27,7 +27,7 @@
               <v-img
                 class="white--text align-end"
                 height="200px"
-                :src="require('../tail_images/question_block.png')"
+                :src="require('../../images/question_block.png')"
               >
                 <v-card-title class="font-prof-default">
                   クエスチョンフォーマット

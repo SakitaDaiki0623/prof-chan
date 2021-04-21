@@ -139,7 +139,7 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
 // components ----------
-import QuestionBlockItem from "./items/QuestionBlockItem";
+import QuestionBlockItem from "./QuestionBlockItem";
 
 export default {
   components: {

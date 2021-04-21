@@ -171,8 +171,8 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // components ----------
-import EditQuestionBlockItem from "../items/EditQuestionBlockItem";
-import IndividualCreateQuestionBlockItem from "../items/IndividualCreateQuestionBlockItem";
+import EditQuestionBlockItem from "../question_block/EditQuestionBlockItem";
+import IndividualCreateQuestionBlockItem from "../question_block/IndividualCreateQuestionBlockItem";
 
 export default {
   components: {
