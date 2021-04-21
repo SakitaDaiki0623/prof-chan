@@ -45,7 +45,6 @@
       </v-btn>
     </v-row>
     <QuestionBlockList
-      :myQuestionBlocks="myQuestionBlocks"
       class="mb-10"
       @open-question-text-format-dialog="openEditQuestionFormatDialog"
       @delete-question-block="hundleDeleteQuestionBlock"
@@ -71,7 +70,7 @@
       :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
       :edit-question-block="editQuestionBlock"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @cancel-question-format-update="cancelQuestionFormatUpdate"
+      @cancel-question-block-update="cancelQuestionBlockUpdate"
     />
 
     <!-- Text Block -->
@@ -170,19 +169,12 @@ export default {
         ) || {}
       );
     },
-    myQuestionBlocks() {
-      return (
-        this.questionBlocks.filter(
-          (questionBlock) =>
-            questionBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
   },
   mounted() {
     this.fetchProfiles();
     this.fetchTextBlocks();
     this.fetchQuestionBlocks();
+    this.fetchQuestionItems();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },
@@ -190,8 +182,13 @@ export default {
     ...mapActions({
       fetchProfiles: "profiles/fetchProfiles",
       fetchCurrentUser: "users/fetchCurrentUser",
+
+      // Question Block
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
+      fetchQuestionItems:  "questionBlocks/fetchQuestionItems",
+
+      // Text Block
       fetchTextBlocks: "textBlocks/fetchTextBlocks",
       deleteTextBlock: "textBlocks/deleteTextBlock",
     }),
@@ -246,8 +243,8 @@ export default {
     closeEditQuestionFormatDialog() {
       this.isShownEditQuestionFormatDialog = false;
     },
-    cancelQuestionFormatUpdate() {
-
+    cancelQuestionBlockUpdate(editQuestionBlock) {
+      this.editQuestionBlock = editQuestionBlock
     },
     hundleDeleteQuestionBlock(QuestionBlock) {
       if (!confirm("削除してよろしいですか?")) return;

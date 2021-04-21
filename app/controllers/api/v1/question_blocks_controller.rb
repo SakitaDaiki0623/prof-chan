@@ -27,10 +27,7 @@ module Api
       def show; end
 
       def update
-        @question_block_item_register = QuestionBlockItemRegister.new(set_params, question_block: @question_block)
-
-        if @question_block_item_register.update
-          @question_block = current_user.profile_block.question_blocks.find(@question_block.id)
+        if @question_block.update!(question_block_params)
           render json: @question_block
         else
           render json: @question_block_item_register.errors, status: :bad_request
@@ -49,6 +46,10 @@ module Api
           :question_title, :question_item_content1,
           :question_item_answer1, :question_item_content2, :question_item_answer2, :question_item_content3,
           :question_item_answer3, :current_user).merge(profile_block_id: ProfileBlock.find_by(user_id: User.find(current_user.id)).id)
+      end
+
+      def question_block_params
+        params.require(:question_block).permit(:title)
       end
 
       def set_question_block

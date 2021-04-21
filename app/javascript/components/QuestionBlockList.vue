@@ -52,11 +52,20 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
-  props: {
-    myQuestionBlocks: {
-      type: Array,
-      required: true,
+  computed: {
+    ...mapState("questionBlocks", ["questionBlocks"]),
+    ...mapState("users", ["currentUser"]),
+
+    myQuestionBlocks() {
+      return (
+        this.questionBlocks.filter(
+          (questionBlock) =>
+            questionBlock.profile_block.id == this.currentUser.profile_block.id
+        ) || {}
+      );
     },
   },
   methods: {
