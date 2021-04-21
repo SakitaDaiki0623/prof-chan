@@ -1,6 +1,6 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div class="bg-backimage-02 bg-cover text-gray-600 font-prof-default">
+  <div class="text-gray-600 font-prof-default">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
@@ -24,7 +24,7 @@
         テキストブロックを追加する
       </v-btn>
     </v-row>
-    <TextProfCardList
+    <TextBlockList
       :my-text-blocks="myTextBlocks"
       class="mb-10"
       @open-edit-text-format-dialog="openEditTextFormatDialog"
@@ -44,6 +44,11 @@
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
+    <QuestionBlockList
+      class="mb-10"
+      @open-question-text-format-dialog="openEditQuestionFormatDialog"
+      @delete-question-block="hundleDeleteQuestionBlock"
+    />
 
     <!-- Dialogs -->
     <!-- Basic Prof Card -->
@@ -55,10 +60,17 @@
     <QuestionBlockSelectDialog
       :is-shown-question-block-select-dialog="isShownQuestionBlockSelectDialog"
       @open-question-format-dialog="openQuestionFormatDialog"
+      @close-question-block-select-dialog="closeQuestionBlockSelectDialog"
     />
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
       @close-question-format-dialog="closeQuestionFormatDialog"
+    />
+    <EditQuestionFormatDialog
+      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
+      :edit-question-block="editQuestionBlock"
+      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
+      @cancel-question-block-update="cancelQuestionBlockUpdate"
     />
 
     <!-- Text Block -->
@@ -83,14 +95,20 @@ import axios from "axios";
 import { mapState, mapActions, Store } from "vuex";
 
 // components ----------
+// Basic Prof Card
 import BasicProfCard from "../../components/BasicProfCard";
 import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
-import TextProfCardList from "../../components/TextProfCardList";
-import TextFormatDialog from "../../components/TextFormatDialog";
-import EditTextFormatDialog from "../../components/EditTextFormatDialog";
-import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 
+// Text Block
+import TextBlockList from "../../components/TextBlockList";
+import TextFormatDialog from "../../components/TextFormatDialog";
+import EditTextFormatDialog from "../../components/edit_dialog/EditTextFormatDialog";
+
+// Question Block
+import QuestionBlockList from "../../components/QuestionBlockList";
+import QuestionFormatDialog from "../../components/QuestionFormatDialog";
 import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
+import EditQuestionFormatDialog from "../../components/edit_dialog/EditQuestionFormatDialog";
 
 export default {
   components: {
@@ -100,12 +118,14 @@ export default {
 
     // Text Block
     TextFormatDialog,
-    TextProfCardList,
+    TextBlockList,
     EditTextFormatDialog,
 
     // Question Block
+    QuestionBlockList,
     QuestionBlockSelectDialog,
     QuestionFormatDialog,
+    EditQuestionFormatDialog,
   },
   props: {
     id: {
@@ -128,12 +148,15 @@ export default {
       // Question Block
       isShownQuestionBlockSelectDialog: false,
       isShownQuestionFormatDialog: false,
+      isShownEditQuestionFormatDialog: false,
+      editQuestionBlock: {},
     };
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
     ...mapState("users", ["currentUser"]),
     ...mapState("textBlocks", ["textBlocks"]),
+    ...mapState("questionBlocks", ["questionBlocks"]),
 
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
@@ -150,13 +173,25 @@ export default {
   mounted() {
     this.fetchProfiles();
     this.fetchTextBlocks();
+    this.fetchQuestionBlocks();
+    this.fetchQuestionItems();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },
   methods: {
-    ...mapActions("profiles", ["fetchProfiles"]),
-    ...mapActions("users", ["fetchCurrentUser"]),
-    ...mapActions("textBlocks", ["fetchTextBlocks", "deleteTextBlock"]),
+    ...mapActions({
+      fetchProfiles: "profiles/fetchProfiles",
+      fetchCurrentUser: "users/fetchCurrentUser",
+
+      // Question Block
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
+      fetchQuestionItems:  "questionBlocks/fetchQuestionItems",
+
+      // Text Block
+      fetchTextBlocks: "textBlocks/fetchTextBlocks",
+      deleteTextBlock: "textBlocks/deleteTextBlock",
+    }),
 
     // Basic Prof Card
     openEditBasicProfCard(profile) {
@@ -200,6 +235,25 @@ export default {
     },
     closeQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = false;
+    },
+    openEditQuestionFormatDialog(questionBlock) {
+      this.editQuestionBlock = Object.assign({}, questionBlock);
+      this.isShownEditQuestionFormatDialog = true;
+    },
+    closeEditQuestionFormatDialog() {
+      this.isShownEditQuestionFormatDialog = false;
+    },
+    cancelQuestionBlockUpdate(editQuestionBlock) {
+      this.editQuestionBlock = editQuestionBlock
+    },
+    hundleDeleteQuestionBlock(QuestionBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteQuestionBlock(QuestionBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンブロックを削除したよ！",
+        color: "red lighten-3",
+      });
     },
   },
 };

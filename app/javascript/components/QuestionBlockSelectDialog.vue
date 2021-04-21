@@ -7,6 +7,14 @@
     @input="$emit('input', $event.target.isShownQuestionBlockSelectDialog)"
   >
     <v-card color="red lighten-3">
+      <v-row justify="end" class="mr-2 mt-2">
+        <v-btn
+          color="red lighten-3"
+          @click="hundleCloseQuestionBlockSelectDialog"
+        >
+          ✖︎
+        </v-btn>
+      </v-row>
       <p
         class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10"
       >
@@ -14,10 +22,7 @@
       </p>
       <div class="p-8 bg-question-prof-block bg-center">
         <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-card>
               <v-img
                 class="white--text align-end"
@@ -39,9 +44,7 @@
                   class="font-prof-default white--text"
                   @click="openQuestionFormatDialog"
                 >
-                  <v-icon left>
-                    mdi-pencil
-                  </v-icon>
+                  <v-icon left> mdi-pencil </v-icon>
                   このフォーマットを使う
                 </v-btn>
               </v-card-actions>
@@ -64,6 +67,9 @@ export default {
   methods: {
     openQuestionFormatDialog() {
       this.$emit("open-question-format-dialog");
+    },
+    hundleCloseQuestionBlockSelectDialog() {
+      this.$emit("close-question-block-select-dialog");
     },
   },
 };

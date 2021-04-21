@@ -3,12 +3,17 @@ import Vuex from "vuex";
 import axios from "../plugins/axios.js";
 // [参考]: https://qiita.com/_masa_u/items/b58b92c283f4e770e094
 import createPersistedState from "vuex-persistedstate";
+
 import { profiles } from "./modules/profiles";
 import { users } from "./modules/users";
-import { textBlocks } from "./modules/textBlocks";
-import { profileBlocks } from "./modules/profileBlocks";
 import { flash } from "./modules/flash";
 import { isNotFound } from "./modules/isNotFound";
+
+// Blocks
+import { textBlocks } from "./modules/textBlocks";
+import { questionBlocks } from "./modules/questionBlocks";
+import { profileBlocks } from "./modules/profileBlocks";
+
 
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
@@ -21,8 +26,9 @@ export default new Vuex.Store({
 
     // Blocks
     profiles,
-    textBlocks,
     profileBlocks,
+    textBlocks,
+    questionBlocks
   },
   plugins: [
     createPersistedState({

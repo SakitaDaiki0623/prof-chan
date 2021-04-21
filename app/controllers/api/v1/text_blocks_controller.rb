@@ -1,8 +1,7 @@
 # app/controllers/api/v1/text_blocks_controller.rb
 module Api
   module V1
-    class TextBlocksController < ApplicationController
-      skip_before_action :verify_authenticity_token
+    class TextBlocksController < ApiController
       before_action :set_text_block, only: %i[show update destroy]
 
       def index
