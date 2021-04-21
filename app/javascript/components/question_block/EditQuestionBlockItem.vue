@@ -54,7 +54,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="questionNameForValidation"
-                rules="input_required|max:30"
+                rules="input_required|max:50"
               >
                 <input
                   :value="editQuestionItem.content"
@@ -75,7 +75,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="answerNameForValidation"
-                rules="input_required|max:30"
+                rules="input_required|max:50"
               >
                 <input
                   :value="editQuestionItem.answer"

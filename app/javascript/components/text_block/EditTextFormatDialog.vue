@@ -41,7 +41,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
-                  rules="input_required|max:30"
+                  rules="input_required|max:50"
                 >
                   <input
                     id="text_block_title"
@@ -62,7 +62,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="テキスト"
-                  rules="input_required|max:100"
+                  rules="input_required|max:200"
                 >
                   <textarea
                     id="text_block_text"

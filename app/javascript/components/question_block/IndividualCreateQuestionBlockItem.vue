@@ -11,7 +11,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="質問"
-              rules="input_required|max:30"
+              rules="input_required|max:50"
             >
               <input
                 v-model="questionItem.content"
@@ -29,7 +29,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="答え"
-              rules="input_required|max:30"
+              rules="input_required|max:50"
             >
               <input
                 v-model="questionItem.answer"
