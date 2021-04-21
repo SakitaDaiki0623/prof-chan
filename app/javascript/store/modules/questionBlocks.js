@@ -42,6 +42,18 @@ export const questionBlocks = {
     loadQuestionItems(state, questionItems) {
       state.questionItems = questionItems;
     },
+    addQuestionItem: (state, questionItem) => {
+      state.questionItems.push(questionItem);
+
+      // 作成したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      const questionBlockIndex = state.questionBlocks.findIndex(
+        (questionBlock) => questionBlock.id == questionItem.question_block.id
+      );
+
+      state.questionBlocks[questionBlockIndex].question_items.push(
+        questionItem
+      );
+    },
     updateQuestionItem(state, data) {
       const questionItemsIndex = state.questionItems.findIndex(
         (questionItem) => {
@@ -51,8 +63,8 @@ export const questionBlocks = {
       state.questionItems.splice(questionItemsIndex, 1, data);
 
       // 更新したアイテムを持つクエスチョンブロックのインデックス番号を取得
-      const questinBlockIndex = state.questionBlocks.findIndex(
-        (b) => b.id == data.question_block.id
+      const questionBlockIndex = state.questionBlocks.findIndex(
+        (questionBlock) => questionBlock.id == data.question_block.id
       );
 
       // そのクエスチョンブロック内の更新したアイテムのインデックス番号を取得
@@ -60,7 +72,7 @@ export const questionBlocks = {
         .find((questionBlock) => questionBlock.id == data.question_block.id)
         .question_items.findIndex((questionItem) => questionItem.id == data.id);
 
-      state.questionBlocks[questinBlockIndex].question_items.splice(
+      state.questionBlocks[questionBlockIndex].question_items.splice(
         questionBlockItemsIndex,
         1,
         data
@@ -75,7 +87,7 @@ export const questionBlocks = {
 
       // 削除したアイテムを持つクエスチョンブロックのインデックス番号を取得
       const questinBlockIndex = state.questionBlocks.findIndex(
-        (b) => b.id == data.question_block.id
+        (questionBlock) => questionBlock.id == data.question_block.id
       );
 
       // そのクエスチョンブロック内の削除したアイテムのインデックス番号を取得
@@ -143,6 +155,14 @@ export const questionBlocks = {
         .get("question_items")
         .then((response) => {
           commit("loadQuestionItems", response.data);
+        })
+        .catch((error) => console.log(error.status));
+    },
+    createQuestionItem({ commit }, questionItem) {
+      axios
+        .post("question_items", questionItem)
+        .then((response) => {
+          commit("addQuestionItem", response.data);
         })
         .catch((error) => console.log(error.status));
     },

@@ -110,27 +110,34 @@
             :questionNameForValidation="questionNameForValidation1"
             :answerNameForValidation="answerNameForValidation1"
             :questionItemLength="questionItemLength"
-            :isTheItemEditing="isTheItemEditing"
-            @show-edit-question-item-form="showEditQuestionItemForm"
-            @hide-edit-question-item-form="hideEditQuestionItemForm"
+            :isTheItemEditing="isTheFirstItemEditing"
+            @show-edit-question-item-form="showTheFirstEditQuestionItemForm"
+            @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
           />
           <EditQuestionBlockItem
             :questionItem="questionItem2"
             :questionNameForValidation="questionNameForValidation2"
             :answerNameForValidation="answerNameForValidation2"
-            v-if="questionItemLength >= 2"
+            :isTheItemEditing="isTheSecondItemEditing"
             :questionItemLength="questionItemLength"
-            @show-edit-question-item-form="showEditQuestionItemForm"
-            @hide-edit-question-item-form="hideEditQuestionItemForm"
+            v-if="questionItemLength >= 2"
+            @show-edit-question-item-form="showTheSecondEditQuestionItemForm"
+            @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
           />
           <EditQuestionBlockItem
             :questionItem="questionItem3"
             :questionNameForValidation="questionNameForValidation3"
             :answerNameForValidation="answerNameForValidation3"
-            v-if="questionItemLength >= 3"
+            :isTheItemEditing="isTheThirdItemEditing"
             :questionItemLength="questionItemLength"
-            @show-edit-question-item-form="showEditQuestionItemForm"
-            @hide-edit-question-item-form="hideEditQuestionItemForm"
+            v-if="questionItemLength >= 3"
+            @show-edit-question-item-form="showTheThirdEditQuestionItemForm"
+            @hide-edit-question-item-form="hideTheThirdEditQuestionItemForm"
+          />
+
+          <IndividualCreateQuestionBlockItem
+            :parentQuestionBlockId="parentQuestionBlockId"
+            v-if="questionItemLength < 3"
           />
 
           <div
@@ -165,10 +172,12 @@ import { mapState, mapActions } from "vuex";
 
 // components ----------
 import EditQuestionBlockItem from "../items/EditQuestionBlockItem";
+import IndividualCreateQuestionBlockItem from "../items/IndividualCreateQuestionBlockItem";
 
 export default {
   components: {
     EditQuestionBlockItem,
+    IndividualCreateQuestionBlockItem,
   },
   props: {
     isShownEditQuestionFormatDialog: {
@@ -186,17 +195,18 @@ export default {
   },
   data() {
     return {
-      questionItemNum: 3,
       questionNameForValidation1: "1番目の質問",
       answerNameForValidation1: "1番目の答え",
       questionNameForValidation2: "2番目の質問",
       answerNameForValidation2: "2番目の答え",
       questionNameForValidation3: "3番目の質問",
       answerNameForValidation3: "3番目の答え",
-      certainlyPushUpdateButton: "※変更するには必ず「更新」ボタンを押してね！",
+      certainlyPushUpdateButton: "※変更する時は必ず「更新」ボタンを押してね！",
 
       isShownForm: false,
-      isTheItemEditing: false,
+      isTheFirstItemEditing: false,
+      isTheSecondItemEditing: false,
+      isTheThirdItemEditing: false,
     };
   },
   computed: {
@@ -208,6 +218,9 @@ export default {
     },
     questionItemLength() {
       return this.questionItemsOfEditQuestionBlock.length;
+    },
+    additionalFormNum() {
+      return 3 - this.questionItemLength;
     },
     questionItemsOfEditQuestionBlock() {
       return this.questionItems.filter(
@@ -235,6 +248,10 @@ export default {
         this.questionItemsOfEditQuestionBlock[2]
       ));
     },
+    // 新規作成のために親であるクエスチョンアイテムブロックのidを渡すためのメソッド
+    parentQuestionBlockId() {
+      return this.editQuestionBlock.id;
+    },
   },
   methods: {
     ...mapActions({
@@ -257,7 +274,6 @@ export default {
     hundleCloseEditQuestionFormatDialog() {
       this.$emit("close-question-block-format-dialog");
       this.hideEditQuestionBlockTitleForm();
-      this.hideEditQuestionItemForm();
     },
 
     hundleCancelQuestionBlockUpdate() {
@@ -273,11 +289,23 @@ export default {
     hideEditQuestionBlockTitleForm() {
       this.isShownForm = false;
     },
-    showEditQuestionItemForm() {
-      this.isTheItemEditing = true;
+    showTheFirstEditQuestionItemForm() {
+      this.isTheFirstItemEditing = true;
     },
-    hideEditQuestionItemForm() {
-      this.isTheItemEditing = false;
+    hideTheFirstEditQuestionItemForm() {
+      this.isTheFirstItemEditing = false;
+    },
+    showTheSecondEditQuestionItemForm() {
+      this.isTheSecondItemEditing = true;
+    },
+    hideTheSecondEditQuestionItemForm() {
+      this.isTheSecondItemEditing = false;
+    },
+    showTheThirdEditQuestionItemForm() {
+      this.isTheThirdItemEditing = true;
+    },
+    hideTheThirdEditQuestionItemForm() {
+      this.isTheThirdItemEditing = false;
     },
   },
 };

@@ -55,7 +55,7 @@
               @click="deleteQuestionItemNum"
             >
               <v-icon left> mdi-minus </v-icon>
-              質問と答えを追加する
+              質問と答えを減らす
             </v-btn>
           </div>
           <ValidationObserver ref="observer" v-slot="{ invalid }">

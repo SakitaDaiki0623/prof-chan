@@ -21,6 +21,16 @@ module Api
         end
       end
 
+      def create
+        @questioin_item = QuestionItem.new(question_item_params)
+
+        if @questioin_item.save!
+          render json: @questioin_item, serializer: QuestionItemSerializer
+        else
+          render json: @questioin_item.errors, status: :bad_request
+        end
+      end
+
       def destroy
         @question_item.destroy!
         render json: @question_item
@@ -29,7 +39,7 @@ module Api
       private
 
       def question_item_params
-        params.require(:question_item).permit(:content, :answer)
+        params.require(:question_item).permit(:content, :answer, :question_block_id)
       end
 
       def set_question_item
