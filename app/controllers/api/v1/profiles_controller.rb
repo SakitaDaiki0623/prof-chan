@@ -1,8 +1,7 @@
 # app/controllers/api/v1/profiles_controller.rb
 module Api
   module V1
-    class ProfilesController < ApplicationController
-      skip_before_action :verify_authenticity_token
+    class ProfilesController < ApiController
       before_action :set_profile, only: %i[show update]
 
       def index

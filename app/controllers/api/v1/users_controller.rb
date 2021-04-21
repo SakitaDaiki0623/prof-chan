@@ -1,7 +1,6 @@
 module Api
   module V1
-    class UsersController < ApplicationController
-      skip_before_action :verify_authenticity_token
+    class UsersController < ApiController
 
       def index
         @user = User.find(current_user.id)
