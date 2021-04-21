@@ -44,7 +44,7 @@ export default {
   top: 10px;
   left: 20px;
   max-width: 350px;
-  z-index: 100;
+  z-index: 500;
 }
 .v-alert--outlined {
   background: rgba(255, 255, 255, 0.9) !important;

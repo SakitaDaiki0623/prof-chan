@@ -87,6 +87,11 @@ export default {
     hundleCreateIndevisialQuestionItem(questionItem) {
       this.createQuestionItem(questionItem);
       this.resetQuestionItem();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンアイテムを作成したよ！",
+        color: "red lighten-3",
+      });
     },
     resetQuestionItem() {
       this.questionItem.content = "";

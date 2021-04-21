@@ -70,7 +70,7 @@
       :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
       :edit-question-block="editQuestionBlock"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @cancel-question-block-update="cancelQuestionBlockUpdate"
+      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
     />
 
     <!-- Text Block -->
@@ -243,7 +243,7 @@ export default {
     closeEditQuestionFormatDialog() {
       this.isShownEditQuestionFormatDialog = false;
     },
-    cancelQuestionBlockUpdate(editQuestionBlock) {
+    closeQuestionBlockEditDialog(editQuestionBlock) {
       this.editQuestionBlock = editQuestionBlock
     },
     hundleDeleteQuestionBlock(QuestionBlock) {

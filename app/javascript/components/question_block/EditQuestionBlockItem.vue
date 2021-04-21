@@ -110,7 +110,7 @@
                 tile
                 small
                 color="red darken-1"
-                @click="hideEditQuestionItemForm"
+                @click="cancelEditQuestionItem"
                 class="font-prof-default"
               >
                 ×
@@ -153,8 +153,16 @@ export default {
     return {};
   },
   computed: {
-    editQuestionItem() {
-      return Object.assign({}, this.questionItem);
+    editQuestionItem: {
+      get() {
+        return Object.assign({}, this.questionItem);
+      },
+      set(newValue) {
+        const content = newValue.content;
+        const answer = newValue.answer;
+        this.content = content;
+        this.answer = answer;
+      },
     },
     IsItemLengthOne() {
       return this.questionItemLength == 1 ? true : false;
@@ -172,18 +180,35 @@ export default {
       this.$emit("hide-edit-question-item-form");
     },
 
+    // TODO: [FIX] 編集前の値に戻るように修正
+    cancelEditQuestionItem() {
+      this.hideEditQuestionItemForm();
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
+    },
+
     // 更新
     hundleUpdateQuestionItem(questionItem) {
       this.patchQuestionItem(questionItem);
-      this.questionItem.content = questionItem.content;
-      this.questionItem.answer = questionItem.answer;
+      this.editQuestionItem = questionItem;
       this.hideEditQuestionItemForm();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンアイテムを更新したよ！",
+        color: "red lighten-3",
+      });
     },
 
     // 削除
     hundleDeleteQuestionItem(questionItem) {
       if (!confirm("削除してよろしいですか?")) return;
       this.deleteQuestionItem(questionItem);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンアイテムを削除したよ！",
+        color: "red lighten-3",
+      });
     },
   },
 };

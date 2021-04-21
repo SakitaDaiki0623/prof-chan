@@ -9,7 +9,10 @@
     >
       <v-card color="red lighten-3">
         <v-row justify="end" class="mr-2 mt-2">
-          <v-btn color="red lighten-3" @click="hundleCancelQuestionBlockUpdate">
+          <v-btn
+            color="red lighten-3"
+            @click="hundleCloseQuestionBlockEditDialog"
+          >
             ✖︎
           </v-btn>
         </v-row>
@@ -70,7 +73,7 @@
                     <v-btn
                       :id="
                         'update-question-item-button-' +
-                        editQuestionBlockForForm.id
+                          editQuestionBlockForForm.id
                       "
                       tile
                       small
@@ -88,7 +91,7 @@
                     <v-btn
                       :id="
                         'cancel-question-item-update-button-' +
-                        editQuestionBlockForForm.id
+                          editQuestionBlockForForm.id
                       "
                       tile
                       small
@@ -138,6 +141,7 @@
           <IndividualCreateQuestionBlockItem
             :parentQuestionBlockId="parentQuestionBlockId"
             v-if="questionItemLength < 3"
+            ref="IndividualCreateQuestionBlockItem"
           />
 
           <div
@@ -154,7 +158,7 @@
               x-large
               color="red lighten-3"
               class="white--text"
-              @click="hundleCancelQuestionBlockUpdate"
+              @click="hundleCloseQuestionBlockEditDialog"
             >
               編集をおしまいにする
             </v-btn>
@@ -262,6 +266,11 @@ export default {
       this.patchQuestionBlock(editQuestionBlock);
       this.editQuestionBlock.title = editQuestionBlock.title;
       this.hideEditQuestionBlockTitleForm();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンブロックのタイトルを更新したよ！",
+        color: "red lighten-3",
+      });
     },
 
     addQuestionItemNum() {
@@ -271,18 +280,27 @@ export default {
       this.questionItemNum--;
     },
 
-    hundleCloseEditQuestionFormatDialog() {
+    closeEditQuestionFormatDialog() {
       this.$emit("close-question-block-format-dialog");
-      this.hideEditQuestionBlockTitleForm();
+      this.hideAllEditQuestionItemForm();
     },
 
-    hundleCancelQuestionBlockUpdate() {
-      this.$emit("cancel-question-block-update", this.editQuestionBlock);
-      this.hundleCloseEditQuestionFormatDialog();
+    // 元のアイテムの状態に戻す
+    revertItemStateBeforeEdit() {
+      this.$emit("close-question-block-edit-dialog", this.editQuestionBlock);
+    },
+
+    hundleCloseQuestionBlockEditDialog() {
+      this.revertItemStateBeforeEdit();
+      this.closeEditQuestionFormatDialog();
+      // 子コンポーネントのメソッドの呼び出し
+      this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
     },
+
+    // FORMごとの表示・非表示の切り替え
     showEditQuestionBlockTitleForm() {
       this.isShownForm = true;
     },
@@ -306,6 +324,14 @@ export default {
     },
     hideTheThirdEditQuestionItemForm() {
       this.isTheThirdItemEditing = false;
+    },
+
+    // 全てのフォームの表示をオフにする
+    hideAllEditQuestionItemForm() {
+      this.hideEditQuestionBlockTitleForm();
+      this.hideTheFirstEditQuestionItemForm();
+      this.hideTheSecondEditQuestionItemForm();
+      this.hideTheThirdEditQuestionItemForm();
     },
   },
 };
