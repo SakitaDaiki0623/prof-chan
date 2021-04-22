@@ -293,8 +293,11 @@ export default {
     hundleCloseQuestionBlockEditDialog() {
       this.revertItemStateBeforeEdit();
       this.closeEditQuestionFormatDialog();
-      // 子コンポーネントのメソッドの呼び出し
-      this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
+
+      if (this.questionItemLength < 3) {
+        // 子コンポーネントのメソッドの呼び出し
+        this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
+      }
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
