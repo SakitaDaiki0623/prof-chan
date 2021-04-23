@@ -19,7 +19,7 @@
         <p
           class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10"
         >
-          クエスチョンブロック
+          オリジナルクエスチョンブロック
         </p>
 
         <div
@@ -28,7 +28,7 @@
         >
           <div class="pb-2">
             <v-btn
-              id="add_button"
+              id="add-question-item-button"
               type="submit"
               depressed
               elevation="4"
@@ -43,7 +43,7 @@
               質問と答えを追加する
             </v-btn>
             <v-btn
-              id="delete_button"
+              id="delete-question-item-button"
               type="submit"
               depressed
               elevation="4"
@@ -78,7 +78,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
-                  rules="input_required|max:30"
+                  rules="input_required|max:50"
                 >
                   <input
                     id="question_block_title"
@@ -93,17 +93,20 @@
 
               <!-- Item Form -->
               <QuestionBlockItem
+                questionBlockItemId="create-question-item-1"
                 :questionItem="questionItem1"
                 :questionNameForValidation="questionNameForValidation1"
                 :answerNameForValidation="answerNameForValidation1"
               />
               <QuestionBlockItem
+                questionBlockItemId="create-question-item-2"
                 :questionItem="questionItem2"
                 v-if="questionItemNum >= 2"
                 :questionNameForValidation="questionNameForValidation2"
                 :answerNameForValidation="answerNameForValidation2"
               />
               <QuestionBlockItem
+                questionBlockItemId="create-question-item-3"
                 :questionItem="questionItem3"
                 v-if="questionItemNum >= 3"
                 :questionNameForValidation="questionNameForValidation3"
@@ -139,7 +142,7 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
 // components ----------
-import QuestionBlockItem from "./items/QuestionBlockItem";
+import QuestionBlockItem from "./QuestionBlockItem";
 
 export default {
   components: {

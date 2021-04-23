@@ -9,7 +9,10 @@
     >
       <v-card color="red lighten-3">
         <v-row justify="end" class="mr-2 mt-2">
-          <v-btn color="red lighten-3" @click="hundleCancelQuestionBlockUpdate">
+          <v-btn
+            color="red lighten-3"
+            @click="hundleCloseQuestionBlockEditDialog"
+          >
             ✖︎
           </v-btn>
         </v-row>
@@ -44,22 +47,22 @@
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form>
                 <div>
-                  <label class="form-label-text-block" for="text_block_title"
+                  <label class="form-label-question-block" for="question_block_title"
                     >タイトル</label
                   >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="タイトル"
-                    rules="input_required|max:30"
+                    rules="input_required|max:50"
                   >
                     <input
-                      id="text_block_title"
+                      :id="'edit-question-title-form-' + editQuestionBlockForForm.id"
                       :value="editQuestionBlockForForm.title"
                       @input="
                         editQuestionBlockForForm.title = $event.target.value
                       "
-                      class="input-form-text-block"
-                      name="text_block[text_block_title]"
+                      class="input-form-question-block"
+                      name="question_block[question_block_title]"
                       type="text"
                     />
                     <span class="text-red-400">{{ errors[0] }}</span>
@@ -106,6 +109,7 @@
 
           <!-- Item Form -->
           <EditQuestionBlockItem
+            questionBlockItemId="edit-question-item-1"
             :questionItem="questionItem1"
             :questionNameForValidation="questionNameForValidation1"
             :answerNameForValidation="answerNameForValidation1"
@@ -115,6 +119,7 @@
             @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
           />
           <EditQuestionBlockItem
+            questionBlockItemId="edit-question-item-2"
             :questionItem="questionItem2"
             :questionNameForValidation="questionNameForValidation2"
             :answerNameForValidation="answerNameForValidation2"
@@ -125,6 +130,7 @@
             @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
           />
           <EditQuestionBlockItem
+            questionBlockItemId="edit-question-item-3"
             :questionItem="questionItem3"
             :questionNameForValidation="questionNameForValidation3"
             :answerNameForValidation="answerNameForValidation3"
@@ -138,6 +144,7 @@
           <IndividualCreateQuestionBlockItem
             :parentQuestionBlockId="parentQuestionBlockId"
             v-if="questionItemLength < 3"
+            ref="IndividualCreateQuestionBlockItem"
           />
 
           <div
@@ -154,7 +161,7 @@
               x-large
               color="red lighten-3"
               class="white--text"
-              @click="hundleCancelQuestionBlockUpdate"
+              @click="hundleCloseQuestionBlockEditDialog"
             >
               編集をおしまいにする
             </v-btn>
@@ -171,8 +178,8 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // components ----------
-import EditQuestionBlockItem from "../items/EditQuestionBlockItem";
-import IndividualCreateQuestionBlockItem from "../items/IndividualCreateQuestionBlockItem";
+import EditQuestionBlockItem from "../question_block/EditQuestionBlockItem";
+import IndividualCreateQuestionBlockItem from "../question_block/IndividualCreateQuestionBlockItem";
 
 export default {
   components: {
@@ -262,6 +269,11 @@ export default {
       this.patchQuestionBlock(editQuestionBlock);
       this.editQuestionBlock.title = editQuestionBlock.title;
       this.hideEditQuestionBlockTitleForm();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンブロックのタイトルを更新したよ！",
+        color: "red lighten-3",
+      });
     },
 
     addQuestionItemNum() {
@@ -271,18 +283,30 @@ export default {
       this.questionItemNum--;
     },
 
-    hundleCloseEditQuestionFormatDialog() {
+    closeEditQuestionFormatDialog() {
       this.$emit("close-question-block-format-dialog");
-      this.hideEditQuestionBlockTitleForm();
+      this.hideAllEditQuestionItemForm();
     },
 
-    hundleCancelQuestionBlockUpdate() {
-      this.$emit("cancel-question-block-update", this.editQuestionBlock);
-      this.hundleCloseEditQuestionFormatDialog();
+    // 元のアイテムの状態に戻す
+    revertItemStateBeforeEdit() {
+      this.$emit("close-question-block-edit-dialog", this.editQuestionBlock);
+    },
+
+    hundleCloseQuestionBlockEditDialog() {
+      this.revertItemStateBeforeEdit();
+      this.closeEditQuestionFormatDialog();
+
+      if (this.questionItemLength < 3) {
+        // 子コンポーネントのメソッドの呼び出し
+        this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
+      }
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
     },
+
+    // FORMごとの表示・非表示の切り替え
     showEditQuestionBlockTitleForm() {
       this.isShownForm = true;
     },
@@ -306,6 +330,14 @@ export default {
     },
     hideTheThirdEditQuestionItemForm() {
       this.isTheThirdItemEditing = false;
+    },
+
+    // 全てのフォームの表示をオフにする
+    hideAllEditQuestionItemForm() {
+      this.hideEditQuestionBlockTitleForm();
+      this.hideTheFirstEditQuestionItemForm();
+      this.hideTheSecondEditQuestionItemForm();
+      this.hideTheThirdEditQuestionItemForm();
     },
   },
 };

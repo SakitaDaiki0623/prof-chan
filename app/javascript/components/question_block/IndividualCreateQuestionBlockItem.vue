@@ -1,7 +1,7 @@
 <template>
   <!-- Item Form -->
   <ValidationObserver ref="observer" v-slot="{ invalid }">
-    <form>
+    <form id="individual-create-question-block-item-form">
       <div class="m-1">
         <v-row>
           <v-col cols="12" md="6">
@@ -11,7 +11,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="質問"
-              rules="input_required|max:30"
+              rules="input_required|max:50"
             >
               <input
                 v-model="questionItem.content"
@@ -29,7 +29,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               name="答え"
-              rules="input_required|max:30"
+              rules="input_required|max:50"
             >
               <input
                 v-model="questionItem.answer"
@@ -87,6 +87,11 @@ export default {
     hundleCreateIndevisialQuestionItem(questionItem) {
       this.createQuestionItem(questionItem);
       this.resetQuestionItem();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンアイテムを作成したよ！",
+        color: "red lighten-3",
+      });
     },
     resetQuestionItem() {
       this.questionItem.content = "";
