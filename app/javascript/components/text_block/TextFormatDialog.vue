@@ -114,7 +114,7 @@ export default {
     ...mapActions("textBlocks", ["createTextBlock"]),
 
     hundleCreateTextBlock(textBlock) {
-      if (textBlock.title == "" || textBlock.title == "") return;
+      if (textBlock.title == "" || textBlock.text == "") return;
       this.createTextBlock(textBlock);
       this.hundleCloseTextFormatDialog();
       this.$store.dispatch("flash/setFlash", {
