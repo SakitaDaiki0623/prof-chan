@@ -258,17 +258,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.note {
-  width: 80%;
-  padding: 0 1em;
-  background: linear-gradient(#ccc 0.1px, transparent 0.6px) #fffbf2;
-  background-size: auto 2.5em;
-  line-height: 2.5em;
-  border-bottom: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  overflow: hidden;
-}
-</style>
