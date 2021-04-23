@@ -1,5 +1,5 @@
 <template>
-  <div class="m-1">
+  <div class="m-1" :id="questionBlockItemId">
     <!-- Item Form -->
     <v-row align="center" justify="center" v-show="!isTheItemEditing">
       <v-col cols="12" md="10">
@@ -54,9 +54,10 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="questionNameForValidation"
-                rules="input_required|max:30"
+                rules="input_required|max:50"
               >
                 <input
+                  :id="'edit-question-item-content-form-' + editQuestionItem.id"
                   :value="editQuestionItem.content"
                   @input="editQuestionItem.content = $event.target.value"
                   class="input-form-question-block"
@@ -75,9 +76,10 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="answerNameForValidation"
-                rules="input_required|max:30"
+                rules="input_required|max:50"
               >
                 <input
+                  :id="'edit-question-item-answer-form-' + editQuestionItem.id"
                   :value="editQuestionItem.answer"
                   @input="editQuestionItem.answer = $event.target.value"
                   class="input-form-question-block"
@@ -110,7 +112,7 @@
                 tile
                 small
                 color="red darken-1"
-                @click="hideEditQuestionItemForm"
+                @click="cancelEditQuestionItem"
                 class="font-prof-default"
               >
                 ×
@@ -148,13 +150,25 @@ export default {
       type: Boolean,
       require: false,
     },
+    questionBlockItemId: {
+      type: String,
+      require: true,
+    },
   },
   data() {
     return {};
   },
   computed: {
-    editQuestionItem() {
-      return Object.assign({}, this.questionItem);
+    editQuestionItem: {
+      get() {
+        return Object.assign({}, this.questionItem);
+      },
+      set(newValue) {
+        const content = newValue.content;
+        const answer = newValue.answer;
+        this.content = content;
+        this.answer = answer;
+      },
     },
     IsItemLengthOne() {
       return this.questionItemLength == 1 ? true : false;
@@ -172,18 +186,35 @@ export default {
       this.$emit("hide-edit-question-item-form");
     },
 
+    // TODO: [FIX] 編集前の値に戻るように修正
+    cancelEditQuestionItem() {
+      this.hideEditQuestionItemForm();
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
+    },
+
     // 更新
     hundleUpdateQuestionItem(questionItem) {
       this.patchQuestionItem(questionItem);
-      this.questionItem.content = questionItem.content;
-      this.questionItem.answer = questionItem.answer;
+      this.editQuestionItem = questionItem;
       this.hideEditQuestionItemForm();
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンアイテムを更新したよ！",
+        color: "red lighten-3",
+      });
     },
 
     // 削除
     hundleDeleteQuestionItem(questionItem) {
       if (!confirm("削除してよろしいですか?")) return;
       this.deleteQuestionItem(questionItem);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンアイテムを削除したよ！",
+        color: "red lighten-3",
+      });
     },
   },
 };

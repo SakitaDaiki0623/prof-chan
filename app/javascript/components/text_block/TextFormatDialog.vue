@@ -2,19 +2,16 @@
 <template>
   <div>
     <v-dialog
-      :value="isShownEditTextFormatDialog"
+      :value="isShownTextFormatDialog"
       max-width="800"
       persistent
-      @input="$emit('input', $event.target.isShownEditTextFormatDialog)"
+      @input="$emit('input', $event.target.isShownTextFormatDialog)"
     >
       <v-card :color="textBlockColorForFlashMessage">
-        <v-row
-          justify="end"
-          class="mr-2 mt-2"
-        >
+        <v-row justify="end" class="mr-2 mt-2">
           <v-btn
             :color="textBlockColorForFlashMessage"
-            @click="hundleCloseEditTextFormatDialog"
+            @click="hundleCloseTextFormatDialog"
           >
             ✖︎
           </v-btn>
@@ -22,55 +19,45 @@
         <p
           class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10 mb-10"
         >
-          テキストブロックを編集
+          テキストブロック作成
         </p>
-        <div
-          id="text-block-form"
-          class="p-10 bg-text-prof-block bg-top"
-        >
-          <ValidationObserver
-            ref="observer"
-            v-slot="{ invalid }"
-          >
-            <form @submit.prevent="hundleEditTextBlock(editTextBlock)">
+        <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
+            <form @submit.prevent="hundleCreateTextBlock(textBlock)">
               <div>
-                <label
-                  class="form-label-text-block"
-                  for="text_block_title"
-                >タイトル</label>
+                <label class="form-label-text-block" for="text_block_title"
+                  >タイトル</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
-                  rules="input_required|max:30"
+                  rules="input_required|max:50"
                 >
                   <input
                     id="text_block_title"
-                    :value="editTextBlock.title"
+                    v-model="textBlock.title"
                     class="input-form-text-block"
                     name="text_block[text_block_title]"
                     type="text"
-                    @input="editTextBlock.title = $event.target.value"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
-                <label
-                  class="form-label-text-block"
-                  for="text_block_text"
-                >テキスト</label>
+                <label class="form-label-text-block" for="text_block_text"
+                  >テキスト</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="テキスト"
-                  rules="input_required|max:100"
+                  rules="input_required|max:200"
                 >
                   <textarea
                     id="text_block_text"
-                    :value="editTextBlock.text"
+                    v-model="textBlock.text"
                     class="input-form-text-block"
                     name="text_block[text_block_text]"
                     rows="7"
-                    @input="editTextBlock.text = $event.target.value"
                   />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -86,7 +73,7 @@
                   :color="textBlockColorForFlashMessage"
                   class="white--text"
                 >
-                  テキストブロックを更新！
+                  テキストブロックを作成！
                 </v-btn>
               </div>
             </form>
@@ -106,12 +93,8 @@ import { mapActions } from "vuex";
 
 export default {
   props: {
-    isShownEditTextFormatDialog: {
+    isShownTextFormatDialog: {
       type: Boolean,
-      required: true,
-    },
-    editTextBlock: {
-      type: Object,
       required: true,
     },
     textBlockColorForFlashMessage: {
@@ -120,22 +103,36 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      textBlock: {
+        title: "",
+        text: "",
+      },
+    };
   },
   methods: {
-    ...mapActions("textBlocks", ["patchTextBlock"]),
-    hundleEditTextBlock(editTextBlock) {
-      this.patchTextBlock(editTextBlock);
-      this.hundleCloseEditTextFormatDialog();
+    ...mapActions("textBlocks", ["createTextBlock"]),
+
+    hundleCreateTextBlock(textBlock) {
+      if (textBlock.title == "" || textBlock.title == "") return;
+      this.createTextBlock(textBlock);
+      this.hundleCloseTextFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "テキストブロックを更新したよ！",
+        message: "テキストブロックを作成したよ！",
         color: this.textBlockColorForFlashMessage,
       });
     },
-
-    hundleCloseEditTextFormatDialog() {
-      this.$emit("close-edit-text-format-dialog");
+    hundleCloseTextFormatDialog() {
+      this.$emit("close-text-format-dialog");
+      this.clearTextBlock();
+    },
+    clearTextBlock() {
+      this.textBlock.title = "";
+      this.textBlock.text = "";
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
     },
   },
 };

@@ -70,7 +70,7 @@
       :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
       :edit-question-block="editQuestionBlock"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @cancel-question-block-update="cancelQuestionBlockUpdate"
+      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
     />
 
     <!-- Text Block -->
@@ -100,15 +100,15 @@ import BasicProfCard from "../../components/BasicProfCard";
 import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
 
 // Text Block
-import TextBlockList from "../../components/TextBlockList";
-import TextFormatDialog from "../../components/TextFormatDialog";
-import EditTextFormatDialog from "../../components/edit_dialog/EditTextFormatDialog";
+import TextBlockList from "../../components/text_block/TextBlockList";
+import TextFormatDialog from "../../components//text_block/TextFormatDialog";
+import EditTextFormatDialog from "../../components/text_block/EditTextFormatDialog";
 
 // Question Block
-import QuestionBlockList from "../../components/QuestionBlockList";
-import QuestionFormatDialog from "../../components/QuestionFormatDialog";
-import QuestionBlockSelectDialog from "../../components/QuestionBlockSelectDialog";
-import EditQuestionFormatDialog from "../../components/edit_dialog/EditQuestionFormatDialog";
+import QuestionBlockList from "../../components/question_block/QuestionBlockList";
+import QuestionFormatDialog from "../../components/question_block/QuestionFormatDialog";
+import QuestionBlockSelectDialog from "../../components/question_block/QuestionBlockSelectDialog";
+import EditQuestionFormatDialog from "../../components/question_block/EditQuestionFormatDialog";
 
 export default {
   components: {
@@ -243,7 +243,7 @@ export default {
     closeEditQuestionFormatDialog() {
       this.isShownEditQuestionFormatDialog = false;
     },
-    cancelQuestionBlockUpdate(editQuestionBlock) {
+    closeQuestionBlockEditDialog(editQuestionBlock) {
       this.editQuestionBlock = editQuestionBlock
     },
     hundleDeleteQuestionBlock(QuestionBlock) {

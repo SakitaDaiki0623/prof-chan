@@ -17,6 +17,7 @@
 #
 #  index_profiles_on_user_id  (user_id)
 
+# spec/factories/profile.rb
 FactoryBot.define do
   factory :profile do
     height { rand(130..210) }

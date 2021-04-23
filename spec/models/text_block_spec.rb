@@ -17,13 +17,13 @@ RSpec.describe TextBlock, type: :model do
   end
 
   describe 'validations' do
-    it 'titleがなかったら、テキストブロックの登録に失敗すること' do
+    it 'タイトルがなかったら、テキストブロックの登録に失敗すること' do
       text_block = build(:text_block, title: nil)
       text_block.valid?
       expect(text_block.errors[:title]).to include("を入力してください")
     end
 
-    it 'textがなかったら、テキストブロックの登録に失敗すること' do
+    it 'テキストがなかったら、テキストブロックの登録に失敗すること' do
       text_block = build(:text_block, text: nil)
       text_block.valid?
       expect(text_block.errors[:text]).to include("を入力してください")
