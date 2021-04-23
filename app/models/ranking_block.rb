@@ -21,4 +21,7 @@ class RankingBlock < ApplicationRecord
   validates :first_place,   presence: true, length: { maximum: 50 }
   validates :second_place,  presence: true, length: { maximum: 50 }
   validates :third_place,   presence: true, length: { maximum: 50 }
+
+  # scope ============= # Ex:- scope :active, -> {where(:active => true)}
+  scope :by_team, -> (current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id })}
 end
