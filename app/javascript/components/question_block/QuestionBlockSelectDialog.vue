@@ -9,6 +9,7 @@
     <v-card color="red lighten-3">
       <v-row justify="end" class="mr-2 mt-2">
         <v-btn
+          id="close-question-block-select-dialog"
           color="red lighten-3"
           @click="hundleCloseQuestionBlockSelectDialog"
         >
@@ -35,11 +36,12 @@
               </v-img>
 
               <v-card-text class="font-prof-default text-gray-600">
-                <div>★使い方: 質問を作ってそれを自分で答えるよ！</div>
+                <div>★オリジナルクエスチョンブロックを作成する</div>
               </v-card-text>
 
               <v-card-actions>
                 <v-btn
+                  id="open-create-original-question-format-dialog"
                   color="red lighten-3"
                   class="font-prof-default white--text"
                   @click="openQuestionFormatDialog"

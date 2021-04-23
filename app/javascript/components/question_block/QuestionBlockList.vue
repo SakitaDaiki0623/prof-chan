@@ -10,7 +10,7 @@
         <v-card class="bg-question-prof-block bg-cover shadow rounded-2xl p-5">
           <v-row justify="end">
             <v-btn
-              :id="'edit-text-block-button-' + questionBlock.id"
+              :id="'edit-question-block-button-' + questionBlock.id"
               tile
               small
               color="red lighten-4"
@@ -19,7 +19,7 @@
               <v-icon> mdi-pencil </v-icon>
             </v-btn>
             <v-btn
-              :id="'delete-text-block-button-' + questionBlock.id"
+              :id="'delete-question-block-button-' + questionBlock.id"
               tile
               small
               color="red lighten-1"

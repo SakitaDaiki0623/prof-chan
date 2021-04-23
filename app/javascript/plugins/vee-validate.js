@@ -14,7 +14,7 @@ extend("select_required", {
 
 extend("max", {
   ...max,
-  message: "{_field_}は最大{length}文字です"
+  message: "{_field_}は最大{length}文字だよ"
 })
 
 export default {

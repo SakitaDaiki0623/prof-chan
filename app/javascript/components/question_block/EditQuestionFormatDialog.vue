@@ -47,7 +47,7 @@
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form>
                 <div>
-                  <label class="form-label-text-block" for="text_block_title"
+                  <label class="form-label-question-block" for="question_block_title"
                     >タイトル</label
                   >
                   <ValidationProvider
@@ -56,13 +56,13 @@
                     rules="input_required|max:50"
                   >
                     <input
-                      id="text_block_title"
+                      :id="'edit-question-title-form-' + editQuestionBlockForForm.id"
                       :value="editQuestionBlockForForm.title"
                       @input="
                         editQuestionBlockForForm.title = $event.target.value
                       "
-                      class="input-form-text-block"
-                      name="text_block[text_block_title]"
+                      class="input-form-question-block"
+                      name="question_block[question_block_title]"
                       type="text"
                     />
                     <span class="text-red-400">{{ errors[0] }}</span>
@@ -73,7 +73,7 @@
                     <v-btn
                       :id="
                         'update-question-item-button-' +
-                          editQuestionBlockForForm.id
+                        editQuestionBlockForForm.id
                       "
                       tile
                       small
@@ -91,7 +91,7 @@
                     <v-btn
                       :id="
                         'cancel-question-item-update-button-' +
-                          editQuestionBlockForForm.id
+                        editQuestionBlockForForm.id
                       "
                       tile
                       small
@@ -109,6 +109,7 @@
 
           <!-- Item Form -->
           <EditQuestionBlockItem
+            questionBlockItemId="edit-question-item-1"
             :questionItem="questionItem1"
             :questionNameForValidation="questionNameForValidation1"
             :answerNameForValidation="answerNameForValidation1"
@@ -118,6 +119,7 @@
             @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
           />
           <EditQuestionBlockItem
+            questionBlockItemId="edit-question-item-2"
             :questionItem="questionItem2"
             :questionNameForValidation="questionNameForValidation2"
             :answerNameForValidation="answerNameForValidation2"
@@ -128,6 +130,7 @@
             @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
           />
           <EditQuestionBlockItem
+            questionBlockItemId="edit-question-item-3"
             :questionItem="questionItem3"
             :questionNameForValidation="questionNameForValidation3"
             :answerNameForValidation="answerNameForValidation3"

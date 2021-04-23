@@ -1,5 +1,5 @@
 <template>
-  <div class="m-1">
+  <div class="m-1" :id="questionBlockItemId">
     <!-- Item Form -->
     <v-row align="center" justify="center" v-show="!isTheItemEditing">
       <v-col cols="12" md="10">
@@ -57,6 +57,7 @@
                 rules="input_required|max:50"
               >
                 <input
+                  :id="'edit-question-item-content-form-' + editQuestionItem.id"
                   :value="editQuestionItem.content"
                   @input="editQuestionItem.content = $event.target.value"
                   class="input-form-question-block"
@@ -78,6 +79,7 @@
                 rules="input_required|max:50"
               >
                 <input
+                  :id="'edit-question-item-answer-form-' + editQuestionItem.id"
                   :value="editQuestionItem.answer"
                   @input="editQuestionItem.answer = $event.target.value"
                   class="input-form-question-block"
@@ -147,6 +149,10 @@ export default {
     isTheItemEditing: {
       type: Boolean,
       require: false,
+    },
+    questionBlockItemId: {
+      type: String,
+      require: true,
     },
   },
   data() {

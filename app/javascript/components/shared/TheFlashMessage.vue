@@ -43,7 +43,7 @@ export default {
   position: fixed;
   top: 10px;
   left: 20px;
-  max-width: 350px;
+  max-width: 400px;
   z-index: 500;
 }
 .v-alert--outlined {

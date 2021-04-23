@@ -1,7 +1,7 @@
 <template>
   <!-- Item Form -->
   <ValidationObserver ref="observer" v-slot="{ invalid }">
-    <form>
+    <form id="individual-create-question-block-item-form">
       <div class="m-1">
         <v-row>
           <v-col cols="12" md="6">
