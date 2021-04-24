@@ -1,15 +1,23 @@
 <template>
-  <div class="m-1" :id="questionBlockItemId">
+  <div class="m-1" :id="yesOrNoBlockItemId">
     <!-- Item Form -->
     <v-row align="center" justify="center" v-show="!isTheItemEditing">
       <v-col cols="12" md="10">
         <v-card class="p-5 rounded-lg" outlined>
           <v-row>
             <v-col cols="12" sm="6">
-              {{ questionItem.content }}
+              {{ yesOrNoItem.content }}
             </v-col>
-            <v-col cols="12" sm="6" class="text-red-500">
-              {{ questionItem.answer }}
+            <v-col
+              cols="12"
+              sm="6"
+              class="text-red-500"
+              v-if="yesOrNoItem.answer"
+            >
+              YES
+            </v-col>
+            <v-col cols="12" sm="6" class="text-red-500" v-else>
+              NO
             </v-col>
           </v-row>
         </v-card>
@@ -17,23 +25,23 @@
 
       <v-col cols="12" md="1">
         <v-btn
-          :id="'edit-question-item-button-' + questionItem.id"
+          :id="'edit-yes-or-no-item-button-' + yesOrNoItem.id"
           tile
           small
           color="red lighten-4"
-          @click="showEditQuestionItemForm"
+          @click="showEditYesOrNoItemForm"
         >
           <v-icon> mdi-pencil </v-icon>
         </v-btn>
       </v-col>
       <v-col cols="12" md="1">
         <v-btn
-          :id="'delete-question-item-button-' + questionItem.id"
+          :id="'delete-yes-or-no-item-button-' + yesOrNoItem.id"
           tile
           small
           color="red lighten-1"
           :disabled="IsItemLengthOne"
-          @click="hundleDeleteQuestionItem(questionItem)"
+          @click="hundleDeleteYesOrNoItem(yesOrNoItem)"
         >
           <v-icon> mdi-delete </v-icon>
         </v-btn>
@@ -47,21 +55,21 @@
           <v-row>
             <v-col cols="12" md="6">
               <label
-                for="question_item_content"
-                class="form-label-question-block"
+                for="yes_or_no_item_content"
+                class="form-label-yes-or-no-block"
                 >質問</label
               >
               <ValidationProvider
                 v-slot="{ errors }"
-                :name="questionNameForValidation"
+                :name="yesOrNoNameForValidation"
                 rules="input_required|max:50"
               >
                 <input
-                  :id="'edit-question-item-content-form-' + editQuestionItem.id"
-                  :value="editQuestionItem.content"
-                  @input="editQuestionItem.content = $event.target.value"
-                  class="input-form-question-block"
-                  name="question_item[question_item_content]"
+                  :id="'edit-yes-or-no-item-content-form-' + editYesOrNoItem.id"
+                  :value="editYesOrNoItem.content"
+                  @input="editYesOrNoItem.content = $event.target.value"
+                  class="input-form-yes-or-no-block"
+                  name="yes_or_no_item[yes_or_no_item_content]"
                   type="text"
                 />
                 <span class="text-red-400">{{ errors[0] }}</span>
@@ -69,36 +77,26 @@
             </v-col>
             <v-col cols="12" md="6">
               <label
-                for="question_item_content"
-                class="form-label-question-block"
-                >答え</label
+                for="yes_or_no_item_answer"
+                class="form-label-yes-or-no-block inline-block"
               >
-              <ValidationProvider
-                v-slot="{ errors }"
-                :name="answerNameForValidation"
-                rules="input_required|max:50"
-              >
-                <input
-                  :id="'edit-question-item-answer-form-' + editQuestionItem.id"
-                  :value="editQuestionItem.answer"
-                  @input="editQuestionItem.answer = $event.target.value"
-                  class="input-form-question-block"
-                  name="question_item[question_item_answer]"
-                  type="text"
-                />
-                <span class="text-red-400">{{ errors[0] }}</span>
-              </ValidationProvider>
+                答え
+              </label>
+              <v-radio-group v-model="editYesOrNoItem.answer" mandatory row>
+                <v-radio label="YES" :value="true" color="orange"> </v-radio>
+                <v-radio label="NO" :value="false" color="orange"></v-radio>
+              </v-radio-group>
             </v-col>
           </v-row>
           <v-row justify="end">
             <v-col cols="12" md="1">
               <v-btn
-                :id="'update-question-item-button-' + editQuestionItem.id"
+                :id="'update-yes-or-no-item-button-' + editYesOrNoItem.id"
                 tile
                 small
                 color="red lighten-4"
                 :disabled="invalid"
-                @click="hundleUpdateQuestionItem(editQuestionItem)"
+                @click="hundleUpdateYesOrNoItem(editYesOrNoItem)"
               >
                 更新
               </v-btn>
@@ -106,12 +104,12 @@
             <v-col cols="12" md="1">
               <v-btn
                 :id="
-                  'cancel-question-item-update-button-' + editQuestionItem.id
+                  'cancel-yes-or-no-item-update-button-' + editYesOrNoItem.id
                 "
                 tile
                 small
                 color="red darken-1"
-                @click="cancelEditQuestionItem"
+                @click="cancelYesOrNoItemUpdate"
               >
                 ×
               </v-btn>
@@ -128,11 +126,11 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
-    questionItem: {
+    yesOrNoItem: {
       type: Object,
       require: true,
     },
-    questionNameForValidation: {
+    yesOrNoNameForValidation: {
       type: String,
       require: true,
     },
@@ -140,7 +138,7 @@ export default {
       type: String,
       require: true,
     },
-    questionItemLength: {
+    yesOrNoItemLength: {
       type: Number,
       require: false,
     },
@@ -148,11 +146,11 @@ export default {
       type: Boolean,
       require: false,
     },
-    questionBlockItemId: {
+    yesOrNoBlockItemId: {
       type: String,
       require: true,
     },
-    questionBlockColor: {
+    yesOrNoBlockColor: {
       type: String,
       require: true,
     },
@@ -161,9 +159,9 @@ export default {
     return {};
   },
   computed: {
-    editQuestionItem: {
+    editYesOrNoItem: {
       get() {
-        return Object.assign({}, this.questionItem);
+        return Object.assign({}, this.yesOrNoItem);
       },
       set(newValue) {
         const content = newValue.content;
@@ -173,49 +171,49 @@ export default {
       },
     },
     IsItemLengthOne() {
-      return this.questionItemLength == 1 ? true : false;
+      return this.yesOrNoItemLength == 1 ? true : false;
     },
   },
   methods: {
     ...mapActions({
-      patchQuestionItem: "questionBlocks/patchQuestionItem",
-      deleteQuestionItem: "questionBlocks/deleteQuestionItem",
+      patchYesOrNoItem: "yesOrNoBlocks/patchYesOrNoItem",
+      deleteYesOrNoItem: "yesOrNoBlocks/deleteYesOrNoItem",
     }),
-    showEditQuestionItemForm() {
-      this.$emit("show-edit-question-item-form");
+    showEditYesOrNoItemForm() {
+      this.$emit("show-edit-yes-or-no-item-form");
     },
-    hideEditQuestionItemForm() {
-      this.$emit("hide-edit-question-item-form");
+    hideEditYesOrNoForm() {
+      this.$emit("hide-edit-yes-or-no-item-form");
     },
 
     // TODO: [FIX] 編集前の値に戻るように修正
-    cancelEditQuestionItem() {
-      this.hideEditQuestionItemForm();
+    cancelYesOrNoItemUpdate() {
+      this.hideEditYesOrNoForm();
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
     },
 
     // 更新
-    hundleUpdateQuestionItem(questionItem) {
-      this.patchQuestionItem(questionItem);
-      this.editQuestionItem = questionItem;
-      this.hideEditQuestionItemForm();
+    hundleUpdateYesOrNoItem(yesOrNoItem) {
+      this.patchYesOrNoItem(yesOrNoItem);
+      this.editYesOrNoItem = yesOrNoItem;
+      this.hideEditYesOrNoForm();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンアイテムを更新したよ！",
-        color: this.questionBlockColor,
+        color: this.yesOrNoBlockColor,
       });
     },
 
     // 削除
-    hundleDeleteQuestionItem(questionItem) {
+    hundleDeleteYesOrNoItem(yesOrNoItem) {
       if (!confirm("削除してよろしいですか?")) return;
-      this.deleteQuestionItem(questionItem);
+      this.deleteYesOrNoItem(yesOrNoItem);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンアイテムを削除したよ！",
-        color: this.questionBlockColor,
+        color: this.yesOrNoBlockColor,
       });
     },
   },

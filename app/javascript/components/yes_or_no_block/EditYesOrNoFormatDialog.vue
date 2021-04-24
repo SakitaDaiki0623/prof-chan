@@ -2,40 +2,38 @@
 <template>
   <div>
     <v-dialog
-      :value="isShownEditQuestionFormatDialog"
+      :value="isShownEditYesOrNoFormatDialog"
       max-width="800"
       persistent
-      @input="$emit('input', $event.target.isShownEditQuestionFormatDialog)"
+      @input="$emit('input', $event.target.isShownEditYesOrNoFormatDialog)"
     >
-      <v-card :color="questionBlockColor">
+      <v-card :color="yesOrNoBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn
-            :color="questionBlockColor"
-            @click="hundleCloseQuestionBlockEditDialog"
+            :color="yesOrNoBlockColor"
+            @click="hundleCloseYesOrNoBlockEditDialog"
           >
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
-        >
+        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           クエスチョンブロックを編集
         </p>
 
-        <div class="p-10 bg-question-prof-block bg-fixed">
+        <div class="p-10 bg-yes-or-no-prof-block bg-fixed">
           <v-row align="center" v-show="!isShownForm">
             <v-col cols="12" md="10">
               <p class="text-2xl font-bold text-gray-600 pt-3">
-                {{ editQuestionBlock.title }}
+                {{ editYesOrNoBlock.title }}
               </p>
             </v-col>
             <v-col cols="12" md="1">
               <v-btn
-                :id="'edit-question-block-title-button-' + editQuestionBlock.id"
+                :id="'edit-yes-or-no-block-title-button-' + editYesOrNoBlock.id"
                 tile
                 small
                 color="red lighten-4"
-                @click="showEditQuestionBlockTitleForm"
+                @click="showEditYesOrNoBlockTitleForm"
               >
                 <v-icon> mdi-pencil </v-icon>
               </v-btn>
@@ -47,7 +45,9 @@
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form>
                 <div>
-                  <label class="form-label-question-block" for="question_block_title"
+                  <label
+                    class="form-label-yes-or-no-block"
+                    for="yes_or_no_block_title"
                     >タイトル</label
                   >
                   <ValidationProvider
@@ -56,13 +56,16 @@
                     rules="input_required|max:50"
                   >
                     <input
-                      :id="'edit-question-title-form-' + editQuestionBlockForForm.id"
-                      :value="editQuestionBlockForForm.title"
-                      @input="
-                        editQuestionBlockForForm.title = $event.target.value
+                      :id="
+                        'edit-yes-or-no-title-form-' +
+                        editYesOrNoBlockForForm.id
                       "
-                      class="input-form-question-block"
-                      name="question_block[question_block_title]"
+                      :value="editYesOrNoBlockForForm.title"
+                      @input="
+                        editYesOrNoBlockForForm.title = $event.target.value
+                      "
+                      class="input-form-yes-or-no-block"
+                      name="yes_or_no_block[yes_or_no_block_title]"
                       type="text"
                     />
                     <span class="text-red-400">{{ errors[0] }}</span>
@@ -72,15 +75,15 @@
                   <v-col cols="12" md="1">
                     <v-btn
                       :id="
-                        'update-question-item-button-' +
-                        editQuestionBlockForForm.id
+                        'update-yes-or-no-item-button-' +
+                        editYesOrNoBlockForForm.id
                       "
                       tile
                       small
                       color="red lighten-4"
                       :disabled="invalid"
                       @click="
-                        hundleEditQuestionBlockTitle(editQuestionBlockForForm)
+                        hundleEditYesOrNoBlockTitle(editYesOrNoBlockForForm)
                       "
                     >
                       更新
@@ -89,13 +92,13 @@
                   <v-col cols="12" md="1">
                     <v-btn
                       :id="
-                        'cancel-question-item-update-button-' +
-                        editQuestionBlockForForm.id
+                        'cancel-yes-or-no-item-update-button-' +
+                        editYesOrNoBlockForForm.id
                       "
                       tile
                       small
                       color="red darken-1"
-                      @click="hideEditQuestionBlockTitleForm"
+                      @click="hideEditYesOrNoBlockTitleForm"
                     >
                       ×
                     </v-btn>
@@ -106,51 +109,49 @@
           </div>
 
           <!-- Item Form -->
-          <EditQuestionBlockItem
-            questionBlockItemId="edit-question-item-1"
-            :questionItem="questionItem1"
-            :questionNameForValidation="questionNameForValidation1"
+          <EditYesOrNoBlockItem
+            yesOrNoBlockItemId="edit-yes-or-no-item-1"
+            :yesOrNoItem="yesOrNoItem1"
+            :yesOrNoNameForValidation="yesOrNoNameForValidation1"
             :answerNameForValidation="answerNameForValidation1"
-            :questionItemLength="questionItemLength"
+            :yesOrNoItemLength="yesOrNoItemLength"
             :isTheItemEditing="isTheFirstItemEditing"
-            :question-block-color="questionBlockColor"
-            @show-edit-question-item-form="showTheFirstEditQuestionItemForm"
-            @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
+            :yes-or-no-block-color="yesOrNoBlockColor"
+            @show-edit-yes-or-no-item-form="showTheFirstEditYesOrNoItemForm"
+            @hide-edit-yes-or-no-item-form="hideTheFirstEditYesOrNoItemForm"
           />
-          <EditQuestionBlockItem
-            questionBlockItemId="edit-question-item-2"
-            :questionItem="questionItem2"
-            :questionNameForValidation="questionNameForValidation2"
+          <EditYesOrNoBlockItem
+            yesOrNoBlockItemId="edit-yes-or-no-item-2"
+            :yesOrNoItem="yesOrNoItem2"
+            :yesOrNoNameForValidation="yesOrNoNameForValidation2"
             :answerNameForValidation="answerNameForValidation2"
             :isTheItemEditing="isTheSecondItemEditing"
-            :questionItemLength="questionItemLength"
-            :question-block-color="questionBlockColor"
-            v-if="questionItemLength >= 2"
-            @show-edit-question-item-form="showTheSecondEditQuestionItemForm"
-            @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
+            :yesOrNoItemLength="yesOrNoItemLength"
+            :yes-or-no-block-color="yesOrNoBlockColor"
+            v-if="yesOrNoItemLength >= 2"
+            @show-edit-yes-or-no-item-form="showTheSecondEditYesOrNoItemForm"
+            @hide-edit-yes-or-no-item-form="hideTheSecondEditYesOrNoItemForm"
           />
-          <EditQuestionBlockItem
-            questionBlockItemId="edit-question-item-3"
-            :questionItem="questionItem3"
-            :questionNameForValidation="questionNameForValidation3"
+          <EditYesOrNoBlockItem
+            yesOrNoBlockItemId="edit-yes-or-no-item-3"
+            :yesOrNoItem="yesOrNoItem3"
+            :yesOrNoNameForValidation="yesOrNoNameForValidation3"
             :answerNameForValidation="answerNameForValidation3"
             :isTheItemEditing="isTheThirdItemEditing"
-            :questionItemLength="questionItemLength"
-            :question-block-color="questionBlockColor"
-            v-if="questionItemLength >= 3"
-            @show-edit-question-item-form="showTheThirdEditQuestionItemForm"
-            @hide-edit-question-item-form="hideTheThirdEditQuestionItemForm"
+            :yesOrNoItemLength="yesOrNoItemLength"
+            :yes-or-no-block-color="yesOrNoBlockColor"
+            v-if="yesOrNoItemLength >= 3"
+            @show-edit-yes-or-no-item-form="showTheThirdEditYesOrNoItemForm"
+            @hide-edit-yes-or-no-item-form="hideTheThirdEditYesOrNoItemForm"
           />
 
-          <IndividualCreateQuestionBlockItem
-            :parentQuestionBlockId="parentQuestionBlockId"
-            v-if="questionItemLength < 3"
-            ref="IndividualCreateQuestionBlockItem"
+          <IndividualCreateYesOrNoBlockItem
+            :parentYesOrNoBlockId="parentYesOrNoBlockId"
+            v-if="yesOrNoItemLength < 3"
+            ref="IndividualCreateYesOrNoBlockItem"
           />
 
-          <div
-            class="mt-3 font-weight-bold text-gray-600 text-sm"
-          >
+          <div class="mt-3 font-weight-bold text-gray-600 text-sm">
             {{ certainlyPushUpdateButton }}
           </div>
           <div class="text-center mt-3">
@@ -160,9 +161,9 @@
               depressed
               elevation="4"
               x-large
-              :color="questionBlockColor"
+              :color="yesOrNoBlockColor"
               class="white--text"
-              @click="hundleCloseQuestionBlockEditDialog"
+              @click="hundleCloseYesOrNoBlockEditDialog"
             >
               編集をおしまいにする
             </v-btn>
@@ -179,35 +180,35 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // components ----------
-import EditQuestionBlockItem from "../question_block/EditQuestionBlockItem";
-import IndividualCreateQuestionBlockItem from "../question_block/IndividualCreateQuestionBlockItem";
+import EditYesOrNoBlockItem from "../yes_or_no_block/EditYesOrNoBlockItem";
+import IndividualCreateYesOrNoBlockItem from "../yes_or_no_block/IndividualCreateYesOrNoBlockItem";
 
 export default {
   components: {
-    EditQuestionBlockItem,
-    IndividualCreateQuestionBlockItem,
+    EditYesOrNoBlockItem,
+    IndividualCreateYesOrNoBlockItem,
   },
   props: {
-    isShownEditQuestionFormatDialog: {
+    isShownEditYesOrNoFormatDialog: {
       type: Boolean,
       required: true,
     },
-    editQuestionBlock: {
+    editYesOrNoBlock: {
       type: Object,
       required: true,
     },
-    questionBlockColor: {
+    yesOrNoBlockColor: {
       type: String,
       required: false,
     },
   },
   data() {
     return {
-      questionNameForValidation1: "1番目の質問",
+      yesOrNoNameForValidation1: "1番目の質問",
       answerNameForValidation1: "1番目の答え",
-      questionNameForValidation2: "2番目の質問",
+      yesOrNoNameForValidation2: "2番目の質問",
       answerNameForValidation2: "2番目の答え",
-      questionNameForValidation3: "3番目の質問",
+      yesOrNoNameForValidation3: "3番目の質問",
       answerNameForValidation3: "3番目の答え",
       certainlyPushUpdateButton: "※変更する時は必ず「更新」ボタンを押してね！",
 
@@ -218,89 +219,89 @@ export default {
     };
   },
   computed: {
-    ...mapState("questionBlocks", ["questionBlocks"]),
-    ...mapState("questionBlocks", ["questionItems"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoItems"]),
 
-    editQuestionBlockForForm() {
-      return Object.assign({}, this.editQuestionBlock);
+    editYesOrNoBlockForForm() {
+      return Object.assign({}, this.editYesOrNoBlock);
     },
-    questionItemLength() {
-      return this.questionItemsOfEditQuestionBlock.length;
+    yesOrNoItemLength() {
+      return this.yesOrNoItemsOfEditYesOrNoBlock.length;
     },
     additionalFormNum() {
-      return 3 - this.questionItemLength;
+      return 3 - this.yesOrNoItemLength;
     },
-    questionItemsOfEditQuestionBlock() {
-      return this.questionItems.filter(
-        (questionItem) =>
-          questionItem.question_block.id == this.editQuestionBlock.id
+    yesOrNoItemsOfEditYesOrNoBlock() {
+      return this.yesOrNoItems.filter(
+        (yesOrNoItem) =>
+          yesOrNoItem.yes_or_no_block.id == this.editYesOrNoBlock.id
       );
     },
-    questionItem1() {
-      return (this.questionItemsOfEditQuestionBlock[0] = Object.assign(
+    yesOrNoItem1() {
+      return (this.yesOrNoItemsOfEditYesOrNoBlock[0] = Object.assign(
         {},
-        this.questionItemsOfEditQuestionBlock[0]
+        this.yesOrNoItemsOfEditYesOrNoBlock[0]
       ));
     },
-    questionItem2() {
-      if (this.questionItemsOfEditQuestionBlock[1] == undefined) return;
-      return (this.questionItemsOfEditQuestionBlock[1] = Object.assign(
+    yesOrNoItem2() {
+      if (this.yesOrNoItemsOfEditYesOrNoBlock[1] == undefined) return;
+      return (this.yesOrNoItemsOfEditYesOrNoBlock[1] = Object.assign(
         {},
-        this.questionItemsOfEditQuestionBlock[1]
+        this.yesOrNoItemsOfEditYesOrNoBlock[1]
       ));
     },
-    questionItem3() {
-      if (this.questionItemsOfEditQuestionBlock[2] == undefined) return;
-      return (this.questionItemsOfEditQuestionBlock[2] = Object.assign(
+    yesOrNoItem3() {
+      if (this.yesOrNoItemsOfEditYesOrNoBlock[2] == undefined) return;
+      return (this.yesOrNoItemsOfEditYesOrNoBlock[2] = Object.assign(
         {},
-        this.questionItemsOfEditQuestionBlock[2]
+        this.yesOrNoItemsOfEditYesOrNoBlock[2]
       ));
     },
     // 新規作成のために親であるクエスチョンアイテムブロックのidを渡すためのメソッド
-    parentQuestionBlockId() {
-      return this.editQuestionBlock.id;
+    parentYesOrNoBlockId() {
+      return this.editYesOrNoBlock.id;
     },
   },
   methods: {
     ...mapActions({
-      patchQuestionBlock: "questionBlocks/patchQuestionBlock",
+      patchYesOrNoBlock: "yesOrNoBlocks/patchYesOrNoBlock",
     }),
-    hundleEditQuestionBlockTitle(editQuestionBlock) {
-      if (editQuestionBlock.title == "") return;
-      this.patchQuestionBlock(editQuestionBlock);
-      this.editQuestionBlock.title = editQuestionBlock.title;
-      this.hideEditQuestionBlockTitleForm();
+    hundleEditYesOrNoBlockTitle(editYesOrNoBlock) {
+      if (editYesOrNoBlock.title == "") return;
+      this.patchYesOrNoBlock(editYesOrNoBlock);
+      this.editYesOrNoBlock.title = editYesOrNoBlock.title;
+      this.hideEditYesOrNoBlockTitleForm();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックのタイトルを更新したよ！",
-        color: this.questionBlockColor,
+        color: this.YesOrNoBlockColor,
       });
     },
 
-    addQuestionItemNum() {
-      this.questionItemNum++;
+    addYesOrNoItemNum() {
+      this.yesOrNoItemNum++;
     },
-    deleteQuestionItemNum() {
-      this.questionItemNum--;
+    deleteYesOrNoItemNum() {
+      this.yesOrNoItemNum--;
     },
 
-    closeEditQuestionFormatDialog() {
-      this.$emit("close-question-block-format-dialog");
-      this.hideAllEditQuestionItemForm();
+    closeEditYesOrNoFormatDialog() {
+      this.$emit("close-yes-or-no-block-format-dialog");
+      this.hideAllEditYesOrNoItemForm();
     },
 
     // 元のアイテムの状態に戻す
     revertItemStateBeforeEdit() {
-      this.$emit("close-question-block-edit-dialog", this.editQuestionBlock);
+      this.$emit("close-yes-or-no-block-edit-dialog", this.editYesOrNoBlock);
     },
 
-    hundleCloseQuestionBlockEditDialog() {
+    hundleCloseYesOrNoBlockEditDialog() {
       this.revertItemStateBeforeEdit();
-      this.closeEditQuestionFormatDialog();
+      this.closeEditYesOrNoFormatDialog();
 
-      if (this.questionItemLength < 3) {
+      if (this.yesOrNoItemLength < 3) {
         // 子コンポーネントのメソッドの呼び出し
-        this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
+        this.$refs.IndividualCreateYesOrNoBlockItem.resetYesOrNoItem();
       }
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
@@ -308,37 +309,37 @@ export default {
     },
 
     // FORMごとの表示・非表示の切り替え
-    showEditQuestionBlockTitleForm() {
+    showEditYesOrNoBlockTitleForm() {
       this.isShownForm = true;
     },
-    hideEditQuestionBlockTitleForm() {
+    hideEditYesOrNoBlockTitleForm() {
       this.isShownForm = false;
     },
-    showTheFirstEditQuestionItemForm() {
+    showTheFirstEditYesOrNoItemForm() {
       this.isTheFirstItemEditing = true;
     },
-    hideTheFirstEditQuestionItemForm() {
+    hideTheFirstEditYesOrNoItemForm() {
       this.isTheFirstItemEditing = false;
     },
-    showTheSecondEditQuestionItemForm() {
+    showTheSecondEditYesOrNoItemForm() {
       this.isTheSecondItemEditing = true;
     },
-    hideTheSecondEditQuestionItemForm() {
+    hideTheSecondEditYesOrNoItemForm() {
       this.isTheSecondItemEditing = false;
     },
-    showTheThirdEditQuestionItemForm() {
+    showTheThirdEditYesOrNoItemForm() {
       this.isTheThirdItemEditing = true;
     },
-    hideTheThirdEditQuestionItemForm() {
+    hideTheThirdEditYesOrNoItemForm() {
       this.isTheThirdItemEditing = false;
     },
 
     // 全てのフォームの表示をオフにする
-    hideAllEditQuestionItemForm() {
-      this.hideEditQuestionBlockTitleForm();
-      this.hideTheFirstEditQuestionItemForm();
-      this.hideTheSecondEditQuestionItemForm();
-      this.hideTheThirdEditQuestionItemForm();
+    hideAllEditYesOrNoItemForm() {
+      this.hideEditYesOrNoBlockTitleForm();
+      this.hideTheFirstEditYesOrNoItemForm();
+      this.hideTheSecondEditYesOrNoItemForm();
+      this.hideTheThirdEditYesOrNoItemForm();
     },
   },
 };

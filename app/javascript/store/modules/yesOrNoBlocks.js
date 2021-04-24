@@ -127,7 +127,7 @@ export const yesOrNoBlocks = {
         })
         .catch((err) => console.log(err.status));
     },
-    patchyesOrNoBlock({ commit }, payload) {
+    patchYesOrNoBlock({ commit }, payload) {
       axios
         .patch(`yes_or_no_blocks/${payload.id}`, payload)
         .then((response) => {
@@ -136,7 +136,7 @@ export const yesOrNoBlocks = {
         .catch((err) => console.log(err));
     },
 
-    deleteyesOrNoBlock({ commit }, payload) {
+    deleteYesOrNoBlock({ commit }, payload) {
       axios
         .delete(`yes_or_no_blocks/${payload.id}`, payload)
         .then((response) => {

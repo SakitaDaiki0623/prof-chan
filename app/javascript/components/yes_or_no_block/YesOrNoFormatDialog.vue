@@ -1,17 +1,17 @@
-<!-- app/javascript/components/QuestionFormatDialog.vue -->
+<!-- app/javascript/components/yes_or_no_block/YesOrNoFormatDialog.vue -->
 <template>
   <div>
     <v-dialog
-      :value="isShownQuestionFormatDialog"
+      :value="isShownYesOrNoFormatDialog"
       max-width="800"
       persistent
-      @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
+      @input="$emit('input', $event.target.isShownYesOrNoFormatDialog)"
     >
-      <v-card :color="questionBlockColor">
+      <v-card :color="yesOrNoBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn
-            :color="questionBlockColor"
-            @click="hundleCloseQuestioniFormatDialog"
+            :color="yesOrNoBlockColor"
+            @click="hundleCloseYesOrNoFormatDialog"
           >
             ✖︎
           </v-btn>
@@ -19,31 +19,31 @@
         <p
           class="font-weight-bold text-white text-4xl text-center mt-10"
         >
-          オリジナルクエスチョンブロック
+          Yes or No ブロック
         </p>
 
         <div
-          id="question-block-form"
-          class="p-10 bg-question-prof-block bg-fixed"
+          id="yes-or-no-block-form"
+          class="p-10 bg-yes-or-no-prof-block bg-fixed"
         >
           <div class="pb-2">
             <v-btn
-              id="add-question-item-button"
+              id="add-yes-or-no-item-button"
               type="submit"
               depressed
               elevation="4"
               small
               tile
-              color="red lighten-2"
+              color="orange lighten-2"
               class="white--text"
-              :disabled="questionItemNum >= 3"
-              @click="addQuestionItemNum"
+              :disabled="yesOrNoItemNum >= 3"
+              @click="addYesOrNoItemNum"
             >
               <v-icon left> mdi-plus </v-icon>
               質問と答えを追加する
             </v-btn>
             <v-btn
-              id="delete-question-item-button"
+              id="delete-yes-or-no-item-button"
               type="submit"
               depressed
               elevation="4"
@@ -51,8 +51,8 @@
               tile
               color="grey darken-3"
               class="white--text"
-              :disabled="questionItemNum <= 1"
-              @click="deleteQuestionItemNum"
+              :disabled="yesOrNoItemNum <= 1"
+              @click="deleteYesOrNoItemNum"
             >
               <v-icon left> mdi-minus </v-icon>
               質問と答えを減らす
@@ -61,18 +61,18 @@
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form
               @submit.prevent="
-                hundleCreateQuestionBlock(
-                  questionBlock,
-                  questionItem1,
-                  questionItem2,
-                  questionItem3
+                hundleCreateYesOrNoBlock(
+                  yesOrNoBlock,
+                  yesOrNoItem1,
+                  yesOrNoItem2,
+                  yesOrNoItem3
                 )
               "
             >
               <div>
                 <label
-                  class="form-label-question-block"
-                  for="question_block_title"
+                  class="form-label-yes-or-no-block"
+                  for="yes_or_no_block_title"
                   >タイトル</label
                 >
                 <ValidationProvider
@@ -81,10 +81,10 @@
                   rules="input_required|max:50"
                 >
                   <input
-                    id="question_block_title"
-                    v-model="questionBlock.title"
-                    class="input-form-question-block"
-                    name="question_block[question_block_title]"
+                    id="yes_or_no_block_title"
+                    v-model="yesOrNoBlock.title"
+                    class="input-form-yes-or-no-block"
+                    name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
                   />
                   <span class="text-red-400">{{ errors[0] }}</span>
@@ -92,24 +92,24 @@
               </div>
 
               <!-- Item Form -->
-              <QuestionBlockItem
-                questionBlockItemId="create-question-item-1"
-                :questionItem="questionItem1"
-                :questionNameForValidation="questionNameForValidation1"
+              <YesOrNoBlockItem
+                yesOrNoBlockItemId="create-yes-or-no-item-1"
+                :yesOrNoItem="yesOrNoItem1"
+                :yesOrNoNameForValidation="yesOrNoNameForValidation1"
                 :answerNameForValidation="answerNameForValidation1"
               />
-              <QuestionBlockItem
-                questionBlockItemId="create-question-item-2"
-                :questionItem="questionItem2"
-                v-if="questionItemNum >= 2"
-                :questionNameForValidation="questionNameForValidation2"
+              <YesOrNoBlockItem
+                yesOrNoBlockItemId="create-yes-or-no-item-2"
+                :yesOrNoItem="yesOrNoItem2"
+                v-if="yesOrNoItemNum >= 2"
+                :yesOrNoNameForValidation="yesOrNoNameForValidation2"
                 :answerNameForValidation="answerNameForValidation2"
               />
-              <QuestionBlockItem
-                questionBlockItemId="create-question-item-3"
-                :questionItem="questionItem3"
-                v-if="questionItemNum >= 3"
-                :questionNameForValidation="questionNameForValidation3"
+              <YesOrNoBlockItem
+                yesOrNoBlockItemId="create-yes-or-no-item-3"
+                :yesOrNoItem="yesOrNoItem3"
+                v-if="yesOrNoItemNum >= 3"
+                :yesOrNoNameForValidation="yesOrNoNameForValidation3"
                 :answerNameForValidation="answerNameForValidation3"
               />
 
@@ -121,11 +121,11 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  :color="questionBlockColor"
+                  :color="yesOrNoBlockColor"
                   class="white--text"
                 >
                   <v-icon left> mdi-plus </v-icon>
-                  クエスチョンブロックを作成！
+                  Yes or No ブロックを作成！
                 </v-btn>
               </div>
             </form>
@@ -142,47 +142,47 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
 // components ----------
-import QuestionBlockItem from "./QuestionBlockItem";
+import YesOrNoBlockItem from "./YesOrNoBlockItem";
 
 export default {
   components: {
-    QuestionBlockItem,
+    YesOrNoBlockItem,
   },
   props: {
-    isShownQuestionFormatDialog: {
+    isShownYesOrNoFormatDialog: {
       type: Boolean,
       required: true,
     },
-    questionBlockColor: {
+    yesOrNoBlockColor: {
       type: String,
       required: false,
     },
   },
   data() {
     return {
-      questionBlock: {
+      yesOrNoBlock: {
         title: "",
       },
-      questionItemNum: 1, // アイテム数
-      questionItem1: {
+      yesOrNoItemNum: 1, // アイテム数
+      yesOrNoItem1: {
         content: "",
         answer: "",
       },
-      questionItem2: {
+      yesOrNoItem2: {
         content: "",
         answer: "",
       },
-      questionItem3: {
+      yesOrNoItem3: {
         content: "",
         answer: "",
       },
 
       // Validator
-      questionNameForValidation1: "1番目の質問",
+      yesOrNoNameForValidation1: "1番目の質問",
       answerNameForValidation1: "1番目の答え",
-      questionNameForValidation2: "2番目の質問",
+      yesOrNoNameForValidation2: "2番目の質問",
       answerNameForValidation2: "2番目の答え",
-      questionNameForValidation3: "3番目の質問",
+      yesOrNoNameForValidation3: "3番目の質問",
       answerNameForValidation3: "3番目の答え",
     };
   },
@@ -193,52 +193,52 @@ export default {
   },
   methods: {
     ...mapActions({
-      createQuestionBlock: "questionBlocks/createQuestionBlock",
+      createYesOrNoBlock: "yesOrNoBlocks/createYesOrNoBlock",
     }),
-    addQuestionItemNum() {
-      this.questionItemNum++;
+    addYesOrNoItemNum() {
+      this.yesOrNoItemNum++;
     },
-    deleteQuestionItemNum() {
-      this.questionItemNum--;
-      if (this.questionItemNum == 2) {
-        this.questionItem3 = {};
-      } else if (this.questionItemNum == 1) {
-        this.questionItem2 = {};
+    deleteYesOrNoItemNum() {
+      this.yesOrNoItemNum--;
+      if (this.yesOrNoItemNum == 2) {
+        this.yesOrNoItem3 = {};
+      } else if (this.yesOrNoItemNum == 1) {
+        this.yesOrNoItem2 = {};
       }
     },
-    hundleCreateQuestionBlock(
-      questionBlock,
-      questionItem1,
-      questionItem2,
-      questionItem3
+    hundleCreateYesOrNoBlock(
+      yesOrNoBlock,
+      yesOrNoItem1,
+      yesOrNoItem2,
+      yesOrNoItem3
     ) {
-      this.createQuestionBlock({
-        questionBlock: questionBlock,
-        questionItem1: questionItem1,
-        questionItem2: questionItem2,
-        questionItem3: questionItem3,
+      this.createYesOrNoBlock({
+        yesOrNoBlock: yesOrNoBlock,
+        yesOrNoItem1: yesOrNoItem1,
+        yesOrNoItem2: yesOrNoItem2,
+        yesOrNoItem3: yesOrNoItem3,
       });
-      this.hundleCloseQuestioniFormatDialog();
+      this.hundleCloseYesOrNoFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
-        color: this.questionBlockColor,
+        color: this.yesOrNoBlockColor,
       });
     },
-    hundleCloseQuestioniFormatDialog() {
-      this.$emit("close-question-format-dialog");
-      this.clearQuestionBlock();
+    hundleCloseYesOrNoFormatDialog() {
+      this.$emit("close-yes-or-no-format-dialog");
+      this.clearYesOrNoBlock();
     },
 
-    clearQuestionBlock() {
-      this.questionItemNum = 1; // アイテム数のリセット
-      this.questionBlock.title = "";
-      this.questionItem1.content = "";
-      this.questionItem1.answer = "";
-      this.questionItem2.content = "";
-      this.questionItem2.answer = "";
-      this.questionItem3.content = "";
-      this.questionItem3.answer = "";
+    clearYesOrNoBlock() {
+      this.yesOrNoItemNum = 1; // アイテム数のリセット
+      this.yesOrNoBlock.title = "";
+      this.yesOrNoItem1.content = "";
+      this.yesOrNoItem1.answer = "";
+      this.yesOrNoItem2.content = "";
+      this.yesOrNoItem2.answer = "";
+      this.yesOrNoItem3.content = "";
+      this.yesOrNoItem3.answer = "";
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });

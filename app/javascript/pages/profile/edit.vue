@@ -63,6 +63,11 @@
         Yes or No ブロックを追加する
       </v-btn>
     </v-row>
+    <YesOrNoBlockList
+      class="mb-10"
+      @open-edit-yes-or-no-format-dialog="openEditYesOrNoFormatDialog"
+      @delete-yes-or-no-block="hundleDeleteYesOrNoBlock"
+    />
 
     <!-- Ranking Blocks -->
     <v-row justify="center" class="mb-10">
@@ -102,6 +107,20 @@
       :question-block-color="questionBlockColor"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
       @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
+    />
+
+    <!-- YesOrNo Block -->
+    <YesOrNoFormatDialog
+      :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
+      :yes-or-no-block-color="yesOrNoBlockColor"
+      @close-yes-or-no-format-dialog="closeYesOrNoFormatDialog"
+    />
+    <EditYesOrNoFormatDialog
+      :is-shown-edit-yes-or-no-format-dialog="isShownEditYesOrNoFormatDialog"
+      :edit-yes-or-no-block="editYesOrNoBlock"
+      :yes-or-no-block-color="yesOrNoBlockColor"
+      @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
+      @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
     />
 
     <!-- Ranking Block -->
@@ -153,6 +172,11 @@ import QuestionBlockList from "../../components/question_block/QuestionBlockList
 import QuestionFormatDialog from "../../components/question_block/QuestionFormatDialog";
 import EditQuestionFormatDialog from "../../components/question_block/EditQuestionFormatDialog";
 
+// YesOrNo Block
+import YesOrNoFormatDialog from "../../components/yes_or_no_block/YesOrNoFormatDialog";
+import EditYesOrNoFormatDialog from "../../components/yes_or_no_block/EditYesOrNoFormatDialog";
+import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
+
 // Ranking Block
 import RankingFormatDialog from "../../components//ranking_block/RankingFormatDialog";
 import RankingBlockList from "../../components//ranking_block/RankingBlockList";
@@ -168,6 +192,11 @@ export default {
     QuestionBlockList,
     QuestionFormatDialog,
     EditQuestionFormatDialog,
+
+    // YesOrNo Block
+    YesOrNoFormatDialog,
+    YesOrNoBlockList,
+    EditYesOrNoFormatDialog,
 
     // Ranking Block
     RankingFormatDialog,
@@ -222,6 +251,7 @@ export default {
     ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("questionBlocks", ["questionBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
 
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
@@ -256,6 +286,11 @@ export default {
     ...mapActions({
       fetchProfiles: "profiles/fetchProfiles",
       fetchCurrentUser: "users/fetchCurrentUser",
+
+      // YesOrNo Block
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      deleteYesOrNoBlock: "yesOrNoBlocks/deleteYesOrNoBlock",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
 
       // Question Block
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
@@ -331,8 +366,27 @@ export default {
     openYesOrNoFormatDialog() {
       this.isShownYesOrNoFormatDialog = true;
     },
-    closeRankingFormatDialog() {
+    closeYesOrNoFormatDialog() {
       this.isShownYesOrNoFormatDialog = false;
+    },
+    openEditYesOrNoFormatDialog(yesOrNoBlock) {
+      this.editYesOrNoBlock = Object.assign({}, yesOrNoBlock);
+      this.isShownEditYesOrNoFormatDialog = true;
+    },
+    closeEditYesOrNoFormatDialog() {
+      this.isShownEditYesOrNoFormatDialog = false;
+    },
+    closeYesOrNoBlockEditDialog(editYesOrNoBlock) {
+      this.editYesOrNoBlock = editYesOrNoBlock;
+    },
+    hundleDeleteYesOrNoBlock(yesOrNoBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteYesOrNoBlock(yesOrNoBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンブロックを削除したよ！",
+        color: "red lighten-3",
+      });
     },
 
     // Ranking Block

@@ -16,10 +16,8 @@
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10"
-        >
-          オリジナルクエスチョンブロック
+        <p class="font-weight-bold text-white text-4xl text-center mt-10">
+          クエスチョンブロック
         </p>
 
         <div
