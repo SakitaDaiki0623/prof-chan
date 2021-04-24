@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     openEditQuestionFormatDialog(questionBlock) {
-      this.$emit("open-question-text-format-dialog", questionBlock);
+      this.$emit("open-edit-question-format-dialog", questionBlock);
     },
     hundleDeleteQuestionBlock(questionBlock) {
       this.$emit("delete-question-block", questionBlock);

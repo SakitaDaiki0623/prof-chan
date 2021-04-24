@@ -72,18 +72,13 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
 
   create_table "ranking_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
+    t.string "first_place", null: false
+    t.string "second_place", null: false
+    t.string "third_place", null: false
     t.bigint "profile_block_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_block_id"], name: "index_ranking_blocks_on_profile_block_id"
-  end
-
-  create_table "ranking_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "answer"
-    t.bigint "ranking_block_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ranking_block_id"], name: "index_ranking_items_on_ranking_block_id"
   end
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -148,7 +143,6 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
   add_foreign_key "question_blocks", "profile_blocks"
   add_foreign_key "question_items", "question_blocks"
   add_foreign_key "ranking_blocks", "profile_blocks"
-  add_foreign_key "ranking_items", "ranking_blocks"
   add_foreign_key "text_blocks", "profile_blocks"
   add_foreign_key "users", "teams"
   add_foreign_key "yes_or_no_blocks", "profile_blocks"
