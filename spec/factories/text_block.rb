@@ -1,13 +1,15 @@
 # == Schema Information
 #
-# Table name: profile_blocks
+# Table name: text_blocks
 #
 #  id                 :bigint           not null, primary key
-#  user_id            :string(255)      not null
+#  title              :string(255)      not null
+#  text               :text             not null
+#  profile_block_id   :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 
-# spec/factories/profile_block.rb
+# spec/factories/text_block.rb
 FactoryBot.define do
   factory :text_block do
     title { Faker::Lorem.sentence }
