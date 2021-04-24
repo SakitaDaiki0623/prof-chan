@@ -8,16 +8,13 @@
             <v-col cols="12" sm="6">
               {{ yesOrNoItem.content }}
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              class="text-red-500"
-              v-if="yesOrNoItem.answer"
-            >
-              YES
+            <v-col cols="12" sm="6" v-if="yesOrNoItem.answer">
+              <span class="rounded-full border-red-500 border-2 p-2">YES</span>
+              / NO
             </v-col>
-            <v-col cols="12" sm="6" class="text-red-500" v-else>
-              NO
+            <v-col cols="12" sm="6" v-else>
+              YES /
+              <span class="rounded-full border-red-500 border-2 p-2">NO</span>
             </v-col>
           </v-row>
         </v-card>
