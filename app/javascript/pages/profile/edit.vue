@@ -99,6 +99,12 @@
       :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
       @close-ranking-format-dialog="closeRankingFormatDialog"
     />
+    <EditRankingFormatDialog
+      :is-shown-edit-ranking-format-dialog="isShownEditRankingFormatDialog"
+      :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
+      :edit-ranking-block="editRankingBlock"
+      @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
+    />
 
     <!-- Text Block -->
     <TextFormatDialog
@@ -140,6 +146,7 @@ import EditQuestionFormatDialog from "../../components/question_block/EditQuesti
 // Ranking Block
 import RankingFormatDialog from "../../components//ranking_block/RankingFormatDialog";
 import RankingBlockList from "../../components//ranking_block/RankingBlockList";
+import EditRankingFormatDialog from "../../components//ranking_block/EditRankingFormatDialog";
 
 export default {
   components: {
@@ -156,6 +163,7 @@ export default {
     // Ranking Block
     RankingFormatDialog,
     RankingBlockList,
+    EditRankingFormatDialog,
 
     // Text Block
     TextFormatDialog,
@@ -267,9 +275,9 @@ export default {
     closeEditTextFormatDialog() {
       this.isShownEditTextFormatDialog = false;
     },
-    hundleDeleteTextBlock(TextBlock) {
+    hundleDeleteTextBlock(textBlock) {
       if (!confirm("削除してよろしいですか?")) return;
-      this.deleteTextBlock(TextBlock);
+      this.deleteTextBlock(textBlock);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "テキストブロックを削除したよ！",
@@ -317,6 +325,13 @@ export default {
     },
     closeRankingFormatDialog() {
       this.isShownRankingFormatDialog = false;
+    },
+    openEditRankingFormatDialog(rankingBlock) {
+      this.editRankingBlock = Object.assign({}, rankingBlock);
+      this.isShownEditRankingFormatDialog = true;
+    },
+    closeEditRankingFormatDialog() {
+      this.isShownEditRankingFormatDialog = false;
     },
     hundleDeleteRankingBlock(rankingBlock) {
       if (!confirm("削除してよろしいですか?")) return;
