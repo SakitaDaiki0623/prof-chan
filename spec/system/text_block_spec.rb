@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'TextBlock', type: :system do
 
   let(:text_block) { TextBlock.last }
+  let(:factory_text_block) { create(:text_block) }
 
   let(:words_over_fifty)      { 'あ' * 51 }
   let(:words_over_two_hundreds) { 'あ' * 201 }
@@ -19,13 +20,14 @@ RSpec.describe 'TextBlock', type: :system do
       before do
         click_on 'テキストブロックを追加する'
         expect(page).to have_button 'テキストブロックを作成！', disabled: true
-        fill_in 'text_block_title',	with: 'テキストブロック'
-        fill_in 'text_block_text',	with: 'テキストブロック'
+        fill_in 'text_block_title',	with: factory_text_block.title
+        fill_in 'text_block_text',	with: factory_text_block.text
         expect(page).to have_button 'テキストブロックを作成！', disabled: false
         click_on 'テキストブロックを作成！'
       end
       it 'テキストブロックが作成されること' do
-        expect(page).to have_content('テキストブロック'), 'テキストブロックが作成されていません'
+        expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
+        expect(page).to have_content(factory_text_block.text),  'テキストブロックが作成されていません'
         expect(page).to have_content('テキストブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
       end
 
@@ -39,7 +41,6 @@ RSpec.describe 'TextBlock', type: :system do
       before do
         click_on 'テキストブロックを追加する'
         fill_in 'text_block_title',	with: ''
-        fill_in 'text_block_text',	with: 'テキストブロック'
       end
       it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
         expect(page).to have_content('タイトルを入力してね'), 'バリデーションメッセージが表示されていません'
@@ -47,29 +48,31 @@ RSpec.describe 'TextBlock', type: :system do
       end
     end
 
-    # context 'タイトルが51文字以上の時' do
-    #   before do
-    #     click_on 'テキストブロックを追加する'
-    #     fill_in 'text_block_title',	with: words_over_fifty
-    #     fill_in 'text_block_text', with: 'テキストブロック'
-    #   end
-    #   it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-    #     expect(page).to have_content('タイトルは最大50文字です'), 'バリデーションメッセージが表示されていません'
-    #     expect(page).to have_button 'テキストブロックを作成！', disabled: true
-    #   end
-    # end
+    context 'タイトルが51文字以上の時' do
+      before do
+        click_on 'テキストブロックを追加する'
+        fill_in 'text_block_title',	with: words_over_fifty
+        sleep 0.5
+        fill_in 'text_block_title',	with: words_over_fifty
+      end
+      fit 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
+        expect(page).to have_content('タイトルは最大50文字だよ'), 'バリデーションメッセージが表示されていません'
+        expect(page).to have_button 'テキストブロックを作成！', disabled: true
+      end
+    end
 
-    # context 'テキストが201文字以上の時' do
-    #   before do
-    #     click_on 'テキストブロックを追加する'
-    #     fill_in 'text_block_title',	with: 'テキストブロック'
-    #     fill_in 'text_block_text', with: words_over_two_hundreds
-    #   end
-    #   it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-    #     expect(page).to have_content('テキストは最大200文字です'), 'バリデーションメッセージが表示されていません'
-    #     expect(page).to have_button 'テキストブロックを作成！', disabled: true
-    #   end
-    # end
+    context 'テキストが201文字以上の時' do
+      before do
+        click_on 'テキストブロックを追加する'
+        fill_in 'text_block_text', with: words_over_two_hundreds
+        sleep 0.5
+        fill_in 'text_block_text', with: words_over_two_hundreds
+      end
+      fit 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
+        expect(page).to have_content('テキストは最大200文字だよ'), 'バリデーションメッセージが表示されていません'
+        expect(page).to have_button 'テキストブロックを作成！', disabled: true
+      end
+    end
   end
 
   describe 'テキストブロック編集機能' do
@@ -96,30 +99,6 @@ RSpec.describe 'TextBlock', type: :system do
         expect(page).to have_content('テキストブロックを更新したよ！'), 'フラッシュメッセージが表示されていません'
       end
     end
-
-    # context 'テキストブロックのタイトルを空値にした時' do
-    #   before do
-    #     find("#edit-text-block-button-#{text_block.id}").click
-    #     expect(page).to have_content('テキストブロックを編集'), 'テキストブロック編集ダイアログが表示されていません'
-    #     fill_in 'text_block_title',	with: ''
-    #   end
-    #   it 'バリデーションメッセージが表示され、更新ボタンがdisabledであること' do
-    #     expect(page).to have_content('タイトルを入力してね'), 'バリデーションメッセージが表示されていません'
-    #     expect(page).to have_button 'テキストブロックを更新！', disabled: true
-    #   end
-    # end
-
-    # context 'テキストブロックのテキストを空値にした時' do
-    #   before do
-    #     find("#edit-text-block-button-#{text_block.id}").click
-    #     expect(page).to have_content('テキストブロックを編集'), 'テキストブロック編集ダイアログが表示されていません'
-    #     fill_in 'text_block_text', with: ''
-    #   end
-    #   it 'バリデーションメッセージが表示され、更新ボタンがdisabledであること' do
-    #     expect(page).to have_content('テキストを入力してね'), 'バリデーションメッセージが表示されていません'
-    #     expect(page).to have_button 'テキストブロックを更新！', disabled: true
-    #   end
-    # end
   end
 
   describe 'テキストブロック削除機能' do
