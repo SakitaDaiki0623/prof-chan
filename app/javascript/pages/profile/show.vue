@@ -1,7 +1,7 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div
-    class="bg-backimage-02 bg-cover bg-fixed text-gray-600 font-prof-default"
+    class="bg-backimage-02 bg-cover bg-fixed text-gray-600"
   >
     <v-container>
       <p class="text-5xl font-bold note mb-10">
@@ -33,7 +33,7 @@
         <v-btn
           x-large
           color="light-green accent-2"
-          class="font-prof-default black--text"
+          class="black--text"
           @click="moveToProfilesPage"
         >
           <v-icon left>

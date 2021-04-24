@@ -20,7 +20,7 @@
           </v-btn>
         </v-row>
         <p
-          class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10 mb-10"
+          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
         >
           ランキングブロックを編集
         </p>

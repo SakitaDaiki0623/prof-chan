@@ -3,7 +3,7 @@
   <header>
     <v-app-bar
       v-show="doesCurrentUserhaveProfile"
-      class="font-prof-default bg-header"
+      class="bg-header"
     >
       <v-toolbar-title>
         <router-link to="/profiles"> プロフちゃん(ロゴ) </router-link>

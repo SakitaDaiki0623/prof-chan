@@ -1,6 +1,6 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div class="text-gray-600 font-prof-default">
+  <div class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
@@ -49,6 +49,20 @@
       @open-edit-question-format-dialog="openEditQuestionFormatDialog"
       @delete-question-block="hundleDeleteQuestionBlock"
     />
+
+    <!-- YesOrNo Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-yes-or-no-block-btn"
+        tile
+        :color="yesOrNoBlockColor"
+        class="ma-2 white--text"
+        @click="openYesOrNoFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        Yes or No ブロックを追加する
+      </v-btn>
+    </v-row>
 
     <!-- Ranking Blocks -->
     <v-row justify="center" class="mb-10">
@@ -187,7 +201,13 @@ export default {
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
-      questionBlockColor: "red lighten-3", // ranking block image color
+      questionBlockColor: "red lighten-3", // question block image color
+
+      // YesOrNo Block
+      isShownYesOrNoFormatDialog: false,
+      isShownEditYesOrNoFormatDialog: false,
+      editYesOrNoBlock: {},
+      yesOrNoBlockColor: "orange lighten-3", // ranking block image color
 
       // Ranking Block
       isShownRankingFormatDialog: false,
@@ -305,6 +325,14 @@ export default {
         message: "クエスチョンブロックを削除したよ！",
         color: "red lighten-3",
       });
+    },
+
+    // YesOrNo Block
+    openYesOrNoFormatDialog() {
+      this.isShownYesOrNoFormatDialog = true;
+    },
+    closeRankingFormatDialog() {
+      this.isShownYesOrNoFormatDialog = false;
     },
 
     // Ranking Block

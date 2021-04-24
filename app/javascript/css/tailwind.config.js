@@ -16,16 +16,6 @@ module.exports = {
       //   "text-prof-block": "url('../images/text_block_bg.jpg')",
       //   "question-prof-block": "url('../images/question_block_bg.jpg')",
       // }),
-      fontFamily: {
-        "prof-default": [
-          "TsukuARdGothic-Regular",
-          "klee",
-          "Hannotate SC",
-          "Chalkboard SE",
-          "Comic Sans MS",
-          "sans-serif",
-        ],
-      },
     },
   },
   variants: {
