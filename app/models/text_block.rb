@@ -15,6 +15,6 @@ class TextBlock < ApplicationRecord
   belongs_to :profile_block
 
   # validation =============
-  validates :title, presence: true,      length: { maximum: 30 }
-  validates :text,  presence: true,      length: { maximum: 100 }
+  validates :title, presence: true,      length: { maximum: 50 }
+  validates :text,  presence: true,      length: { maximum: 200 }
 end
