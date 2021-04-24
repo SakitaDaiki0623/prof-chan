@@ -97,6 +97,29 @@
   }
 }
 
+.input-form-ranking-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-green-500;
+    @apply ring-2;
+    @apply ring-green-200;
+  }
+}
+
 // 入力フォームラベル ====================
 // 雛形
 .form-label {
@@ -130,6 +153,18 @@
 }
 
 .form-label-question-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
+  @apply font-prof-default;
+}
+
+.form-label-ranking-block {
   @apply pt-2;
   @apply text-sm;
   @apply font-medium;
