@@ -80,8 +80,8 @@
                 答え
               </label>
               <v-radio-group v-model="editYesOrNoItem.answer" mandatory row>
-                <v-radio label="YES" :value="true" color="orange"> </v-radio>
-                <v-radio label="NO" :value="false" color="orange"></v-radio>
+                <v-radio label="YES" :value="true" color="orange" class="yes-for-rspec"> </v-radio>
+                <v-radio label="NO" :value="false" color="orange" class="no-for-rspec"></v-radio>
               </v-radio-group>
             </v-col>
           </v-row>
