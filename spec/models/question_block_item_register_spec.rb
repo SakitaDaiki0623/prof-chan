@@ -10,7 +10,7 @@ RSpec.describe QuestionBlockItemRegister, type: :model do
 
   describe 'バリデーション' do
 
-    it 'クエスチョンブロックのタイトルがなかったら、ユーザー登録に失敗すること' do
+    it 'クエスチョンブロックのタイトルがなかったら、エラーメッセージを返すこと' do
       question_block_item_register.question_title = ""
       question_block_item_register.valid?
       expect(question_block_item_register.errors[:question_title]).to include("を入力してください")
@@ -22,7 +22,7 @@ RSpec.describe QuestionBlockItemRegister, type: :model do
       expect(question_block_item_register.errors[:question_title]).to include("は50文字以内で入力してください")
     end
 
-    it 'クエスチョンブロックの質問内容1がなかったら、ユーザー登録に失敗すること' do
+    it 'クエスチョンブロックの質問内容1がなかったら、エラーメッセージを返すこと' do
       question_block_item_register.question_item_content1 = ""
       question_block_item_register.valid?
       expect(question_block_item_register.errors[:question_item_content1]).to include("を入力してください")
