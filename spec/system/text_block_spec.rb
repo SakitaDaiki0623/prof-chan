@@ -55,7 +55,7 @@ RSpec.describe 'TextBlock', type: :system do
         sleep 0.5
         fill_in 'text_block_title',	with: words_over_fifty
       end
-      fit 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
+      it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
         expect(page).to have_content('タイトルは最大50文字だよ'), 'バリデーションメッセージが表示されていません'
         expect(page).to have_button 'テキストブロックを作成！', disabled: true
       end
@@ -68,7 +68,7 @@ RSpec.describe 'TextBlock', type: :system do
         sleep 0.5
         fill_in 'text_block_text', with: words_over_two_hundreds
       end
-      fit 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
+      it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
         expect(page).to have_content('テキストは最大200文字だよ'), 'バリデーションメッセージが表示されていません'
         expect(page).to have_button 'テキストブロックを作成！', disabled: true
       end

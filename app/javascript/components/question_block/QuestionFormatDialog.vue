@@ -7,10 +7,10 @@
       persistent
       @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
     >
-      <v-card :color="questionBlockColorForFlashMessage">
+      <v-card :color="questionBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn
-            :color="questionBlockColorForFlashMessage"
+            :color="questionBlockColor"
             @click="hundleCloseQuestioniFormatDialog"
           >
             ✖︎
@@ -121,7 +121,7 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  :color="questionBlockColorForFlashMessage"
+                  :color="questionBlockColor"
                   class="white--text"
                 >
                   <v-icon left> mdi-plus </v-icon>
@@ -153,6 +153,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    questionBlockColor: {
+      type: String,
+      required: false,
+    },
   },
   data() {
     return {
@@ -171,10 +175,6 @@ export default {
       questionItem3: {
         content: "",
         answer: "",
-      },
-      questionBlockColorForFlashMessage: {
-        type: String,
-        required: false,
       },
 
       // Validator
@@ -222,7 +222,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
-        color: questionBlockColorForFlashMessage,
+        color: this.questionBlockColor,
       });
     },
     hundleCloseQuestioniFormatDialog() {

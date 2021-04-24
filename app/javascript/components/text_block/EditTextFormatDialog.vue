@@ -7,13 +7,13 @@
       persistent
       @input="$emit('input', $event.target.isShownEditTextFormatDialog)"
     >
-      <v-card :color="textBlockColorForFlashMessage">
+      <v-card :color="textBlockColor">
         <v-row
           justify="end"
           class="mr-2 mt-2"
         >
           <v-btn
-            :color="textBlockColorForFlashMessage"
+            :color="textBlockColor"
             @click="hundleCloseEditTextFormatDialog"
           >
             ✖︎
@@ -83,7 +83,7 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  :color="textBlockColorForFlashMessage"
+                  :color="textBlockColor"
                   class="white--text"
                 >
                   テキストブロックを更新！
@@ -114,7 +114,7 @@ export default {
       type: Object,
       required: true,
     },
-    textBlockColorForFlashMessage: {
+    textBlockColor: {
       type: String,
       required: true,
     },
@@ -130,7 +130,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "テキストブロックを更新したよ！",
-        color: this.textBlockColorForFlashMessage,
+        color: this.textBlockColor,
       });
     },
 

@@ -16,7 +16,7 @@
       <v-btn
         id="add-text-block-btn"
         tile
-        color="teal lighten-3"
+        :color="textBlockColor"
         class="ma-2 white--text"
         @click="openTextFormatDialog"
       >
@@ -36,7 +36,7 @@
       <v-btn
         id="add-question-block-btn"
         tile
-        color="red lighten-3"
+        :color="questionBlockColor"
         class="ma-2 white--text"
         @click="openQuestionFormatDialog"
       >
@@ -55,7 +55,7 @@
       <v-btn
         id="add-ranking-block-btn"
         tile
-        color="green lighten-3"
+        :color="rankingBlockColor"
         class="ma-2 white--text"
         @click="openRankingFormatDialog"
       >
@@ -79,13 +79,13 @@
     <!-- Question Block -->
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
-      :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
+      :question-block-color="questionBlockColor"
       @close-question-format-dialog="closeQuestionFormatDialog"
     />
     <EditQuestionFormatDialog
       :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
       :edit-question-block="editQuestionBlock"
-      :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
+      :question-block-color="questionBlockColor"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
       @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
     />
@@ -93,12 +93,12 @@
     <!-- Ranking Block -->
     <RankingFormatDialog
       :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
-      :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
+      :ranking-block-color="rankingBlockColor"
       @close-ranking-format-dialog="closeRankingFormatDialog"
     />
     <EditRankingFormatDialog
       :is-shown-edit-ranking-format-dialog="isShownEditRankingFormatDialog"
-      :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
+      :ranking-block-color="rankingBlockColor"
       :edit-ranking-block="editRankingBlock"
       @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
     />
@@ -106,12 +106,12 @@
     <!-- Text Block -->
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
-      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
+      :text-block-color="textBlockColor"
       @close-text-format-dialog="closeTextFormatDialog"
     />
     <EditTextFormatDialog
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
-      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
+      :text-block-color="textBlockColor"
       :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
     />
@@ -181,19 +181,19 @@ export default {
       isShownTextFormatDialog: false,
       isShownEditTextFormatDialog: false,
       editTextBlock: {},
-      textBlockColorForFlashMessage: "teal lighten-3", // text block image color
+      textBlockColor: "teal lighten-3", // text block image color
 
       // Question Block
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
-      questionBlockColorForFlashMessage: "red lighten-3", // ranking block image color
+      questionBlockColor: "red lighten-3", // ranking block image color
 
       // Ranking Block
       isShownRankingFormatDialog: false,
       isShownEditRankingFormatDialog: false,
       editRankingBlock: {},
-      rankingBlockColorForFlashMessage: "green lighten-3", // ranking block image color
+      rankingBlockColor: "green lighten-3", // ranking block image color
     };
   },
   computed: {
@@ -276,7 +276,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "テキストブロックを削除したよ！",
-        color: this.textBlockColorForFlashMessage,
+        color: this.textBlockColor,
       });
     },
 
@@ -327,7 +327,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "ランキングブロックを削除したよ！",
-        color: this.rankingBlockColorForFlashMessage,
+        color: this.rankingBlockColor,
       });
     },
   },

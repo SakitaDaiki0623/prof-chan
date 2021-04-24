@@ -154,7 +154,7 @@ export default {
       type: String,
       require: true,
     },
-    questionBlockColorForFlashMessage: {
+    questionBlockColor: {
       type: String,
       require: true,
     },
@@ -206,7 +206,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンアイテムを更新したよ！",
-        color: questionBlockColorForFlashMessage,
+        color: this.questionBlockColor,
       });
     },
 
@@ -217,7 +217,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンアイテムを削除したよ！",
-        color: questionBlockColorForFlashMessage,
+        color: this.questionBlockColor,
       });
     },
   },

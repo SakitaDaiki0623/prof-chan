@@ -7,13 +7,13 @@
       persistent
       @input="$emit('input', $event.target.isShownEditRankingFormatDialog)"
     >
-      <v-card :color="rankingBlockColorForFlashMessage">
+      <v-card :color="rankingBlockColor">
         <v-row
           justify="end"
           class="mr-2 mt-2"
         >
           <v-btn
-            :color="rankingBlockColorForFlashMessage"
+            :color="rankingBlockColor"
             @click="hundleCloseEditRankingFormatDialog"
           >
             ✖︎
@@ -122,7 +122,7 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  :color="rankingBlockColorForFlashMessage"
+                  :color="rankingBlockColor"
                   class="white--text"
                 >
                   ランキングブロックを更新！
@@ -153,7 +153,7 @@ export default {
       type: Object,
       required: true,
     },
-    rankingBlockColorForFlashMessage: {
+    rankingBlockColor: {
       type: String,
       required: true,
     },
@@ -169,7 +169,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "ランキングブロックを更新したよ！",
-        color: this.rankingBlockColorForFlashMessage,
+        color: this.rankingBlockColor,
       });
     },
 
