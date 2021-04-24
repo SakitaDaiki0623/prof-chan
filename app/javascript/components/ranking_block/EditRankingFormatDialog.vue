@@ -168,7 +168,7 @@ export default {
       this.hundleCloseEditRankingFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "テキストブロックを更新したよ！",
+        message: "ランキングブロックを更新したよ！",
         color: this.rankingBlockColorForFlashMessage,
       });
     },
