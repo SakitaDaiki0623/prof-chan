@@ -221,7 +221,7 @@ export default {
       this.hundleCloseYesOrNoFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "クエスチョンブロックを作成したよ！",
+        message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
     },

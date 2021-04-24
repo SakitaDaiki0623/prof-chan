@@ -17,7 +17,7 @@
           </v-btn>
         </v-row>
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
-          クエスチョンブロックを編集
+          Yes or No ブロックを編集
         </p>
 
         <div class="p-10 bg-yes-or-no-prof-block bg-fixed">
@@ -32,7 +32,7 @@
                 :id="'edit-yes-or-no-block-title-button-' + editYesOrNoBlock.id"
                 tile
                 small
-                color="red lighten-4"
+                color="orange lighten-4"
                 @click="showEditYesOrNoBlockTitleForm"
               >
                 <v-icon> mdi-pencil </v-icon>
@@ -80,7 +80,7 @@
                       "
                       tile
                       small
-                      color="red lighten-4"
+                      color="orange lighten-4"
                       :disabled="invalid"
                       @click="
                         hundleEditYesOrNoBlockTitle(editYesOrNoBlockForForm)
@@ -97,7 +97,7 @@
                       "
                       tile
                       small
-                      color="red darken-1"
+                      color="orange darken-1"
                       @click="hideEditYesOrNoBlockTitleForm"
                     >
                       ×
@@ -257,7 +257,7 @@ export default {
         this.yesOrNoItemsOfEditYesOrNoBlock[2]
       ));
     },
-    // 新規作成のために親であるクエスチョンアイテムブロックのidを渡すためのメソッド
+    // 新規作成のために親であるYes or No アイテムブロックのidを渡すためのメソッド
     parentYesOrNoBlockId() {
       return this.editYesOrNoBlock.id;
     },
@@ -273,7 +273,7 @@ export default {
       this.hideEditYesOrNoBlockTitleForm();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "クエスチョンブロックのタイトルを更新したよ！",
+        message: "Yes or No ブロックのタイトルを更新したよ！",
         color: this.YesOrNoBlockColor,
       });
     },

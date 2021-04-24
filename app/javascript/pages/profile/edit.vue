@@ -384,8 +384,8 @@ export default {
       this.deleteYesOrNoBlock(yesOrNoBlock);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "クエスチョンブロックを削除したよ！",
-        color: "red lighten-3",
+        message: "Yes or No ブロックを削除したよ！",
+        color: this.yesOrNoBlockColor,
       });
     },
 

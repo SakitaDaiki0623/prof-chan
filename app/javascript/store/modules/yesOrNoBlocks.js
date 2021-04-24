@@ -45,7 +45,7 @@ export const yesOrNoBlocks = {
     addYesOrNoItem: (state, yesOrNoItem) => {
       state.yesOrNoItems.push(yesOrNoItem);
 
-      // 作成したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      // 作成したアイテムを持つYes or No ブロックのインデックス番号を取得
       const yesOrNoBlockIndex = state.yesOrNoBlocks.findIndex(
         (yesOrNoBlock) => yesOrNoBlock.id == yesOrNoItem.yes_or_no_block.id
       );
@@ -58,12 +58,12 @@ export const yesOrNoBlocks = {
       });
       state.yesOrNoItems.splice(yesOrNoItemsIndex, 1, data);
 
-      // 更新したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      // 更新したアイテムを持つYes or No ブロックのインデックス番号を取得
       const yesOrNoBlockIndex = state.yesOrNoBlocks.findIndex(
         (yesOrNoBlock) => yesOrNoBlock.id == data.yes_or_no_block.id
       );
 
-      // そのクエスチョンブロック内の更新したアイテムのインデックス番号を取得
+      // そのYes or No ブロック内の更新したアイテムのインデックス番号を取得
       const yesOrNoBlockItemsIndex = state.yesOrNoBlocks
         .find((yesOrNoBlock) => yesOrNoBlock.id == data.yes_or_no_block.id)
         .yes_or_no_items.findIndex((yesOrNoItem) => yesOrNoItem.id == data.id);
@@ -81,12 +81,12 @@ export const yesOrNoBlocks = {
       });
       state.yesOrNoItems.splice(index, 1);
 
-      // 削除したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      // 削除したアイテムを持つYes or No ブロックのインデックス番号を取得
       const yesOrNoBlockIndex = state.yesOrNoBlocks.findIndex(
         (yesOrNoBlock) => yesOrNoBlock.id == data.yes_or_no_block.id
       );
 
-      // そのクエスチョンブロック内の削除したアイテムのインデックス番号を取得
+      // そのYes or No ブロック内の削除したアイテムのインデックス番号を取得
       const yesOrNoBlockItemsIndex = state.yesOrNoBlocks
         .find((yesOrNoBlock) => yesOrNoBlock.id == data.yes_or_no_block.id)
         .yes_or_no_items.findIndex((yesOrNoItem) => yesOrNoItem.id == data.id);

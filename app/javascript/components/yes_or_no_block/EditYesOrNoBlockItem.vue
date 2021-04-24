@@ -25,7 +25,7 @@
           :id="'edit-yes-or-no-item-button-' + yesOrNoItem.id"
           tile
           small
-          color="red lighten-4"
+          color="orange lighten-4"
           @click="showEditYesOrNoItemForm"
         >
           <v-icon> mdi-pencil </v-icon>
@@ -36,7 +36,7 @@
           :id="'delete-yes-or-no-item-button-' + yesOrNoItem.id"
           tile
           small
-          color="red lighten-1"
+          color="orange lighten-1"
           :disabled="IsItemLengthOne"
           @click="hundleDeleteYesOrNoItem(yesOrNoItem)"
         >
@@ -91,7 +91,7 @@
                 :id="'update-yes-or-no-item-button-' + editYesOrNoItem.id"
                 tile
                 small
-                color="red lighten-4"
+                color="orange lighten-4"
                 :disabled="invalid"
                 @click="hundleUpdateYesOrNoItem(editYesOrNoItem)"
               >
@@ -105,7 +105,7 @@
                 "
                 tile
                 small
-                color="red darken-1"
+                color="orange darken-1"
                 @click="cancelYesOrNoItemUpdate"
               >
                 ×
@@ -198,7 +198,7 @@ export default {
       this.hideEditYesOrNoForm();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "クエスチョンアイテムを更新したよ！",
+        message: "Yes or No アイテムを更新したよ！",
         color: this.yesOrNoBlockColor,
       });
     },
@@ -209,7 +209,7 @@ export default {
       this.deleteYesOrNoItem(yesOrNoItem);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "クエスチョンアイテムを削除したよ！",
+        message: "Yes or No アイテムを削除したよ！",
         color: this.yesOrNoBlockColor,
       });
     },

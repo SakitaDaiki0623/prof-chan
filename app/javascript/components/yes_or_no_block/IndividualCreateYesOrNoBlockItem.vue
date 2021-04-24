@@ -41,7 +41,7 @@
             <v-btn
               tile
               large
-              color="red lighten-4"
+              color="orange lighten-4"
               :disabled="invalid"
               @click="hundleCreateIndevisialYesOrNoItem(yesOrNoItem)"
             >
@@ -83,8 +83,8 @@ export default {
       this.resetYesOrNoItem();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "クエスチョンアイテムを作成したよ！",
-        color: "red lighten-3",
+        message: "Yes or No アイテムを作成したよ！",
+        color: "orange lighten-3",
       });
     },
     resetYesOrNoItem() {

@@ -13,7 +13,7 @@
               :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
               tile
               small
-              color="red lighten-4"
+              color="orange lighten-4"
               @click="openEditYesOrNoFormatDialog(yesOrNoBlock)"
             >
               <v-icon> mdi-pencil </v-icon>
@@ -22,7 +22,7 @@
               :id="'delete-yes-or-no-block-button-' + yesOrNoBlock.id"
               tile
               small
-              color="red lighten-1"
+              color="orange lighten-1"
               @click="hundleDeleteYesOrNoBlock(yesOrNoBlock)"
             >
               <v-icon> mdi-delete </v-icon>
