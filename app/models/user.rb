@@ -33,6 +33,11 @@ class User < ApplicationRecord
   has_one :profile_block, dependent: :destroy
   belongs_to :team
 
+  has_many :text_block_likes, dependent: :destroy
+  has_many :question_block_likes, dependent: :destroy
+  has_many :ranking_block_likes, dependent: :destroy
+  has_many :yes_or_no_block_likes, dependent: :destroy
+
   # validation
   validates :name,                      presence: true, length: { in: 1..15 }
   validates :email,                     presence: true, uniqueness: { case_sensitive: true }

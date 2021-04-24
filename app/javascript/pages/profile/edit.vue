@@ -278,8 +278,8 @@ export default {
     // this.fetchTextBlocks();
     // this.fetchQuestionBlocks();
     // this.fetchQuestionItems();
-    this.fetchRankingBlocks();
-    this.fetchYesOrNoBlocks();
+    // this.fetchRankingBlocks();
+    // this.fetchYesOrNoBlocks();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },
