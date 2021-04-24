@@ -50,6 +50,20 @@
       @delete-question-block="hundleDeleteQuestionBlock"
     />
 
+    <!-- Ranking Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-ranking-block-btn"
+        tile
+        color="green lighten-3"
+        class="ma-2 white--text"
+        @click="openRankingFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        ランキングブロックを追加する
+      </v-btn>
+    </v-row>
+
     <!-- Dialogs -->
     <!-- Basic Prof Card -->
     <EditBasicProfCardDialog
@@ -71,6 +85,13 @@
       :edit-question-block="editQuestionBlock"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
       @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
+    />
+
+    <!-- Ranking Block -->
+    <RankingFormatDialog
+      :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
+      :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
+      @close-ranking-format-dialog="closeRankingFormatDialog"
     />
 
     <!-- Text Block -->
@@ -110,22 +131,30 @@ import QuestionFormatDialog from "../../components/question_block/QuestionFormat
 import QuestionBlockSelectDialog from "../../components/question_block/QuestionBlockSelectDialog";
 import EditQuestionFormatDialog from "../../components/question_block/EditQuestionFormatDialog";
 
+// Ranking Block
+import RankingFormatDialog from "../../components//ranking_block/RankingFormatDialog";
+
+
 export default {
   components: {
     // Basic Prof Card
     BasicProfCard,
     EditBasicProfCardDialog,
 
-    // Text Block
-    TextFormatDialog,
-    TextBlockList,
-    EditTextFormatDialog,
-
     // Question Block
     QuestionBlockList,
     QuestionBlockSelectDialog,
     QuestionFormatDialog,
     EditQuestionFormatDialog,
+
+    // Ranking Block
+    RankingFormatDialog,
+
+    // Text Block
+    TextFormatDialog,
+    TextBlockList,
+    EditTextFormatDialog,
+
   },
   props: {
     id: {
@@ -150,6 +179,12 @@ export default {
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
+
+      // Ranking Block
+      isShownRankingFormatDialog: false,
+      isShownEditRankingFormatDialog: false,
+      editRankingBlock: {},
+      rankingBlockColorForFlashMessage: "green lighten-3", // ranking block image color
     };
   },
   computed: {
@@ -170,11 +205,12 @@ export default {
       );
     },
   },
-  mounted() {
-    this.fetchProfiles();
-    this.fetchTextBlocks();
-    this.fetchQuestionBlocks();
-    this.fetchQuestionItems();
+  created() {
+    // this.fetchProfiles();
+    // this.fetchTextBlocks();
+    // this.fetchQuestionBlocks();
+    // this.fetchQuestionItems();
+    this.fetchRankingBlocks();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },
@@ -186,7 +222,11 @@ export default {
       // Question Block
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
-      fetchQuestionItems:  "questionBlocks/fetchQuestionItems",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
+
+      // Ranking Block
+      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
+      deleteRankingBlock: "rankingBlocks/deleteRankingBlock",
 
       // Text Block
       fetchTextBlocks: "textBlocks/fetchTextBlocks",
@@ -244,7 +284,7 @@ export default {
       this.isShownEditQuestionFormatDialog = false;
     },
     closeQuestionBlockEditDialog(editQuestionBlock) {
-      this.editQuestionBlock = editQuestionBlock
+      this.editQuestionBlock = editQuestionBlock;
     },
     hundleDeleteQuestionBlock(QuestionBlock) {
       if (!confirm("削除してよろしいですか?")) return;
@@ -254,6 +294,14 @@ export default {
         message: "クエスチョンブロックを削除したよ！",
         color: "red lighten-3",
       });
+    },
+
+    // Ranking Block
+    openRankingFormatDialog() {
+      this.isShownRankingFormatDialog = true;
+    },
+    closeRankingFormatDialog() {
+      this.isShownRankingFormatDialog = false;
     },
   },
 };
