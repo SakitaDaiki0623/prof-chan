@@ -14,6 +14,7 @@ import { textBlocks } from "./modules/textBlocks";
 import { questionBlocks } from "./modules/questionBlocks";
 import { profileBlocks } from "./modules/profileBlocks";
 import { rankingBlocks } from "./modules/rankingBlocks";
+import { yesOrNoBlocks } from "./modules/yesOrNoBlocks";
 
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     textBlocks,
     questionBlocks,
     rankingBlocks,
+    yesOrNoBlocks,
   },
   plugins: [
     createPersistedState({
