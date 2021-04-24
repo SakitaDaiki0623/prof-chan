@@ -14,7 +14,7 @@ module Api
 
       def create
         @yes_or_no_block_item_register = YesOrNoBlockItemRegister.new(set_params)
-        if @yes_or_no_block_item_register.save
+        if @yes_or_no_block_item_register.save_block_and_items
           @yes_or_no_block = YesOrNoBlock.last # TODO: リファクタリング YesOrNoBlock.last => より確実に作成されたブロックを取得
           render json: @yes_or_no_block
         else

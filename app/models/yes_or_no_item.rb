@@ -13,9 +13,6 @@ class YesOrNoItem < ApplicationRecord
   # association =============
   belongs_to :yes_or_no_block
 
-  # validation
-  validates :answer, inclusion: { in: [true, false] }
-
   # scope ============= # Ex:- scope :active, -> {where(:active => true)}
   scope :by_team, -> (current_user) { includes(yes_or_no_block: { profile_block: { user: :team } } ).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id })}
 end
