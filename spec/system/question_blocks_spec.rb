@@ -475,7 +475,7 @@ RSpec.describe "QuestionBlocks", type: :system do
         find("#delete-question-block-button-#{last_question_block.id}").click
         page.driver.browser.switch_to.alert.accept # confirmダイアログで「OK」を選択する
       end
-      fit '対象のクエスチョンブロックが削除されること' do
+      it '対象のクエスチョンブロックが削除されること' do
         expect(page).not_to have_content(question_block_title), '対象のクエスチョンブロックが削除されていません'
         expect(page).to have_content('クエスチョンブロックを削除したよ！'), 'フラッシュメッセージが表示されていません'
       end
