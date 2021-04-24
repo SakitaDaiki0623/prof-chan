@@ -38,7 +38,7 @@
         tile
         color="red lighten-3"
         class="ma-2 white--text"
-        @click="openQuestionBlockSelectDialog"
+        @click="openQuestionFormatDialog"
       >
         <v-icon left> mdi-plus </v-icon>
         クエスチョンブロックを追加する
@@ -77,18 +77,15 @@
     />
 
     <!-- Question Block -->
-    <QuestionBlockSelectDialog
-      :is-shown-question-block-select-dialog="isShownQuestionBlockSelectDialog"
-      @open-question-format-dialog="openQuestionFormatDialog"
-      @close-question-block-select-dialog="closeQuestionBlockSelectDialog"
-    />
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
+      :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
       @close-question-format-dialog="closeQuestionFormatDialog"
     />
     <EditQuestionFormatDialog
       :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
       :edit-question-block="editQuestionBlock"
+      :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
       @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
     />
@@ -140,7 +137,6 @@ import EditTextFormatDialog from "../../components/text_block/EditTextFormatDial
 // Question Block
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import QuestionFormatDialog from "../../components/question_block/QuestionFormatDialog";
-import QuestionBlockSelectDialog from "../../components/question_block/QuestionBlockSelectDialog";
 import EditQuestionFormatDialog from "../../components/question_block/EditQuestionFormatDialog";
 
 // Ranking Block
@@ -156,7 +152,6 @@ export default {
 
     // Question Block
     QuestionBlockList,
-    QuestionBlockSelectDialog,
     QuestionFormatDialog,
     EditQuestionFormatDialog,
 
@@ -189,10 +184,10 @@ export default {
       textBlockColorForFlashMessage: "teal lighten-3", // text block image color
 
       // Question Block
-      isShownQuestionBlockSelectDialog: false,
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
+      questionBlockColorForFlashMessage: "red lighten-3", // ranking block image color
 
       // Ranking Block
       isShownRankingFormatDialog: false,
@@ -286,14 +281,7 @@ export default {
     },
 
     // Question Block
-    openQuestionBlockSelectDialog() {
-      this.isShownQuestionBlockSelectDialog = true;
-    },
-    closeQuestionBlockSelectDialog() {
-      this.isShownQuestionBlockSelectDialog = false;
-    },
     openQuestionFormatDialog() {
-      this.closeQuestionBlockSelectDialog();
       this.isShownQuestionFormatDialog = true;
     },
     closeQuestionFormatDialog() {

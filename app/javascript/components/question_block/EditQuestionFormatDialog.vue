@@ -7,10 +7,10 @@
       persistent
       @input="$emit('input', $event.target.isShownEditQuestionFormatDialog)"
     >
-      <v-card color="red lighten-3">
+      <v-card :color="questionBlockColorForFlashMessage">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn
-            color="red lighten-3"
+            :color="questionBlockColorForFlashMessage"
             @click="hundleCloseQuestionBlockEditDialog"
           >
             ✖︎
@@ -115,6 +115,7 @@
             :answerNameForValidation="answerNameForValidation1"
             :questionItemLength="questionItemLength"
             :isTheItemEditing="isTheFirstItemEditing"
+            :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
             @show-edit-question-item-form="showTheFirstEditQuestionItemForm"
             @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
           />
@@ -125,6 +126,7 @@
             :answerNameForValidation="answerNameForValidation2"
             :isTheItemEditing="isTheSecondItemEditing"
             :questionItemLength="questionItemLength"
+            :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
             v-if="questionItemLength >= 2"
             @show-edit-question-item-form="showTheSecondEditQuestionItemForm"
             @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
@@ -136,6 +138,7 @@
             :answerNameForValidation="answerNameForValidation3"
             :isTheItemEditing="isTheThirdItemEditing"
             :questionItemLength="questionItemLength"
+            :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
             v-if="questionItemLength >= 3"
             @show-edit-question-item-form="showTheThirdEditQuestionItemForm"
             @hide-edit-question-item-form="hideTheThirdEditQuestionItemForm"
@@ -159,7 +162,7 @@
               depressed
               elevation="4"
               x-large
-              color="red lighten-3"
+              :color="questionBlockColorForFlashMessage"
               class="white--text"
               @click="hundleCloseQuestionBlockEditDialog"
             >
@@ -195,7 +198,7 @@ export default {
       type: Object,
       required: true,
     },
-    textBlockColorForFlashMessage: {
+    questionBlockColorForFlashMessage: {
       type: String,
       required: false,
     },
@@ -272,7 +275,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックのタイトルを更新したよ！",
-        color: "red lighten-3",
+        color: questionBlockColorForFlashMessage,
       });
     },
 
