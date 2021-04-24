@@ -46,7 +46,7 @@
     </v-row>
     <QuestionBlockList
       class="mb-10"
-      @open-question-text-format-dialog="openEditQuestionFormatDialog"
+      @open-edit-question-format-dialog="openEditQuestionFormatDialog"
       @delete-question-block="hundleDeleteQuestionBlock"
     />
 
@@ -133,7 +133,7 @@ import EditQuestionFormatDialog from "../../components/question_block/EditQuesti
 
 // Ranking Block
 import RankingFormatDialog from "../../components//ranking_block/RankingFormatDialog";
-
+import RankingBlockList from "../../components//ranking_block/RankingBlockList";
 
 export default {
   components: {
@@ -149,12 +149,12 @@ export default {
 
     // Ranking Block
     RankingFormatDialog,
+    RankingBlockList,
 
     // Text Block
     TextFormatDialog,
     TextBlockList,
     EditTextFormatDialog,
-
   },
   props: {
     id: {
@@ -191,6 +191,7 @@ export default {
     ...mapState("profiles", ["profiles"]),
     ...mapState("users", ["currentUser"]),
     ...mapState("textBlocks", ["textBlocks"]),
+    ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("questionBlocks", ["questionBlocks"]),
 
     profile() {
@@ -201,6 +202,14 @@ export default {
         this.textBlocks.filter(
           (textBlock) =>
             textBlock.profile_block.id == this.currentUser.profile_block.id
+        ) || {}
+      );
+    },
+    myRankingBlocks() {
+      return (
+        this.rankingBlocks.filter(
+          (rankingBlock) =>
+            rankingBlock.profile_block.id == this.currentUser.profile_block.id
         ) || {}
       );
     },
