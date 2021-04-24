@@ -91,9 +91,9 @@
   @apply ease-in-out;
 
   &:focus {
-    @apply border-red-500;
+    @apply border-yellow-500;
     @apply ring-2;
-    @apply ring-red-200;
+    @apply ring-yellow-200;
   }
 }
 
