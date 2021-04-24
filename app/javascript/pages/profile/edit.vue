@@ -63,6 +63,12 @@
         ランキングブロックを追加する
       </v-btn>
     </v-row>
+    <RankingBlockList
+      class="mb-10"
+      :my-ranking-blocks="myRankingBlocks"
+      @open-edit-ranking-format-dialog="openEditRankingFormatDialog"
+      @delete-ranking-block="hundleDeleteRankingBlock"
+    />
 
     <!-- Dialogs -->
     <!-- Basic Prof Card -->
@@ -311,6 +317,15 @@ export default {
     },
     closeRankingFormatDialog() {
       this.isShownRankingFormatDialog = false;
+    },
+    hundleDeleteRankingBlock(rankingBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteRankingBlock(rankingBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "ランキングブロックを削除したよ！",
+        color: this.rankingBlockColorForFlashMessage,
+      });
     },
   },
 };

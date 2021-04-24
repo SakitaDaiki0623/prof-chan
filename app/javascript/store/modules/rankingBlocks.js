@@ -36,14 +36,8 @@ export const rankingBlocks = {
         .catch((error) => console.log(error.status));
     },
     createRankingBlock({ commit }, rankingBlock) {
-      const params = {
-        title: rankingBlock.title,
-        first_place: rankingBlock.firstPlace,
-        second_place: rankingBlock.secondPlace,
-        third_place: rankingBlock.thirdPlace,
-      };
       axios
-        .post("ranking_blocks", params)
+        .post("ranking_blocks", rankingBlock)
         .then((response) => {
           commit("addRankingBlock", response.data);
         })

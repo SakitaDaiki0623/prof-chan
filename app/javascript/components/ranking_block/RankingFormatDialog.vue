@@ -54,7 +54,7 @@
                 >
                   <input
                     id="ranking_block_first_place"
-                    v-model="rankingBlock.firstPlace"
+                    v-model="rankingBlock.first_place"
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_first_place]"
                   />
@@ -72,7 +72,7 @@
                 >
                   <input
                     id="ranking_block_second_place"
-                    v-model="rankingBlock.secondPlace"
+                    v-model="rankingBlock.second_place"
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_second_place]"
                   />
@@ -90,7 +90,7 @@
                 >
                   <input
                     id="ranking_block_third_place"
-                    v-model="rankingBlock.thirdPlace"
+                    v-model="rankingBlock.third_place"
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_third_place]"
                   />
@@ -141,9 +141,9 @@ export default {
     return {
       rankingBlock: {
         title: "",
-        firstPlace: "",
-        secondPlace: "",
-        thirdPlace: "",
+        first_place: "",
+        second_place: "",
+        third_place: "",
       },
     };
   },
@@ -165,9 +165,9 @@ export default {
     },
     clearRankingBlock() {
       this.rankingBlock.title = "";
-      this.rankingBlock.firstPlace = "";
-      this.rankingBlock.secondPlace = "";
-      this.rankingBlock.thirdPlace = "";
+      this.rankingBlock.first_place = "";
+      this.rankingBlock.second_place = "";
+      this.rankingBlock.third_place = "";
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
