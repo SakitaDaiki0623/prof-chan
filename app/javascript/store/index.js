@@ -13,7 +13,7 @@ import { isNotFound } from "./modules/isNotFound";
 import { textBlocks } from "./modules/textBlocks";
 import { questionBlocks } from "./modules/questionBlocks";
 import { profileBlocks } from "./modules/profileBlocks";
-
+import { rankingBlocks } from "./modules/rankingBlocks";
 
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
@@ -28,7 +28,8 @@ export default new Vuex.Store({
     profiles,
     profileBlocks,
     textBlocks,
-    questionBlocks
+    questionBlocks,
+    rankingBlocks,
   },
   plugins: [
     createPersistedState({

@@ -5,8 +5,7 @@ module Api
       before_action :set_ranking_block, only: %i[show update destroy]
 
       def index
-        @user = User.find(current_user.id)
-        @ranking_blocks = RankingBlock.includes(profile_block: { user: :team }).where(teams: { workspace_id: @user.team.workspace_id })
+        @ranking_blocks = RankingBlock.by_team(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @ranking_blocks,
           serializer: RankingBlockSerializer
@@ -14,13 +13,12 @@ module Api
       end
 
       def create
-        @ranking_block_item_register = RankingBlockItemRegister.new(set_params)
-        if @ranking_block_item_register.save
-          # TODO: Refactoring RankingBlock.lastでは確実に作成した値を返すかわからない
-          @ranking_block = RankingBlock.last
-          render json: @ranking_block
+        @ranking_block = current_user.profile_block.ranking_blocks.build(ranking_block_params)
+
+        if @ranking_block.save
+          render json: @ranking_block, serializer: RankingBlockSerializer
         else
-          render json: @ranking_block_item_register.errors, status: :bad_request
+          render json: @ranking_block.errors, status: :bad_request
         end
       end
 
@@ -28,7 +26,7 @@ module Api
 
       def update
         if @ranking_block.update!(ranking_block_params)
-          render json: @ranking_block
+          render json: @ranking_block, serializer: RankingBlockSerializer
         else
           render json: @ranking_block_item_register.errors, status: :bad_request
         end
@@ -36,20 +34,13 @@ module Api
 
       def destroy
         @ranking_block.destroy!
-        render json: @ranking_block
+        render json: @ranking_block, serializer: RankingBlockSerializer
       end
 
       private
 
-      def set_params
-        params.permit(
-          :ranking_title, :ranking_item_content1,
-          :ranking_item_answer1, :ranking_item_content2, :ranking_item_answer2, :ranking_item_content3,
-          :ranking_item_answer3, :current_user).merge(profile_block_id: ProfileBlock.find_by(user_id: User.find(current_user.id)).id)
-      end
-
       def ranking_block_params
-        params.require(:ranking_block).permit(:title)
+        params.require(:ranking_block).permit(:title, :first_place, :second_place, :third_place)
       end
 
       def set_ranking_block
