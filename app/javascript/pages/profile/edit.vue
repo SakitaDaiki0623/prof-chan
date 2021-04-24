@@ -1,6 +1,6 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div class="text-gray-600 font-prof-default">
+  <div class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
@@ -16,7 +16,7 @@
       <v-btn
         id="add-text-block-btn"
         tile
-        color="teal lighten-3"
+        :color="textBlockColor"
         class="ma-2 white--text"
         @click="openTextFormatDialog"
       >
@@ -36,7 +36,7 @@
       <v-btn
         id="add-question-block-btn"
         tile
-        color="red lighten-3"
+        :color="questionBlockColor"
         class="ma-2 white--text"
         @click="openQuestionFormatDialog"
       >
@@ -50,12 +50,31 @@
       @delete-question-block="hundleDeleteQuestionBlock"
     />
 
+    <!-- YesOrNo Blocks -->
+    <v-row justify="center" class="mb-10">
+      <v-btn
+        id="add-yes-or-no-block-btn"
+        tile
+        :color="yesOrNoBlockColor"
+        class="ma-2 white--text"
+        @click="openYesOrNoFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        Yes or No ブロックを追加する
+      </v-btn>
+    </v-row>
+    <YesOrNoBlockList
+      class="mb-10"
+      @open-edit-yes-or-no-format-dialog="openEditYesOrNoFormatDialog"
+      @delete-yes-or-no-block="hundleDeleteYesOrNoBlock"
+    />
+
     <!-- Ranking Blocks -->
     <v-row justify="center" class="mb-10">
       <v-btn
         id="add-ranking-block-btn"
         tile
-        color="green lighten-3"
+        :color="rankingBlockColor"
         class="ma-2 white--text"
         @click="openRankingFormatDialog"
       >
@@ -79,26 +98,40 @@
     <!-- Question Block -->
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
-      :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
+      :question-block-color="questionBlockColor"
       @close-question-format-dialog="closeQuestionFormatDialog"
     />
     <EditQuestionFormatDialog
       :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
       :edit-question-block="editQuestionBlock"
-      :question-block-color-for-flash-message="questionBlockColorForFlashMessage"
+      :question-block-color="questionBlockColor"
       @close-question-block-format-dialog="closeEditQuestionFormatDialog"
       @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
+    />
+
+    <!-- YesOrNo Block -->
+    <YesOrNoFormatDialog
+      :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
+      :yes-or-no-block-color="yesOrNoBlockColor"
+      @close-yes-or-no-format-dialog="closeYesOrNoFormatDialog"
+    />
+    <EditYesOrNoFormatDialog
+      :is-shown-edit-yes-or-no-format-dialog="isShownEditYesOrNoFormatDialog"
+      :edit-yes-or-no-block="editYesOrNoBlock"
+      :yes-or-no-block-color="yesOrNoBlockColor"
+      @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
+      @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
     />
 
     <!-- Ranking Block -->
     <RankingFormatDialog
       :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
-      :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
+      :ranking-block-color="rankingBlockColor"
       @close-ranking-format-dialog="closeRankingFormatDialog"
     />
     <EditRankingFormatDialog
       :is-shown-edit-ranking-format-dialog="isShownEditRankingFormatDialog"
-      :ranking-block-color-for-flash-message="rankingBlockColorForFlashMessage"
+      :ranking-block-color="rankingBlockColor"
       :edit-ranking-block="editRankingBlock"
       @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
     />
@@ -106,12 +139,12 @@
     <!-- Text Block -->
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
-      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
+      :text-block-color="textBlockColor"
       @close-text-format-dialog="closeTextFormatDialog"
     />
     <EditTextFormatDialog
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
-      :text-block-color-for-flash-message="textBlockColorForFlashMessage"
+      :text-block-color="textBlockColor"
       :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
     />
@@ -139,6 +172,11 @@ import QuestionBlockList from "../../components/question_block/QuestionBlockList
 import QuestionFormatDialog from "../../components/question_block/QuestionFormatDialog";
 import EditQuestionFormatDialog from "../../components/question_block/EditQuestionFormatDialog";
 
+// YesOrNo Block
+import YesOrNoFormatDialog from "../../components/yes_or_no_block/YesOrNoFormatDialog";
+import EditYesOrNoFormatDialog from "../../components/yes_or_no_block/EditYesOrNoFormatDialog";
+import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
+
 // Ranking Block
 import RankingFormatDialog from "../../components//ranking_block/RankingFormatDialog";
 import RankingBlockList from "../../components//ranking_block/RankingBlockList";
@@ -154,6 +192,11 @@ export default {
     QuestionBlockList,
     QuestionFormatDialog,
     EditQuestionFormatDialog,
+
+    // YesOrNo Block
+    YesOrNoFormatDialog,
+    YesOrNoBlockList,
+    EditYesOrNoFormatDialog,
 
     // Ranking Block
     RankingFormatDialog,
@@ -181,19 +224,25 @@ export default {
       isShownTextFormatDialog: false,
       isShownEditTextFormatDialog: false,
       editTextBlock: {},
-      textBlockColorForFlashMessage: "teal lighten-3", // text block image color
+      textBlockColor: "teal lighten-3", // text block image color
 
       // Question Block
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
-      questionBlockColorForFlashMessage: "red lighten-3", // ranking block image color
+      questionBlockColor: "red lighten-3", // question block image color
+
+      // YesOrNo Block
+      isShownYesOrNoFormatDialog: false,
+      isShownEditYesOrNoFormatDialog: false,
+      editYesOrNoBlock: {},
+      yesOrNoBlockColor: "orange lighten-3", // ranking block image color
 
       // Ranking Block
       isShownRankingFormatDialog: false,
       isShownEditRankingFormatDialog: false,
       editRankingBlock: {},
-      rankingBlockColorForFlashMessage: "green lighten-3", // ranking block image color
+      rankingBlockColor: "green lighten-3", // ranking block image color
     };
   },
   computed: {
@@ -202,6 +251,7 @@ export default {
     ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("questionBlocks", ["questionBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
 
     profile() {
       return this.profiles.find((profile) => profile.id == this.id) || {};
@@ -236,6 +286,11 @@ export default {
     ...mapActions({
       fetchProfiles: "profiles/fetchProfiles",
       fetchCurrentUser: "users/fetchCurrentUser",
+
+      // YesOrNo Block
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      deleteYesOrNoBlock: "yesOrNoBlocks/deleteYesOrNoBlock",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
 
       // Question Block
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
@@ -276,7 +331,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "テキストブロックを削除したよ！",
-        color: this.textBlockColorForFlashMessage,
+        color: this.textBlockColor,
       });
     },
 
@@ -307,6 +362,33 @@ export default {
       });
     },
 
+    // YesOrNo Block
+    openYesOrNoFormatDialog() {
+      this.isShownYesOrNoFormatDialog = true;
+    },
+    closeYesOrNoFormatDialog() {
+      this.isShownYesOrNoFormatDialog = false;
+    },
+    openEditYesOrNoFormatDialog(yesOrNoBlock) {
+      this.editYesOrNoBlock = Object.assign({}, yesOrNoBlock);
+      this.isShownEditYesOrNoFormatDialog = true;
+    },
+    closeEditYesOrNoFormatDialog() {
+      this.isShownEditYesOrNoFormatDialog = false;
+    },
+    closeYesOrNoBlockEditDialog(editYesOrNoBlock) {
+      this.editYesOrNoBlock = editYesOrNoBlock;
+    },
+    hundleDeleteYesOrNoBlock(yesOrNoBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteYesOrNoBlock(yesOrNoBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "Yes or No ブロックを削除したよ！",
+        color: this.yesOrNoBlockColor,
+      });
+    },
+
     // Ranking Block
     openRankingFormatDialog() {
       this.isShownRankingFormatDialog = true;
@@ -327,7 +409,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "ランキングブロックを削除したよ！",
-        color: this.rankingBlockColorForFlashMessage,
+        color: this.rankingBlockColor,
       });
     },
   },

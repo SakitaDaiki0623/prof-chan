@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       resources :question_blocks,   only: %i[index create show update destroy]
       resources :question_items,    only: %i[index create update destroy]
       resources :ranking_blocks,   only: %i[index create show update destroy]
+      resources :yes_or_no_blocks,   only: %i[index create show update destroy]
+      resources :yes_or_no_items,    only: %i[index create update destroy]
     end
   end
 

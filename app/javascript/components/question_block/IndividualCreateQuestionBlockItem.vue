@@ -48,7 +48,6 @@
               large
               color="red lighten-4"
               :disabled="invalid"
-              class="font-prof-default	"
               @click="hundleCreateIndevisialQuestionItem(questionItem)"
             >
               作成！

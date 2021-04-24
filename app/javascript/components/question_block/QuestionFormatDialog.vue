@@ -7,19 +7,17 @@
       persistent
       @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
     >
-      <v-card :color="questionBlockColorForFlashMessage">
+      <v-card :color="questionBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn
-            :color="questionBlockColorForFlashMessage"
+            :color="questionBlockColor"
             @click="hundleCloseQuestioniFormatDialog"
           >
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10"
-        >
-          オリジナルクエスチョンブロック
+        <p class="font-weight-bold text-white text-4xl text-center mt-10">
+          クエスチョンブロック
         </p>
 
         <div
@@ -35,7 +33,7 @@
               small
               tile
               color="red lighten-2"
-              class="white--text font-prof-default"
+              class="white--text"
               :disabled="questionItemNum >= 3"
               @click="addQuestionItemNum"
             >
@@ -50,7 +48,7 @@
               small
               tile
               color="grey darken-3"
-              class="white--text font-prof-default"
+              class="white--text"
               :disabled="questionItemNum <= 1"
               @click="deleteQuestionItemNum"
             >
@@ -121,7 +119,7 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  :color="questionBlockColorForFlashMessage"
+                  :color="questionBlockColor"
                   class="white--text"
                 >
                   <v-icon left> mdi-plus </v-icon>
@@ -153,6 +151,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    questionBlockColor: {
+      type: String,
+      required: false,
+    },
   },
   data() {
     return {
@@ -171,10 +173,6 @@ export default {
       questionItem3: {
         content: "",
         answer: "",
-      },
-      questionBlockColorForFlashMessage: {
-        type: String,
-        required: false,
       },
 
       // Validator
@@ -222,7 +220,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
-        color: questionBlockColorForFlashMessage,
+        color: this.questionBlockColor,
       });
     },
     hundleCloseQuestioniFormatDialog() {

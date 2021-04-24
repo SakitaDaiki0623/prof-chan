@@ -8,7 +8,7 @@
     >
       <v-card height="550" :img="require('../images/card_bg.jpg')">
         <p
-          class="font-weight-bold font-prof-default text-gray-600 text-4xl text-center mt-20 mb-10"
+          class="font-weight-bold  text-gray-600 text-4xl text-center mt-20 mb-10"
         >
           基本情報の登録が完了しました！
         </p>
@@ -17,7 +17,7 @@
             <v-btn
               x-large
               color="blue-grey darken-2"
-              class="font-prof-default white--text"
+              class="white--text"
               @click="moveToEditProfilePage"
             >
               <v-icon left> mdi-pencil </v-icon>
@@ -25,7 +25,7 @@
             </v-btn>
           </v-row>
         </v-card-actions>
-        <v-card-text class="font-prof-default text-gray-600 text-center mb-5">
+        <v-card-text class="text-gray-600 text-center mb-5">
           趣味、住所などあなたに関わるプロフィールを追加します。
         </v-card-text>
         <v-card-actions>
@@ -33,7 +33,7 @@
             <v-btn
               x-large
               color="light-green accent-2"
-              class="font-prof-default black--text"
+              class=" black--text"
               @click="moveToProfilesPage"
             >
               <v-icon left> mdi-account-circle </v-icon>
@@ -41,7 +41,7 @@
             </v-btn>
           </v-row>
         </v-card-actions>
-        <v-card-text class="font-prof-default text-gray-600 text-center mb-5">
+        <v-card-text class=" text-gray-600 text-center mb-5">
           他の社員プロフィールを閲覧します。
         </v-card-text>
       </v-card>
