@@ -1,6 +1,6 @@
 <!-- app/javascript/pages/profile/index.vue -->
 <template>
-  <div class="bg-backimage bg-cover bg-fixed text-gray-600 font-prof-default">
+  <div class="bg-backimage bg-cover bg-fixed text-gray-600">
     <v-container class="note shadow-lg mb-20 mt-20">
       <p class="text-5xl font-bold pt-10 pb-10">
         社員プロフィール一覧

@@ -1,6 +1,6 @@
 <template>
   <v-fade-transition>
-    <div class="flash font-prof-default">
+    <div class="flash">
       <v-alert
         dense
         outlined

@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app">
+  <v-app id="app" class="default">
     <TheHeader />
     <v-main>
       <TheNotFound v-if="isNotFound" />
@@ -38,4 +38,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.default {
+  font-family: "TsukuARdGothic-Regular", "klee", "Hannotate SC", "Chalkboard SE",
+    "Comic Sans MS", "sans-serif";
+}
+</style>

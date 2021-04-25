@@ -7,17 +7,17 @@
       persistent
       @input="$emit('input', $event.target.isShownRankingFormatDialog)"
     >
-      <v-card :color="rankingBlockColorForFlashMessage">
+      <v-card :color="rankingBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn
-            :color="rankingBlockColorForFlashMessage"
+            :color="rankingBlockColor"
             @click="hundleCloseRankingFormatDialog"
           >
             ✖︎
           </v-btn>
         </v-row>
         <p
-          class="font-weight-bold font-prof-default text-white text-4xl text-center mt-10 mb-10"
+          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
         >
           ランキングブロック作成
         </p>
@@ -105,7 +105,7 @@
                   elevation="4"
                   x-large
                   :disabled="invalid"
-                  :color="rankingBlockColorForFlashMessage"
+                  :color="rankingBlockColor"
                   class="white--text"
                 >
                   ランキングブロックを作成！
@@ -132,7 +132,7 @@ export default {
       type: Boolean,
       required: true,
     },
-    rankingBlockColorForFlashMessage: {
+    rankingBlockColor: {
       type: String,
       required: true,
     },
@@ -156,7 +156,7 @@ export default {
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "ランキングブロックを作成したよ！",
-        color: this.rankingBlockColorForFlashMessage,
+        color: this.rankingBlockColor,
       });
     },
     hundleCloseRankingFormatDialog() {

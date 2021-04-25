@@ -8,7 +8,7 @@
   >
     <!-- Basic Info Card -->
     <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
-      <div class="flex p-3 text-gray-600 font-prof-default">
+      <div class="flex p-3 text-gray-600">
         <div class="md:w-2/4 p-4 text-center mt-10">
           <div
             class="border-b-2 border-gray-600 border-4 border-gray-300 m-5"

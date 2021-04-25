@@ -14,6 +14,6 @@ class YesOrNoBlock < ApplicationRecord
   belongs_to :profile_block
   has_many :yes_or_no_items, dependent: :destroy
 
-  # validation =============
-  validates :title, presence: true, length: { maximum: 30 }
+  # scope ============= # Ex:- scope :active, -> {where(:active => true)}
+  scope :by_team, -> (current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id })}
 end
