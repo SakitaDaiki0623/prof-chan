@@ -25,9 +25,15 @@ Rails.application.routes.draw do
       resources :text_blocks,       only: %i[index create show update destroy]
       resources :question_blocks,   only: %i[index create show update destroy]
       resources :question_items,    only: %i[index create update destroy]
-      resources :ranking_blocks,   only: %i[index create show update destroy]
+      resources :ranking_blocks,    only: %i[index create show update destroy]
       resources :yes_or_no_blocks,   only: %i[index create show update destroy]
       resources :yes_or_no_items,    only: %i[index create update destroy]
+
+      # 各ブロックのいいね機能
+      resources :text_block_likes,      only: [:index, :create, :destroy]
+      resources :question_block_likes,  only: [:index, :create, :destroy]
+      resources :ranking_block_likes,   only: [:index, :create, :destroy]
+      resources :yes_or_no_block_likes, only: [:index, :create, :destroy]
     end
   end
 

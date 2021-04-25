@@ -13,6 +13,7 @@
 class TextBlock < ApplicationRecord
   # association ==========
   belongs_to :profile_block
+  has_many :text_block_likes, dependent: :destroy
 
   # validation =============
   validates :title, presence: true,      length: { maximum: 50 }
