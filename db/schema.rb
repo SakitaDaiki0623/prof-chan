@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_064804) do
     t.string "manga_anime"
     t.string "game_app"
     t.string "character"
-    t.string "admired_person"
     t.string "entertainer"
     t.string "musician"
     t.string "music"
@@ -49,7 +48,8 @@ ActiveRecord::Schema.define(version: 2021_04_25_064804) do
     t.string "snack"
     t.string "alcohol_drink"
     t.string "restaurants"
-    t.string "characteristic"
+    t.string "YouTuber"
+    t.string "actor"
     t.bigint "profile_block_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

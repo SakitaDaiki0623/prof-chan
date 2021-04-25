@@ -23,7 +23,7 @@ module Api
       private
 
       def my_favorite_block_params
-        params.require(:my_favorite_block).permit(:manga_anime, :game_app, :character, :admired_person, :entertainer, :music, :food, :animal, :sports, :book, :place, :snack, :alcohol_drink, :restaurants, :characteristic, :musician)
+        params.require(:my_favorite_block).permit(:manga_anime, :game_app, :character, :actor, :entertainer, :music, :food, :animal, :sports, :book, :place, :snack, :alcohol_drink, :restaurants, :YouTuber, :musician)
       end
 
       def set_my_favorite_block

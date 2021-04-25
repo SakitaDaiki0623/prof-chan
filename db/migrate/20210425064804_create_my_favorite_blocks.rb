@@ -4,7 +4,6 @@ class CreateMyFavoriteBlocks < ActiveRecord::Migration[6.0]
       t.string :manga_anime
       t.string :game_app
       t.string :character
-      t.string :admired_person
       t.string :entertainer
       t.string :musician
       t.string :music
@@ -16,7 +15,8 @@ class CreateMyFavoriteBlocks < ActiveRecord::Migration[6.0]
       t.string :snack
       t.string :alcohol_drink
       t.string :restaurants
-      t.string :characteristic
+      t.string :YouTuber
+      t.string :actor
 
       t.references :profile_block, null: false, foreign_key: true
 

@@ -8,7 +8,7 @@ class MyFavoriteBlock < ApplicationRecord
     validates :manga_anime
     validates :game_app
     validates :character
-    validates :admired_person
+    validates :actor
     validates :entertainer
     validates :musician
     validates :music
@@ -20,6 +20,9 @@ class MyFavoriteBlock < ApplicationRecord
     validates :snack
     validates :alcohol_drink
     validates :restaurants
-    validates :characteristic
+    validates :YouTuber
   end
+
+  # scope =============
+  scope :by_team, ->(current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id }) }
 end
