@@ -2,7 +2,6 @@
 module Api
   module V1
     class QuestionBlockLikesController < ApiController
-
       def index
         @question_block_likes = QuestionBlockLike.filter_by_question_block(params[:question_block_id]).select(:id, :user_id, :question_block_id)
         render json: @question_block_likes
@@ -19,6 +18,7 @@ module Api
       end
 
       private
+
       def question_blocks_params
         params.require(:question_block_like).permit(:question_block_id)
       end

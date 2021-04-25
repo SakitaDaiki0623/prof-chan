@@ -73,5 +73,4 @@ class User < ApplicationRecord
                   Team.create!(name: name, workspace_id: workspace_id, image: image)
                 end
   end
-
 end

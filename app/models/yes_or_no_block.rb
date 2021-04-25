@@ -16,5 +16,5 @@ class YesOrNoBlock < ApplicationRecord
   has_many :yes_or_no_block_likes, dependent: :destroy
 
   # scope ============= # Ex:- scope :active, -> {where(:active => true)}
-  scope :by_team, -> (current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id })}
+  scope :by_team, ->(current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id }) }
 end

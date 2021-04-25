@@ -22,10 +22,11 @@ class QuestionBlockItemRegister
   validates :question_item_answer2,                         length: { maximum: 50 }
   validates :question_item_content3,                        length: { maximum: 50 }
   validates :question_item_answer3,                         length: { maximum: 50 }
-  validates :profile_block_id,        presence: true
+  validates :profile_block_id, presence: true
 
   def save
     return false if invalid?
+
     ActiveRecord::Base.transaction do
       question_block = QuestionBlock.create!(title: question_title, profile_block_id: profile_block_id)
 
