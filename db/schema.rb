@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_174006) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_block_id"], name: "index_question_block_likes_on_question_block_id"
+    t.index ["user_id", "question_block_id"], name: "index_question_block_likes_on_user_id_and_question_block_id", unique: true
     t.index ["user_id"], name: "index_question_block_likes_on_user_id"
   end
 
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_174006) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ranking_block_id"], name: "index_ranking_block_likes_on_ranking_block_id"
+    t.index ["user_id", "ranking_block_id"], name: "index_ranking_block_likes_on_user_id_and_ranking_block_id", unique: true
     t.index ["user_id"], name: "index_ranking_block_likes_on_user_id"
   end
 
@@ -114,6 +116,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_174006) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["text_block_id"], name: "index_text_block_likes_on_text_block_id"
+    t.index ["user_id", "text_block_id"], name: "index_text_block_likes_on_user_id_and_text_block_id", unique: true
     t.index ["user_id"], name: "index_text_block_likes_on_user_id"
   end
 
@@ -152,6 +155,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_174006) do
     t.bigint "yes_or_no_block_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "yes_or_no_block_id"], name: "index_yes_or_no_block_likes_on_user_id_and_yes_or_no_block_id", unique: true
     t.index ["user_id"], name: "index_yes_or_no_block_likes_on_user_id"
     t.index ["yes_or_no_block_id"], name: "index_yes_or_no_block_likes_on_yes_or_no_block_id"
   end

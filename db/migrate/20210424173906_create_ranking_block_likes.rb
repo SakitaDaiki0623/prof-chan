@@ -5,6 +5,8 @@ class CreateRankingBlockLikes < ActiveRecord::Migration[6.0]
       t.references :ranking_block, null: false, foreign_key: true
 
       t.timestamps
+
+      t.index [:user_id, :ranking_block_id], unique: true
     end
   end
 end

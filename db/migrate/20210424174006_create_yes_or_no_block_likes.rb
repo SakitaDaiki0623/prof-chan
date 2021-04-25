@@ -5,6 +5,8 @@ class CreateYesOrNoBlockLikes < ActiveRecord::Migration[6.0]
       t.references :yes_or_no_block, null: false, foreign_key: true
 
       t.timestamps
+
+      t.index [:user_id, :yes_or_no_block_id], unique: true
     end
   end
 end
