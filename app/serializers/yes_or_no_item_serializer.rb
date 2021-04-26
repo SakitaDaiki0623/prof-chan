@@ -3,7 +3,5 @@ class YesOrNoItemSerializer < ActiveModel::Serializer
   attributes :id, :content, :answer, :yes_or_no_block
   belongs_to :yes_or_no_block, serializer: YesOrNoBlockSerializer
 
-  def yes_or_no_block
-    object.yes_or_no_block
-  end
+  delegate :yes_or_no_block, to: :object
 end

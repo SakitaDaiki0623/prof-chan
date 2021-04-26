@@ -1,4 +1,4 @@
-<!-- app/javascript/pages/profile/show.vue -->
+<!-- app/javascript/pages/profile/edit.vue -->
 <template>
   <div class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
@@ -10,6 +10,9 @@
         @open-edit-basic-prof-card="openEditBasicProfCard"
       />
     </div>
+
+    <!-- My Favorites Blocks -->
+    <MyFavoriteBlock />
 
     <!-- Text Blocks -->
     <v-row justify="center" class="mb-10">
@@ -162,6 +165,9 @@ import { mapState, mapActions, Store } from "vuex";
 import BasicProfCard from "../../components/BasicProfCard";
 import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
 
+// My Favorites Blocks
+import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
+
 // Text Block
 import TextBlockList from "../../components/text_block/TextBlockList";
 import TextFormatDialog from "../../components//text_block/TextFormatDialog";
@@ -187,6 +193,9 @@ export default {
     // Basic Prof Card
     BasicProfCard,
     EditBasicProfCardDialog,
+
+    // My Favorites Blocks
+    MyFavoriteBlock,
 
     // Question Block
     QuestionBlockList,
@@ -278,7 +287,8 @@ export default {
     // this.fetchTextBlocks();
     // this.fetchQuestionBlocks();
     // this.fetchQuestionItems();
-    this.fetchRankingBlocks();
+    // this.fetchRankingBlocks();
+    // this.fetchYesOrNoBlocks();
 
     document.title = `プロフィール編集 - プロフちゃん`;
   },

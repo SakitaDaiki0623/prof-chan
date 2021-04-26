@@ -33,6 +33,11 @@ class User < ApplicationRecord
   has_one :profile_block, dependent: :destroy
   belongs_to :team
 
+  has_many :text_block_likes, dependent: :destroy
+  has_many :question_block_likes, dependent: :destroy
+  has_many :ranking_block_likes, dependent: :destroy
+  has_many :yes_or_no_block_likes, dependent: :destroy
+
   # validation
   validates :name,                      presence: true, length: { in: 1..15 }
   validates :email,                     presence: true, uniqueness: { case_sensitive: true }
@@ -40,6 +45,9 @@ class User < ApplicationRecord
   validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
+
+  # after_create
+  after_create :create_profile_block
 
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
@@ -49,7 +57,6 @@ class User < ApplicationRecord
     user.image = user_info.dig('user', 'image_192')
     user.check_team_existence(user_info.dig('team'))
     user.save!
-    user.check_profile_block_existence
     user
   end
 
@@ -65,13 +72,5 @@ class User < ApplicationRecord
                   # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
                   Team.create!(name: name, workspace_id: workspace_id, image: image)
                 end
-  end
-
-  # ユーザーにprofile_blockがなければ作成
-  def check_profile_block_existence
-    if profile_block.nil?
-      build_profile_block
-      profile_block.save!
-    end
   end
 end

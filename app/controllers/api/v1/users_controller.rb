@@ -1,7 +1,6 @@
 module Api
   module V1
     class UsersController < ApiController
-
       def index
         @user = User.find(current_user.id)
         @users = User.includes(:team).where(teams: { workspace_id: @user.team.workspace_id })

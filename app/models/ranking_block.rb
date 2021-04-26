@@ -15,13 +15,18 @@
 class RankingBlock < ApplicationRecord
   # association =============
   belongs_to :profile_block
+  has_many :ranking_block_likes, dependent: :destroy
 
   # validation =============
-  validates :title,         presence: true, length: { maximum: 50 }
-  validates :first_place,   presence: true, length: { maximum: 50 }
-  validates :second_place,  presence: true, length: { maximum: 50 }
-  validates :third_place,   presence: true, length: { maximum: 50 }
+  with_options presence: true do
+    with_options length: { maximum: 50 } do
+      validates :title
+      validates :first_place
+      validates :second_place
+      validates :third_place
+    end
+  end
 
   # scope ============= # Ex:- scope :active, -> {where(:active => true)}
-  scope :by_team, -> (current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id })}
+  scope :by_team, ->(current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id }) }
 end

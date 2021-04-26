@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_111303) do
+ActiveRecord::Schema.define(version: 2021_04_25_064804) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,29 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "my_favorite_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "manga_anime"
+    t.string "game_app"
+    t.string "character"
+    t.string "entertainer"
+    t.string "musician"
+    t.string "music"
+    t.string "food"
+    t.string "animal"
+    t.string "sports"
+    t.string "book"
+    t.string "place"
+    t.string "snack"
+    t.string "alcohol_drink"
+    t.string "restaurants"
+    t.string "youtuber"
+    t.string "actor"
+    t.bigint "profile_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_block_id"], name: "index_my_favorite_blocks_on_profile_block_id"
+  end
+
   create_table "profile_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -53,6 +76,16 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "question_block_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "question_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_block_id"], name: "index_question_block_likes_on_question_block_id"
+    t.index ["user_id", "question_block_id"], name: "index_question_block_likes_on_user_id_and_question_block_id", unique: true
+    t.index ["user_id"], name: "index_question_block_likes_on_user_id"
+  end
+
   create_table "question_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "profile_block_id", null: false
@@ -68,6 +101,16 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_block_id"], name: "index_question_items_on_question_block_id"
+  end
+
+  create_table "ranking_block_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "ranking_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ranking_block_id"], name: "index_ranking_block_likes_on_ranking_block_id"
+    t.index ["user_id", "ranking_block_id"], name: "index_ranking_block_likes_on_user_id_and_ranking_block_id", unique: true
+    t.index ["user_id"], name: "index_ranking_block_likes_on_user_id"
   end
 
   create_table "ranking_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -88,6 +131,16 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["workspace_id"], name: "index_teams_on_workspace_id", unique: true
+  end
+
+  create_table "text_block_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "text_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["text_block_id"], name: "index_text_block_likes_on_text_block_id"
+    t.index ["user_id", "text_block_id"], name: "index_text_block_likes_on_user_id_and_text_block_id", unique: true
+    t.index ["user_id"], name: "index_text_block_likes_on_user_id"
   end
 
   create_table "text_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -120,6 +173,16 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  create_table "yes_or_no_block_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "yes_or_no_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "yes_or_no_block_id"], name: "index_yes_or_no_block_likes_on_user_id_and_yes_or_no_block_id", unique: true
+    t.index ["user_id"], name: "index_yes_or_no_block_likes_on_user_id"
+    t.index ["yes_or_no_block_id"], name: "index_yes_or_no_block_likes_on_yes_or_no_block_id"
+  end
+
   create_table "yes_or_no_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "profile_block_id", null: false
@@ -138,13 +201,22 @@ ActiveRecord::Schema.define(version: 2021_04_13_111303) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "my_favorite_blocks", "profile_blocks"
   add_foreign_key "profile_blocks", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "question_block_likes", "question_blocks"
+  add_foreign_key "question_block_likes", "users"
   add_foreign_key "question_blocks", "profile_blocks"
   add_foreign_key "question_items", "question_blocks"
+  add_foreign_key "ranking_block_likes", "ranking_blocks"
+  add_foreign_key "ranking_block_likes", "users"
   add_foreign_key "ranking_blocks", "profile_blocks"
+  add_foreign_key "text_block_likes", "text_blocks"
+  add_foreign_key "text_block_likes", "users"
   add_foreign_key "text_blocks", "profile_blocks"
   add_foreign_key "users", "teams"
+  add_foreign_key "yes_or_no_block_likes", "users"
+  add_foreign_key "yes_or_no_block_likes", "yes_or_no_blocks"
   add_foreign_key "yes_or_no_blocks", "profile_blocks"
   add_foreign_key "yes_or_no_items", "yes_or_no_blocks"
 end
