@@ -235,8 +235,8 @@
                   <input
                     type="text"
                     class="input-form-text-block"
-                    :value="editMyFavoriteBlock.YouTuber"
-                    @input="editMyFavoriteBlock.YouTuber = $event.target.value"
+                    :value="editMyFavoriteBlock.youtuber"
+                    @input="editMyFavoriteBlock.youtuber = $event.target.value"
                   />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>

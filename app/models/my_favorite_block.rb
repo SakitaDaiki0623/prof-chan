@@ -20,7 +20,7 @@ class MyFavoriteBlock < ApplicationRecord
     validates :snack
     validates :alcohol_drink
     validates :restaurants
-    validates :YouTuber
+    validates :youtuber
   end
 
   # scope =============

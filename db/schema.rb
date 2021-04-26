@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_064804) do
     t.string "snack"
     t.string "alcohol_drink"
     t.string "restaurants"
-    t.string "YouTuber"
+    t.string "youtuber"
     t.string "actor"
     t.bigint "profile_block_id", null: false
     t.datetime "created_at", precision: 6, null: false

@@ -102,10 +102,10 @@
           <p class="my-favorite-block-index">{{ myFavoriteBlock.musician }}</p>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="3" v-show="myFavoriteBlock.YouTuber">
+      <v-col cols="12" sm="3" v-show="myFavoriteBlock.youtuber">
         <v-card class="pa-2" height="100" color="brown lighten-5">
           <label class="form-label-text-block">YouTuber</label>
-          <p class="my-favorite-block-index">{{ myFavoriteBlock.YouTuber }}</p>
+          <p class="my-favorite-block-index">{{ myFavoriteBlock.youtuber }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.entertainer">

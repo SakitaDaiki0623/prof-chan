@@ -15,7 +15,7 @@ class CreateMyFavoriteBlocks < ActiveRecord::Migration[6.0]
       t.string :snack
       t.string :alcohol_drink
       t.string :restaurants
-      t.string :YouTuber
+      t.string :youtuber
       t.string :actor
 
       t.references :profile_block, null: false, foreign_key: true
