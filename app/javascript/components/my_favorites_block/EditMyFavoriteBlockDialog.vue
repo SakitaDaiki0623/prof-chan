@@ -5,10 +5,10 @@
     persistent
     @input="$emit('input', $event.target.isShownEditMyFavoriteFormatDialog)"
   >
-    <v-container class="my-favorite-block-bg">
+    <v-container class="my-favorite-block-bg" id="edit-my-favorite-block-container">
       <v-row justify="end">
         <v-btn
-          id="edit-my-favorite-block-button"
+          id="cancel-edit-my-favorite-block-button"
           tile
           small
           color="teal lighten-4"
@@ -18,10 +18,10 @@
         </v-btn>
       </v-row>
       <p class="font-weight-bold text-4xl text-gray-600 text-center mt-10">
-        My Favorites コーナー
+        My Favorites 編集
       </p>
       <p class="font-weight-bold text-xl text-gray-600 text-center mb-10">
-        好きなものをひとつだけ入力してね♪
+        項目ごとに好きなものをひとつだけ入力してね♪
       </p>
       <ValidationObserver ref="observer" v-slot="{ invalid }">
         <form @submit.prevent="hundleUpdateMyFavoriteBlock">
@@ -31,6 +31,7 @@
                 <label class="form-label-text-block">漫画・アニメ</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="anime-manga-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.manga_anime"
@@ -47,6 +48,7 @@
                 <label class="form-label-text-block">ゲーム・アプリ</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="game-app-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.game_app"
@@ -61,6 +63,7 @@
                 <label class="form-label-text-block">キャラクター</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="character-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.character"
@@ -75,6 +78,7 @@
                 <label class="form-label-text-block">俳優・女優</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="actor-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.actor"
@@ -89,6 +93,7 @@
                 <label class="form-label-text-block">音楽</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="music-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.music"
@@ -103,6 +108,7 @@
                 <label class="form-label-text-block">食べ物</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="food-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.food"
@@ -117,6 +123,7 @@
                 <label class="form-label-text-block">動物</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="animal-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.animal"
@@ -131,6 +138,7 @@
                 <label class="form-label-text-block">スポーツ</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                  id="sports-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.sports"
@@ -145,6 +153,7 @@
                 <label class="form-label-text-block">本</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="book-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.book"
@@ -159,6 +168,7 @@
                 <label class="form-label-text-block">場所</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="place-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.place"
@@ -173,6 +183,7 @@
                 <label class="form-label-text-block">お菓子</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="snack-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.snack"
@@ -187,6 +198,7 @@
                 <label class="form-label-text-block">お酒</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="alcohol-drink-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.alcohol_drink"
@@ -203,6 +215,7 @@
                 <label class="form-label-text-block">飲食店</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="restaurants-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.restaurants"
@@ -219,6 +232,7 @@
                 <label class="form-label-text-block">歌手</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="musician-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.musician"
@@ -233,6 +247,7 @@
                 <label class="form-label-text-block">YouTuber</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="youtuber-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.youtuber"
@@ -247,6 +262,7 @@
                 <label class="form-label-text-block">お笑い芸人</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
+                    id="entertainer-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.entertainer"
@@ -261,7 +277,7 @@
           </v-row>
           <div class="text-center mt-3">
             <v-btn
-              id="creation_button"
+              id="update-my-favorite-block-button"
               type="submit"
               depressed
               elevation="4"

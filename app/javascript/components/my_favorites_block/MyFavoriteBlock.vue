@@ -11,6 +11,9 @@
         <v-icon> mdi-pencil </v-icon>
       </v-btn>
     </v-row>
+    <p class="font-weight-bold text-4xl text-gray-600 text-center">
+      My Favorites コーナー
+    </p>
     <v-row class="mt-6" no-gutters>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.manga_anime">
         <v-card class="pa-2" height="100" color="brown lighten-5">

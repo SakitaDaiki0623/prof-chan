@@ -12,7 +12,7 @@
 # snack
 # alcohol_drink
 # restaurants
-# YouTuber
+# youtuber
 # actor
 
 # spec/factories/my_favorite_block.rb
