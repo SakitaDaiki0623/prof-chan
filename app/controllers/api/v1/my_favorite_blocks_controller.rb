@@ -27,7 +27,7 @@ module Api
       end
 
       def set_my_favorite_block
-        @my_favorite_block = current_user.profile_block.my_favorite_blocks.find(params[:id])
+        @my_favorite_block = current_user.profile_block.my_favorite_block
       end
     end
   end
