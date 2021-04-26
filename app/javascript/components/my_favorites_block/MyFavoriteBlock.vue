@@ -141,6 +141,7 @@ export default {
   data() {
     return {
       myFavoriteBlocks: [],
+      editMyFavoriteBlock: {},
       isShownEditMyFavoriteFormatDialog: false,
     };
   },
@@ -151,11 +152,6 @@ export default {
         (myFavoriteBlock) =>
           myFavoriteBlock.profile_block.id == this.currentUser.profile_block.id
       );
-    },
-    editMyFavoriteBlock: {
-      get() {
-        return Object.assign({}, this.myFavoriteBlock);
-      },
     },
   },
   created() {
@@ -180,6 +176,7 @@ export default {
       this.myFavoriteBlocks.splice(myFavoriteBlockIndex, 1, result);
     },
     openEditMyFavoriteFormatDialog() {
+      this.editMyFavoriteBlock = Object.assign({}, this.myFavoriteBlock);
       this.isShownEditMyFavoriteFormatDialog = true;
     },
     closeEditMyFavoriteFormatDialog() {

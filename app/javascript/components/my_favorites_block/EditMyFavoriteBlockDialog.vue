@@ -17,14 +17,10 @@
           ✖︎
         </v-btn>
       </v-row>
-      <p
-        class="font-weight-bold text-4xl text-gray-600 text-center mt-10"
-      >
+      <p class="font-weight-bold text-4xl text-gray-600 text-center mt-10">
         My Favorites コーナー
       </p>
-      <p
-        class="font-weight-bold text-xl text-gray-600 text-center mb-10"
-      >
+      <p class="font-weight-bold text-xl text-gray-600 text-center mb-10">
         好きなものをひとつだけ入力してね♪
       </p>
       <ValidationObserver ref="observer" v-slot="{ invalid }">
@@ -312,6 +308,9 @@ export default {
     },
     hundleCloseEditMyFavoriteFormatDialog() {
       this.$emit("close-edit-my-favorite-format-dialog");
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
     },
     hundleUpdateMyFavoriteBlock() {
       this.patchMyFavoriteBlocks().then((result) => {
