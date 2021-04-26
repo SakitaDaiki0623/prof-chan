@@ -14,6 +14,6 @@ FactoryBot.define do
   factory :yes_or_no_item do
     content { Faker::Lorem.sentence }
     answer  { [true, false].sample }
-    association :question_block
+    association :yes_or_no_block
   end
 end

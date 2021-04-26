@@ -86,6 +86,7 @@ RSpec.describe 'TextBlock', type: :system do
     end
     context 'テキストブロックを更新した時' do
       before do
+        sleep 1
         find("#edit-text-block-button-#{text_block.id}").click
         expect(page).to have_content('テキストブロックを編集'), 'テキストブロック編集ダイアログが表示されていません'
         fill_in 'text_block_title',	with: '編集されたタイトル'
@@ -112,6 +113,7 @@ RSpec.describe 'TextBlock', type: :system do
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do
+        sleep 1
         find("#delete-text-block-button-#{text_block.id}").click
         page.driver.browser.switch_to.alert.accept # confirmダイアログで「OK」を選択する
       end
@@ -123,6 +125,7 @@ RSpec.describe 'TextBlock', type: :system do
 
     context '削除ボタンを押してconfirmダイアログで「キャンセル」を選択した時' do
       before do
+        sleep 1
         find("#delete-text-block-button-#{text_block.id}").click
         page.driver.browser.switch_to.alert.dismiss # confirmダイアログで「キャンセル」を選択する
       end
