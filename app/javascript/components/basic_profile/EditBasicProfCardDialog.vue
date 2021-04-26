@@ -1,4 +1,4 @@
-<!-- app/javascript/components/TextFormatDialog.vue -->
+<!-- app/javascript/components/basic_profile/EditBasicProfCardDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditBasicProfCardDialog"
@@ -10,13 +10,11 @@
     <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
       <div class="flex p-3 text-gray-600">
         <div class="md:w-2/4 p-4 text-center mt-10">
-          <div
-            class="border-b-2 border-gray-600 border-4 border-gray-300 m-5"
-          >
+          <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
             ★基本情報★
           </div>
           <div class="flex justify-center">
-            <img class="ring-4 ring-gray-600 w-9/12" :src="user.image" />
+            <img class="ring-4 ring-gray-600 w-9/12" :src="currentUser.image" />
           </div>
           <div class="text-xl font-bold inline-block mt-4">
             <label
@@ -26,7 +24,7 @@
             <div
               class="text-2xl pb-2 border-b-2 border-gray-600 inline-block font-bold text-center"
             >
-              {{ user.name }}
+              {{ currentUser.name }}
             </div>
           </div>
         </div>
@@ -34,7 +32,9 @@
           <!-- FORM -->
           <div id="profile-basic-form" class="p-6">
             <ValidationObserver ref="observer" v-slot="{ invalid }">
-              <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
+              <form
+                @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"
+              >
                 <div>
                   <label class="form-label-basic-block" for="profile_gender"
                     >性別</label
@@ -46,12 +46,16 @@
                   >
                     <select
                       id="profile_gender"
-                      v-model="profile.gender"
+                      v-model="editBasicProfile.gender"
                       class="input-form-basic-block"
                       name="profile[gender]"
                     >
-                      <option value="male">男性</option>
-                      <option value="female">女性</option>
+                      <option
+                        v-for="gender in genders"
+                        :key="gender"
+                        :value="gender"
+                        >{{ gender }}</option
+                      >
                     </select>
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -67,7 +71,7 @@
                   >
                     <input
                       id="profile_height"
-                      v-model="profile.height"
+                      v-model="editBasicProfile.height"
                       class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
@@ -86,14 +90,17 @@
                   >
                     <select
                       id="profile_blood_type"
-                      v-model="profile.blood_type"
+                      v-model="editBasicProfile.blood_type"
                       class="input-form-basic-block"
                       name="profile[blood_type]"
                     >
-                      <option value="A">A型</option>
-                      <option value="B">B型</option>
-                      <option value="AB">AB型</option>
-                      <option value="O">O型</option>
+                      <option
+                        v-for="bloodType in bloodTypes"
+                        :key="bloodType"
+                        :value="bloodType"
+                      >
+                        {{ bloodType }}型
+                      </option>
                     </select>
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -111,14 +118,14 @@
                   >
                     <select
                       id="profile_prefecture_id"
-                      v-model="profile.prefecture_id"
+                      v-model="editBasicProfile.prefecture_id"
                       name="profile[prefecture_id]"
                       class="input-form-basic-block"
                     >
                       <option
                         v-for="prefecture in prefectures"
                         :key="prefecture.value"
-                        :value="prefecture.value"
+                        :value="prefecture.text"
                       >
                         {{ prefecture.text }}
                       </option>
@@ -146,7 +153,7 @@
                       >
                         <input
                           id="profile_birthday"
-                          v-model="profile.birthday"
+                          v-model="editBasicProfile.birthday"
                           type="date"
                           class="input-form-basic-block"
                           name="profile[birthday]"
@@ -158,7 +165,7 @@
                     </template>
                     <v-date-picker
                       ref="picker"
-                      v-model="profile.birthday"
+                      v-model="editBasicProfile.birthday"
                       color="blue-grey darken-3"
                       header-color="blue-grey darken-2"
                       locale="ja-jp"
@@ -191,7 +198,7 @@
                       >
                         <input
                           id="profile_day_of_joinning"
-                          v-model="profile.day_of_joinning"
+                          v-model="editBasicProfile.day_of_joinning"
                           type="date"
                           name="profile[day_of_joinning]"
                           v-bind="attrs"
@@ -203,7 +210,7 @@
                     </template>
                     <v-date-picker
                       ref="picker"
-                      v-model="profile.day_of_joinning"
+                      v-model="editBasicProfile.day_of_joinning"
                       color="blue-grey darken-3"
                       header-color="blue-grey darken-2"
                       locale="ja-jp"
@@ -248,6 +255,10 @@ export default {
   props: {
     isShownEditBasicProfCardDialog: {
       type: Boolean,
+      required: true,
+    },
+    editBasicProfile: {
+      type: Object,
       required: true,
     },
   },
@@ -305,31 +316,20 @@ export default {
         { text: "鹿児島県", value: "46" },
         { text: "沖縄県", value: "47" },
       ],
+      genders: ["男性", "女性"],
+      bloodTypes: ["A", "B", "AB", "O"],
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
-    ...mapState("profiles", ["profiles"]),
-    user() {
-      return this.currentUser;
-    },
-    profile() {
-      return (
-        this.profiles.find(
-          (profile) => profile.id == this.currentUser.profile.id
-        ) || {}
-      );
-    },
   },
   methods: {
-    ...mapActions("textBlocks", ["patchTextBlock"]),
-    hundleEditTextBlock(profile) {
-      this.patchTextBlock(profile);
-      this.hundleCloseEditTextFormatDialog();
+    hundleUpdateBasicProfile() {
+      console.log(this.editBasicProfile);
+      this.hundleCloseEditBasicProfCardDialog();
     },
-
-    hundleCloseEditTextFormatDialog() {
-      this.$emit("close-edit-text-format-dialog");
+    hundleCloseEditBasicProfCardDialog() {
+      this.$emit("close-edit-basic-prof-card-dialog");
     },
     saveBirthDate(date) {
       this.$refs.menu.save(date);

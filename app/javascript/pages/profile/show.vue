@@ -52,7 +52,7 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // Component ----------
-import BasicProfCard from "../../components/BasicProfCard";
+import BasicProfCard from "../../components/basic_profile/BasicProfCard";
 
 export default {
   components: {

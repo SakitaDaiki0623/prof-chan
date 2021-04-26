@@ -4,12 +4,7 @@
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
     <!-- Basic Prof Card -->
-    <div class="mb-10">
-      <BasicProfCard
-        :profile="profile"
-        @open-edit-basic-prof-card="openEditBasicProfCard"
-      />
-    </div>
+    <BasicProfCard />
 
     <!-- My Favorites Blocks -->
     <MyFavoriteBlock />
@@ -94,9 +89,6 @@
 
     <!-- Dialogs -->
     <!-- Basic Prof Card -->
-    <EditBasicProfCardDialog
-      :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
-    />
 
     <!-- Question Block -->
     <QuestionFormatDialog
@@ -162,8 +154,7 @@ import { mapState, mapActions, Store } from "vuex";
 
 // components ----------
 // Basic Prof Card
-import BasicProfCard from "../../components/BasicProfCard";
-import EditBasicProfCardDialog from "../../components/EditBasicProfCardDialog";
+import BasicProfCard from "../../components/basic_profile/BasicProfCard";
 
 // My Favorites Blocks
 import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
@@ -192,7 +183,6 @@ export default {
   components: {
     // Basic Prof Card
     BasicProfCard,
-    EditBasicProfCardDialog,
 
     // My Favorites Blocks
     MyFavoriteBlock,
@@ -226,32 +216,29 @@ export default {
   },
   data() {
     return {
-      // Basic Prof Card
-      isShownEditBasicProfCardDialog: false,
-
       // Text Block
       isShownTextFormatDialog: false,
       isShownEditTextFormatDialog: false,
       editTextBlock: {},
-      textBlockColor: "teal lighten-3", // text block image color
+      textBlockColor: "teal lighten-3", // text block color
 
       // Question Block
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
-      questionBlockColor: "red lighten-3", // question block image color
+      questionBlockColor: "red lighten-3", // question block color
 
       // YesOrNo Block
       isShownYesOrNoFormatDialog: false,
       isShownEditYesOrNoFormatDialog: false,
       editYesOrNoBlock: {},
-      yesOrNoBlockColor: "orange lighten-3", // ranking block image color
+      yesOrNoBlockColor: "orange lighten-3", // ranking block color
 
       // Ranking Block
       isShownRankingFormatDialog: false,
       isShownEditRankingFormatDialog: false,
       editRankingBlock: {},
-      rankingBlockColor: "green lighten-3", // ranking block image color
+      rankingBlockColor: "green lighten-3", // ranking block color
     };
   },
   computed: {
@@ -261,10 +248,6 @@ export default {
     ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
-
-    profile() {
-      return this.profiles.find((profile) => profile.id == this.id) || {};
-    },
     myTextBlocks() {
       return (
         this.textBlocks.filter(
@@ -315,11 +298,6 @@ export default {
       fetchTextBlocks: "textBlocks/fetchTextBlocks",
       deleteTextBlock: "textBlocks/deleteTextBlock",
     }),
-
-    // Basic Prof Card
-    openEditBasicProfCard(profile) {
-      this.isShownEditBasicProfCardDialog = true;
-    },
 
     // Text Block
     openTextFormatDialog() {

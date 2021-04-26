@@ -92,6 +92,11 @@
         </v-card>
       </v-col>
     </v-row>
+    <EditBasicProfCardDialog
+      :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
+      :edit-basic-profile="editBasicProfile"
+      @close-edit-basic-prof-card-dialog="closeEditBasicProfCardDialog"
+    />
   </v-container>
 </template>
 
@@ -99,22 +104,41 @@
 import moment from "moment";
 import { mapState } from "vuex";
 
+import EditBasicProfCardDialog from "./EditBasicProfCardDialog";
+
 export default {
   filters: {
-    moment: function (date) {
+    moment: function(date) {
       return moment(date).format("YYYY/MM/DD");
     },
   },
-  props: {
-    profile: {
-      type: Object,
-      required: true,
+  components: {
+    EditBasicProfCardDialog,
+  },
+  data() {
+    return {
+      isShownEditBasicProfCardDialog: false,
+      editBasicProfile: {},
+    };
+  },
+  computed: {
+    ...mapState("profiles", ["profiles"]),
+    ...mapState("users", ["currentUser"]),
+    profile() {
+      return (
+        this.profiles.find(
+          (profile) => profile.id == this.currentUser.profile.id
+        ) || {}
+      );
     },
   },
-  computed: {},
   methods: {
     openEditBasicProfCard() {
-      this.$emit("open-edit-basic-prof-card", this.profile);
+      this.editBasicProfile = this.profile;
+      this.isShownEditBasicProfCardDialog = true;
+    },
+    closeEditBasicProfCardDialog() {
+      this.isShownEditBasicProfCardDialog = false;
     },
   },
 };
