@@ -33,6 +33,9 @@ class Profile < ApplicationRecord
   validate  :birthday_cannot_be_in_the_future
   validates :day_of_joinning, presence: true
 
+  # scope ==========
+  scope :by_team, -> (current_user) { includes(user: :team).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id }) }
+
   # custom validation =============
   def birthday_cannot_be_in_the_future
     errors.add(:birthday, 'に未来の日付は使えません') if birthday.present? && birthday > Time.zone.today

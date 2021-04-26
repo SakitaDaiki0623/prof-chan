@@ -52,9 +52,9 @@
                     >
                       <option
                         v-for="gender in genders"
-                        :key="gender"
-                        :value="gender"
-                        >{{ gender }}</option
+                        :key="gender.value"
+                        :value="gender.text"
+                        >{{ gender.text }}</option
                       >
                     </select>
                     <span class="text-red-400">{{ errors[0] }}</span>
@@ -316,7 +316,10 @@ export default {
         { text: "鹿児島県", value: "46" },
         { text: "沖縄県", value: "47" },
       ],
-      genders: ["男性", "女性"],
+      genders: [
+        { text: "男性", value: "male" },
+        { text: "女性", value: "female" },
+      ],
       bloodTypes: ["A", "B", "AB", "O"],
     };
   },
@@ -324,8 +327,25 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    hundleUpdateBasicProfile() {
-      console.log(this.editBasicProfile);
+    ...mapActions({
+      patchProfile: "profiles/patchProfile",
+    }),
+    hundleUpdateBasicProfile(editBasicProfile) {
+
+      // genderの変換
+      if (editBasicProfile.gender == "男性") {
+        editBasicProfile.gender = "male";
+      } else {
+        editBasicProfile.gender = "female";
+      }
+
+      // prefecture_idの変換
+      const selectedPrefecture = this.prefectures.find(
+        (prefecture) => prefecture.text == editBasicProfile.prefecture_id
+      );
+      editBasicProfile.prefecture_id = selectedPrefecture.value;
+
+      this.patchProfile(editBasicProfile);
       this.hundleCloseEditBasicProfCardDialog();
     },
     hundleCloseEditBasicProfCardDialog() {
