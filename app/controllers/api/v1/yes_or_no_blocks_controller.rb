@@ -43,7 +43,8 @@ module Api
         params.permit(
           :yes_or_no_title, :yes_or_no_item_content1,
           :yes_or_no_item_answer1, :yes_or_no_item_content2, :yes_or_no_item_answer2, :yes_or_no_item_content3,
-          :yes_or_no_item_answer3, :current_user).merge(profile_block_id: ProfileBlock.find_by(user_id: User.find(current_user.id)).id)
+          :yes_or_no_item_answer3, :current_user
+        ).merge(profile_block_id: ProfileBlock.find_by(user_id: User.find(current_user.id)).id)
       end
 
       def yes_or_no_block_params

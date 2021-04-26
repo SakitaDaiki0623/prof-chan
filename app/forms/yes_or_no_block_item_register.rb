@@ -12,17 +12,18 @@ class YesOrNoBlockItemRegister
   attribute :yes_or_no_item_answer2,  :boolean
   attribute :yes_or_no_item_content3, :string
   attribute :yes_or_no_item_answer3,  :boolean
-  attribute :profile_block_id,       :integer
+  attribute :profile_block_id, :integer
 
   # validation =============
   validates :yes_or_no_title,         presence: true,        length: { maximum: 50 }
   validates :yes_or_no_item_content1, presence: true,        length: { maximum: 50 }
   validates :yes_or_no_item_content2,                        length: { maximum: 50 }
   validates :yes_or_no_item_content3,                        length: { maximum: 50 }
-  validates :profile_block_id,        presence: true
+  validates :profile_block_id, presence: true
 
   def save_block_and_items
     return false if invalid?
+
     ActiveRecord::Base.transaction do
       yes_or_no_block = YesOrNoBlock.create!(title: yes_or_no_title, profile_block_id: profile_block_id)
 

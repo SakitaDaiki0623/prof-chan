@@ -143,6 +143,17 @@
   }
 }
 
+.my-favorite-block-index {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply py-2;
+  @apply text-center;
+  @apply text-gray-600;
+}
+
 // 入力フォームラベル ====================
 // 雛形
 .form-label {
@@ -205,5 +216,3 @@
   @apply rounded;
   @apply text-green-500;
 }
-
-

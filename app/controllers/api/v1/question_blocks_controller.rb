@@ -45,7 +45,8 @@ module Api
         params.permit(
           :question_title, :question_item_content1,
           :question_item_answer1, :question_item_content2, :question_item_answer2, :question_item_content3,
-          :question_item_answer3, :current_user).merge(profile_block_id: ProfileBlock.find_by(user_id: User.find(current_user.id)).id)
+          :question_item_answer3, :current_user
+        ).merge(profile_block_id: ProfileBlock.find_by(user_id: User.find(current_user.id)).id)
       end
 
       def question_block_params

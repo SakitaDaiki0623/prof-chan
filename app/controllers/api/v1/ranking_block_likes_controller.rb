@@ -2,7 +2,6 @@
 module Api
   module V1
     class RankingBlockLikesController < ApiController
-
       def index
         @ranking_block_likes = RankingBlockLike.filter_by_ranking_block(params[:ranking_block_id]).select(:id, :user_id, :ranking_block_id)
         render json: @ranking_block_likes
@@ -19,6 +18,7 @@ module Api
       end
 
       private
+
       def ranking_blocks_params
         params.require(:ranking_block_like).permit(:ranking_block_id)
       end

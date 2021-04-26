@@ -46,6 +46,9 @@ class User < ApplicationRecord
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
 
+  # after_create
+  after_create :create_profile_block
+
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
@@ -54,7 +57,6 @@ class User < ApplicationRecord
     user.image = user_info.dig('user', 'image_192')
     user.check_team_existence(user_info.dig('team'))
     user.save!
-    user.check_profile_block_existence
     user
   end
 
@@ -70,13 +72,5 @@ class User < ApplicationRecord
                   # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
                   Team.create!(name: name, workspace_id: workspace_id, image: image)
                 end
-  end
-
-  # ユーザーにprofile_blockがなければ作成
-  def check_profile_block_existence
-    if profile_block.nil?
-      build_profile_block
-      profile_block.save!
-    end
   end
 end

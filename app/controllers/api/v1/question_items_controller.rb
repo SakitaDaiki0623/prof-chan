@@ -6,7 +6,7 @@ module Api
 
       def index
         @user = User.find(current_user.id)
-        @question_items = QuestionItem.includes(question_block: { profile_block: { user: :team } } ).where(teams: { workspace_id: @user.team.workspace_id })
+        @question_items = QuestionItem.includes(question_block: { profile_block: { user: :team } }).where(teams: { workspace_id: @user.team.workspace_id })
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @question_items,
           serializer: QuestionItemSerializer
@@ -48,4 +48,3 @@ module Api
     end
   end
 end
-
