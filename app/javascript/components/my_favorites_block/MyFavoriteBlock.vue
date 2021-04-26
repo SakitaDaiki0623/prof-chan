@@ -123,7 +123,7 @@
       "
       :edit-my-favorite-block="editMyFavoriteBlock"
       @close-edit-my-favorite-format-dialog="closeEditMyFavoriteFormatDialog"
-      @update-my-favorite-blocks="updateMyFavoriteBlocks"
+      @update-my-favorite-block="updateMyFavoriteBlock"
     />
   </v-container>
 </template>
@@ -140,40 +140,33 @@ export default {
   },
   data() {
     return {
-      myFavoriteBlocks: [],
+      myFavoriteBlock: {},
       editMyFavoriteBlock: {},
       isShownEditMyFavoriteFormatDialog: false,
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
-    myFavoriteBlock() {
-      return this.myFavoriteBlocks.find(
+  },
+  created() {
+    this.fetchMyFavoriteBlock().then((result) => {
+      const res = result.find(
         (myFavoriteBlock) =>
           myFavoriteBlock.profile_block.id == this.currentUser.profile_block.id
       );
-    },
-  },
-  created() {
-    this.fetchMyFavoriteBlocks().then((result) => {
-      this.myFavoriteBlocks = result;
+      this.myFavoriteBlock = res;
     });
   },
   methods: {
-    fetchMyFavoriteBlocks: async function() {
+    fetchMyFavoriteBlock: async function() {
       const res = await axios.get("/api/v1/my_favorite_blocks");
       if (res.status !== 200) {
         process.exit();
       }
       return res.data;
     },
-    updateMyFavoriteBlocks(result) {
-      const myFavoriteBlockIndex = this.myFavoriteBlocks.findIndex(
-        (myFavoriteBlock) => {
-          return myFavoriteBlock.id == result.id;
-        }
-      );
-      this.myFavoriteBlocks.splice(myFavoriteBlockIndex, 1, result);
+    updateMyFavoriteBlock(result) {
+      this.myFavoriteBlock = result;
     },
     openEditMyFavoriteFormatDialog() {
       this.editMyFavoriteBlock = Object.assign({}, this.myFavoriteBlock);

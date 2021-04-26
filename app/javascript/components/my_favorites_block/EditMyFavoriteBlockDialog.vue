@@ -296,7 +296,7 @@ export default {
   },
 
   methods: {
-    patchMyFavoriteBlocks: async function() {
+    patchMyFavoriteBlock: async function() {
       const res = await axios.patch(
         `/api/v1/my_favorite_blocks/${this.editMyFavoriteBlock.id}`,
         this.editMyFavoriteBlock
@@ -313,8 +313,8 @@ export default {
       });
     },
     hundleUpdateMyFavoriteBlock() {
-      this.patchMyFavoriteBlocks().then((result) => {
-        this.$emit("update-my-favorite-blocks", result);
+      this.patchMyFavoriteBlock().then((result) => {
+        this.$emit("update-my-favorite-block", result);
       });
       this.hundleCloseEditMyFavoriteFormatDialog();
     },
