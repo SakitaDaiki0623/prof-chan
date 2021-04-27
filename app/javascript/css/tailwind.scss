@@ -28,6 +28,26 @@
   }
 }
 
+.address-form {
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-yellow-500;
+    @apply ring-2;
+    @apply ring-yellow-200;
+  }
+}
+
 .input-form-basic-block {
   @apply w-full;
   @apply bg-white;

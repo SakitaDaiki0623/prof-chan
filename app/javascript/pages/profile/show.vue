@@ -1,49 +1,21 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <div
-    class="bg-backimage-02 bg-cover bg-fixed text-gray-600"
-  >
-    <v-container>
-      <p class="text-5xl font-bold note mb-10">
-        {{ profile.user.name }} さんのプロフィール
-      </p>
-      <v-row
-        class="mb-10"
-        justify="center"
-      >
-        <v-col
-          cols="12"
-          sm="6"
-        >
-          <BasicProfCard
-            :profile="profile"
-            :current-user="currentUser"
-          />
-          <v-btn
-            v-show="isCurrentUser"
-            id="edit-basic-profile-btn"
-          >
-            編集する
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-row justify="space-around">
-      <v-card-actions>
-        <v-btn
-          x-large
-          color="light-green accent-2"
-          class="black--text"
-          @click="moveToProfilesPage"
-        >
-          <v-icon left>
-            mdi-account-circle
-          </v-icon>
-          プロフィール閲覧
-        </v-btn>
-      </v-card-actions>
-    </v-row>
-  </div>
+  <v-container class="text-gray-600">
+    <p class="text-5xl font-bold note mb-10">
+      {{ currentUser.name }}さんのプロフィール
+    </p>
+    <BasicAndAddressBlock />
+
+    <MyFavoriteBlock />
+
+    <TextBlockList />
+
+    <QuestionBlockList />
+
+    <YesOrNoBlockList />
+
+    <RankingBlockList />
+  </v-container>
 </template>
 
 <script>
@@ -52,11 +24,21 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // Component ----------
-import BasicProfCard from "../../components/basic_profile/BasicProfCard";
+import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
+import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
+import TextBlockList from "../../components/text_block/TextBlockList";
+import QuestionBlockList from "../../components/question_block/QuestionBlockList";
+import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
+import RankingBlockList from "../../components//ranking_block/RankingBlockList";
 
 export default {
   components: {
-    BasicProfCard,
+    BasicAndAddressBlock,
+    MyFavoriteBlock,
+    QuestionBlockList,
+    YesOrNoBlockList,
+    RankingBlockList,
+    TextBlockList,
   },
   props: {
     id: {
@@ -64,6 +46,9 @@ export default {
       require: true,
       default: "",
     },
+  },
+  created() {
+    console.log(this.$route.path);
   },
   data() {
     return {};
@@ -73,9 +58,6 @@ export default {
     ...mapState("users", ["currentUser"]),
     ...mapState("textBlocks", ["textBlocks"]),
 
-    profile() {
-      return this.profiles.find((profile) => profile.id == this.id) || {};
-    },
     isCurrentUser() {
       return this.profile.user.id === this.currentUser.id;
     },
@@ -98,6 +80,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

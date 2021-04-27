@@ -38,7 +38,7 @@ const routes = [
       if (currentUserProfileId == to.params.id) {
         next();
       } else {
-        next({ path: "/profiles" });
+        next({ path: `/profiles/${currentUserProfileId}/edit` });
         store.dispatch("flash/setFlash", {
           type: "error",
           message: "他の人のプロフィールは編集できないよ！",

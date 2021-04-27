@@ -37,10 +37,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_015102) do
     t.string "twitter"
     t.string "instagram"
     t.string "postcode"
-    t.string "prefecture_name"
-    t.string "address_city"
-    t.string "address_street"
-    t.string "address_building"
+    t.string "full_address"
     t.bigint "profile_block_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

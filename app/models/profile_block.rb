@@ -19,6 +19,6 @@ class ProfileBlock < ApplicationRecord
   belongs_to :user
 
   # after_create
-  after_create :create_my_favorite_block
-  after_create :create_address_block
+  after_create  :create_address_block
+  after_create  :create_my_favorite_block
 end
