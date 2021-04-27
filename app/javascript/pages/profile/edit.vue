@@ -3,34 +3,14 @@
   <div class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
-    <!-- Basic Prof Card -->
     <BasicProfCard />
 
-    <!-- My Favorites Blocks -->
     <MyFavoriteBlock />
 
-    <!-- Text Blocks -->
     <TextBlockList />
 
-    <!-- Questioin Blocks -->
-    <v-row justify="center">
-      <v-btn
-        id="add-question-block-btn"
-        tile
-        :color="questionBlockColor"
-        class="ma-2 white--text"
-        @click="openQuestionFormatDialog"
-      >
-        <v-icon left> mdi-plus </v-icon>
-        クエスチョンブロックを追加する
-      </v-btn>
-    </v-row>
-    <QuestionBlockList
-      @open-edit-question-format-dialog="openEditQuestionFormatDialog"
-      @delete-question-block="hundleDeleteQuestionBlock"
-    />
+    <QuestionBlockList />
 
-    <!-- YesOrNo Blocks -->
     <v-row justify="center">
       <v-btn
         id="add-yes-or-no-block-btn"
@@ -49,20 +29,6 @@
     />
 
     <RankingBlockList />
-
-    <!-- Question Block -->
-    <QuestionFormatDialog
-      :is-shown-question-format-dialog="isShownQuestionFormatDialog"
-      :question-block-color="questionBlockColor"
-      @close-question-format-dialog="closeQuestionFormatDialog"
-    />
-    <EditQuestionFormatDialog
-      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
-      :edit-question-block="editQuestionBlock"
-      :question-block-color="questionBlockColor"
-      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
-    />
 
     <!-- YesOrNo Block -->
     <YesOrNoFormatDialog
@@ -94,8 +60,6 @@ import TextBlockList from "../../components/text_block/TextBlockList";
 
 // Question Block
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
-import QuestionFormatDialog from "../../components/question_block/QuestionFormatDialog";
-import EditQuestionFormatDialog from "../../components/question_block/EditQuestionFormatDialog";
 
 // YesOrNo Block
 import YesOrNoFormatDialog from "../../components/yes_or_no_block/YesOrNoFormatDialog";
@@ -115,8 +79,6 @@ export default {
 
     // Question Block
     QuestionBlockList,
-    QuestionFormatDialog,
-    EditQuestionFormatDialog,
 
     // YesOrNo Block
     YesOrNoFormatDialog,
@@ -138,12 +100,6 @@ export default {
   },
   data() {
     return {
-      // Question Block
-      isShownQuestionFormatDialog: false,
-      isShownEditQuestionFormatDialog: false,
-      editQuestionBlock: {},
-      questionBlockColor: "red lighten-3", // question block color
-
       // YesOrNo Block
       isShownYesOrNoFormatDialog: false,
       isShownEditYesOrNoFormatDialog: false,
@@ -154,7 +110,6 @@ export default {
   computed: {
     ...mapState("profiles", ["profiles"]),
     ...mapState("users", ["currentUser"]),
-    ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
   },
   created() {
@@ -176,39 +131,7 @@ export default {
       fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
       deleteYesOrNoBlock: "yesOrNoBlocks/deleteYesOrNoBlock",
       fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-
-      // Question Block
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
     }),
-
-    // Question Block
-    openQuestionFormatDialog() {
-      this.isShownQuestionFormatDialog = true;
-    },
-    closeQuestionFormatDialog() {
-      this.isShownQuestionFormatDialog = false;
-    },
-    openEditQuestionFormatDialog(questionBlock) {
-      this.editQuestionBlock = Object.assign({}, questionBlock);
-      this.isShownEditQuestionFormatDialog = true;
-    },
-    closeEditQuestionFormatDialog() {
-      this.isShownEditQuestionFormatDialog = false;
-    },
-    closeQuestionBlockEditDialog(editQuestionBlock) {
-      this.editQuestionBlock = editQuestionBlock;
-    },
-    hundleDeleteQuestionBlock(QuestionBlock) {
-      if (!confirm("削除してよろしいですか?")) return;
-      this.deleteQuestionBlock(QuestionBlock);
-      this.$store.dispatch("flash/setFlash", {
-        type: "success",
-        message: "クエスチョンブロックを削除したよ！",
-        color: "red lighten-3",
-      });
-    },
 
     // YesOrNo Block
     openYesOrNoFormatDialog() {

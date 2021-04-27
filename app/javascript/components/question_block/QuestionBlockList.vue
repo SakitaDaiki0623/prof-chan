@@ -1,5 +1,17 @@
 <template>
   <v-container>
+    <v-row justify="center">
+      <v-btn
+        id="add-question-block-btn"
+        tile
+        :color="questionBlockColor"
+        class="ma-2 white--text"
+        @click="openQuestionFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        クエスチョンブロックを追加する
+      </v-btn>
+    </v-row>
     <v-row>
       <v-col
         v-for="questionBlock in myQuestionBlocks"
@@ -48,13 +60,42 @@
         </v-card>
       </v-col>
     </v-row>
+    <QuestionFormatDialog
+      :is-shown-question-format-dialog="isShownQuestionFormatDialog"
+      :question-block-color="questionBlockColor"
+      @close-question-format-dialog="closeQuestionFormatDialog"
+    />
+    <EditQuestionFormatDialog
+      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
+      :edit-question-block="editQuestionBlock"
+      :question-block-color="questionBlockColor"
+      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
+      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
+    />
   </v-container>
 </template>
 
 <script>
+// plugins
+import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
+import QuestionFormatDialog from "./QuestionFormatDialog";
+import EditQuestionFormatDialog from "./EditQuestionFormatDialog";
+
 export default {
+  components: {
+    QuestionFormatDialog,
+    EditQuestionFormatDialog,
+  },
+  data() {
+    return {
+      isShownQuestionFormatDialog: false,
+      isShownEditQuestionFormatDialog: false,
+      editQuestionBlock: {},
+      questionBlockColor: "red lighten-3", // question block color
+    };
+  },
   computed: {
     ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("users", ["currentUser"]),
@@ -69,11 +110,35 @@ export default {
     },
   },
   methods: {
-    openEditQuestionFormatDialog(questionBlock) {
-      this.$emit("open-edit-question-format-dialog", questionBlock);
+    ...mapActions({
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
+    }),
+    openQuestionFormatDialog() {
+      this.isShownQuestionFormatDialog = true;
     },
-    hundleDeleteQuestionBlock(questionBlock) {
-      this.$emit("delete-question-block", questionBlock);
+    closeQuestionFormatDialog() {
+      this.isShownQuestionFormatDialog = false;
+    },
+    openEditQuestionFormatDialog(questionBlock) {
+      this.editQuestionBlock = Object.assign({}, questionBlock);
+      this.isShownEditQuestionFormatDialog = true;
+    },
+    closeEditQuestionFormatDialog() {
+      this.isShownEditQuestionFormatDialog = false;
+    },
+    closeQuestionBlockEditDialog(editQuestionBlock) {
+      this.editQuestionBlock = editQuestionBlock;
+    },
+    hundleDeleteQuestionBlock(QuestionBlock) {
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteQuestionBlock(QuestionBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "クエスチョンブロックを削除したよ！",
+        color: "red lighten-3",
+      });
     },
   },
 };
