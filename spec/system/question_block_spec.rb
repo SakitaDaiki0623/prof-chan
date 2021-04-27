@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "QuestionBlocks", type: :system do
+RSpec.describe "QuestionBlock", type: :system do
 
   let(:last_question_block) { QuestionBlock.last }
   let(:question_item_1)     { QuestionBlock.last.question_items[0] }

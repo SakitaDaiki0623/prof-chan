@@ -1,5 +1,17 @@
 <template>
   <v-container>
+    <v-row justify="center">
+      <v-btn
+        id="add-yes-or-no-block-btn"
+        tile
+        :color="yesOrNoBlockColor"
+        class="ma-2 white--text"
+        @click="openYesOrNoFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        Yes or No ブロックを追加する
+      </v-btn>
+    </v-row>
     <v-row>
       <v-col
         v-for="yesOrNoBlock in myYesOrNoBlocks"
@@ -38,15 +50,17 @@
                   <v-col cols="12" sm="6">
                     {{ yes_or_no_item.content }}
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    v-if="yes_or_no_item.answer"
-                  >
-                    <span class="rounded-full border-red-500 border-2 p-2">YES</span>  /  NO
+                  <v-col cols="12" sm="6" v-if="yes_or_no_item.answer">
+                    <span class="rounded-full border-red-500 border-2 p-2"
+                      >YES</span
+                    >
+                    / NO
                   </v-col>
                   <v-col cols="12" sm="6" v-else>
-                    YES  /  <span class="rounded-full border-red-500 border-2 p-2">NO</span>
+                    YES /
+                    <span class="rounded-full border-red-500 border-2 p-2"
+                      >NO</span
+                    >
                   </v-col>
                 </v-row>
               </v-card>
@@ -55,13 +69,43 @@
         </v-card>
       </v-col>
     </v-row>
+    <YesOrNoFormatDialog
+      :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
+      :yes-or-no-block-color="yesOrNoBlockColor"
+      @close-yes-or-no-format-dialog="closeYesOrNoFormatDialog"
+    />
+    <EditYesOrNoFormatDialog
+      :is-shown-edit-yes-or-no-format-dialog="isShownEditYesOrNoFormatDialog"
+      :edit-yes-or-no-block="editYesOrNoBlock"
+      :yes-or-no-block-color="yesOrNoBlockColor"
+      @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
+      @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
+    />
   </v-container>
 </template>
 
 <script>
+// plugins
+import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
+import YesOrNoFormatDialog from "./YesOrNoFormatDialog";
+import EditYesOrNoFormatDialog from "./EditYesOrNoFormatDialog";
+
 export default {
+  components: {
+    YesOrNoFormatDialog,
+    EditYesOrNoFormatDialog,
+  },
+  data() {
+    return {
+      // YesOrNo Block
+      isShownYesOrNoFormatDialog: false,
+      isShownEditYesOrNoFormatDialog: false,
+      editYesOrNoBlock: {},
+      yesOrNoBlockColor: "orange lighten-3", // ranking block color
+    };
+  },
   computed: {
     ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
     ...mapState("users", ["currentUser"]),
@@ -76,11 +120,35 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      deleteYesOrNoBlock: "yesOrNoBlocks/deleteYesOrNoBlock",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
+    }),
+    openYesOrNoFormatDialog() {
+      this.isShownYesOrNoFormatDialog = true;
+    },
+    closeYesOrNoFormatDialog() {
+      this.isShownYesOrNoFormatDialog = false;
+    },
     openEditYesOrNoFormatDialog(yesOrNoBlock) {
-      this.$emit("open-edit-yes-or-no-format-dialog", yesOrNoBlock);
+      this.editYesOrNoBlock = Object.assign({}, yesOrNoBlock);
+      this.isShownEditYesOrNoFormatDialog = true;
+    },
+    closeEditYesOrNoFormatDialog() {
+      this.isShownEditYesOrNoFormatDialog = false;
+    },
+    closeYesOrNoBlockEditDialog(editYesOrNoBlock) {
+      this.editYesOrNoBlock = editYesOrNoBlock;
     },
     hundleDeleteYesOrNoBlock(yesOrNoBlock) {
-      this.$emit("delete-yes-or-no-block", yesOrNoBlock);
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteYesOrNoBlock(yesOrNoBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "Yes or No ブロックを削除したよ！",
+        color: this.yesOrNoBlockColor,
+      });
     },
   },
 };
