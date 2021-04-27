@@ -48,27 +48,7 @@
       @delete-yes-or-no-block="hundleDeleteYesOrNoBlock"
     />
 
-    <!-- Ranking Blocks -->
-    <v-row justify="center">
-      <v-btn
-        id="add-ranking-block-btn"
-        tile
-        :color="rankingBlockColor"
-        class="ma-2 white--text"
-        @click="openRankingFormatDialog"
-      >
-        <v-icon left> mdi-plus </v-icon>
-        ランキングブロックを追加する
-      </v-btn>
-    </v-row>
-    <RankingBlockList
-      :my-ranking-blocks="myRankingBlocks"
-      @open-edit-ranking-format-dialog="openEditRankingFormatDialog"
-      @delete-ranking-block="hundleDeleteRankingBlock"
-    />
-
-    <!-- Dialogs -->
-    <!-- Basic Prof Card -->
+    <RankingBlockList />
 
     <!-- Question Block -->
     <QuestionFormatDialog
@@ -97,20 +77,6 @@
       @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
       @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
     />
-
-    <!-- Ranking Block -->
-    <RankingFormatDialog
-      :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
-      :ranking-block-color="rankingBlockColor"
-      @close-ranking-format-dialog="closeRankingFormatDialog"
-    />
-    <EditRankingFormatDialog
-      :is-shown-edit-ranking-format-dialog="isShownEditRankingFormatDialog"
-      :ranking-block-color="rankingBlockColor"
-      :edit-ranking-block="editRankingBlock"
-      @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
-    />
-    <!-- /Dialogs -->
   </div>
 </template>
 
@@ -137,9 +103,7 @@ import EditYesOrNoFormatDialog from "../../components/yes_or_no_block/EditYesOrN
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
 
 // Ranking Block
-import RankingFormatDialog from "../../components//ranking_block/RankingFormatDialog";
 import RankingBlockList from "../../components//ranking_block/RankingBlockList";
-import EditRankingFormatDialog from "../../components//ranking_block/EditRankingFormatDialog";
 
 export default {
   components: {
@@ -160,9 +124,7 @@ export default {
     EditYesOrNoFormatDialog,
 
     // Ranking Block
-    RankingFormatDialog,
     RankingBlockList,
-    EditRankingFormatDialog,
 
     // Text Block
     TextBlockList,
@@ -187,29 +149,13 @@ export default {
       isShownEditYesOrNoFormatDialog: false,
       editYesOrNoBlock: {},
       yesOrNoBlockColor: "orange lighten-3", // ranking block color
-
-      // Ranking Block
-      isShownRankingFormatDialog: false,
-      isShownEditRankingFormatDialog: false,
-      editRankingBlock: {},
-      rankingBlockColor: "green lighten-3", // ranking block color
     };
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
     ...mapState("users", ["currentUser"]),
-    ...mapState("textBlocks", ["textBlocks"]),
-    ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
-    myRankingBlocks() {
-      return (
-        this.rankingBlocks.filter(
-          (rankingBlock) =>
-            rankingBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
   },
   created() {
     // this.fetchProfiles();
@@ -235,14 +181,6 @@ export default {
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
       fetchQuestionItems: "questionBlocks/fetchQuestionItems",
-
-      // Ranking Block
-      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
-      deleteRankingBlock: "rankingBlocks/deleteRankingBlock",
-
-      // Text Block
-      fetchTextBlocks: "textBlocks/fetchTextBlocks",
-      deleteTextBlock: "textBlocks/deleteTextBlock",
     }),
 
     // Question Block
@@ -296,30 +234,6 @@ export default {
         type: "success",
         message: "Yes or No ブロックを削除したよ！",
         color: this.yesOrNoBlockColor,
-      });
-    },
-
-    // Ranking Block
-    openRankingFormatDialog() {
-      this.isShownRankingFormatDialog = true;
-    },
-    closeRankingFormatDialog() {
-      this.isShownRankingFormatDialog = false;
-    },
-    openEditRankingFormatDialog(rankingBlock) {
-      this.editRankingBlock = Object.assign({}, rankingBlock);
-      this.isShownEditRankingFormatDialog = true;
-    },
-    closeEditRankingFormatDialog() {
-      this.isShownEditRankingFormatDialog = false;
-    },
-    hundleDeleteRankingBlock(rankingBlock) {
-      if (!confirm("削除してよろしいですか?")) return;
-      this.deleteRankingBlock(rankingBlock);
-      this.$store.dispatch("flash/setFlash", {
-        type: "success",
-        message: "ランキングブロックを削除したよ！",
-        color: this.rankingBlockColor,
       });
     },
   },
