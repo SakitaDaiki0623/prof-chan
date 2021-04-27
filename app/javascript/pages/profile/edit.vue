@@ -10,27 +10,10 @@
     <MyFavoriteBlock />
 
     <!-- Text Blocks -->
-    <v-row justify="center" class="mb-10">
-      <v-btn
-        id="add-text-block-btn"
-        tile
-        :color="textBlockColor"
-        class="ma-2 white--text"
-        @click="openTextFormatDialog"
-      >
-        <v-icon left> mdi-plus </v-icon>
-        テキストブロックを追加する
-      </v-btn>
-    </v-row>
-    <TextBlockList
-      :my-text-blocks="myTextBlocks"
-      class="mb-10"
-      @open-edit-text-format-dialog="openEditTextFormatDialog"
-      @delete-text-block="hundleDeleteTextBlock"
-    />
+    <TextBlockList />
 
     <!-- Questioin Blocks -->
-    <v-row justify="center" class="mb-10">
+    <v-row justify="center">
       <v-btn
         id="add-question-block-btn"
         tile
@@ -43,13 +26,12 @@
       </v-btn>
     </v-row>
     <QuestionBlockList
-      class="mb-10"
       @open-edit-question-format-dialog="openEditQuestionFormatDialog"
       @delete-question-block="hundleDeleteQuestionBlock"
     />
 
     <!-- YesOrNo Blocks -->
-    <v-row justify="center" class="mb-10">
+    <v-row justify="center">
       <v-btn
         id="add-yes-or-no-block-btn"
         tile
@@ -62,13 +44,12 @@
       </v-btn>
     </v-row>
     <YesOrNoBlockList
-      class="mb-10"
       @open-edit-yes-or-no-format-dialog="openEditYesOrNoFormatDialog"
       @delete-yes-or-no-block="hundleDeleteYesOrNoBlock"
     />
 
     <!-- Ranking Blocks -->
-    <v-row justify="center" class="mb-10">
+    <v-row justify="center">
       <v-btn
         id="add-ranking-block-btn"
         tile
@@ -81,7 +62,6 @@
       </v-btn>
     </v-row>
     <RankingBlockList
-      class="mb-10"
       :my-ranking-blocks="myRankingBlocks"
       @open-edit-ranking-format-dialog="openEditRankingFormatDialog"
       @delete-ranking-block="hundleDeleteRankingBlock"
@@ -130,19 +110,6 @@
       :edit-ranking-block="editRankingBlock"
       @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
     />
-
-    <!-- Text Block -->
-    <TextFormatDialog
-      :is-shown-text-format-dialog="isShownTextFormatDialog"
-      :text-block-color="textBlockColor"
-      @close-text-format-dialog="closeTextFormatDialog"
-    />
-    <EditTextFormatDialog
-      :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
-      :text-block-color="textBlockColor"
-      :edit-text-block="editTextBlock"
-      @close-edit-text-format-dialog="closeEditTextFormatDialog"
-    />
     <!-- /Dialogs -->
   </div>
 </template>
@@ -153,16 +120,11 @@ import axios from "axios";
 import { mapState, mapActions, Store } from "vuex";
 
 // components ----------
-// Basic Prof Card
 import BasicProfCard from "../../components/basic_profile/BasicProfCard";
 
-// My Favorites Blocks
 import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
 
-// Text Block
 import TextBlockList from "../../components/text_block/TextBlockList";
-import TextFormatDialog from "../../components//text_block/TextFormatDialog";
-import EditTextFormatDialog from "../../components/text_block/EditTextFormatDialog";
 
 // Question Block
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
@@ -203,9 +165,7 @@ export default {
     EditRankingFormatDialog,
 
     // Text Block
-    TextFormatDialog,
     TextBlockList,
-    EditTextFormatDialog,
   },
   props: {
     id: {
@@ -216,12 +176,6 @@ export default {
   },
   data() {
     return {
-      // Text Block
-      isShownTextFormatDialog: false,
-      isShownEditTextFormatDialog: false,
-      editTextBlock: {},
-      textBlockColor: "teal lighten-3", // text block color
-
       // Question Block
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
@@ -248,14 +202,6 @@ export default {
     ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
-    myTextBlocks() {
-      return (
-        this.textBlocks.filter(
-          (textBlock) =>
-            textBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
     myRankingBlocks() {
       return (
         this.rankingBlocks.filter(
@@ -298,30 +244,6 @@ export default {
       fetchTextBlocks: "textBlocks/fetchTextBlocks",
       deleteTextBlock: "textBlocks/deleteTextBlock",
     }),
-
-    // Text Block
-    openTextFormatDialog() {
-      this.isShownTextFormatDialog = true;
-    },
-    closeTextFormatDialog() {
-      this.isShownTextFormatDialog = false;
-    },
-    openEditTextFormatDialog(textBlock) {
-      this.editTextBlock = Object.assign({}, textBlock);
-      this.isShownEditTextFormatDialog = true;
-    },
-    closeEditTextFormatDialog() {
-      this.isShownEditTextFormatDialog = false;
-    },
-    hundleDeleteTextBlock(textBlock) {
-      if (!confirm("削除してよろしいですか?")) return;
-      this.deleteTextBlock(textBlock);
-      this.$store.dispatch("flash/setFlash", {
-        type: "success",
-        message: "テキストブロックを削除したよ！",
-        color: this.textBlockColor,
-      });
-    },
 
     // Question Block
     openQuestionFormatDialog() {
