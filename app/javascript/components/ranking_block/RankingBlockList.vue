@@ -1,5 +1,18 @@
 <template>
-  <v-container>
+  <v-container class="mb-10">
+    <!-- Ranking Blocks -->
+    <v-row justify="center">
+      <v-btn
+        id="add-ranking-block-btn"
+        tile
+        :color="rankingBlockColor"
+        class="ma-2 white--text"
+        @click="openRankingFormatDialog"
+      >
+        <v-icon left> mdi-plus </v-icon>
+        ランキングブロックを追加する
+      </v-btn>
+    </v-row>
     <v-row>
       <v-col
         v-for="rankingBlock in myRankingBlocks"
@@ -7,9 +20,7 @@
         cols="12"
         sm="6"
       >
-        <v-card
-          class="bg-ranking-prof-block bg-cover shadow rounded-2xl p-5"
-        >
+        <v-card class="bg-ranking-prof-block bg-cover shadow rounded-2xl p-5">
           <v-row justify="end">
             <v-btn
               :id="'edit-ranking-block-button-' + rankingBlock.id"
@@ -45,23 +56,85 @@
         </v-card>
       </v-col>
     </v-row>
+    <RankingFormatDialog
+      :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
+      :ranking-block-color="rankingBlockColor"
+      @close-ranking-format-dialog="closeRankingFormatDialog"
+    />
+    <EditRankingFormatDialog
+      :is-shown-edit-ranking-format-dialog="isShownEditRankingFormatDialog"
+      :ranking-block-color="rankingBlockColor"
+      :edit-ranking-block="editRankingBlock"
+      @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
+    />
   </v-container>
 </template>
 
 <script>
+// plugins
+import axios from "axios";
+import { mapState, mapActions, Store } from "vuex";
+
+import RankingFormatDialog from "./RankingFormatDialog";
+import EditRankingFormatDialog from "./EditRankingFormatDialog";
+
 export default {
-  props: {
-    myRankingBlocks: {
-      type: Array,
-      required: true,
+  components: {
+    RankingFormatDialog,
+    EditRankingFormatDialog,
+  },
+  data() {
+    return {
+      // Ranking Block
+      isShownRankingFormatDialog: false,
+      isShownEditRankingFormatDialog: false,
+      editRankingBlock: {},
+      rankingBlockColor: "green lighten-3", // ranking block color
+    };
+  },
+  computed: {
+    ...mapState("rankingBlocks", ["rankingBlocks"]),
+    ...mapState("users", ["currentUser"]),
+
+    myRankingBlocks() {
+      return (
+        this.rankingBlocks.filter(
+          (rankingBlock) =>
+            rankingBlock.profile_block.id == this.currentUser.profile_block.id
+        ) || {}
+      );
     },
   },
   methods: {
+    ...mapActions({
+      // Ranking Block
+      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
+      deleteRankingBlock: "rankingBlocks/deleteRankingBlock",
+    }),
     openEditRankingFormatDialog(rankingBlock) {
       this.$emit("open-edit-ranking-format-dialog", rankingBlock);
     },
+    openRankingFormatDialog() {
+      this.isShownRankingFormatDialog = true;
+    },
+    closeRankingFormatDialog() {
+      this.isShownRankingFormatDialog = false;
+    },
+    openEditRankingFormatDialog(rankingBlock) {
+      this.editRankingBlock = Object.assign({}, rankingBlock);
+      this.isShownEditRankingFormatDialog = true;
+    },
+    closeEditRankingFormatDialog() {
+      this.isShownEditRankingFormatDialog = false;
+    },
     hundleDeleteRankingBlock(rankingBlock) {
-      this.$emit("delete-ranking-block", rankingBlock);
+      if (!confirm("削除してよろしいですか?")) return;
+      this.deleteRankingBlock(rankingBlock);
+      this.$store.dispatch("flash/setFlash", {
+        type: "success",
+        message: "ランキングブロックを削除したよ！",
+        color: this.rankingBlockColor,
+      });
     },
   },
 };

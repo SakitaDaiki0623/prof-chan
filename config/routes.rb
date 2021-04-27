@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :yes_or_no_blocks,   only: %i[index create show update destroy]
       resources :yes_or_no_items,    only: %i[index create update destroy]
       resources :my_favorite_blocks, only: %i[index update]
+      resources :address_blocks,     only: %i[index update]
 
       # 各ブロックのいいね機能
       resources :text_block_likes,      only: [:index, :create, :destroy]

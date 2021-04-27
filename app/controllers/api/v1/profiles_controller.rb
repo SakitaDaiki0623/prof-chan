@@ -5,8 +5,7 @@ module Api
       before_action :set_profile, only: %i[show update]
 
       def index
-        @user = User.find(current_user.id)
-        @profiles = Profile.includes(user: :team).where(teams: { workspace_id: @user.team.workspace_id })
+        @profiles = Profile.by_team(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @profiles,
           serializer: ProfileSerializer
@@ -34,8 +33,6 @@ module Api
           render json: @profile.errors, status: :bad_request
         end
       end
-
-      def destroy; end
 
       private
 

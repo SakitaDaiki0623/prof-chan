@@ -5,7 +5,10 @@
     persistent
     @input="$emit('input', $event.target.isShownEditMyFavoriteFormatDialog)"
   >
-    <v-container class="my-favorite-block-bg" id="edit-my-favorite-block-container">
+    <v-container
+      class="my-favorite-block-bg"
+      id="edit-my-favorite-block-container"
+    >
       <v-row justify="end">
         <v-btn
           id="cancel-edit-my-favorite-block-button"
@@ -138,7 +141,7 @@
                 <label class="form-label-text-block">スポーツ</label>
                 <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
                   <input
-                  id="sports-form"
+                    id="sports-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.sports"
@@ -322,17 +325,17 @@ export default {
       }
       return res.data;
     },
-    hundleCloseEditMyFavoriteFormatDialog() {
-      this.$emit("close-edit-my-favorite-format-dialog");
-      requestAnimationFrame(() => {
-        this.$refs.observer.reset();
-      });
-    },
     hundleUpdateMyFavoriteBlock() {
       this.patchMyFavoriteBlock().then((result) => {
         this.$emit("update-my-favorite-block", result);
       });
       this.hundleCloseEditMyFavoriteFormatDialog();
+    },
+    hundleCloseEditMyFavoriteFormatDialog() {
+      this.$emit("close-edit-my-favorite-format-dialog");
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
     },
   },
 };

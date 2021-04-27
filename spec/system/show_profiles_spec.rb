@@ -33,6 +33,7 @@ RSpec.describe 'ShowProfile', type: :system do
     before { find("#profile-index-card-#{my_profile.id}").click }
 
     it '編集ボタンが表示されていること' do
+      sleep 1
       expect(page).to have_button('編集する')
     end
   end

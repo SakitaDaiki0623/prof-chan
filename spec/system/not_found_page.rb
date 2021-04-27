@@ -12,7 +12,7 @@ RSpec.describe 'NotFoundPage', type: :system do
       end
       context '存在しないURLにアクセスした時' do
         before { visit '/profiles/404test' }
-        fit '404ページに遷移すること' do
+        it '404ページに遷移すること' do
           expect(page).to have_content('404 NotFound'), '404ページが表示されていません'
         end
       end
