@@ -1,8 +1,7 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
-  <header>
+  <header v-show="doesCurrentUserhaveProfile">
     <v-app-bar
-      v-show="doesCurrentUserhaveProfile"
       class="bg-header"
     >
       <v-toolbar-title>

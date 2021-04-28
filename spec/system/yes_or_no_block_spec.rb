@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "YesOrNoBlocks", type: :system do
+RSpec.describe "YesOrNoBlock", type: :system do
 
   let(:last_yes_or_no_block) { YesOrNoBlock.last }
   let(:yes_or_no_item_1)     { YesOrNoBlock.last.yes_or_no_items[0] }

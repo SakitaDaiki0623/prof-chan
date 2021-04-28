@@ -15,8 +15,10 @@ class ProfileBlock < ApplicationRecord
   has_many :ranking_blocks,    dependent: :destroy
   has_many :yes_or_no_blocks,  dependent: :destroy
   has_one  :my_favorite_block, dependent: :destroy
+  has_one  :address_block,     dependent: :destroy
   belongs_to :user
 
   # after_create
-  after_create :create_my_favorite_block
+  after_create  :create_address_block
+  after_create  :create_my_favorite_block
 end

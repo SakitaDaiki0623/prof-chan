@@ -7,7 +7,6 @@ class ProfileSerializer < ActiveModel::Serializer
     object.gender_i18n
   end
 
-  # TODO: 後ほどprefectureに戻す
   def prefecture_id
     object.prefecture.name
   end
