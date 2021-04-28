@@ -1,6 +1,6 @@
 <template>
   <v-container class="my-favorite-block-bg mb-10">
-    <v-row justify="end">
+    <v-row justify="end" v-show="isThisEditPage">
       <v-btn
         id="edit-my-favorite-block-button"
         tile
@@ -140,6 +140,13 @@ import EditMyFavoriteBlockDialog from "./EditMyFavoriteBlockDialog";
 export default {
   components: {
     EditMyFavoriteBlockDialog,
+  },
+  props: {
+    isThisEditPage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {

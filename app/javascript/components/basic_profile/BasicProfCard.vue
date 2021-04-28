@@ -6,7 +6,7 @@
           ★基本情報★
         </div>
         <div class="flex justify-center">
-          <img class="ring-4 ring-gray-600 w-9/12" :src="profile.user.image" />
+          <img class="ring-4 ring-gray-600 w-9/12" :src="user.image" />
         </div>
         <div>
           <div class="text-xl font-bold inline-block mt-4">
@@ -15,12 +15,12 @@
               class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
               >名前</label
             >
-            {{ profile.user.name }}
+            {{ user.name }}
           </div>
         </div>
       </div>
       <div class="p-2 text-lg md:w-2/4">
-        <v-row justify="end">
+        <v-row justify="end" v-show="isThisEditPage">
           <v-btn
             tile
             small
@@ -90,6 +90,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import moment from "moment";
 import { mapState } from "vuex";
 
@@ -104,23 +105,27 @@ export default {
   components: {
     EditBasicProfCardDialog,
   },
+  props: {
+    isThisEditPage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
       isShownEditBasicProfCardDialog: false,
       editBasicProfile: {},
+      user: {},
+      profile: {},
     };
+  },
+  created() {
+    this.firstRead();
   },
   computed: {
     ...mapState("profiles", ["profiles"]),
     ...mapState("users", ["currentUser"]),
-    user() {},
-    profile() {
-      return (
-        this.profiles.find(
-          (profile) => profile.id == this.currentUser.profile.id
-        ) || {}
-      );
-    },
   },
   methods: {
     openEditBasicProfCard() {
@@ -129,6 +134,22 @@ export default {
     },
     closeEditBasicProfCardDialog() {
       this.isShownEditBasicProfCardDialog = false;
+    },
+    async firstRead() {
+      this.getProfile();
+    },
+    async getProfile() {
+      const profileRes = await axios.get(
+        `/api/v1/profiles/${this.$route.params.id}`
+      );
+      const profile = profileRes.data;
+      this.profile = profile;
+      this.getUser();
+    },
+    async getUser() {
+      await axios
+        .get(`/api/v1/users/${this.profile.user.id}`)
+        .then((response) => (this.user = response.data));
     },
   },
 };

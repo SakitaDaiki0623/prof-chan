@@ -3,17 +3,17 @@
   <div class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
-    <BasicAndAddressBlock />
+    <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" />
 
-    <MyFavoriteBlock />
+    <MyFavoriteBlock :is-this-edit-page="isThisEditPage" />
 
-    <TextBlockList />
+    <TextBlockList :is-this-edit-page="isThisEditPage" />
 
-    <QuestionBlockList />
+    <QuestionBlockList :is-this-edit-page="isThisEditPage" />
 
-    <YesOrNoBlockList />
+    <YesOrNoBlockList :is-this-edit-page="isThisEditPage" />
 
-    <RankingBlockList />
+    <RankingBlockList :is-this-edit-page="isThisEditPage" />
   </div>
 </template>
 
@@ -38,6 +38,12 @@ export default {
     RankingBlockList,
     TextBlockList,
   },
+  data() {
+    return {
+      profile: {},
+      user: {},
+    };
+  },
   props: {
     id: {
       type: String,
@@ -46,11 +52,14 @@ export default {
     },
   },
   computed: {
+    isThisEditPage() {
+      return this.$route.path == `/profiles/${this.profile.id}/edit`
+        ? true
+        : false;
+    },
   },
   created() {
-    // this.fetchProfiles();
-    // this.fetchCurrentUser();
-
+    this.firstRead();
     document.title = `プロフィール編集 - プロフちゃん`;
   },
   methods: {
@@ -58,6 +67,22 @@ export default {
       fetchProfiles: "profiles/fetchProfiles",
       fetchCurrentUser: "users/fetchCurrentUser",
     }),
+    async firstRead() {
+      this.getProfile();
+    },
+    async getProfile() {
+      const profileRes = await axios.get(
+        `/api/v1/profiles/${this.$route.params.id}`
+      );
+      const profile = profileRes.data;
+      this.profile = profile;
+      this.getUser();
+    },
+    async getUser() {
+      await axios
+        .get(`/api/v1/users/${this.profile.user.id}`)
+        .then((response) => (this.user = response.data));
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row justify="center" v-show="isThisEditPage">
       <v-btn
         id="add-question-block-btn"
         tile
@@ -20,7 +20,7 @@
         sm="6"
       >
         <v-card class="bg-question-prof-block bg-cover shadow rounded-2xl p-5">
-          <v-row justify="end">
+          <v-row justify="end" v-show="isThisEditPage">
             <v-btn
               :id="'edit-question-block-button-' + questionBlock.id"
               tile
@@ -87,6 +87,13 @@ export default {
   components: {
     QuestionFormatDialog,
     EditQuestionFormatDialog,
+  },
+  props: {
+    isThisEditPage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {

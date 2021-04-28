@@ -2,10 +2,10 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="6">
-        <BasicProfCard />
+        <BasicProfCard :is-this-edit-page="isThisEditPage"/>
       </v-col>
       <v-col cols="12" sm="6">
-        <AddressBlock />
+        <AddressBlock :is-this-edit-page="isThisEditPage"/>
       </v-col>
     </v-row>
   </v-container>
@@ -20,6 +20,13 @@ export default {
   components: {
     BasicProfCard,
     AddressBlock,
+  },
+  props: {
+    isThisEditPage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 };
 </script>

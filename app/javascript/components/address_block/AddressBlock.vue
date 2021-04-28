@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-5">
-    <v-row justify="end">
+    <v-row justify="end" v-show="isThisEditPage">
       <v-btn
         tile
         small
@@ -47,6 +47,13 @@ import EditAddressBlockDialog from "./EditAddressBlockDialog";
 export default {
   components: {
     EditAddressBlockDialog,
+  },
+  props: {
+    isThisEditPage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {

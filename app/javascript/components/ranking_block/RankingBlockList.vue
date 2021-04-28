@@ -1,7 +1,7 @@
 <template>
   <v-container class="mb-10">
     <!-- Ranking Blocks -->
-    <v-row justify="center">
+    <v-row justify="center" v-show="isThisEditPage">
       <v-btn
         id="add-ranking-block-btn"
         tile
@@ -21,7 +21,7 @@
         sm="6"
       >
         <v-card class="bg-ranking-prof-block bg-cover shadow rounded-2xl p-5">
-          <v-row justify="end">
+          <v-row justify="end" v-show="isThisEditPage">
             <v-btn
               :id="'edit-ranking-block-button-' + rankingBlock.id"
               tile
@@ -82,6 +82,13 @@ export default {
   components: {
     RankingFormatDialog,
     EditRankingFormatDialog,
+  },
+    props: {
+    isThisEditPage: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {
