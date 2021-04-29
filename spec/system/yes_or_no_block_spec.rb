@@ -15,6 +15,9 @@ RSpec.describe "YesOrNoBlock", type: :system do
   let(:yes_or_no_item_content2) { 'Yes or No アイテム2 質問' }
   let(:yes_or_no_item_content3) { 'Yes or No アイテム3 質問' }
 
+  let(:my_profile) { Profile.last }
+  let(:others_profile) { Profile.second }
+
   # 編集画面まで遷移
   before do
     create_real_team_with_users(users_count: 15)
@@ -47,6 +50,16 @@ RSpec.describe "YesOrNoBlock", type: :system do
         it 'Yes or No ブロックが作成されること' do
           expect(page).to have_content(yes_or_no_block_title), 'Yes or No ブロックが作成されていません'
           expect(page).to have_content('Yes or No ブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
+        end
+
+        it '作成したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).to have_content(yes_or_no_block_title)
+        end
+
+        it '作成したブロックが他人の詳細ページに反映されていないこと' do
+          visit "/profiles/#{others_profile.id}"
+          expect(page).not_to have_content(yes_or_no_block_title)
         end
 
         it '作成ボタンがdisableに戻っていること' do
@@ -185,6 +198,13 @@ RSpec.describe "YesOrNoBlock", type: :system do
               expect(last_yes_or_no_block.yes_or_no_items.count).to eq(3), 'Yes or No ブロックのアイテム数が合っていません'
               expect(page).to have_content('Yes or No ブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
             end
+
+            it '作成したブロックが詳細ページに反映されていること' do
+              visit "/profiles/#{my_profile.id}"
+              expect(page).to have_content(yes_or_no_block_title),   'Yes or No ブロックが作成されていません'
+              expect(page).to have_selector 'span.border-red-500', text: 'YES'
+              expect(page).to have_selector 'span.border-red-500', text: 'NO'
+            end
           end
 
           context '全ての値が空値で入力された時' do
@@ -271,6 +291,12 @@ RSpec.describe "YesOrNoBlock", type: :system do
           expect(page).not_to have_selector("#edit-yes-or-no-title-form-#{last_yes_or_no_block.id}"), 'タイトル編集フォームがが表示されていません'
           expect(page).to have_content('Yes or No ブロックのタイトルを更新したよ！'), 'フラッシュメッセージが表示されていません'
         end
+
+
+        it '作成したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).to have_content(edit_yes_or_no_block_title), '更新したYes or No ブロックのタイトルが表示されていません'
+        end
       end
 
       context 'タイトルを入力して更新ボタンを押さずに編集をキャンセルした時' do
@@ -300,6 +326,12 @@ RSpec.describe "YesOrNoBlock", type: :system do
           expect(page).to have_selector 'span.border-red-500', text: 'NO'
           expect(YesOrNoBlock.last.yes_or_no_items[0].content).to eq(edit_yes_or_no_item_content1), 'アイテムが更新されていません' # DB上でも更新されているか確認
           expect(page).to have_content('Yes or No アイテムを更新したよ！'), 'フラッシュメッセージが表示されていません'
+        end
+
+        it '作成したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).to have_content(edit_yes_or_no_item_content1), '更新したYes or No ブロックのアイテムの質問が表示されていません'
+          expect(page).to have_selector 'span.border-red-500', text: 'NO'
         end
       end
 
@@ -385,6 +417,11 @@ RSpec.describe "YesOrNoBlock", type: :system do
           end
         end
         it 'アイテムが1つ消えること' do
+          expect(page).not_to have_content(yes_or_no_item_content2), '2番目のアイテムの質問が表示されています'
+        end
+
+        it '作成したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
           expect(page).not_to have_content(yes_or_no_item_content2), '2番目のアイテムの質問が表示されています'
         end
       end

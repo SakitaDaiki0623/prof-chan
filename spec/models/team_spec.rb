@@ -16,7 +16,7 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  fit '有効なファクトリを持つこと' do
+  it '有効なファクトリを持つこと' do
     expect(create(:team)).to be_valid
   end
 

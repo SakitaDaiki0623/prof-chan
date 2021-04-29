@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "BasicBlocks", type: :system do
 
-  let!(:profile) { create(:profile) } 
-  let!(:my_profile) { create(:profile, :my_profile) } 
+  let!(:profile) { create(:profile) }
+  let!(:my_profile) { create(:profile, :my_profile) }
+
+  let(:last_profile) { Profile.last }
 
   # 編集画面まで遷移
   before do
@@ -54,9 +56,19 @@ RSpec.describe "BasicBlocks", type: :system do
       fill_in 'profile_day_of_joinning',	with: profile.day_of_joinning
       click_on'基本情報を更新！'
     end
-    fit '変更した内容が全て反映されること' do
+    it '変更した内容が全て反映されること' do
       expect(page).not_to have_selector("#edit-basic-prof-card-dialog")
       sleep 1
+      expect(page).to have_content(profile.gender_i18n)
+      expect(page).to have_content(profile.height)
+      expect(page).to have_content(profile.blood_type)
+      expect(page).to have_content(profile.prefecture.name)
+      expect(page).to have_content(profile.birthday.strftime("%Y/%m/%d"))
+      expect(page).to have_content(profile.day_of_joinning.strftime("%Y/%m/%d"))
+    end
+
+    it '変更した内容が詳細ページにも反映されること' do
+      visit "/profiles/#{last_profile.id}"
       expect(page).to have_content(profile.gender_i18n)
       expect(page).to have_content(profile.height)
       expect(page).to have_content(profile.blood_type)

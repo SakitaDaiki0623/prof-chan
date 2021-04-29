@@ -2,6 +2,7 @@
   <v-card class="pa-5">
     <v-row justify="end" v-show="isThisEditPage">
       <v-btn
+        id="edit-address-block-button"
         tile
         small
         color="red lighten-4"
@@ -79,7 +80,7 @@ export default {
     });
   },
   methods: {
-    fetchAddressBlock: async function() {
+    fetchAddressBlock: async function () {
       const res = await axios.get("/api/v1/address_blocks");
       if (res.status !== 200) {
         process.exit();

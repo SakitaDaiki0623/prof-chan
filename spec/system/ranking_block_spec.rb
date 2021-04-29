@@ -4,7 +4,10 @@ require 'rails_helper'
 RSpec.describe 'RankingBlock', type: :system do
 
   let(:ranking_block) { RankingBlock.last }
-  let(:factory_ranking_block) { create(:ranking_block) }
+  let!(:factory_ranking_block) { create(:ranking_block) }
+
+  let(:my_profile) { Profile.last }
+  let(:others_profile) { Profile.second }
 
   let(:words_over_fifty)      { 'あ' * 51 }
 
@@ -34,6 +37,22 @@ RSpec.describe 'RankingBlock', type: :system do
         expect(page).to have_content(factory_ranking_block.second_place), 'ランキングブロックが作成されていません'
         expect(page).to have_content(factory_ranking_block.third_place),  'ランキングブロックが作成されていません'
         expect(page).to have_content('ランキングブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
+      end
+
+      it '作成したブロックが詳細ページに反映されていること' do
+        visit "/profiles/#{my_profile.id}"
+        expect(page).to have_content(factory_ranking_block.title),        'ランキングブロックが作成されていません'
+        expect(page).to have_content(factory_ranking_block.first_place),  'ランキングブロックが作成されていません'
+        expect(page).to have_content(factory_ranking_block.second_place), 'ランキングブロックが作成されていません'
+        expect(page).to have_content(factory_ranking_block.third_place),  'ランキングブロックが作成されていません'
+      end
+
+      it '作成したブロックが他人の詳細ページに反映されていないこと' do
+        visit "/profiles/#{others_profile.id}"
+        expect(page).not_to have_content(factory_ranking_block.title),        'ランキングブロックが作成されていません'
+        expect(page).not_to have_content(factory_ranking_block.first_place),  'ランキングブロックが作成されていません'
+        expect(page).not_to have_content(factory_ranking_block.second_place), 'ランキングブロックが作成されていません'
+        expect(page).not_to have_content(factory_ranking_block.third_place),  'ランキングブロックが作成されていません'
       end
 
       it '作成ボタンがdisableに戻っていること' do
@@ -164,6 +183,22 @@ RSpec.describe 'RankingBlock', type: :system do
         expect(page).to have_content('編集されたランキング2位'), '2位が更新されていません'
         expect(page).to have_content('編集されたランキング3位'), '3位が更新されていません'
         expect(page).to have_content('ランキングブロックを更新したよ！'), 'フラッシュメッセージが表示されていません'
+      end
+
+      it '編集したブロックが詳細ページに反映されていること' do
+        visit "/profiles/#{my_profile.id}"
+        expect(page).to have_content('編集されたタイトル'),      'タイトルが更新されていません'
+        expect(page).to have_content('編集されたランキング1位'), '1位が更新されていません'
+        expect(page).to have_content('編集されたランキング2位'), '2位が更新されていません'
+        expect(page).to have_content('編集されたランキング3位'), '3位が更新されていません'
+      end
+
+      it '編集したブロックが他人の詳細ページに反映されていないこと' do
+        visit "/profiles/#{others_profile.id}"
+        expect(page).not_to have_content('編集されたタイトル'),      'タイトルが更新されていません'
+        expect(page).not_to have_content('編集されたランキング1位'), '1位が更新されていません'
+        expect(page).not_to have_content('編集されたランキング2位'), '2位が更新されていません'
+        expect(page).not_to have_content('編集されたランキング3位'), '3位が更新されていません'
       end
     end
 

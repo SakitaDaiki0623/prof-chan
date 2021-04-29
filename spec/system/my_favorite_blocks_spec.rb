@@ -4,6 +4,9 @@ RSpec.describe "MyFavoriteBlocks", type: :system do
   let(:my_favorite_block) { MyFavoriteBlock.last }
   let(:factory_my_favorite_block) { create(:my_favorite_block) }
 
+  let(:my_profile) { Profile.last }
+  let(:others_profile) { Profile.second }
+
   let(:over_fifteen_words) { 'あ' * 16 }
 
   # 編集画面まで遷移
@@ -30,6 +33,26 @@ RSpec.describe "MyFavoriteBlocks", type: :system do
       expect(page).to have_content('リングフィットアドベンチャー')
       expect(page).to have_content('俳優・女優')
       expect(page).to have_content('新垣結衣')
+    end
+
+    it '入力した項目が詳細ページに表示されること' do
+      visit "/profiles/#{my_profile.id}"
+      expect(page).to have_content('漫画・アニメ')
+      expect(page).to have_content('reゼロ')
+      expect(page).to have_content('ゲーム・アプリ')
+      expect(page).to have_content('リングフィットアドベンチャー')
+      expect(page).to have_content('俳優・女優')
+      expect(page).to have_content('新垣結衣')
+    end
+
+    it '入力した項目が他人の詳細ページに表示されないこと' do
+      visit "/profiles/#{others_profile.id}"
+      expect(page).not_to have_content('漫画・アニメ')
+      expect(page).not_to have_content('reゼロ')
+      expect(page).not_to have_content('ゲーム・アプリ')
+      expect(page).not_to have_content('リングフィットアドベンチャー')
+      expect(page).not_to have_content('俳優・女優')
+      expect(page).not_to have_content('新垣結衣')
     end
   end
 

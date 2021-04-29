@@ -3,10 +3,13 @@ require 'rails_helper'
 RSpec.describe 'TextBlock', type: :system do
 
   let(:text_block) { TextBlock.last }
-  let(:factory_text_block) { create(:text_block) }
+  let!(:factory_text_block) { create(:text_block) }
 
   let(:words_over_fifty)      { 'あ' * 51 }
   let(:words_over_two_hundreds) { 'あ' * 201 }
+
+  let(:my_profile) { Profile.last }
+  let(:others_profile) { Profile.second }
 
   before do
     create_real_team_with_users(users_count: 15)
@@ -29,6 +32,18 @@ RSpec.describe 'TextBlock', type: :system do
         expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
         expect(page).to have_content(factory_text_block.text),  'テキストブロックが作成されていません'
         expect(page).to have_content('テキストブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
+      end
+
+      it '作成したブロックが詳細ページに反映されていること' do
+        visit "/profiles/#{my_profile.id}"
+        expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
+        expect(page).to have_content(factory_text_block.text),  'テキストブロックが作成されていません'
+      end
+
+      it '作成したブロックが他人の詳細ページに反映されていないこと' do
+        visit "/profiles/#{others_profile.id}"
+        expect(page).not_to have_content(factory_text_block.title)
+        expect(page).not_to have_content(factory_text_block.text)
       end
 
       it '作成ボタンがdisableに戻っていること' do
@@ -99,6 +114,12 @@ RSpec.describe 'TextBlock', type: :system do
         expect(page).to have_content('編集されたテキスト'), 'テキストが更新されていません'
         expect(page).to have_content('テキストブロックを更新したよ！'), 'フラッシュメッセージが表示されていません'
       end
+
+      it '作成したブロックが詳細ページに反映されていること' do
+        visit "/profiles/#{my_profile.id}"
+        expect(page).to have_content('編集されたタイトル'), 'タイトルが更新されていません'
+        expect(page).to have_content('編集されたテキスト'), 'テキストが更新されていません'
+      end
     end
   end
 
@@ -120,6 +141,11 @@ RSpec.describe 'TextBlock', type: :system do
       it '対象のテキストブロックが削除されること' do
         expect(page).not_to have_content('削除されるテキストブロック'), '対象のテキストブロックが削除されていません'
         expect(page).to have_content('テキストブロックを削除したよ！'), 'フラッシュメッセージが表示されていません'
+      end
+
+      it '詳細ページから対象のテキストブロックが削除されること' do
+        visit "/profiles/#{my_profile.id}"
+        expect(page).not_to have_content('削除されるテキストブロック'), '対象のテキストブロックが削除されていません'
       end
     end
 

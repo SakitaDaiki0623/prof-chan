@@ -27,12 +27,25 @@ RSpec.describe 'EditProfile', type: :system do
     it '自分のプロフィール編集画面であること' do
       expect(page).to have_content(my_profile.user.name)
     end
+
+    it '編集ボタンが表示されていること' do
+      expect(page).to have_selector('#edit-basic-prof-card-button')
+      expect(page).to have_selector('#edit-address-block-button')
+      expect(page).to have_selector('#edit-my-favorite-block-button')
+    end
+    it 'ブロック追加ボタンが表示されていること' do
+      expect(page).to have_selector('#add-text-block-btn')
+      expect(page).to have_selector('#add-ranking-block-btn')
+      expect(page).to have_selector('#add-question-block-btn')
+      expect(page).to have_selector('#add-yes-or-no-block-btn')
+    end
   end
 
   describe 'Authorization' do
     context '他人の編集ページにアクセスしようとした時' do
       before { visit other_profile_edit_path }
-      it 'プロフィールページにリダイレクトすること' do
+      it '自分のプロフィール編集
+      ページにリダイレクトすること' do
         expect(current_path).to eq("/profiles/#{my_profile.id}/edit")
         expect(page).to have_content('他の人のプロフィールは編集できないよ！')
       end

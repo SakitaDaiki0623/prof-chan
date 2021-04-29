@@ -14,6 +14,16 @@
     <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
     <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+
+    <v-btn
+      color="primary"
+      depressed
+      :to="{ path: '/profiles' }"
+      class="mb-10"
+      id="back-to-profiles-path-button"
+    >
+      <v-icon left>mdi-exit-run</v-icon>プロフィール一覧ページに戻る
+    </v-btn>
   </div>
 </template>
 

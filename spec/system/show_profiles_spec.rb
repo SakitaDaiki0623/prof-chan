@@ -20,7 +20,7 @@ RSpec.describe 'ShowProfile', type: :system do
     end
 
     it '指定のプロフィールが表示されていること' do
-      expect(page).to have_content("#{my_profile.user.name} さんのプロフィール")
+      expect(page).to have_content("#{my_profile.user.name}さんのプロフィール")
     end
 
     it 'ヘッダーが表示されていること' do
@@ -32,9 +32,16 @@ RSpec.describe 'ShowProfile', type: :system do
 
     before { find("#profile-index-card-#{my_profile.id}").click }
 
-    it '編集ボタンが表示されていること' do
-      sleep 1
-      expect(page).to have_button('編集する')
+    it '編集ボタンが表示されていないこと' do
+      expect(page).not_to have_selector('#edit-basic-prof-card-button')
+      expect(page).not_to have_selector('#edit-address-block-button')
+      expect(page).not_to have_selector('#edit-my-favorite-block-button')
+    end
+    it 'ブロック追加ボタンが表示されていないこと' do
+      expect(page).not_to have_selector('#add-text-block-btn')
+      expect(page).not_to have_selector('#add-ranking-block-btn')
+      expect(page).not_to have_selector('#add-question-block-btn')
+      expect(page).not_to have_selector('#add-yes-or-no-block-btn')
     end
   end
 
@@ -44,6 +51,19 @@ RSpec.describe 'ShowProfile', type: :system do
 
     it '編集ボタンが表示されていないこと' do
       expect(page).not_to have_button('編集する')
+    end
+
+    it '編集ボタンが表示されていないこと' do
+      expect(page).not_to have_selector('#edit-basic-prof-card-button')
+      expect(page).not_to have_selector('#edit-address-block-button')
+      expect(page).not_to have_selector('#edit-my-favorite-block-button')
+    end
+
+    it 'ブロック追加ボタンが表示されていないこと' do
+      expect(page).not_to have_selector('#add-text-block-btn')
+      expect(page).not_to have_selector('#add-ranking-block-btn')
+      expect(page).not_to have_selector('#add-question-block-btn')
+      expect(page).not_to have_selector('#add-yes-or-no-block-btn')
     end
   end
 end
