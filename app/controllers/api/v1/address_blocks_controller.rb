@@ -12,9 +12,6 @@ module Api
       end
 
       def update
-        
-        binding.pry
-        
         if @address_block.update!(address_block_params)
           render json: @address_block
         else

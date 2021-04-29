@@ -122,9 +122,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
     }),
     openQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = true;

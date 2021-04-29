@@ -16,7 +16,7 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 // Component ----------
 import IndexProfCard from "../../components/IndexProfCard";
@@ -32,18 +32,18 @@ export default {
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    ...mapState("textBlocks", ["textBlocks"]),
+    ...mapState("rankingBlocks", ["rankingBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoItems"]),
+    ...mapState("questionBlocks", ["questionBlocks"]),
+    ...mapState("questionBlocks", ["questionItems"]),
   },
   mounted() {
     document.title = "プロフィール一覧 - プロフちゃん";
   },
   created() {
-    this.fetchUsers();
-    this.fetchCurrentUser();
-    this.fetchProfiles();
-    this.fetchTextBlocks();
-    this.fetchRankingBlocks();
-    this.fetchYesOrNoBlocks();
-    this.fetchYesOrNoItems();
+    this.firstRead();
   },
   methods: {
     ...mapActions({
@@ -52,12 +52,25 @@ export default {
       fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
       fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
       fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
       fetchUsers: "users/fetchUsers",
     }),
     async fetchProfiles() {
       await axios
         .get("/api/v1/profiles")
         .then((response) => (this.profiles = response.data));
+    },
+    async firstRead() {
+      this.fetchCurrentUser();
+      this.fetchUsers();
+      this.fetchProfiles();
+      this.fetchTextBlocks();
+      this.fetchRankingBlocks();
+      this.fetchYesOrNoBlocks();
+      this.fetchYesOrNoItems();
+      this.fetchQuestionBlocks();
+      this.fetchQuestionItems();
     },
   },
 };
