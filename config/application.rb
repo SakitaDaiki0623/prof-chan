@@ -31,6 +31,8 @@ module ShowProfile
     # Load CustomFailure for Devise Authentication
     config.autoload_paths << Rails.root.join('lib')
 
+    config.api_only = true
+
     # Prevent the $ rails g from generating assets, helper, test files and routing
     config.generators do |g|
       g.assets false

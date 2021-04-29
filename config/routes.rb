@@ -10,9 +10,6 @@ Rails.application.routes.draw do
     delete 'logout' => 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  # redirect path after authentication
-  resources :profiles,  only: %i[new index]
-
   # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
