@@ -2,7 +2,7 @@
   <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
     <div class="flex p-3 text-gray-600 font-bold">
       <div class="md:w-2/4 text-center">
-        <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5 ">
+        <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
           ★基本情報★
         </div>
         <div class="flex justify-center">
@@ -22,6 +22,7 @@
       <div class="p-2 text-lg md:w-2/4">
         <v-row justify="end" v-show="isThisEditPage">
           <v-btn
+            id="edit-basic-prof-card-button"
             tile
             small
             color="red lighten-4"
@@ -98,7 +99,7 @@ import EditBasicProfCardDialog from "./EditBasicProfCardDialog";
 
 export default {
   filters: {
-    moment: function(date) {
+    moment: function (date) {
       return moment(date).format("YYYY/MM/DD");
     },
   },
