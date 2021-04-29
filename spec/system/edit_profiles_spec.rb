@@ -33,7 +33,7 @@ RSpec.describe 'EditProfile', type: :system do
     context '他人の編集ページにアクセスしようとした時' do
       before { visit other_profile_edit_path }
       it 'プロフィールページにリダイレクトすること' do
-        expect(current_path).to eq(profiles_path)
+        expect(current_path).to eq("/profiles/#{my_profile.id}/edit")
         expect(page).to have_content('他の人のプロフィールは編集できないよ！')
       end
     end
