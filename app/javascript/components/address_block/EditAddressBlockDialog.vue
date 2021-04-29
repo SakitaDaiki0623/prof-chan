@@ -1,3 +1,4 @@
+<!-- app/javascript/components/address_block/EditAddressBlockDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditAddressBlockDialog"
@@ -39,8 +40,7 @@
                 <label class="form-label-basic-block">郵便番号</label>
                 <!-- TODO: ポストコードの正規表現がうまくいかないので後ほど追記 -->
                 <ValidationProvider
-                  v-slot="{ errors }"
-                  rules="input_required"
+                  rules="input_required|regex: /^[0-9]{7}$/"
                   name="郵便番号"
                 >
                   〒<input
@@ -49,7 +49,6 @@
                     placeholder="郵便番号を入力"
                     v-model="editMyAddressBlock.postcode"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
                 <v-btn @click="searchAddressInfo" :disabled="invalid"
                   >住所を自動で入力!</v-btn

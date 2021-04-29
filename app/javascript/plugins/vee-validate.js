@@ -24,7 +24,6 @@ extend("max_no_field", {
 
 extend("regex_postcode", {
   ...regex,
-  message: "正しい{_field_}を入力してね",
 });
 
 export default {
