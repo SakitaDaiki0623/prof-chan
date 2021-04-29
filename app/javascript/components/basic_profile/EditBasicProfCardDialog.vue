@@ -327,11 +327,17 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    ...mapActions({
-      patchProfile: "profiles/patchProfile",
-    }),
+    patchProfile: async function() {
+      const res = await axios.patch(
+        `/api/v1/profiles/${this.editBasicProfile.id}`,
+        this.editBasicProfile
+      );
+      if (res.status !== 200) {
+        process.exit();
+      }
+      return res.data;
+    },
     hundleUpdateBasicProfile(editBasicProfile) {
-
       // genderの変換
       if (editBasicProfile.gender == "男性") {
         editBasicProfile.gender = "male";
@@ -345,7 +351,9 @@ export default {
       );
       editBasicProfile.prefecture_id = selectedPrefecture.value;
 
-      this.patchProfile(editBasicProfile);
+      this.patchProfile().then((result) => {
+        this.$emit("update-profile", result);
+      });
       this.hundleCloseEditBasicProfCardDialog();
     },
     hundleCloseEditBasicProfCardDialog() {

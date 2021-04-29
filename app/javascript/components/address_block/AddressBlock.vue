@@ -54,6 +54,10 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
@@ -69,7 +73,7 @@ export default {
     this.fetchAddressBlock().then((result) => {
       const res = result.find(
         (addressBlock) =>
-          addressBlock.profile_block.id == this.currentUser.profile_block.id
+          addressBlock.profile_block.id == this.user.profile_block.id
       );
       this.myAddressBlock = res;
     });

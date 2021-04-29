@@ -2,26 +2,26 @@
 <template>
   <v-container class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">
-      {{ currentUser.name }}さんのプロフィール
+      {{ user.name }}さんのプロフィール
     </p>
-    <BasicAndAddressBlock />
+    <BasicAndAddressBlock :user="user" />
 
-    <MyFavoriteBlock />
+    <MyFavoriteBlock :user="user" />
 
-    <TextBlockList />
+    <TextBlockList :user="user" />
 
-    <QuestionBlockList />
+    <QuestionBlockList :user="user" />
 
-    <YesOrNoBlockList />
+    <YesOrNoBlockList :user="user" />
 
-    <RankingBlockList />
+    <RankingBlockList :user="user" />
   </v-container>
 </template>
 
 <script>
 // plugins
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 // Component ----------
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
@@ -47,32 +47,24 @@ export default {
       default: "",
     },
   },
-  created() {
-    console.log(this.$route.path);
-  },
-  data() {
-    return {};
-  },
   computed: {
-    ...mapState("profiles", ["profiles"]),
-    ...mapState("users", ["currentUser"]),
-    ...mapState("textBlocks", ["textBlocks"]),
+    ...mapState("users", ["users"]),
 
-    isCurrentUser() {
-      return this.profile.user.id === this.currentUser.id;
+    user() {
+      return this.users.find(
+        (user) => this.$route.params.id == user.profile.id
+      );
     },
   },
+  data() {
+    return {
+      profile: {},
+    };
+  },
   mounted() {
-    this.fetchProfiles();
-    this.fetchTextBlocks();
-    this.fetchCurrentUser();
     document.title = `プロフィール詳細 - プロフちゃん`;
   },
   methods: {
-    ...mapActions("profiles", ["patchProfile", "fetchProfiles"]),
-    ...mapActions("textBlocks", ["fetchTextBlocks"]),
-    ...mapActions("users", ["fetchCurrentUser"]),
-
     moveToProfilesPage() {
       this.$router.push("/profiles");
     },

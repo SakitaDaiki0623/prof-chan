@@ -82,6 +82,10 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
@@ -99,7 +103,7 @@ export default {
       return (
         this.textBlocks.filter(
           (textBlock) =>
-            textBlock.profile_block.id == this.currentUser.profile_block.id
+            textBlock.profile_block.id == this.user.profile_block.id
         ) || {}
       );
     },

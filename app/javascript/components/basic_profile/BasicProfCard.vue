@@ -85,6 +85,7 @@
       :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
       :edit-basic-profile="editBasicProfile"
       @close-edit-basic-prof-card-dialog="closeEditBasicProfCardDialog"
+      @update-profile="updateProfile"
     />
   </v-card>
 </template>
@@ -92,7 +93,6 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import { mapState } from "vuex";
 
 import EditBasicProfCardDialog from "./EditBasicProfCardDialog";
 
@@ -111,22 +111,22 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
       isShownEditBasicProfCardDialog: false,
       editBasicProfile: {},
-      user: {},
       profile: {},
     };
   },
   created() {
     this.firstRead();
   },
-  computed: {
-    ...mapState("profiles", ["profiles"]),
-    ...mapState("users", ["currentUser"]),
-  },
+  computed: {},
   methods: {
     openEditBasicProfCard() {
       this.editBasicProfile = this.profile;
@@ -144,12 +144,9 @@ export default {
       );
       const profile = profileRes.data;
       this.profile = profile;
-      this.getUser();
     },
-    async getUser() {
-      await axios
-        .get(`/api/v1/users/${this.profile.user.id}`)
-        .then((response) => (this.user = response.data));
+    updateProfile(result) {
+      this.profile = result;
     },
   },
 };

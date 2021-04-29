@@ -361,10 +361,8 @@ export default {
     this.fetchCurrentUser();
   },
   methods: {
-    ...mapActions("profiles", ["createBasicProfile"]),
     ...mapActions("users", ["fetchCurrentUser"]),
     hundleSubmitBasicProfileInfo(profile) {
-      // [TODO: リファクタリング] メソッドが冗長なのでリファクタリングできるか考える
       if (
         profile.height == "" ||
         profile.gender == "" ||
@@ -386,6 +384,9 @@ export default {
     },
     saveJoinedDate(date) {
       this.$refs.menu.save(date);
+    },
+    async createBasicProfile() {
+      await axios.post("/api/v1/profiles", this.profile);
     },
   },
 };
