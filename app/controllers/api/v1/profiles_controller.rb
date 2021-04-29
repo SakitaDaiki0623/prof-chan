@@ -23,12 +23,12 @@ module Api
       end
 
       def show
-        render json: @profile
+        render json: @profile, serializer: ProfileSerializer
       end
 
       def update
         if @profile.update(profile_params)
-          render json: @profile
+          render json: @profile, serializer: ProfileSerializer
         else
           render json: @profile.errors, status: :bad_request
         end

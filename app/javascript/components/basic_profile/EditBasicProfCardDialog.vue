@@ -7,7 +7,10 @@
     @input="$emit('input', $event.target.isShownEditBasicProfCardDialog)"
   >
     <!-- Basic Info Card -->
-    <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
+    <v-card
+      class="shadow rounded-2xl bg-question-prof-block bg-cover"
+      id="edit-basic-prof-card-dialog"
+    >
       <div class="flex p-3 text-gray-600">
         <div class="md:w-2/4 p-4 text-center mt-10">
           <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
@@ -29,6 +32,17 @@
           </div>
         </div>
         <div class="md:w-3/5 p-8 lg:ml-4">
+          <v-row justify="end">
+            <v-btn
+              id="cancel-basic-prof-card-button"
+              tile
+              small
+              color="red lighten-4"
+              @click="hundleCloseEditBasicProfCardDialog"
+            >
+              ✖︎
+            </v-btn>
+          </v-row>
           <!-- FORM -->
           <div id="profile-basic-form" class="p-6">
             <ValidationObserver ref="observer" v-slot="{ invalid }">
@@ -54,8 +68,9 @@
                         v-for="gender in genders"
                         :key="gender.value"
                         :value="gender.text"
-                        >{{ gender.text }}</option
                       >
+                        {{ gender.text }}
+                      </option>
                     </select>
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -230,7 +245,7 @@
                     color="blue-grey darken-2"
                     class="white--text"
                   >
-                    入力完了！
+                    基本情報を更新！
                   </v-btn>
                 </div>
               </form>
@@ -327,11 +342,17 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    ...mapActions({
-      patchProfile: "profiles/patchProfile",
-    }),
+    patchProfile: async function () {
+      const res = await axios.patch(
+        `/api/v1/profiles/${this.editBasicProfile.id}`,
+        this.editBasicProfile
+      );
+      if (res.status !== 200) {
+        process.exit();
+      }
+      return res.data;
+    },
     hundleUpdateBasicProfile(editBasicProfile) {
-
       // genderの変換
       if (editBasicProfile.gender == "男性") {
         editBasicProfile.gender = "male";
@@ -345,7 +366,9 @@ export default {
       );
       editBasicProfile.prefecture_id = selectedPrefecture.value;
 
-      this.patchProfile(editBasicProfile);
+      this.patchProfile().then((result) => {
+        this.$emit("update-profile", result);
+      });
       this.hundleCloseEditBasicProfCardDialog();
     },
     hundleCloseEditBasicProfCardDialog() {

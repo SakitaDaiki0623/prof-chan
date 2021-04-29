@@ -2,6 +2,7 @@
   <v-card class="pa-5">
     <v-row justify="end" v-show="isThisEditPage">
       <v-btn
+        id="edit-address-block-button"
         tile
         small
         color="red lighten-4"
@@ -54,6 +55,10 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
@@ -69,13 +74,13 @@ export default {
     this.fetchAddressBlock().then((result) => {
       const res = result.find(
         (addressBlock) =>
-          addressBlock.profile_block.id == this.currentUser.profile_block.id
+          addressBlock.profile_block.id == this.user.profile_block.id
       );
       this.myAddressBlock = res;
     });
   },
   methods: {
-    fetchAddressBlock: async function() {
+    fetchAddressBlock: async function () {
       const res = await axios.get("/api/v1/address_blocks");
       if (res.status !== 200) {
         process.exit();

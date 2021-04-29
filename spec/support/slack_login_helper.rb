@@ -25,5 +25,6 @@ module SlackLoginHelper
     create_profile
     click_button 'プロフィール閲覧'
     expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+    sleep 0.5
   end
 end

@@ -4,7 +4,6 @@ import axios from "../plugins/axios.js";
 // [参考]: https://qiita.com/_masa_u/items/b58b92c283f4e770e094
 import createPersistedState from "vuex-persistedstate";
 
-import { profiles } from "./modules/profiles";
 import { users } from "./modules/users";
 import { flash } from "./modules/flash";
 import { isNotFound } from "./modules/isNotFound";
@@ -26,7 +25,6 @@ export default new Vuex.Store({
     isNotFound,
 
     // Blocks
-    profiles,
     profileBlocks,
     textBlocks,
     questionBlocks,

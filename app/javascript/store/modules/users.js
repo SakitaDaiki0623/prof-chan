@@ -8,11 +8,15 @@ export const users = {
     currentUser: {},
   },
   getters: {
+    users: (state) => state.users,
     currentUser: (state) => state.currentUser,
   },
   mutations: {
     loadCurrentUser(state, currentUser) {
       state.currentUser = currentUser;
+    },
+    loadUsers(state, users) {
+      state.users = users;
     },
   },
   actions: {
@@ -21,6 +25,14 @@ export const users = {
         .get("/users/new")
         .then((response) => {
           commit("loadCurrentUser", response.data);
+        })
+        .catch((err) => console.log(err.status));
+    },
+    fetchUsers({ commit }) {
+      axios
+        .get("users")
+        .then((response) => {
+          commit("loadUsers", response.data);
         })
         .catch((err) => console.log(err.status));
     },

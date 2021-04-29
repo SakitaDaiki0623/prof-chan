@@ -94,13 +94,17 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
       isShownQuestionFormatDialog: false,
       isShownEditQuestionFormatDialog: false,
       editQuestionBlock: {},
-      questionBlockColor: "red lighten-3", // question block color
+      questionBlockColor: "red lighten-3", // question block colorz
     };
   },
   computed: {
@@ -111,16 +115,14 @@ export default {
       return (
         this.questionBlocks.filter(
           (questionBlock) =>
-            questionBlock.profile_block.id == this.currentUser.profile_block.id
+            questionBlock.profile_block.id == this.user.profile_block.id
         ) || {}
       );
     },
   },
   methods: {
     ...mapActions({
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
     }),
     openQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = true;

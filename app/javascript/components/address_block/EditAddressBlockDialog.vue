@@ -7,7 +7,9 @@
   >
     <v-card class="pa-5">
       <v-row justify="end">
-        <v-btn @click="hundleCloseEditAddressBlockDialog">
+        <v-btn
+          @click="hundleCloseEditAddressBlockDialog"
+        >
           ✖︎
         </v-btn>
       </v-row>
@@ -110,7 +112,7 @@ export default {
         this.$emit("update-address-automatically", res.data.data.fullAddress);
       });
     },
-    patchAddressBlock: async function() {
+    patchAddressBlock: async function () {
       const res = await axios.patch(
         `/api/v1/address_blocks/${this.editMyAddressBlock.id}`,
         this.editMyAddressBlock

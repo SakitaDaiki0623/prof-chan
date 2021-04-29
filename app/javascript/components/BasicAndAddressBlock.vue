@@ -2,10 +2,10 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="6">
-        <BasicProfCard :is-this-edit-page="isThisEditPage"/>
+        <BasicProfCard :is-this-edit-page="isThisEditPage" :user="user" />
       </v-col>
       <v-col cols="12" sm="6">
-        <AddressBlock :is-this-edit-page="isThisEditPage"/>
+        <AddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
       </v-col>
     </v-row>
   </v-container>
@@ -26,6 +26,10 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    user: {
+      type: Object,
+      required: false,
     },
   },
 };

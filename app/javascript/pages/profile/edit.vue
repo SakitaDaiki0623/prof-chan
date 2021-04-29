@@ -3,17 +3,27 @@
   <div class="text-gray-600">
     <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
 
-    <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" />
+    <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <MyFavoriteBlock :is-this-edit-page="isThisEditPage" />
+    <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <TextBlockList :is-this-edit-page="isThisEditPage" />
+    <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <QuestionBlockList :is-this-edit-page="isThisEditPage" />
+    <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <YesOrNoBlockList :is-this-edit-page="isThisEditPage" />
+    <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <RankingBlockList :is-this-edit-page="isThisEditPage" />
+    <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+
+    <v-btn
+      color="primary"
+      depressed
+      :to="{ path: '/profiles' }"
+      class="mb-10"
+      id="back-to-profiles-path-button"
+    >
+      <v-icon left>mdi-exit-run</v-icon>プロフィール一覧ページに戻る
+    </v-btn>
   </div>
 </template>
 
@@ -41,7 +51,6 @@ export default {
   data() {
     return {
       profile: {},
-      user: {},
     };
   },
   props: {
@@ -52,14 +61,19 @@ export default {
     },
   },
   computed: {
+    ...mapState("users", ["users"]),
     isThisEditPage() {
-      return this.$route.path == `/profiles/${this.profile.id}/edit`
+      return this.$route.path == `/profiles/${this.user.profile.id}/edit`
         ? true
         : false;
     },
+    user() {
+      return this.users.find(
+        (user) => this.$route.params.id == user.profile.id
+      );
+    },
   },
   created() {
-    this.firstRead();
     document.title = `プロフィール編集 - プロフちゃん`;
   },
   methods: {
@@ -67,22 +81,6 @@ export default {
       fetchProfiles: "profiles/fetchProfiles",
       fetchCurrentUser: "users/fetchCurrentUser",
     }),
-    async firstRead() {
-      this.getProfile();
-    },
-    async getProfile() {
-      const profileRes = await axios.get(
-        `/api/v1/profiles/${this.$route.params.id}`
-      );
-      const profile = profileRes.data;
-      this.profile = profile;
-      this.getUser();
-    },
-    async getUser() {
-      await axios
-        .get(`/api/v1/users/${this.profile.user.id}`)
-        .then((response) => (this.user = response.data));
-    },
   },
 };
 </script>

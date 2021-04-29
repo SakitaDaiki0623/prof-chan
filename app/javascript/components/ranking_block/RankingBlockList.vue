@@ -83,11 +83,15 @@ export default {
     RankingFormatDialog,
     EditRankingFormatDialog,
   },
-    props: {
+  props: {
     isThisEditPage: {
       type: Boolean,
       required: false,
       default: false,
+    },
+    user: {
+      type: Object,
+      required: false,
     },
   },
   data() {
@@ -107,7 +111,7 @@ export default {
       return (
         this.rankingBlocks.filter(
           (rankingBlock) =>
-            rankingBlock.profile_block.id == this.currentUser.profile_block.id
+            rankingBlock.profile_block.id == this.user.profile_block.id
         ) || {}
       );
     },

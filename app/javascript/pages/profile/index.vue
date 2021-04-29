@@ -6,12 +6,7 @@
         社員プロフィール一覧
       </p>
       <v-row class="mb-10">
-        <v-col
-          v-for="profile in getProfiles"
-          :key="profile.id"
-          cols="12"
-          sm="4"
-        >
+        <v-col v-for="profile in profiles" :key="profile.id" cols="12" sm="4">
           <IndexProfCard :profile="profile" />
         </v-col>
       </v-row>
@@ -21,7 +16,7 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 // Component ----------
 import IndexProfCard from "../../components/IndexProfCard";
@@ -37,18 +32,46 @@ export default {
   },
   computed: {
     ...mapState("users", ["currentUser"]),
-    ...mapGetters("profiles", ["getProfiles"]),
+    ...mapState("textBlocks", ["textBlocks"]),
+    ...mapState("rankingBlocks", ["rankingBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
+    ...mapState("yesOrNoBlocks", ["yesOrNoItems"]),
+    ...mapState("questionBlocks", ["questionBlocks"]),
+    ...mapState("questionBlocks", ["questionItems"]),
   },
   mounted() {
     document.title = "プロフィール一覧 - プロフちゃん";
   },
   created() {
-    this.fetchCurrentUser();
-    this.fetchProfiles();
+    this.firstRead();
   },
   methods: {
-    ...mapActions("profiles", ["fetchProfiles"]),
-    ...mapActions("users", ["fetchCurrentUser"]),
+    ...mapActions({
+      fetchCurrentUser: "users/fetchCurrentUser",
+      fetchTextBlocks: "textBlocks/fetchTextBlocks",
+      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
+      fetchUsers: "users/fetchUsers",
+    }),
+    async fetchProfiles() {
+      await axios
+        .get("/api/v1/profiles")
+        .then((response) => (this.profiles = response.data));
+    },
+    async firstRead() {
+      this.fetchCurrentUser();
+      this.fetchUsers();
+      this.fetchProfiles();
+      this.fetchTextBlocks();
+      this.fetchRankingBlocks();
+      this.fetchYesOrNoBlocks();
+      this.fetchYesOrNoItems();
+      this.fetchQuestionBlocks();
+      this.fetchQuestionItems();
+    },
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
     <div class="flex p-3 text-gray-600 font-bold">
       <div class="md:w-2/4 text-center">
-        <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5 ">
+        <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
           ★基本情報★
         </div>
         <div class="flex justify-center">
@@ -22,6 +22,7 @@
       <div class="p-2 text-lg md:w-2/4">
         <v-row justify="end" v-show="isThisEditPage">
           <v-btn
+            id="edit-basic-prof-card-button"
             tile
             small
             color="red lighten-4"
@@ -85,6 +86,7 @@
       :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
       :edit-basic-profile="editBasicProfile"
       @close-edit-basic-prof-card-dialog="closeEditBasicProfCardDialog"
+      @update-profile="updateProfile"
     />
   </v-card>
 </template>
@@ -92,13 +94,12 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import { mapState } from "vuex";
 
 import EditBasicProfCardDialog from "./EditBasicProfCardDialog";
 
 export default {
   filters: {
-    moment: function(date) {
+    moment: function (date) {
       return moment(date).format("YYYY/MM/DD");
     },
   },
@@ -111,22 +112,22 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
       isShownEditBasicProfCardDialog: false,
       editBasicProfile: {},
-      user: {},
       profile: {},
     };
   },
   created() {
     this.firstRead();
   },
-  computed: {
-    ...mapState("profiles", ["profiles"]),
-    ...mapState("users", ["currentUser"]),
-  },
+  computed: {},
   methods: {
     openEditBasicProfCard() {
       this.editBasicProfile = this.profile;
@@ -144,12 +145,9 @@ export default {
       );
       const profile = profileRes.data;
       this.profile = profile;
-      this.getUser();
     },
-    async getUser() {
-      await axios
-        .get(`/api/v1/users/${this.profile.user.id}`)
-        .then((response) => (this.user = response.data));
+    updateProfile(result) {
+      this.profile = result;
     },
   },
 };

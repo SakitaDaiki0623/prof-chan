@@ -103,6 +103,10 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
@@ -121,7 +125,7 @@ export default {
       return (
         this.yesOrNoBlocks.filter(
           (yesOrNoBlock) =>
-            yesOrNoBlock.profile_block.id == this.currentUser.profile_block.id
+            yesOrNoBlock.profile_block.id == this.user.profile_block.id
         ) || {}
       );
     },

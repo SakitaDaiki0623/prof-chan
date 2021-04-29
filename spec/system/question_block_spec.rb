@@ -19,6 +19,9 @@ RSpec.describe "QuestionBlock", type: :system do
   let(:question_item_content3) { 'クエスチョンアイテム3 質問' }
   let(:question_item_answer3) { 'クエスチョンアイテム3 回答' }
 
+  let(:my_profile) { Profile.last }
+  let(:others_profile) { Profile.second }
+
   # 編集画面まで遷移
   before do
     create_real_team_with_users(users_count: 15)
@@ -50,6 +53,16 @@ RSpec.describe "QuestionBlock", type: :system do
         it 'クエスチョンブロックが作成されること' do
           expect(page).to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
           expect(page).to have_content('クエスチョンブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
+        end
+
+        it '作成したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
+        end
+
+        it '作成したブロックが他人の詳細ページに反映されていないこと' do
+          visit "/profiles/#{others_profile.id}"
+          expect(page).not_to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
         end
 
         it '作成ボタンがdisableに戻っていること' do
@@ -213,6 +226,16 @@ RSpec.describe "QuestionBlock", type: :system do
               expect(last_question_block.question_items.count).to eq(3), 'クエスチョンブロックのアイテム数が合っていません'
               expect(page).to have_content('クエスチョンブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
             end
+
+            it '作成したブロックが詳細ページに反映されていること' do
+              visit "/profiles/#{my_profile.id}"
+              expect(page).to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
+            end
+
+            it '作成したブロックが他人の詳細ページに反映されていないこと' do
+              visit "/profiles/#{others_profile.id}"
+              expect(page).not_to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
+            end
           end
 
           context '全ての値が空値で入力された時' do
@@ -317,6 +340,11 @@ RSpec.describe "QuestionBlock", type: :system do
           expect(page).not_to have_selector("#edit-question-title-form-#{last_question_block.id}"), 'タイトル編集フォームがが表示されていません'
           expect(page).to have_content('クエスチョンブロックのタイトルを更新したよ！'), 'フラッシュメッセージが表示されていません'
         end
+
+        it '編集したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).to have_content(edit_question_block_title)
+        end
       end
 
       context 'タイトルを入力して更新ボタンを押さずに編集をキャンセルした時' do
@@ -345,6 +373,12 @@ RSpec.describe "QuestionBlock", type: :system do
           expect(page).to have_content(edit_question_item_answer1), '更新したクエスチョンブロックのアイテムの答えが表示されていません'
           expect(QuestionBlock.last.question_items[0].content).to eq(edit_question_item_content1), 'アイテムが更新されていません' # DB上でも更新されているか確認
           expect(page).to have_content('クエスチョンアイテムを更新したよ！'), 'フラッシュメッセージが表示されていません'
+        end
+
+        it '編集したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).to have_content(edit_question_item_content1)
+          expect(page).to have_content(edit_question_item_answer1)
         end
       end
 
@@ -433,6 +467,12 @@ RSpec.describe "QuestionBlock", type: :system do
         it 'アイテムが1つ消えること' do
           expect(page).not_to have_content(question_item_content2), '2番目のアイテムの質問が表示されています'
           expect(page).not_to have_content(question_item_answer2), '2番目のアイテムの回答が表示されています'
+        end
+
+        it '編集したブロックが詳細ページに反映されていること' do
+          visit "/profiles/#{my_profile.id}"
+          expect(page).not_to have_content(question_item_content2)
+          expect(page).not_to have_content(question_item_answer2)
         end
       end
       context 'アイテムが3つある状態で1つアイテムを削除する場合' do

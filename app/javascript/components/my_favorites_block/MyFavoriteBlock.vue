@@ -147,6 +147,10 @@ export default {
       required: false,
       default: false,
     },
+    user: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
@@ -162,7 +166,7 @@ export default {
     this.fetchMyFavoriteBlock().then((result) => {
       const res = result.find(
         (myFavoriteBlock) =>
-          myFavoriteBlock.profile_block.id == this.currentUser.profile_block.id
+          myFavoriteBlock.profile_block.id == this.user.profile_block.id
       );
       this.myFavoriteBlock = res;
     });
