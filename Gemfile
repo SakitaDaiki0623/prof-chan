@@ -14,6 +14,7 @@ gem 'devise_token_auth'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 gem "omniauth-rails_csrf_protection"
 gem 'rack-cors'
+gem 'omniauth-twitter'
 
 # Authorization
 gem "pundit"
