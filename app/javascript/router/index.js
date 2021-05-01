@@ -2,6 +2,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store/index.js";
+import TopPage from "../pages/top";
 import ProfilesPage from "../pages/profile/index";
 import ShowProfilesPage from "../pages/profile/show";
 import NewProfilesPage from "../pages/profile/new";
@@ -12,14 +13,19 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/profiles/new",
-    name: "NewProfilesPage",
-    component: NewProfilesPage,
+    path: "/",
+    name: "TopPage",
+    component: TopPage,
   },
   {
     path: "/profiles",
     name: "ProfilesPage",
     component: ProfilesPage,
+  },
+  {
+    path: "/profiles/new",
+    name: "NewProfilesPage",
+    component: NewProfilesPage,
   },
   {
     path: "/profiles/:id(\\d+)",

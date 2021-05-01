@@ -1,17 +1,18 @@
 # config/routes.rb
 Rails.application.routes.draw do
 
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+    omniauth_callbacks: 'overrides/omniauth_callbacks'
+  }
+
   # ROOT_PATH
   root to: 'home#index'
 
-  # authetication
-  devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
-  devise_scope :user do
-    delete 'logout' => 'devise/sessions#destroy', as: :destroy_user_session
-  end
-
-  # redirect path after authentication
-  resources :profiles,  only: %i[new index]
+  # authetication ルートが被ってしまうためコメントアウト
+  # devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
+  # devise_scope :user do
+  #   delete 'logout' => 'devise/sessions#destroy', as: :destroy_user_session
+  # end
 
   # API
   namespace :api, {format: 'json'} do
@@ -39,5 +40,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path', to: 'profiles#index'
+  # TODO slackトークン認証完了後コメントイン
+  # get '*path', to: 'home#index' <= 404ページが表示されないようにコメントアウトしておく
 end

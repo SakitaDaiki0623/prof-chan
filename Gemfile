@@ -6,13 +6,15 @@ ruby '2.6.5'
 gem 'rails', '6.0.3.5'
 
 # Assets
-gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
 # Authentication for Slack
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
+gem 'devise_token_auth'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 gem "omniauth-rails_csrf_protection"
+gem 'rack-cors'
+gem 'omniauth-twitter'
 
 # Authorization
 gem "pundit"
@@ -84,8 +86,6 @@ group :development do
 
   gem 'foreman'
   gem 'listen', '~> 3.2'
-  gem 'web-console', '>= 3.3.0'
-
 end
 
 group :test do
