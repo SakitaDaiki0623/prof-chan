@@ -96,9 +96,3 @@ yarn-debug.log*
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
-
-# IMAGES ==========
-# ignore app/assets/images
-/app/assets/images/
-# ignore app/javascript/tail_images
-app/javascript/images
