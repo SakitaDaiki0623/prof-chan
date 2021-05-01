@@ -16,6 +16,13 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       ## Rememberable
       t.datetime :remember_created_at
 
+      ## Trackable
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
+
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at
@@ -34,7 +41,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.references :team, foreign_key: true
 
       ## Tokens
-      t.text :tokens
+      t.json :tokens
 
       t.timestamps
     end
@@ -46,8 +53,6 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
   end
 
   def self.down
-    # By default, we don't want to make any assumption about how to roll back a migration when your
-    # model already existed. Please edit below which fields you would like to remove in this migration.
     raise ActiveRecord::IrreversibleMigration
   end
 end
