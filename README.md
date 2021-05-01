@@ -51,3 +51,40 @@ Slackと連携するリフルリモート会社向けWebサービス
 
 # ER図
 [プロフィール公開機能のER図](https://drive.google.com/file/d/1pW12b2TSxHrzDs3K9VegpUCwETd3dkdx/view)
+
+### セットアップ
+
+- Gemのインストール
+
+```basic
+$ bundle update mimemagic
+```
+
+- npmのインストール
+
+```basic
+$ yarn install
+```
+
+- データベースの作成
+
+```basic
+$ bundle exec rails db:create
+$ rails db:migrate
+```
+
+- JavaScriptのコンパイル
+
+```basic
+$ ./bin/webpack
+```
+
+- セットアップ後起動を確認
+
+```basic
+$ ./bin/webpack-dev-server
+```
+
+```basic
+$ bundle exec rails server
+```
