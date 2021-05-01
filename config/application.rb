@@ -31,7 +31,23 @@ module ShowProfile
     # Load CustomFailure for Devise Authentication
     config.autoload_paths << Rails.root.join('lib')
 
+    config.action_controller.default_protect_from_forgery = false
+
     config.api_only = true
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    config.middleware.use ActionDispatch::Flash
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+          headers: :any,
+          expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :post, :options, :delete, :put]
+      end
+    end
 
     # Prevent the $ rails g from generating assets, helper, test files and routing
     config.generators do |g|
