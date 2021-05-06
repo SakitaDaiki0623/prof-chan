@@ -12,9 +12,16 @@
             <a
               class="slack-btn"
               rel="nofollow"
-              data-method="post"
-              href="/users/auth/slack"
+              href="/auth/slack"
               >Slackログイン</a
+            >
+          </div>
+          <div class="mt-20 inline-block">
+            <a
+              class="slack-btn"
+              rel="nofollow"
+              href="/auth/twitter"
+              >Twitter</a
             >
           </div>
         </div>

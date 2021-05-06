@@ -1,7 +1,7 @@
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
-  protect_from_forgery
   include DeviseTokenAuth::Concerns::SetUserByToken
+  protect_from_forgery
   include Pundit
   before_action :authenticate_user!
 
