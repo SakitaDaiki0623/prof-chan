@@ -16,6 +16,9 @@ module.exports = {
       //   "text-prof-block": "url('../images/text_block_bg.jpg')",
       //   "question-prof-block": "url('../images/question_block_bg.jpg')",
       // }),
+      fontFamily: {
+        body: ["Hannotate SC", "sans-serif"],
+      },
     },
   },
   variants: {

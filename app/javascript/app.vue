@@ -40,8 +40,15 @@ export default {
 </script>
 
 <style scoped>
+@import url(https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c);
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC:700);
+
 .default {
-  font-family: "TsukuARdGothic-Regular", "klee", "Hannotate SC", "Chalkboard SE",
-    "Comic Sans MS", "sans-serif";
+  font-family: "Hannotate SC Regular", "Amatic SC", "M PLUS Rounded 1c", cursive,
+    "sans-serif";
+  color: #505050;
+}
+.v-main {
+  background-color: #fffaf0;
 }
 </style>

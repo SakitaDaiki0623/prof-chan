@@ -1,9 +1,7 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <header v-show="doesCurrentUserhaveProfile">
-    <v-app-bar
-      class="bg-header"
-    >
+    <v-app-bar color="brown lighten-4">
       <v-toolbar-title>
         <router-link to="/profiles"> プロフちゃん(ロゴ) </router-link>
       </v-toolbar-title>
@@ -56,17 +54,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.bg-header {
-  background-image: linear-gradient(
-    -45deg,
-    #bfffa8 25%,
-    #fbffcc 25%,
-    #fbffcc 50%,
-    #bfffa8 50%,
-    #bfffa8 75%,
-    #fbffcc 75%,
-    #fbffcc
-  );
-}
-</style>
+<style scoped></style>
