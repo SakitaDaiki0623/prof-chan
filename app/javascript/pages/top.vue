@@ -9,20 +9,12 @@
             Withコロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
           </p>
           <div class="mt-20 inline-block">
-            <a
-              class="slack-btn"
-              rel="nofollow"
-              href="/auth/slack"
+            <a class="slack-btn" rel="nofollow" href="/auth/slack"
               >Slackログイン</a
             >
           </div>
           <div class="mt-20 inline-block">
-            <a
-              class="slack-btn"
-              rel="nofollow"
-              href="/auth/twitter"
-              >Twitter</a
-            >
+            <a class="slack-btn" rel="nofollow" href="/auth/twitter">Twitter</a>
           </div>
         </div>
         <img
@@ -48,5 +40,4 @@
 export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
