@@ -11,7 +11,7 @@ gem 'webpacker', '~> 4.0'
 # Authentication for Slack
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'devise_token_auth'
-gem 'ginjo-omniauth-slack', require:'omniauth-slack'
+gem 'ginjo-omniauth-slack', require:'omniauth-slack', git: 'git@github.com:koshilife/omniauth-slack.git', branch: '#16_allow-for-omniauth-2.0'
 gem "omniauth-rails_csrf_protection"
 gem 'rack-cors'
 gem 'omniauth-twitter'
