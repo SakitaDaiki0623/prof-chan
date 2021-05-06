@@ -7,7 +7,7 @@ end
 
 # 参考: https://stackoverflow.com/questions/66009147/no-route-matches-get-auth-twitter-omnia
 OmniAuth.config.allowed_request_methods = [:post, :get]
-
+OmniAuth.config.silence_get_warning = true
 
 # RSpecのモック認証のリダイレクト時にエラーにならないように設定
 if Rails.env.test?
@@ -15,4 +15,3 @@ if Rails.env.test?
     on_failure { |env| Users::OmniauthCallbacksController.action(:failure).call(env) }
   end
 end
-
