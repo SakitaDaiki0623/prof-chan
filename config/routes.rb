@@ -1,12 +1,16 @@
 # config/routes.rb
 Rails.application.routes.draw do
 
-  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-    omniauth_callbacks: 'overrides/omniauth_callbacks'
-  }
+  # mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+  #   omniauth_callbacks: 'overrides/omniauth_callbacks'
+  # }
+
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   # ROOT_PATH
   root to: 'home#index'
+
+  resources :profiles,       only: %i[index new]
 
   # authetication ルートが被ってしまうためコメントアウト
   # devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
@@ -17,6 +21,9 @@ Rails.application.routes.draw do
   # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
+      # mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+      #   omniauth_callbacks: 'overrides/omniauth_callbacks'
+      # }
       resources :profiles,       only: %i[index create show update]
       resources :users,          only: %i[index show new]
       resources :teams,          only: %i[show]

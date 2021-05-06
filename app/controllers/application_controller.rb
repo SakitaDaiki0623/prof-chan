@@ -26,4 +26,13 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     redirect_to(request.referer || root_path)
   end
+
+  def skip_session
+    request.session_options[:skip] = true
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  end
 end

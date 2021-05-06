@@ -37,7 +37,7 @@
         </v-row>
       </div>
     </div>
-    <div class="p-20">
+    <div class="p-20 text-center">
       <v-row class="px-20">
         <v-col cols="12" sm="12">
           <div class="text-3xl top-sub-title mb-10">

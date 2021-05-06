@@ -2,6 +2,14 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate_user!, only: %i[slack failure]
+
+    def redirect_callbacks
+      
+      binding.pry
+      
+      super
+    end
+
     def slack
       user_info = get_user_info(request.env['omniauth.strategy'])
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info)

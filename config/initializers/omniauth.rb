@@ -1,7 +1,7 @@
 # config/initializers/omniauth.rb
 # 参考: https://github.com/ginjo/omniauth-slack/blob/v2.5.0/README.md
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic', scope: 'team:read,users:read' # , :provider_ignores_state => true
+  provider :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic', scope: 'team:read,users:read' , :provider_ignores_state => true
   provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET'] # 練習用
 end
 
