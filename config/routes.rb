@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+        registrations: 'api/v1/auth/registrations',
+        omniauth_callbacks: 'api/v1/auth/omniauth_callbacks'
+      }
       resources :profiles,       only: %i[index create show update]
       resources :users,          only: %i[index show new]
       resources :teams,          only: %i[show]
