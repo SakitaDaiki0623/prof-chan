@@ -14,11 +14,7 @@
                 コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
               </div>
               <div class="text-8xl p-10 font-body">プロフちゃん</div>
-              <a
-                class="inline-block"
-                rel="nofollow"
-                data-method="post"
-                href="/users/auth/slack"
+              <a class="inline-block" rel="nofollow" :href="slackAuthUrl"
                 ><img
                   alt="Sign in with Slack"
                   height="60"
@@ -72,7 +68,59 @@
 </template>
 
 <script>
-export default {};
+import firebase from "../plugins/firebase";
+
+export default {
+  data() {
+    return {
+      slackAuthUrl: `https://slack.com/oauth/v2/authorize?user_scope=identity.basic&client_id=${process.env.SLACK_CLIENT_ID}&state=${window.location.href}`,
+    };
+  },
+  mounted() {
+    (async () => {
+      const queryPrams = new URLSearchParams(window.location.search);
+      const token = queryPrams.get("t");
+
+      if (token) {
+        window.history.replaceState(
+          undefined,
+          window.document.title,
+          window.location.href.replace(window.location.search, "")
+        );
+        await firebase
+          .auth()
+          .signInWithCustomToken(token)
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+          });
+      }
+
+      await firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.user = user;
+        } else {
+          this.user = {};
+        }
+      });
+    })();
+  },
+  methods: {
+    hundleSignOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          console.log("sign out successful");
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
