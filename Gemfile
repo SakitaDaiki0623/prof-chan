@@ -12,12 +12,14 @@ gem 'webpacker', '~> 4.0'
 # Authentication for Slack
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
-gem 'oauth2', '>= 1.4.4'
-gem 'omniauth-oauth2'
 gem "omniauth-rails_csrf_protection"
 
-# General Gem fof Slack API
+# Authorization
+gem "pundit"
+
+# API
 gem 'slack-ruby-client'
+gem 'active_model_serializers', '~> 0.10.0'
 
 # Application server
 gem 'puma', '~> 4.1'
@@ -33,6 +35,7 @@ gem 'redis-rails'
 
 # Model
 gem 'enum_help'
+gem 'active_hash'
 
 # UI/UX
 gem 'rails-i18n'
@@ -76,17 +79,21 @@ group :development, :test do
 end
 
 group :development do
-# Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.2'
+  # N + 1問題
+  gem 'bullet'
 
   gem 'foreman'
+  gem 'listen', '~> 3.2'
+  gem 'web-console', '>= 3.3.0'
+
 end
 
 group :test do
   gem 'capybara'
   gem 'faker'
   gem 'webdrivers'
+  gem "webmock"
+  gem 'vcr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

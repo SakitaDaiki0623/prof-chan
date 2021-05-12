@@ -12,7 +12,6 @@
 #  encrypted_password :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  slack_credential_token  :string(255)     not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :string(255)
 #  remember_created_at     :string(255)
@@ -27,10 +26,21 @@ FactoryBot.define do
   factory :user do
     sequence(:name, 'user_1')
     sequence(:email)   { |n| "sample#{n}@example.com" }
-    team_id { rand(10 ** 19).to_s }
     uid     { rand(10 ** 19).to_s }
-    slack_credential_token { rand(10 ** 19).to_s }
     provider { 'slack' }
     password { 'password' }
+    image { ENV['USER_IMAGE'] }
+    association :team
+
+    trait :real_workspace_id do
+      image { ENV['TEAM_IMAGE'] }
+      association :team, workspace_id: ENV['TEAM_ID']
+    end
+
+    after(:create) do |user|
+      create(:profile, user: user)
+      create(:profile_block, user: user)
+    end
   end
 end
+

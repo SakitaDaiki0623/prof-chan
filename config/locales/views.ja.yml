@@ -1,20 +1,23 @@
 # config/locales/views.ja.yml
 ja:
   defaults:
-    create: "作成"
-    logout: "ログアウト"
-    slack_login: "Slackログイン"
+    create: 作成
+    done_enter: 入力完了！
+    logout: ログアウト
+    slack_login: Slackログイン
+    about_prof: プロフちゃんとは
   home:
     index:
-      about_show_profile: "Show Profile とは"
-      app_name: "Show Profile"
-      catchphrase: "あなたと社員をより近く"
-      logout: "ログアウト"
-      slack_login: "Slackログイン"
-      terms_of_use: "利用規約"
-  user_sessions:
-    new:
-      title: "ログイン"
+      app_name: プロフちゃん
+      catchphrase: あなたと社員をより近く
+      description: Withコロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
+      logout: ログアウト
+      slack_login: Slackログイン
+      terms_of_use: 利用規約
   profiles:
+    index:
+      view_profile: 'プロフィールを見る'
     new:
-      title: "プロフィール作成画面"
+      title: プロフィールづくり - プロフちゃん
+      basic_info: ★基本情報★
+      write_basic_info: 基本情報を入力してね♬

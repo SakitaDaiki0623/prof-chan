@@ -1,10 +1,10 @@
 // app/javascript/css/tailwind.scss
-//  Use Tailwind
+//  カスタムクラスファイル
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-// 入力フォーム
+// 入力フォーム ====================
 .input-form {
   @apply w-full;
   @apply bg-white;
@@ -28,40 +28,211 @@
   }
 }
 
-// 入力フォームラベル
+.address-form {
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-yellow-500;
+    @apply ring-2;
+    @apply ring-yellow-200;
+  }
+}
+
+.input-form-basic-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-red-500;
+    @apply ring-2;
+    @apply ring-red-200;
+  }
+}
+
+.input-form-question-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-red-500;
+    @apply ring-2;
+    @apply ring-red-200;
+  }
+}
+
+.input-form-yes-or-no-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-yellow-500;
+    @apply ring-2;
+    @apply ring-yellow-200;
+  }
+}
+
+.input-form-text-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-gray-500;
+    @apply ring-2;
+    @apply ring-gray-200;
+  }
+}
+
+.input-form-ranking-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-green-500;
+    @apply ring-2;
+    @apply ring-green-200;
+  }
+}
+
+.my-favorite-block-index {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply py-2;
+  @apply text-center;
+  @apply text-gray-600;
+}
+
+// 入力フォームラベル ====================
+// 雛形
 .form-label {
   @apply leading-7;
   @apply text-sm;
   @apply text-gray-600;
 }
 
-// 緑色slackボタン
-.slack-green-btn {
-  @apply bg-green-700;
-  @apply py-4;
-  @apply px-8;
-  @apply rounded-lg;
-  @apply text-white;
-
-  &:hover {
-    @apply bg-green-500;
-  }
+.form-label-text-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
 }
 
-// フラッシュメッセージ
-
-.notice {
-  @apply bg-yellow-100;
-  @apply border-l-4;
-  @apply border-yellow-500;
-  @apply text-yellow-700;
-  @apply p-4;
+.form-label-basic-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
 }
 
-.alert {
-  @apply bg-red-100;
-  @apply border-l-4;
-  @apply border-red-500;
-  @apply text-red-700;
-  @apply p-4;
+.form-label-question-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
+}
+
+.form-label-yes-or-no-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
+}
+
+.form-label-ranking-block {
+  @apply pt-2;
+  @apply text-sm;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
 }
