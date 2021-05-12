@@ -8,7 +8,7 @@
         .text-lg
           | コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
         .text-8xl.p-10.font-body プロフちゃん
-        = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, class: "inline-block"
+        = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign_in_with_slack_button', class: "inline-block"
       .col-start-8.col-span-5
         .py-32 プロフちゃんの画像
   .bg-brown-50.p-10
