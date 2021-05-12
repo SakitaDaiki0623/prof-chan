@@ -195,7 +195,6 @@ export default {
       },
 
       randomeTitles: [
-        { title: "Love Corner", contents: [""] },
         {
           title: "結婚歴",
           contents: [
@@ -205,42 +204,42 @@ export default {
             "いつ結婚したいですか？",
           ],
         },
-        {
-          title: "私の働き方",
-          contents: ["仕事は1人で黙々やるのが好き？", ""],
-        },
-        {
-          title: "あなたが思う誰誰(イニシャルでもいいよ！)",
-          contens: [
-            "あなたが思う優しい人は？",
-            "あなたが思う腹黒な人は",
-            "仕事ができる人",
-            "頭いい人",
-            "かっこいい人",
-          ],
-        },
-        { title: "コミュニケーション", contents: ["自分から話を始める？", ""] },
-        {
-          title: "あなたの怒りポイント",
-          contents: ["何されたら起こりますか？", ""],
-        },
-        {
-          title: "遊び",
-          contents: ["インドア派ですか？", "アウトドアが好きですか？"],
-        },
-        {
-          title: "食べ物",
-          contents: [
-            "和食が好きですか？",
-            "洋食が好きですか？",
-            "iPhine派ですか？",
-            "Android派ですか？",
-          ],
-        },
-        {
-          title: "住む場所",
-          contents: ["将来は田舎に住みますか？", "将来は都会に住みますか？"],
-        },
+        // {
+        //   title: "私の働き方",
+        //   contents: ["仕事は1人で黙々やるのが好き？", ""],
+        // },
+        // {
+        //   title: "あなたが思う誰誰(イニシャルでもいいよ！)",
+        //   contens: [
+        //     "あなたが思う優しい人は？",
+        //     "あなたが思う腹黒な人は",
+        //     "仕事ができる人",
+        //     "頭いい人",
+        //     "かっこいい人",
+        //   ],
+        // },
+        // { title: "コミュニケーション", contents: ["自分から話を始める？", ""] },
+        // {
+        //   title: "あなたの怒りポイント",
+        //   contents: ["何されたら起こりますか？", ""],
+        // },
+        // {
+        //   title: "遊び",
+        //   contents: ["インドア派ですか？", "アウトドアが好きですか？"],
+        // },
+        // {
+        //   title: "食べ物",
+        //   contents: [
+        //     "和食が好きですか？",
+        //     "洋食が好きですか？",
+        //     "iPhine派ですか？",
+        //     "Android派ですか？",
+        //   ],
+        // },
+        // {
+        //   title: "住む場所",
+        //   contents: ["将来は田舎に住みますか？", "将来は都会に住みますか？"],
+        // },
       ],
 
       // Validator
@@ -267,9 +266,11 @@ export default {
     deleteYesOrNoItemNum() {
       this.yesOrNoItemNum--;
       if (this.yesOrNoItemNum == 2) {
-        this.yesOrNoItem3 = {};
+        this.yesOrNoItem3.content = "";
+        this.yesOrNoItem3.answer = "";
       } else if (this.yesOrNoItemNum == 1) {
-        this.yesOrNoItem2 = {};
+        this.yesOrNoItem2.content = "";
+        this.yesOrNoItem2.answer = "";
       }
     },
     hundleCreateYesOrNoBlock(
@@ -311,17 +312,57 @@ export default {
     },
     inputTitleRandomly() {
       const randomNum = Math.floor(Math.random() * this.randomeTitles.length);
-      this.yesOrNoBlock.title = this.randomeTitles[randomNum].title;
+      const selectedRandomTitle = JSON.parse(
+        JSON.stringify(this.randomeTitles[randomNum])
+      );
+
+      this.yesOrNoBlock.title = selectedRandomTitle.title;
 
       if (this.yesOrNoItemNum == 1) {
-        this.yesOrNoItem1.content = this.randomeTitles[randomNum].contents[0];
+        const randomItemContentIndexForItem1 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem1,
+          1
+        );
       } else if (this.yesOrNoItemNum == 2) {
-        this.yesOrNoItem1.content = this.randomeTitles[randomNum].contents[0];
-        this.yesOrNoItem2.content = this.randomeTitles[randomNum].contents[1];
+        const randomItemContentIndexForItem1 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem1,
+          1
+        );
+        const randomItemContentIndexForItem2 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.yesOrNoItem2.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem2,
+          1
+        );
       } else if (this.yesOrNoItemNum == 3) {
-        this.yesOrNoItem1.content = this.randomeTitles[randomNum].contents[0];
-        this.yesOrNoItem2.content = this.randomeTitles[randomNum].contents[1];
-        this.yesOrNoItem3.content = this.randomeTitles[randomNum].contents[2];
+        const randomItemContentIndexForItem1 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem1,
+          1
+        );
+        const randomItemContentIndexForItem2 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.yesOrNoItem2.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem2,
+          1
+        );
+        const randomItemContentIndexForItem3 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.yesOrNoItem3.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem3,
+          1
+        );
       }
     },
   },
