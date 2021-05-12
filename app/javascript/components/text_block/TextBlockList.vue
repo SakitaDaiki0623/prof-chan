@@ -65,7 +65,7 @@
       <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
-            社員のクエスチョンブロックがありません
+            社員のテキストブロックがありません
           </div>
         </v-row>
       </v-container>
