@@ -25,38 +25,56 @@
           class="p-10 note-box"
           color="orange lighten-4"
         >
-          <div class="pb-2">
-            <v-btn
-              id="add-yes-or-no-item-button"
-              type="submit"
-              depressed
-              elevation="4"
-              small
-              tile
-              color="orange lighten-2"
-              class="white--text"
-              :disabled="yesOrNoItemNum >= 3"
-              @click="addYesOrNoItemNum"
-            >
-              <v-icon left> mdi-plus </v-icon>
-              質問と答えを追加する
-            </v-btn>
-            <v-btn
-              id="delete-yes-or-no-item-button"
-              type="submit"
-              depressed
-              elevation="4"
-              small
-              tile
-              color="grey darken-3"
-              class="white--text"
-              :disabled="yesOrNoItemNum <= 1"
-              @click="deleteYesOrNoItemNum"
-            >
-              <v-icon left> mdi-minus </v-icon>
-              質問と答えを減らす
-            </v-btn>
-          </div>
+          <v-row>
+            <v-col cols="12" sm="7">
+              <v-btn
+                id="add-yes-or-no-item-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="orange lighten-2"
+                class="white--text"
+                :disabled="yesOrNoItemNum >= 3"
+                @click="addYesOrNoItemNum"
+              >
+                <v-icon left> mdi-plus </v-icon>
+                質問と答えを追加する
+              </v-btn>
+              <v-btn
+                id="delete-yes-or-no-item-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="grey darken-3"
+                class="white--text"
+                :disabled="yesOrNoItemNum <= 1"
+                @click="deleteYesOrNoItemNum"
+              >
+                <v-icon left> mdi-minus </v-icon>
+                質問と答えを減らす
+              </v-btn>
+            </v-col>
+            <v-spacer />
+            <v-col cols="12" sm="4">
+              <v-btn
+                id="input-yes-or-no-title-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="orange lighten-2"
+                class="white--text py-2"
+                @click="inputTitleRandomly"
+                ><v-icon left> mdi-plus </v-icon>タイトルをランダムに入力</v-btn
+              >
+            </v-col>
+          </v-row>
+
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form
               @submit.prevent="
@@ -176,6 +194,55 @@ export default {
         answer: "",
       },
 
+      randomeTitles: [
+        { title: "Love Corner", contents: [""] },
+        {
+          title: "結婚歴",
+          contents: [
+            "既婚願望はありますか？",
+            "結婚したことはありますか？",
+            "いつ結婚しましたか？",
+            "いつ結婚したいですか？",
+          ],
+        },
+        {
+          title: "私の働き方",
+          contents: ["仕事は1人で黙々やるのが好き？", ""],
+        },
+        {
+          title: "あなたが思う誰誰(イニシャルでもいいよ！)",
+          contens: [
+            "あなたが思う優しい人は？",
+            "あなたが思う腹黒な人は",
+            "仕事ができる人",
+            "頭いい人",
+            "かっこいい人",
+          ],
+        },
+        { title: "コミュニケーション", contents: ["自分から話を始める？", ""] },
+        {
+          title: "あなたの怒りポイント",
+          contents: ["何されたら起こりますか？", ""],
+        },
+        {
+          title: "遊び",
+          contents: ["インドア派ですか？", "アウトドアが好きですか？"],
+        },
+        {
+          title: "食べ物",
+          contents: [
+            "和食が好きですか？",
+            "洋食が好きですか？",
+            "iPhine派ですか？",
+            "Android派ですか？",
+          ],
+        },
+        {
+          title: "住む場所",
+          contents: ["将来は田舎に住みますか？", "将来は都会に住みますか？"],
+        },
+      ],
+
       // Validator
       yesOrNoNameForValidation1: "1番目の質問",
       answerNameForValidation1: "1番目の答え",
@@ -241,6 +308,21 @@ export default {
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
+    },
+    inputTitleRandomly() {
+      const randomNum = Math.floor(Math.random() * this.randomeTitles.length);
+      this.yesOrNoBlock.title = this.randomeTitles[randomNum].title;
+
+      if (this.yesOrNoItemNum == 1) {
+        this.yesOrNoItem1.content = this.randomeTitles[randomNum].contents[0];
+      } else if (this.yesOrNoItemNum == 2) {
+        this.yesOrNoItem1.content = this.randomeTitles[randomNum].contents[0];
+        this.yesOrNoItem2.content = this.randomeTitles[randomNum].contents[1];
+      } else if (this.yesOrNoItemNum == 3) {
+        this.yesOrNoItem1.content = this.randomeTitles[randomNum].contents[0];
+        this.yesOrNoItem2.content = this.randomeTitles[randomNum].contents[1];
+        this.yesOrNoItem3.content = this.randomeTitles[randomNum].contents[2];
+      }
     },
   },
 };
