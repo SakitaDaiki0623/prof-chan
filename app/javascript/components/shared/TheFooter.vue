@@ -1,5 +1,5 @@
 <template>
-  <v-footer app absolute dark>
+  <v-footer app absolute color="brown lighten-3">
     <v-spacer />
     <div>
       <v-btn dense text>利用規約</v-btn>
@@ -12,21 +12,21 @@
 export default {
   data() {
     return {
-      startYear: 2021
-    }
+      startYear: 2021,
+    };
   },
   computed: {
     thisYear() {
-      return new Date().getFullYear()
+      return new Date().getFullYear();
     },
     copyText() {
       if (this.startYear === this.thisYear) {
-        return `${this.thisYear} - プロフちゃん`
+        return `${this.thisYear} - プロフちゃん`;
       }
-      return `${this.startYear} - ${this.thisYear} - プロフちゃん`
-    }
+      return `${this.startYear} - ${this.thisYear} - プロフちゃん`;
+    },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

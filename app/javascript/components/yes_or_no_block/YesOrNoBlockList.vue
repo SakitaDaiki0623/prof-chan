@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="rounded-2xl bg-color">
     <v-row justify="center" v-show="isThisEditPage">
       <v-btn
         id="add-yes-or-no-block-btn"
@@ -12,63 +12,79 @@
         Yes or No ブロックを追加する
       </v-btn>
     </v-row>
-    <v-row>
-      <v-col
-        v-for="yesOrNoBlock in myYesOrNoBlocks"
-        :key="yesOrNoBlock.id"
-        cols="12"
-        sm="6"
-      >
-        <v-card class="bg-yes-or-no-prof-block bg-cover shadow rounded-2xl p-5">
-          <v-row justify="end" v-show="isThisEditPage">
-            <v-btn
-              :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
-              tile
-              small
-              color="orange lighten-4"
-              @click="openEditYesOrNoFormatDialog(yesOrNoBlock)"
-            >
-              <v-icon> mdi-pencil </v-icon>
-            </v-btn>
-            <v-btn
-              :id="'delete-yes-or-no-block-button-' + yesOrNoBlock.id"
-              tile
-              small
-              color="orange lighten-1"
-              @click="hundleDeleteYesOrNoBlock(yesOrNoBlock)"
-            >
-              <v-icon> mdi-delete </v-icon>
-            </v-btn>
-          </v-row>
-          <p class="text-2xl font-bold text-gray-600 pt-3">
-            {{ yesOrNoBlock.title }}
-          </p>
-          <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
-            <div :key="yes_or_no_item.id">
-              <v-card class="p-5 rounded-lg" outlined>
-                <v-row>
-                  <v-col cols="12" sm="6">
-                    {{ yes_or_no_item.content }}
-                  </v-col>
-                  <v-col cols="12" sm="6" v-if="yes_or_no_item.answer">
-                    <span class="rounded-full border-red-500 border-2 p-2"
-                      >YES</span
-                    >
-                    / NO
-                  </v-col>
-                  <v-col cols="12" sm="6" v-else>
-                    YES /
-                    <span class="rounded-full border-red-500 border-2 p-2"
-                      >NO</span
-                    >
-                  </v-col>
-                </v-row>
-              </v-card>
-            </div>
-          </template>
-        </v-card>
-      </v-col>
-    </v-row>
+    <div class="block-title">Yes or No コーナー</div>
+    <div>
+      <v-row v-if="isMyYesOrNoBlocksLengthNotZero">
+        <v-col
+          v-for="yesOrNoBlock in myYesOrNoBlocks"
+          :key="yesOrNoBlock.id"
+          cols="12"
+          sm="4"
+        >
+          <v-card
+            class="rounded-2xl p-5 note-box"
+            outlined
+            color="orange lighten-4"
+          >
+            <v-row justify="end" v-show="isThisEditPage">
+              <v-btn
+                :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
+                tile
+                small
+                color="orange lighten-4"
+                @click="openEditYesOrNoFormatDialog(yesOrNoBlock)"
+              >
+                <v-icon> mdi-pencil </v-icon>
+              </v-btn>
+              <v-btn
+                :id="'delete-yes-or-no-block-button-' + yesOrNoBlock.id"
+                tile
+                small
+                color="orange lighten-1"
+                @click="hundleDeleteYesOrNoBlock(yesOrNoBlock)"
+              >
+                <v-icon> mdi-delete </v-icon>
+              </v-btn>
+            </v-row>
+            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+              {{ yesOrNoBlock.title }}
+            </p>
+            <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
+              <div :key="yes_or_no_item.id">
+                <v-card class="p-2 m-2" outlined color="white">
+                  <v-row align="center">
+                    <v-col cols="12" sm="7">
+                      {{ yes_or_no_item.content }}
+                    </v-col>
+                    <v-col cols="12" sm="5" v-if="yes_or_no_item.answer">
+                      <span class="rounded-full border-red-500 border-2 p-2"
+                        >YES</span
+                      >
+                      / NO
+                    </v-col>
+                    <v-col cols="12" sm="5" v-else>
+                      YES /
+                      <span class="rounded-full border-red-500 border-2 p-2"
+                        >NO</span
+                      >
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </div>
+            </template>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-container v-else class="no-block-display-container">
+        <v-row justify="center">
+          <div class="font-bold text-2xl opacity-50">
+            社員のYes or No ブロックがありません
+          </div>
+        </v-row>
+      </v-container>
+    </div>
+
+    <div class="block-title"></div>
     <YesOrNoFormatDialog
       :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
       :yes-or-no-block-color="yesOrNoBlockColor"
@@ -129,6 +145,10 @@ export default {
         ) || {}
       );
     },
+
+    isMyYesOrNoBlocksLengthNotZero() {
+      return this.myYesOrNoBlocks.length !== 0 ? true : false;
+    },
   },
   methods: {
     ...mapActions({
@@ -166,13 +186,69 @@ export default {
 </script>
 
 <style scoped>
-.bg-yes-or-no-prof-block {
-  background: linear-gradient(#ccc 0.1px, transparent 0.6px) #fffbf2;
-  background-size: auto 2.5em;
-  line-height: 2.5em;
-  border-bottom: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  overflow: hidden;
+.bg-color {
+  background-color: #ffebca;
+}
+
+.block-title {
+  color: #ffb74b; /* 文字色 */
+  padding: 5px 5px 5px 30px; /* 上・右・下・左の余白 */
+  position: relative;
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+.block-title::before {
+  background-color: #ffb74b;
+  border-radius: 5px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 3px; /* 左端からの位置 */
+  width: 5px; /* 左側の線の幅 */
+  height: 100%;
+}
+
+.block-title::after {
+  background-color: #f3a3a8; /* 1個目（一番左）のドットの色 */
+  border-radius: 50%;
+  content: "";
+  margin-left: 15px; /* 最後の文字とドットとの余白 */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px; /* ドットの幅 */
+  height: 5px; /* ドットの高さ */
+  box-shadow: 20px 0px 0px rgb(217, 204, 179), 40px 0px 0px rgb(217, 204, 179),
+    60px 0px 0px rgb(243, 163, 168), 80px 0px 0px rgb(217, 204, 179),
+    100px 0px 0px rgb(217, 204, 179), 120px 0px 0px rgb(243, 163, 168),
+    140px 0px 0px rgb(217, 204, 179), 160px 0px 0px rgb(217, 204, 179),
+    180px 0px 0px rgb(243, 163, 168), 200px 0px 0px rgb(217, 204, 179),
+    220px 0px 0px rgb(217, 204, 179);
+}
+
+.note-box {
+  position: relative;
+}
+.note-box::before {
+  content: "";
+  position: absolute;
+  border-right: dashed 5px rgb(155, 155, 155); /*ドットの大きさ、高さ*/
+  height: 90%;
+  top: 0.5em;
+  left: 0.5em;
+}
+
+.note-box::after {
+  content: "";
+  position: absolute;
+  border-right: dashed 5px rgb(155, 155, 155); /*ドットの大きさ、高さ*/
+  height: 50%;
+  top: 3em;
+  right: 0.5em;
+}
+
+.no-block-display-container {
+  height: 300px;
 }
 </style>

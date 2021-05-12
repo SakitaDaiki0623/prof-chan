@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="rounded-2xl bg-color">
     <v-row justify="center" v-show="isThisEditPage">
       <v-btn
         id="add-question-block-btn"
@@ -12,54 +12,71 @@
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
-    <v-row>
-      <v-col
-        v-for="questionBlock in myQuestionBlocks"
-        :key="questionBlock.id"
-        cols="12"
-        sm="6"
-      >
-        <v-card class="bg-question-prof-block bg-cover shadow rounded-2xl p-5">
-          <v-row justify="end" v-show="isThisEditPage">
-            <v-btn
-              :id="'edit-question-block-button-' + questionBlock.id"
-              tile
-              small
-              color="red lighten-4"
-              @click="openEditQuestionFormatDialog(questionBlock)"
-            >
-              <v-icon> mdi-pencil </v-icon>
-            </v-btn>
-            <v-btn
-              :id="'delete-question-block-button-' + questionBlock.id"
-              tile
-              small
-              color="red lighten-1"
-              @click="hundleDeleteQuestionBlock(questionBlock)"
-            >
-              <v-icon> mdi-delete </v-icon>
-            </v-btn>
-          </v-row>
-          <p class="text-2xl font-bold text-gray-600 pt-3">
-            {{ questionBlock.title }}
-          </p>
-          <template v-for="question_item in questionBlock.question_items">
-            <div :key="question_item.id">
-              <v-card class="p-5 rounded-lg" outlined>
-                <v-row>
-                  <v-col cols="12" sm="4">
-                    {{ question_item.content }}
-                  </v-col>
-                  <v-col cols="12" sm="8" class="text-red-500">
-                    {{ question_item.answer }}
-                  </v-col>
-                </v-row>
-              </v-card>
-            </div>
-          </template>
-        </v-card>
-      </v-col>
+    <v-row justify="end">
+      <div class="block-title">質問コーナー</div>
     </v-row>
+    <div>
+      <v-row v-if="isMyQuestionBlocksLengthNotZero">
+        <v-col
+          v-for="questionBlock in myQuestionBlocks"
+          :key="questionBlock.id"
+          cols="12"
+          sm="4"
+        >
+          <v-card
+            class="rounded-2xl p-5 note-box"
+            outlined
+            color="red lighten-4"
+          >
+            <v-row justify="end" v-show="isThisEditPage">
+              <v-btn
+                :id="'edit-question-block-button-' + questionBlock.id"
+                tile
+                small
+                color="red lighten-4"
+                @click="openEditQuestionFormatDialog(questionBlock)"
+              >
+                <v-icon> mdi-pencil </v-icon>
+              </v-btn>
+              <v-btn
+                :id="'delete-question-block-button-' + questionBlock.id"
+                tile
+                small
+                color="red lighten-1"
+                @click="hundleDeleteQuestionBlock(questionBlock)"
+              >
+                <v-icon> mdi-delete </v-icon>
+              </v-btn>
+            </v-row>
+            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+              {{ questionBlock.title }}
+            </p>
+            <template v-for="question_item in questionBlock.question_items">
+              <div :key="question_item.id">
+                <div class="rounded-lg">
+                  <v-row>
+                    <label for="question_item_content" class="mx-5 text-sm">
+                      {{ question_item.content }}
+                    </label>
+                    <v-col cols="12" sm="12" class="mb-2">
+                      <v-card class="p-2" outlined color="white">
+                        {{ question_item.answer }}
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </div>
+              </div>
+            </template>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-container v-else class="no-block-display-container">
+        <v-row justify="center">
+          <div class="font-bold text-2xl opacity-50">社員のクエスチョンブロックがありません</div>
+        </v-row>
+      </v-container>
+    </div>
+
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
       :question-block-color="questionBlockColor"
@@ -119,6 +136,10 @@ export default {
         ) || {}
       );
     },
+
+    isMyQuestionBlocksLengthNotZero() {
+      return this.myQuestionBlocks.length !== 0 ? true : false;
+    },
   },
   methods: {
     ...mapActions({
@@ -152,3 +173,45 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-color {
+  background-color: #fce4ec;
+}
+
+.block-title {
+  color: #ef9a9a;
+  padding: 10px;
+  position: relative;
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+.block-title:after {
+  background: repeating-linear-gradient(
+    -45deg,
+    #f0b8bf,
+    #f0b8bf 6px,
+    #fcf0f1 0,
+    #fcf0f1 10px
+  );
+  content: "";
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.note-box {
+  background-image: radial-gradient(#ffffff 40%, transparent 20%),
+    radial-gradient(#ffffff 20%, transparent 20%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+.no-block-display-container {
+  height: 300px;
+}
+</style>

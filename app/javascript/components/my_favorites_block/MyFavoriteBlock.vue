@@ -1,22 +1,20 @@
 <template>
-  <v-container class="my-favorite-block-bg mb-10">
+  <v-container class="rounded-2xl bg-color">
     <v-row justify="end" v-show="isThisEditPage">
       <v-btn
         id="edit-my-favorite-block-button"
-        tile
-        small
-        color="teal lighten-4"
+        color="grey lighten-3"
         @click="openEditMyFavoriteFormatDialog"
       >
         <v-icon> mdi-pencil </v-icon>
       </v-btn>
     </v-row>
-    <p class="font-weight-bold text-4xl text-gray-600 text-center">
-      My Favorites コーナー
-    </p>
+    <v-row justify="end">
+      <div class="block-title">My Favorites</div>
+    </v-row>
     <v-row class="mt-6" no-gutters>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.manga_anime">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">漫画・アニメ</label>
           <p class="my-favorite-block-index">
             {{ myFavoriteBlock.manga_anime }}
@@ -24,67 +22,67 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.game_app">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">ゲーム・アプリ</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.game_app }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.character">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">キャラクター</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.character }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.actor">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">俳優・女優</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.actor }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.music">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">音楽</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.music }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.food">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">食べ物</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.food }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.animal">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">動物</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.animal }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.sports">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">スポーツ</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.sports }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.book">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">本</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.book }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.place">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">場所</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.place }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.snack">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">お菓子</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.snack }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.alcohol_drink">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">お酒</label>
           <p class="my-favorite-block-index">
             {{ myFavoriteBlock.alcohol_drink }}
@@ -92,7 +90,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.restaurants">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">飲食店</label>
           <p class="my-favorite-block-index">
             {{ myFavoriteBlock.restaurants }}
@@ -100,19 +98,19 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.musician">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">歌手</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.musician }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.youtuber">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">YouTuber</label>
           <p class="my-favorite-block-index">{{ myFavoriteBlock.youtuber }}</p>
         </v-card>
       </v-col>
       <v-col cols="12" sm="3" v-show="myFavoriteBlock.entertainer">
-        <v-card class="pa-2" height="100" color="brown lighten-5">
+        <v-card class="pa-2" height="100" color="brown lighten-5 m-1" outlined>
           <label class="form-label-text-block">お笑い芸人</label>
           <p class="my-favorite-block-index">
             {{ myFavoriteBlock.entertainer }}
@@ -194,7 +192,7 @@ export default {
 </script>
 
 <style scoped>
-.my-favorite-block-bg {
+.bg-color {
   background-image: linear-gradient(
     -45deg,
     #fff 25%,
@@ -205,5 +203,37 @@ export default {
     #eac7cd 75%,
     #eac7cd
   );
+}
+
+.block-title {
+  position: relative;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 0.6em;
+  background: -webkit-repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 4px,
+    #eac7cd 3px,
+    #eac7cd 8px
+  );
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 4px,
+    #eac7cd 3px,
+    #eac7cd 8px
+  );
+  border-radius: 7px;
+}
+.block-title::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  right: 30px;
+  border: 15px solid transparent;
+  border-top: 15px solid #eac7cd;
+  width: 0;
+  height: 0;
 }
 </style>

@@ -1,30 +1,26 @@
 <!-- app/javascript/pages/profile/edit.vue -->
 <template>
-  <div class="text-gray-600">
-    <p class="text-5xl font-bold note mb-10">プロフィール編集</p>
+  <v-container
+    class="border-gray-500 border-dashed rounded-xl border-2 m-20 bg-main-contain-color"
+  >
+    <div class="text-5xl font-bold p-10 text-gray-600 rounded-t-2xl">
+      プロフ編集
+    </div>
 
-    <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
+    <v-container>
+      <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
+      <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
-
-    <v-btn
-      color="primary"
-      depressed
-      :to="{ path: '/profiles' }"
-      class="mb-10"
-      id="back-to-profiles-path-button"
-    >
-      <v-icon left>mdi-exit-run</v-icon>プロフィール一覧ページに戻る
-    </v-btn>
-  </div>
+      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+    </v-container>
+  </v-container>
 </template>
 
 <script>
@@ -74,7 +70,7 @@ export default {
     },
   },
   created() {
-    document.title = `プロフィール編集 - プロフちゃん`;
+    document.title = `プロフ編集 - プロフちゃん`;
   },
   methods: {
     ...mapActions({
@@ -84,3 +80,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-main-contain-color {
+  background-color: #fdfff2;
+}
+
+.dot-color {
+  color: #fffaf0;
+  letter-spacing: 5rem;
+}
+</style>
