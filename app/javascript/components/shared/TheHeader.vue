@@ -2,7 +2,8 @@
 <template>
   <header v-show="doesCurrentUserhaveProfile">
     <v-app-bar
-      class="bg-header"
+      color="brown lighten-2"
+      outlined
     >
       <v-toolbar-title>
         <router-link to="/profiles"> プロフちゃん(ロゴ) </router-link>
@@ -57,16 +58,5 @@ export default {
 </script>
 
 <style scoped>
-.bg-header {
-  background-image: linear-gradient(
-    -45deg,
-    #bfffa8 25%,
-    #fbffcc 25%,
-    #fbffcc 50%,
-    #bfffa8 50%,
-    #bfffa8 75%,
-    #fbffcc 75%,
-    #fbffcc
-  );
-}
+
 </style>

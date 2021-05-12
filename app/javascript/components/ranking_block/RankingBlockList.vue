@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mb-10">
+  <v-container class="rounded-2xl bg-color">
     <!-- Ranking Blocks -->
     <v-row justify="center" v-show="isThisEditPage">
       <v-btn
@@ -13,49 +13,81 @@
         ランキングブロックを追加する
       </v-btn>
     </v-row>
-    <v-row>
-      <v-col
-        v-for="rankingBlock in myRankingBlocks"
-        :key="rankingBlock.id"
-        cols="12"
-        sm="6"
-      >
-        <v-card class="bg-ranking-prof-block bg-cover shadow rounded-2xl p-5">
-          <v-row justify="end" v-show="isThisEditPage">
-            <v-btn
-              :id="'edit-ranking-block-button-' + rankingBlock.id"
-              tile
-              small
-              color="green lighten-4"
-              @click="openEditRankingFormatDialog(rankingBlock)"
-            >
-              <v-icon> mdi-pencil </v-icon>
-            </v-btn>
-            <v-btn
-              :id="'delete-ranking-block-button-' + rankingBlock.id"
-              tile
-              small
-              color="green lighten-1"
-              @click="hundleDeleteRankingBlock(rankingBlock)"
-            >
-              <v-icon> mdi-delete </v-icon>
-            </v-btn>
-          </v-row>
-          <p class="text-2xl font-bold text-gray-600 pt-3">
-            {{ rankingBlock.title }}
-          </p>
-          <v-card class="p-5 rounded-lg" outlined>
-            {{ rankingBlock.first_place }}
-          </v-card>
-          <v-card class="p-5 rounded-lg" outlined>
-            {{ rankingBlock.second_place }}
-          </v-card>
-          <v-card class="p-5 rounded-lg" outlined>
-            {{ rankingBlock.third_place }}
-          </v-card>
-        </v-card>
-      </v-col>
+    <v-row justify="end">
+      <div class="block-title">My Best 3</div>
     </v-row>
+    <div>
+      <v-row v-if="isMyRankingBlocksLengthNotZero">
+        <v-col
+          v-for="rankingBlock in myRankingBlocks"
+          :key="rankingBlock.id"
+          cols="12"
+          sm="4"
+        >
+          <v-card
+            class="rounded-2xl p-5 note-box"
+            outlined
+            color="light-green lighten-5"
+          >
+            <v-row justify="end" v-show="isThisEditPage">
+              <v-btn
+                :id="'edit-ranking-block-button-' + rankingBlock.id"
+                tile
+                small
+                color="green lighten-4"
+                @click="openEditRankingFormatDialog(rankingBlock)"
+              >
+                <v-icon> mdi-pencil </v-icon>
+              </v-btn>
+              <v-btn
+                :id="'delete-ranking-block-button-' + rankingBlock.id"
+                tile
+                small
+                color="green lighten-1"
+                @click="hundleDeleteRankingBlock(rankingBlock)"
+              >
+                <v-icon> mdi-delete </v-icon>
+              </v-btn>
+            </v-row>
+            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+              {{ rankingBlock.title }}
+            </p>
+            <v-card
+              class="p-2 m-3 rounded-full"
+              outlined
+              color="white"
+            >
+              <label for="1st place" class="ranking-label">1st</label
+              >{{ rankingBlock.first_place }}
+            </v-card>
+            <v-card
+              class="p-2 m-3 rounded-full"
+              outlined
+              color="white"
+            >
+              <label for="2nd place" class="ranking-label">2nd</label
+              >{{ rankingBlock.second_place }}
+            </v-card>
+            <v-card
+              class="p-2 m-3 rounded-full"
+              outlined
+              color="white"
+            >
+              <label for="3rd place" class="ranking-label">3rd</label
+              >{{ rankingBlock.third_place }}
+            </v-card>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-container v-else class="no-block-display-container">
+        <v-row justify="center">
+          <div class="font-bold text-2xl opacity-50">
+            社員のランキングブロックがありません
+          </div>
+        </v-row>
+      </v-container>
+    </div>
+
     <RankingFormatDialog
       :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
       :ranking-block-color="rankingBlockColor"
@@ -100,13 +132,15 @@ export default {
       isShownRankingFormatDialog: false,
       isShownEditRankingFormatDialog: false,
       editRankingBlock: {},
-      rankingBlockColor: "green lighten-3", // ranking block color
+      rankingBlockColor: "green lighten-4", // ranking block color
     };
   },
   computed: {
     ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("users", ["currentUser"]),
-
+    isMyRankingBlocksLengthNotZero() {
+      return this.myRankingBlocks.length !== 0 ? true : false;
+    },
     myRankingBlocks() {
       return (
         this.rankingBlocks.filter(
@@ -150,3 +184,36 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-color {
+  background-color: #e4fcdd;
+}
+
+.block-title {
+  border: 1px solid #c5e1a5; /* 枠線 */
+  border-right: 20px solid #c5e1a5; /* 右側の太い線 */
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  color: #c5e1a5; /* 文字色 */
+  padding: 10px 20px; /* 上下・左右の余白 */
+  position: relative;
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+.note-box {
+  position: relative;
+}
+.note-box::before {
+  content: "";
+  position: absolute;
+  border-right: dotted 10px #ddd; /*ドットの大きさ、高さ*/
+  height: 90%;
+  top: 0.5em; /*位置*/
+  left: 0.5em; /*位置*/
+}
+
+.no-block-display-container {
+  height: 300px;
+}
+</style>

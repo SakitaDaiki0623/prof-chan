@@ -1,94 +1,77 @@
 <template>
-  <v-card class="shadow rounded-2xl bg-question-prof-block bg-cover">
-    <div class="flex p-3 text-gray-600 font-bold">
-      <div class="md:w-2/4 text-center">
-        <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
-          ★基本情報★
-        </div>
-        <div class="flex justify-center">
-          <img class="ring-4 ring-gray-600 w-9/12" :src="user.image" />
-        </div>
-        <div>
-          <div class="text-xl font-bold inline-block mt-4">
-            <label
-              for="name"
-              class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-              >名前</label
-            >
-            {{ user.name }}
+  <div class="rounded-2xl">
+    <v-card outlined color="amber lighten-5" class="py-5 px-10">
+      <v-row>
+        <v-col cols="12" sm="6">
+          <div class="border-b-2 border-gray-600 border-4 mb-3 text-center">
+            ★基本情報★
           </div>
-        </div>
-      </div>
-      <div class="p-2 text-lg md:w-2/4">
-        <v-row justify="end" v-show="isThisEditPage">
-          <v-btn
-            id="edit-basic-prof-card-button"
-            tile
-            small
-            color="red lighten-4"
-            @click="openEditBasicProfCard"
-          >
-            <v-icon> mdi-pencil </v-icon>
-          </v-btn>
-        </v-row>
-        <div class="p-2">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >性別</label
-          >
-          {{ profile.gender }}
-        </div>
+          <div>
+            <v-img
+              class="ring-4 ring-gray-600"
+              :src="user.image"
+              max-height="205px"
+            />
+          </div>
+          <div>
+            <div
+              class="p-3 text-2xl font-bold text-gray-600 border-dotted	border-b-2 border-gray-400"
+            >
+              <label for="name" class="form-label-text-block">名前</label>
+              <span class="name-text">{{ user.name }}</span>
+            </div>
+          </div>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <v-row justify="end" v-show="isThisEditPage">
+            <v-btn
+              id="edit-basic-prof-card-button"
+              tile
+              small
+              color="amber lighten-4"
+              @click="openEditBasicProfCard"
+            >
+              <v-icon> mdi-pencil </v-icon>
+            </v-btn>
+          </v-row>
+          <div class="p-3 border-dotted	border-b-2 border-gray-400">
+            <label for="birthday" class="form-label-text-block">性別</label>
+            {{ profile.gender }}
+          </div>
 
-        <div class="p-2">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >身長</label
-          >{{ profile.height }} cm
-        </div>
+          <div class="p-3 border-dotted	border-b-2 border-gray-400">
+            <label for="birthday" class="form-label-text-block">身長</label
+            >{{ profile.height }} cm
+          </div>
 
-        <div class="p-2">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >血液型</label
-          >{{ profile.blood_type }} 型
-        </div>
+          <div class="p-3 border-dotted	border-b-2 border-gray-400">
+            <label for="birthday" class="form-label-text-block">血液型</label
+            >{{ profile.blood_type }} 型
+          </div>
 
-        <div class="p-2">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >出身地</label
-          >{{ profile.prefecture_id }}
-        </div>
-        <div class="p-2">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >誕生日</label
-          >
-          {{ profile.birthday | moment }}
-        </div>
-        <div class="p-2">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >入社日</label
-          >
+          <div class="p-3 border-dotted	border-b-2 border-gray-400">
+            <label for="birthday" class="form-label-text-block">出身地</label
+            >{{ profile.prefecture_id }}
+          </div>
+          <div class="p-3 border-dotted	border-b-2 border-gray-400">
+            <label for="birthday" class="form-label-text-block">誕生日</label>
+            {{ profile.birthday | moment }}
+          </div>
+          <div class="p-3 border-dotted	border-b-2 border-gray-400">
+            <label for="birthday" class="form-label-text-block">入社日</label>
 
-          {{ profile.day_of_joinning | moment }}
-        </div>
-      </div>
-    </div>
-    <EditBasicProfCardDialog
-      :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
-      :edit-basic-profile="editBasicProfile"
-      @close-edit-basic-prof-card-dialog="closeEditBasicProfCardDialog"
-      @update-profile="updateProfile"
-    />
-  </v-card>
+            {{ profile.day_of_joinning | moment }}
+          </div>
+        </v-col>
+      </v-row>
+      <EditBasicProfCardDialog
+        :is-shown-edit-basic-prof-card-dialog="isShownEditBasicProfCardDialog"
+        :edit-basic-profile="editBasicProfile"
+        @close-edit-basic-prof-card-dialog="closeEditBasicProfCardDialog"
+        @update-profile="updateProfile"
+      />
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -99,7 +82,7 @@ import EditBasicProfCardDialog from "./EditBasicProfCardDialog";
 
 export default {
   filters: {
-    moment: function (date) {
+    moment: function(date) {
       return moment(date).format("YYYY/MM/DD");
     },
   },
@@ -152,3 +135,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="rounded-2xl bg-color">
     <v-row justify="center" v-show="isThisEditPage">
       <v-btn
         id="add-text-block-btn"
@@ -13,42 +13,64 @@
       </v-btn>
     </v-row>
     <v-row>
-      <v-col
-        v-for="textBlock in myTextBlocks"
-        :key="textBlock.id"
-        cols="12"
-        sm="6"
-      >
-        <v-card class="bg-text-prof-block bg-cover shadow rounded-2xl p-5">
-          <v-row justify="end" v-show="isThisEditPage">
-            <v-btn
-              :id="'edit-text-block-button-' + textBlock.id"
-              tile
-              small
-              color="teal lighten-4"
-              @click="openEditTextFormatDialog(textBlock)"
-            >
-              <v-icon> mdi-pencil </v-icon>
-            </v-btn>
-            <v-btn
-              :id="'delete-text-block-button-' + textBlock.id"
-              tile
-              small
-              color="teal lighten-1"
-              @click="hundleDeleteTextBlock(textBlock)"
-            >
-              <v-icon> mdi-delete </v-icon>
-            </v-btn>
-          </v-row>
-          <p class="text-2xl font-bold text-gray-600 pt-3">
-            {{ textBlock.title }}
-          </p>
-          <v-card class="p-5 rounded-lg" outlined>
-            {{ textBlock.text }}
-          </v-card>
-        </v-card>
-      </v-col>
+      <div class="block-title">テキストコーナー</div>
     </v-row>
+    <div>
+      <v-row v-if="isMyTextBlocksLengthNotZero">
+        <v-col
+          v-for="textBlock in myTextBlocks"
+          :key="textBlock.id"
+          cols="12"
+          sm="6"
+        >
+          <v-card
+            class="rounded-2xl p-5 note-box"
+            outlined
+            color="teal accent-1"
+          >
+            <v-row justify="end" v-show="isThisEditPage">
+              <v-btn
+                :id="'edit-text-block-button-' + textBlock.id"
+                tile
+                small
+                color="teal lighten-4"
+                @click="openEditTextFormatDialog(textBlock)"
+              >
+                <v-icon> mdi-pencil </v-icon>
+              </v-btn>
+              <v-btn
+                :id="'delete-text-block-button-' + textBlock.id"
+                tile
+                small
+                color="teal lighten-1"
+                @click="hundleDeleteTextBlock(textBlock)"
+              >
+                <v-icon> mdi-delete </v-icon>
+              </v-btn>
+            </v-row>
+            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+              {{ textBlock.title }}
+            </p>
+            <v-card
+              class="p-3 rounded-lg"
+              outlined
+              color="white"
+              min-height="200px"
+            >
+              {{ textBlock.text }}
+            </v-card>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-container v-else class="no-block-display-container">
+        <v-row justify="center">
+          <div class="font-bold text-2xl opacity-50">
+            社員のクエスチョンブロックがありません
+          </div>
+        </v-row>
+      </v-container>
+    </div>
+
     <TextFormatDialog
       :is-shown-text-format-dialog="isShownTextFormatDialog"
       :text-block-color="textBlockColor"
@@ -99,6 +121,9 @@ export default {
   computed: {
     ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
+    isMyTextBlocksLengthNotZero() {
+      return this.myTextBlocks.length !== 0 ? true : false;
+    },
     myTextBlocks() {
       return (
         this.textBlocks.filter(
@@ -141,3 +166,50 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-color {
+  background-color: #e0f2f1;
+}
+
+.block-title {
+  color: #80cbc4; /* 文字色 */
+  padding: 10px 10px 10px 60px; /* 上・右・下・左の余白 */
+  position: relative;
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+.block-title:after {
+  border-bottom: 2px dotted #80cbc4; /* 下線 */
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.note-box {
+  position: relative;
+}
+
+.note-box::after {
+  content: "＊*"; /*花に見せかけるためのアスタリスク*/
+  color: #fff; /* アスタリスクの色 */
+  display: inline-block;
+  font-size: 30px; /* アスタリスクの大きさ */
+  font-weight: bold;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -webkit-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  text-shadow: 0px 0px 6px #eaa8bf, 0px 0px 4px #eaa8bf, 0 0 0.5px #eaa8bf; /* アスタリスク周りの影 */
+}
+
+.no-block-display-container {
+  height: 300px;
+}
+</style>
