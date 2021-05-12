@@ -20,18 +20,18 @@
           ランキングブロック作成
         </p>
         <div id="ranking-block-form" class="p-10 note-box">
-        <v-btn
-          id="input-ranking-title-button"
-          type="submit"
-          depressed
-          elevation="4"
-          small
-          tile
-          color="green lighten-2"
-          class="white--text py-2"
-          @click="inputTitleRandomly"
-          ><v-icon left> mdi-plus </v-icon>タイトルをランダムに入力</v-btn
-        >
+          <v-btn
+            id="input-ranking-title-button"
+            type="submit"
+            depressed
+            elevation="4"
+            small
+            tile
+            color="green lighten-2"
+            class="white--text py-2"
+            @click="inputTitleRandomly"
+            ><v-icon left> mdi-plus </v-icon>タイトルをランダムに入力</v-btn
+          >
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
               <div>
@@ -171,6 +171,9 @@ export default {
         "結婚したい芸能人",
         "ゲーム",
         "映画",
+        "好きなアーティスト",
+        "言われて嬉しい言葉",
+        "コロナ空けで行きたい国",
       ],
     };
   },
