@@ -231,8 +231,17 @@
   @apply text-sm;
   @apply font-medium;
   @apply bg-green-100;
-  @apply py-1;
-  @apply px-2;
+  @apply py-2;
+  @apply px-1;
   @apply rounded;
   @apply text-green-500;
+}
+
+.top-sub-title {
+  position: relative;
+  background: #a1887f;
+  box-shadow: 0px 0px 0px 5px #a1887f;
+  border: dashed 2px white;
+  padding: 0.2em 0.5em;
+  color: white;
 }
