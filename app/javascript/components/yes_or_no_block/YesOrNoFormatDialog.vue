@@ -16,15 +16,14 @@
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10"
-        >
+        <p class="font-weight-bold text-white text-4xl text-center mt-10">
           Yes or No ブロック
         </p>
 
         <div
           id="yes-or-no-block-form"
-          class="p-10 bg-yes-or-no-prof-block bg-fixed"
+          class="p-10 note-box"
+          color="orange lighten-4"
         >
           <div class="pb-2">
             <v-btn
@@ -246,3 +245,27 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.note-box {
+  position: relative;
+  background-color: #ffe0b2;
+}
+.note-box::before {
+  content: "";
+  position: absolute;
+  border-right: dashed 5px rgb(155, 155, 155); /*ドットの大きさ、高さ*/
+  height: 90%;
+  top: 0.5em;
+  left: 0.5em;
+}
+
+.note-box::after {
+  content: "";
+  position: absolute;
+  border-right: dashed 5px rgb(155, 155, 155); /*ドットの大きさ、高さ*/
+  height: 50%;
+  top: 3em;
+  right: 0.5em;
+}
+</style>

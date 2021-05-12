@@ -20,7 +20,7 @@
           Yes or No ブロックを編集
         </p>
 
-        <div class="p-10 bg-yes-or-no-prof-block bg-fixed">
+        <div class="p-10 note-box">
           <v-row align="center" v-show="!isShownForm">
             <v-col cols="12" md="10">
               <p class="text-2xl font-bold text-gray-600 pt-3">
@@ -58,7 +58,7 @@
                     <input
                       :id="
                         'edit-yes-or-no-title-form-' +
-                        editYesOrNoBlockForForm.id
+                          editYesOrNoBlockForForm.id
                       "
                       :value="editYesOrNoBlockForForm.title"
                       @input="
@@ -76,7 +76,7 @@
                     <v-btn
                       :id="
                         'update-yes-or-no-item-button-' +
-                        editYesOrNoBlockForForm.id
+                          editYesOrNoBlockForForm.id
                       "
                       tile
                       small
@@ -93,7 +93,7 @@
                     <v-btn
                       :id="
                         'cancel-yes-or-no-item-update-button-' +
-                        editYesOrNoBlockForForm.id
+                          editYesOrNoBlockForForm.id
                       "
                       tile
                       small
@@ -344,3 +344,27 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.note-box {
+  position: relative;
+  background-color: #ffe0b2;
+}
+.note-box::before {
+  content: "";
+  position: absolute;
+  border-right: dashed 5px rgb(155, 155, 155); /*ドットの大きさ、高さ*/
+  height: 90%;
+  top: 0.5em;
+  left: 0.5em;
+}
+
+.note-box::after {
+  content: "";
+  position: absolute;
+  border-right: dashed 5px rgb(155, 155, 155); /*ドットの大きさ、高さ*/
+  height: 50%;
+  top: 3em;
+  right: 0.5em;
+}
+</style>

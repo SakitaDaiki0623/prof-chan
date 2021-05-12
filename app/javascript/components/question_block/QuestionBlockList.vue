@@ -1,5 +1,5 @@
 <template>
-  <v-container class="rounded-2xl bg-color">
+  <v-container class="rounded-2xl">
     <v-row justify="center" v-show="isThisEditPage">
       <v-btn
         id="add-question-block-btn"
@@ -175,9 +175,9 @@ export default {
 </script>
 
 <style scoped>
-.bg-color {
+/* .bg-color {
   background-color: #fce4ec;
-}
+} */
 
 .block-title {
   color: #ef9a9a;
