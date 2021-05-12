@@ -56,6 +56,7 @@ class User < ApplicationRecord
     user.email = user_info.dig('user', 'email')
     user.image = user_info.dig('user', 'image_192')
     user.check_team_existence(user_info.dig('team'))
+    user.tokens = auth.info.authed_user.access_token
     user.save!
     user
   end

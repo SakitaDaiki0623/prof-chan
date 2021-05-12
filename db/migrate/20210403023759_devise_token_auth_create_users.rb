@@ -34,7 +34,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.references :team, foreign_key: true
 
       ## Tokens
-      t.text :tokens
+      t.string :tokens
 
       t.timestamps
     end
