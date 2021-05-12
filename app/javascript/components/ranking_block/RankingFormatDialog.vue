@@ -16,16 +16,28 @@
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
-        >
+        <p class="font-weight-bold text-white text-4xl text-center my-10">
           ランキングブロック作成
         </p>
-        <div id="ranking-block-form" class="p-10 bg-ranking-prof-block bg-top">
+        <div id="ranking-block-form" class="p-10 note-box">
+          <v-btn
+            id="input-ranking-title-button"
+            type="submit"
+            depressed
+            elevation="4"
+            small
+            tile
+            color="green lighten-2"
+            class="white--text py-2"
+            @click="inputTitleRandomly"
+            ><v-icon left> mdi-plus </v-icon>タイトルをランダムに入力</v-btn
+          >
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
               <div>
-                <label class="form-label-ranking-block" for="ranking_block_title"
+                <label
+                  class="form-label-ranking-block"
+                  for="ranking_block_title"
                   >タイトル</label
                 >
                 <ValidationProvider
@@ -43,9 +55,12 @@
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
+
               <div class="mt-5">
-                <label class="form-label-ranking-block" for="ranking_block_first_place"
-                  >1位</label
+                <label
+                  class="form-label-ranking-block"
+                  for="ranking_block_first_place"
+                  >1st</label
                 >
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -62,8 +77,10 @@
                 </ValidationProvider>
               </div>
               <div class="mt-5">
-                <label class="form-label-ranking-block" for="ranking_block_second_place"
-                  >2位</label
+                <label
+                  class="form-label-ranking-block"
+                  for="ranking_block_second_place"
+                  >2nd</label
                 >
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -80,8 +97,10 @@
                 </ValidationProvider>
               </div>
               <div class="mt-5">
-                <label class="form-label-ranking-block" for="ranking_block_third_place"
-                  >3位</label
+                <label
+                  class="form-label-ranking-block"
+                  for="ranking_block_third_place"
+                  >3rd</label
                 >
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -145,6 +164,17 @@ export default {
         second_place: "",
         third_place: "",
       },
+
+      randomeTitles: [
+        "好きなアニメ漫画",
+        "カラオケの18番",
+        "結婚したい芸能人",
+        "ゲーム",
+        "映画",
+        "好きなアーティスト",
+        "言われて嬉しい言葉",
+        "コロナ空けで行きたい国",
+      ],
     };
   },
   methods: {
@@ -172,8 +202,25 @@ export default {
         this.$refs.observer.reset();
       });
     },
+    inputTitleRandomly() {
+      const randomNum = Math.floor(Math.random() * this.randomeTitles.length);
+      this.rankingBlock.title = this.randomeTitles[randomNum];
+    },
   },
 };
 </script>
 
-
+<style scoped>
+.note-box {
+  position: relative;
+  background-color: #f1f8e9;
+}
+.note-box::before {
+  content: "";
+  position: absolute;
+  border-right: dotted 10px #ddd; /*ドットの大きさ、高さ*/
+  height: 90%;
+  top: 0.5em; /*位置*/
+  left: 0.5em; /*位置*/
+}
+</style>

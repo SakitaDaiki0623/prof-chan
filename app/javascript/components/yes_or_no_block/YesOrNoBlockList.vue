@@ -186,9 +186,9 @@ export default {
 </script>
 
 <style scoped>
-.bg-color {
+/* .bg-color {
   background-color: #ffebca;
-}
+} */
 
 .block-title {
   color: #ffb74b; /* 文字色 */

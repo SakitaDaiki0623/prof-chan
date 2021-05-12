@@ -1,5 +1,5 @@
 <template>
-  <v-container class="rounded-2xl bg-color">
+  <v-container class="rounded-2xl">
     <v-row justify="end" v-show="isThisEditPage">
       <v-btn
         id="edit-my-favorite-block-button"
@@ -192,19 +192,6 @@ export default {
 </script>
 
 <style scoped>
-.bg-color {
-  background-image: linear-gradient(
-    -45deg,
-    #fff 25%,
-    #eac7cd 25%,
-    #eac7cd 50%,
-    #fff 50%,
-    #fff 75%,
-    #eac7cd 75%,
-    #eac7cd
-  );
-}
-
 .block-title {
   position: relative;
   font-size: 2.5rem;

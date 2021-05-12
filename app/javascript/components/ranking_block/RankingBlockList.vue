@@ -186,9 +186,9 @@ export default {
 </script>
 
 <style scoped>
-.bg-color {
+/* .bg-color {
   background-color: #e4fcdd;
-}
+} */
 
 .block-title {
   border: 1px solid #c5e1a5; /* 枠線 */

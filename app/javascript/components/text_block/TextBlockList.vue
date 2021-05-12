@@ -65,7 +65,7 @@
       <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
-            社員のクエスチョンブロックがありません
+            社員のテキストブロックがありません
           </div>
         </v-row>
       </v-container>
@@ -168,9 +168,9 @@ export default {
 </script>
 
 <style scoped>
-.bg-color {
+/* .bg-color {
   background-color: #e0f2f1;
-}
+} */
 
 .block-title {
   color: #80cbc4; /* 文字色 */

@@ -16,13 +16,11 @@
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
-        >
+        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           クエスチョンブロックを編集
         </p>
 
-        <div class="p-10 bg-question-prof-block bg-fixed">
+        <div class="p-10 note-box">
           <v-row align="center" v-show="!isShownForm">
             <v-col cols="12" md="10">
               <p class="text-2xl font-bold text-gray-600 pt-3">
@@ -47,7 +45,9 @@
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form>
                 <div>
-                  <label class="form-label-question-block" for="question_block_title"
+                  <label
+                    class="form-label-question-block"
+                    for="question_block_title"
                     >タイトル</label
                   >
                   <ValidationProvider
@@ -56,7 +56,10 @@
                     rules="input_required|max:50"
                   >
                     <input
-                      :id="'edit-question-title-form-' + editQuestionBlockForForm.id"
+                      :id="
+                        'edit-question-title-form-' +
+                          editQuestionBlockForForm.id
+                      "
                       :value="editQuestionBlockForForm.title"
                       @input="
                         editQuestionBlockForForm.title = $event.target.value
@@ -73,7 +76,7 @@
                     <v-btn
                       :id="
                         'update-question-item-button-' +
-                        editQuestionBlockForForm.id
+                          editQuestionBlockForForm.id
                       "
                       tile
                       small
@@ -90,7 +93,7 @@
                     <v-btn
                       :id="
                         'cancel-question-item-update-button-' +
-                        editQuestionBlockForForm.id
+                          editQuestionBlockForForm.id
                       "
                       tile
                       small
@@ -148,9 +151,7 @@
             ref="IndividualCreateQuestionBlockItem"
           />
 
-          <div
-            class="mt-3 font-weight-bold text-gray-600 text-sm"
-          >
+          <div class="mt-3 font-weight-bold text-gray-600 text-sm">
             {{ certainlyPushUpdateButton }}
           </div>
           <div class="text-center mt-3">
@@ -343,3 +344,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.note-box {
+  background-color: #ffcdd2;
+  background-image: radial-gradient(#ffffff 40%, transparent 20%),
+    radial-gradient(#ffffff 20%, transparent 20%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+</style>

@@ -20,42 +20,56 @@
           クエスチョンブロック
         </p>
 
-        <div
-          id="question-block-form"
-          class="p-10 bg-question-prof-block bg-fixed"
-        >
-          <div class="pb-2">
-            <v-btn
-              id="add-question-item-button"
-              type="submit"
-              depressed
-              elevation="4"
-              small
-              tile
-              color="red lighten-2"
-              class="white--text"
-              :disabled="questionItemNum >= 3"
-              @click="addQuestionItemNum"
-            >
-              <v-icon left> mdi-plus </v-icon>
-              質問と答えを追加する
-            </v-btn>
-            <v-btn
-              id="delete-question-item-button"
-              type="submit"
-              depressed
-              elevation="4"
-              small
-              tile
-              color="grey darken-3"
-              class="white--text"
-              :disabled="questionItemNum <= 1"
-              @click="deleteQuestionItemNum"
-            >
-              <v-icon left> mdi-minus </v-icon>
-              質問と答えを減らす
-            </v-btn>
-          </div>
+        <div id="question-block-form" class="p-10 note-box">
+          <v-row>
+            <v-col cols="12" sm="7">
+              <v-btn
+                id="add-question-item-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="red lighten-2"
+                class="white--text"
+                :disabled="questionItemNum >= 3"
+                @click="addQuestionItemNum"
+              >
+                <v-icon left> mdi-plus </v-icon>
+                質問と答えを追加する
+              </v-btn>
+              <v-btn
+                id="delete-question-item-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="grey darken-3"
+                class="white--text"
+                :disabled="questionItemNum <= 1"
+                @click="deleteQuestionItemNum"
+              >
+                <v-icon left> mdi-minus </v-icon>
+                質問と答えを減らす
+              </v-btn>
+            </v-col>
+            <v-spacer />
+            <v-col cols="12" sm="4">
+              <v-btn
+                id="input-yes-or-no-title-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="red lighten-2"
+                class="white--text py-2"
+                @click="inputTitleRandomly"
+                ><v-icon left> mdi-plus </v-icon>タイトルをランダムに入力</v-btn
+              >
+            </v-col>
+          </v-row>
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form
               @submit.prevent="
@@ -175,6 +189,36 @@ export default {
         answer: "",
       },
 
+      randomeTitles: [
+        // {
+        //   title: "私の働き方",
+        //   contents: ["仕事は1人で黙々やるのが好き？", "あ"],
+        // },
+        // { title: "こだわりトーク" },
+        // { title: "鬼滅の刃" },
+        // { title: "季節", contents: ["好きな季節はなんですか？"] },
+        // { title: "お金", contents: ["100万円あったら何に使う？", ""] },
+        // {
+        //   title: "無人島",
+        //   contents: [
+        //     "無人島に何を持っていく？",
+        //     "無人島で恋に落ちた！どうする？",
+        //   ],
+        // },
+        // { title: "昔", contents: ["なりたかった職業は？", ""] },
+        {
+          title: "If...",
+          contents: [
+            "総理大臣になったら何を変えたい？",
+            "嵐のメンバーになったら何をする？",
+            "世界が明日滅びるとしたら明日までに何をする？",
+            "本、テレビ、映画の世界で生きられるならどんな作品の世界に住みたい？",
+            "100万円が手に入ったら何に使う？",
+            "どこにでも行けるならどこを旅したい？",
+          ],
+        },
+      ],
+
       // Validator
       questionNameForValidation1: "1番目の質問",
       answerNameForValidation1: "1番目の答え",
@@ -199,9 +243,11 @@ export default {
     deleteQuestionItemNum() {
       this.questionItemNum--;
       if (this.questionItemNum == 2) {
-        this.questionItem3 = {};
+        this.questionItem3.content = "";
+        this.questionItem3.answer = "";
       } else if (this.questionItemNum == 1) {
-        this.questionItem2 = {};
+        this.questionItem2.content = "";
+        this.questionItem2.answer = "";
       }
     },
     hundleCreateQuestionBlock(
@@ -241,6 +287,74 @@ export default {
         this.$refs.observer.reset();
       });
     },
+    inputTitleRandomly() {
+      const randomNum = Math.floor(Math.random() * this.randomeTitles.length);
+      const selectedRandomTitle = JSON.parse(
+        JSON.stringify(this.randomeTitles[randomNum])
+      );
+
+      console.log(this.randomeTitles);
+      console.log(selectedRandomTitle);
+
+      this.questionBlock.title = selectedRandomTitle.title;
+
+      if (this.questionItemNum == 1) {
+        const randomItemContentIndexForItem1 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.questionItem1.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem1,
+          1
+        );
+      } else if (this.questionItemNum == 2) {
+        const randomItemContentIndexForItem1 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.questionItem1.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem1,
+          1
+        );
+        const randomItemContentIndexForItem2 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.questionItem2.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem2,
+          1
+        );
+      } else if (this.questionItemNum == 3) {
+        const randomItemContentIndexForItem1 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.questionItem1.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem1,
+          1
+        );
+        const randomItemContentIndexForItem2 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.questionItem2.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem2,
+          1
+        );
+        const randomItemContentIndexForItem3 = Math.floor(
+          Math.random() * selectedRandomTitle.contents.length
+        );
+        this.questionItem3.content = selectedRandomTitle.contents.splice(
+          randomItemContentIndexForItem3,
+          1
+        );
+      }
+    },
   },
 };
 </script>
+
+<style scoped>
+.note-box {
+  background-color: #ffcdd2;
+  background-image: radial-gradient(#ffffff 40%, transparent 20%),
+    radial-gradient(#ffffff 20%, transparent 20%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+</style>
