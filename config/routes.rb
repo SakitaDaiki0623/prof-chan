@@ -34,7 +34,11 @@ Rails.application.routes.draw do
       end
       resources :question_items,     only: %i[index create update destroy]
       resources :ranking_blocks,     only: %i[index create show update destroy]
-      resources :yes_or_no_blocks,   only: %i[index create show update destroy]
+      resources :yes_or_no_blocks,   only: %i[index create show update destroy] do
+        collection do
+          post 'post_to_slack_after_create'
+        end
+      end
       resources :yes_or_no_items,    only: %i[index create update destroy]
       resources :my_favorite_blocks, only: %i[index update]
       resources :address_blocks,     only: %i[index update]
