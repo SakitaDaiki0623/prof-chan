@@ -58,10 +58,12 @@ Rails.application.routes.draw do
       resources :address_blocks,     only: %i[index update]
 
       # 各ブロックのいいね機能
-      resources :text_block_likes,      only: [:index, :create, :destroy]
-      resources :question_block_likes,  only: [:index, :create, :destroy]
-      resources :ranking_block_likes,   only: [:index, :create, :destroy]
-      resources :yes_or_no_block_likes, only: [:index, :create, :destroy]
+      namespace :likes do
+        resources :text_block_likes,      only: [:index, :create, :destroy]
+        resources :question_block_likes,  only: [:index, :create, :destroy]
+        resources :ranking_block_likes,   only: [:index, :create, :destroy]
+        resources :yes_or_no_block_likes, only: [:index, :create, :destroy]
+      end
     end
   end
 

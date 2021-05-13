@@ -57,7 +57,7 @@ export default {
   methods: {
     fetchLikeByTextBlockId: async function() {
       const res = await axios.get(
-        `/api/v1/text_block_likes/?text_block_id=${this.textBlockId}`
+        `/api/v1/likes/text_block_likes/?text_block_id=${this.textBlockId}`
       );
       if (res.status !== 200) {
         process.exit();
@@ -66,7 +66,7 @@ export default {
     },
 
     registerLike: async function() {
-      const res = await axios.post("/api/v1/text_block_likes", {
+      const res = await axios.post("/api/v1/likes/text_block_likes", {
         text_block_id: this.textBlockId,
       });
       if (res.status !== 201) {
@@ -79,7 +79,9 @@ export default {
 
     deleteLike: async function() {
       const likeId = this.findLikeId();
-      const res = await axios.delete(`/api/v1/text_block_likes/${likeId}`);
+      const res = await axios.delete(
+        `/api/v1/likes/text_block_likes/${likeId}`
+      );
       if (res.status !== 200) {
         process.exit();
       }
