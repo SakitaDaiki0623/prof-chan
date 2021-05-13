@@ -3,7 +3,7 @@
   <div>
     <v-dialog
       :value="isShownQuestionFormatDialog"
-      max-width="800"
+      max-width="1000"
       persistent
       @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
     >
@@ -256,18 +256,31 @@ export default {
       questionItem2,
       questionItem3
     ) {
-      this.createQuestionBlock({
-        questionBlock: questionBlock,
-        questionItem1: questionItem1,
-        questionItem2: questionItem2,
-        questionItem3: questionItem3,
-      });
+      const params = {
+        question_title: questionBlock.title,
+        question_item_content1: questionItem1.content,
+        question_item_answer1: questionItem1.answer,
+        question_item_content2: questionItem2.content,
+        question_item_answer2: questionItem2.answer,
+        question_item_content3: questionItem3.content,
+        question_item_answer3: questionItem3.answer,
+      };
+      this.createQuestionBlock(params);
       this.hundleCloseQuestioniFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
         color: this.questionBlockColor,
       });
+      if (confirm("slackに通知しますか?")) {
+        this.postToSlackAfterCreate(params);
+      }
+    },
+    async postToSlackAfterCreate(params) {
+      const res = await axios.post(
+        "/api/v1/question_blocks/post_to_slack_after_create",
+        params
+      );
     },
     hundleCloseQuestioniFormatDialog() {
       this.$emit("close-question-format-dialog");
@@ -293,9 +306,6 @@ export default {
         JSON.stringify(this.randomeTitles[randomNum])
       );
 
-      console.log(this.randomeTitles);
-      console.log(selectedRandomTitle);
-
       this.questionBlock.title = selectedRandomTitle.title;
 
       if (this.questionItemNum == 1) {
@@ -305,7 +315,7 @@ export default {
         this.questionItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
       } else if (this.questionItemNum == 2) {
         const randomItemContentIndexForItem1 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
@@ -313,14 +323,14 @@ export default {
         this.questionItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem2 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.questionItem2.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem2,
           1
-        );
+        )[0];
       } else if (this.questionItemNum == 3) {
         const randomItemContentIndexForItem1 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
@@ -328,21 +338,21 @@ export default {
         this.questionItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem2 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.questionItem2.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem2,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem3 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.questionItem3.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem3,
           1
-        );
+        )[0];
       }
     },
   },

@@ -9,16 +9,11 @@
     >
       <v-card :color="textBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
-          <v-btn
-            :color="textBlockColor"
-            @click="hundleCloseTextFormatDialog"
-          >
+          <v-btn :color="textBlockColor" @click="hundleCloseTextFormatDialog">
             ✖︎
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
-        >
+        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           テキストブロック作成
         </p>
         <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
@@ -116,12 +111,21 @@ export default {
     hundleCreateTextBlock(textBlock) {
       if (textBlock.title == "" || textBlock.text == "") return;
       this.createTextBlock(textBlock);
+      if (confirm("slackに通知しますか?")) {
+        this.postToSlackAfterCreate(textBlock);
+      }
       this.hundleCloseTextFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "テキストブロックを作成したよ！",
         color: this.textBlockColor,
       });
+    },
+    async postToSlackAfterCreate(textBlock) {
+      const res = await axios.post(
+        "/api/v1/text_blocks/post_to_slack_after_create",
+        textBlock
+      );
     },
     hundleCloseTextFormatDialog() {
       this.$emit("close-text-format-dialog");

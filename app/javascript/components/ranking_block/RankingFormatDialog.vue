@@ -182,12 +182,21 @@ export default {
 
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
+      if (confirm("slackに通知しますか?")) {
+        this.postToSlackAfterCreate(rankingBlock);
+      }
       this.hundleCloseRankingFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "ランキングブロックを作成したよ！",
         color: this.rankingBlockColor,
       });
+    },
+    async postToSlackAfterCreate(rankingBlock) {
+      const res = await axios.post(
+        "/api/v1/ranking_blocks/post_to_slack_after_create",
+        rankingBlock
+      );
     },
     hundleCloseRankingFormatDialog() {
       this.$emit("close-ranking-format-dialog");
@@ -202,6 +211,7 @@ export default {
         this.$refs.observer.reset();
       });
     },
+
     inputTitleRandomly() {
       const randomNum = Math.floor(Math.random() * this.randomeTitles.length);
       this.rankingBlock.title = this.randomeTitles[randomNum];

@@ -37,6 +37,68 @@ module Api
         render json: @yes_or_no_block
       end
 
+      def post_to_slack_after_create
+        @yes_or_no_block_item_register = YesOrNoBlockItemRegister.new(set_params)
+        if @yes_or_no_block_item_register.valid?
+          chat_post_message(@yes_or_no_block_item_register)
+          render json: @yes_or_no_block_item_register, status: :no_content
+
+        else
+          render json: @yes_or_no_block_item_register.errors, status: :bad_request
+        end
+      end
+
+      def chat_post_message(register)
+        client = Slack::Web::Client.new
+
+
+        if register.yes_or_no_item_content3.present?
+          post_text = " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
+        elsif register.yes_or_no_item_content2.present?
+          post_text = " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
+        else
+          post_text = " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
+        end
+
+        text = "*#{current_user.name}さんがYes or No ブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.yes_or_no_title}* :star2:"
+
+        client.chat_postMessage(
+          channel: '#プロフちゃん実験',
+          text: text,
+          blocks: [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": text
+              }
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": post_text
+              },
+              "accessory": {
+                "type": "image",
+                "image_url": "#{current_user.image}",
+                "alt_text": "computer thumbnail"
+              }
+            },
+            {
+              "type": "divider"
+            }
+          ]
+        )
+      end
+
+      def translate_boolean(answer)
+        answer ? "YES！:laughing:" : "NO！ :weary:"
+      end
+
       private
 
       def set_params

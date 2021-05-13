@@ -279,18 +279,29 @@ export default {
       yesOrNoItem2,
       yesOrNoItem3
     ) {
-      this.createYesOrNoBlock({
-        yesOrNoBlock: yesOrNoBlock,
-        yesOrNoItem1: yesOrNoItem1,
-        yesOrNoItem2: yesOrNoItem2,
-        yesOrNoItem3: yesOrNoItem3,
-      });
+      const params = {
+        yes_or_no_title: yesOrNoBlock.title,
+        yes_or_no_item_content1: yesOrNoItem1.content,
+        yes_or_no_item_answer1: yesOrNoItem1.answer,
+        yes_or_no_item_content2: yesOrNoItem2.content,
+        yes_or_no_item_answer2: yesOrNoItem2.answer,
+        yes_or_no_item_content3: yesOrNoItem3.content,
+        yes_or_no_item_answer3: yesOrNoItem3.answer,
+      };
+      this.createYesOrNoBlock(params);
       this.hundleCloseYesOrNoFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
+      if (confirm("slackに通知しますか?")) {
+        this.postToSlackAfterCreate(params);
+      }
+    },
+    async postToSlackAfterCreate(params) {
+      const res = await axios
+        .post("/api/v1/yes_or_no_blocks/post_to_slack_after_create", params)
     },
     hundleCloseYesOrNoFormatDialog() {
       this.$emit("close-yes-or-no-format-dialog");
@@ -325,7 +336,7 @@ export default {
         this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
       } else if (this.yesOrNoItemNum == 2) {
         const randomItemContentIndexForItem1 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
@@ -333,14 +344,14 @@ export default {
         this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem2 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.yesOrNoItem2.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem2,
           1
-        );
+        )[0];
       } else if (this.yesOrNoItemNum == 3) {
         const randomItemContentIndexForItem1 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
@@ -348,21 +359,21 @@ export default {
         this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem2 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.yesOrNoItem2.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem2,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem3 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.yesOrNoItem3.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem3,
           1
-        );
+        )[0];
       }
     },
   },

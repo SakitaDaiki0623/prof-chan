@@ -27,6 +27,7 @@ RSpec.describe 'TextBlock', type: :system do
         fill_in 'text_block_text',	with: factory_text_block.text
         expect(page).to have_button 'テキストブロックを作成！', disabled: false
         click_on 'テキストブロックを作成！'
+        page.driver.browser.switch_to.alert.dismiss
       end
       it 'テキストブロックが作成されること' do
         expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
@@ -98,6 +99,7 @@ RSpec.describe 'TextBlock', type: :system do
       fill_in 'text_block_text', with: 'テキスト'
       expect(page).to have_button 'テキストブロックを作成！', disabled: false
       click_on 'テキストブロックを作成！'
+      page.driver.browser.switch_to.alert.dismiss
     end
     context 'テキストブロックを更新した時' do
       before do
@@ -131,6 +133,7 @@ RSpec.describe 'TextBlock', type: :system do
       fill_in 'text_block_text',	with: '削除されるテキストブロック'
       expect(page).to have_button 'テキストブロックを作成！', disabled: false
       click_on 'テキストブロックを作成！'
+      page.driver.browser.switch_to.alert.dismiss
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do
