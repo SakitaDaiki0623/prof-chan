@@ -1,9 +1,9 @@
 <template>
-  <v-container class="rounded-2xl bg-color" v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage">
-    <v-row
-      v-show="isThisEditPage"
-      justify="center"
-    >
+  <v-container
+    class="rounded-2xl bg-color"
+    v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
+  >
+    <v-row v-show="isThisEditPage" justify="center">
       <v-btn
         id="add-yes-or-no-block-btn"
         tile
@@ -33,10 +33,7 @@
             outlined
             color="orange lighten-4"
           >
-            <v-row
-              v-show="isThisEditPage"
-              justify="end"
-            >
+            <v-row v-show="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
                 tile
@@ -56,42 +53,33 @@
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </v-row>
+            <v-row>
+              <v-spacer />
+              <yes-or-no-block-like-button
+                :yes-or-no-block-id="yesOrNoBlock.id"
+              ></yes-or-no-block-like-button>
+            </v-row>
             <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
               {{ yesOrNoBlock.title }}
             </p>
             <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
               <div :key="yes_or_no_item.id">
-                <v-card
-                  class="p-2 m-2"
-                  outlined
-                  color="white"
-                >
+                <v-card class="p-2 m-2" outlined color="white">
                   <v-row align="center">
-                    <v-col
-                      cols="12"
-                      sm="7"
-                    >
+                    <v-col cols="12" sm="7">
                       {{ yes_or_no_item.content }}
                     </v-col>
-                    <v-col
-                      v-if="yes_or_no_item.answer"
-                      cols="12"
-                      sm="5"
-                    >
-                      <span
-                        class="rounded-full border-red-500 border-2 p-2"
-                      >YES</span>
+                    <v-col v-if="yes_or_no_item.answer" cols="12" sm="5">
+                      <span class="rounded-full border-red-500 border-2 p-2"
+                        >YES</span
+                      >
                       / NO
                     </v-col>
-                    <v-col
-                      v-else
-                      cols="12"
-                      sm="5"
-                    >
+                    <v-col v-else cols="12" sm="5">
                       YES /
-                      <span
-                        class="rounded-full border-red-500 border-2 p-2"
-                      >NO</span>
+                      <span class="rounded-full border-red-500 border-2 p-2"
+                        >NO</span
+                      >
                     </v-col>
                   </v-row>
                 </v-card>
@@ -100,10 +88,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-container
-        v-else
-        class="no-block-display-container"
-      >
+      <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
             社員のYes or No ブロックがありません
@@ -135,11 +120,13 @@ import { mapState, mapActions } from "vuex";
 
 import YesOrNoFormatDialog from "./YesOrNoFormatDialog";
 import EditYesOrNoFormatDialog from "./EditYesOrNoFormatDialog";
+import YesOrNoBlockLikeButton from "../likes/YesOrNoBlockLikeButton";
 
 export default {
   components: {
     YesOrNoFormatDialog,
     EditYesOrNoFormatDialog,
+    YesOrNoBlockLikeButton,
   },
   props: {
     isThisEditPage: {
