@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # ROOT_PATH
   root to: 'home#index'
 
+  get 'top', to: 'profiles#top'
+
   # authetication
   devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   devise_scope :user do

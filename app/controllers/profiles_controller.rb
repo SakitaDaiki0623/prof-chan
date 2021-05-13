@@ -8,6 +8,8 @@ class ProfilesController < ApplicationController
     authorize Profile
   end
 
+  def top; end
+
   private
 
   def profile_params
