@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
-      resources :profiles,       only: %i[index create show update]
+      resources :profiles,       only: %i[index create show update] do
+        collection do
+          get 'recently_joined_user_profiles'
+        end
+      end
       resources :users,          only: %i[index show new] do
         collection do
           get 'get_current_user'

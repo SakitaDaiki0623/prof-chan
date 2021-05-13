@@ -48,12 +48,12 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentUser: "users/fetchCurrentUser",
-      // fetchTextBlocks: "textBlocks/fetchTextBlocks",
-      // fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
-      // fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
-      // fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-      // fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      // fetchQuestionItems: "questionBlocks/fetchQuestionItems",
+      fetchTextBlocks: "textBlocks/fetchTextBlocks",
+      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
       fetchUsers: "users/fetchUsers",
     }),
     async fetchProfiles() {

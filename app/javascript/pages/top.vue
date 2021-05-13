@@ -14,17 +14,6 @@
                 コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
               </div>
               <div class="text-8xl p-10 font-body">プロフちゃん</div>
-              <a class="inline-block" rel="nofollow" :href="slackAuthUrl"
-                ><img
-                  alt="Sign in with Slack"
-                  height="60"
-                  width="200"
-                  src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-                  srcset="
-                    https://platform.slack-edge.com/img/sign_in_with_slack.png    1x,
-                    https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x
-                  "
-              /></a>
             </div>
           </v-col>
           <v-col cols="12" sm="4"
@@ -34,7 +23,48 @@
       </div>
     </div>
     <div class="p-20 text-center">
-      <v-row class="px-20">
+      <v-row class="px-20" justify="center" align-content="center">
+        <v-col cols="12" sm="12">
+          <div class="text-3xl top-sub-title mb-10">最近入社した社員さん</div>
+        </v-col>
+        <v-col
+          cols="4"
+          v-for="recentlyJoinedUserProfile in recentlyJoinedUserProfiles"
+          :key="recentlyJoinedUserProfile.id"
+        >
+          <v-card
+            class="mx-auto"
+            max-width="344"
+            outlined
+            color="brown lighten-5"
+          >
+            <v-card color="brown lighten-2" class="white--text"
+              >{{ recentlyJoinedUserProfile.day_of_joinning }} 入社</v-card
+            >
+            <v-img
+              :src="recentlyJoinedUserProfile.user.image"
+              height="180px"
+            ></v-img>
+
+            <div class="text-center font-bold text-3xl pt-5 text-brown-600">
+              {{ recentlyJoinedUserProfile.user.name }} さん
+            </div>
+
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                color="brown lighten-1"
+                class="white--text"
+                small
+                tile
+                @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
+              >
+                社員プロフィールを見る
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+        <div class="text-3xl top-sub-title mb-10">今月誕生日の人</div>
         <v-col cols="12" sm="12">
           <div class="text-3xl top-sub-title mb-10">
             リモートで会えない他の社員に自分のプロフィールを公開しよう
@@ -68,12 +98,32 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
-    return {};
+    return {
+      recentlyJoinedUserProfiles: [],
+      show: false,
+    };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.firstRead();
+  },
+  methods: {
+    async firstRead() {
+      await this.fetchRecentlyJoinedUserProfiles();
+    },
+    async fetchRecentlyJoinedUserProfiles() {
+      await axios
+        .get("/api/v1/profiles/recently_joined_user_profiles")
+        .then((res) => (this.recentlyJoinedUserProfiles = res.data))
+        .catch((error) => console.log(error.status));
+    },
+    moveToUserProfilePage(profile) {
+      this.$router.push(`/profiles/${profile.id}`);
+    },
+  },
 };
 </script>
 
