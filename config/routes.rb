@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       resources :profiles,       only: %i[index create show update]
       resources :users,          only: %i[index show new] do
         collection do
-          get 'current_user'
+          get 'get_current_user'
         end
       end
       resources :teams,          only: %i[show]
