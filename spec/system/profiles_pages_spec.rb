@@ -7,7 +7,7 @@ RSpec.describe 'ProfilesPage', type: :system do
   before do
     create_real_team_with_users(users_count: 15)
     create_normal_team_with_users
-    slack_login_till_access_profiles_path
+    slack_login_till_access_top_path
   end
 
   describe 'ページの基本検証' do
@@ -33,14 +33,14 @@ RSpec.describe 'ProfilesPage', type: :system do
     context 'ホーム画面に遷移したと場合' do
       before { visit root_path }
       it 'プロフィール作成画面にアクセスすること' do
-        expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+        expect(current_path).to eq(top_path), 'パスがtop_pathではありません'
       end
     end
 
     context 'プロフィール作成画面に遷移したと場合' do
       before { visit new_profile_path }
       it 'プロフィール作成画面にアクセスすること' do
-        expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+        expect(current_path).to eq(top_path), 'パスがtop_pathではありません'
       end
     end
   end

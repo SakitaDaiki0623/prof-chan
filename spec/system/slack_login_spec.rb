@@ -38,14 +38,14 @@ RSpec.describe "SlackLogin", type: :system do
       slack_login_first_time
       create_profile
       click_button 'プロフィール閲覧'
-      expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+      expect(current_path).to eq(top_path), 'パスがtop_pathではありません'
       expect(page).to have_content('ログアウト'), 'ログアウトボタンが表示されていません'
       click_on 'ログアウト'
       expect(current_path).to eq(root_path), 'パスがroot_pathではありません'
       expect{ find("#sign_in_with_slack_button").click }.to change(User, :count).by(0), 'ユーザー数が1人増えています'
     end
     it 'プロフィール一覧画面にリダイレクトされること' do
-      expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+      expect(current_path).to eq(top_path), 'パスがtop_pathではありません'
     end
   end
 

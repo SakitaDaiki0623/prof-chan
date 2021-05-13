@@ -14,7 +14,7 @@ RSpec.describe 'TextBlock', type: :system do
   before do
     create_real_team_with_users(users_count: 15)
     create_normal_team_with_users
-    slack_login_till_access_profiles_path
+    slack_login_till_access_top_path
     find('#profile-edit-button').click
   end
 
