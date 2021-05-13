@@ -1,5 +1,5 @@
 <template>
-  <v-container class="rounded-2xl bg-color">
+  <v-container class="rounded-2xl bg-color" v-show="isMyRankingBlocksLengthNotZero || isThisEditPage">
     <!-- Ranking Blocks -->
     <v-row
       v-show="isThisEditPage"

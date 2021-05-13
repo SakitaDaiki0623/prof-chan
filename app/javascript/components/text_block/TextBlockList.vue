@@ -1,9 +1,6 @@
 <template>
-  <v-container class="rounded-2xl bg-color">
-    <v-row
-      v-show="isThisEditPage"
-      justify="center"
-    >
+  <v-container class="rounded-2xl bg-color" v-show="isMyTextBlocksLengthNotZero || isThisEditPage">
+    <v-row v-show="isThisEditPage" justify="center">
       <v-btn
         id="add-text-block-btn"
         tile
@@ -11,16 +8,12 @@
         class="ma-2 white--text"
         @click="openTextFormatDialog"
       >
-        <v-icon left>
-          mdi-plus
-        </v-icon>
+        <v-icon left> mdi-plus </v-icon>
         テキストブロックを追加する
       </v-btn>
     </v-row>
     <v-row>
-      <div class="block-title">
-        テキストコーナー
-      </div>
+      <div class="block-title">テキストコーナー</div>
     </v-row>
     <div>
       <v-row v-if="isMyTextBlocksLengthNotZero">
@@ -35,10 +28,7 @@
             outlined
             color="teal accent-1"
           >
-            <v-row
-              v-show="isThisEditPage"
-              justify="end"
-            >
+            <v-row v-show="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-text-block-button-' + textBlock.id"
                 tile
@@ -72,10 +62,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-container
-        v-else
-        class="no-block-display-container"
-      >
+      <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
             社員のテキストブロックがありません
@@ -134,6 +121,7 @@ export default {
   computed: {
     ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
+    isMyTextBlocksLengthNotZeroAndisThisShowPage() {},
     isMyTextBlocksLengthNotZero() {
       return this.myTextBlocks.length !== 0 ? true : false;
     },

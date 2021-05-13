@@ -1,5 +1,5 @@
 <template>
-  <v-container class="rounded-2xl">
+  <v-container class="rounded-2xl" v-show="isMyQuestionBlocksLengthNotZero || isThisEditPage">
     <v-row
       v-show="isThisEditPage"
       justify="center"
