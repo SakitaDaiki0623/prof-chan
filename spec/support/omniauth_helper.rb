@@ -7,6 +7,11 @@ module OmniauthHelpers
             {
                 'provider'  => 'slack',
                 'uid'       => 'mock_uid_1234',
+                'info' => {
+                  'authed_user' => {
+                    'access_token'      => 'xoxo-sample123456789',
+                  }
+                },
                 },
         )
   end

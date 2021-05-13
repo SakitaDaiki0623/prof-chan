@@ -45,6 +45,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
           end
           expect(page).to have_button 'Yes or No ブロックを作成！', disabled: false
           click_on 'Yes or No ブロックを作成！'
+          page.driver.browser.switch_to.alert.dismiss
         end
 
         it 'Yes or No ブロックが作成されること' do
@@ -190,6 +191,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
               end
               expect(page).to have_button 'Yes or No ブロックを作成！', disabled: false
               click_on 'Yes or No ブロックを作成！'
+              page.driver.browser.switch_to.alert.dismiss
             end
             it 'アイテム数が3つのYes or No ブロックが作成されること' do
               expect(page).to have_content(yes_or_no_block_title),   'Yes or No ブロックが作成されていません'
@@ -269,6 +271,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         fill_in 'yes_or_no_item[yes_or_no_item_content]', with: yes_or_no_item_content1
       end
       click_on 'Yes or No ブロックを作成！'
+      page.driver.browser.switch_to.alert.dismiss
       sleep 1
       find("#edit-yes-or-no-block-button-#{last_yes_or_no_block.id}").click
       sleep 1
@@ -458,6 +461,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         find(".no-for-rspec").click
       end
       click_on 'Yes or No ブロックを作成！'
+      page.driver.browser.switch_to.alert.dismiss
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do
