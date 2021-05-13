@@ -26,14 +26,22 @@ Rails.application.routes.draw do
 
       # プロフブロック
       resources :profile_blocks,     only: %i[index show]
-      resources :text_blocks,        only: %i[index create show update destroy]
+      resources :text_blocks,        only: %i[index create show update destroy] do
+        collection do
+          post 'post_to_slack_after_create'
+        end
+      end
       resources :question_blocks,    only: %i[index create show update destroy] do
         collection do
           post 'post_to_slack_after_create'
         end
       end
       resources :question_items,     only: %i[index create update destroy]
-      resources :ranking_blocks,     only: %i[index create show update destroy]
+      resources :ranking_blocks,     only: %i[index create show update destroy] do
+        collection do
+          post 'post_to_slack_after_create'
+        end
+      end
       resources :yes_or_no_blocks,   only: %i[index create show update destroy] do
         collection do
           post 'post_to_slack_after_create'
