@@ -20,11 +20,11 @@ module SlackLoginHelper
     click_on '入力完了！'
   end
 
-  def slack_login_till_access_profiles_path
+  def slack_login_till_access_top_path
     slack_login_first_time
     create_profile
     click_button 'プロフィール閲覧'
-    expect(current_path).to eq(profiles_path), 'パスがprofiles_pathではありません'
+    expect(current_path).to eq(top_path), 'パスがtop_pathではありません'
     sleep 0.5
   end
 end
