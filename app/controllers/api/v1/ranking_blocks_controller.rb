@@ -49,14 +49,16 @@ module Api
 
       def chat_post_message(block)
         client = Slack::Web::Client.new
+        text = "*#{current_user.name}さんがランキングブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
         client.chat_postMessage(
           channel: '#プロフちゃん実験',
+          text: text,
           blocks: [
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "*#{current_user.name}さんがテキストブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
+                "text": text
               }
             },
             {
@@ -66,32 +68,12 @@ module Api
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": ":first_place_medal: *#{block.first_place}*"
+                "text": ":first_place_medal: *#{block.first_place}*\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: *#{block.second_place}*\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: *#{block.third_place}*"
               }
             },
             {
               "type": "divider"
             },
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": ":second_place_medal: *#{block.second_place}*"
-              }
-            },
-            {
-              "type": "divider"
-            },
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": ":third_place_medal: *#{block.third_place}*"
-              }
-            },
-            {
-              "type": "divider"
-            }
           ]
         )
       end

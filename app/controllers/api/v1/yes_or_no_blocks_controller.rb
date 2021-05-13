@@ -51,6 +51,7 @@ module Api
       def chat_post_message(register)
         client = Slack::Web::Client.new
 
+
         if register.yes_or_no_item_content3.present?
           post_text = " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
         elsif register.yes_or_no_item_content2.present?
@@ -59,14 +60,17 @@ module Api
           post_text = " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
         end
 
+        text = "*#{current_user.name}さんがYes or No ブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.yes_or_no_title}* :star2:"
+
         client.chat_postMessage(
           channel: '#プロフちゃん実験',
+          text: text,
           blocks: [
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "*#{current_user.name}さんがYes or No ブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.yes_or_no_title}* :star2:"
+                "text": text
               }
             },
             {

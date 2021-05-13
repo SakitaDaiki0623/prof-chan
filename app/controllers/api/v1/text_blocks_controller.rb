@@ -51,14 +51,16 @@ module Api
 
       def chat_post_message(block)
         client = Slack::Web::Client.new
+        text = "#{current_user.name}さんがテキストブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
         client.chat_postMessage(
           channel: '#プロフちゃん実験',
+          text: text,
           blocks: [
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "*#{current_user.name}さんがテキストブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
+                "text": text
               }
             },
             {

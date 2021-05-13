@@ -60,14 +60,17 @@ module Api
           post_text = " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*"
         end
 
+        text = "*#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.question_title}* :star2:"
+
         client.chat_postMessage(
           channel: '#プロフちゃん実験',
+          text: text,
           blocks: [
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "*#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.question_title}* :star2:"
+                "text": text
               }
             },
             {
