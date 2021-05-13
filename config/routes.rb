@@ -17,13 +17,21 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     namespace :v1 do
       resources :profiles,       only: %i[index create show update]
-      resources :users,          only: %i[index show new]
+      resources :users,          only: %i[index show new] do
+        collection do
+          get 'current_user'
+        end
+      end
       resources :teams,          only: %i[show]
 
       # プロフブロック
       resources :profile_blocks,     only: %i[index show]
       resources :text_blocks,        only: %i[index create show update destroy]
-      resources :question_blocks,    only: %i[index create show update destroy]
+      resources :question_blocks,    only: %i[index create show update destroy] do
+        collection do
+          post 'post_to_slack_after_create'
+        end
+      end
       resources :question_items,     only: %i[index create update destroy]
       resources :ranking_blocks,     only: %i[index create show update destroy]
       resources :yes_or_no_blocks,   only: %i[index create show update destroy]

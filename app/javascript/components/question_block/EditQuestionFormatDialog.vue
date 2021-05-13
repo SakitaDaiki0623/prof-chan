@@ -3,7 +3,7 @@
   <div>
     <v-dialog
       :value="isShownEditQuestionFormatDialog"
-      max-width="800"
+      max-width="1000"
       persistent
       @input="$emit('input', $event.target.isShownEditQuestionFormatDialog)"
     >

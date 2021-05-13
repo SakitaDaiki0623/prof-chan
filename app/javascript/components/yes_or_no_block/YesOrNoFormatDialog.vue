@@ -325,7 +325,7 @@ export default {
         this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
       } else if (this.yesOrNoItemNum == 2) {
         const randomItemContentIndexForItem1 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
@@ -333,14 +333,14 @@ export default {
         this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem2 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.yesOrNoItem2.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem2,
           1
-        );
+        )[0];
       } else if (this.yesOrNoItemNum == 3) {
         const randomItemContentIndexForItem1 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
@@ -348,21 +348,21 @@ export default {
         this.yesOrNoItem1.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem1,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem2 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.yesOrNoItem2.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem2,
           1
-        );
+        )[0];
         const randomItemContentIndexForItem3 = Math.floor(
           Math.random() * selectedRandomTitle.contents.length
         );
         this.yesOrNoItem3.content = selectedRandomTitle.contents.splice(
           randomItemContentIndexForItem3,
           1
-        );
+        )[0];
       }
     },
   },

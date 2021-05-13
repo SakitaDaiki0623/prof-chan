@@ -111,19 +111,7 @@ export const questionBlocks = {
         })
         .catch((error) => console.log(error.status));
     },
-    createQuestionBlock(
-      { commit },
-      { questionBlock, questionItem1, questionItem2, questionItem3 }
-    ) {
-      const params = {
-        question_title: questionBlock.title,
-        question_item_content1: questionItem1.content,
-        question_item_answer1: questionItem1.answer,
-        question_item_content2: questionItem2.content,
-        question_item_answer2: questionItem2.answer,
-        question_item_content3: questionItem3.content,
-        question_item_answer3: questionItem3.answer,
-      };
+    createQuestionBlock({ commit }, params) {
       axios
         .post("question_blocks", params)
         .then((response) => {
