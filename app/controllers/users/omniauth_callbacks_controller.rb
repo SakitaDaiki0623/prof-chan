@@ -13,6 +13,10 @@ module Users
       end
     end
 
+    def get_user_info(request)
+      request.access_token.user_token.get('/api/users.identity').parsed
+    end
+
     def failure
       flash[:alert] = 'Slack認証に失敗しました。'
       redirect_to root_path
