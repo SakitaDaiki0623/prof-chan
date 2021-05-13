@@ -1,10 +1,10 @@
 <template>
-  <v-container class="rounded-2xl bg-color" v-show="isMyRankingBlocksLengthNotZero || isThisEditPage">
+  <v-container
+    class="rounded-2xl bg-color"
+    v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
+  >
     <!-- Ranking Blocks -->
-    <v-row
-      v-show="isThisEditPage"
-      justify="center"
-    >
+    <v-row v-show="isThisEditPage" justify="center">
       <v-btn
         id="add-ranking-block-btn"
         tile
@@ -36,10 +36,7 @@
             outlined
             color="light-green lighten-5"
           >
-            <v-row
-              v-show="isThisEditPage"
-              justify="end"
-            >
+            <v-row v-show="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-ranking-block-button-' + rankingBlock.id"
                 tile
@@ -59,46 +56,31 @@
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </v-row>
+            <v-row>
+              <v-spacer />
+              <ranking-block-like-button
+                :ranking-block-id="rankingBlock.id"
+              ></ranking-block-like-button>
+            </v-row>
             <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
               {{ rankingBlock.title }}
             </p>
-            <v-card
-              class="p-2 m-3 rounded-full"
-              outlined
-              color="white"
-            >
-              <label
-                for="1st place"
-                class="ranking-label"
-              >1st</label>{{ rankingBlock.first_place }}
+            <v-card class="p-2 m-3 rounded-full" outlined color="white">
+              <label for="1st place" class="ranking-label">1st</label
+              >{{ rankingBlock.first_place }}
             </v-card>
-            <v-card
-              class="p-2 m-3 rounded-full"
-              outlined
-              color="white"
-            >
-              <label
-                for="2nd place"
-                class="ranking-label"
-              >2nd</label>{{ rankingBlock.second_place }}
+            <v-card class="p-2 m-3 rounded-full" outlined color="white">
+              <label for="2nd place" class="ranking-label">2nd</label
+              >{{ rankingBlock.second_place }}
             </v-card>
-            <v-card
-              class="p-2 m-3 rounded-full"
-              outlined
-              color="white"
-            >
-              <label
-                for="3rd place"
-                class="ranking-label"
-              >3rd</label>{{ rankingBlock.third_place }}
+            <v-card class="p-2 m-3 rounded-full" outlined color="white">
+              <label for="3rd place" class="ranking-label">3rd</label
+              >{{ rankingBlock.third_place }}
             </v-card>
           </v-card>
         </v-col>
       </v-row>
-      <v-container
-        v-else
-        class="no-block-display-container"
-      >
+      <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
             社員のランキングブロックがありません
@@ -128,11 +110,13 @@ import { mapState, mapActions, Store } from "vuex";
 
 import RankingFormatDialog from "./RankingFormatDialog";
 import EditRankingFormatDialog from "./EditRankingFormatDialog";
+import RankingBlockLikeButton from "../likes/RankingBlockLikeButton";
 
 export default {
   components: {
     RankingFormatDialog,
     EditRankingFormatDialog,
+    RankingBlockLikeButton,
   },
   props: {
     isThisEditPage: {
