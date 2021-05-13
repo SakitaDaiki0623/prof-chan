@@ -6,7 +6,12 @@
         社員プロフィール一覧
       </p>
       <v-row class="mb-10">
-        <v-col v-for="profile in profiles" :key="profile.id" cols="12" sm="4">
+        <v-col
+          v-for="profile in profiles"
+          :key="profile.id"
+          cols="12"
+          sm="4"
+        >
           <IndexProfCard :profile="profile" />
         </v-col>
       </v-row>

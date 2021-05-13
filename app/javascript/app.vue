@@ -1,6 +1,9 @@
 <!-- app/javascript/app.vue -->
 <template>
-  <v-app id="app" class="default kawaii">
+  <v-app
+    id="app"
+    class="default kawaii"
+  >
     <TheHeader />
     <v-main>
       <TheNotFound v-if="isNotFound" />

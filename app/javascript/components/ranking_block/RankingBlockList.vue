@@ -1,7 +1,10 @@
 <template>
   <v-container class="rounded-2xl bg-color">
     <!-- Ranking Blocks -->
-    <v-row justify="center" v-show="isThisEditPage">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+    >
       <v-btn
         id="add-ranking-block-btn"
         tile
@@ -9,12 +12,16 @@
         class="ma-2 white--text"
         @click="openRankingFormatDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         ランキングブロックを追加する
       </v-btn>
     </v-row>
     <v-row justify="end">
-      <div class="block-title">My Best 3</div>
+      <div class="block-title">
+        My Best 3
+      </div>
     </v-row>
     <div>
       <v-row v-if="isMyRankingBlocksLengthNotZero">
@@ -29,7 +36,10 @@
             outlined
             color="light-green lighten-5"
           >
-            <v-row justify="end" v-show="isThisEditPage">
+            <v-row
+              v-show="isThisEditPage"
+              justify="end"
+            >
               <v-btn
                 :id="'edit-ranking-block-button-' + rankingBlock.id"
                 tile
@@ -57,29 +67,38 @@
               outlined
               color="white"
             >
-              <label for="1st place" class="ranking-label">1st</label
-              >{{ rankingBlock.first_place }}
+              <label
+                for="1st place"
+                class="ranking-label"
+              >1st</label>{{ rankingBlock.first_place }}
             </v-card>
             <v-card
               class="p-2 m-3 rounded-full"
               outlined
               color="white"
             >
-              <label for="2nd place" class="ranking-label">2nd</label
-              >{{ rankingBlock.second_place }}
+              <label
+                for="2nd place"
+                class="ranking-label"
+              >2nd</label>{{ rankingBlock.second_place }}
             </v-card>
             <v-card
               class="p-2 m-3 rounded-full"
               outlined
               color="white"
             >
-              <label for="3rd place" class="ranking-label">3rd</label
-              >{{ rankingBlock.third_place }}
+              <label
+                for="3rd place"
+                class="ranking-label"
+              >3rd</label>{{ rankingBlock.third_place }}
             </v-card>
           </v-card>
         </v-col>
       </v-row>
-      <v-container v-else class="no-block-display-container">
+      <v-container
+        v-else
+        class="no-block-display-container"
+      >
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
             社員のランキングブロックがありません

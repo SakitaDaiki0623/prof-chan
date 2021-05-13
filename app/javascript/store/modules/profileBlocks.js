@@ -18,7 +18,6 @@ export const profileBlocks = {
         .then((response) => {
           commit("loadProfileBlocks", response.data);
         })
-        .catch((error) => console.log(error.status));
     },
   },
 };

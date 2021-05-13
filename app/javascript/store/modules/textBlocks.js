@@ -28,36 +28,24 @@ export const textBlocks = {
   },
   actions: {
     fetchTextBlocks({ commit }) {
-      axios
-        .get("text_blocks")
-        .then((response) => {
-          commit("loadTextBlocks", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.get("text_blocks").then((response) => {
+        commit("loadTextBlocks", response.data);
+      });
     },
     createTextBlock({ commit }, textBlock) {
-      axios
-        .post("text_blocks", textBlock)
-        .then((response) => {
-          commit("addTextBlock", response.data);
-        })
-        .catch((err) => console.log(err.status));
+      axios.post("text_blocks", textBlock).then((response) => {
+        commit("addTextBlock", response.data);
+      });
     },
     patchTextBlock({ commit }, payload) {
-      axios
-        .patch(`text_blocks/${payload.id}`, payload)
-        .then((response) => {
-          commit("updateTextBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.patch(`text_blocks/${payload.id}`, payload).then((response) => {
+        commit("updateTextBlock", response.data);
+      });
     },
     deleteTextBlock({ commit }, payload) {
-      axios
-        .delete(`text_blocks/${payload.id}`, payload)
-        .then((response) => {
-          commit("retrieveTextBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.delete(`text_blocks/${payload.id}`, payload).then((response) => {
+        commit("retrieveTextBlock", response.data);
+      });
     },
   },
 };

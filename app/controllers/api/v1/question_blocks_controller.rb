@@ -52,13 +52,13 @@ module Api
 
       def chat_post_message(register)
         client = Slack::Web::Client.new
-        if register.question_item_content3.present? && register.question_item_answer3.present?
-          post_text = " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*:\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}:*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}:*\n"
-        elsif register.question_item_content2.present? && register.question_item_answer2.present?
-          post_text = " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}:*"
-        else
-          post_text = " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*"
-        end
+        post_text = if register.question_item_content3.present? && register.question_item_answer3.present?
+                      " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*:\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}:*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}:*\n"
+                    elsif register.question_item_content2.present? && register.question_item_answer2.present?
+                      " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}:*"
+                    else
+                      " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}:*"
+                    end
 
         text = "*#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.question_title}* :star2:"
 
@@ -67,29 +67,29 @@ module Api
           text: text,
           blocks: [
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": text
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             },
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": post_text
               },
               "accessory": {
-                "type": "image",
-                "image_url": "#{current_user.image}",
-                "alt_text": "computer thumbnail"
+                "type": 'image',
+                "image_url": current_user.image.to_s,
+                "alt_text": 'computer thumbnail'
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             }
           ]
         )

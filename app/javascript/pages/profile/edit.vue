@@ -8,17 +8,35 @@
     </div>
 
     <v-container>
-      <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
+      <BasicAndAddressBlock
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
+      <MyFavoriteBlock
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <TextBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <QuestionBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <YesOrNoBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <RankingBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
     </v-container>
   </v-container>
 </template>
@@ -44,17 +62,17 @@ export default {
     RankingBlockList,
     TextBlockList,
   },
-  data() {
-    return {
-      profile: {},
-    };
-  },
   props: {
     id: {
       type: String,
       require: true,
       default: "",
     },
+  },
+  data() {
+    return {
+      profile: {},
+    };
   },
   computed: {
     ...mapState("users", ["users"]),

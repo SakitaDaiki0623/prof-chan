@@ -8,7 +8,10 @@
       @input="$emit('input', $event.target.isShownYesOrNoFormatDialog)"
     >
       <v-card :color="yesOrNoBlockColor">
-        <v-row justify="end" class="mr-2 mt-2">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
           <v-btn
             :color="yesOrNoBlockColor"
             @click="hundleCloseYesOrNoFormatDialog"
@@ -26,7 +29,10 @@
           color="orange lighten-4"
         >
           <v-row>
-            <v-col cols="12" sm="7">
+            <v-col
+              cols="12"
+              sm="7"
+            >
               <v-btn
                 id="add-yes-or-no-item-button"
                 type="submit"
@@ -39,7 +45,9 @@
                 :disabled="yesOrNoItemNum >= 3"
                 @click="addYesOrNoItemNum"
               >
-                <v-icon left> mdi-plus </v-icon>
+                <v-icon left>
+                  mdi-plus
+                </v-icon>
                 質問と答えを追加する
               </v-btn>
               <v-btn
@@ -54,12 +62,17 @@
                 :disabled="yesOrNoItemNum <= 1"
                 @click="deleteYesOrNoItemNum"
               >
-                <v-icon left> mdi-minus </v-icon>
+                <v-icon left>
+                  mdi-minus
+                </v-icon>
                 質問と答えを減らす
               </v-btn>
             </v-col>
             <v-spacer />
-            <v-col cols="12" sm="4">
+            <v-col
+              cols="12"
+              sm="4"
+            >
               <v-btn
                 id="input-yes-or-no-title-button"
                 type="submit"
@@ -70,12 +83,18 @@
                 color="orange lighten-2"
                 class="white--text py-2"
                 @click="inputTitleRandomly"
-                ><v-icon left> mdi-plus </v-icon>タイトルをランダムに入力</v-btn
               >
+                <v-icon left>
+                  mdi-plus
+                </v-icon>タイトルをランダムに入力
+              </v-btn>
             </v-col>
           </v-row>
 
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <ValidationObserver
+            ref="observer"
+            v-slot="{ invalid }"
+          >
             <form
               @submit.prevent="
                 hundleCreateYesOrNoBlock(
@@ -90,8 +109,7 @@
                 <label
                   class="form-label-yes-or-no-block"
                   for="yes_or_no_block_title"
-                  >タイトル</label
-                >
+                >タイトル</label>
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -103,31 +121,31 @@
                     class="input-form-yes-or-no-block"
                     name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
 
               <!-- Item Form -->
               <YesOrNoBlockItem
-                yesOrNoBlockItemId="create-yes-or-no-item-1"
-                :yesOrNoItem="yesOrNoItem1"
-                :yesOrNoNameForValidation="yesOrNoNameForValidation1"
-                :answerNameForValidation="answerNameForValidation1"
+                yes-or-no-block-item-id="create-yes-or-no-item-1"
+                :yes-or-no-item="yesOrNoItem1"
+                :yes-or-no-name-for-validation="yesOrNoNameForValidation1"
+                :answer-name-for-validation="answerNameForValidation1"
               />
               <YesOrNoBlockItem
-                yesOrNoBlockItemId="create-yes-or-no-item-2"
-                :yesOrNoItem="yesOrNoItem2"
                 v-if="yesOrNoItemNum >= 2"
-                :yesOrNoNameForValidation="yesOrNoNameForValidation2"
-                :answerNameForValidation="answerNameForValidation2"
+                yes-or-no-block-item-id="create-yes-or-no-item-2"
+                :yes-or-no-item="yesOrNoItem2"
+                :yes-or-no-name-for-validation="yesOrNoNameForValidation2"
+                :answer-name-for-validation="answerNameForValidation2"
               />
               <YesOrNoBlockItem
-                yesOrNoBlockItemId="create-yes-or-no-item-3"
-                :yesOrNoItem="yesOrNoItem3"
                 v-if="yesOrNoItemNum >= 3"
-                :yesOrNoNameForValidation="yesOrNoNameForValidation3"
-                :answerNameForValidation="answerNameForValidation3"
+                yes-or-no-block-item-id="create-yes-or-no-item-3"
+                :yes-or-no-item="yesOrNoItem3"
+                :yes-or-no-name-for-validation="yesOrNoNameForValidation3"
+                :answer-name-for-validation="answerNameForValidation3"
               />
 
               <div class="text-center p-10">
@@ -141,7 +159,9 @@
                   :color="yesOrNoBlockColor"
                   class="white--text"
                 >
-                  <v-icon left> mdi-plus </v-icon>
+                  <v-icon left>
+                    mdi-plus
+                  </v-icon>
                   Yes or No ブロックを作成！
                 </v-btn>
               </div>

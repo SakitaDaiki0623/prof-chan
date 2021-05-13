@@ -1,30 +1,39 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <header v-show="doesCurrentUserhaveProfile">
-    <v-app-bar color="brown lighten-2" outlined>
+    <v-app-bar
+      color="brown lighten-2"
+      outlined
+    >
       <v-toolbar-title>
-        <router-link to="/top"> プロフちゃん(ロゴ) </router-link>
+        <router-link to="/top">
+          プロフちゃん(ロゴ)
+        </router-link>
       </v-toolbar-title>
 
       <div class="flex-grow-1" />
 
       <v-btn
         id="profile-edit-button"
-        @click="openProfilesPage"
         class="m-2 white--text"
         color="brown lighten-2"
+        @click="openProfilesPage"
       >
-        <v-icon left> mdi-account-group </v-icon>
+        <v-icon left>
+          mdi-account-group
+        </v-icon>
         プロフ一覧
       </v-btn>
 
       <v-btn
         id="profile-edit-button"
-        @click="openProfileEditPage"
         class="m-2 white--text"
         color="brown lighten-2"
+        @click="openProfileEditPage"
       >
-        <v-icon left> mdi-pencil </v-icon>
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
         プロフ編集
       </v-btn>
 
