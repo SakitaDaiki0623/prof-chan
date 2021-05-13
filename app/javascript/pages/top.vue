@@ -13,11 +13,15 @@
               <div class="text-lg">
                 コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
               </div>
-              <div class="text-8xl p-10 font-body">プロフちゃん</div>
+              <div class="text-8xl p-10 font-body">
+                プロフちゃん
+              </div>
             </div>
           </v-col>
-          <v-col cols="12" sm="4"
-            ><div class="py-32">プロフちゃんの画像</div>
+          <v-col cols="12" sm="4">
+            <div class="py-32">
+              プロフちゃんの画像
+            </div>
           </v-col>
         </v-row>
       </div>
@@ -25,47 +29,53 @@
     <div class="p-20 text-center">
       <v-row class="px-20" justify="center" align-content="center">
         <v-col cols="12" sm="12">
-          <div class="text-3xl top-sub-title mb-10">最近入社した社員さん</div>
+          <div class="text-3xl top-sub-title mb-10">
+            最近入社した社員さん
+          </div>
         </v-col>
-        <v-col
-          cols="4"
-          v-for="recentlyJoinedUserProfile in recentlyJoinedUserProfiles"
-          :key="recentlyJoinedUserProfile.id"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            outlined
-            color="brown lighten-5"
+        <transition-group tag="v-row">
+          <v-col
+            v-for="recentlyJoinedUserProfile in recentlyJoinedUserProfiles"
+            :key="recentlyJoinedUserProfile.id"
+            cols="4"
           >
-            <v-card color="brown lighten-2" class="white--text"
-              >{{ recentlyJoinedUserProfile.day_of_joinning }} 入社</v-card
+            <v-card
+              class="mx-auto"
+              max-width="344"
+              outlined
+              color="brown lighten-5"
             >
-            <v-img
-              :src="recentlyJoinedUserProfile.user.image"
-              height="180px"
-            ></v-img>
+              <v-card color="brown lighten-2" class="white--text">
+                {{ recentlyJoinedUserProfile.day_of_joinning }} 入社
+              </v-card>
+              <v-img
+                :src="recentlyJoinedUserProfile.user.image"
+                height="180px"
+              />
 
-            <div class="text-center font-bold text-3xl pt-5 text-brown-600">
-              {{ recentlyJoinedUserProfile.user.name }} さん
-            </div>
+              <div class="text-center font-bold text-3xl pt-5 text-brown-600">
+                {{ recentlyJoinedUserProfile.user.name }} さん
+              </div>
 
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                color="brown lighten-1"
-                class="white--text"
-                small
-                tile
-                @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
-              >
-                社員プロフィールを見る
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-        <div class="text-3xl top-sub-title mb-10">今月誕生日の人</div>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  color="brown lighten-1"
+                  class="white--text"
+                  small
+                  tile
+                  @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
+                >
+                  社員プロフィールを見る
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </transition-group>
         <v-col cols="12" sm="12">
+          <div class="text-3xl top-sub-title mb-10">
+            今月誕生日の人
+          </div>
           <div class="text-3xl top-sub-title mb-10">
             リモートで会えない他の社員に自分のプロフィールを公開しよう
           </div>
@@ -117,8 +127,7 @@ export default {
     async fetchRecentlyJoinedUserProfiles() {
       await axios
         .get("/api/v1/profiles/recently_joined_user_profiles")
-        .then((res) => (this.recentlyJoinedUserProfiles = res.data))
-        .catch((error) => console.log(error.status));
+        .then((res) => (this.recentlyJoinedUserProfiles = res.data));
     },
     moveToUserProfilePage(profile) {
       this.$router.push(`/profiles/${profile.id}`);

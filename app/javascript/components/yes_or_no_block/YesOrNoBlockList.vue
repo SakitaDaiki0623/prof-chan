@@ -1,6 +1,9 @@
 <template>
-  <v-container class="rounded-2xl bg-color">
-    <v-row justify="center" v-show="isThisEditPage">
+  <v-container class="rounded-2xl bg-color" v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+    >
       <v-btn
         id="add-yes-or-no-block-btn"
         tile
@@ -8,11 +11,15 @@
         class="ma-2 white--text"
         @click="openYesOrNoFormatDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         Yes or No ブロックを追加する
       </v-btn>
     </v-row>
-    <div class="block-title">Yes or No コーナー</div>
+    <div class="block-title">
+      Yes or No コーナー
+    </div>
     <div>
       <v-row v-if="isMyYesOrNoBlocksLengthNotZero">
         <v-col
@@ -26,7 +33,10 @@
             outlined
             color="orange lighten-4"
           >
-            <v-row justify="end" v-show="isThisEditPage">
+            <v-row
+              v-show="isThisEditPage"
+              justify="end"
+            >
               <v-btn
                 :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
                 tile
@@ -51,22 +61,37 @@
             </p>
             <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
               <div :key="yes_or_no_item.id">
-                <v-card class="p-2 m-2" outlined color="white">
+                <v-card
+                  class="p-2 m-2"
+                  outlined
+                  color="white"
+                >
                   <v-row align="center">
-                    <v-col cols="12" sm="7">
+                    <v-col
+                      cols="12"
+                      sm="7"
+                    >
                       {{ yes_or_no_item.content }}
                     </v-col>
-                    <v-col cols="12" sm="5" v-if="yes_or_no_item.answer">
-                      <span class="rounded-full border-red-500 border-2 p-2"
-                        >YES</span
-                      >
+                    <v-col
+                      v-if="yes_or_no_item.answer"
+                      cols="12"
+                      sm="5"
+                    >
+                      <span
+                        class="rounded-full border-red-500 border-2 p-2"
+                      >YES</span>
                       / NO
                     </v-col>
-                    <v-col cols="12" sm="5" v-else>
+                    <v-col
+                      v-else
+                      cols="12"
+                      sm="5"
+                    >
                       YES /
-                      <span class="rounded-full border-red-500 border-2 p-2"
-                        >NO</span
-                      >
+                      <span
+                        class="rounded-full border-red-500 border-2 p-2"
+                      >NO</span>
                     </v-col>
                   </v-row>
                 </v-card>
@@ -75,7 +100,10 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-container v-else class="no-block-display-container">
+      <v-container
+        v-else
+        class="no-block-display-container"
+      >
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
             社員のYes or No ブロックがありません
@@ -84,7 +112,7 @@
       </v-container>
     </div>
 
-    <div class="block-title"></div>
+    <div class="block-title" />
     <YesOrNoFormatDialog
       :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
       :yes-or-no-block-color="yesOrNoBlockColor"

@@ -1,8 +1,17 @@
 <template>
-  <v-footer app absolute color="brown lighten-3">
+  <v-footer
+    app
+    absolute
+    color="brown lighten-3"
+  >
     <v-spacer />
     <div>
-      <v-btn dense text>利用規約</v-btn>
+      <v-btn
+        dense
+        text
+      >
+        利用規約
+      </v-btn>
     </div>
     <small>&copy; {{ copyText }}</small>
   </v-footer>

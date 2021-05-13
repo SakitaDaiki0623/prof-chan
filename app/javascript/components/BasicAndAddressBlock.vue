@@ -1,11 +1,23 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="6">
-        <BasicProfCard :is-this-edit-page="isThisEditPage" :user="user" />
+      <v-col
+        cols="12"
+        sm="6"
+      >
+        <BasicProfCard
+          :is-this-edit-page="isThisEditPage"
+          :user="user"
+        />
       </v-col>
-      <v-col cols="12" sm="6">
-        <AddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
+      <v-col
+        cols="12"
+        sm="6"
+      >
+        <AddressBlock
+          :is-this-edit-page="isThisEditPage"
+          :user="user"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -30,6 +42,7 @@ export default {
     user: {
       type: Object,
       required: false,
+      default: false,
     },
   },
 };

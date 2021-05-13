@@ -1,6 +1,13 @@
 <template>
-  <v-card class="pa-5" color="yellow lighten-4" outlined>
-    <v-row justify="end" v-show="isThisEditPage">
+  <v-card
+    class="pa-5"
+    color="yellow lighten-4"
+    outlined
+  >
+    <v-row
+      v-show="isThisEditPage"
+      justify="end"
+    >
       <v-btn
         id="edit-address-block-button"
         tile
@@ -15,33 +22,55 @@
       アドレスコーナー
     </p>
     <v-row>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-icon>mdi-twitter</v-icon>Twitter
-        <v-card outlined color="white" min-height="30px">{{
-          myAddressBlock.twitter
-        }}</v-card>
+        <v-card
+          outlined
+          color="white"
+          min-height="30px"
+        >
+          {{
+            myAddressBlock.twitter
+          }}
+        </v-card>
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-icon>mdi-instagram</v-icon>Instagram
-        <v-card outlined color="white" min-height="30px">{{
-          myAddressBlock.instagram
-        }}</v-card>
+        <v-card
+          outlined
+          color="white"
+          min-height="30px"
+        >
+          {{
+            myAddressBlock.instagram
+          }}
+        </v-card>
       </v-col>
     </v-row>
-    <br />
+    <br>
     <v-icon>mdi-home</v-icon><label>住所</label>
-    <v-card color="white" outlined class="pa-2">
+    <v-card
+      color="white"
+      outlined
+      class="pa-2"
+    >
       <p>〒: {{ myAddressBlock.postcode }}</p>
       <p>
         {{ myAddressBlock.full_address }}
       </p>
     </v-card>
     <EditAddressBlockDialog
+      :is-shown-edit-address-block-dialog="isShownEditAddressBlockDialog"
+      :edit-my-address-block="editMyAddressBlock"
       @close-edit-address-block-dialog="closeEditAddressBlockDialog"
       @update-address-automatically="updateAddressAutomatically"
       @update-address-block="updateAddressBlock"
-      :is-shown-edit-address-block-dialog="isShownEditAddressBlockDialog"
-      :edit-my-address-block="editMyAddressBlock"
     />
   </v-card>
 </template>
@@ -65,6 +94,7 @@ export default {
     user: {
       type: Object,
       required: false,
+      default: false,
     },
   },
   data() {
