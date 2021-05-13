@@ -22,7 +22,7 @@ export const users = {
   actions: {
     fetchCurrentUser({ commit }) {
       axios
-        .get("/users/new")
+        .get("/users/get_current_user")
         .then((response) => {
           commit("loadCurrentUser", response.data);
         })

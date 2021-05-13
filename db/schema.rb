@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_015102) do
     t.string "image", null: false
     t.string "email", null: false
     t.bigint "team_id"
-    t.text "tokens"
+    t.string "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

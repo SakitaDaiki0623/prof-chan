@@ -38,6 +38,53 @@ module Api
         render json: @text_block
       end
 
+      def post_to_slack_after_create
+        @text_block = current_user.profile_block.text_blocks.build(text_block_params)
+        if @text_block.valid?
+          chat_post_message(@text_block)
+          render json: @text_block, status: :no_content
+
+        else
+          render json: @text_block.errors, status: :bad_request
+        end
+      end
+
+      def chat_post_message(block)
+        client = Slack::Web::Client.new
+        text = "#{current_user.name}さんがテキストブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
+        client.chat_postMessage(
+          channel: '#プロフちゃん実験',
+          text: text,
+          blocks: [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": text
+              }
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": block.text
+              },
+              "accessory": {
+                "type": "image",
+                "image_url": "#{current_user.image}",
+                "alt_text": "computer thumbnail"
+              }
+            },
+            {
+              "type": "divider"
+            }
+          ]
+        )
+      end
+
       private
 
       def text_block_params

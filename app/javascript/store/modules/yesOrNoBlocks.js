@@ -107,19 +107,7 @@ export const yesOrNoBlocks = {
         })
         .catch((error) => console.log(error.status));
     },
-    createYesOrNoBlock(
-      { commit },
-      { yesOrNoBlock, yesOrNoItem1, yesOrNoItem2, yesOrNoItem3 }
-    ) {
-      const params = {
-        yes_or_no_title: yesOrNoBlock.title,
-        yes_or_no_item_content1: yesOrNoItem1.content,
-        yes_or_no_item_answer1: yesOrNoItem1.answer,
-        yes_or_no_item_content2: yesOrNoItem2.content,
-        yes_or_no_item_answer2: yesOrNoItem2.answer,
-        yes_or_no_item_content3: yesOrNoItem3.content,
-        yes_or_no_item_answer3: yesOrNoItem3.answer,
-      };
+    createYesOrNoBlock({ commit }, params) {
       axios
         .post("yes_or_no_blocks", params)
         .then((response) => {

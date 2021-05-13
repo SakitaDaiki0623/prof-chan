@@ -1,11 +1,11 @@
 <template>
-  <v-card class="pa-5">
+  <v-card class="pa-5" color="yellow lighten-4" outlined>
     <v-row justify="end" v-show="isThisEditPage">
       <v-btn
         id="edit-address-block-button"
         tile
         small
-        color="red lighten-4"
+        color="yellow lighten-4"
         @click="openEditAddressBlockDialog"
       >
         <v-icon> mdi-pencil </v-icon>
@@ -14,21 +14,28 @@
     <p class="font-weight-bold text-4xl text-gray-600 text-center">
       アドレスコーナー
     </p>
-    <p>
-      Twitter:
-      <span>{{ myAddressBlock.twitter }}</span>
-    </p>
-    <p>
-      Instagram:
-      <span>{{ myAddressBlock.instagram }}</span>
-    </p>
-    <div>
-      <p>住所</p>
-      <p>〒{{ myAddressBlock.postcode }}</p>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <v-icon>mdi-twitter</v-icon>Twitter
+        <v-card outlined color="white" min-height="30px">{{
+          myAddressBlock.twitter
+        }}</v-card>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-icon>mdi-instagram</v-icon>Instagram
+        <v-card outlined color="white" min-height="30px">{{
+          myAddressBlock.instagram
+        }}</v-card>
+      </v-col>
+    </v-row>
+    <br />
+    <v-icon>mdi-home</v-icon><label>住所</label>
+    <v-card color="white" outlined class="pa-2">
+      <p>〒: {{ myAddressBlock.postcode }}</p>
       <p>
         {{ myAddressBlock.full_address }}
       </p>
-    </div>
+    </v-card>
     <EditAddressBlockDialog
       @close-edit-address-block-dialog="closeEditAddressBlockDialog"
       @update-address-automatically="updateAddressAutomatically"
@@ -80,7 +87,7 @@ export default {
     });
   },
   methods: {
-    fetchAddressBlock: async function () {
+    fetchAddressBlock: async function() {
       const res = await axios.get("/api/v1/address_blocks");
       if (res.status !== 200) {
         process.exit();

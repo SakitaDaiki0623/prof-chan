@@ -48,6 +48,7 @@ RSpec.describe "QuestionBlock", type: :system do
           end
           expect(page).to have_button 'クエスチョンブロックを作成！', disabled: false
           click_on 'クエスチョンブロックを作成！'
+          page.driver.browser.switch_to.alert.dismiss
         end
 
         it 'クエスチョンブロックが作成されること' do
@@ -220,6 +221,7 @@ RSpec.describe "QuestionBlock", type: :system do
               end
               expect(page).to have_button 'クエスチョンブロックを作成！', disabled: false
               click_on 'クエスチョンブロックを作成！'
+              page.driver.browser.switch_to.alert.dismiss
             end
             it 'アイテム数が3つのクエスチョンブロックが作成されること' do
               expect(page).to have_content(question_block_title),   'クエスチョンブロックが作成されていません'
@@ -319,6 +321,7 @@ RSpec.describe "QuestionBlock", type: :system do
         fill_in 'question_item[question_item_answer]',  with:  question_item_answer1
       end
       click_on 'クエスチョンブロックを作成！'
+      page.driver.browser.switch_to.alert.dismiss
       sleep 1
       find("#edit-question-block-button-#{last_question_block.id}").click
       expect(page).to have_content('クエスチョンブロックを編集'), 'クエスチョンブロック編集モーダルが表示されていません'
@@ -508,6 +511,7 @@ RSpec.describe "QuestionBlock", type: :system do
         fill_in 'question_item[question_item_answer]',  with:  question_item_answer1
       end
       click_on 'クエスチョンブロックを作成！'
+      page.driver.browser.switch_to.alert.dismiss
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do
