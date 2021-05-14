@@ -26,7 +26,4 @@ class RankingBlock < ApplicationRecord
       validates :third_place
     end
   end
-
-  # scope ============= # Ex:- scope :active, -> {where(:active => true)}
-  scope :by_team, ->(user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(user.id).team.workspace_id }) }
 end

@@ -5,8 +5,7 @@ module Api
       before_action :set_question_item, only: %i[update destroy]
 
       def index
-        @user = User.find(current_user.id)
-        @question_items = QuestionItem.includes(question_block: { profile_block: { user: :team } }).where(teams: { workspace_id: @user.team.workspace_id })
+        @question_items = QuestionItem.by_team_block(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @question_items,
           serializer: QuestionItemSerializer

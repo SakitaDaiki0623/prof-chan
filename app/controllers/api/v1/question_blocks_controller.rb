@@ -5,7 +5,7 @@ module Api
       before_action :set_question_block, only: %i[show update destroy]
 
       def index
-        @question_blocks = QuestionBlock.by_team
+        @question_blocks = QuestionBlock.by_team(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @question_blocks,
           serializer: QuestionBlockSerializer

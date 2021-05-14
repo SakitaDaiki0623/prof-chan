@@ -5,7 +5,7 @@ module Api
       before_action :set_text_block, only: %i[show update destroy]
 
       def index
-        @text_blocks = TextBlock.by_team
+        @text_blocks = TextBlock.by_team(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @text_blocks,
           serializer: TextBlockSerializer
