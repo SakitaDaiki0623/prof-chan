@@ -16,7 +16,7 @@ class RankingBlock < ApplicationRecord
   # association =============
   belongs_to :profile_block
   has_many :ranking_block_likes, dependent: :destroy
-  has_many :users, through: :join_association
+  has_many :users, through: :ranking_block_likes
 
   # validation =============
   with_options presence: true do
