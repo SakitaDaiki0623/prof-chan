@@ -37,6 +37,14 @@ module Api
         render json: @text_block
       end
 
+      def popular_blocks
+        @text_popular_blocks = TextBlock.by_team(current_user).popular_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @text_popular_blocks,
+          serializer: TextBlockSerializer
+        ).to_json
+      end
+
       def post_to_slack_after_create
         @text_block = current_user.profile_block.text_blocks.build(text_block_params)
         if @text_block.valid?
