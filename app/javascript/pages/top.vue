@@ -146,13 +146,4 @@ export default {
   height: 560px;
   padding: 2rem;
 }
-
-.top-sub-title {
-  position: relative;
-  background: #a1887f;
-  box-shadow: 0px 0px 0px 5px #a1887f;
-  border: dashed 2px white;
-  padding: 0.2em 0.5em;
-  color: white;
-}
 </style>
