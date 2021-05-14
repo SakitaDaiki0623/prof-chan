@@ -18,4 +18,7 @@ class TextBlock < ApplicationRecord
   # validation =============
   validates :title, presence: true,      length: { maximum: 50 }
   validates :text,  presence: true,      length: { maximum: 200 }
+
+    # scope ============= # Ex:- scope :active, -> {where(:active => true)}
+    scope :by_team, ->(user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(user.id).team.workspace_id }) }
 end

@@ -5,8 +5,7 @@ module Api
       before_action :set_text_block, only: %i[show update destroy]
 
       def index
-        @user = User.find(current_user.id)
-        @text_blocks = TextBlock.includes(profile_block: { user: :team }).where(teams: { workspace_id: @user.team.workspace_id })
+        @text_blocks = TextBlock.by_team
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @text_blocks,
           serializer: TextBlockSerializer
