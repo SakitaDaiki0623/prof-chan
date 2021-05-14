@@ -1,11 +1,18 @@
 <template>
   <!-- Item Form -->
-  <div class="m-1" :id="questionBlockItemId">
+  <div
+    :id="questionBlockItemId"
+    class="m-1"
+  >
     <v-row>
-      <v-col cols="12" md="6">
-        <label for="question_item_content" class="form-label-question-block"
-          >質問</label
-        >
+      <v-col
+        cols="12"
+        md="6"
+      >
+        <label
+          for="question_item_content"
+          class="form-label-question-block"
+        >質問</label>
         <ValidationProvider
           v-slot="{ errors }"
           :name="questionNameForValidation"
@@ -13,18 +20,22 @@
         >
           <input
             :value="questionItem.content"
-            @input="questionItem.content = $event.target.value"
             class="input-form-question-block"
             name="question_item[question_item_content]"
             type="text"
-          />
+            @input="questionItem.content = $event.target.value"
+          >
           <span class="text-red-400">{{ errors[0] }}</span>
         </ValidationProvider>
       </v-col>
-      <v-col cols="12" md="6">
-        <label for="question_item_answer" class="form-label-question-block"
-          >答え</label
-        >
+      <v-col
+        cols="12"
+        md="6"
+      >
+        <label
+          for="question_item_answer"
+          class="form-label-question-block"
+        >答え</label>
         <ValidationProvider
           v-slot="{ errors }"
           :name="answerNameForValidation"
@@ -32,11 +43,11 @@
         >
           <input
             :value="questionItem.answer"
-            @input="questionItem.answer = $event.target.value"
             class="input-form-question-block"
             name="question_item[question_item_answer]"
             type="text"
-          />
+            @input="questionItem.answer = $event.target.value"
+          >
           <span class="text-red-400">{{ errors[0] }}</span>
         </ValidationProvider>
       </v-col>

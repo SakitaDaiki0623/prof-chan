@@ -55,25 +55,25 @@ module Api
           text: text,
           blocks: [
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": text
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             },
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": ":first_place_medal: *#{block.first_place}*\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: *#{block.second_place}*\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: *#{block.third_place}*"
               }
             },
             {
-              "type": "divider"
-            },
+              "type": 'divider'
+            }
           ]
         )
       end

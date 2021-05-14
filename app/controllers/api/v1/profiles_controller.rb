@@ -34,6 +34,14 @@ module Api
         end
       end
 
+      def recently_joined_user_profiles
+        @recently_joined_user_profiles = Profile.by_team(current_user).recently_joined
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @recently_joined_user_profiles,
+          serializer: ProfileSerializer
+        ).to_json
+      end
+
       private
 
       def set_profile

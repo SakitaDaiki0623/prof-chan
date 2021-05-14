@@ -100,28 +100,21 @@ export const yesOrNoBlocks = {
   actions: {
     // yesOrNo Blocks ===========================
     fetchYesOrNoBlocks({ commit }) {
-      axios
-        .get("yes_or_no_blocks")
-        .then((response) => {
-          commit("loadYesOrNoBlocks", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.get("yes_or_no_blocks").then((response) => {
+        commit("loadYesOrNoBlocks", response.data);
+      });
     },
     createYesOrNoBlock({ commit }, params) {
-      axios
-        .post("yes_or_no_blocks", params)
-        .then((response) => {
-          commit("addYesOrNoBlock", response.data);
-        })
-        .catch((err) => console.log(err.status));
+      axios.post("yes_or_no_blocks", params).then((response) => {
+        commit("addYesOrNoBlock", response.data);
+      });
     },
     patchYesOrNoBlock({ commit }, payload) {
       axios
         .patch(`yes_or_no_blocks/${payload.id}`, payload)
         .then((response) => {
           commit("updateYesOrNoBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+        });
     },
 
     deleteYesOrNoBlock({ commit }, payload) {
@@ -129,42 +122,31 @@ export const yesOrNoBlocks = {
         .delete(`yes_or_no_blocks/${payload.id}`, payload)
         .then((response) => {
           commit("retrieveYesOrNoBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+        });
     },
 
     // yesOrNo Items ===========================
     fetchYesOrNoItems({ commit }) {
-      axios
-        .get("yes_or_no_items")
-        .then((response) => {
-          commit("loadYesOrNoItems", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.get("yes_or_no_items").then((response) => {
+        commit("loadYesOrNoItems", response.data);
+      });
     },
     createYesOrNoItem({ commit }, yesOrNoItem) {
-      axios
-        .post("yes_or_no_items", yesOrNoItem)
-        .then((response) => {
-          commit("addYesOrNoItem", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.post("yes_or_no_items", yesOrNoItem).then((response) => {
+        commit("addYesOrNoItem", response.data);
+      });
     },
     patchYesOrNoItem({ commit }, payload) {
-      axios
-        .patch(`yes_or_no_items/${payload.id}`, payload)
-        .then((response) => {
-          commit("updateYesOrNoItem", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.patch(`yes_or_no_items/${payload.id}`, payload).then((response) => {
+        commit("updateYesOrNoItem", response.data);
+      });
     },
     deleteYesOrNoItem({ commit }, payload) {
       axios
         .delete(`yes_or_no_items/${payload.id}`, payload)
         .then((response) => {
           commit("retrieveYesOrNoItem", response.data);
-        })
-        .catch((err) => console.log(err));
+        });
     },
   },
 };

@@ -85,7 +85,7 @@ RSpec.describe 'NewProfiles', type: :system do
     end
 
     context 'プロフィール一覧画面に遷移したと場合' do
-      before { visit profiles_path }
+      before { visit top_path }
       it 'プロフィール作成画面にアクセスすること' do
         expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
       end

@@ -44,17 +44,17 @@ export default {
     RankingBlockList,
     TextBlockList,
   },
-  data() {
-    return {
-      profile: {},
-    };
-  },
   props: {
     id: {
       type: String,
       require: true,
       default: "",
     },
+  },
+  data() {
+    return {
+      profile: {},
+    };
   },
   computed: {
     ...mapState("users", ["users"]),
@@ -81,7 +81,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .bg-main-contain-color {
   background-color: #fdfff2;
 }

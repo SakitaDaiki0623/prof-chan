@@ -6,8 +6,8 @@
     @input="$emit('input', $event.target.isShownEditMyFavoriteFormatDialog)"
   >
     <v-container
-      class="my-favorite-block-bg"
       id="edit-my-favorite-block-container"
+      class="my-favorite-block-bg"
     >
       <v-row justify="end">
         <v-btn
@@ -26,13 +26,29 @@
       <p class="font-weight-bold text-xl text-gray-600 text-center mb-10">
         項目ごとに好きなものをひとつだけ入力してね♪
       </p>
-      <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ invalid }"
+      >
         <form @submit.prevent="hundleUpdateMyFavoriteBlock">
-          <v-row class="mt-6" no-gutters>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+          <v-row
+            class="mt-6"
+            no-gutters
+          >
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">漫画・アニメ</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="anime-manga-form"
                     type="text"
@@ -41,165 +57,275 @@
                     @input="
                       editMyFavoriteBlock.manga_anime = $event.target.value
                     "
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">ゲーム・アプリ</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="game-app-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.game_app"
                     @input="editMyFavoriteBlock.game_app = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">キャラクター</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="character-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.character"
                     @input="editMyFavoriteBlock.character = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">俳優・女優</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="actor-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.actor"
                     @input="editMyFavoriteBlock.actor = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">音楽</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="music-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.music"
                     @input="editMyFavoriteBlock.music = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">食べ物</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="food-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.food"
                     @input="editMyFavoriteBlock.food = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">動物</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="animal-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.animal"
                     @input="editMyFavoriteBlock.animal = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">スポーツ</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="sports-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.sports"
                     @input="editMyFavoriteBlock.sports = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">本</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="book-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.book"
                     @input="editMyFavoriteBlock.book = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">場所</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="place-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.place"
                     @input="editMyFavoriteBlock.place = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">お菓子</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="snack-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.snack"
                     @input="editMyFavoriteBlock.snack = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">お酒</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="alcohol-drink-form"
                     type="text"
@@ -208,15 +334,25 @@
                     @input="
                       editMyFavoriteBlock.alcohol_drink = $event.target.value
                     "
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">飲食店</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="restaurants-form"
                     type="text"
@@ -225,45 +361,75 @@
                     @input="
                       editMyFavoriteBlock.restaurants = $event.target.value
                     "
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">歌手</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="musician-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.musician"
                     @input="editMyFavoriteBlock.musician = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">YouTuber</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="youtuber-form"
                     type="text"
                     class="input-form-text-block"
                     :value="editMyFavoriteBlock.youtuber"
                     @input="editMyFavoriteBlock.youtuber = $event.target.value"
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
-            <v-col cols="12" sm="3">
-              <v-card class="pa-2" height="130px" color="brown lighten-5">
+            <v-col
+              cols="12"
+              sm="3"
+            >
+              <v-card
+                class="pa-2"
+                height="130px"
+                color="brown lighten-5"
+              >
                 <label class="form-label-text-block">お笑い芸人</label>
-                <ValidationProvider v-slot="{ errors }" rules="max_no_field:15">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  rules="max_no_field:15"
+                >
                   <input
                     id="entertainer-form"
                     type="text"
@@ -272,7 +438,7 @@
                     @input="
                       editMyFavoriteBlock.entertainer = $event.target.value
                     "
-                  />
+                  >
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>

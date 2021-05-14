@@ -1,6 +1,9 @@
 <template>
-  <v-container class="rounded-2xl bg-color">
-    <v-row justify="center" v-show="isThisEditPage">
+  <v-container
+    class="rounded-2xl bg-color"
+    v-show="isMyTextBlocksLengthNotZero || isThisEditPage"
+  >
+    <v-row v-show="isThisEditPage" justify="center">
       <v-btn
         id="add-text-block-btn"
         tile
@@ -16,7 +19,7 @@
       <div class="block-title">テキストコーナー</div>
     </v-row>
     <div>
-      <v-row v-if="isMyTextBlocksLengthNotZero">
+      <transition-group v-if="isMyTextBlocksLengthNotZero" tag="v-row" appear>
         <v-col
           v-for="textBlock in myTextBlocks"
           :key="textBlock.id"
@@ -28,7 +31,7 @@
             outlined
             color="teal accent-1"
           >
-            <v-row justify="end" v-show="isThisEditPage">
+            <v-row v-show="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-text-block-button-' + textBlock.id"
                 tile
@@ -61,7 +64,7 @@
             </v-card>
           </v-card>
         </v-col>
-      </v-row>
+      </transition-group>
       <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
@@ -121,6 +124,7 @@ export default {
   computed: {
     ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
+    isMyTextBlocksLengthNotZeroAndisThisShowPage() {},
     isMyTextBlocksLengthNotZero() {
       return this.myTextBlocks.length !== 0 ? true : false;
     },
@@ -168,9 +172,15 @@ export default {
 </script>
 
 <style scoped>
-/* .bg-color {
-  background-color: #e0f2f1;
-} */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1s;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
 
 .block-title {
   color: #80cbc4; /* 文字色 */

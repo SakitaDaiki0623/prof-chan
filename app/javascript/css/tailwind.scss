@@ -237,6 +237,11 @@
   @apply text-green-500;
 }
 
+@font-face {
+	font-family: 'prof-font';
+	src: url("./fonts/APJapanesefont.ttf");
+}
+
 .top-sub-title {
   position: relative;
   background: #a1887f;

@@ -51,14 +51,13 @@ module Api
       def chat_post_message(register)
         client = Slack::Web::Client.new
 
-
-        if register.yes_or_no_item_content3.present?
-          post_text = " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
-        elsif register.yes_or_no_item_content2.present?
-          post_text = " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
-        else
-          post_text = " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
-        end
+        post_text = if register.yes_or_no_item_content3.present?
+                      " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
+                    elsif register.yes_or_no_item_content2.present?
+                      " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
+                    else
+                      " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
+                    end
 
         text = "*#{current_user.name}さんがYes or No ブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.yes_or_no_title}* :star2:"
 
@@ -67,36 +66,36 @@ module Api
           text: text,
           blocks: [
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": text
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             },
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": post_text
               },
               "accessory": {
-                "type": "image",
-                "image_url": "#{current_user.image}",
-                "alt_text": "computer thumbnail"
+                "type": 'image',
+                "image_url": current_user.image.to_s,
+                "alt_text": 'computer thumbnail'
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             }
           ]
         )
       end
 
       def translate_boolean(answer)
-        answer ? "YES！:laughing:" : "NO！ :weary:"
+        answer ? 'YES！:laughing:' : 'NO！ :weary:'
       end
 
       private

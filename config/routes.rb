@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # ROOT_PATH
   root to: 'home#index'
 
+  get 'top', to: 'profiles#top'
+
   # authetication
   devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   devise_scope :user do
@@ -16,7 +18,11 @@ Rails.application.routes.draw do
   # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
-      resources :profiles,       only: %i[index create show update]
+      resources :profiles,       only: %i[index create show update] do
+        collection do
+          get 'recently_joined_user_profiles'
+        end
+      end
       resources :users,          only: %i[index show new] do
         collection do
           get 'get_current_user'

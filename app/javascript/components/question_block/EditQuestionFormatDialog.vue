@@ -8,7 +8,10 @@
       @input="$emit('input', $event.target.isShownEditQuestionFormatDialog)"
     >
       <v-card :color="questionBlockColor">
-        <v-row justify="end" class="mr-2 mt-2">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
           <v-btn
             :color="questionBlockColor"
             @click="hundleCloseQuestionBlockEditDialog"
@@ -21,13 +24,22 @@
         </p>
 
         <div class="p-10 note-box">
-          <v-row align="center" v-show="!isShownForm">
-            <v-col cols="12" md="10">
+          <v-row
+            v-show="!isShownForm"
+            align="center"
+          >
+            <v-col
+              cols="12"
+              md="10"
+            >
               <p class="text-2xl font-bold text-gray-600 pt-3">
                 {{ editQuestionBlock.title }}
               </p>
             </v-col>
-            <v-col cols="12" md="1">
+            <v-col
+              cols="12"
+              md="1"
+            >
               <v-btn
                 :id="'edit-question-block-title-button-' + editQuestionBlock.id"
                 tile
@@ -42,14 +54,16 @@
 
           <!-- タイトル編集フォーム -->
           <div v-show="isShownForm">
-            <ValidationObserver ref="observer" v-slot="{ invalid }">
+            <ValidationObserver
+              ref="observer"
+              v-slot="{ invalid }"
+            >
               <form>
                 <div>
                   <label
                     class="form-label-question-block"
                     for="question_block_title"
-                    >タイトル</label
-                  >
+                  >タイトル</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="タイトル"
@@ -61,18 +75,25 @@
                           editQuestionBlockForForm.id
                       "
                       :value="editQuestionBlockForForm.title"
-                      @input="
-                        editQuestionBlockForForm.title = $event.target.value
-                      "
                       class="input-form-question-block"
                       name="question_block[question_block_title]"
                       type="text"
-                    />
+                      @input="
+                        editQuestionBlockForForm.title = $event.target.value
+                      "
+                    >
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
-                <v-row justify="end" align="center" class="pt-3">
-                  <v-col cols="12" md="1">
+                <v-row
+                  justify="end"
+                  align="center"
+                  class="pt-3"
+                >
+                  <v-col
+                    cols="12"
+                    md="1"
+                  >
                     <v-btn
                       :id="
                         'update-question-item-button-' +
@@ -89,7 +110,10 @@
                       更新
                     </v-btn>
                   </v-col>
-                  <v-col cols="12" md="1">
+                  <v-col
+                    cols="12"
+                    md="1"
+                  >
                     <v-btn
                       :id="
                         'cancel-question-item-update-button-' +
@@ -110,45 +134,45 @@
 
           <!-- Item Form -->
           <EditQuestionBlockItem
-            questionBlockItemId="edit-question-item-1"
-            :questionItem="questionItem1"
-            :questionNameForValidation="questionNameForValidation1"
-            :answerNameForValidation="answerNameForValidation1"
-            :questionItemLength="questionItemLength"
-            :isTheItemEditing="isTheFirstItemEditing"
+            question-block-item-id="edit-question-item-1"
+            :question-item="questionItem1"
+            :question-name-for-validation="questionNameForValidation1"
+            :answer-name-for-validation="answerNameForValidation1"
+            :question-item-length="questionItemLength"
+            :is-the-item-editing="isTheFirstItemEditing"
             :question-block-color="questionBlockColor"
             @show-edit-question-item-form="showTheFirstEditQuestionItemForm"
             @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
           />
           <EditQuestionBlockItem
-            questionBlockItemId="edit-question-item-2"
-            :questionItem="questionItem2"
-            :questionNameForValidation="questionNameForValidation2"
-            :answerNameForValidation="answerNameForValidation2"
-            :isTheItemEditing="isTheSecondItemEditing"
-            :questionItemLength="questionItemLength"
-            :question-block-color="questionBlockColor"
             v-if="questionItemLength >= 2"
+            question-block-item-id="edit-question-item-2"
+            :question-item="questionItem2"
+            :question-name-for-validation="questionNameForValidation2"
+            :answer-name-for-validation="answerNameForValidation2"
+            :is-the-item-editing="isTheSecondItemEditing"
+            :question-item-length="questionItemLength"
+            :question-block-color="questionBlockColor"
             @show-edit-question-item-form="showTheSecondEditQuestionItemForm"
             @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
           />
           <EditQuestionBlockItem
-            questionBlockItemId="edit-question-item-3"
-            :questionItem="questionItem3"
-            :questionNameForValidation="questionNameForValidation3"
-            :answerNameForValidation="answerNameForValidation3"
-            :isTheItemEditing="isTheThirdItemEditing"
-            :questionItemLength="questionItemLength"
-            :question-block-color="questionBlockColor"
             v-if="questionItemLength >= 3"
+            question-block-item-id="edit-question-item-3"
+            :question-item="questionItem3"
+            :question-name-for-validation="questionNameForValidation3"
+            :answer-name-for-validation="answerNameForValidation3"
+            :is-the-item-editing="isTheThirdItemEditing"
+            :question-item-length="questionItemLength"
+            :question-block-color="questionBlockColor"
             @show-edit-question-item-form="showTheThirdEditQuestionItemForm"
             @hide-edit-question-item-form="hideTheThirdEditQuestionItemForm"
           />
 
           <IndividualCreateQuestionBlockItem
-            :parentQuestionBlockId="parentQuestionBlockId"
             v-if="questionItemLength < 3"
             ref="IndividualCreateQuestionBlockItem"
+            :parent-question-block-id="parentQuestionBlockId"
           />
 
           <div class="mt-3 font-weight-bold text-gray-600 text-sm">

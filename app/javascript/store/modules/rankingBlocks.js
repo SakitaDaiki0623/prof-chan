@@ -28,36 +28,24 @@ export const rankingBlocks = {
   },
   actions: {
     fetchRankingBlocks({ commit }) {
-      axios
-        .get("ranking_blocks")
-        .then((response) => {
-          commit("loadRankingBlocks", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.get("ranking_blocks").then((response) => {
+        commit("loadRankingBlocks", response.data);
+      });
     },
     createRankingBlock({ commit }, rankingBlock) {
-      axios
-        .post("ranking_blocks", rankingBlock)
-        .then((response) => {
-          commit("addRankingBlock", response.data);
-        })
-        .catch((err) => console.log(err.status));
+      axios.post("ranking_blocks", rankingBlock).then((response) => {
+        commit("addRankingBlock", response.data);
+      });
     },
     patchRankingBlock({ commit }, payload) {
-      axios
-        .patch(`ranking_blocks/${payload.id}`, payload)
-        .then((response) => {
-          commit("updateRankingBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.patch(`ranking_blocks/${payload.id}`, payload).then((response) => {
+        commit("updateRankingBlock", response.data);
+      });
     },
     deleteRankingBlock({ commit }, payload) {
-      axios
-        .delete(`ranking_blocks/${payload.id}`, payload)
-        .then((response) => {
-          commit("retrieveRankingBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.delete(`ranking_blocks/${payload.id}`, payload).then((response) => {
+        commit("retrieveRankingBlock", response.data);
+      });
     },
   },
 };

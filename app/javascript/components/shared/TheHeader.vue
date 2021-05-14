@@ -6,22 +6,45 @@
       outlined
     >
       <v-toolbar-title>
-        <router-link to="/profiles"> プロフちゃん(ロゴ) </router-link>
+        <router-link to="/top">
+          プロフちゃん(ロゴ)
+        </router-link>
       </v-toolbar-title>
 
       <div class="flex-grow-1" />
 
       <v-btn
         id="profile-edit-button"
-        @click="openProfileEditPage"
         class="m-2 white--text"
-        color="blue-grey darken-2"
+        color="brown lighten-2"
+        @click="openProfilesPage"
       >
-        <v-icon left> mdi-pencil </v-icon>
+        <v-icon left>
+          mdi-account-group
+        </v-icon>
+        プロフ一覧
+      </v-btn>
+
+      <v-btn
+        id="profile-edit-button"
+        class="m-2 white--text"
+        color="brown lighten-2"
+        @click="openProfileEditPage"
+      >
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
         プロフ編集
       </v-btn>
 
-      <a href="/logout" data-method="delete">ログアウト</a>
+      <v-btn
+        class="m-2 white--text"
+        color="brown darken-1"
+        href="/logout"
+        data-method="delete"
+      >
+        ログアウト
+      </v-btn>
     </v-app-bar>
   </header>
 </template>
@@ -48,6 +71,9 @@ export default {
   },
   created() {},
   methods: {
+    openProfilesPage() {
+      this.$router.push(`/profiles`).catch((err) => {});
+    },
     openProfileEditPage() {
       this.$router
         .push(`/profiles/${this.currentUser.profile.id}/edit`)
@@ -58,5 +84,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

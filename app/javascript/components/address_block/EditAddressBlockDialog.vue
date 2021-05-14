@@ -14,29 +14,35 @@
           ✖︎
         </v-btn>
       </v-row>
-      <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ invalid }"
+      >
         <form @submit.prevent="hundleUpdateAddressBlock">
           <section>
             <p>
               <label class="form-label-basic-block">Twitter</label>
               <v-icon>mdi-twitter</v-icon>
               <input
+                v-model="editMyAddressBlock.twitter"
                 type="text"
                 class="address-form"
-                v-model="editMyAddressBlock.twitter"
-              />
+              >
             </p>
             <p>
               <label class="form-label-basic-block">Instagram</label>
               <v-icon>mdi-instagram</v-icon>
               <input
+                v-model="editMyAddressBlock.instagram"
                 type="text"
                 class="address-form"
-                v-model="editMyAddressBlock.instagram"
-              />
+              >
             </p>
             <div>
-              <ValidationObserver ref="observer" v-slot="{ invalid }">
+              <ValidationObserver
+                ref="observer"
+                v-slot="{ invalid }"
+              >
                 <label class="form-label-basic-block">郵便番号</label>
                 <!-- TODO: ポストコードの正規表現がうまくいかないので後ほど追記 -->
                 <ValidationProvider
@@ -44,25 +50,28 @@
                   name="郵便番号"
                 >
                   〒<input
+                    v-model="editMyAddressBlock.postcode"
                     type="text"
                     class="address-form"
                     placeholder="郵便番号を入力"
-                    v-model="editMyAddressBlock.postcode"
-                  />
+                  >
                 </ValidationProvider>
-                <v-btn @click="searchAddressInfo" :disabled="invalid"
-                  >住所を自動で入力!</v-btn
+                <v-btn
+                  :disabled="invalid"
+                  @click="searchAddressInfo"
                 >
+                  住所を自動で入力!
+                </v-btn>
               </ValidationObserver>
             </div>
-            <br />
+            <br>
             <label class="form-label-basic-block">住所</label>
             <input
+              v-model="editMyAddressBlock.full_address"
               type="text"
               class="address-form"
-              v-model="editMyAddressBlock.full_address"
               placeholder="東京都西東京市谷戸町1-157-12"
-            />
+            >
           </section>
           <div class="text-center mt-3">
             <v-btn

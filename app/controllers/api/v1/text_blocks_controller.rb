@@ -57,29 +57,29 @@ module Api
           text: text,
           blocks: [
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": text
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             },
             {
-              "type": "section",
+              "type": 'section',
               "text": {
-                "type": "mrkdwn",
+                "type": 'mrkdwn',
                 "text": block.text
               },
               "accessory": {
-                "type": "image",
-                "image_url": "#{current_user.image}",
-                "alt_text": "computer thumbnail"
+                "type": 'image',
+                "image_url": current_user.image.to_s,
+                "alt_text": 'computer thumbnail'
               }
             },
             {
-              "type": "divider"
+              "type": 'divider'
             }
           ]
         )

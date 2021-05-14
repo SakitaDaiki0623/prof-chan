@@ -21,20 +21,14 @@ export const users = {
   },
   actions: {
     fetchCurrentUser({ commit }) {
-      axios
-        .get("/users/get_current_user")
-        .then((response) => {
-          commit("loadCurrentUser", response.data);
-        })
-        .catch((err) => console.log(err.status));
+      axios.get("/users/get_current_user").then((response) => {
+        commit("loadCurrentUser", response.data);
+      });
     },
     fetchUsers({ commit }) {
-      axios
-        .get("users")
-        .then((response) => {
-          commit("loadUsers", response.data);
-        })
-        .catch((err) => console.log(err.status));
+      axios.get("users").then((response) => {
+        commit("loadUsers", response.data);
+      });
     },
   },
 };

@@ -1,6 +1,9 @@
 <template>
   <v-container class="rounded-2xl">
-    <v-row justify="center" v-show="isThisEditPage">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+    >
       <v-btn
         id="add-question-block-btn"
         tile
@@ -8,12 +11,16 @@
         class="ma-2 white--text"
         @click="openQuestionFormatDialog"
       >
-        <v-icon left> mdi-plus </v-icon>
+        <v-icon left>
+          mdi-plus
+        </v-icon>
         クエスチョンブロックを追加する
       </v-btn>
     </v-row>
     <v-row justify="end">
-      <div class="block-title">質問コーナー</div>
+      <div class="block-title">
+        質問コーナー
+      </div>
     </v-row>
     <div>
       <v-row v-if="isMyQuestionBlocksLengthNotZero">
@@ -28,7 +35,10 @@
             outlined
             color="red lighten-4"
           >
-            <v-row justify="end" v-show="isThisEditPage">
+            <v-row
+              v-show="isThisEditPage"
+              justify="end"
+            >
               <v-btn
                 :id="'edit-question-block-button-' + questionBlock.id"
                 tile
@@ -55,11 +65,22 @@
               <div :key="question_item.id">
                 <div class="rounded-lg">
                   <v-row>
-                    <label for="question_item_content" class="mx-5 text-sm">
+                    <label
+                      for="question_item_content"
+                      class="mx-5 text-sm"
+                    >
                       {{ question_item.content }}
                     </label>
-                    <v-col cols="12" sm="12" class="mb-2">
-                      <v-card class="p-2" outlined color="white">
+                    <v-col
+                      cols="12"
+                      sm="12"
+                      class="mb-2"
+                    >
+                      <v-card
+                        class="p-2"
+                        outlined
+                        color="white"
+                      >
                         {{ question_item.answer }}
                       </v-card>
                     </v-col>
@@ -70,9 +91,14 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-container v-else class="no-block-display-container">
+      <v-container
+        v-else
+        class="no-block-display-container"
+      >
         <v-row justify="center">
-          <div class="font-bold text-2xl opacity-50">社員のクエスチョンブロックがありません</div>
+          <div class="font-bold text-2xl opacity-50">
+            社員のクエスチョンブロックがありません
+          </div>
         </v-row>
       </v-container>
     </div>

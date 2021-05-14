@@ -1,21 +1,44 @@
 <template>
-  <div class="m-1" :id="questionBlockItemId">
+  <div
+    :id="questionBlockItemId"
+    class="m-1"
+  >
     <!-- Item Form -->
-    <v-row align="center" justify="center" v-show="!isTheItemEditing">
-      <v-col cols="12" md="10">
-        <v-card class="p-5 rounded-lg" outlined>
+    <v-row
+      v-show="!isTheItemEditing"
+      align="center"
+      justify="center"
+    >
+      <v-col
+        cols="12"
+        md="10"
+      >
+        <v-card
+          class="p-5 rounded-lg"
+          outlined
+        >
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               {{ questionItem.content }}
             </v-col>
-            <v-col cols="12" sm="6" class="text-red-500">
+            <v-col
+              cols="12"
+              sm="6"
+              class="text-red-500"
+            >
               {{ questionItem.answer }}
             </v-col>
           </v-row>
         </v-card>
       </v-col>
 
-      <v-col cols="12" md="1">
+      <v-col
+        cols="12"
+        md="1"
+      >
         <v-btn
           :id="'edit-question-item-button-' + questionItem.id"
           tile
@@ -26,7 +49,10 @@
           <v-icon> mdi-pencil </v-icon>
         </v-btn>
       </v-col>
-      <v-col cols="12" md="1">
+      <v-col
+        cols="12"
+        md="1"
+      >
         <v-btn
           :id="'delete-question-item-button-' + questionItem.id"
           tile
@@ -42,15 +68,20 @@
 
     <!-- Item Form -->
     <div v-show="isTheItemEditing">
-      <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <ValidationObserver
+        ref="observer"
+        v-slot="{ invalid }"
+      >
         <form>
           <v-row>
-            <v-col cols="12" md="6">
+            <v-col
+              cols="12"
+              md="6"
+            >
               <label
                 for="question_item_content"
                 class="form-label-question-block"
-                >質問</label
-              >
+              >質問</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="questionNameForValidation"
@@ -59,20 +90,22 @@
                 <input
                   :id="'edit-question-item-content-form-' + editQuestionItem.id"
                   :value="editQuestionItem.content"
-                  @input="editQuestionItem.content = $event.target.value"
                   class="input-form-question-block"
                   name="question_item[question_item_content]"
                   type="text"
-                />
+                  @input="editQuestionItem.content = $event.target.value"
+                >
                 <span class="text-red-400">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col
+              cols="12"
+              md="6"
+            >
               <label
                 for="question_item_content"
                 class="form-label-question-block"
-                >答え</label
-              >
+              >答え</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="answerNameForValidation"
@@ -81,17 +114,20 @@
                 <input
                   :id="'edit-question-item-answer-form-' + editQuestionItem.id"
                   :value="editQuestionItem.answer"
-                  @input="editQuestionItem.answer = $event.target.value"
                   class="input-form-question-block"
                   name="question_item[question_item_answer]"
                   type="text"
-                />
+                  @input="editQuestionItem.answer = $event.target.value"
+                >
                 <span class="text-red-400">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
           </v-row>
           <v-row justify="end">
-            <v-col cols="12" md="1">
+            <v-col
+              cols="12"
+              md="1"
+            >
               <v-btn
                 :id="'update-question-item-button-' + editQuestionItem.id"
                 tile
@@ -103,7 +139,10 @@
                 更新
               </v-btn>
             </v-col>
-            <v-col cols="12" md="1">
+            <v-col
+              cols="12"
+              md="1"
+            >
               <v-btn
                 :id="
                   'cancel-question-item-update-button-' + editQuestionItem.id

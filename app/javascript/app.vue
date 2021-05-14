@@ -1,6 +1,9 @@
 <!-- app/javascript/app.vue -->
 <template>
-  <v-app id="app" class="default kawaii">
+  <v-app
+    id="app"
+    class="default kawaii"
+  >
     <TheHeader />
     <v-main>
       <TheNotFound v-if="isNotFound" />
@@ -40,11 +43,9 @@ export default {
 </script>
 
 <style scoped>
-@import url(https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c);
 
 .default {
-  font-family: "Hannotate SC Regular", "Amatic SC", "M PLUS Rounded 1c", cursive,
-    "sans-serif";
+  font-family: "prof-font", "Hannotate SC Regular", "sans-serif";
   color: #505050;
 }
 .v-main {

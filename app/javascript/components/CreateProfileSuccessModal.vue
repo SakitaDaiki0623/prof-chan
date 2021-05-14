@@ -13,14 +13,19 @@
           基本情報の登録が完了しました！
         </p>
         <v-card-actions>
-          <v-row justify="center" class="p-8">
+          <v-row
+            justify="center"
+            class="p-8"
+          >
             <v-btn
               x-large
               color="light-green accent-2"
               class=" black--text"
               @click="moveToProfilesPage"
             >
-              <v-icon left> mdi-account-circle </v-icon>
+              <v-icon left>
+                mdi-account-circle
+              </v-icon>
               プロフィール閲覧
             </v-btn>
           </v-row>

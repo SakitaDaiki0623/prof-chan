@@ -104,28 +104,19 @@ export const questionBlocks = {
   actions: {
     // Question Blocks ===========================
     fetchQuestionBlocks({ commit }) {
-      axios
-        .get("question_blocks")
-        .then((response) => {
-          commit("loadQuestionBlocks", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.get("question_blocks").then((response) => {
+        commit("loadQuestionBlocks", response.data);
+      });
     },
     createQuestionBlock({ commit }, params) {
-      axios
-        .post("question_blocks", params)
-        .then((response) => {
-          commit("addQuestionBlock", response.data);
-        })
-        .catch((err) => console.log(err.status));
+      axios.post("question_blocks", params).then((response) => {
+        commit("addQuestionBlock", response.data);
+      });
     },
     patchQuestionBlock({ commit }, payload) {
-      axios
-        .patch(`question_blocks/${payload.id}`, payload)
-        .then((response) => {
-          commit("updateQuestionBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.patch(`question_blocks/${payload.id}`, payload).then((response) => {
+        commit("updateQuestionBlock", response.data);
+      });
     },
 
     deleteQuestionBlock({ commit }, payload) {
@@ -133,42 +124,29 @@ export const questionBlocks = {
         .delete(`question_blocks/${payload.id}`, payload)
         .then((response) => {
           commit("retrieveQuestionBlock", response.data);
-        })
-        .catch((err) => console.log(err));
+        });
     },
 
     // Question Items ===========================
     fetchQuestionItems({ commit }) {
-      axios
-        .get("question_items")
-        .then((response) => {
-          commit("loadQuestionItems", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.get("question_items").then((response) => {
+        commit("loadQuestionItems", response.data);
+      });
     },
     createQuestionItem({ commit }, questionItem) {
-      axios
-        .post("question_items", questionItem)
-        .then((response) => {
-          commit("addQuestionItem", response.data);
-        })
-        .catch((error) => console.log(error.status));
+      axios.post("question_items", questionItem).then((response) => {
+        commit("addQuestionItem", response.data);
+      });
     },
     patchQuestionItem({ commit }, payload) {
-      axios
-        .patch(`question_items/${payload.id}`, payload)
-        .then((response) => {
-          commit("updateQuestionItem", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.patch(`question_items/${payload.id}`, payload).then((response) => {
+        commit("updateQuestionItem", response.data);
+      });
     },
     deleteQuestionItem({ commit }, payload) {
-      axios
-        .delete(`question_items/${payload.id}`, payload)
-        .then((response) => {
-          commit("retrieveQuestionItem", response.data);
-        })
-        .catch((err) => console.log(err));
+      axios.delete(`question_items/${payload.id}`, payload).then((response) => {
+        commit("retrieveQuestionItem", response.data);
+      });
     },
   },
 };

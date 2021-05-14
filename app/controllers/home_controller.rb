@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     if user_signed_in? && current_user.profile.nil?
       redirect_to new_profile_path
     elsif user_signed_in?
-      redirect_to profiles_path
+      redirect_to top_path
     end
   end
 end
