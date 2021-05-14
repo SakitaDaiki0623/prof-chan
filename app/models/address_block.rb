@@ -16,5 +16,4 @@
 class AddressBlock < ApplicationRecord
   # association ==========
   belongs_to :profile_block
-
 end

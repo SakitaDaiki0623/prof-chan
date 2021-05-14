@@ -26,7 +26,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+        :recoverable, :rememberable, :validatable, :omniauthable
 
   # association
   has_one :profile,       dependent: :destroy
@@ -34,9 +34,13 @@ class User < ApplicationRecord
   belongs_to :team
 
   has_many :text_block_likes, dependent: :destroy
+  has_many :text_blocks, through: :text_block_likes
   has_many :question_block_likes, dependent: :destroy
+  has_many :question_blocks, through: :question_block_likes
   has_many :ranking_block_likes, dependent: :destroy
+  has_many :ranking_blocks, through: :ranking_block_likes
   has_many :yes_or_no_block_likes, dependent: :destroy
+  has_many :yes_or_no_blocks, through: :yes_or_no_block_likes
 
   # validation
   validates :name,                      presence: true, length: { in: 1..15 }
