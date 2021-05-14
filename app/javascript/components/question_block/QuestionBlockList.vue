@@ -35,7 +35,7 @@
             outlined
             color="red lighten-4"
           >
-            <v-row v-show="isThisEditPage" justify="end">
+            <v-row v-if="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-question-block-button-' + questionBlock.id"
                 tile
@@ -55,7 +55,7 @@
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </v-row>
-            <v-row>
+            <v-row v-else>
               <v-spacer />
               <question-block-like-button
                 :question-block-id="questionBlock.id"

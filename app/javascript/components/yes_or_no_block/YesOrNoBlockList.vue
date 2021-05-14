@@ -33,7 +33,7 @@
             outlined
             color="orange lighten-4"
           >
-            <v-row v-show="isThisEditPage" justify="end">
+            <v-row v-if="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
                 tile
@@ -53,7 +53,7 @@
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </v-row>
-            <v-row>
+            <v-row v-else>
               <v-spacer />
               <yes-or-no-block-like-button
                 :yes-or-no-block-id="yesOrNoBlock.id"
