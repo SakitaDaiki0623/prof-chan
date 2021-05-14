@@ -38,6 +38,14 @@ module Api
         render json: @question_block
       end
 
+      def popular_blocks
+        @question_popular_blocks = QuestionBlock.by_team(current_user).popular_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @question_popular_blocks,
+          serializer: QuestionBlockSerializer
+        ).to_json
+      end
+
       def post_to_slack_after_create
         @question_block_item_register = QuestionBlockItemRegister.new(set_params)
         if @question_block_item_register.valid?
