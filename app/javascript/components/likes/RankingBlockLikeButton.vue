@@ -21,7 +21,7 @@ import { mapState } from "vuex";
 
 export default {
   props: {
-    textBlockId: {
+    rankingBlockId: {
       type: Number,
       required: true,
     },
@@ -50,14 +50,14 @@ export default {
   },
 
   created: function() {
-    this.fetchLikeByTextBlockId().then((result) => {
+    this.fetchLikeByRankingBlockId().then((result) => {
       this.likeList = result;
     });
   },
   methods: {
-    fetchLikeByTextBlockId: async function() {
+    fetchLikeByRankingBlockId: async function() {
       const res = await axios.get(
-        `/api/v1/likes/text_block_likes/?text_block_id=${this.textBlockId}`
+        `/api/v1/likes/ranking_block_likes/?ranking_block_id=${this.rankingBlockId}`
       );
       if (res.status !== 200) {
         process.exit();
@@ -66,13 +66,13 @@ export default {
     },
 
     registerLike: async function() {
-      const res = await axios.post("/api/v1/likes/text_block_likes", {
-        text_block_id: this.textBlockId,
+      const res = await axios.post("/api/v1/likes/ranking_block_likes", {
+        ranking_block_id: this.rankingBlockId,
       });
       if (res.status !== 201) {
         process.exit();
       }
-      this.fetchLikeByTextBlockId().then((result) => {
+      this.fetchLikeByRankingBlockId().then((result) => {
         this.likeList = result;
       });
     },
@@ -80,7 +80,7 @@ export default {
     deleteLike: async function() {
       const likeId = this.findLikeId();
       const res = await axios.delete(
-        `/api/v1/likes/text_block_likes/${likeId}`
+        `/api/v1/likes/ranking_block_likes/${likeId}`
       );
       if (res.status !== 200) {
         process.exit();

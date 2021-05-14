@@ -370,7 +370,7 @@ export default {
     },
   },
   mounted() {
-    document.title = "プロフィールづくり - プロフちゃん";
+    document.title = "プロフづくり - プロフちゃん";
   },
   created() {
     this.fetchCurrentUser();

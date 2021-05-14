@@ -26,12 +26,12 @@
               <v-icon left>
                 mdi-account-circle
               </v-icon>
-              プロフィール閲覧
+              プロフ閲覧
             </v-btn>
           </v-row>
         </v-card-actions>
         <v-card-text class=" text-gray-600 text-center mb-5">
-          他の社員プロフィールを閲覧します。
+          他の社員プロフを閲覧します。
         </v-card-text>
       </v-card>
     </v-dialog>

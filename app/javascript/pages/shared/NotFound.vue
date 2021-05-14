@@ -18,7 +18,7 @@
     >
       <v-icon left>
         mdi-exit-run
-      </v-icon>プロフィール一覧ページに戻る
+      </v-icon>プロフ一覧ページに戻る
     </v-btn>
   </div>
 </template>

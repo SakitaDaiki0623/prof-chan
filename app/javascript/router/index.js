@@ -47,7 +47,7 @@ const routes = [
         next({ path: `/profiles/${currentUserProfileId}/edit` });
         store.dispatch("flash/setFlash", {
           type: "error",
-          message: "他の人のプロフィールは編集できないよ！",
+          message: "他の人のプロフは編集できないよ！",
           color: "red lighten-3",
         });
       }
