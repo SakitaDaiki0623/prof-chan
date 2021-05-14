@@ -41,7 +41,7 @@
         <v-icon left>
           mdi-crown-outline
         </v-icon>
-        人気のプロフ
+        人気のプロフブロック
       </v-btn>
 
       <v-spacer />
@@ -84,10 +84,12 @@ export default {
       this.$router.push(`/profiles`).catch((err) => {});
     },
     openProfileEditPage() {
-      this.$router.push(`/profiles/${this.currentUser.profile.id}/edit`);
+      this.$router
+        .push(`/profiles/${this.currentUser.profile.id}/edit`)
+        .catch((err) => {});
     },
     openPopularBlocksPage() {
-      this.$router.push(`/profiles/popular_blocks`);
+      this.$router.push(`/profiles/popular_blocks`).catch((err) => {});
     },
   },
 };
