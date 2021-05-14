@@ -37,6 +37,14 @@ module Api
         render json: @yes_or_no_block
       end
 
+      def popular_blocks
+        @yes_or_no_popular_blocks = YesOrNoBlock.by_team(current_user).popular_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @yes_or_no_popular_blocks,
+          serializer: YesOrNoBlockSerializer
+        ).to_json
+      end
+
       def post_to_slack_after_create
         @yes_or_no_block_item_register = YesOrNoBlockItemRegister.new(set_params)
         if @yes_or_no_block_item_register.valid?
