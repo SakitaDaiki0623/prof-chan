@@ -6,7 +6,8 @@ import ProfilesPage from "../pages/profile/index";
 import ShowProfilesPage from "../pages/profile/show";
 import NewProfilesPage from "../pages/profile/new";
 import EditProfilesPage from "../pages/profile/edit";
-import Top from "../pages/top.vue"
+import Top from "../pages/top.vue";
+import popularBlocks from "../pages/popularBlocks.vue";
 import NotFound from "../pages/shared/NotFound";
 
 Vue.use(VueRouter);
@@ -52,6 +53,11 @@ const routes = [
         });
       }
     },
+  },
+  {
+    path: "/profiles/popular_blocks",
+    name: "popularBlocks",
+    component: popularBlocks,
   },
   {
     name: "NotFound",
