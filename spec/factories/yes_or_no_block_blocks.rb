@@ -11,7 +11,12 @@
 # spec/factories/yes_or_no_block_blocks.rb
 FactoryBot.define do
   factory :yes_or_no_block do
-    title { 'あ' * 30 }
+    title { Faker::Lorem.characters(number: 30) }
     association :profile_block
+    after(:create) do |yes_or_no_block|
+      [1, 2, 3].sample.times do
+        create(:yes_or_no_item, yes_or_no_block: yes_or_no_block)
+      end
+    end
   end
 end

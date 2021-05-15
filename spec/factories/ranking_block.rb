@@ -14,10 +14,10 @@
 # spec/factories/ranking_block.rb
 FactoryBot.define do
   factory :ranking_block do
-    title { Faker::Lorem.sentence }
-    first_place  { Faker::Lorem.sentence }
-    second_place { Faker::Lorem.sentence }
-    third_place  { Faker::Lorem.sentence }
+    title { Faker::Lorem.characters(number: 30) }
+    first_place  { Faker::Lorem.characters(number: 30) }
+    second_place { Faker::Lorem.characters(number: 30) }
+    third_place  { Faker::Lorem.characters(number: 30) }
     association :profile_block
   end
 end

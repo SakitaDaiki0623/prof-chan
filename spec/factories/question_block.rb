@@ -11,7 +11,12 @@
 # spec/factories/question_blocks.rb
 FactoryBot.define do
   factory :question_block do
-    title { 'あ' * 30 }
+    title { Faker::Lorem.characters(number: 30) }
     association :profile_block
+    after(:create) do |question_block|
+      [1, 2, 3].sample.times do
+        create(:question_item, question_block: question_block)
+      end
+    end
   end
 end

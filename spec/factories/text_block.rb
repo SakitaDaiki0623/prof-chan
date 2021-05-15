@@ -12,8 +12,8 @@
 # spec/factories/text_block.rb
 FactoryBot.define do
   factory :text_block do
-    title { Faker::Lorem.sentence }
-    text  { Faker::Lorem.sentence }
+    title { Faker::Lorem.characters(number: 30) }
+    text  { Faker::Lorem.characters(number: 30) }
     association :profile_block
   end
 end

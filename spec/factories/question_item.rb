@@ -12,8 +12,8 @@
 # spec/factories/question_item.rb
 FactoryBot.define do
   factory :question_item do
-    content { Faker::Lorem.sentence }
-    answer  { Faker::Lorem.sentence }
+    content { Faker::Lorem.characters(number: 30) }
+    answer  { Faker::Lorem.characters(number: 30) }
     association :question_block
   end
 end
