@@ -78,7 +78,7 @@
     <!-- /クエスチョンブロック -->
 
     <!-- ランキングブロック -->
-    <div class="py-10 px-20">
+    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
       <div class="top-sub-title my-10">
         ランキングブロック
       </div>
@@ -139,7 +139,7 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 px-20">
+    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
       <div class="top-sub-title my-10">
         Yes or No ブロック
       </div>
@@ -212,7 +212,7 @@
     <!-- /Yes or No ブロック -->
 
     <!-- テキストブロック -->
-    <div class="py-10 px-20">
+    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
       <div class="top-sub-title my-10">
         テキストブロック
       </div>
@@ -281,6 +281,7 @@ export default {
       rankingPopularBlocks: [],
       yesOrNoPopularBlocks: [],
       textPopularBlocks: [],
+      visible: false,
     };
   },
   computed: {
@@ -337,7 +338,19 @@ export default {
   mounted() {
     this.firstRead();
   },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    handleScroll() {
+      if (!this.visible) {
+        var top = this.$el.getBoundingClientRect().top;
+        this.visible = top < window.innerHeight + 100;
+      }
+    },
     async firstRead() {
       await this.fetchRecentlyJoinedUserProfiles();
       await this.fetchQuestionPopularBlocks();
@@ -383,5 +396,19 @@ export default {
 .top-bg {
   background-color: #efebe9;
   padding: 2rem;
+}
+
+.fadeIn {
+  animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 </style>
