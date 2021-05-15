@@ -16,15 +16,15 @@ RSpec.describe 'EditProfile', type: :system do
   describe 'ページの基本検証' do
     before {find("#profile-edit-button").click}
 
-    it 'タイトルが「プロフィール編集 - プロフちゃん」であること' do
-      expect(page).to have_title('プロフィール編集 - プロフちゃん'), '意図したタイトルが表示されていません'
+    it 'タイトルが「プロフ編集 - プロフちゃん」であること' do
+      expect(page).to have_title('プロフ編集 - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
     it 'ヘッダーが表示されていないこと' do
       expect(page).to have_selector('header'), 'ヘッダーが表示されています'
     end
 
-    it '自分のプロフィール編集画面であること' do
+    it '自分のプロフ編集画面であること' do
       expect(page).to have_content(my_profile.user.name)
     end
 
@@ -44,10 +44,10 @@ RSpec.describe 'EditProfile', type: :system do
   describe 'Authorization' do
     context '他人の編集ページにアクセスしようとした時' do
       before { visit other_profile_edit_path }
-      it '自分のプロフィール編集
+      it '自分のプロフ編集
       ページにリダイレクトすること' do
         expect(current_path).to eq("/profiles/#{my_profile.id}/edit")
-        expect(page).to have_content('他の人のプロフィールは編集できないよ！')
+        expect(page).to have_content('他の人のプロフは編集できないよ！')
       end
     end
   end

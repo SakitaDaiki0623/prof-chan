@@ -4,7 +4,7 @@ RSpec.describe 'NotFoundPage', type: :system do
 
 
   describe 'ログイン後' do
-    describe 'プロフィール一覧画面' do
+    describe 'プロフ一覧画面' do
       before do
         create_real_team_with_users(users_count: 15)
         create_normal_team_with_users

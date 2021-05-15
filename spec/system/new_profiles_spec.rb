@@ -8,8 +8,8 @@ RSpec.describe 'NewProfiles', type: :system do
   before { slack_login_first_time }
 
   describe 'ページの基本検証' do
-    it 'タイトルが「プロフィールづくり - プロフちゃん」であること' do
-      expect(page).to have_title('プロフィールづくり - プロフちゃん'), '意図したタイトルが表示されていません'
+    it 'タイトルが「プロフづくり - プロフちゃん」であること' do
+      expect(page).to have_title('プロフづくり - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
     it 'ヘッダーが表示されていないこと' do
@@ -17,7 +17,7 @@ RSpec.describe 'NewProfiles', type: :system do
     end
   end
 
-  describe 'プロフィール情報を正確に入力' do
+  describe 'プロフ情報を正確に入力' do
     before do
       select '男性', from: 'profile_gender'
       fill_in 'profile_height',	with: profile.height
@@ -29,10 +29,10 @@ RSpec.describe 'NewProfiles', type: :system do
       click_on '入力完了！'
       sleep 1
     end
-    it 'プロフィール一覧にアクセスすること' do
+    it 'プロフ一覧にアクセスすること' do
       expect(page).to have_content('基本情報の登録が完了しました！'), '意図したメッセージが表示されていません'
-      expect(page).to have_button('他の情報も入力する'), 'プロフィール編集画面へのボタンがありません'
-      expect(page).to have_button('プロフィール閲覧'), 'プロフィール一覧画面へのボタンがありません'
+      expect(page).to have_button('他の情報も入力する'), 'プロフ編集画面へのボタンがありません'
+      expect(page).to have_button('プロフ閲覧'), 'プロフ一覧画面へのボタンがありません'
     end
   end
 
@@ -79,14 +79,14 @@ RSpec.describe 'NewProfiles', type: :system do
   describe 'Authorization' do
     context 'ホーム画面に遷移したと場合' do
       before { visit root_path }
-      it 'プロフィール作成画面にアクセスすること' do
+      it 'プロフ作成画面にアクセスすること' do
         expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
       end
     end
 
-    context 'プロフィール一覧画面に遷移したと場合' do
+    context 'プロフ一覧画面に遷移したと場合' do
       before { visit top_path }
-      it 'プロフィール作成画面にアクセスすること' do
+      it 'プロフ作成画面にアクセスすること' do
         expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
       end
     end

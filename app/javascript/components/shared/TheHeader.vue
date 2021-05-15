@@ -9,7 +9,7 @@
       </v-toolbar-title>
 
       <v-btn
-        id="profile-edit-button"
+        id="profiles-button"
         class="m-2 white--text"
         color="brown lighten-2"
         @click="openProfilesPage"
@@ -33,7 +33,7 @@
       </v-btn>
 
       <v-btn
-        id="profile-edit-button"
+        id="popular-blocks-button"
         class="m-2 white--text"
         color="brown lighten-2"
         @click="openPopularBlocksPage"

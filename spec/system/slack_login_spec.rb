@@ -1,3 +1,4 @@
+# pass 3
 # spec/system/slack_login_spec.rb
 require 'rails_helper'
 
@@ -6,10 +7,10 @@ RSpec.describe "SlackLogin", type: :system do
   before do
     Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # Devise使用時に必要な記載
     Rails.application.env_config["omniauth.auth"] = set_slack_omniauth # omniauth.authの値を代入
-    allow_any_instance_of(ApplicationController).to receive(:get_user_info).and_return(set_user_info) # strategy.authの値を代入
+    allow_any_instance_of(Users::OmniauthCallbacksController).to receive(:get_user_info).and_return(set_user_info) # strategy.authの値を代入
   end
 
-  context 'oauthがinvali_omniauthの場合' do
+  context 'oauthがinvalid_omniauthの場合' do
     before do
       Rails.application.env_config["omniauth.auth"] = set_invalid_omniauth
       visit root_path
@@ -17,7 +18,6 @@ RSpec.describe "SlackLogin", type: :system do
     end
     it "トップページにリダイレクトされること" do
       expect(current_path).to eq(root_path), 'ルートパスにリダイレクトされていません'
-      expect(page).to have_content('Slack認証に失敗しました。'), 'フラッシュメッセージが表示されていません'
     end
   end
 
@@ -37,7 +37,6 @@ RSpec.describe "SlackLogin", type: :system do
     before do
       slack_login_first_time
       create_profile
-      click_button 'プロフィール閲覧'
       expect(current_path).to eq(top_path), 'パスがtop_pathではありません'
       expect(page).to have_content('ログアウト'), 'ログアウトボタンが表示されていません'
       click_on 'ログアウト'

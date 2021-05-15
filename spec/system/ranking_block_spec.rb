@@ -1,3 +1,4 @@
+# 17pass
 # spec/system/ranking_block_spec.rb
 require 'rails_helper'
 
@@ -168,6 +169,7 @@ RSpec.describe 'RankingBlock', type: :system do
       fill_in 'ranking_block_third_place',	with: factory_ranking_block.third_place
       click_on 'ランキングブロックを作成！'
       page.driver.browser.switch_to.alert.dismiss
+      sleep 0.5
     end
     context 'ランキングブロックを更新した時' do
       before do
