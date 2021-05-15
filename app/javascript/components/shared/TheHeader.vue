@@ -9,18 +9,6 @@
       </v-toolbar-title>
 
       <v-btn
-        id="profiles-button"
-        class="m-2 white--text"
-        color="brown lighten-2"
-        @click="openProfilesPage"
-      >
-        <v-icon left>
-          mdi-account-group
-        </v-icon>
-        プロフ一覧
-      </v-btn>
-
-      <v-btn
         id="profile-edit-button"
         class="m-2 white--text"
         color="brown lighten-2"
@@ -32,17 +20,28 @@
         プロフ編集
       </v-btn>
 
-      <v-btn
-        id="popular-blocks-button"
-        class="m-2 white--text"
-        color="brown lighten-2"
-        @click="openPopularBlocksPage"
-      >
-        <v-icon left>
-          mdi-crown-outline
-        </v-icon>
-        人気のプロフブロック
-      </v-btn>
+      <v-menu right bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on" color="brown lighten-3" class="white--text">
+            <v-icon>mdi-dots-horizontal</v-icon>プロフ関連
+          </v-btn>
+        </template>
+
+        <v-list color="brown lighten-3">
+          <v-list-item
+            v-for="item in itemLists"
+            :key="item.id"
+            @click="item.clickEvent"
+          >
+            <v-list-item-avatar color="white">
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-avatar>
+            <v-list-item-title class="white--text">{{
+              item.text
+            }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
       <v-spacer />
 
@@ -66,6 +65,26 @@ export default {
   data() {
     return {
       user: {},
+      itemLists: [
+        {
+          id: 1,
+          text: "プロフ一覧",
+          icon: "mdi-account-group",
+          clickEvent: this.openProfilesPage,
+        },
+        {
+          id: 2,
+          text: "人気のプロフブロック",
+          icon: "mdi-crown-outline",
+          clickEvent: this.openPopularBlocksPage,
+        },
+        {
+          id: 3,
+          text: "あなたへのおすすめ社員",
+          icon: "mdi-account-star-outline",
+          clickEvent: this.openRecommendedUsersPage,
+        },
+      ],
     };
   },
   computed: {
@@ -90,6 +109,9 @@ export default {
     },
     openPopularBlocksPage() {
       this.$router.push(`/profiles/popular_blocks`).catch((err) => {});
+    },
+    openRecommendedUsersPage() {
+      this.$router.push(`/recommended_users`).catch((err) => {});
     },
   },
 };
