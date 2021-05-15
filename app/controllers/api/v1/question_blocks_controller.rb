@@ -5,8 +5,7 @@ module Api
       before_action :set_question_block, only: %i[show update destroy]
 
       def index
-        @user = User.find(current_user.id)
-        @question_blocks = QuestionBlock.includes(profile_block: { user: :team }).where(teams: { workspace_id: @user.team.workspace_id })
+        @question_blocks = QuestionBlock.by_team(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @question_blocks,
           serializer: QuestionBlockSerializer
@@ -37,6 +36,14 @@ module Api
       def destroy
         @question_block.destroy!
         render json: @question_block
+      end
+
+      def popular_blocks
+        @question_popular_blocks = QuestionBlock.by_team(current_user).popular_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @question_popular_blocks,
+          serializer: QuestionBlockSerializer
+        ).to_json
       end
 
       def post_to_slack_after_create

@@ -46,31 +46,13 @@ export default {
     this.firstRead();
   },
   methods: {
-    ...mapActions({
-      fetchCurrentUser: "users/fetchCurrentUser",
-      fetchTextBlocks: "textBlocks/fetchTextBlocks",
-      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
-      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
-      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
-      fetchUsers: "users/fetchUsers",
-    }),
     async fetchProfiles() {
       await axios
         .get("/api/v1/profiles")
         .then((response) => (this.profiles = response.data));
     },
     async firstRead() {
-      this.fetchCurrentUser();
-      this.fetchUsers();
       this.fetchProfiles();
-      this.fetchTextBlocks();
-      this.fetchRankingBlocks();
-      this.fetchYesOrNoBlocks();
-      this.fetchYesOrNoItems();
-      this.fetchQuestionBlocks();
-      this.fetchQuestionItems();
     },
   },
 };

@@ -35,22 +35,26 @@ Rails.application.routes.draw do
       resources :text_blocks,        only: %i[index create show update destroy] do
         collection do
           post 'post_to_slack_after_create'
+          get 'popular_blocks'
         end
       end
       resources :question_blocks,    only: %i[index create show update destroy] do
         collection do
           post 'post_to_slack_after_create'
+          get 'popular_blocks'
         end
       end
       resources :question_items,     only: %i[index create update destroy]
       resources :ranking_blocks,     only: %i[index create show update destroy] do
         collection do
           post 'post_to_slack_after_create'
+          get 'popular_blocks'
         end
       end
       resources :yes_or_no_blocks,   only: %i[index create show update destroy] do
         collection do
           post 'post_to_slack_after_create'
+          get 'popular_blocks'
         end
       end
       resources :yes_or_no_items,    only: %i[index create update destroy]

@@ -36,7 +36,7 @@
             outlined
             color="light-green lighten-5"
           >
-            <v-row v-show="isThisEditPage" justify="end">
+            <v-row v-if="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-ranking-block-button-' + rankingBlock.id"
                 tile
@@ -56,7 +56,7 @@
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </v-row>
-            <v-row>
+            <v-row v-else>
               <v-spacer />
               <ranking-block-like-button
                 :ranking-block-id="rankingBlock.id"
