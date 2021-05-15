@@ -109,6 +109,7 @@
 
 <script>
 import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
@@ -121,8 +122,26 @@ export default {
     this.firstRead();
   },
   methods: {
+    ...mapActions({
+      fetchCurrentUser: "users/fetchCurrentUser",
+      fetchTextBlocks: "textBlocks/fetchTextBlocks",
+      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
+      fetchUsers: "users/fetchUsers",
+    }),
     async firstRead() {
       await this.fetchRecentlyJoinedUserProfiles();
+      await this.fetchCurrentUser();
+      await this.fetchUsers();
+      await this.fetchTextBlocks();
+      await this.fetchRankingBlocks();
+      await this.fetchYesOrNoBlocks();
+      await this.fetchYesOrNoItems();
+      await this.fetchQuestionBlocks();
+      await this.fetchQuestionItems();
     },
     async fetchRecentlyJoinedUserProfiles() {
       await axios
