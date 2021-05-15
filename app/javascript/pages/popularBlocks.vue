@@ -24,6 +24,7 @@
           cols="12"
           sm="4"
         >
+          <div>作成者: {{ questionBlock.user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -88,6 +89,7 @@
           cols="12"
           sm="4"
         >
+          <div>作成者: {{ rankingBlock.user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -148,6 +150,8 @@
           cols="12"
           sm="4"
         >
+          <div>作成者: {{ yesOrNoBlock.user.name }}</div>
+
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -219,6 +223,7 @@
           cols="12"
           sm="4"
         >
+          <div>作成者: {{ textBlock.user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -279,9 +284,7 @@ export default {
     };
   },
   computed: {
-    overallTopThreeBlocks() {
-
-    },
+    overallTopThreeBlocks() {},
     questionPopularBlocksFirstPlace() {
       return this.questionPopularBlocksTopThree[0];
     },
