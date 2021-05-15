@@ -24,7 +24,7 @@
       </div>
     </v-row>
     <div>
-      <v-row v-if="isMyRankingBlocksLengthNotZero">
+      <transition-group tag="v-row" name="list" v-if="isMyRankingBlocksLengthNotZero">
         <v-col
           v-for="rankingBlock in myRankingBlocks"
           :key="rankingBlock.id"
@@ -79,7 +79,7 @@
             </v-card>
           </v-card>
         </v-col>
-      </v-row>
+      </transition-group>
       <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">

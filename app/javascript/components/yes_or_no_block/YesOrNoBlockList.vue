@@ -21,7 +21,7 @@
       Yes or No コーナー
     </div>
     <div>
-      <v-row v-if="isMyYesOrNoBlocksLengthNotZero">
+      <transition-group tag="v-row" name="list" v-if="isMyYesOrNoBlocksLengthNotZero">
         <v-col
           v-for="yesOrNoBlock in myYesOrNoBlocks"
           :key="yesOrNoBlock.id"
@@ -87,7 +87,7 @@
             </template>
           </v-card>
         </v-col>
-      </v-row>
+      </transition-group>
       <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
