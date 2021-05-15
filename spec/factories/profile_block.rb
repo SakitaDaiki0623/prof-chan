@@ -13,13 +13,13 @@ FactoryBot.define do
     association :user
 
     after(:create) do |profile_block|
-      3.times do
-        create(:question_block, profile_block: profile_block)
-        create(:ranking_block, profile_block: profile_block)
-        create(:text_block, profile_block: profile_block)
-        create(:yes_or_no_block, profile_block: profile_block)
-      end
+      
+      binding.pry
+      
+      create_list(:question_block, 3, profile_block: profile_block)
+      create_list(:ranking_block, 3, profile_block: profile_block)
+      create_list(:text_block, 3, profile_block: profile_block)
+      create_list(:yes_or_no_block, 3, profile_block: profile_block)
     end
   end
-
 end

@@ -3,8 +3,7 @@
 # Table name: question_blocks
 #
 #  id                 :bigint           not null, primary key
-#  title              :string(255)      not null
-#  profile_block_id   :string(255)      not null
+#  title              :string(255)      not null  profile_block_id   :string(255)      not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 
@@ -14,9 +13,7 @@ FactoryBot.define do
     title { Faker::Lorem.characters(number: 30) }
     association :profile_block
     after(:create) do |question_block|
-      [1, 2, 3].sample.times do
-        create(:question_item, question_block: question_block)
-      end
+      create_list(:question_item, [1, 2, 3].sample, question_block: question_block)
     end
   end
 end

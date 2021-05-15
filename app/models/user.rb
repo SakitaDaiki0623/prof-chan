@@ -51,7 +51,7 @@ class User < ApplicationRecord
   validates :encrypted_password,        presence: true
 
   # after_create
-  after_create :create_profile_block
+  after_create :create_profile_block if Rails.env.development?
 
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)

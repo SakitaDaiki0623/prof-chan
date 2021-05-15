@@ -14,9 +14,7 @@ FactoryBot.define do
     title { Faker::Lorem.characters(number: 30) }
     association :profile_block
     after(:create) do |yes_or_no_block|
-      [1, 2, 3].sample.times do
-        create(:yes_or_no_item, yes_or_no_block: yes_or_no_block)
-      end
+      create_list(:yes_or_no_item, [1, 2, 3].sample, yes_or_no_block: yes_or_no_block)
     end
   end
 end
