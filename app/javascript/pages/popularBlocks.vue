@@ -139,7 +139,7 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
+    <div class="py-10 px-20">
       <div class="top-sub-title my-10">
         Yes or No ブロック
       </div>
@@ -212,7 +212,7 @@
     <!-- /Yes or No ブロック -->
 
     <!-- テキストブロック -->
-    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
+    <div class="py-10 px-20">
       <div class="top-sub-title my-10">
         テキストブロック
       </div>
