@@ -1,4 +1,4 @@
-class TextBlockLikeSerializer < ActiveModel::Serializer
+class TextBlockLikeSerializer < ApplicationSerializer
   attributes :id
   belongs_to :user
   belongs_to :text_block

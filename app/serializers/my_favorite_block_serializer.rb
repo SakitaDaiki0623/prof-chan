@@ -1,4 +1,4 @@
-class MyFavoriteBlockSerializer < ActiveModel::Serializer
+class MyFavoriteBlockSerializer < ApplicationSerializer
   attributes :id, :manga_anime, :game_app, :character, :actor, :entertainer, :music, :food, :animal, :sports, :book, :place, :snack, :alcohol_drink, :restaurants, :youtuber, :musician
 
   belongs_to :profile_block

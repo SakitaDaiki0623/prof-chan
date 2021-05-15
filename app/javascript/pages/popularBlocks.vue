@@ -1,10 +1,10 @@
 <template>
-  <div class="top text-center">
+  <div class="top">
     <div class="top-bg">
       <div>
         <v-row>
           <v-col cols="12" sm="12">
-            <div class=" text-5xl">
+            <div class="text-center text-5xl">
               - - - - 人気のプロフブロック- - - -
             </div>
           </v-col>
@@ -24,7 +24,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ questionBlock.user.name }}</div>
+          <div>作成者: {{ questionBlock.owing_user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -89,7 +89,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ rankingBlock.user.name }}</div>
+          <div>作成者: {{ rankingBlock.owing_user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -150,7 +150,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ yesOrNoBlock.user.name }}</div>
+          <div>作成者: {{ yesOrNoBlock.owing_user.name }}</div>
 
           <v-card
             class="rounded-2xl p-5 note-box"
@@ -223,7 +223,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ textBlock.user.name }}</div>
+          <div>作成者: {{ textBlock.owing_user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
