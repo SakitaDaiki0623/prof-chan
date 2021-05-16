@@ -9,6 +9,7 @@ import EditProfilesPage from "../pages/profile/edit";
 import Top from "../pages/top.vue";
 import popularBlocks from "../pages/popularBlocks.vue";
 import bookmarkPage from "../pages/bookmarkPage.vue";
+import recommendedUsers from "../pages/recommendedUsers.vue";
 import NotFound from "../pages/shared/NotFound";
 
 Vue.use(VueRouter);
@@ -61,9 +62,14 @@ const routes = [
     component: popularBlocks,
   },
   {
-    path: "/recommended_users",
+    path: "/bookmark_page",
     name: "bookmarkPage",
     component: bookmarkPage,
+  },
+  {
+    path: "/recommended_users",
+    name: "recommendedUsers",
+    component: recommendedUsers,
   },
   {
     name: "NotFound",
