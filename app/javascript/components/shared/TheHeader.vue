@@ -22,7 +22,12 @@
 
       <v-menu right bottom>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" color="brown lighten-3" class="white--text">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            color="brown lighten-3"
+            class="white--text"
+          >
             <v-icon>mdi-dots-horizontal</v-icon>プロフ関連
           </v-btn>
         </template>
@@ -82,7 +87,13 @@ export default {
           id: 3,
           text: "共感したブロック一覧",
           icon: "mdi-account-star-outline",
-          clickEvent: this.openRecommendedUsersPage,
+          clickEvent: this.openBookmarkPage,
+        },
+        {
+          id: 4,
+          text: "おすすめユーザー一覧",
+          icon: "mdi-account-star-outline",
+          clickEvent: this.openRecommendedUsers,
         },
       ],
     };
@@ -110,7 +121,10 @@ export default {
     openPopularBlocksPage() {
       this.$router.push(`/profiles/popular_blocks`).catch((err) => {});
     },
-    openRecommendedUsersPage() {
+    openBookmarkPage() {
+      this.$router.push(`/bookmark_page`).catch((err) => {});
+    },
+    openRecommendedUsers() {
       this.$router.push(`/recommended_users`).catch((err) => {});
     },
   },
