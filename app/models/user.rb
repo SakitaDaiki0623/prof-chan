@@ -50,8 +50,8 @@ class User < ApplicationRecord
   validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
 
-  # after_create
-  after_create :create_profile_block if Rails.env.development?
+  # after_create Seedを入れるときコメントアウト
+  after_create :create_profile_block
 
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)

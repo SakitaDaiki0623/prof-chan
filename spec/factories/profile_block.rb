@@ -13,9 +13,6 @@ FactoryBot.define do
     association :user
 
     after(:create) do |profile_block|
-      
-      binding.pry
-      
       create_list(:question_block, 3, profile_block: profile_block)
       create_list(:ranking_block, 3, profile_block: profile_block)
       create_list(:text_block, 3, profile_block: profile_block)
