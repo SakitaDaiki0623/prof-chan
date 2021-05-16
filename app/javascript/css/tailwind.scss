@@ -237,12 +237,15 @@
   @apply text-green-500;
 }
 
-
 // 共通CSS
 
 @font-face {
-	font-family: 'prof-font';
-	src: url("./fonts/APJapanesefont.ttf");
+  font-family: "prof-font";
+  src: url("./fonts/APJapanesefont.ttf");
+}
+
+.font {
+  font-family: "prof-font", "Hannotate SC Regular", "sans-serif";
 }
 
 .top-sub-title {
