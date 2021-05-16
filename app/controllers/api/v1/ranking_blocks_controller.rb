@@ -44,6 +44,18 @@ module Api
         ).to_json
       end
 
+      def random_current_user_likes_blocks
+        ranking_blocks = []
+        @random_current_user_likes = RankingBlockLike.filter_by_current_user(current_user.id)
+        @random_current_user_likes.each do |like|
+          ranking_blocks << RankingBlock.find(like.ranking_block_id)
+        end
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          ranking_blocks,
+          serializer: RankingBlockSerializer
+        ).to_json
+      end
+
       def post_to_slack_after_create
         @ranking_block = current_user.profile_block.ranking_blocks.build(ranking_block_params)
         if @ranking_block.valid?
