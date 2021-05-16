@@ -1,4 +1,4 @@
-class ProfileBlockSerializer < ActiveModel::Serializer
+class ProfileBlockSerializer < ApplicationSerializer
   attributes :id
 
   belongs_to :user, serializer: UserSerializer

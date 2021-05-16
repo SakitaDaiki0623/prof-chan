@@ -23,7 +23,7 @@
       </div>
     </v-row>
     <div>
-      <v-row v-if="isMyQuestionBlocksLengthNotZero">
+      <transition-group tag="v-row" name="list" v-if="isMyQuestionBlocksLengthNotZero">
         <v-col
           v-for="questionBlock in myQuestionBlocks"
           :key="questionBlock.id"
@@ -82,7 +82,7 @@
             </template>
           </v-card>
         </v-col>
-      </v-row>
+      </transition-group>
       <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">

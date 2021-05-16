@@ -19,7 +19,7 @@
       <div class="block-title">テキストコーナー</div>
     </v-row>
     <div>
-      <transition-group v-if="isMyTextBlocksLengthNotZero" tag="v-row" appear>
+      <transition-group tag="v-row" name="list" v-if="isMyTextBlocksLengthNotZero">
         <v-col
           v-for="textBlock in myTextBlocks"
           :key="textBlock.id"
@@ -180,16 +180,6 @@ export default {
 </script>
 
 <style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 1s;
-}
-
-.v-enter,
-.v-leave-to {
-  opacity: 0;
-}
-
 .block-title {
   color: #80cbc4; /* 文字色 */
   padding: 10px 10px 10px 60px; /* 上・右・下・左の余白 */

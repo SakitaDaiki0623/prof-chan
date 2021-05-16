@@ -19,9 +19,7 @@
             </div>
           </v-col>
           <v-col cols="12" sm="4">
-            <div class="py-32">
-              プロフちゃんの画像
-            </div>
+            <img src="../images/prof_glad.png" class="h-80" />
           </v-col>
         </v-row>
       </div>
