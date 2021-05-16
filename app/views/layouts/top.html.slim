@@ -9,5 +9,6 @@ html
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body.flex.flex-col.min-h-screen.text-gray-600.font
+    = render  "shared/flash_message"
     = yield
     = render  "shared/footer"
