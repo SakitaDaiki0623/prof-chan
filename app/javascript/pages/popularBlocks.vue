@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="12" sm="12">
             <div class="text-center text-5xl">
-              - - - - 人気のプロフブロック- - - -
+              - - - - 社内人気のあるブロック- - - -
             </div>
           </v-col>
         </v-row>
@@ -17,6 +17,8 @@
       <div class="top-sub-title my-10">
         クエスチョンブロック
       </div>
+
+      <!-- TODO: 後ほどコンポーネント化 -->
       <v-row>
         <v-col
           v-for="questionBlock in questionPopularBlocksTopThree"
@@ -52,28 +54,6 @@
           </v-card>
         </v-col>
       </v-row>
-      <div>
-        <v-row>
-          <v-col
-            v-for="questionBlock in questionPopularBlocksTopThree"
-            :key="questionBlock.id"
-            cols="12"
-            sm="4"
-          >
-            <v-card outlined color="brown lighten-3" height="100" class="p-2">
-              <v-col
-                v-for="user in questionBlock.users"
-                :key="user.id"
-                cols="10"
-                sm="2"
-                class="inline-block"
-              >
-                <v-img :src="user.image"></v-img>
-              </v-col>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
     </div>
     <!-- /クエスチョンブロック -->
 

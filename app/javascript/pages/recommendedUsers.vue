@@ -5,41 +5,47 @@
         <v-row>
           <v-col cols="12" sm="12">
             <div class="text-center text-5xl">
-              - - - - あなたが興味のある社員- - - -
+              - - - - 共感したブロック一覧- - - -
             </div>
           </v-col>
         </v-row>
       </div>
     </div>
-    <div class="p-10">
+    <div class="p-20">
       <div class="top-sub-title m-5">クエスチョンブロック</div>
       <v-row>
         <v-col
           v-for="questionBlock in randomCurrentUserLikesQuestionBlocks"
           :key="questionBlock.id"
+          cols="12"
+          sm="4"
         >
+          {{ questionBlock.owing_user.name }} さん
+          <div class="border-2 border-gray-500"></div>
           <v-card
-            class="mx-auto"
-            max-width="344"
+            class="rounded-2xl p-5 note-box"
             outlined
             color="red lighten-4"
           >
-            <v-img :src="questionBlock.owing_user.image" height="180px" />
-
-            <div class="text-center font-bold text-3xl pt-5 text-brown-600">
-              {{ questionBlock.owing_user.name }} さん
-            </div>
-          </v-card>
-          <v-card
-            class="mx-auto m-5"
-            max-width="344"
-            outlined
-            color="brown lighten-4"
-          >
-            話題: {{ questionBlock.title }}
-            <div v-for="item in questionBlock.question_items" :key="item.id">
-              {{ item.content }}と質問されたら、{{ item.answer }}と答えるよ
-            </div>
+            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+              {{ questionBlock.title }}
+            </p>
+            <template v-for="question_item in questionBlock.question_items">
+              <div :key="question_item.id">
+                <div class="rounded-lg">
+                  <v-row>
+                    <label for="question_item_content" class="mx-5 text-sm">
+                      {{ question_item.content }}
+                    </label>
+                    <v-col cols="12" sm="12" class="mb-2">
+                      <v-card class="p-2" outlined color="white">
+                        {{ question_item.answer }}
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </div>
+              </div>
+            </template>
           </v-card>
         </v-col>
       </v-row>
