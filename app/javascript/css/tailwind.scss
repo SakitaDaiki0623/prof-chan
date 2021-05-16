@@ -237,8 +237,28 @@
   @apply text-green-500;
 }
 
-// 共通CSS
+// Flash (Before Login)
+.notice {
+  @apply border-l-4;
+  @apply border-brown-500;
+  @apply bg-brown-200;
+  @apply text-brown-700;
+  @apply p-4;
+  @apply text-2xl;
+  @apply shadow-md;
+}
+.alert {
+  @apply bg-red-200;
+  @apply border-l-4;
+  @apply border-red-500;
+  @apply text-red-700;
+  @apply p-4;
+  @apply text-2xl;
+  @apply shadow-md;
+}
 
+// =======================================
+// 共通CSS
 @font-face {
   font-family: "prof-font";
   src: url("./fonts/APJapanesefont.ttf");
