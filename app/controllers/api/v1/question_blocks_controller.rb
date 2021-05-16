@@ -46,6 +46,18 @@ module Api
         ).to_json
       end
 
+      def random_current_user_likes_blocks
+        question_blocks = []
+        @random_current_user_likes = QuestionBlockLike.filter_by_current_user(current_user.id)
+        @random_current_user_likes.each do |like|
+          question_blocks << QuestionBlock.find(like.question_block_id)
+        end
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          question_blocks,
+          serializer: QuestionBlockSerializer
+        ).to_json
+      end
+
       def post_to_slack_after_create
         @question_block_item_register = QuestionBlockItemRegister.new(set_params)
         if @question_block_item_register.valid?

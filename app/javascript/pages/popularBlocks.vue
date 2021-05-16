@@ -1,11 +1,11 @@
 <template>
-  <div class="top text-center">
+  <div class="top">
     <div class="top-bg">
       <div>
         <v-row>
           <v-col cols="12" sm="12">
-            <div class=" text-5xl">
-              - - - - 人気のプロフブロック- - - -
+            <div class="text-center text-5xl">
+              - - - - 社内人気のあるブロック- - - -
             </div>
           </v-col>
         </v-row>
@@ -17,6 +17,8 @@
       <div class="top-sub-title my-10">
         クエスチョンブロック
       </div>
+
+      <!-- TODO: 後ほどコンポーネント化 -->
       <v-row>
         <v-col
           v-for="questionBlock in questionPopularBlocksTopThree"
@@ -24,7 +26,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ questionBlock.user.name }}</div>
+          <div>作成者: {{ questionBlock.owing_user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -52,33 +54,11 @@
           </v-card>
         </v-col>
       </v-row>
-      <div>
-        <v-row>
-          <v-col
-            v-for="questionBlock in questionPopularBlocksTopThree"
-            :key="questionBlock.id"
-            cols="12"
-            sm="4"
-          >
-            <v-card outlined color="brown lighten-3" height="100" class="p-2">
-              <v-col
-                v-for="user in questionBlock.users"
-                :key="user.id"
-                cols="10"
-                sm="2"
-                class="inline-block"
-              >
-                <v-img :src="user.image"></v-img>
-              </v-col>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
     </div>
     <!-- /クエスチョンブロック -->
 
     <!-- ランキングブロック -->
-    <div class="py-10 px-20">
+    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
       <div class="top-sub-title my-10">
         ランキングブロック
       </div>
@@ -89,7 +69,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ rankingBlock.user.name }}</div>
+          <div>作成者: {{ rankingBlock.owing_user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -150,7 +130,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ yesOrNoBlock.user.name }}</div>
+          <div>作成者: {{ yesOrNoBlock.owing_user.name }}</div>
 
           <v-card
             class="rounded-2xl p-5 note-box"
@@ -223,7 +203,7 @@
           cols="12"
           sm="4"
         >
-          <div>作成者: {{ textBlock.user.name }}</div>
+          <div>作成者: {{ textBlock.owing_user.name }}</div>
           <v-card
             class="rounded-2xl p-5 note-box"
             outlined
@@ -281,6 +261,7 @@ export default {
       rankingPopularBlocks: [],
       yesOrNoPopularBlocks: [],
       textPopularBlocks: [],
+      visible: false,
     };
   },
   computed: {
@@ -337,7 +318,19 @@ export default {
   mounted() {
     this.firstRead();
   },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    handleScroll() {
+      if (!this.visible) {
+        var top = this.$el.getBoundingClientRect().top;
+        this.visible = top < window.innerHeight + 100;
+      }
+    },
     async firstRead() {
       await this.fetchRecentlyJoinedUserProfiles();
       await this.fetchQuestionPopularBlocks();
@@ -383,5 +376,19 @@ export default {
 .top-bg {
   background-color: #efebe9;
   padding: 2rem;
+}
+
+.fadeIn {
+  animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 </style>

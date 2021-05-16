@@ -101,4 +101,4 @@ config/environments/*.local.yml
 # ignore app/assets/images
 /app/assets/images/
 # ignore app/javascript/tail_images
-app/javascript/images
+# app/javascript/images

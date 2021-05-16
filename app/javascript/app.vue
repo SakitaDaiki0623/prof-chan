@@ -1,11 +1,9 @@
 <!-- app/javascript/app.vue -->
 <template>
-  <v-app
-    id="app"
-    class="default kawaii"
-  >
+  <v-app id="app" class="default kawaii">
     <TheHeader />
-    <v-main>
+    <Loading v-show="loading"></Loading>
+    <v-main v-show="!loading">
       <TheNotFound v-if="isNotFound" />
       <TheFlashMessage v-if="isFlash" />
       <router-view />
@@ -18,13 +16,16 @@
 import { mapGetters } from "vuex";
 import TheHeader from "./components/shared/TheHeader";
 import TheFooter from "./components/shared/TheFooter";
+import Loading from "./components/shared/Loading";
 import TheFlashMessage from "./components/shared/TheFlashMessage";
 import TheNotFound from "./pages/shared/NotFound";
 
 export default {
-  components: { TheHeader, TheFlashMessage, TheNotFound, TheFooter },
+  components: { TheHeader, TheFlashMessage, TheNotFound, TheFooter, Loading },
   data() {
-    return {};
+    return {
+      loading: true,
+    };
   },
   computed: {
     ...mapGetters({
@@ -39,11 +40,15 @@ export default {
       });
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+  },
 };
 </script>
 
 <style scoped>
-
 .default {
   font-family: "prof-font", "Hannotate SC Regular", "sans-serif";
   color: #505050;

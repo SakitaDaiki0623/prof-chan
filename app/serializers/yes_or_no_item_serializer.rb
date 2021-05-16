@@ -1,5 +1,5 @@
 # app/serializers/yes_or_no_item_serializer.rb
-class YesOrNoItemSerializer < ActiveModel::Serializer
+class YesOrNoItemSerializer < ApplicationSerializer
   attributes :id, :content, :answer, :yes_or_no_block
   belongs_to :yes_or_no_block, serializer: YesOrNoBlockSerializer
 
