@@ -6,7 +6,8 @@ import ProfilesPage from "../pages/profile/index";
 import ShowProfilesPage from "../pages/profile/show";
 import NewProfilesPage from "../pages/profile/new";
 import EditProfilesPage from "../pages/profile/edit";
-import Top from "../pages/top.vue"
+import Top from "../pages/top.vue";
+import popularBlocks from "../pages/popularBlocks.vue";
 import NotFound from "../pages/shared/NotFound";
 
 Vue.use(VueRouter);
@@ -47,11 +48,16 @@ const routes = [
         next({ path: `/profiles/${currentUserProfileId}/edit` });
         store.dispatch("flash/setFlash", {
           type: "error",
-          message: "他の人のプロフィールは編集できないよ！",
+          message: "他の人のプロフは編集できないよ！",
           color: "red lighten-3",
         });
       }
     },
+  },
+  {
+    path: "/profiles/popular_blocks",
+    name: "popularBlocks",
+    component: popularBlocks,
   },
   {
     name: "NotFound",

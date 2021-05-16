@@ -5,7 +5,7 @@ module Api
       before_action :set_yes_or_no_item, only: %i[update destroy]
 
       def index
-        @yes_or_no_items = YesOrNoItem.by_team(current_user)
+        @yes_or_no_items = YesOrNoItem.by_team_block(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @yes_or_no_items,
           serializer: YesOrNoItemSerializer

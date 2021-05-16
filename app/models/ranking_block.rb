@@ -16,6 +16,7 @@ class RankingBlock < ApplicationRecord
   # association =============
   belongs_to :profile_block
   has_many :ranking_block_likes, dependent: :destroy
+  has_many :users, through: :ranking_block_likes
 
   # validation =============
   with_options presence: true do
@@ -26,7 +27,4 @@ class RankingBlock < ApplicationRecord
       validates :third_place
     end
   end
-
-  # scope ============= # Ex:- scope :active, -> {where(:active => true)}
-  scope :by_team, ->(current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id }) }
 end

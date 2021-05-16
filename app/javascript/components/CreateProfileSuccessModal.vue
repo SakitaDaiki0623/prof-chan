@@ -13,26 +13,20 @@
           基本情報の登録が完了しました！
         </p>
         <v-card-actions>
-          <v-row
-            justify="center"
-            class="p-8"
-          >
+          <v-row justify="center" class="p-8">
             <v-btn
               x-large
               color="light-green accent-2"
               class=" black--text"
-              @click="moveToProfilesPage"
+              @click="moveToTopPage"
             >
               <v-icon left>
                 mdi-account-circle
               </v-icon>
-              プロフィール閲覧
+              プロフ閲覧
             </v-btn>
           </v-row>
         </v-card-actions>
-        <v-card-text class=" text-gray-600 text-center mb-5">
-          他の社員プロフィールを閲覧します。
-        </v-card-text>
       </v-card>
     </v-dialog>
   </div>
@@ -52,8 +46,8 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    moveToProfilesPage() {
-      this.$router.push("/profiles");
+    moveToTopPage() {
+      this.$router.push("/top");
     },
   },
 };

@@ -22,7 +22,4 @@ class MyFavoriteBlock < ApplicationRecord
     validates :restaurants
     validates :youtuber
   end
-
-  # scope =============
-  scope :by_team, ->(current_user) { includes(profile_block: { user: :team }).where(teams: { workspace_id: User.find(current_user.id).team.workspace_id }) }
 end

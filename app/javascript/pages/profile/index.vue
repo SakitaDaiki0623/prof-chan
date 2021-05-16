@@ -3,7 +3,7 @@
   <div class="bg-backimage bg-cover bg-fixed text-gray-600">
     <v-container class="note shadow-lg mb-20 mt-20">
       <p class="text-5xl font-bold pt-10 pb-10">
-        社員プロフィール一覧
+        社員プロフ一覧
       </p>
       <v-row class="mb-10">
         <v-col v-for="profile in profiles" :key="profile.id" cols="12" sm="4">
@@ -40,37 +40,19 @@ export default {
     ...mapState("questionBlocks", ["questionItems"]),
   },
   mounted() {
-    document.title = "プロフィール一覧 - プロフちゃん";
+    document.title = "プロフ一覧 - プロフちゃん";
   },
   created() {
     this.firstRead();
   },
   methods: {
-    ...mapActions({
-      fetchCurrentUser: "users/fetchCurrentUser",
-      fetchTextBlocks: "textBlocks/fetchTextBlocks",
-      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
-      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
-      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
-      fetchUsers: "users/fetchUsers",
-    }),
     async fetchProfiles() {
       await axios
         .get("/api/v1/profiles")
         .then((response) => (this.profiles = response.data));
     },
     async firstRead() {
-      this.fetchCurrentUser();
-      this.fetchUsers();
       this.fetchProfiles();
-      this.fetchTextBlocks();
-      this.fetchRankingBlocks();
-      this.fetchYesOrNoBlocks();
-      this.fetchYesOrNoItems();
-      this.fetchQuestionBlocks();
-      this.fetchQuestionItems();
     },
   },
 };

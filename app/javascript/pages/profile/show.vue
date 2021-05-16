@@ -1,9 +1,7 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
   <v-container class="text-gray-600">
-    <p class="text-5xl font-bold note mb-10">
-      {{ user.name }}さんのプロフィール
-    </p>
+    <p class="text-5xl font-bold note mb-10">{{ user.name }}さんのプロフ</p>
     <BasicAndAddressBlock :user="user" />
 
     <MyFavoriteBlock :user="user" />
@@ -62,7 +60,7 @@ export default {
     };
   },
   mounted() {
-    document.title = `プロフィール詳細 - プロフちゃん`;
+    document.title = `プロフ詳細 - プロフちゃん`;
   },
   methods: {
     moveToProfilesPage() {

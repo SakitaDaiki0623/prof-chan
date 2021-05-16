@@ -15,12 +15,12 @@ RSpec.describe 'ShowProfile', type: :system do
 
     before { find("#profile-index-card-#{my_profile.id}").click }
 
-    it 'タイトルが「プロフィール詳細 - プロフちゃん」であること' do
-      expect(page).to have_title('プロフィール詳細 - プロフちゃん'), '意図したタイトルが表示されていません'
+    it 'タイトルが「プロフ詳細 - プロフちゃん」であること' do
+      expect(page).to have_title('プロフ詳細 - プロフちゃん'), '意図したタイトルが表示されていません'
     end
 
-    it '指定のプロフィールが表示されていること' do
-      expect(page).to have_content("#{my_profile.user.name}さんのプロフィール")
+    it '指定のプロフが表示されていること' do
+      expect(page).to have_content("#{my_profile.user.name}さんのプロフ")
     end
 
     it 'ヘッダーが表示されていること' do

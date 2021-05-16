@@ -31,7 +31,7 @@
             outlined
             color="teal accent-1"
           >
-            <v-row v-show="isThisEditPage" justify="end">
+            <v-row v-if="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-text-block-button-' + textBlock.id"
                 tile
@@ -50,6 +50,12 @@
               >
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
+            </v-row>
+            <v-row v-else>
+              <v-spacer />
+              <text-block-like-button
+                :text-block-id="textBlock.id"
+              ></text-block-like-button>
             </v-row>
             <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
               {{ textBlock.title }}
@@ -95,11 +101,13 @@ import { mapState, mapActions, Store } from "vuex";
 
 import TextFormatDialog from "./TextFormatDialog";
 import EditTextFormatDialog from "./EditTextFormatDialog";
+import TextBlockLikeButton from "../likes/TextBlockLikeButton";
 
 export default {
   components: {
     TextFormatDialog,
     EditTextFormatDialog,
+    TextBlockLikeButton,
   },
   props: {
     isThisEditPage: {

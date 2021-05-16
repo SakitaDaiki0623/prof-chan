@@ -1,9 +1,9 @@
 <template>
-  <v-container class="rounded-2xl">
-    <v-row
-      v-show="isThisEditPage"
-      justify="center"
-    >
+  <v-container
+    class="rounded-2xl"
+    v-show="isMyQuestionBlocksLengthNotZero || isThisEditPage"
+  >
+    <v-row v-show="isThisEditPage" justify="center">
       <v-btn
         id="add-question-block-btn"
         tile
@@ -35,10 +35,7 @@
             outlined
             color="red lighten-4"
           >
-            <v-row
-              v-show="isThisEditPage"
-              justify="end"
-            >
+            <v-row v-if="isThisEditPage" justify="end">
               <v-btn
                 :id="'edit-question-block-button-' + questionBlock.id"
                 tile
@@ -58,6 +55,12 @@
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </v-row>
+            <v-row v-else>
+              <v-spacer />
+              <question-block-like-button
+                :question-block-id="questionBlock.id"
+              ></question-block-like-button>
+            </v-row>
             <p class="text-2xl font-bold text-gray-600 px-3 py-3">
               {{ questionBlock.title }}
             </p>
@@ -65,22 +68,11 @@
               <div :key="question_item.id">
                 <div class="rounded-lg">
                   <v-row>
-                    <label
-                      for="question_item_content"
-                      class="mx-5 text-sm"
-                    >
+                    <label for="question_item_content" class="mx-5 text-sm">
                       {{ question_item.content }}
                     </label>
-                    <v-col
-                      cols="12"
-                      sm="12"
-                      class="mb-2"
-                    >
-                      <v-card
-                        class="p-2"
-                        outlined
-                        color="white"
-                      >
+                    <v-col cols="12" sm="12" class="mb-2">
+                      <v-card class="p-2" outlined color="white">
                         {{ question_item.answer }}
                       </v-card>
                     </v-col>
@@ -91,10 +83,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-container
-        v-else
-        class="no-block-display-container"
-      >
+      <v-container v-else class="no-block-display-container">
         <v-row justify="center">
           <div class="font-bold text-2xl opacity-50">
             社員のクエスチョンブロックがありません
@@ -125,11 +114,13 @@ import { mapState, mapActions } from "vuex";
 
 import QuestionFormatDialog from "./QuestionFormatDialog";
 import EditQuestionFormatDialog from "./EditQuestionFormatDialog";
+import QuestionBlockLikeButton from "../likes/QuestionBlockLikeButton";
 
 export default {
   components: {
     QuestionFormatDialog,
     EditQuestionFormatDialog,
+    QuestionBlockLikeButton,
   },
   props: {
     isThisEditPage: {

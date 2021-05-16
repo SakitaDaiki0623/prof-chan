@@ -5,8 +5,7 @@ module Api
       before_action :set_text_block, only: %i[show update destroy]
 
       def index
-        @user = User.find(current_user.id)
-        @text_blocks = TextBlock.includes(profile_block: { user: :team }).where(teams: { workspace_id: @user.team.workspace_id })
+        @text_blocks = TextBlock.by_team(current_user)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @text_blocks,
           serializer: TextBlockSerializer
@@ -36,6 +35,14 @@ module Api
       def destroy
         @text_block.destroy!
         render json: @text_block
+      end
+
+      def popular_blocks
+        @text_popular_blocks = TextBlock.by_team(current_user).popular_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @text_popular_blocks,
+          serializer: TextBlockSerializer
+        ).to_json
       end
 
       def post_to_slack_after_create

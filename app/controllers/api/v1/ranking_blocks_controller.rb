@@ -36,6 +36,14 @@ module Api
         render json: @ranking_block, serializer: RankingBlockSerializer
       end
 
+      def popular_blocks
+        @ranking_popular_blocks = RankingBlock.by_team(current_user).popular_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @ranking_popular_blocks,
+          serializer: RankingBlockSerializer
+        ).to_json
+      end
+
       def post_to_slack_after_create
         @ranking_block = current_user.profile_block.ranking_blocks.build(ranking_block_params)
         if @ranking_block.valid?
