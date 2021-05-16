@@ -80,7 +80,7 @@ export default {
         },
         {
           id: 3,
-          text: "あなたへのおすすめ社員",
+          text: "共感したブロック一覧",
           icon: "mdi-account-star-outline",
           clickEvent: this.openRecommendedUsersPage,
         },
