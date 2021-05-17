@@ -53,7 +53,7 @@
       <v-btn
         class="m-2 white--text"
         color="brown darken-1"
-        href="/logout"
+        href="/users/sign_out"
         data-method="delete"
       >
         ログアウト
