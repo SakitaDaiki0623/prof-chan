@@ -6,13 +6,13 @@
 
     <MyFavoriteBlock :user="user" />
 
-    <TextBlockList :user="user" />
-
     <QuestionBlockList :user="user" />
+
+    <RankingBlockList :user="user" />
 
     <YesOrNoBlockList :user="user" />
 
-    <RankingBlockList :user="user" />
+    <TextBlockList :user="user" />
   </v-container>
 </template>
 
