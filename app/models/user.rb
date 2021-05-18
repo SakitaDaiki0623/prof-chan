@@ -58,9 +58,8 @@ class User < ApplicationRecord
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
-    user.image = user_info.dig('user', 'image_192')
+    user.remote_image_url = user_info.dig('user', 'image_192')
     user.check_team_existence(user_info.dig('team'))
-    user.tokens = auth.info.authed_user.access_token
     user.save!
     user
   end
