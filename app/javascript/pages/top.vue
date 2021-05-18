@@ -19,7 +19,7 @@
             </div>
           </v-col>
           <v-col cols="12" sm="4">
-            <img src="../images/prof_glad.png" class="h-80" />
+            <img src="../images/prof_happy.png" class="h-80" />
           </v-col>
         </v-row>
       </div>
