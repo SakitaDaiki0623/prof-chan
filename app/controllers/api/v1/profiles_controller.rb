@@ -45,11 +45,11 @@ module Api
       private
 
       def set_profile
-        @profile = Profile.find(params[:id])
+        @profile = Profile.find_by(public_uid: params[:id])
       end
 
       def profile_params
-        params.require(:profile).permit(:birthday, :day_of_joinning, :height, :gender, :blood_type, :prefecture_id)
+        params.require(:profile).permit(:birthday, :day_of_joinning, :height, :gender, :blood_type, :prefecture_id, :public_uid)
       end
     end
   end
