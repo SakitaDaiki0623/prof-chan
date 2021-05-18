@@ -123,7 +123,6 @@ export default {
       this.getProfile();
     },
     async getProfile() {
-      console.log(this.$route.params.id);
       const profileRes = await axios.get(
         `/api/v1/profiles/${this.$route.params.id}`
       );

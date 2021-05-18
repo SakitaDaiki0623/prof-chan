@@ -80,7 +80,6 @@ export default {
         (user) => to.params.id == user.profile.public_uid
       );
       if (profileUser == undefined) {
-        console.log(vm);
         vm.$store.dispatch("isNotFound/setIsNotFound", {
           boolean: true,
         });
