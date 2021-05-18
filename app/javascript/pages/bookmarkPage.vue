@@ -5,7 +5,7 @@
         あなたがよく共感する社員TOP3
       </div>
       <v-row class="py-5 h-96" justify="center">
-        <v-col align-self="center" cols="12" sm="3">
+        <v-col align-self="center" cols="12" sm="3" v-if="secondPlaceUserExist">
           <v-card class="second-place" outlined contain>
             <v-img
               :src="secondPlaceUser.image.url"
@@ -14,7 +14,7 @@
             ></v-img>
           </v-card>
         </v-col>
-        <v-col align-self="start" cols="12" sm="3">
+        <v-col align-self="start" cols="12" sm="3" v-if="firstPlaceUserExist">
           <v-card class="first-place" outlined contain>
             <v-img
               :src="firstPlaceUser.image.url"
@@ -23,7 +23,7 @@
             ></v-img>
           </v-card>
         </v-col>
-        <v-col align-self="end" cols="12" sm="3">
+        <v-col align-self="end" cols="12" sm="3" v-if="thirdPlaceUserExist">
           <v-card class="first-place" outlined contain>
             <v-img
               :src="thirdPlaceUser.image.url"
@@ -45,7 +45,7 @@
     </div>
     <div class="p-20">
       <div class="top-sub-title m-5">クエスチョンブロック</div>
-      <v-row>
+      <v-row v-if="randomCurrentUserLikesQuestionBlocks.length !== 0">
         <v-col
           v-for="questionBlock in randomCurrentUserLikesQuestionBlocks"
           :key="questionBlock.id"
@@ -84,7 +84,7 @@
       <div class="top-sub-title my-10">
         ランキングブロック
       </div>
-      <v-row>
+      <v-row v-if="randomCurrentUserLikesRankingBlocks.length !== 0">
         <v-col
           v-for="rankingBlock in randomCurrentUserLikesRankingBlocks"
           :key="rankingBlock.id"
@@ -119,7 +119,7 @@
       <div class="top-sub-title my-10">
         Yes or No ブロック
       </div>
-      <v-row>
+      <v-row v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0">
         <v-col
           v-for="yesOrNoBlock in randomCurrentUserLikesYesOrNoBlocks"
           :key="yesOrNoBlock.id"
@@ -166,7 +166,11 @@
       <div class="top-sub-title my-10">
         テキストブロック
       </div>
-      <transition-group tag="v-row" appear>
+      <transition-group
+        tag="v-row"
+        appear
+        v-if="randomCurrentUserLikesTextBlocks.length !== 0"
+      >
         <v-col
           v-for="textBlock in randomCurrentUserLikesTextBlocks"
           :key="textBlock.id"
@@ -214,6 +218,15 @@ export default {
     };
   },
   computed: {
+    firstPlaceUserExist() {
+      return !!Object.keys(this.firstPlaceUser).length;
+    },
+    secondPlaceUserExist() {
+      return !!Object.keys(this.secondPlaceUser).length;
+    },
+    thirdPlaceUserExist() {
+      return !!Object.keys(this.thirdPlaceUser).length;
+    },
     getLikingBlocksOwingUserIds() {
       // 参考: https://www.suzu6.net/posts/96-js-count-element/
       // 各ブロックでユーザーが共感しているブロックを持つユーザーのidを取得
@@ -299,16 +312,22 @@ export default {
         .then((res) => (this.randomCurrentUserLikesTextBlocks = res.data));
     },
     async fecthFirstPlaceUser() {
+      if (this.getLikingBlocksOwingUserIds[0] == undefined) return;
+
       await axios
         .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[0].user_id}`)
         .then((res) => (this.firstPlaceUser = res.data));
     },
     async fecthSecondPlaceUser() {
+      if (this.getLikingBlocksOwingUserIds[1] == undefined) return;
+
       await axios
         .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[1].user_id}`)
         .then((res) => (this.secondPlaceUser = res.data));
     },
     async fecthThirdPlaceUser() {
+      if (this.getLikingBlocksOwingUserIds[2] == undefined) return;
+
       await axios
         .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[2].user_id}`)
         .then((res) => (this.thirdPlaceUser = res.data));
