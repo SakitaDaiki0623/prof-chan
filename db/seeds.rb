@@ -1,6 +1,11 @@
 require 'factory_bot'
 require 'faker'
 
+# create another team workspace and users belonging to it
+FactoryBot.create(:team) do |team|
+  FactoryBot.create_list(:user, 10, team: team)
+end
+
 # create real team workspace and users
 FactoryBot.create(:team, :real_team) do |team|
   FactoryBot.create_list(:user, 10, team: team)
@@ -23,9 +28,4 @@ FactoryBot.create(:team, :real_team) do |team|
       FactoryBot.create(:yes_or_no_block_like, user: user, yes_or_no_block: block)
     end
   end
-end
-
-# create another team workspace and users belonging to it
-FactoryBot.create(:team) do |team|
-  FactoryBot.create_list(:user, 10, team: team)
 end

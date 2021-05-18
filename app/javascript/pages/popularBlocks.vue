@@ -109,7 +109,7 @@
                 sm="2"
                 class="inline-block"
               >
-                <v-img :src="user.image"></v-img>
+                <v-img :src="user.image.url"></v-img>
               </v-col>
             </v-card>
           </v-col>
@@ -182,7 +182,7 @@
                 sm="2"
                 class="inline-block"
               >
-                <v-img :src="user.image"></v-img>
+                <v-img :src="user.image.url"></v-img>
               </v-col>
             </v-card>
           </v-col>
@@ -239,7 +239,7 @@
                 sm="2"
                 class="inline-block"
               >
-                <v-img :src="user.image"></v-img>
+                <v-img :src="user.image.url"></v-img>
               </v-col>
             </v-card>
           </v-col>

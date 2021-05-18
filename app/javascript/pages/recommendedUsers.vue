@@ -8,7 +8,7 @@
         <v-col align-self="center" cols="12" sm="3">
           <v-card class="second-place" outlined contain>
             <v-img
-              :src="secondPlaceUser.image"
+              :src="secondPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
@@ -17,7 +17,7 @@
         <v-col align-self="start" cols="12" sm="3">
           <v-card class="first-place" outlined contain>
             <v-img
-              :src="firstPlaceUser.image"
+              :src="firstPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
@@ -26,7 +26,7 @@
         <v-col align-self="end" cols="12" sm="3">
           <v-card class="first-place" outlined contain>
             <v-img
-              :src="thirdPlaceUser.image"
+              :src="thirdPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
@@ -34,6 +34,22 @@
         </v-col>
       </v-row>
     </div>
+    <div class="top-sub-title m-5">1番共感してくれる社員</div>
+    <v-row>
+      <v-col
+        v-for="block in firstPlaceUserLikesBlocks"
+        :key="block.id"
+        cols="12"
+        sm="4"
+      >
+        <div class="border-2 border-gray-500"></div>
+        <v-card class="rounded-2xl p-5 note-box" outlined color="red lighten-4">
+          <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+            {{ block.title }}
+          </p>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -44,12 +60,13 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      datas: [],
       firstPlaceUser: {},
       secondPlaceUser: {},
       thirdPlaceUser: {},
-      recommendedUsers: [],
-      ids: [],
+      currentUserProfileBlock: {},
+      // firstPlaceUserProfileBlock: {},
+      // secondPlaceUserProfileBlock: {},
+      // thirdPlaceUserProfileBlock: {},
     };
   },
   computed: {
@@ -59,22 +76,78 @@ export default {
     ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
 
+    topThreeUserIdAndTotalLikes() {
+      const allUserIds = this.currentUserBlocklikesUsres.map((user) => user.id);
+
+      const dict = {};
+
+      for (let key of allUserIds) {
+        dict[key] = allUserIds.filter(function(x) {
+          return x == key;
+        }).length;
+      }
+
+      let arr = Object.keys(dict).map((e) => ({ user_id: e, value: dict[e] }));
+
+      arr.sort(function(a, b) {
+        if (a.value < b.value) return 1;
+        if (a.value > b.value) return -1;
+        return 0;
+      });
+
+      const target = arr.splice(0, 3);
+      return target; // ex.0: {user_id: "2", value: 12}, 1: {user_id: "3", value: 6}, 2: {user_id: "1", value: 3}
+    },
+
+    //Other User Likes Blocks of Current Users
+    firstPlaceUserLikesBlocks() {
+      const blocks = [];
+      this.allCurrentUserBlocks.forEach((block) =>
+        block.users.forEach((user) => {
+          if (user.id == this.firstPlaceUser.id) {
+            blocks.push(block);
+          }
+        })
+      );
+      return blocks;
+    },
+    secondPlaceUserLikesBlocks() {
+      const blocks = [];
+      this.allCurrentUserBlocks.forEach((block) =>
+        block.users.forEach((user) => {
+          if (user.id == this.secondPlaceUser.id) {
+            blocks.push(block);
+          }
+        })
+      );
+      return blocks;
+    },
+    thirdPlaceUserLikesBlocks() {
+      const blocks = [];
+      this.allCurrentUserBlocks.forEach((block) =>
+        block.users.forEach((user) => {
+          if (user.id == this.thirdPlaceUser.id) {
+            blocks.push(block);
+          }
+        })
+      );
+      return blocks;
+    },
+
     currentUserBlocklikesUsres() {
       const users = [];
-      this.currentUserQuestionBlocks.forEach((block) =>
+      this.allCurrentUserBlocks.forEach((block) =>
         block.users.forEach((user) => users.push(user))
       );
-      this.currentUserRankingBlocks.forEach((block) =>
-        block.users.forEach((user) => users.push(user))
-      );
-      this.currentUserYesOrNoBlocks.forEach((block) =>
-        block.users.forEach((user) => users.push(user))
-      );
-      this.currentUserTextBlocks.forEach((block) =>
-        block.users.forEach((user) => users.push(user))
-      );
-
       return users;
+    },
+    allCurrentUserBlocks() {
+      return [].concat(
+        this.currentUserQuestionBlocks,
+        this.currentUserRankingBlocks,
+        this.currentUserYesOrNoBlocks,
+        this.currentUserTextBlocks
+      );
     },
     currentUserQuestionBlocks() {
       return (
@@ -108,30 +181,6 @@ export default {
         ) || {}
       );
     },
-    getLikingBlocksOwingUserIds() {
-
-      const allUserIds = this.currentUserBlocklikesUsres.map((user) => user.id);
-
-      // 要素数が多いユーザートップ3のidを取得
-      const dict = {};
-
-      for (let key of allUserIds) {
-        dict[key] = allUserIds.filter(function(x) {
-          return x == key;
-        }).length;
-      }
-
-      let arr = Object.keys(dict).map((e) => ({ user_id: e, value: dict[e] }));
-
-      arr.sort(function(a, b) {
-        if (a.value < b.value) return 1;
-        if (a.value > b.value) return -1;
-        return 0;
-      });
-
-      const topThreeUserIdAndLikesCount = arr.splice(0, 3);
-      return topThreeUserIdAndLikesCount; // ex.0: {user_id: "2", value: 12}, 1: {user_id: "3", value: 6}, 2: {user_id: "1", value: 3}
-    },
   },
   mounted() {
     this.firstRead();
@@ -144,17 +193,17 @@ export default {
     },
     async fecthFirstPlaceUser() {
       await axios
-        .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[0].user_id}`)
+        .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[0].user_id}`)
         .then((res) => (this.firstPlaceUser = res.data));
     },
     async fecthSecondPlaceUser() {
       await axios
-        .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[1].user_id}`)
+        .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[1].user_id}`)
         .then((res) => (this.secondPlaceUser = res.data));
     },
     async fecthThirdPlaceUser() {
       await axios
-        .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[2].user_id}`)
+        .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[2].user_id}`)
         .then((res) => (this.thirdPlaceUser = res.data));
     },
   },

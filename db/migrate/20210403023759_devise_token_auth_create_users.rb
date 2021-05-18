@@ -3,7 +3,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
     create_table(:users) do |t|
 
       t.string :provider, null: false, :default => "email"
-      t.string :uid, null: false, :default => ""
+      t.string :uid
 
       ## Database authenticatable
       t.string :encrypted_password, null: false, :default => ""
@@ -31,11 +31,9 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string :name, null: false
       t.string :image, null: false
       t.string :email, null: false
-      t.references :team, foreign_key: true
+      t.references :team, foreign_key: true, :default => "1"
 
       ## Tokens
-      t.string :tokens
-
       t.timestamps
     end
 
