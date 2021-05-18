@@ -185,23 +185,7 @@
               sm="4"
             >
               <div>作成者: {{ textBlock.owing_user.name }}</div>
-              <v-card
-                class="rounded-2xl p-5 note-box"
-                outlined
-                color="teal accent-1"
-              >
-                <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-                  {{ textBlock.title }}
-                </p>
-                <v-card
-                  class="p-3 rounded-lg"
-                  outlined
-                  color="white"
-                  min-height="200px"
-                >
-                  {{ textBlock.text }}
-                </v-card>
-              </v-card>
+              <TextBlockCard :text-block="textBlock" />
             </v-col>
           </transition-group>
         </div>
@@ -214,10 +198,12 @@
 <script>
 import axios from "axios";
 import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
+import TextBlockCard from "../components/text_block/TextBlockCard";
 
 export default {
   components: {
     NotAnyBookmarkBlock,
+    TextBlockCard,
   },
   data() {
     return {

@@ -204,47 +204,9 @@
           sm="4"
         >
           <div>作成者: {{ textBlock.owing_user.name }}</div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="teal accent-1"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-              {{ textBlock.title }}
-            </p>
-            <v-card
-              class="p-3 rounded-lg"
-              outlined
-              color="white"
-              min-height="200px"
-            >
-              {{ textBlock.text }}
-            </v-card>
-          </v-card>
+          <TextBlockCard :text-block="textBlock" />
         </v-col>
       </transition-group>
-      <div>
-        <v-row>
-          <v-col
-            v-for="textBlock in textPopularBlocksTopThree"
-            :key="textBlock.id"
-            cols="12"
-            sm="4"
-          >
-            <v-card outlined color="brown lighten-3" height="100" class="p-2">
-              <v-col
-                v-for="user in textBlock.users"
-                :key="user.id"
-                cols="10"
-                sm="2"
-                class="inline-block"
-              >
-                <v-img :src="user.image.url"></v-img>
-              </v-col>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
     </div>
     <!-- /テキストブロック -->
   </div>
@@ -252,8 +214,12 @@
 
 <script>
 import axios from "axios";
+import TextBlockCard from "../components/text_block/TextBlockCard";
 
 export default {
+  components: {
+    TextBlockCard,
+  },
   data() {
     return {
       recentlyJoinedUserProfiles: [],
