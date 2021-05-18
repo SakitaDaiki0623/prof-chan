@@ -57,7 +57,7 @@ const routes = [
     },
   },
   {
-    path: "/profiles/popular_blocks",
+    path: "/popular_blocks",
     name: "popularBlocks",
     component: popularBlocks,
   },
