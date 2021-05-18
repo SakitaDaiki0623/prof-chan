@@ -44,8 +44,6 @@ const routes = [
     beforeEnter: (to, from, next) => {
       if (store.state == undefined) return;
       const currentUserProfileId = store.state.users.currentUser.profile.public_uid;
-      console.log(to.params.id)
-      console.log(currentUserProfileId)
       if (currentUserProfileId == to.params.id) {
         next();
       } else {

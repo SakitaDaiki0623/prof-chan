@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       profile: {},
+      profiles: [],
     };
   },
   mounted() {
@@ -66,6 +67,25 @@ export default {
     moveToProfilesPage() {
       this.$router.push("/profiles");
     },
+    fetchProfiles() {
+      axios
+        .get("/api/v1/profiles")
+        .then((response) => (this.profiles = response.data));
+    },
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      const users = vm.users;
+      const profileUser = users.find(
+        (user) => to.params.id == user.profile.public_uid
+      );
+      if (profileUser == undefined) {
+        console.log(vm);
+        vm.$store.dispatch("isNotFound/setIsNotFound", {
+          boolean: true,
+        });
+      }
+    });
   },
 };
 </script>
