@@ -5,8 +5,8 @@
         <img src="../images/prof_normal.png" class="image" />
       </v-col>
       <v-col cols="12" sm="6" align="left">
-        <div class="text-center text-5xl balloon4">
-          共感ボタンを押したブロックはまだないよ
+        <div class="text-center text-4xl balloon4">
+          {{ profMessage }}
         </div>
       </v-col>
     </v-row>
@@ -14,7 +14,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    profMessage: {
+      type: String,
+      required: false,
+      default: "共感ボタンを押したブロックはまだないよ",
+    },
+  },
+};
 </script>
 <style scoped>
 .image {
