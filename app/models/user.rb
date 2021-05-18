@@ -28,6 +28,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable, :omniauthable
 
+  mount_uploader :image, ImageUploader
+
+
   # association
   has_one :profile,       dependent: :destroy
   has_one :profile_block, dependent: :destroy
@@ -43,11 +46,8 @@ class User < ApplicationRecord
   has_many :yes_or_no_blocks, through: :yes_or_no_block_likes
 
   # validation
-  validates :name,                      presence: true, length: { in: 1..15 }
+  validates :name,                      presence: true
   validates :email,                     presence: true, uniqueness: { case_sensitive: true }
-  validates :provider,                  presence: true
-  validates :uid,                       presence: true, uniqueness: { case_sensitive: true }
-  validates :team_id,                   presence: true
   validates :encrypted_password,        presence: true
 
   # after_create Seedを入れるときコメントアウト

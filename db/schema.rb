@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_015102) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "provider", default: "email", null: false
-    t.string "uid", default: "", null: false
+    t.string "uid"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -174,14 +174,11 @@ ActiveRecord::Schema.define(version: 2021_04_27_015102) do
     t.string "name", null: false
     t.string "image", null: false
     t.string "email", null: false
-    t.bigint "team_id"
-    t.string "tokens"
+    t.bigint "team_id", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
-    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
   create_table "yes_or_no_block_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
