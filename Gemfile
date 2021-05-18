@@ -23,6 +23,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 # Application server
 gem 'puma', '~> 4.1'
+gem 'carrierwave'
 
 # Config
 gem 'config'
