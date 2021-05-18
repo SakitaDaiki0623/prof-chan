@@ -82,8 +82,10 @@ ActiveRecord::Schema.define(version: 2021_04_27_015102) do
     t.integer "prefecture_id", null: false
     t.datetime "birthday", null: false
     t.datetime "day_of_joinning", null: false
+    t.string "public_uid", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["public_uid"], name: "index_profiles_on_public_uid", unique: true
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -179,6 +181,8 @@ ActiveRecord::Schema.define(version: 2021_04_27_015102) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
   create_table "yes_or_no_block_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

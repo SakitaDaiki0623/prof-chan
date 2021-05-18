@@ -45,4 +45,7 @@ class Profile < ApplicationRecord
   # active hash =============
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
+
+  # generate_public_uid ==========
+  generate_public_uid generator: PublicUid::Generators::HexStringSecureRandom.new(10)
 end
