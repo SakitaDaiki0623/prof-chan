@@ -50,7 +50,7 @@ export default {
 
     user() {
       return this.users.find(
-        (user) => this.$route.params.id == user.profile.id
+        (user) => this.$route.params.id == user.profile.public_uid
       );
     },
   },

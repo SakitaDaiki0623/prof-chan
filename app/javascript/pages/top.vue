@@ -34,7 +34,7 @@
         <transition-group tag="v-row">
           <v-col
             v-for="recentlyJoinedUserProfile in recentlyJoinedUserProfiles"
-            :key="recentlyJoinedUserProfile.id"
+            :key="recentlyJoinedUserProfile.public_uid"
             cols="4"
           >
             <v-card
@@ -147,7 +147,7 @@ export default {
         .then((res) => (this.recentlyJoinedUserProfiles = res.data));
     },
     moveToUserProfilePage(profile) {
-      this.$router.push(`/profiles/${profile.id}`);
+      this.$router.push(`/profiles/${profile.public_uid}`);
     },
   },
 };

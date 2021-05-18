@@ -354,7 +354,7 @@ export default {
   methods: {
     patchProfile: async function () {
       const res = await axios.patch(
-        `/api/v1/profiles/${this.editBasicProfile.id}`,
+        `/api/v1/profiles/${this.editBasicProfile.public_uid}`,
         this.editBasicProfile
       );
       if (res.status !== 200) {

@@ -115,7 +115,7 @@ export default {
     },
     openProfileEditPage() {
       this.$router
-        .push(`/profiles/${this.currentUser.profile.id}/edit`)
+        .push(`/profiles/${this.currentUser.profile.public_uid}/edit`)
         .catch((err) => {});
     },
     openPopularBlocksPage() {

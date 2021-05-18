@@ -59,13 +59,13 @@ export default {
   computed: {
     ...mapState("users", ["users"]),
     isThisEditPage() {
-      return this.$route.path == `/profiles/${this.user.profile.id}/edit`
+      return this.$route.path == `/profiles/${this.user.profile.public_uid}/edit`
         ? true
         : false;
     },
     user() {
       return this.users.find(
-        (user) => this.$route.params.id == user.profile.id
+        (user) => this.$route.params.id == user.profile.public_uid
       );
     },
   },

@@ -31,19 +31,21 @@ const routes = [
     component: ProfilesPage,
   },
   {
-    path: "/profiles/:id(\\d+)",
+    path: "/profiles/:id",
     name: "ShowProfilesPage",
     component: ShowProfilesPage,
     props: true,
   },
   {
-    path: "/profiles/:id(\\d+)/edit",
+    path: "/profiles/:id/edit",
     name: "EditProfilesPage",
     component: EditProfilesPage,
     props: true,
     beforeEnter: (to, from, next) => {
       if (store.state == undefined) return;
-      const currentUserProfileId = store.state.users.currentUser.profile.id;
+      const currentUserProfileId = store.state.users.currentUser.profile.public_uid;
+      console.log(to.params.id)
+      console.log(currentUserProfileId)
       if (currentUserProfileId == to.params.id) {
         next();
       } else {
