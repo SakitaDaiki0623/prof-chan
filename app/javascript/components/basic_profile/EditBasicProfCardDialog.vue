@@ -19,7 +19,7 @@
           <div class="flex justify-center">
             <img
               class="ring-4 ring-gray-600 w-9/12"
-              :src="currentUser.image"
+              :src="currentUser.image.url"
             >
           </div>
           <div class="text-xl font-bold inline-block mt-4">

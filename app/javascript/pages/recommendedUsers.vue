@@ -8,7 +8,7 @@
         <v-col align-self="center" cols="12" sm="3">
           <v-card class="second-place" outlined contain>
             <v-img
-              :src="secondPlaceUser.image"
+              :src="secondPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
@@ -17,7 +17,7 @@
         <v-col align-self="start" cols="12" sm="3">
           <v-card class="first-place" outlined contain>
             <v-img
-              :src="firstPlaceUser.image"
+              :src="firstPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
@@ -26,7 +26,7 @@
         <v-col align-self="end" cols="12" sm="3">
           <v-card class="first-place" outlined contain>
             <v-img
-              :src="thirdPlaceUser.image"
+              :src="thirdPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
