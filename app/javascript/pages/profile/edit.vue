@@ -6,19 +6,18 @@
     <div class="text-5xl font-bold p-10 text-gray-600 rounded-t-2xl">
       プロフ編集
     </div>
-
     <v-container>
       <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
       <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
-
       <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+
+      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
       <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
     </v-container>
   </v-container>
 </template>
@@ -26,7 +25,7 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
 import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
@@ -51,32 +50,23 @@ export default {
       default: "",
     },
   },
-  data() {
-    return {
-      profile: {},
-    };
-  },
   computed: {
     ...mapState("users", ["users"]),
+
     isThisEditPage() {
-      return this.$route.path == `/profiles/${this.user.profile.id}/edit`
+      return this.$route.path ==
+        `/profiles/${this.user.profile.public_uid}/edit`
         ? true
         : false;
     },
     user() {
       return this.users.find(
-        (user) => this.$route.params.id == user.profile.id
+        (user) => this.$route.params.id == user.profile.public_uid
       );
     },
   },
   created() {
     document.title = `プロフ編集 - プロフちゃん`;
-  },
-  methods: {
-    ...mapActions({
-      fetchProfiles: "profiles/fetchProfiles",
-      fetchCurrentUser: "users/fetchCurrentUser",
-    }),
   },
 };
 </script>
@@ -90,7 +80,6 @@ export default {
   color: #fffaf0;
   letter-spacing: 5rem;
 }
-
 
 .list-enter-active,
 .list-leave-active,

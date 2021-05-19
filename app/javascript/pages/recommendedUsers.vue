@@ -1,11 +1,11 @@
 <template>
   <div class="top">
-    <div class="top-three-recommended-users-space">
+    <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
       <div class="text-center text-5xl text-white">
         あなたによく共感する社員TOP3
       </div>
       <v-row class="py-5 h-96" justify="center">
-        <v-col align-self="center" cols="12" sm="3">
+        <v-col align-self="center" cols="12" sm="3" v-if="secondPlaceUserExist">
           <v-card class="second-place" outlined contain>
             <v-img
               :src="secondPlaceUser.image.url"
@@ -23,7 +23,7 @@
             ></v-img>
           </v-card>
         </v-col>
-        <v-col align-self="end" cols="12" sm="3">
+        <v-col align-self="end" cols="12" sm="3" v-if="thirdPlaceUserExist">
           <v-card class="first-place" outlined contain>
             <v-img
               :src="thirdPlaceUser.image.url"
@@ -34,47 +34,69 @@
         </v-col>
       </v-row>
     </div>
-    <div class="top-sub-title m-5">1番共感してくれる社員</div>
-    <v-row>
-      <v-col
-        v-for="block in firstPlaceUserLikesBlocks"
-        :key="block.id"
-        cols="12"
-        sm="4"
-      >
-        <div class="border-2 border-gray-500"></div>
-        <v-card class="rounded-2xl p-5 note-box" outlined color="red lighten-4">
-          <p class="text-2xl font-bold text-gray-600 px-3 py-3">
-            {{ block.title }}
-          </p>
-        </v-card>
-      </v-col>
-    </v-row>
+
+    <div v-if="firstPlaceUserExist">
+      <div class="top-sub-title m-5">1番共感してくれる社員</div>
+      <v-row>
+        <v-col
+          v-for="block in firstPlaceUserLikesBlocks"
+          :key="block.id"
+          cols="12"
+          sm="4"
+        >
+          <div class="border-2 border-gray-500"></div>
+          <v-card
+            class="rounded-2xl p-5 note-box"
+            outlined
+            color="red lighten-4"
+          >
+            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+              {{ block.title }}
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+    <NotAnyBookmarkBlock
+      v-else
+      prof-message="共感されているブロックはまだないよ"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
+import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
 
 export default {
+  components: {
+    NotAnyBookmarkBlock,
+  },
   data() {
     return {
       firstPlaceUser: {},
       secondPlaceUser: {},
       thirdPlaceUser: {},
       currentUserProfileBlock: {},
-      // firstPlaceUserProfileBlock: {},
-      // secondPlaceUserProfileBlock: {},
-      // thirdPlaceUserProfileBlock: {},
+      questionBlocks: [],
+      rankingBlocks: [],
+      yesOrNoBlocks: [],
+      textBlocks: [],
     };
   },
   computed: {
-    ...mapState("questionBlocks", ["questionBlocks"]),
-    ...mapState("rankingBlocks", ["rankingBlocks"]),
-    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
-    ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
+
+    firstPlaceUserExist() {
+      return !!Object.keys(this.firstPlaceUser).length;
+    },
+    secondPlaceUserExist() {
+      return !!Object.keys(this.secondPlaceUser).length;
+    },
+    thirdPlaceUserExist() {
+      return !!Object.keys(this.thirdPlaceUser).length;
+    },
 
     topThreeUserIdAndTotalLikes() {
       const allUserIds = this.currentUserBlocklikesUsres.map((user) => user.id);
@@ -185,23 +207,54 @@ export default {
   mounted() {
     this.firstRead();
   },
+
   methods: {
     async firstRead() {
+      await this.fetchQuestionBlocks();
+      await this.fetchRankingBlocks();
+      await this.fetchYesOrNoBlocks();
+      await this.fetchTextBlocks();
       await this.fecthFirstPlaceUser();
       await this.fecthSecondPlaceUser();
       await this.fecthThirdPlaceUser();
     },
+    async fetchQuestionBlocks() {
+      await axios
+        .get("/api/v1/question_blocks")
+        .then((res) => (this.questionBlocks = res.data));
+    },
+    async fetchRankingBlocks() {
+      await axios
+        .get("/api/v1/ranking_blocks")
+        .then((res) => (this.rankingBlocks = res.data));
+    },
+    async fetchYesOrNoBlocks() {
+      await axios
+        .get("/api/v1/yes_or_no_blocks")
+        .then((res) => (this.yesOrNoBlocks = res.data));
+    },
+    async fetchTextBlocks() {
+      await axios
+        .get("/api/v1/text_blocks")
+        .then((res) => (this.textBlocks = res.data));
+    },
     async fecthFirstPlaceUser() {
+      if (this.topThreeUserIdAndTotalLikes[0] == undefined) return;
+
       await axios
         .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[0].user_id}`)
         .then((res) => (this.firstPlaceUser = res.data));
     },
     async fecthSecondPlaceUser() {
+      if (this.topThreeUserIdAndTotalLikes[1] == undefined) return;
+
       await axios
         .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[1].user_id}`)
         .then((res) => (this.secondPlaceUser = res.data));
     },
     async fecthThirdPlaceUser() {
+      if (this.topThreeUserIdAndTotalLikes[2] == undefined) return;
+
       await axios
         .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[2].user_id}`)
         .then((res) => (this.thirdPlaceUser = res.data));

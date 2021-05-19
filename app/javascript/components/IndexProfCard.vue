@@ -1,6 +1,6 @@
 <template>
   <div
-    :id="'profile-index-card-' + profile.id"
+    :id="'profile-index-card-' + profile.public_uid"
     class="bg-prof-card bg-cover shadow rounded-2xl duration-300 hover:shadow-xl transform hover:scale-105"
     @click="openProfileShowPage(profile)"
   >
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     openProfileShowPage(profile) {
-      this.$router.push(`/profiles/${profile.id}`);
+      this.$router.push(`/profiles/${profile.public_uid}`);
     },
   },
 };

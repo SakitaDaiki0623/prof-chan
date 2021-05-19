@@ -31,19 +31,20 @@ const routes = [
     component: ProfilesPage,
   },
   {
-    path: "/profiles/:id(\\d+)",
+    path: "/profiles/:id",
     name: "ShowProfilesPage",
     component: ShowProfilesPage,
     props: true,
   },
   {
-    path: "/profiles/:id(\\d+)/edit",
+    path: "/profiles/:id/edit",
     name: "EditProfilesPage",
     component: EditProfilesPage,
     props: true,
     beforeEnter: (to, from, next) => {
       if (store.state == undefined) return;
-      const currentUserProfileId = store.state.users.currentUser.profile.id;
+      const currentUserProfileId =
+        store.state.users.currentUser.profile.public_uid;
       if (currentUserProfileId == to.params.id) {
         next();
       } else {
@@ -57,7 +58,7 @@ const routes = [
     },
   },
   {
-    path: "/profiles/popular_blocks",
+    path: "/popular_blocks",
     name: "popularBlocks",
     component: popularBlocks,
   },

@@ -27,31 +27,7 @@
           sm="4"
         >
           <div>作成者: {{ questionBlock.owing_user.name }}</div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="red lighten-4"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
-              {{ questionBlock.title }}
-            </p>
-            <template v-for="question_item in questionBlock.question_items">
-              <div :key="question_item.id">
-                <div class="rounded-lg">
-                  <v-row>
-                    <label for="question_item_content" class="mx-5 text-sm">
-                      {{ question_item.content }}
-                    </label>
-                    <v-col cols="12" sm="12" class="mb-2">
-                      <v-card class="p-2" outlined color="white">
-                        {{ question_item.answer }}
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                </div>
-              </div>
-            </template>
-          </v-card>
+          <QuestionBlockCard :question-block="questionBlock" />
         </v-col>
       </v-row>
     </div>
@@ -70,27 +46,7 @@
           sm="4"
         >
           <div>作成者: {{ rankingBlock.owing_user.name }}</div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="light-green lighten-5"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-              {{ rankingBlock.title }}
-            </p>
-            <v-card class="p-2 m-3 rounded-full" outlined color="white">
-              <label for="1st place" class="ranking-label">1st</label
-              >{{ rankingBlock.first_place }}
-            </v-card>
-            <v-card class="p-2 m-3 rounded-full" outlined color="white">
-              <label for="2nd place" class="ranking-label">2nd</label
-              >{{ rankingBlock.second_place }}
-            </v-card>
-            <v-card class="p-2 m-3 rounded-full" outlined color="white">
-              <label for="3rd place" class="ranking-label">3rd</label
-              >{{ rankingBlock.third_place }}
-            </v-card>
-          </v-card>
+          <RankingBlockCard :ranking-block="rankingBlock" />
         </v-col>
       </v-row>
       <div>
@@ -131,39 +87,7 @@
           sm="4"
         >
           <div>作成者: {{ yesOrNoBlock.owing_user.name }}</div>
-
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="orange lighten-4"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-              {{ yesOrNoBlock.title }}
-            </p>
-            <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
-              <div :key="yes_or_no_item.id">
-                <v-card class="p-2 m-2" outlined color="white">
-                  <v-row align="center">
-                    <v-col cols="12" sm="7">
-                      {{ yes_or_no_item.content }}
-                    </v-col>
-                    <v-col v-if="yes_or_no_item.answer" cols="12" sm="5">
-                      <span class="rounded-full border-red-500 border-2 p-2"
-                        >YES</span
-                      >
-                      / NO
-                    </v-col>
-                    <v-col v-else cols="12" sm="5">
-                      YES /
-                      <span class="rounded-full border-red-500 border-2 p-2"
-                        >NO</span
-                      >
-                    </v-col>
-                  </v-row>
-                </v-card>
-              </div>
-            </template>
-          </v-card>
+          <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
         </v-col>
       </v-row>
       <div>
@@ -204,47 +128,9 @@
           sm="4"
         >
           <div>作成者: {{ textBlock.owing_user.name }}</div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="teal accent-1"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-              {{ textBlock.title }}
-            </p>
-            <v-card
-              class="p-3 rounded-lg"
-              outlined
-              color="white"
-              min-height="200px"
-            >
-              {{ textBlock.text }}
-            </v-card>
-          </v-card>
+          <TextBlockCard :text-block="textBlock" />
         </v-col>
       </transition-group>
-      <div>
-        <v-row>
-          <v-col
-            v-for="textBlock in textPopularBlocksTopThree"
-            :key="textBlock.id"
-            cols="12"
-            sm="4"
-          >
-            <v-card outlined color="brown lighten-3" height="100" class="p-2">
-              <v-col
-                v-for="user in textBlock.users"
-                :key="user.id"
-                cols="10"
-                sm="2"
-                class="inline-block"
-              >
-                <v-img :src="user.image.url"></v-img>
-              </v-col>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
     </div>
     <!-- /テキストブロック -->
   </div>
@@ -252,8 +138,18 @@
 
 <script>
 import axios from "axios";
+import TextBlockCard from "../components/text_block/TextBlockCard";
+import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
+import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
+import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 
 export default {
+  components: {
+    TextBlockCard,
+    QuestionBlockCard,
+    YesOrNoBlockCard,
+    RankingBlockCard,
+  },
   data() {
     return {
       recentlyJoinedUserProfiles: [],
