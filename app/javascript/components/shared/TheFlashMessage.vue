@@ -1,14 +1,15 @@
 <template>
   <v-fade-transition>
     <div class="flash">
-      <v-alert
-        dense
-        outlined
-        border="left"
-        :color="flash.color"
-        :type="flash.type"
-      >
-        {{ flash.message }}
+      <v-alert dense outlined border="left" :color="flash.color">
+        <div v-if="flash.type == 'success'">
+          <img src="../../images/prof_happy.png" class="w-10 inline-block"/>
+          {{ flash.message }}
+        </div>
+        <div v-if="flash.type == 'error'">
+          <img src="../../images/prof_sad.png" class="w-10 inline-block"/>
+          {{ flash.message }}
+        </div>
       </v-alert>
     </div>
   </v-fade-transition>
@@ -43,7 +44,7 @@ export default {
   position: fixed;
   top: 10px;
   left: 20px;
-  max-width: 400px;
+  max-width: 600px;
   z-index: 500;
 }
 .v-alert--outlined {
