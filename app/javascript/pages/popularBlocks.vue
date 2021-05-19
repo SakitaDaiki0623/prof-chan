@@ -107,39 +107,7 @@
           sm="4"
         >
           <div>作成者: {{ yesOrNoBlock.owing_user.name }}</div>
-
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="orange lighten-4"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-              {{ yesOrNoBlock.title }}
-            </p>
-            <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
-              <div :key="yes_or_no_item.id">
-                <v-card class="p-2 m-2" outlined color="white">
-                  <v-row align="center">
-                    <v-col cols="12" sm="7">
-                      {{ yes_or_no_item.content }}
-                    </v-col>
-                    <v-col v-if="yes_or_no_item.answer" cols="12" sm="5">
-                      <span class="rounded-full border-red-500 border-2 p-2"
-                        >YES</span
-                      >
-                      / NO
-                    </v-col>
-                    <v-col v-else cols="12" sm="5">
-                      YES /
-                      <span class="rounded-full border-red-500 border-2 p-2"
-                        >NO</span
-                      >
-                    </v-col>
-                  </v-row>
-                </v-card>
-              </div>
-            </template>
-          </v-card>
+          <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
         </v-col>
       </v-row>
       <div>
@@ -192,11 +160,13 @@
 import axios from "axios";
 import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
+import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
 
 export default {
   components: {
     TextBlockCard,
     QuestionBlockCard,
+    YesOrNoBlockCard,
   },
   data() {
     return {

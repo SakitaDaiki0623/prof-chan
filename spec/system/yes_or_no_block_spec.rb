@@ -1,3 +1,4 @@
+# 29 examples
 require 'rails_helper'
 
 RSpec.describe "YesOrNoBlock", type: :system do
@@ -54,12 +55,12 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
 
         it '作成したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(yes_or_no_block_title)
         end
 
         it '作成したブロックが他人の詳細ページに反映されていないこと' do
-          visit "/profiles/#{others_profile.id}"
+          visit "/profiles/#{others_profile.public_uid}"
           expect(page).not_to have_content(yes_or_no_block_title)
         end
 
@@ -202,7 +203,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
             end
 
             it '作成したブロックが詳細ページに反映されていること' do
-              visit "/profiles/#{my_profile.id}"
+              visit "/profiles/#{my_profile.public_uid}"
               expect(page).to have_content(yes_or_no_block_title),   'Yes or No ブロックが作成されていません'
               expect(page).to have_selector 'span.border-red-500', text: 'YES'
               expect(page).to have_selector 'span.border-red-500', text: 'NO'
@@ -297,7 +298,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
 
 
         it '作成したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(edit_yes_or_no_block_title), '更新したYes or No ブロックのタイトルが表示されていません'
         end
       end
@@ -332,7 +333,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
 
         it '作成したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(edit_yes_or_no_item_content1), '更新したYes or No ブロックのアイテムの質問が表示されていません'
           expect(page).to have_selector 'span.border-red-500', text: 'NO'
         end
@@ -424,7 +425,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
 
         it '作成したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).not_to have_content(yes_or_no_item_content2), '2番目のアイテムの質問が表示されています'
         end
       end
