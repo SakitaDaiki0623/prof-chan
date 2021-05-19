@@ -34,57 +34,11 @@
           cols="12"
           sm="4"
         >
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="red lighten-4"
-          >
-            <v-row v-if="isThisEditPage" justify="end">
-              <v-btn
-                :id="'edit-question-block-button-' + questionBlock.id"
-                tile
-                small
-                color="red lighten-4"
-                @click="openEditQuestionFormatDialog(questionBlock)"
-              >
-                <v-icon> mdi-pencil </v-icon>
-              </v-btn>
-              <v-btn
-                :id="'delete-question-block-button-' + questionBlock.id"
-                tile
-                small
-                color="red lighten-1"
-                @click="hundleDeleteQuestionBlock(questionBlock)"
-              >
-                <v-icon> mdi-delete </v-icon>
-              </v-btn>
-            </v-row>
-            <v-row v-else>
-              <v-spacer />
-              <question-block-like-button
-                :question-block-id="questionBlock.id"
-              ></question-block-like-button>
-            </v-row>
-            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
-              {{ questionBlock.title }}
-            </p>
-            <template v-for="question_item in questionBlock.question_items">
-              <div :key="question_item.id">
-                <div class="rounded-lg">
-                  <v-row>
-                    <label for="question_item_content" class="mx-5 text-sm">
-                      {{ question_item.content }}
-                    </label>
-                    <v-col cols="12" sm="12" class="mb-2">
-                      <v-card class="p-2" outlined color="white">
-                        {{ question_item.answer }}
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                </div>
-              </div>
-            </template>
-          </v-card>
+          <QuestionBlockCard
+            :question-block="questionBlock"
+            :is-this-edit-page="isThisEditPage"
+            :question-block-color="questionBlockColor"
+          />
         </v-col>
       </transition-group>
       <v-container v-else class="no-block-display-container">
@@ -101,13 +55,6 @@
       :question-block-color="questionBlockColor"
       @close-question-format-dialog="closeQuestionFormatDialog"
     />
-    <EditQuestionFormatDialog
-      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
-      :edit-question-block="editQuestionBlock"
-      :question-block-color="questionBlockColor"
-      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
-    />
   </v-container>
 </template>
 
@@ -117,14 +64,12 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 import QuestionFormatDialog from "./QuestionFormatDialog";
-import EditQuestionFormatDialog from "./EditQuestionFormatDialog";
-import QuestionBlockLikeButton from "../likes/QuestionBlockLikeButton";
+import QuestionBlockCard from "./QuestionBlockCard";
 
 export default {
   components: {
     QuestionFormatDialog,
-    EditQuestionFormatDialog,
-    QuestionBlockLikeButton,
+    QuestionBlockCard,
   },
   props: {
     isThisEditPage: {
@@ -140,9 +85,7 @@ export default {
   data() {
     return {
       isShownQuestionFormatDialog: false,
-      isShownEditQuestionFormatDialog: false,
-      editQuestionBlock: {},
-      questionBlockColor: "red lighten-3", // question block colorz
+      questionBlockColor: "red lighten-3", // question block color
     };
   },
   computed: {
@@ -157,39 +100,16 @@ export default {
         ) || {}
       );
     },
-
     isMyQuestionBlocksLengthNotZero() {
       return this.myQuestionBlocks.length !== 0 ? true : false;
     },
   },
   methods: {
-    ...mapActions({
-      deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
-    }),
     openQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = true;
     },
     closeQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = false;
-    },
-    openEditQuestionFormatDialog(questionBlock) {
-      this.editQuestionBlock = Object.assign({}, questionBlock);
-      this.isShownEditQuestionFormatDialog = true;
-    },
-    closeEditQuestionFormatDialog() {
-      this.isShownEditQuestionFormatDialog = false;
-    },
-    closeQuestionBlockEditDialog(editQuestionBlock) {
-      this.editQuestionBlock = editQuestionBlock;
-    },
-    hundleDeleteQuestionBlock(QuestionBlock) {
-      if (!confirm("削除してよろしいですか?")) return;
-      this.deleteQuestionBlock(QuestionBlock);
-      this.$store.dispatch("flash/setFlash", {
-        type: "success",
-        message: "クエスチョンブロックを削除したよ！",
-        color: "red lighten-3",
-      });
     },
   },
 };
@@ -219,13 +139,6 @@ export default {
   left: 0;
   right: 0;
   z-index: 1;
-}
-
-.note-box {
-  background-image: radial-gradient(#ffffff 40%, transparent 20%),
-    radial-gradient(#ffffff 20%, transparent 20%);
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 20px;
 }
 
 .no-block-display-container {

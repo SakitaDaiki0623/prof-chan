@@ -102,9 +102,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      fetchTextBlocks: "textBlocks/fetchTextBlocks",
-    }),
     openTextFormatDialog() {
       this.isShownTextFormatDialog = true;
     },

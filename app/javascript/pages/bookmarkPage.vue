@@ -55,32 +55,7 @@
               sm="4"
             >
               {{ questionBlock.owing_user.name }} さん
-              <div class="border-2 border-gray-500"></div>
-              <v-card
-                class="rounded-2xl p-5 note-box"
-                outlined
-                color="red lighten-4"
-              >
-                <p class="text-2xl font-bold text-gray-600 px-3 py-3">
-                  {{ questionBlock.title }}
-                </p>
-                <template v-for="question_item in questionBlock.question_items">
-                  <div :key="question_item.id">
-                    <div class="rounded-lg">
-                      <v-row>
-                        <label for="question_item_content" class="mx-5 text-sm">
-                          {{ question_item.content }}
-                        </label>
-                        <v-col cols="12" sm="12" class="mb-2">
-                          <v-card class="p-2" outlined color="white">
-                            {{ question_item.answer }}
-                          </v-card>
-                        </v-col>
-                      </v-row>
-                    </div>
-                  </div>
-                </template>
-              </v-card>
+              <QuestionBlockCard :question-block="questionBlock" />
             </v-col>
           </v-row>
         </div>
@@ -199,11 +174,13 @@
 import axios from "axios";
 import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
 import TextBlockCard from "../components/text_block/TextBlockCard";
+import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 
 export default {
   components: {
     NotAnyBookmarkBlock,
     TextBlockCard,
+    QuestionBlockCard,
   },
   data() {
     return {
