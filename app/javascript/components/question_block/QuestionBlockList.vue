@@ -1,7 +1,7 @@
 <template>
   <v-container
     class="rounded-2xl"
-    v-show="isMyQuestionBlocksLengthNotZero || isThisEditPage"
+    v-if="isMyQuestionBlocksLengthNotZero || isThisEditPage"
   >
     <v-row v-show="isThisEditPage" justify="center">
       <v-btn
@@ -23,7 +23,11 @@
       </div>
     </v-row>
     <div>
-      <transition-group tag="v-row" name="list" v-if="isMyQuestionBlocksLengthNotZero">
+      <transition-group
+        tag="v-row"
+        name="list"
+        v-if="isMyQuestionBlocksLengthNotZero"
+      >
         <v-col
           v-for="questionBlock in myQuestionBlocks"
           :key="questionBlock.id"
@@ -192,10 +196,6 @@ export default {
 </script>
 
 <style scoped>
-/* .bg-color {
-  background-color: #fce4ec;
-} */
-
 .block-title {
   color: #ef9a9a;
   padding: 10px;

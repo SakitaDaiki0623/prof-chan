@@ -25,7 +25,7 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
 import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
@@ -50,15 +50,12 @@ export default {
       default: "",
     },
   },
-  data() {
-    return {
-      profile: {},
-    };
-  },
   computed: {
     ...mapState("users", ["users"]),
+
     isThisEditPage() {
-      return this.$route.path == `/profiles/${this.user.profile.public_uid}/edit`
+      return this.$route.path ==
+        `/profiles/${this.user.profile.public_uid}/edit`
         ? true
         : false;
     },
@@ -70,12 +67,6 @@ export default {
   },
   created() {
     document.title = `プロフ編集 - プロフちゃん`;
-  },
-  methods: {
-    ...mapActions({
-      fetchProfiles: "profiles/fetchProfiles",
-      fetchCurrentUser: "users/fetchCurrentUser",
-    }),
   },
 };
 </script>
@@ -89,7 +80,6 @@ export default {
   color: #fffaf0;
   letter-spacing: 5rem;
 }
-
 
 .list-enter-active,
 .list-leave-active,

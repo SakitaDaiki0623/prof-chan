@@ -67,11 +67,6 @@ export default {
     moveToProfilesPage() {
       this.$router.push("/profiles");
     },
-    fetchProfiles() {
-      axios
-        .get("/api/v1/profiles")
-        .then((response) => (this.profiles = response.data));
-    },
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {

@@ -43,7 +43,8 @@ const routes = [
     props: true,
     beforeEnter: (to, from, next) => {
       if (store.state == undefined) return;
-      const currentUserProfileId = store.state.users.currentUser.profile.public_uid;
+      const currentUserProfileId =
+        store.state.users.currentUser.profile.public_uid;
       if (currentUserProfileId == to.params.id) {
         next();
       } else {
