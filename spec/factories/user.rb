@@ -29,7 +29,7 @@ FactoryBot.define do
     uid     { rand(10 ** 19).to_s }
     provider { 'slack' }
     password { 'password' }
-    image { ENV['USER_IMAGE'] }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/images/prof_normal.png')) }
     association :team
 
     trait :real_workspace_id do

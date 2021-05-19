@@ -21,7 +21,7 @@
                   <div class="flex justify-center">
                     <img
                       class="ring-4 ring-gray-600 w-9/12"
-                      :src="user.image"
+                      :src="user.image.url"
                     />
                   </div>
                   <div class="mt-4">

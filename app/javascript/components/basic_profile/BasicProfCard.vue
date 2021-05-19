@@ -16,7 +16,7 @@
           <div>
             <v-img
               class="ring-4 ring-gray-600"
-              :src="user.image"
+              :src="user.image.url"
               max-height="205px"
             />
           </div>

@@ -7,10 +7,7 @@ Rails.application.routes.draw do
   get 'top', to: 'profiles#top'
 
   # authetication
-  devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
-  devise_scope :user do
-    delete 'logout' => 'devise/sessions#destroy', as: :destroy_user_session
-  end
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # redirect path after authentication
   resources :profiles,  only: %i[new index]

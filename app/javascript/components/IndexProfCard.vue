@@ -9,7 +9,7 @@
         <div class="w-full mt-10">
           <img
             class="ring-4 ring-gray-600"
-            :src="profile.user.image"
+            :src="profile.user.image.url"
           >
         </div>
         <div>

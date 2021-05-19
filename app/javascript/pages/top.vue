@@ -47,7 +47,7 @@
                 {{ recentlyJoinedUserProfile.day_of_joinning }} 入社
               </v-card>
               <v-img
-                :src="recentlyJoinedUserProfile.user.image"
+                :src="recentlyJoinedUserProfile.user.image.url"
                 height="180px"
               />
 
