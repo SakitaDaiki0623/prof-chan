@@ -1,24 +1,34 @@
 <template>
-  <div class="content pt-10 pb-5">
-    <h1 class="display-3 font-weight-thin">
-      404 NotFound
+  <div class="content pt-10 pb-5 text-center">
+    <h1 class="display-3 font-bold">
+      404 Not Found
     </h1>
     <div class="mt-10 mb-10">
-      <p>お探しのページが見つかりませんでした。</p>
-      <p>
-        一時的にアクセスができない状況にあるか
-        <br class="d-flex d-sm-none">移動もしくは削除された可能性があります。
-      </p>
-      <p>URLにお間違いがないか再度ご確認ください。</p>
+      <v-row>
+        <v-col cols="12" sm="6" align="right">
+          <img src="../../images/prof_sad.png" class="image" />
+        </v-col>
+        <v-col cols="12" sm="6">
+          <div class="balloon4">
+            <p>お探しのページが見つかりませんでした。</p>
+            <p>
+              一時的にアクセスができない状況にあるか
+              <br
+                class="d-flex d-sm-none"
+              />移動もしくは削除された可能性があります。
+            </p>
+            <p>URLにお間違いがないか再度ご確認ください。</p>
+          </div>
+        </v-col>
+      </v-row>
     </div>
     <v-btn
-      color="primary"
+      color="brown"
+      class="white--text text-center"
       depressed
-      :to="{ path: '/profiles' }"
+      :to="{ path: '/top' }"
     >
-      <v-icon left>
-        mdi-exit-run
-      </v-icon>プロフ一覧ページに戻る
+      <v-icon left> mdi-exit-run </v-icon>トップページに戻る
     </v-btn>
   </div>
 </template>
@@ -32,8 +42,41 @@ export default {
 </script>
 
 <style scoped>
+.balloon4 {
+  position: relative;
+  background: #fff0c6;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.balloon4:before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  width: 13px;
+  height: 12px;
+  bottom: 0;
+  background: #fff0c6;
+  border-radius: 50%;
+}
+
+.balloon4:after {
+  content: "";
+  position: absolute;
+  left: -24px;
+  width: 20px;
+  height: 18px;
+  bottom: 3px;
+  background: #fff0c6;
+  border-radius: 50%;
+}
+
+.balloon4 div {
+  margin: 0;
+  padding: 0;
+}
 .content {
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 550px;
 }
 </style>
