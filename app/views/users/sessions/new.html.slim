@@ -1,18 +1,29 @@
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "users/shared/links"
+.flex.flex-col.items-center.justify-center.h-screen.select-none
+  .flex.flex-col.-mt-32.bg-brown-50.px-6.sm:px-6.md:px-8.lg:px-10.py-8.rounded-xl.shadow-2xl.w-full.max-w-md.border-l-4.border-brown-600
+    .text-xl.top-sub-title.text-center
+      | ログイン
+    .mt-10
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = render "users/shared/error_messages", resource: resource
+        .relative.w-full.mb-3
+          = f.label :email, class: 'form-label-basic-block'
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-form-basic-block"
+        .relative.w-full.mb-3
+          = f.label :password, class: 'form-label-basic-block'
+          = f.password_field :password, autocomplete: "new-password", class: "input-form-basic-block"
+          - if devise_mapping.rememberable?
+          .field
+            = f.check_box :remember_me
+            = f.label :remember_me
+        .text-center.mt-6
+          .actions
+            = f.submit "ログイン", class: "p-3 rounded-lg bg-brown-600 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500"
+        .flex.flex-wrap.mt-6
+          .w-1/2.text-left
+            a.text-blue-900.text-xl[href="#"]
+              small
+                | Forgot password?
+          .w-1/2.text-right
+              small
+                = link_to "→トップページに戻る", root_path, class: "inline-block"
+
