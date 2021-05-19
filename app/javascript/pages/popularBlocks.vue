@@ -46,27 +46,7 @@
           sm="4"
         >
           <div>作成者: {{ rankingBlock.owing_user.name }}</div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="light-green lighten-5"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-              {{ rankingBlock.title }}
-            </p>
-            <v-card class="p-2 m-3 rounded-full" outlined color="white">
-              <label for="1st place" class="ranking-label">1st</label
-              >{{ rankingBlock.first_place }}
-            </v-card>
-            <v-card class="p-2 m-3 rounded-full" outlined color="white">
-              <label for="2nd place" class="ranking-label">2nd</label
-              >{{ rankingBlock.second_place }}
-            </v-card>
-            <v-card class="p-2 m-3 rounded-full" outlined color="white">
-              <label for="3rd place" class="ranking-label">3rd</label
-              >{{ rankingBlock.third_place }}
-            </v-card>
-          </v-card>
+          <RankingBlockCard :ranking-block="rankingBlock" />
         </v-col>
       </v-row>
       <div>
@@ -161,12 +141,14 @@ import axios from "axios";
 import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
+import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 
 export default {
   components: {
     TextBlockCard,
     QuestionBlockCard,
     YesOrNoBlockCard,
+    RankingBlockCard,
   },
   data() {
     return {

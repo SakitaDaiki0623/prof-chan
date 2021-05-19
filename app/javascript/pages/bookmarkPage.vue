@@ -5,7 +5,7 @@
         あなたがよく共感する社員TOP3
       </div>
       <v-row class="py-5 h-96" justify="center">
-        <v-col align-self="center" cols="12" sm="3" v-if="secondPlaceUserExist">
+        <v-col align-self="center" cols="12" sm="4" v-if="secondPlaceUserExist">
           <v-card class="second-place" outlined contain>
             <v-img
               :src="secondPlaceUser.image.url"
@@ -14,7 +14,7 @@
             ></v-img>
           </v-card>
         </v-col>
-        <v-col align-self="start" cols="12" sm="3">
+        <v-col align-self="start" cols="12" sm="4">
           <v-card class="first-place" outlined contain>
             <v-img
               :src="firstPlaceUser.image.url"
@@ -23,7 +23,7 @@
             ></v-img>
           </v-card>
         </v-col>
-        <v-col align-self="end" cols="12" sm="3" v-if="thirdPlaceUserExist">
+        <v-col align-self="end" cols="12" sm="4" v-if="thirdPlaceUserExist">
           <v-card class="first-place" outlined contain>
             <v-img
               :src="thirdPlaceUser.image.url"
@@ -72,27 +72,7 @@
               sm="4"
             >
               <div>作成者: {{ rankingBlock.owing_user.name }}</div>
-              <v-card
-                class="rounded-2xl p-5 note-box"
-                outlined
-                color="light-green lighten-5"
-              >
-                <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
-                  {{ rankingBlock.title }}
-                </p>
-                <v-card class="p-2 m-3 rounded-full" outlined color="white">
-                  <label for="1st place" class="ranking-label">1st</label
-                  >{{ rankingBlock.first_place }}
-                </v-card>
-                <v-card class="p-2 m-3 rounded-full" outlined color="white">
-                  <label for="2nd place" class="ranking-label">2nd</label
-                  >{{ rankingBlock.second_place }}
-                </v-card>
-                <v-card class="p-2 m-3 rounded-full" outlined color="white">
-                  <label for="3rd place" class="ranking-label">3rd</label
-                  >{{ rankingBlock.third_place }}
-                </v-card>
-              </v-card>
+              <RankingBlockCard :ranking-block="rankingBlock" />
             </v-col>
           </v-row>
         </div>
@@ -142,6 +122,7 @@ import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
 import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
+import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 
 export default {
   components: {
@@ -149,6 +130,7 @@ export default {
     TextBlockCard,
     QuestionBlockCard,
     YesOrNoBlockCard,
+    RankingBlockCard,
   },
   data() {
     return {
