@@ -1,3 +1,5 @@
+# Finished in 1 minute 45.06 seconds (files took 5.08 seconds to load)
+# 12 examples, 0 failures
 require 'rails_helper'
 
 RSpec.describe 'TextBlock', type: :system do
@@ -22,6 +24,7 @@ RSpec.describe 'TextBlock', type: :system do
     context '正常な値を入力した時' do
       before do
         click_on 'テキストブロックを追加する'
+        sleep 1
         expect(page).to have_button 'テキストブロックを作成！', disabled: true
         fill_in 'text_block_title',	with: factory_text_block.title
         fill_in 'text_block_text',	with: factory_text_block.text
@@ -36,13 +39,13 @@ RSpec.describe 'TextBlock', type: :system do
       end
 
       it '作成したブロックが詳細ページに反映されていること' do
-        visit "/profiles/#{my_profile.id}"
+        visit "/profiles/#{my_profile.public_uid}"
         expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
         expect(page).to have_content(factory_text_block.text),  'テキストブロックが作成されていません'
       end
 
       it '作成したブロックが他人の詳細ページに反映されていないこと' do
-        visit "/profiles/#{others_profile.id}"
+        visit "/profiles/#{others_profile.public_uid}"
         expect(page).not_to have_content(factory_text_block.title)
         expect(page).not_to have_content(factory_text_block.text)
       end
@@ -118,7 +121,7 @@ RSpec.describe 'TextBlock', type: :system do
       end
 
       it '作成したブロックが詳細ページに反映されていること' do
-        visit "/profiles/#{my_profile.id}"
+        visit "/profiles/#{my_profile.public_uid}"
         expect(page).to have_content('編集されたタイトル'), 'タイトルが更新されていません'
         expect(page).to have_content('編集されたテキスト'), 'テキストが更新されていません'
       end
@@ -147,7 +150,7 @@ RSpec.describe 'TextBlock', type: :system do
       end
 
       it '詳細ページから対象のテキストブロックが削除されること' do
-        visit "/profiles/#{my_profile.id}"
+        visit "/profiles/#{my_profile.public_uid}"
         expect(page).not_to have_content('削除されるテキストブロック'), '対象のテキストブロックが削除されていません'
       end
     end
