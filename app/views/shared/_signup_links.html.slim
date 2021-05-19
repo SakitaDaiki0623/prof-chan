@@ -1,0 +1,8 @@
+.flex.flex-wrap.mt-6
+  .w-1/2.text-left
+    a.text-blue-900.text-xl[href="#"]
+      small
+        = link_to  "パスワードをお忘れの方", new_user_password_url
+  .w-1/2.text-right
+      small
+        = link_to "→トップページに戻る", root_path, class: "inline-block"
