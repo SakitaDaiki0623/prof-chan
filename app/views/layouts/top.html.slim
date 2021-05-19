@@ -6,6 +6,7 @@ html
       = page_title(yield(:title))
     = csrf_meta_tags
     = csp_meta_tag
+    = favicon_link_tag('prof_normal')
     = stylesheet_pack_tag "application", "data-turbo-track": "reload"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body.flex.flex-col.min-h-screen.text-gray-600.font.bg-brown-100
