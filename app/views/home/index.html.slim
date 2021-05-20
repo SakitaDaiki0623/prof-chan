@@ -4,17 +4,18 @@
       .text-center.text-3xl
         | - - - - REMOTELY PROMOTE YOURSELF.- - - -
     .grid.grid-cols-12.gap-2.text-center
-      .text-center.py-20.col-start-1.col-span-7
+      .text-center.p-20.col-start-1.col-span-7
         .text-lg
           | コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
         .text-8xl.p-10.font-body プロフちゃん
         = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign_in_with_slack_button', class: "inline-block"
-        div
-          = link_to "ログイン", new_user_session_path, class: "inline-block"
-        div
-          = link_to "新規登録", new_user_registration_path, class: "inline-block"
+        .my-10
+          div
+            = link_to "ログイン", new_user_session_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
+          div
+          = link_to "新規登録", new_user_registration_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
       .col-start-8.col-span-5
-        .py-32 プロフちゃんの画像
+        = image_tag  "prof_normal.png"
   .bg-brown-50.p-10
     .p-20.text-center
       .text-3xl.top-sub-title.mb-10
