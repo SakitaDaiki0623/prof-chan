@@ -98,6 +98,6 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 
 # IMAGES ==========
-/app/assets/images/
+# /app/assets/images/
 /public/uploads
-/spec/fixtures
+# /spec/fixtures

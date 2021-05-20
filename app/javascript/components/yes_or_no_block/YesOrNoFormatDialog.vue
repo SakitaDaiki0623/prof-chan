@@ -8,10 +8,7 @@
       @input="$emit('input', $event.target.isShownYesOrNoFormatDialog)"
     >
       <v-card :color="yesOrNoBlockColor">
-        <v-row
-          justify="end"
-          class="mr-2 mt-2"
-        >
+        <v-row justify="end" class="mr-2 mt-2">
           <v-btn
             :color="yesOrNoBlockColor"
             @click="hundleCloseYesOrNoFormatDialog"
@@ -29,10 +26,7 @@
           color="orange lighten-4"
         >
           <v-row>
-            <v-col
-              cols="12"
-              sm="7"
-            >
+            <v-col cols="12" sm="7">
               <v-btn
                 id="add-yes-or-no-item-button"
                 type="submit"
@@ -45,9 +39,7 @@
                 :disabled="yesOrNoItemNum >= 3"
                 @click="addYesOrNoItemNum"
               >
-                <v-icon left>
-                  mdi-plus
-                </v-icon>
+                <v-icon left> mdi-plus </v-icon>
                 質問と答えを追加する
               </v-btn>
               <v-btn
@@ -62,17 +54,12 @@
                 :disabled="yesOrNoItemNum <= 1"
                 @click="deleteYesOrNoItemNum"
               >
-                <v-icon left>
-                  mdi-minus
-                </v-icon>
+                <v-icon left> mdi-minus </v-icon>
                 質問と答えを減らす
               </v-btn>
             </v-col>
             <v-spacer />
-            <v-col
-              cols="12"
-              sm="4"
-            >
+            <v-col cols="12" sm="4">
               <v-btn
                 id="input-yes-or-no-title-button"
                 type="submit"
@@ -84,17 +71,12 @@
                 class="white--text py-2"
                 @click="inputTitleRandomly"
               >
-                <v-icon left>
-                  mdi-plus
-                </v-icon>タイトルをランダムに入力
+                <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
               </v-btn>
             </v-col>
           </v-row>
 
-          <ValidationObserver
-            ref="observer"
-            v-slot="{ invalid }"
-          >
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form
               @submit.prevent="
                 hundleCreateYesOrNoBlock(
@@ -109,7 +91,8 @@
                 <label
                   class="form-label-yes-or-no-block"
                   for="yes_or_no_block_title"
-                >タイトル</label>
+                  >タイトル</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -121,7 +104,7 @@
                     class="input-form-yes-or-no-block"
                     name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
@@ -159,9 +142,7 @@
                   :color="yesOrNoBlockColor"
                   class="white--text"
                 >
-                  <v-icon left>
-                    mdi-plus
-                  </v-icon>
+                  <v-icon left> mdi-plus </v-icon>
                   Yes or No ブロックを作成！
                 </v-btn>
               </div>
@@ -315,13 +296,17 @@ export default {
         message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
-      if (confirm("slackに通知しますか?")) {
-        this.postToSlackAfterCreate(params);
+      if (this.currentUser.provider == "slack") {
+        if (confirm("slackに通知しますか?")) {
+          this.postToSlackAfterCreate(params);
+        }
       }
     },
     async postToSlackAfterCreate(params) {
-      const res = await axios
-        .post("/api/v1/yes_or_no_blocks/post_to_slack_after_create", params)
+      const res = await axios.post(
+        "/api/v1/yes_or_no_blocks/post_to_slack_after_create",
+        params
+      );
     },
     hundleCloseYesOrNoFormatDialog() {
       this.$emit("close-yes-or-no-format-dialog");
