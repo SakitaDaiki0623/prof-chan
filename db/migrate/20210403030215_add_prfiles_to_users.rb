@@ -8,8 +8,11 @@ class AddPrfilesToUsers < ActiveRecord::Migration[6.0]
       t.integer :prefecture_id, null: false
       t.datetime :birthday, null: false
       t.datetime :day_of_joinning, null: false
+      t.string :public_uid, null: false
 
       t.timestamps
     end
+
+    add_index :profiles, :public_uid, unique: true
   end
 end

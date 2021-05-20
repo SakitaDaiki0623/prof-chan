@@ -6,13 +6,13 @@
 
     <MyFavoriteBlock :user="user" />
 
-    <TextBlockList :user="user" />
-
     <QuestionBlockList :user="user" />
+
+    <RankingBlockList :user="user" />
 
     <YesOrNoBlockList :user="user" />
 
-    <RankingBlockList :user="user" />
+    <TextBlockList :user="user" />
   </v-container>
 </template>
 
@@ -50,13 +50,14 @@ export default {
 
     user() {
       return this.users.find(
-        (user) => this.$route.params.id == user.profile.id
+        (user) => this.$route.params.id == user.profile.public_uid
       );
     },
   },
   data() {
     return {
       profile: {},
+      profiles: [],
     };
   },
   mounted() {
@@ -66,6 +67,19 @@ export default {
     moveToProfilesPage() {
       this.$router.push("/profiles");
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      const users = vm.users;
+      const profileUser = users.find(
+        (user) => to.params.id == user.profile.public_uid
+      );
+      if (profileUser == undefined) {
+        vm.$store.dispatch("isNotFound/setIsNotFound", {
+          boolean: true,
+        });
+      }
+    });
   },
 };
 </script>

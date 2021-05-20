@@ -115,17 +115,17 @@ export default {
     },
     openProfileEditPage() {
       this.$router
-        .push(`/profiles/${this.currentUser.profile.id}/edit`)
+        .push(`/profiles/${this.currentUser.profile.public_uid}/edit`)
         .catch((err) => {});
     },
     openPopularBlocksPage() {
-      this.$router.push(`/profiles/popular_blocks`).catch((err) => {});
+      this.$router.push("/popular_blocks").catch((err) => {});
     },
     openBookmarkPage() {
-      this.$router.push(`/bookmark_page`).catch((err) => {});
+      this.$router.push("/bookmark_page").catch((err) => {});
     },
     openRecommendedUsers() {
-      this.$router.push(`/recommended_users`).catch((err) => {});
+      this.$router.push("/recommended_users").catch((err) => {});
     },
   },
 };

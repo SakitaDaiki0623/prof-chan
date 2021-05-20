@@ -72,5 +72,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path', to: 'profiles#index'
+  get '*path', to: 'profiles#top'
 end

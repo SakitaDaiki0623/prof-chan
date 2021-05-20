@@ -47,7 +47,7 @@ class User < ApplicationRecord
 
   # validation
   validates :name,                      presence: true
-  validates :email,                     presence: true, uniqueness: { case_sensitive: true }
+  validates :image,                     presence: true
   validates :encrypted_password,        presence: true
 
   # after_create Seedを入れるときコメントアウト

@@ -1,3 +1,4 @@
+# 32 examples
 require 'rails_helper'
 
 RSpec.describe "QuestionBlock", type: :system do
@@ -57,12 +58,12 @@ RSpec.describe "QuestionBlock", type: :system do
         end
 
         it '作成したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
         end
 
         it '作成したブロックが他人の詳細ページに反映されていないこと' do
-          visit "/profiles/#{others_profile.id}"
+          visit "/profiles/#{others_profile.public_uid}"
           expect(page).not_to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
         end
 
@@ -230,12 +231,12 @@ RSpec.describe "QuestionBlock", type: :system do
             end
 
             it '作成したブロックが詳細ページに反映されていること' do
-              visit "/profiles/#{my_profile.id}"
+              visit "/profiles/#{my_profile.public_uid}"
               expect(page).to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
             end
 
             it '作成したブロックが他人の詳細ページに反映されていないこと' do
-              visit "/profiles/#{others_profile.id}"
+              visit "/profiles/#{others_profile.public_uid}"
               expect(page).not_to have_content(question_block_title), 'クエスチョンブロックが作成されていません'
             end
           end
@@ -345,7 +346,7 @@ RSpec.describe "QuestionBlock", type: :system do
         end
 
         it '編集したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(edit_question_block_title)
         end
       end
@@ -379,7 +380,7 @@ RSpec.describe "QuestionBlock", type: :system do
         end
 
         it '編集したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(edit_question_item_content1)
           expect(page).to have_content(edit_question_item_answer1)
         end
@@ -473,7 +474,7 @@ RSpec.describe "QuestionBlock", type: :system do
         end
 
         it '編集したブロックが詳細ページに反映されていること' do
-          visit "/profiles/#{my_profile.id}"
+          visit "/profiles/#{my_profile.public_uid}"
           expect(page).not_to have_content(question_item_content2)
           expect(page).not_to have_content(question_item_answer2)
         end
