@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   # authetication
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords', :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  devise_scope :user do
+    # guest login
+    # 参考: https://qiita.com/take18k_tech/items/35f9b5883f5be4c6e104
+    post '/users/guest_sign_in', to: 'users/sessions#new_guest'
+  end
+
+
   # redirect path after authentication
   resources :profiles,  only: %i[new index]
 

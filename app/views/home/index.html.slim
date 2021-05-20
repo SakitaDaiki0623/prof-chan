@@ -13,7 +13,10 @@
           div
             = link_to "ログイン", new_user_session_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
           div
-          = link_to "新規登録", new_user_registration_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
+            = link_to "新規登録", new_user_registration_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
+        .my-10
+          div
+            = link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path , method: :post, class: "inline-block my-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-10 border border-yellow-700 rounded"
       .col-start-8.col-span-5
         = image_tag  "prof_normal.png"
   .bg-brown-50.p-10
