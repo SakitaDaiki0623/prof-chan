@@ -4,6 +4,13 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   layout 'top'
 
+  def new_guest
+    user = User.guest
+    user.create_guest_profile if user.profile.nil?
+    sign_in user
+    redirect_to top_path
+  end
+
   # GET /resource/sign_in
   # def new
   #   super

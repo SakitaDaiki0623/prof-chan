@@ -53,6 +53,20 @@ class User < ApplicationRecord
   # after_create Seedを入れるときコメントアウト
   after_create :create_profile_block
 
+  def create_guest_profile
+    profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 15, gender: "female", blood_type: "O", prefecture_id: 13 }
+    profile = self.build_profile(profile_params)
+    profile.save!
+  end
+
+  def self.guest
+    self.find_or_create_by(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = 'ゲストユーザー'
+      user.remote_image_url = ENV['USER_IMAGE']
+    end
+  end
+
   def self.from_omniauth(auth, user_info)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
