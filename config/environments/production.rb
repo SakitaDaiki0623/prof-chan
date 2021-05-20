@@ -122,3 +122,4 @@ Rails.application.configure do
 # doesn't have to be Heroku, but you get the idea.
   config.action_mailer.default_url_options = { :host => ENV["SITE_NAME"] }
 end
+
