@@ -3,9 +3,6 @@
   <v-container
     class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color"
   >
-    <div class="text-5xl font-bold p-10 text-gray-600 rounded-t-2xl">
-      プロフ編集
-    </div>
     <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
     <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
