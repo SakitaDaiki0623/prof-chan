@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
       # プロフブロック
       resources :profile_blocks,     only: %i[index show]
+      resources :favorite_blocks,        only: %i[index create show update destroy]
       resources :text_blocks,        only: %i[index create show update destroy] do
         collection do
           get  'random_current_user_likes_blocks'
