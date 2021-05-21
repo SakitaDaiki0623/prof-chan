@@ -271,6 +271,7 @@ export default {
         message: "クエスチョンブロックを作成したよ！",
         color: this.questionBlockColor,
       });
+
       if (this.currentUser.provider == "slack") {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(params);

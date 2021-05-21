@@ -1,22 +1,31 @@
 <template>
   <v-container
-    class="rounded-2xl bg-color"
+    class="rounded-2xl bg-brown-200"
     v-show="isMyTextBlocksLengthNotZero || isThisEditPage"
   >
-    <v-row v-show="isThisEditPage" justify="center">
-      <v-btn
-        id="add-text-block-btn"
-        tile
-        :color="textBlockColor"
-        class="ma-2 white--text"
-        @click="openTextFormatDialog"
-      >
-        <v-icon left> mdi-plus </v-icon>
-        テキストブロックを追加する
-      </v-btn>
-    </v-row>
-    <v-row>
-      <div class="block-title">テキストコーナー</div>
+    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
+      <span class="text-blue-100 rounded-full px-2 bg-white">T</span>
+      テキストコーナー
+    </div>
+    <v-row v-show="isThisEditPage" justify="center" class="py-5">
+      <v-col cols="12" sm="12" align="center">
+        <v-btn
+          id="add-text-block-btn"
+          tile
+          :color="textBlockColor"
+          class="ma-2 white--text"
+          @click="openTextFormatDialog"
+        >
+          <v-icon left> mdi-plus </v-icon>
+          テキストブロックを追加する
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="8" align="right">
+        <ProgressBar
+          :percentage-for-blocks="percentageMyTextBlocksLengt"
+          :block-color="textBlockColor"
+        />
+      </v-col>
     </v-row>
     <div>
       <transition-group
@@ -29,6 +38,7 @@
           :key="textBlock.id"
           cols="12"
           sm="6"
+          class="border-b-2 border-blue-300 border-dashed"
         >
           <TextBlockCard
             :text-block="textBlock"
@@ -61,11 +71,13 @@ import { mapState, mapActions, Store } from "vuex";
 
 import TextFormatDialog from "./TextFormatDialog";
 import TextBlockCard from "./TextBlockCard";
+import ProgressBar from "../ProgressBar";
 
 export default {
   components: {
     TextFormatDialog,
     TextBlockCard,
+    ProgressBar,
   },
   props: {
     isThisEditPage: {
@@ -91,6 +103,10 @@ export default {
     isMyTextBlocksLengthNotZeroAndisThisShowPage() {},
     isMyTextBlocksLengthNotZero() {
       return this.myTextBlocks.length !== 0 ? true : false;
+    },
+    percentageMyTextBlocksLengt() {
+      if (this.myTextBlocks.length / 2 >= 1) return 100;
+      return (this.myTextBlocks.length / 2) * 100;
     },
     myTextBlocks() {
       return (

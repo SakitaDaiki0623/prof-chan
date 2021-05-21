@@ -1,24 +1,22 @@
 <!-- app/javascript/pages/profile/edit.vue -->
 <template>
   <v-container
-    class="border-gray-500 border-dashed rounded-xl border-2 m-20 bg-main-contain-color"
+    class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color"
   >
     <div class="text-5xl font-bold p-10 text-gray-600 rounded-t-2xl">
       プロフ編集
     </div>
-    <v-container>
-      <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
+    <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
+    <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+    <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+    <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+    <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
-    </v-container>
+    <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
   </v-container>
 </template>
 
@@ -73,11 +71,11 @@ export default {
 
 <style>
 .bg-main-contain-color {
-  background-color: #fdfff2;
+  background-color: #f1fcdf;
 }
 
 .dot-color {
-  color: #fffaf0;
+  color: #fff4dd;
   letter-spacing: 5rem;
 }
 

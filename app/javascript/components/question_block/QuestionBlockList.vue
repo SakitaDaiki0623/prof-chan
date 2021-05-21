@@ -1,26 +1,37 @@
 <template>
   <v-container
-    class="rounded-2xl"
+    class="rounded-2xl bg-brown-200"
     v-if="isMyQuestionBlocksLengthNotZero || isThisEditPage"
   >
-    <v-row v-show="isThisEditPage" justify="center">
-      <v-btn
-        id="add-question-block-btn"
-        tile
-        :color="questionBlockColor"
-        class="ma-2 white--text"
-        @click="openQuestionFormatDialog"
-      >
-        <v-icon left>
-          mdi-plus
-        </v-icon>
-        クエスチョンブロックを追加する
-      </v-btn>
-    </v-row>
-    <v-row justify="end">
-      <div class="block-title">
-        質問コーナー
-      </div>
+    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
+      <span class="text-red-300 rounded-full px-2 bg-white">Q</span>質問コーナー
+    </div>
+    <v-row
+      v-show="isThisEditPage"
+      class="py-5"
+      justify="center"
+      align-content="center"
+    >
+      <v-col cols="12" sm="12" align="center">
+        <v-btn
+          id="add-question-block-btn"
+          tile
+          :color="questionBlockColor"
+          class="ma-2 white--text"
+          @click="openQuestionFormatDialog"
+        >
+          <v-icon left>
+            mdi-plus
+          </v-icon>
+          クエスチョンブロックを追加する
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="8" align="right">
+        <ProgressBar
+          :percentage-for-blocks="percentageMyQuestionBlocksLengt"
+          :block-color="questionBlockColor"
+        />
+      </v-col>
     </v-row>
     <div>
       <transition-group
@@ -33,6 +44,7 @@
           :key="questionBlock.id"
           cols="12"
           sm="4"
+          class="border-b-2 border-red-300 border-dashed"
         >
           <QuestionBlockCard
             :question-block="questionBlock"
@@ -65,11 +77,13 @@ import { mapState, mapActions } from "vuex";
 
 import QuestionFormatDialog from "./QuestionFormatDialog";
 import QuestionBlockCard from "./QuestionBlockCard";
+import ProgressBar from "../ProgressBar";
 
 export default {
   components: {
     QuestionFormatDialog,
     QuestionBlockCard,
+    ProgressBar,
   },
   props: {
     isThisEditPage: {
@@ -92,6 +106,13 @@ export default {
     ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("users", ["currentUser"]),
 
+    isMyQuestionBlocksLengthNotZero() {
+      return this.myQuestionBlocks.length !== 0 ? true : false;
+    },
+    percentageMyQuestionBlocksLengt() {
+      if (this.myQuestionBlocks.length / 5 >= 1) return 100;
+      return (this.myQuestionBlocks.length / 5) * 100;
+    },
     myQuestionBlocks() {
       return (
         this.questionBlocks.filter(
@@ -99,9 +120,6 @@ export default {
             questionBlock.profile_block.id == this.user.profile_block.id
         ) || {}
       );
-    },
-    isMyQuestionBlocksLengthNotZero() {
-      return this.myQuestionBlocks.length !== 0 ? true : false;
     },
   },
   methods: {
