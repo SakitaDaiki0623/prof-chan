@@ -1,7 +1,8 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <v-container class="text-gray-600">
-    <p class="text-5xl font-bold note mb-10">{{ user.name }}さんのプロフ</p>
+  <v-container
+    class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color"
+  >
     <BasicAndAddressBlock :user="user" />
 
     <MyFavoriteBlock :user="user" />
@@ -84,4 +85,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.bg-main-contain-color {
+  background-color: #f1fcdf;
+}
+</style>

@@ -3,31 +3,40 @@
     <v-dialog
       :value="isShownCreateProfileSuccessDialog"
       persistent
-      max-width="800"
+      max-width="1000"
       @input="$emit('input', $event.target.isShownCreateProfileSuccessDialog)"
     >
-      <v-card height="550">
-        <p
-          class="font-weight-bold  text-gray-600 text-4xl text-center mt-20 mb-10"
+      <div class="bg-brown-100">
+        <div
+          class="font-weight-bold  text-gray-600 text-4xl text-center bg-brown-200 py-10"
         >
-          基本情報の登録が完了しました！
-        </p>
-        <v-card-actions>
-          <v-row justify="center" class="p-8">
-            <v-btn
-              x-large
-              color="light-green accent-2"
-              class=" black--text"
-              @click="moveToTopPage"
-            >
-              <v-icon left>
-                mdi-account-circle
-              </v-icon>
-              プロフ閲覧
-            </v-btn>
+          基本情報の入力が完了しました
+        </div>
+        <v-card color="brown lighten-2" outlined>
+          <v-row align="center" align-content="center">
+            <v-col cols="12" sm="6" align="right">
+              <img src="../images/prof_happy.png" class="max-w-sm" />
+            </v-col>
+            <v-col cols="12" sm="6">
+              <p
+                class="text-2xl bg-brown-100 text-gray-600 text-center p-10 rounded-full max-w-sm font-weight-bold"
+              >
+                プロフちゃんの世界へようこそ！
+              </p>
+              <v-card-actions>
+                <v-btn
+                  x-large
+                  color="brown accent-2"
+                  class=" white--text"
+                  @click="moveToTopPage"
+                >
+                  トップページに行く
+                </v-btn>
+              </v-card-actions>
+            </v-col>
           </v-row>
-        </v-card-actions>
-      </v-card>
+        </v-card>
+      </div>
     </v-dialog>
   </div>
 </template>
@@ -52,3 +61,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>

@@ -1,26 +1,32 @@
 <template>
   <v-container
-    class="rounded-2xl bg-color"
+    class="rounded-2xl bg-brown-100"
     v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
   >
-    <v-row v-show="isThisEditPage" justify="center">
-      <v-btn
-        id="add-ranking-block-btn"
-        tile
-        :color="rankingBlockColor"
-        class="ma-2 white--text"
-        @click="openRankingFormatDialog"
-      >
-        <v-icon left>
-          mdi-plus
-        </v-icon>
-        ランキングブロックを追加する
-      </v-btn>
-    </v-row>
-    <v-row justify="end">
-      <div class="block-title">
-        My Best 3
-      </div>
+    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
+      <span class="text-green-300 rounded-full px-2 bg-white">R</span> My Best 3
+    </div>
+    <v-row v-show="isThisEditPage" justify="center" class="py-5">
+      <v-col cols="12" sm="12" align="center">
+        <v-btn
+          id="add-ranking-block-btn"
+          tile
+          :color="rankingBlockColor"
+          class="ma-2 white--text"
+          @click="openRankingFormatDialog"
+        >
+          <v-icon left>
+            mdi-plus
+          </v-icon>
+          ランキングブロックを追加する
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="8" align="right">
+        <ProgressBar
+          :percentage-for-blocks="percentageMyRankingBlocksLengt"
+          :block-color="rankingBlockColor"
+        />
+      </v-col>
     </v-row>
     <div>
       <transition-group
@@ -33,6 +39,7 @@
           :key="rankingBlock.id"
           cols="12"
           sm="4"
+          class="border-b-2 border-green-300 border-dashed"
         >
           <RankingBlockCard
             :ranking-block="rankingBlock"
@@ -65,11 +72,13 @@ import { mapState, mapActions, Store } from "vuex";
 
 import RankingFormatDialog from "./RankingFormatDialog";
 import RankingBlockCard from "./RankingBlockCard";
+import ProgressBar from "../ProgressBar";
 
 export default {
   components: {
     RankingFormatDialog,
     RankingBlockCard,
+    ProgressBar,
   },
   props: {
     isThisEditPage: {
@@ -91,6 +100,10 @@ export default {
   computed: {
     ...mapState("rankingBlocks", ["rankingBlocks"]),
     ...mapState("users", ["currentUser"]),
+    percentageMyRankingBlocksLengt() {
+      if (this.myRankingBlocks.length / 5 >= 1) return 100;
+      return (this.myRankingBlocks.length / 5) * 100;
+    },
     isMyRankingBlocksLengthNotZero() {
       return this.myRankingBlocks.length !== 0 ? true : false;
     },

@@ -1,31 +1,37 @@
 .top
-  .top-bg.p-10
-    .border-t-2.border-pink-500.border-dashed
+  .top-bg.px-20.pt-10
+    .border-t-2.border-brown-500.border-dashed
       .text-center.text-3xl
         | - - - - REMOTELY PROMOTE YOURSELF.- - - -
     .grid.grid-cols-12.gap-2.text-center
-      .text-center.p-20.col-start-1.col-span-7
-        .text-lg
-          | コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
-        .text-8xl.p-10.font-body プロフちゃん
-        = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign_in_with_slack_button', class: "inline-block"
-        .my-10
-          div
-            = link_to "ログイン", new_user_session_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
-          div
-            = link_to "新規登録", new_user_registration_path, class: "inline-block my-3 bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-10 border border-brown-700 rounded"
-        .my-10
-          div
-            = link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path , method: :post, class: "inline-block my-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-10 border border-yellow-700 rounded"
+      .text-center.m-10.col-start-1.col-span-7
+        .text-center.p-10.bg-white.rounded-full
+          .text-xl.mt-10
+            | コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス
+          .text-7xl.p-10.font-body
+            | プロフちゃん
       .col-start-8.col-span-5
-        = image_tag  "prof_normal.png"
-  .bg-brown-50.p-10
+        = image_tag  "prof_normal.png", class: "max-w-sm"
+  .grid.grid-cols-12.text-center.bg-brown-500
+    .col-start-1.col-span-4.border-2.border-white-500.border-dashed.p-10
+      = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign_in_with_slack_button', class: "inline-block pointer-events-none opacity-50"
+      .my-1.text-white
+        | 近日実装予定です。
+    .col-start-5.col-span-4.border-2.border-white-500.border-dashed.p-10
+      = link_to "ログイン", new_user_session_path, class: "bg-brown-400 hover:bg-brown-700 text-2xl text-white font-bold py-2 px-10 border border-brown-700 rounded"
+      .my-3.text-white
+        = link_to "新規登録はこちら", new_user_registration_path, class: "border-dashed border-2 border-white p-1 hover:text-brown-100"
+    .col-start-9.col-span-4.border-2.border-white-500.border-dashed.p-10
+      = link_to "ゲストログイン", users_guest_sign_in_path , method: :post, class: "bg-yellow-500 text-2xl hover:bg-yellow-600 text-white font-bold py-2 px-10 border border-yellow-600 rounded"
+      .my-3.text-white
+        | ゲストユーザとして閲覧します
+  .bg-brown-50.px-10
     .p-20.text-center
       .text-3xl.top-sub-title.mb-10
         | リモートで会えない他の社員に自分のプロフィールを公開しよう
       .grid.grid-cols-12.gap-2.px-20
-        .col-start-1.col-span-6.mb-10
-          = image_tag "undraw_swipe_profiles1_i6mr.svg"
+        .col-start-1.col-span-6
+          = image_tag "prof_open_normal.png", class: "max-w-sm flip-horizontal"
         .col-start-7.col-span-6.mb-10
           .text-lg.text-center.p-20.bg-white.rounded-full
             | プロフちゃんはコロナ下で減ってしまった雑談を補完するために
