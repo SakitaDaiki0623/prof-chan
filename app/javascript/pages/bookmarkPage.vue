@@ -1,20 +1,28 @@
 <template>
   <div class="top">
     <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
-      <div class="text-center text-5xl text-white">
+      <div class="text-center text-5xl text-white py-5 top-sub-title">
+        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
         あなたがよく共感する社員TOP3
+        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
       </div>
-      <v-row class="py-5 h-96" justify="center">
-        <v-col align-self="center" cols="12" sm="4" v-if="secondPlaceUserExist">
-          <v-card class="second-place" outlined contain>
+      <v-row class="py-5" justify="center" style="height: 30rem;">
+        <v-col align-self="center" align="center" cols="12" sm="4">
+          <v-card
+            class="second-place"
+            outlined
+            contain
+            v-if="secondPlaceUserExist"
+          >
             <v-img
               :src="secondPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
           </v-card>
+          <PlaceDoesNotExistCard place-number="2" v-else />
         </v-col>
-        <v-col align-self="start" cols="12" sm="4">
+        <v-col align-self="start" align="center" cols="12" sm="4">
           <v-card class="first-place" outlined contain>
             <v-img
               :src="firstPlaceUser.image.url"
@@ -23,14 +31,20 @@
             ></v-img>
           </v-card>
         </v-col>
-        <v-col align-self="end" cols="12" sm="4" v-if="thirdPlaceUserExist">
-          <v-card class="first-place" outlined contain>
+        <v-col align-self="end" align="center" cols="12" sm="4">
+          <v-card
+            class="first-place"
+            outlined
+            contain
+            v-if="thirdPlaceUserExist"
+          >
             <v-img
               :src="thirdPlaceUser.image.url"
               max-height="150"
               max-width="250"
             ></v-img>
           </v-card>
+          <PlaceDoesNotExistCard v-else place-number="3" />
         </v-col>
       </v-row>
     </div>
@@ -123,6 +137,7 @@ import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
 import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
+import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
 
 export default {
   components: {
@@ -131,6 +146,7 @@ export default {
     QuestionBlockCard,
     YesOrNoBlockCard,
     RankingBlockCard,
+    PlaceDoesNotExistCard,
   },
   data() {
     return {

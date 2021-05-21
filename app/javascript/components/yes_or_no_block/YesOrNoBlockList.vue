@@ -1,25 +1,34 @@
 <template>
   <v-container
-    class="rounded-2xl bg-color"
+    class="rounded-2xl bg-brown-300"
     v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
   >
-    <v-row v-show="isThisEditPage" justify="center">
-      <v-btn
-        id="add-yes-or-no-block-btn"
-        tile
-        :color="yesOrNoBlockColor"
-        class="ma-2 white--text"
-        @click="openYesOrNoFormatDialog"
-      >
-        <v-icon left>
-          mdi-plus
-        </v-icon>
-        Yes or No ブロックを追加する
-      </v-btn>
-    </v-row>
-    <div class="block-title">
-      Yes or No コーナー
+    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
+      <span class="text-yellow-300 rounded-full px-2 bg-white">Y</span> Yes or
+      No コーナー
     </div>
+    <v-row v-show="isThisEditPage" justify="center" class="py-5">
+      <v-col cols="12" sm="12" align="center">
+        <v-btn
+          id="add-yes-or-no-block-btn"
+          tile
+          :color="yesOrNoBlockColor"
+          class="ma-2 white--text"
+          @click="openYesOrNoFormatDialog"
+        >
+          <v-icon left>
+            mdi-plus
+          </v-icon>
+          Yes or No ブロックを追加する
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="8" align="right">
+        <ProgressBar
+          :percentage-for-blocks="percentageMyYesOrNoBlocksLengt"
+          :block-color="yesOrNoBlockColor"
+        />
+      </v-col>
+    </v-row>
     <div>
       <transition-group
         tag="v-row"
@@ -31,6 +40,7 @@
           :key="yesOrNoBlock.id"
           cols="12"
           sm="4"
+          class="border-b-2 border-yellow-300 border-dashed"
         >
           <YesOrNoBlockCard
             :yes-or-no-block="yesOrNoBlock"
@@ -48,7 +58,6 @@
       </v-container>
     </div>
 
-    <div class="block-title" />
     <YesOrNoFormatDialog
       :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
       :yes-or-no-block-color="yesOrNoBlockColor"
@@ -64,11 +73,13 @@ import { mapState, mapActions } from "vuex";
 
 import YesOrNoFormatDialog from "./YesOrNoFormatDialog";
 import YesOrNoBlockCard from "./YesOrNoBlockCard";
+import ProgressBar from "../ProgressBar";
 
 export default {
   components: {
     YesOrNoFormatDialog,
     YesOrNoBlockCard,
+    ProgressBar,
   },
   props: {
     isThisEditPage: {
@@ -91,6 +102,11 @@ export default {
   computed: {
     ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
     ...mapState("users", ["currentUser"]),
+
+    percentageMyYesOrNoBlocksLengt() {
+      if (this.myYesOrNoBlocks.length / 5 >= 1) return 100;
+      return (this.myYesOrNoBlocks.length / 5) * 100;
+    },
 
     myYesOrNoBlocks() {
       return (
@@ -157,7 +173,6 @@ export default {
     180px 0px 0px rgb(243, 163, 168), 200px 0px 0px rgb(217, 204, 179),
     220px 0px 0px rgb(217, 204, 179);
 }
-
 
 .no-block-display-container {
   height: 300px;
