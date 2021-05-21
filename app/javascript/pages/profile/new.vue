@@ -9,7 +9,7 @@
       </v-col>
       <v-col cols="12" sm="6">
         <!-- Basic Info Card -->
-        <v-card class="rounded-2xl" color="orange lighten-5" outlined>
+        <v-card class="rounded-2xl" color="brown lighten-4" outlined>
           <div class="md:w-full p-8 lg:ml-4">
             <!-- FORM -->
             <div id="profile-basic-form" class="p-6">
