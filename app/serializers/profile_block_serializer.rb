@@ -6,4 +6,5 @@ class ProfileBlockSerializer < ApplicationSerializer
   has_many :ranking_blocks
   has_many :yes_or_no_blocks
   has_many :text_blocks
+  has_many :favorite_blocks
 end
