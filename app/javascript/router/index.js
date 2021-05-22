@@ -11,6 +11,7 @@ import popularBlocks from "../pages/popularBlocks.vue";
 import bookmarkPage from "../pages/bookmarkPage.vue";
 import recommendedUsers from "../pages/recommendedUsers.vue";
 import NotFound from "../pages/shared/NotFound";
+import About from "../pages/static/about";
 
 Vue.use(VueRouter);
 
@@ -71,6 +72,11 @@ const routes = [
     path: "/recommended_users",
     name: "recommendedUsers",
     component: recommendedUsers,
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: About,
   },
   {
     name: "NotFound",

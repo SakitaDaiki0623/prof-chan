@@ -1,10 +1,10 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
   <header v-show="doesCurrentUserhaveProfile">
-    <v-app-bar color="brown lighten-2" outlined>
+    <v-app-bar color="brown lighten-2" outlined height="80px">
       <v-toolbar-title>
         <router-link to="/top">
-          プロフちゃん(ロゴ)
+          <img src="../../images/prof_normal.png" class="logo" />
         </router-link>
       </v-toolbar-title>
 
@@ -47,6 +47,18 @@
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <v-btn
+        id="profile-edit-button"
+        class="m-2 white--text"
+        color="brown lighten-2"
+        @click="openAboutPage"
+      >
+        <v-icon left>
+          mdi-information-outline
+        </v-icon>
+        プロフちゃんとは
+      </v-btn>
 
       <v-spacer />
 
@@ -127,8 +139,17 @@ export default {
     openRecommendedUsers() {
       this.$router.push("/recommended_users").catch((err) => {});
     },
+    openAboutPage() {
+      this.$router.push("/about").catch((err) => {});
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.logo {
+  max-width: 4rem;
+  background: white;
+  border-radius: 50px;
+}
+</style>

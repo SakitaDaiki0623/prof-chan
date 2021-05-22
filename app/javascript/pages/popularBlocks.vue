@@ -23,7 +23,7 @@
           v-for="favoriteBlock in favoritePopularBlocksTopThree"
           :key="favoriteBlock.id"
           cols="12"
-          sm="4"
+          sm="3"
         >
           <div>作成者: {{ favoriteBlock.owing_user.name }}</div>
           <FavoriteBlockCard :favorite-block="favoriteBlock" />
