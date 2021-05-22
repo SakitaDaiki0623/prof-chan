@@ -36,6 +36,12 @@ Rails.application.routes.draw do
 
       # プロフブロック
       resources :profile_blocks,     only: %i[index show]
+      resources :favorite_blocks,        only: %i[index create show update destroy] do
+        collection do
+          get  'random_current_user_likes_blocks'
+          get  'popular_blocks'
+        end
+      end
       resources :text_blocks,        only: %i[index create show update destroy] do
         collection do
           get  'random_current_user_likes_blocks'
@@ -75,6 +81,7 @@ Rails.application.routes.draw do
         resources :question_block_likes,  only: [:index, :create, :destroy]
         resources :ranking_block_likes,   only: [:index, :create, :destroy]
         resources :yes_or_no_block_likes, only: [:index, :create, :destroy]
+        resources :favorite_block_likes,  only: [:index, :create, :destroy]
       end
     end
   end

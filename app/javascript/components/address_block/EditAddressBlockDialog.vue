@@ -11,7 +11,7 @@
         <v-btn
           @click="hundleCloseEditAddressBlockDialog"
         >
-          ✖︎
+          <v-icon> mdi-close-outline </v-icon>
         </v-btn>
       </v-row>
       <ValidationObserver

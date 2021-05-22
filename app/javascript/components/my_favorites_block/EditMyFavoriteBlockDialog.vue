@@ -17,7 +17,7 @@
           color="teal lighten-4"
           @click="hundleCloseEditMyFavoriteFormatDialog"
         >
-          ✖︎
+          <v-icon> mdi-close-outline </v-icon>
         </v-btn>
       </v-row>
       <p class="font-weight-bold text-4xl text-gray-600 text-center mt-10">
