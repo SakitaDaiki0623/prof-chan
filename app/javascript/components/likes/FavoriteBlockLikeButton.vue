@@ -21,7 +21,7 @@ import { mapState } from "vuex";
 
 export default {
   props: {
-    textBlockId: {
+    favoriteBlockId: {
       type: Number,
       required: true,
     },
@@ -50,14 +50,14 @@ export default {
   },
 
   created: function() {
-    this.fetchLikeByTextBlockId().then((result) => {
+    this.fetchLikeByFavoriteBlockId().then((result) => {
       this.likeList = result;
     });
   },
   methods: {
-    fetchLikeByTextBlockId: async function() {
+    fetchLikeByFavoriteBlockId: async function() {
       const res = await axios.get(
-        `/api/v1/likes/text_block_likes/?text_block_id=${this.textBlockId}`
+        `/api/v1/likes/text_block_likes/?text_block_id=${this.favoriteBlockId}`
       );
       if (res.status !== 200) {
         process.exit();
@@ -67,12 +67,12 @@ export default {
 
     registerLike: async function() {
       const res = await axios.post("/api/v1/likes/text_block_likes", {
-        text_block_id: this.textBlockId,
+        text_block_id: this.favoriteBlockId,
       });
       if (res.status !== 201) {
         process.exit();
       }
-      this.fetchLikeByTextBlockId().then((result) => {
+      this.fetchLikeByFavoriteBlockId().then((result) => {
         this.likeList = result;
       });
     },

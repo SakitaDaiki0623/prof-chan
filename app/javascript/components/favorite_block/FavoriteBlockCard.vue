@@ -21,12 +21,12 @@
           <v-icon> mdi-delete </v-icon>
         </v-btn>
       </v-row>
-      <!-- <v-row v-else>
+      <v-row v-else>
         <v-spacer />
         <favorite-block-like-button
           :favorite-block-id="favoriteBlock.id"
         ></favorite-block-like-button>
-      </v-row> -->
+      </v-row>
       <label class="form-label">
         {{ favoriteBlock.category_name }}
       </label>
