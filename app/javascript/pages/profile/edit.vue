@@ -1,7 +1,7 @@
 <!-- app/javascript/pages/profile/edit.vue -->
 <template>
   <v-container
-    class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color"
+    class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color note"
   >
     <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
@@ -69,10 +69,6 @@ export default {
 </script>
 
 <style>
-.bg-main-contain-color {
-  background-color: #f1fcdf;
-}
-
 .dot-color {
   color: #fff4dd;
   letter-spacing: 5rem;
@@ -103,5 +99,18 @@ export default {
   opacity: 0;
   transform: scaleY(0);
   transform-origin: center top;
+}
+
+.note {
+  width: 80%;
+  padding: 0 1em;
+  background: linear-gradient(rgb(255, 245, 245) 5px, transparent 0.6px) #fffbf2;
+  background-size: auto 5em;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  overflow: hidden;
+
 }
 </style>
