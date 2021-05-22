@@ -40,6 +40,7 @@ module Api
 
       def popular_blocks
         @favorite_popular_blocks = FavoriteBlock.by_team(current_user).popular_blocks
+
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @favorite_popular_blocks,
           serializer: FavoriteBlockSerializer

@@ -59,6 +59,21 @@
         </v-row>
       </div>
       <div class="p-20">
+        <div v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0">
+          <div class="top-sub-title m-5">クエスチョンブロック</div>
+          <v-row>
+            <v-col
+              v-for="favoriteBlock in randomCurrentUserLikesFavoriteBlocks"
+              :key="favoriteBlock.id"
+              cols="12"
+              sm="4"
+            >
+              {{ favoriteBlock.owing_user.name }} さん
+              <FavoriteBlockCard :favorite-block="favoriteBlock" />
+            </v-col>
+          </v-row>
+        </div>
+
         <div v-if="randomCurrentUserLikesQuestionBlocks.length !== 0">
           <div class="top-sub-title m-5">クエスチョンブロック</div>
           <v-row>
@@ -137,6 +152,7 @@ import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
 import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
+import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
 
 export default {
@@ -147,10 +163,12 @@ export default {
     YesOrNoBlockCard,
     RankingBlockCard,
     PlaceDoesNotExistCard,
+    FavoriteBlockCard,
   },
   data() {
     return {
       datas: [],
+      randomCurrentUserLikesFavoriteBlocks: [],
       randomCurrentUserLikesQuestionBlocks: [],
       randomCurrentUserLikesRankingBlocks: [],
       randomCurrentUserLikesYesOrNoBlocks: [],
@@ -177,8 +195,10 @@ export default {
       const allUserIds = this.questionLikedUserIds.concat(
         this.rankingLikedUserIds,
         this.yesOrNoLikedUserIds,
-        this.textLikedUserIds
+        this.textLikedUserIds,
+        this.favoriteLikedUserIds
       );
+      console.log(this.favoriteLikedUserIds);
 
       // 要素数が多いユーザートップ3のidを取得
       const dict = {};
@@ -199,6 +219,11 @@ export default {
 
       const topThreeUserIdAndLikesCount = arr.splice(0, 3);
       return topThreeUserIdAndLikesCount; // ex.0: {user_id: "2", value: 12}, 1: {user_id: "3", value: 6}, 2: {user_id: "1", value: 3}
+    },
+    favoriteLikedUserIds() {
+      return this.randomCurrentUserLikesFavoriteBlocks.map(
+        (value) => value.owing_user.id
+      );
     },
     questionLikedUserIds() {
       return this.randomCurrentUserLikesQuestionBlocks.map(
@@ -226,6 +251,7 @@ export default {
   },
   methods: {
     async firstRead() {
+      await this.fecthRandomCurrentUserLikesFavoriteBlocks();
       await this.fecthRandomCurrentUserLikesQuestionBlocks();
       await this.fecthRandomCurrentUserLikesRankingBlocks();
       await this.fecthRandomCurrentUserLikesYesOrNoBlocks();
@@ -233,6 +259,11 @@ export default {
       await this.fecthFirstPlaceUser();
       await this.fecthSecondPlaceUser();
       await this.fecthThirdPlaceUser();
+    },
+    async fecthRandomCurrentUserLikesFavoriteBlocks() {
+      await axios
+        .get("/api/v1/favorite_blocks/random_current_user_likes_blocks")
+        .then((res) => (this.randomCurrentUserLikesFavoriteBlocks = res.data));
     },
     async fecthRandomCurrentUserLikesQuestionBlocks() {
       await axios

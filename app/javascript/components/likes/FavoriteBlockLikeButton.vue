@@ -57,7 +57,7 @@ export default {
   methods: {
     fetchLikeByFavoriteBlockId: async function() {
       const res = await axios.get(
-        `/api/v1/likes/text_block_likes/?text_block_id=${this.favoriteBlockId}`
+        `/api/v1/likes/favorite_block_likes/?favorite_block_id=${this.favoriteBlockId}`
       );
       if (res.status !== 200) {
         process.exit();
@@ -66,8 +66,8 @@ export default {
     },
 
     registerLike: async function() {
-      const res = await axios.post("/api/v1/likes/text_block_likes", {
-        text_block_id: this.favoriteBlockId,
+      const res = await axios.post("/api/v1/likes/favorite_block_likes", {
+        favorite_block_id: this.favoriteBlockId,
       });
       if (res.status !== 201) {
         process.exit();
