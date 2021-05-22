@@ -40,6 +40,7 @@
       </v-card>
     </v-card>
     <EditFavoriteFormatDialog
+      v-if="isThisEditPage"
       :is-shown-edit-favorite-format-dialog="isShownEditFavoriteFormatDialog"
       :favorite-block-color="favoriteBlockColor"
       :edit-favorite-block="editFavoriteBlock"
