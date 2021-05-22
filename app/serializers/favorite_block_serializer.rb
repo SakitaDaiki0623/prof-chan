@@ -1,5 +1,5 @@
 class FavoriteBlockSerializer < ApplicationSerializer
-  attributes :id, :name, :category_id
+  attributes :id, :text, :category_id, :category_name
   belongs_to :profile_block
 
   def category_name

@@ -177,9 +177,14 @@
 // 入力フォームラベル ====================
 // 雛形
 .form-label {
-  @apply leading-7;
+  @apply pt-2;
   @apply text-sm;
-  @apply text-gray-600;
+  @apply font-medium;
+  @apply bg-green-100;
+  @apply py-1;
+  @apply px-2;
+  @apply rounded;
+  @apply text-green-500;
 }
 
 .form-label-text-block {

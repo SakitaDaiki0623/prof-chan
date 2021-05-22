@@ -294,7 +294,6 @@ export default {
         message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
-      console.log(this.currentUser);
       if (this.currentUser.provider == "slack") {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(params);

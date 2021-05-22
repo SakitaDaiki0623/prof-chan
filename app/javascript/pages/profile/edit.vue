@@ -5,7 +5,7 @@
   >
     <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <MyFavoriteBlock :is-this-edit-page="isThisEditPage" :user="user" />
+    <FavoriteBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
     <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
@@ -27,7 +27,8 @@ import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
-import RankingBlockList from "../../components//ranking_block/RankingBlockList";
+import RankingBlockList from "../../components/ranking_block/RankingBlockList";
+import FavoriteBlockList from "../../components/favorite_block/FavoriteBlockList";
 
 export default {
   components: {
@@ -37,6 +38,7 @@ export default {
     YesOrNoBlockList,
     RankingBlockList,
     TextBlockList,
+    FavoriteBlockList,
   },
   props: {
     id: {

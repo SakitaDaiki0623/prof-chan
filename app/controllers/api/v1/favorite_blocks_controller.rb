@@ -2,7 +2,7 @@
 module Api
   module V1
 
-    class FavoriteBlocksController < ApplicationController
+    class FavoriteBlocksController < ApiController
       before_action :set_favorite_block, only: %i[show update destroy]
 
       def index
