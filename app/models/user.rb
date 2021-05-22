@@ -44,6 +44,8 @@ class User < ApplicationRecord
   has_many :ranking_blocks, through: :ranking_block_likes
   has_many :yes_or_no_block_likes, dependent: :destroy
   has_many :yes_or_no_blocks, through: :yes_or_no_block_likes
+  has_many :favorite_block_likes, dependent: :destroy
+  has_many :favorite_blocks, through: :favorite_block_likes
 
   # validation
   validates :name,                      presence: true
