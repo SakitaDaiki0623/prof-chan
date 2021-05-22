@@ -1,6 +1,28 @@
 # config/routes.rb
 Rails.application.routes.draw do
 
+  namespace :admin do
+      resources :users
+      resources :ranking_block_likes
+      resources :text_block_likes
+      resources :profile_blocks
+      resources :favorite_block_likes
+      resources :yes_or_no_blocks
+      resources :ranking_blocks
+      resources :my_favorite_blocks
+      resources :favorite_blocks
+      resources :address_blocks
+      resources :teams
+      resources :text_blocks
+      resources :profiles
+      resources :question_block_likes
+      resources :question_blocks
+      resources :yes_or_no_block_likes
+      resources :yes_or_no_items
+      resources :question_items
+
+      root to: "users#index"
+    end
   # ROOT_PATH
   root to: 'home#index'
 
