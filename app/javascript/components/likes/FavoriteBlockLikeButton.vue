@@ -80,7 +80,7 @@ export default {
     deleteLike: async function() {
       const likeId = this.findLikeId();
       const res = await axios.delete(
-        `/api/v1/likes/text_block_likes/${likeId}`
+        `/api/v1/likes/favorite_block_likes/${likeId}`
       );
       if (res.status !== 200) {
         process.exit();

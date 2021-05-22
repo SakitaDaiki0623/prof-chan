@@ -95,6 +95,7 @@ export default {
       secondPlaceUser: {},
       thirdPlaceUser: {},
       currentUserProfileBlock: {},
+      favoriteBlocks: [],
       questionBlocks: [],
       rankingBlocks: [],
       yesOrNoBlocks: [],
@@ -181,10 +182,19 @@ export default {
     },
     allCurrentUserBlocks() {
       return [].concat(
+        this.currentUserFavoriteBlocks,
         this.currentUserQuestionBlocks,
         this.currentUserRankingBlocks,
         this.currentUserYesOrNoBlocks,
         this.currentUserTextBlocks
+      );
+    },
+    currentUserFavoriteBlocks() {
+      return (
+        this.favoriteBlocks.filter(
+          (favoriteBlock) =>
+            favoriteBlock.profile_block.id == this.currentUser.profile_block.id
+        ) || {}
       );
     },
     currentUserQuestionBlocks() {
@@ -226,6 +236,7 @@ export default {
 
   methods: {
     async firstRead() {
+      await this.fetchFavoriteBlocks();
       await this.fetchQuestionBlocks();
       await this.fetchRankingBlocks();
       await this.fetchYesOrNoBlocks();
@@ -233,6 +244,11 @@ export default {
       await this.fecthFirstPlaceUser();
       await this.fecthSecondPlaceUser();
       await this.fecthThirdPlaceUser();
+    },
+    async fetchFavoriteBlocks() {
+      await axios
+        .get("/api/v1/favorite_blocks")
+        .then((res) => (this.favoriteBlocks = res.data));
     },
     async fetchQuestionBlocks() {
       await axios

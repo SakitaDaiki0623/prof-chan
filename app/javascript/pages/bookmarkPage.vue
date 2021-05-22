@@ -60,13 +60,13 @@
       </div>
       <div class="p-20">
         <div v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0">
-          <div class="top-sub-title m-5">クエスチョンブロック</div>
+          <div class="top-sub-title m-5">Favorite ブロック</div>
           <v-row>
             <v-col
               v-for="favoriteBlock in randomCurrentUserLikesFavoriteBlocks"
               :key="favoriteBlock.id"
               cols="12"
-              sm="4"
+              sm="3"
             >
               {{ favoriteBlock.owing_user.name }} さん
               <FavoriteBlockCard :favorite-block="favoriteBlock" />
@@ -198,7 +198,6 @@ export default {
         this.textLikedUserIds,
         this.favoriteLikedUserIds
       );
-      console.log(this.favoriteLikedUserIds);
 
       // 要素数が多いユーザートップ3のidを取得
       const dict = {};

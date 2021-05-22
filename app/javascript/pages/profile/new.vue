@@ -217,7 +217,7 @@
                       elevation="4"
                       x-large
                       :disabled="invalid"
-                      color="brown lighten-3"
+                      color="brown"
                       class="white--text"
                     >
                       入力完了！
