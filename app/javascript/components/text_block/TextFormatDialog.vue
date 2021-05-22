@@ -10,7 +10,7 @@
       <v-card :color="textBlockColor">
         <v-row justify="end" class="mr-2 mt-2">
           <v-btn :color="textBlockColor" @click="hundleCloseTextFormatDialog">
-            ✖︎
+            <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">

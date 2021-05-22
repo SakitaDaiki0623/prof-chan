@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="rounded-2xl p-5" outlined color="brown lighten-3">
+    <v-card class="rounded-2xl p-5" outlined :color="favoriteBlockColor">
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + favoriteBlock.id"

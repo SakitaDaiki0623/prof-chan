@@ -13,7 +13,7 @@
             :color="yesOrNoBlockColor"
             @click="hundleCloseYesOrNoFormatDialog"
           >
-            ✖︎
+            <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
         <p class="font-weight-bold text-white text-4xl text-center mt-10">

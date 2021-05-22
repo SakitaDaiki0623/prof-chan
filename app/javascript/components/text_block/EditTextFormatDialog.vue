@@ -16,7 +16,7 @@
             :color="textBlockColor"
             @click="hundleCloseEditTextFormatDialog"
           >
-            ✖︎
+            <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
         <p

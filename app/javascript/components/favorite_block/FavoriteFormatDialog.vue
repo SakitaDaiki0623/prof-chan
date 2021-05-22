@@ -3,7 +3,7 @@
   <div>
     <v-dialog
       :value="isShownFavoriteFormatDialog"
-      max-width="800"
+      max-width="400"
       persistent
       @input="$emit('input', $event.target.isShownFavoriteFormatDialog)"
     >
@@ -13,7 +13,7 @@
             :color="favoriteBlockColor"
             @click="hundleCloseFavoriteFormatDialog"
           >
-            ✖︎
+            <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
