@@ -12,27 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_05_22_022730) do
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
   create_table "address_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "twitter"
     t.string "instagram"
@@ -194,6 +173,7 @@ ActiveRecord::Schema.define(version: 2021_05_22_022730) do
     t.string "name", null: false
     t.string "image", null: false
     t.string "email", null: false
+    t.integer "role", default: 1, null: false
     t.bigint "team_id", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -230,7 +210,6 @@ ActiveRecord::Schema.define(version: 2021_05_22_022730) do
     t.index ["yes_or_no_block_id"], name: "index_yes_or_no_items_on_yes_or_no_block_id"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "address_blocks", "profile_blocks"
   add_foreign_key "favorite_block_likes", "favorite_blocks"
   add_foreign_key "favorite_block_likes", "users"
