@@ -3,12 +3,12 @@ require 'faker'
 
 # create another team workspace and users belonging to it
 FactoryBot.create(:team) do |team|
-  FactoryBot.create_list(:user, 10, team: team)
+  FactoryBot.create_list(:user, 30, team: team)
 end
 
 # create real team workspace and users
 FactoryBot.create(:team, :real_team) do |team|
-  FactoryBot.create_list(:user, 10, team: team)
+  FactoryBot.create_list(:user, 30, team: team)
   random_five_users = User.all.shuffle.slice(0, 5)
   random_ten_question_blocks = QuestionBlock.all.shuffle.slice(0, 10)
   random_ten_ranking_blocks = RankingBlock.all.shuffle.slice(0, 10)
