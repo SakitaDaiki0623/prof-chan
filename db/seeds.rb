@@ -29,3 +29,6 @@ FactoryBot.create(:team, :real_team) do |team|
     end
   end
 end
+
+# 管理者の作成
+FactoryBot.create(:user, :admin)
