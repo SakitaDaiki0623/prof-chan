@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="rounded-2xl bg-brown-100"
+    class="rounded-2xl bg-brown-200"
     v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
@@ -94,7 +94,7 @@ export default {
   data() {
     return {
       isShownRankingFormatDialog: false,
-      rankingBlockColor: "green lighten-4", // ranking block color
+      rankingBlockColor: "green lighten-3", // ranking block color
     };
   },
   computed: {

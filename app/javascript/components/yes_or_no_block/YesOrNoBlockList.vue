@@ -137,42 +137,7 @@ export default {
   background-color: #ffebca;
 } */
 
-.block-title {
-  color: #ffb74b; /* 文字色 */
-  padding: 5px 5px 5px 30px; /* 上・右・下・左の余白 */
-  position: relative;
-  font-size: 2rem;
-  margin: 0.5rem;
-}
 
-.block-title::before {
-  background-color: #ffb74b;
-  border-radius: 5px;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 3px; /* 左端からの位置 */
-  width: 5px; /* 左側の線の幅 */
-  height: 100%;
-}
-
-.block-title::after {
-  background-color: #f3a3a8; /* 1個目（一番左）のドットの色 */
-  border-radius: 50%;
-  content: "";
-  margin-left: 15px; /* 最後の文字とドットとの余白 */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px; /* ドットの幅 */
-  height: 5px; /* ドットの高さ */
-  box-shadow: 20px 0px 0px rgb(217, 204, 179), 40px 0px 0px rgb(217, 204, 179),
-    60px 0px 0px rgb(243, 163, 168), 80px 0px 0px rgb(217, 204, 179),
-    100px 0px 0px rgb(217, 204, 179), 120px 0px 0px rgb(243, 163, 168),
-    140px 0px 0px rgb(217, 204, 179), 160px 0px 0px rgb(217, 204, 179),
-    180px 0px 0px rgb(243, 163, 168), 200px 0px 0px rgb(217, 204, 179),
-    220px 0px 0px rgb(217, 204, 179);
-}
 
 .no-block-display-container {
   height: 300px;

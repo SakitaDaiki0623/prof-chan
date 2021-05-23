@@ -37,6 +37,15 @@ FactoryBot.define do
       association :team, workspace_id: ENV['TEAM_ID']
     end
 
+    trait :admin do
+      name { "プロフちゃん管理" }
+      email { ENV["ADMIN_MAIL"] }
+      password { ENV["ADMIN_PASSWORD"] }
+      password_confirmation { ENV["ADMIN_PASSWORD"] }
+      uid { ENV["ADMIN_UID"] }
+      role {0 }
+    end
+
     after(:create) do |user|
       create(:profile, user: user)
       create(:profile_block, user: user)

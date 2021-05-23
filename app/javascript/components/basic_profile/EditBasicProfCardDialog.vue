@@ -42,7 +42,7 @@
               color="red lighten-4"
               @click="hundleCloseEditBasicProfCardDialog"
             >
-              ✖︎
+              <v-icon> mdi-close-outline </v-icon>
             </v-btn>
           </v-row>
           <!-- FORM -->

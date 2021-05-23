@@ -217,7 +217,7 @@
                       elevation="4"
                       x-large
                       :disabled="invalid"
-                      color="brown lighten-3"
+                      color="brown"
                       class="white--text"
                     >
                       入力完了！
@@ -337,7 +337,6 @@ export default {
   methods: {
     ...mapActions("users", ["fetchCurrentUser"]),
     hundleSubmitBasicProfileInfo(profile) {
-      this.openDialog();
       if (
         profile.height == "" ||
         profile.gender == "" ||
@@ -348,6 +347,7 @@ export default {
       )
         return;
       this.createBasicProfile(profile);
+      this.openDialog();
     },
     openDialog() {
       this.isShownCreateProfileSuccessDialog = true;

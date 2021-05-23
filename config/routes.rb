@@ -1,6 +1,34 @@
 # config/routes.rb
 Rails.application.routes.draw do
 
+  namespace :admin do
+      resources :users
+      resources :ranking_block_likes
+      resources :text_block_likes
+      resources :profile_blocks
+      resources :favorite_block_likes
+      resources :yes_or_no_blocks
+      resources :ranking_blocks
+      resources :my_favorite_blocks
+      resources :favorite_blocks
+      resources :address_blocks
+      resources :teams
+      resources :text_blocks
+      resources :profiles
+      resources :question_block_likes
+      resources :question_blocks
+      resources :yes_or_no_block_likes
+      resources :yes_or_no_items
+      resources :question_items
+
+      # active hash
+      resources :categories
+      resources :prefectures
+
+      # ADMIN_ROOT_PATH
+      root to: "users#index"
+    end
+
   # ROOT_PATH
   root to: 'home#index'
 
@@ -36,6 +64,12 @@ Rails.application.routes.draw do
 
       # プロフブロック
       resources :profile_blocks,     only: %i[index show]
+      resources :favorite_blocks,        only: %i[index create show update destroy] do
+        collection do
+          get  'random_current_user_likes_blocks'
+          get  'popular_blocks'
+        end
+      end
       resources :text_blocks,        only: %i[index create show update destroy] do
         collection do
           get  'random_current_user_likes_blocks'
@@ -75,6 +109,7 @@ Rails.application.routes.draw do
         resources :question_block_likes,  only: [:index, :create, :destroy]
         resources :ranking_block_likes,   only: [:index, :create, :destroy]
         resources :yes_or_no_block_likes, only: [:index, :create, :destroy]
+        resources :favorite_block_likes,  only: [:index, :create, :destroy]
       end
     end
   end

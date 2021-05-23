@@ -13,12 +13,31 @@
     </div>
 
     <div class="py-10 px-20">
+      <!-- Favorite ブロック -->
+      <div class="top-sub-title my-10">
+        Favorite ブロック
+      </div>
+
+      <v-row>
+        <v-col
+          v-for="favoriteBlock in favoritePopularBlocksTopThree"
+          :key="favoriteBlock.id"
+          cols="12"
+          sm="3"
+        >
+          <div>作成者: {{ favoriteBlock.owing_user.name }}</div>
+          <FavoriteBlockCard :favorite-block="favoriteBlock" />
+        </v-col>
+      </v-row>
+    </div>
+    <!-- /Favorite ブロック -->
+
+    <div class="py-10 px-20">
       <!-- クエスチョンブロック -->
       <div class="top-sub-title my-10">
         クエスチョンブロック
       </div>
 
-      <!-- TODO: 後ほどコンポーネント化 -->
       <v-row>
         <v-col
           v-for="questionBlock in questionPopularBlocksTopThree"
@@ -142,6 +161,7 @@ import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
 import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
+import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 
 export default {
   components: {
@@ -149,10 +169,12 @@ export default {
     QuestionBlockCard,
     YesOrNoBlockCard,
     RankingBlockCard,
+    FavoriteBlockCard,
   },
   data() {
     return {
       recentlyJoinedUserProfiles: [],
+      favoritePopularBlocks: [],
       questionPopularBlocks: [],
       rankingPopularBlocks: [],
       yesOrNoPopularBlocks: [],
@@ -161,7 +183,18 @@ export default {
     };
   },
   computed: {
-    overallTopThreeBlocks() {},
+    favoritePopularBlocksFirstPlace() {
+      return this.favoritePopularBlocksTopThree[0];
+    },
+    favoritePopularBlocksSecondPlace() {
+      return this.favoritePopularBlocksTopThree[1];
+    },
+    favoritePopularBlocksThirdPlace() {
+      return this.favoritePopularBlocksTopThree[2];
+    },
+    favoritePopularBlocksTopThree() {
+      return this.favoritePopularBlocks.splice(0, 3);
+    },
     questionPopularBlocksFirstPlace() {
       return this.questionPopularBlocksTopThree[0];
     },
@@ -229,6 +262,7 @@ export default {
     },
     async firstRead() {
       await this.fetchRecentlyJoinedUserProfiles();
+      await this.fetchFavoritePopularBlocks();
       await this.fetchQuestionPopularBlocks();
       await this.fetchRankingPopularBlocks();
       await this.fetchYesOrNoPopularBlocks();
@@ -239,6 +273,11 @@ export default {
       await axios
         .get("/api/v1/profiles/recently_joined_user_profiles")
         .then((res) => (this.recentlyJoinedUserProfiles = res.data));
+    },
+    async fetchFavoritePopularBlocks() {
+      await axios
+        .get("/api/v1/favorite_blocks/popular_blocks")
+        .then((res) => (this.favoritePopularBlocks = res.data));
     },
     async fetchQuestionPopularBlocks() {
       await axios

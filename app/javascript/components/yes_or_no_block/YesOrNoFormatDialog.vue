@@ -13,7 +13,7 @@
             :color="yesOrNoBlockColor"
             @click="hundleCloseYesOrNoFormatDialog"
           >
-            ✖︎
+            <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
         <p class="font-weight-bold text-white text-4xl text-center mt-10">
@@ -294,7 +294,6 @@ export default {
         message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
-      console.log(this.currentUser);
       if (this.currentUser.provider == "slack") {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(params);
