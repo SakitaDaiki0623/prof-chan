@@ -37,7 +37,7 @@
             <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
               <div>
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_title"
                   >タイトル</label
                 >
@@ -59,7 +59,7 @@
 
               <div class="mt-5">
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_first_place"
                   >1st</label
                 >
@@ -79,7 +79,7 @@
               </div>
               <div class="mt-5">
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_second_place"
                   >2nd</label
                 >
@@ -99,7 +99,7 @@
               </div>
               <div class="mt-5">
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_third_place"
                   >3rd</label
                 >

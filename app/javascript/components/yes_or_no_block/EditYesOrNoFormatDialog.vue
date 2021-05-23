@@ -61,7 +61,7 @@
               <form>
                 <div>
                   <label
-                    class="form-label-yes-or-no-block"
+                    class="form-label-text-block"
                     for="yes_or_no_block_title"
                   >タイトル</label>
                   <ValidationProvider

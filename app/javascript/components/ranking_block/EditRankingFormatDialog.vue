@@ -33,7 +33,7 @@
             <form @submit.prevent="hundleEditRankingBlock(editRankingBlock)">
               <div>
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_title"
                 >タイトル</label>
                 <ValidationProvider

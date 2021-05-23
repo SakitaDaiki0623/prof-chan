@@ -19,7 +19,7 @@
               <ValidationObserver ref="observer" v-slot="{ invalid }">
                 <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
                   <div>
-                    <label class="form-label-basic-block" for="profile_gender"
+                    <label class="form-label-text-block" for="profile_gender"
                       >性別</label
                     >
                     <ValidationProvider
@@ -44,7 +44,7 @@
                     </ValidationProvider>
                   </div>
                   <div>
-                    <label class="form-label-basic-block" for="profile_height"
+                    <label class="form-label-text-block" for="profile_height"
                       >身長</label
                     >
                     <ValidationProvider
@@ -64,7 +64,7 @@
                   </div>
                   <div>
                     <label
-                      class="form-label-basic-block"
+                      class="form-label-text-block"
                       for="profile_blood_type"
                       >血液型</label
                     >
@@ -97,7 +97,7 @@
                   </div>
                   <div>
                     <label
-                      class="form-label-basic-block"
+                      class="form-label-text-block"
                       for="profile_prefecture_id"
                       >出身地</label
                     >
@@ -124,7 +124,7 @@
                     </ValidationProvider>
                   </div>
                   <div>
-                    <label class="form-label-basic-block" for="profile_birthday"
+                    <label class="form-label-text-block" for="profile_birthday"
                       >生年月日</label
                     >
                     <v-menu
@@ -168,7 +168,7 @@
                   </div>
                   <div>
                     <label
-                      class="form-label-basic-block"
+                      class="form-label-text-block"
                       for="profile_day_of_joinning"
                       >入社日</label
                     >

@@ -89,7 +89,7 @@
             >
               <label
                 for="yes_or_no_item_content"
-                class="form-label-yes-or-no-block"
+                class="form-label-text-block"
               >質問</label>
               <ValidationProvider
                 v-slot="{ errors }"
@@ -113,7 +113,7 @@
             >
               <label
                 for="yes_or_no_item_answer"
-                class="form-label-yes-or-no-block inline-block"
+                class="form-label-text-block inline-block"
               >
                 答え
               </label>

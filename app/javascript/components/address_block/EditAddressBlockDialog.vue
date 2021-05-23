@@ -21,7 +21,7 @@
         <form @submit.prevent="hundleUpdateAddressBlock">
           <section>
             <p>
-              <label class="form-label-basic-block">Twitter</label>
+              <label class="form-label-text-block">Twitter</label>
               <v-icon>mdi-twitter</v-icon>
               <input
                 v-model="editMyAddressBlock.twitter"
@@ -30,7 +30,7 @@
               >
             </p>
             <p>
-              <label class="form-label-basic-block">Instagram</label>
+              <label class="form-label-text-block">Instagram</label>
               <v-icon>mdi-instagram</v-icon>
               <input
                 v-model="editMyAddressBlock.instagram"
@@ -43,7 +43,7 @@
                 ref="observer"
                 v-slot="{ invalid }"
               >
-                <label class="form-label-basic-block">郵便番号</label>
+                <label class="form-label-text-block">郵便番号</label>
                 <!-- TODO: ポストコードの正規表現がうまくいかないので後ほど追記 -->
                 <ValidationProvider
                   rules="input_required|regex: /^[0-9]{7}$/"
@@ -65,7 +65,7 @@
               </ValidationObserver>
             </div>
             <br>
-            <label class="form-label-basic-block">住所</label>
+            <label class="form-label-text-block">住所</label>
             <input
               v-model="editMyAddressBlock.full_address"
               type="text"

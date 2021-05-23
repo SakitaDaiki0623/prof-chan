@@ -6,10 +6,10 @@
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         = render "users/shared/error_messages", resource: resource
         .relative.w-full.mb-3
-          = f.label :email, class: 'form-label-basic-block'
+          = f.label :email, class: 'form-label-text-block'
           = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-form-basic-block"
         .relative.w-full.mb-3
-          = f.label :password, class: 'form-label-basic-block'
+          = f.label :password, class: 'form-label-text-block'
           = f.password_field :password, autocomplete: "new-password", class: "input-form-basic-block"
           - if devise_mapping.rememberable?
           .field
