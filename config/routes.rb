@@ -21,8 +21,14 @@ Rails.application.routes.draw do
       resources :yes_or_no_items
       resources :question_items
 
+      # active hash
+      resources :categories
+      resources :prefectures
+
+      # ADMIN_ROOT_PATH
       root to: "users#index"
     end
+
   # ROOT_PATH
   root to: 'home#index'
 
