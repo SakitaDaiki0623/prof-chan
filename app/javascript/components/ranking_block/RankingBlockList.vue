@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="rounded-2xl bg-brown-200"
+    class="mb-10 bg-brown-200"
     v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
@@ -48,13 +48,7 @@
           />
         </v-col>
       </transition-group>
-      <v-container v-else class="no-block-display-container">
-        <v-row justify="center">
-          <div class="font-bold text-2xl opacity-50">
-            社員のランキングブロックがありません
-          </div>
-        </v-row>
-      </v-container>
+      <NoBlockContainer block-name="ランキング" v-else />
     </div>
 
     <RankingFormatDialog
@@ -73,12 +67,14 @@ import { mapState, mapActions, Store } from "vuex";
 import RankingFormatDialog from "./RankingFormatDialog";
 import RankingBlockCard from "./RankingBlockCard";
 import ProgressBar from "../ProgressBar";
+import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
   components: {
     RankingFormatDialog,
     RankingBlockCard,
     ProgressBar,
+    NoBlockContainer,
   },
   props: {
     isThisEditPage: {
@@ -127,16 +123,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.block-title {
-  border: 1px solid #c5e1a5; /* 枠線 */
-  border-right: 20px solid #c5e1a5; /* 右側の太い線 */
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-  color: #c5e1a5; /* 文字色 */
-  padding: 10px 20px; /* 上下・左右の余白 */
-  position: relative;
-  font-size: 2rem;
-  margin: 0.5rem;
-}
-
-</style>
+<style scoped></style>
