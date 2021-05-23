@@ -30,6 +30,7 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  enum role: { admin: 0, general: 1 }
 
   # association
   has_one :profile,       dependent: :destroy
