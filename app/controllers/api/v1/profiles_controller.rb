@@ -23,7 +23,12 @@ module Api
       end
 
       def show
-        render json: @profile, serializer: ProfileSerializer
+        if @profile.valid?
+          render json: @profile, serializer: ProfileSerializer
+        else
+          render json: { title: 'Profile Not Found' },
+           status: 404
+        end
       end
 
       def update
@@ -45,7 +50,7 @@ module Api
       private
 
       def set_profile
-        @profile = Profile.find_by(public_uid: params[:id])
+        @profile = Profile.find_by!(public_uid: params[:id])
       end
 
       def profile_params

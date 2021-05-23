@@ -57,7 +57,6 @@ export default {
   },
   data() {
     return {
-      profile: {},
       profiles: [],
     };
   },
@@ -70,17 +69,14 @@ export default {
     },
   },
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      const users = vm.users;
-      const profileUser = users.find(
-        (user) => to.params.id == user.profile.public_uid
-      );
-      if (profileUser == undefined) {
-        vm.$store.dispatch("isNotFound/setIsNotFound", {
-          boolean: true,
-        });
-      }
-    });
+    console.log(to.params);
+    console.log(from);
+    axios
+      .get(`/api/v1/profiles/${to.params.id}`)
+      .then((res) => next())
+      .catch((err) => {
+        next("/profiles");
+      });
   },
 };
 </script>
