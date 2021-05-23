@@ -146,7 +146,5 @@ export default {
   width: 100%;
 }
 
-.no-block-display-container {
-  height: 300px;
-}
+
 </style>

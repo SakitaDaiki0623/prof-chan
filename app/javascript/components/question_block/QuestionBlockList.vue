@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="rounded-2xl bg-brown-200"
+    class="mb-10 bg-brown-200"
     v-if="isMyQuestionBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
@@ -53,13 +53,7 @@
           />
         </v-col>
       </transition-group>
-      <v-container v-else class="no-block-display-container">
-        <v-row justify="center">
-          <div class="font-bold text-2xl opacity-50">
-            社員のクエスチョンブロックがありません
-          </div>
-        </v-row>
-      </v-container>
+      <NoBlockContainer block-name="クエスチョン" v-else />
     </div>
 
     <QuestionFormatDialog
@@ -78,12 +72,14 @@ import { mapState, mapActions } from "vuex";
 import QuestionFormatDialog from "./QuestionFormatDialog";
 import QuestionBlockCard from "./QuestionBlockCard";
 import ProgressBar from "../ProgressBar";
+import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
   components: {
     QuestionFormatDialog,
     QuestionBlockCard,
     ProgressBar,
+    NoBlockContainer,
   },
   props: {
     isThisEditPage: {
@@ -159,7 +155,5 @@ export default {
   z-index: 1;
 }
 
-.no-block-display-container {
-  height: 300px;
-}
+
 </style>

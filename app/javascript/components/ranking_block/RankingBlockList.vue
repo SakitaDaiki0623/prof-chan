@@ -139,7 +139,4 @@ export default {
   margin: 0.5rem;
 }
 
-.no-block-display-container {
-  height: 300px;
-}
 </style>

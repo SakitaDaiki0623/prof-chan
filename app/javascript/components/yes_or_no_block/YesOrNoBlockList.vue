@@ -133,13 +133,6 @@ export default {
 </script>
 
 <style scoped>
-/* .bg-color {
-  background-color: #ffebca;
-} */
 
 
-
-.no-block-display-container {
-  height: 300px;
-}
 </style>
