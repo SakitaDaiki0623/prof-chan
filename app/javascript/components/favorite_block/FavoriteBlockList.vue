@@ -1,10 +1,10 @@
 <template>
   <v-container
-    class="rounded-2xl bg-brown-300"
+    class="bg-brown-200 mb-10"
     v-show="isMyFavoriteBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
-      <span class="text-brown-100 rounded-full px-2 bg-white">F</span>
+      <span class="text-brown-300 rounded-full px-2 bg-white">F</span>
       My Favorite コーナー
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">

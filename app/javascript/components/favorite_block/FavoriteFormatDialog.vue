@@ -19,7 +19,7 @@
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           Favorite ブロック作成
         </p>
-        <div id="favorite-block-form" class="p-10 bg-text-prof-block bg-top">
+        <div id="favorite-block-form" class="p-10 bg-text-prof-block">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateFavoriteBlock(favoriteBlock)">
               <div>

@@ -8,7 +8,7 @@
     >
       <div class="bg-brown-100">
         <div
-          class="font-weight-bold  text-gray-600 text-4xl text-center bg-brown-200 py-10"
+          class="font-weight-bold  text-4xl text-center bg-brown-200 py-10"
         >
           基本情報の入力が完了しました
         </div>
@@ -19,7 +19,7 @@
             </v-col>
             <v-col cols="12" sm="6">
               <p
-                class="text-2xl bg-brown-100 text-gray-600 text-center p-10 rounded-full max-w-sm font-weight-bold"
+                class="text-2xl bg-brown-100 text-center p-10 rounded-full max-w-sm font-weight-bold"
               >
                 プロフちゃんの世界へようこそ！
               </p>

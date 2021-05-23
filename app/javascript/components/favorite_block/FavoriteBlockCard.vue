@@ -100,7 +100,7 @@ export default {
       this.deleteFavoriteBlock(favoriteBlock);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "テキストブロックを削除したよ！",
+        message: "Favorite ブロックを削除したよ！",
         color: this.favoriteBlockColor,
       });
     },
