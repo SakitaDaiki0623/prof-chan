@@ -44,7 +44,7 @@
           :key="questionBlock.id"
           cols="12"
           sm="4"
-          class="border-b-2 border-red-300 border-dashed"
+          class="border-b-2 border-brown-300 border-dashed"
         >
           <QuestionBlockCard
             :question-block="questionBlock"

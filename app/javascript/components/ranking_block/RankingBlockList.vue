@@ -39,7 +39,7 @@
           :key="rankingBlock.id"
           cols="12"
           sm="4"
-          class="border-b-2 border-green-300 border-dashed"
+          class="border-b-2 border-brown-300 border-dashed"
         >
           <RankingBlockCard
             :ranking-block="rankingBlock"

@@ -38,7 +38,7 @@
           :key="favoriteBlock.id"
           cols="12"
           sm="3"
-          class="border-b-2 border-brown-400 border-dashed"
+          class="border-b-2 border-brown-300 border-dashed"
         >
           <FavoriteBlockCard
             :favorite-block="favoriteBlock"

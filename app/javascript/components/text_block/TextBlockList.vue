@@ -38,7 +38,7 @@
           :key="textBlock.id"
           cols="12"
           sm="6"
-          class="border-b-2 border-blue-300 border-dashed"
+          class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard
             :text-block="textBlock"
