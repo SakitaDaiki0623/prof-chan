@@ -4,71 +4,26 @@
     class="bg-prof-card bg-cover shadow rounded-2xl duration-300 hover:shadow-xl transform hover:scale-105"
     @click="openProfileShowPage(profile)"
   >
-    <div class="flex">
-      <div class="md:w-2/5 ml-4">
-        <div class="w-full mt-10">
-          <img
-            class="ring-4 ring-gray-600"
+    <v-card color="brown lighten-2" outlined>
+      <div>
+        <v-row justify="center" align-content="center">
+          <v-img
+            class="ring-4 rounded-full ring-gray-600 text-center sample_box2_3"
             :src="profile.user.image.url"
-          >
-        </div>
-        <div>
-          <label
-            for="name"
-            class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >名前</label>
-          <br>
-          <div class="text-lg font-bold inline-block">
-            <p>{{ profile.user.name }}</p>
-          </div>
-        </div>
+            max-height="250px"
+            max-width="250px"
+          />
+        </v-row>
       </div>
-      <div class="p-8 text-sm">
-        <div class="p-1">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >性別</label>
-          {{ profile.gender }}
-        </div>
-
-        <div class="p-1">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >身長</label>{{ profile.height }} cm
-        </div>
-
-        <div class="p-1">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >血液型</label>{{ profile.blood_type }} 型
-        </div>
-
-        <div class="p-1">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >出身地</label>{{ profile.prefecture_id }}
-        </div>
-        <div class="p-1">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >誕生日</label>
-          {{ profile.birthday | moment }}
-        </div>
-        <div class="p-1">
-          <label
-            for="birthday"
-            class="text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-          >入社日</label>
-
-          {{ profile.day_of_joinning | moment }}
-        </div>
+    </v-card>
+    <v-card color="brown lighten-5 text-center" outlined>
+      <div
+        class="p-3 text-4xl font-bold text-gray-600 border-dotted	border-b-2 border-gray-400"
+      >
+        <span class="name-text">{{ profile.user.name }}</span
+        >さん
       </div>
-    </div>
+    </v-card>
   </div>
 </template>
 
@@ -99,3 +54,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.sample_box2_3 {
+  padding: 1em 1.5em;
+  margin: 2em 0;
+  background-color: #ffc6c6; /*背景色*/
+  box-shadow: 0 0 0 8px #ffc6c6; /*背景色外側*/
+  border: 2px dashed #ffffff; /*線*/
+  color: #000000; /*文字色*/
+}
+</style>
