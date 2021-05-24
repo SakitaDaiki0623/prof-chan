@@ -17,13 +17,12 @@
       <div class="top-sub-title my-10">
         Favorite ブロック
       </div>
-
       <v-row>
         <v-col
           v-for="favoriteBlock in favoritePopularBlocksTopThree"
           :key="favoriteBlock.id"
           cols="12"
-          sm="3"
+          sm="4"
         >
           <div>作成者: {{ favoriteBlock.owing_user.name }}</div>
           <FavoriteBlockCard :favorite-block="favoriteBlock" />
@@ -68,28 +67,6 @@
           <RankingBlockCard :ranking-block="rankingBlock" />
         </v-col>
       </v-row>
-      <div>
-        <v-row>
-          <v-col
-            v-for="rankingBlock in rankingPopularBlocksTopThree"
-            :key="rankingBlock.id"
-            cols="12"
-            sm="4"
-          >
-            <v-card outlined color="brown lighten-3" height="100" class="p-2">
-              <v-col
-                v-for="user in rankingBlock.users"
-                :key="user.id"
-                cols="10"
-                sm="2"
-                class="inline-block"
-              >
-                <v-img :src="user.image.url"></v-img>
-              </v-col>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
     </div>
     <!-- /ランキングブロック -->
 
@@ -109,28 +86,6 @@
           <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
         </v-col>
       </v-row>
-      <div>
-        <v-row>
-          <v-col
-            v-for="yesOrNoBlock in yesOrNoPopularBlocksTopThree"
-            :key="yesOrNoBlock.id"
-            cols="12"
-            sm="4"
-          >
-            <v-card outlined color="brown lighten-3" height="100" class="p-2">
-              <v-col
-                v-for="user in yesOrNoBlock.users"
-                :key="user.id"
-                cols="10"
-                sm="2"
-                class="inline-block"
-              >
-                <v-img :src="user.image.url"></v-img>
-              </v-col>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
     </div>
     <!-- /Yes or No ブロック -->
 
@@ -311,19 +266,5 @@ export default {
 .top-bg {
   background-color: #efebe9;
   padding: 2rem;
-}
-
-.fadeIn {
-  animation: fadeIn 2s;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
 }
 </style>

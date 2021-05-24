@@ -3,47 +3,51 @@
     <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
       <div class="text-center text-5xl text-white py-5 top-sub-title">
         <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-        あなたがよく共感する社員TOP3
+        あなたがよくブックマークする社員TOP3
         <v-icon color="white" x-large>mdi-crown-outline</v-icon>
       </div>
-      <v-row class="py-5" justify="center" style="height: 30rem;">
-        <v-col align-self="center" align="center" cols="12" sm="4">
-          <v-card
-            class="second-place"
-            outlined
-            contain
-            v-if="secondPlaceUserExist"
-          >
-            <v-img
-              :src="secondPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
+      <v-row class="py-5" justify="center" style="height: 40rem;">
+        <v-col
+          align-self="center"
+          align="center"
+          cols="12"
+          sm="3"
+          class="border-2 border-white border-dotted"
+        >
+          <div v-if="secondPlaceUserExist">
+            <div class="place-text">
+              第2位
+            </div>
+            <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
+          </div>
+
           <PlaceDoesNotExistCard place-number="2" v-else />
         </v-col>
-        <v-col align-self="start" align="center" cols="12" sm="4">
-          <v-card class="first-place" outlined contain>
-            <v-img
-              :src="firstPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
+        <v-col
+          align-self="start"
+          align="center"
+          cols="12"
+          sm="3"
+          class="border-2 border-white border-dotted"
+        >
+          <div class="place-text">
+            第1位
+          </div>
+          <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
         </v-col>
-        <v-col align-self="end" align="center" cols="12" sm="4">
-          <v-card
-            class="first-place"
-            outlined
-            contain
-            v-if="thirdPlaceUserExist"
-          >
-            <v-img
-              :src="thirdPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
+        <v-col
+          align-self="end"
+          align="center"
+          cols="12"
+          sm="3"
+          class="border-2 border-white border-dotted"
+        >
+          <div v-if="thirdPlaceUserExist">
+            <div class="place-text">
+              第3位
+            </div>
+            <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
+          </div>
           <PlaceDoesNotExistCard v-else place-number="3" />
         </v-col>
       </v-row>
@@ -53,91 +57,215 @@
         <v-row>
           <v-col cols="12" sm="12">
             <div class="text-center text-5xl">
-              - - - - 共感したブロック一覧- - - -
+              - - - - ブックマーク一覧- - - -
             </div>
           </v-col>
         </v-row>
       </div>
+
       <div class="p-20">
-        <div v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0">
-          <div class="top-sub-title m-5">Favorite ブロック</div>
-          <v-row>
-            <v-col
-              v-for="favoriteBlock in randomCurrentUserLikesFavoriteBlocks"
-              :key="favoriteBlock.id"
-              cols="12"
-              sm="3"
-            >
-              {{ favoriteBlock.owing_user.name }} さん
-              <FavoriteBlockCard :favorite-block="favoriteBlock" />
-            </v-col>
-          </v-row>
+        <div
+          v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0"
+          class="mb-10"
+        >
+          <v-card color="brown lighten-2" class="p-10">
+            <div class="top-sub-title m-5">Favorite ブロック</div>
+            <div class="text-center">
+              <v-pagination
+                v-model="favoriteBlockPage"
+                :length="favoriteBlocklength"
+                circle
+                @input="favoriteBlockPageChange"
+                color="brown lighten-2"
+                class="mb-10"
+              ></v-pagination>
+            </div>
+            <v-row>
+              <v-col
+                v-for="favoriteBlock in displayFavoriteBlocks"
+                :key="favoriteBlock.id"
+                cols="12"
+                sm="3"
+                class="border-2 border-white border-dotted"
+              >
+                <div>
+                  <div class="bg-white inline-block">
+                    {{ favoriteBlock.owing_user.name }} さん
+                  </div>
+                  <v-img
+                    max-width="50px"
+                    :src="favoriteBlock.owing_user.image.url"
+                    class="inline"
+                  ></v-img>
+                </div>
+                <FavoriteBlockCard :favorite-block="favoriteBlock" />
+              </v-col>
+            </v-row>
+          </v-card>
         </div>
 
-        <div v-if="randomCurrentUserLikesQuestionBlocks.length !== 0">
-          <div class="top-sub-title m-5">クエスチョンブロック</div>
-          <v-row>
-            <v-col
-              v-for="questionBlock in randomCurrentUserLikesQuestionBlocks"
-              :key="questionBlock.id"
-              cols="12"
-              sm="4"
-            >
-              {{ questionBlock.owing_user.name }} さん
-              <QuestionBlockCard :question-block="questionBlock" />
-            </v-col>
-          </v-row>
+        <div
+          v-if="randomCurrentUserLikesQuestionBlocks.length !== 0"
+          class="mb-10"
+        >
+          <v-card color="brown lighten-2" class="p-10">
+            <div class="top-sub-title m-5">クエスチョンブロック</div>
+            <div class="text-center">
+              <v-pagination
+                v-model="questionBlockPage"
+                :length="questionBlocklength"
+                circle
+                @input="questionBlockPageChange"
+                color="red lighten-3"
+                class="mb-10"
+              ></v-pagination>
+            </div>
+            <v-row>
+              <v-col
+                v-for="questionBlock in displayQuestionBlocks"
+                :key="questionBlock.id"
+                cols="12"
+                sm="4"
+                class="border-2 border-white border-dotted"
+              >
+                <div>
+                  <div class="bg-white inline-block">
+                    {{ questionBlock.owing_user.name }} さん
+                  </div>
+                  <v-img
+                    max-width="50px"
+                    :src="questionBlock.owing_user.image.url"
+                    class="inline"
+                  ></v-img>
+                </div>
+                <QuestionBlockCard :question-block="questionBlock" />
+              </v-col>
+            </v-row>
+          </v-card>
         </div>
 
-        <div v-if="randomCurrentUserLikesRankingBlocks.length !== 0">
-          <div class="top-sub-title my-10">
-            ランキングブロック
-          </div>
-          <v-row>
-            <v-col
-              v-for="rankingBlock in randomCurrentUserLikesRankingBlocks"
-              :key="rankingBlock.id"
-              cols="12"
-              sm="4"
-            >
-              <div>作成者: {{ rankingBlock.owing_user.name }}</div>
-              <RankingBlockCard :ranking-block="rankingBlock" />
-            </v-col>
-          </v-row>
+        <div
+          v-if="randomCurrentUserLikesRankingBlocks.length !== 0"
+          class="mb-10"
+        >
+          <v-card color="brown lighten-2" class="p-10">
+            <div class="top-sub-title m-5">
+              ランキングブロック
+            </div>
+            <div class="text-center">
+              <v-pagination
+                v-model="rankingBlockPage"
+                :length="rankingBlocklength"
+                circle
+                @input="rankingBlockPageChange"
+                color="green lighten-3"
+                class="mb-10"
+              ></v-pagination>
+            </div>
+            <v-row>
+              <v-col
+                v-for="rankingBlock in displayRankingBlocks"
+                :key="rankingBlock.id"
+                cols="12"
+                sm="4"
+                class="border-2 border-white border-dotted"
+              >
+                <div>
+                  <div class="bg-white inline-block">
+                    {{ rankingBlock.owing_user.name }} さん
+                  </div>
+                  <v-img
+                    max-width="50px"
+                    :src="rankingBlock.owing_user.image.url"
+                    class="inline"
+                  ></v-img>
+                </div>
+                <RankingBlockCard :ranking-block="rankingBlock" />
+              </v-col>
+            </v-row>
+          </v-card>
         </div>
 
-        <div v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0">
-          <div class="top-sub-title my-10">
-            Yes or No ブロック
-          </div>
-          <v-row>
-            <v-col
-              v-for="yesOrNoBlock in randomCurrentUserLikesYesOrNoBlocks"
-              :key="yesOrNoBlock.id"
-              cols="12"
-              sm="4"
-            >
-              <div>作成者: {{ yesOrNoBlock.owing_user.name }}</div>
-              <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
-            </v-col>
-          </v-row>
+        <div
+          v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0"
+          class="mb-10"
+        >
+          <v-card color="brown lighten-2" class="p-10">
+            <div class="top-sub-title m-5">
+              Yes or No ブロック
+            </div>
+            <div class="text-center">
+              <v-pagination
+                v-model="yesOrNoBlockPage"
+                :length="yesOrNoBlocklength"
+                circle
+                @input="yesOrNoBlockPageChange"
+                color="orange lighten-3"
+                class="mb-10"
+              ></v-pagination>
+            </div>
+
+            <v-row>
+              <v-col
+                v-for="yesOrNoBlock in displayYesOrNoBlocks"
+                :key="yesOrNoBlock.id"
+                cols="12"
+                sm="4"
+                class="border-2 border-white border-dotted"
+              >
+                <div>
+                  <div class="bg-white inline-block">
+                    {{ yesOrNoBlock.owing_user.name }} さん
+                  </div>
+                  <v-img
+                    max-width="50px"
+                    :src="yesOrNoBlock.owing_user.image.url"
+                    class="inline"
+                  ></v-img>
+                </div>
+                <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
+              </v-col>
+            </v-row>
+          </v-card>
         </div>
 
         <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
-          <div class="top-sub-title my-10">
-            テキストブロック
-          </div>
-          <transition-group tag="v-row" appear>
-            <v-col
-              v-for="textBlock in randomCurrentUserLikesTextBlocks"
-              :key="textBlock.id"
-              cols="12"
-              sm="4"
-            >
-              <div>作成者: {{ textBlock.owing_user.name }}</div>
-              <TextBlockCard :text-block="textBlock" />
-            </v-col>
-          </transition-group>
+          <v-card color="brown lighten-2" class="p-10">
+            <div class="top-sub-title my-10">
+              テキストブロック
+            </div>
+            <div class="text-center">
+              <v-pagination
+                v-model="textBlockPage"
+                :length="textBlocklength"
+                circle
+                @input="textBlockPageChange"
+                color="teal lighten-3"
+                class="mb-10"
+              ></v-pagination>
+            </div>
+            <transition-group tag="v-row" appear>
+              <v-col
+                v-for="textBlock in displayTextBlocks"
+                :key="textBlock.id"
+                cols="12"
+                sm="6"
+                class="border-2 border-white border-dotted"
+              >
+                <div>
+                  <div class="bg-white inline-block">
+                    {{ textBlock.owing_user.name }} さん
+                  </div>
+                  <v-img
+                    max-width="50px"
+                    :src="textBlock.owing_user.image.url"
+                    class="inline"
+                  ></v-img>
+                </div>
+                <TextBlockCard :text-block="textBlock" />
+              </v-col>
+            </transition-group>
+          </v-card>
         </div>
       </div>
     </div>
@@ -154,6 +282,7 @@ import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
 import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
+import ProfCard from "../components/ProfCard";
 
 export default {
   components: {
@@ -164,6 +293,7 @@ export default {
     RankingBlockCard,
     PlaceDoesNotExistCard,
     FavoriteBlockCard,
+    ProfCard,
   },
   data() {
     return {
@@ -176,6 +306,32 @@ export default {
       firstPlaceUser: {},
       secondPlaceUser: {},
       thirdPlaceUser: {},
+
+      // Favorite Blocks
+      favoriteBlockPage: 1,
+      displayFavoriteBlocks: [],
+      favoriteBlockPageSize: 12,
+      favoriteBlocklength: 0,
+      // Question Blocks
+      questionBlockPage: 1,
+      displayQuestionBlocks: [],
+      questionBlockPageSize: 6,
+      questionBlocklength: 0,
+      // Ranking Blocks
+      rankingBlockPage: 1,
+      displayRankingBlocks: [],
+      rankingBlockPageSize: 6,
+      rankingBlocklength: 0,
+      // YesOrNo Blocks
+      yesOrNoBlockPage: 1,
+      displayYesOrNoBlocks: [],
+      yesOrNoBlockPageSize: 6,
+      yesOrNoBlocklength: 0,
+      // Text Blocks
+      textBlockPage: 1,
+      displayTextBlocks: [],
+      textBlockPageSize: 4,
+      textBlocklength: 0,
     };
   },
   computed: {
@@ -189,9 +345,6 @@ export default {
       return !!Object.keys(this.thirdPlaceUser).length;
     },
     getLikingBlocksOwingUserIds() {
-      // 参考: https://www.suzu6.net/posts/96-js-count-element/
-      // 各ブロックでユーザーが共感しているブロックを持つユーザーのidを取得
-      // 全ての配列を結合させる
       const allUserIds = this.questionLikedUserIds.concat(
         this.rankingLikedUserIds,
         this.yesOrNoLikedUserIds,
@@ -258,6 +411,11 @@ export default {
       await this.fecthFirstPlaceUser();
       await this.fecthSecondPlaceUser();
       await this.fecthThirdPlaceUser();
+      this.questionBlockPageFirstRead();
+      this.favoriteBlockPageFirstRead();
+      this.rankingBlockPageFirstRead();
+      this.yesOrNoBlockPageFirstRead();
+      this.textBlockPageFirstRead();
     },
     async fecthRandomCurrentUserLikesFavoriteBlocks() {
       await axios
@@ -305,6 +463,85 @@ export default {
         .get(`/api/v1/users/${this.getLikingBlocksOwingUserIds[2].user_id}`)
         .then((res) => (this.thirdPlaceUser = res.data));
     },
+    favoriteBlockPageChange(pageNumber) {
+      this.displayFavoriteBlocks = this.randomCurrentUserLikesFavoriteBlocks.slice(
+        this.favoriteBlockPageSize * (pageNumber - 1),
+        this.favoriteBlockPageSize * pageNumber
+      );
+    },
+    favoriteBlockPageFirstRead() {
+      this.favoriteBlocklength = Math.ceil(
+        this.randomCurrentUserLikesFavoriteBlocks.length /
+          this.favoriteBlockPageSize
+      );
+      this.displayFavoriteBlocks = this.randomCurrentUserLikesFavoriteBlocks.slice(
+        0,
+        this.favoriteBlockPageSize
+      );
+    },
+    questionBlockPageChange(pageNumber) {
+      this.displayQuestionBlocks = this.randomCurrentUserLikesQuestionBlocks.slice(
+        this.questionBlockPageSize * (pageNumber - 1),
+        this.questionBlockPageSize * pageNumber
+      );
+    },
+    questionBlockPageFirstRead() {
+      this.questionBlocklength = Math.ceil(
+        this.randomCurrentUserLikesQuestionBlocks.length /
+          this.questionBlockPageSize
+      );
+      this.displayQuestionBlocks = this.randomCurrentUserLikesQuestionBlocks.slice(
+        0,
+        this.questionBlockPageSize
+      );
+    },
+    rankingBlockPageChange(pageNumber) {
+      this.displayRankingBlocks = this.randomCurrentUserLikesRankingBlocks.slice(
+        this.rankingBlockPageSize * (pageNumber - 1),
+        this.rankingBlockPageSize * pageNumber
+      );
+    },
+    rankingBlockPageFirstRead() {
+      this.rankingBlocklength = Math.ceil(
+        this.randomCurrentUserLikesRankingBlocks.length /
+          this.rankingBlockPageSize
+      );
+      this.displayRankingBlocks = this.randomCurrentUserLikesRankingBlocks.slice(
+        0,
+        this.rankingBlockPageSize
+      );
+    },
+    yesOrNoBlockPageChange(pageNumber) {
+      this.displayYesOrNoBlocks = this.randomCurrentUserLikesYesOrNoBlocks.slice(
+        this.yesOrNoBlockPageSize * (pageNumber - 1),
+        this.yesOrNoBlockPageSize * pageNumber
+      );
+    },
+    yesOrNoBlockPageFirstRead() {
+      this.yesOrNoBlocklength = Math.ceil(
+        this.randomCurrentUserLikesYesOrNoBlocks.length /
+          this.yesOrNoBlockPageSize
+      );
+      this.displayYesOrNoBlocks = this.randomCurrentUserLikesYesOrNoBlocks.slice(
+        0,
+        this.yesOrNoBlockPageSize
+      );
+    },
+    textBlockPageChange(pageNumber) {
+      this.displayTextBlocks = this.randomCurrentUserLikesTextBlocks.slice(
+        this.textBlockPageSize * (pageNumber - 1),
+        this.textBlockPageSize * pageNumber
+      );
+    },
+    textBlockPageFirstRead() {
+      this.textBlocklength = Math.ceil(
+        this.randomCurrentUserLikesTextBlocks.length / this.textBlockPageSize
+      );
+      this.displayTextBlocks = this.randomCurrentUserLikesTextBlocks.slice(
+        0,
+        this.textBlockPageSize
+      );
+    },
   },
 };
 </script>
@@ -322,5 +559,14 @@ export default {
 .top-three-recommended-users-space {
   background-color: #b39e9e;
   padding: 2rem;
+}
+
+.place-text {
+  color: #fffffb;
+  background: #f29c9f;
+  margin: 1.4em 0;
+  padding: 0.3em 0 0.3em 0.5em;
+  box-shadow: 0 0 0 5px #f29c9f;
+  border: 3px dashed #fffffb;
 }
 </style>

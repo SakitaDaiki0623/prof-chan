@@ -3,7 +3,7 @@
     <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
       <div class="text-center text-5xl text-white py-5 top-sub-title">
         <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-        あなたによく共感する社員TOP3
+        あなたによくブックマークする社員TOP3
         <v-icon color="white" x-large>mdi-crown-outline</v-icon>
       </div>
       <v-row class="py-5" justify="center" style="height: 30rem;">
@@ -50,7 +50,7 @@
     </div>
 
     <div v-if="firstPlaceUserExist">
-      <div class="top-sub-title m-5">1番共感してくれる社員</div>
+      <div class="top-sub-title m-5">1番ブックマークしてくれる社員</div>
       <v-row>
         <v-col
           v-for="block in firstPlaceUserLikesBlocks"
@@ -73,7 +73,7 @@
     </div>
     <NotAnyBookmarkBlock
       v-else
-      prof-message="共感されているブロックはまだないよ"
+      prof-message="ブックマークされているブロックはまだないよ"
     />
   </div>
 </template>
@@ -83,11 +83,13 @@ import axios from "axios";
 import { mapState } from "vuex";
 import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
+import ProfCard from "../components/ProfCard";
 
 export default {
   components: {
     NotAnyBookmarkBlock,
     PlaceDoesNotExistCard,
+    ProfCard,
   },
   data() {
     return {

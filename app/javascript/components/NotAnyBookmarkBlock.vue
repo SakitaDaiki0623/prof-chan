@@ -19,7 +19,7 @@ export default {
     profMessage: {
       type: String,
       required: false,
-      default: "共感ボタンを押したブロックはまだないよ",
+      default: "ブックマークボタンを押したブロックはまだないよ",
     },
   },
 };
