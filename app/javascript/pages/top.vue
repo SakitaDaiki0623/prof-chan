@@ -8,13 +8,9 @@
       <Birthday />
     </div>
 
-    <div class="top-sub-title m-5 text-center">
-      ・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・
-    </div>
-
     <!-- ユーザごとに変動 -->
     <div>
-      <RecommendedUsers />
+      <RecommendedUsers class="mb-10" />
     </div>
   </div>
 </template>

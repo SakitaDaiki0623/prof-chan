@@ -1,27 +1,116 @@
 <template>
-  <div class="top" v-if="firstPlaceUserExist">
-    <v-row justify="center" align-content="center">
-      <v-col cols="12" sm="5" align="right">
+  <div class="bg" v-if="firstPlaceUserExist">
+    <v-row justify="center" align-content="center" class="p-10">
+      <v-col cols="12" sm="2">
         <img src="../images/prof_normal.png" class="image" />
       </v-col>
-      <v-col cols="12" sm="5" align="left">
-        <div class="text-center text-4xl balloon4">
+      <v-col cols="12" sm="7">
+        <div class="text-center text-6xl balloon4">
           あなたにおすすめの社員さん
         </div>
       </v-col>
-      <v-col
-        v-for="block in firstPlaceUserLikesBlocks"
-        :key="block.id"
-        cols="12"
-        sm="4"
-      >
-        <div class="border-2 border-gray-500"></div>
-        <v-card class="rounded-2xl p-5 note-box" outlined color="red lighten-4">
-          <p class="text-2xl font-bold text-gray-600 px-3 py-3">
-            {{ block.title }}
-          </p>
-        </v-card>
+    </v-row>
+    <v-row
+      justify="center"
+      align-content="center"
+      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+    >
+      <v-col cols="12" sm="3">
+        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+        <v-btn
+          color="brown lighten-1"
+          class="white--text"
+          small
+          tile
+          @click="moveToUserProfilePage(firstPlaceUser.profile)"
+        >
+          社員ブロフィールを見る
+        </v-btn>
       </v-col>
+      <v-row class="p-10">
+        <v-col cols="12" sm="12" align="center">
+          <div
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+          >
+            あなたと盛り上がりそうな話題
+          </div>
+        </v-col>
+        <v-col
+          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          :key="block.id"
+          cols="12"
+          sm="4"
+          align="center"
+        >
+          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white p-2">
+              {{ block.title }}
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-row>
+    <v-row
+      justify="center"
+      align-content="center"
+      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+    >
+      <v-col cols="12" sm="3">
+        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+      </v-col>
+      <v-row class="p-10">
+        <v-col cols="12" sm="12" align="center">
+          <div
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+          >
+            あなたと盛り上がりそうな話題
+          </div>
+        </v-col>
+        <v-col
+          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          :key="block.id"
+          cols="12"
+          sm="4"
+          align="center"
+        >
+          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white p-2">
+              {{ block.title }}
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-row>
+    <v-row
+      justify="center"
+      align-content="center"
+      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+    >
+      <v-col cols="12" sm="3">
+        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+      </v-col>
+      <v-row class="p-10">
+        <v-col cols="12" sm="12" align="center">
+          <div
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+          >
+            あなたと盛り上がりそうな話題
+          </div>
+        </v-col>
+        <v-col
+          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          :key="block.id"
+          cols="12"
+          sm="4"
+          align="center"
+        >
+          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white p-2">
+              {{ block.title }}
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-row>
   </div>
 </template>
@@ -241,13 +330,17 @@ export default {
         .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[2].user_id}`)
         .then((res) => (this.thirdPlaceUser = res.data));
     },
+    moveToUserProfilePage(profile) {
+      this.$router.push(`/profiles/${profile.public_uid}`);
+    },
   },
 };
 </script>
 
 <style scoped>
-.top {
+.bg {
   color: rgb(77, 77, 77);
+  background: #d7ccc8;
 }
 
 .top-bg {
@@ -268,7 +361,7 @@ export default {
   position: relative;
   margin: 2em 4em 2em 40px;
   padding: 5px;
-  background: #fff0c6;
+  background: #fffaf0;
   border-radius: 30px;
 }
 
@@ -279,7 +372,7 @@ export default {
   width: 13px;
   height: 12px;
   bottom: 0;
-  background: #fff0c6;
+  background: #fffaf0;
   border-radius: 50%;
 }
 
@@ -290,7 +383,7 @@ export default {
   width: 20px;
   height: 18px;
   bottom: 3px;
-  background: #fff0c6;
+  background: #fffaf0;
   border-radius: 50%;
 }
 </style>

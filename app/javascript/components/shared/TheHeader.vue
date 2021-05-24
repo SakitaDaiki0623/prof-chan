@@ -101,12 +101,6 @@ export default {
           icon: "mdi-account-star-outline",
           clickEvent: this.openBookmarkPage,
         },
-        {
-          id: 4,
-          text: "おすすめユーザー一覧",
-          icon: "mdi-account-star-outline",
-          clickEvent: this.openRecommendedUsers,
-        },
       ],
     };
   },
