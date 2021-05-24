@@ -1,0 +1,3 @@
+class FavoriteBlockPolicy < BlockPolicy
+
+end
