@@ -69,8 +69,6 @@ export default {
     },
   },
   beforeRouteEnter(to, from, next) {
-    console.log(to.params);
-    console.log(from);
     axios
       .get(`/api/v1/profiles/${to.params.id}`)
       .then((res) => next())

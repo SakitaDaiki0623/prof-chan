@@ -18,7 +18,7 @@
     </v-card>
     <v-card color="brown lighten-5 text-center" outlined>
       <div
-        class="p-3 text-4xl font-bold text-gray-600 border-dotted	border-b-2 border-gray-400"
+        class="p-3 text-4xl font-bold border-dotted	border-b-2 border-gray-400"
       >
         <span class="name-text">{{ profile.user.name }}</span
         >さん

@@ -13,7 +13,7 @@
           >
             <label
               for="yes_or_no_item_content"
-              class="form-label-yes-or-no-block"
+              class="form-label-text-block"
             >質問</label>
             <ValidationProvider
               v-slot="{ errors }"
@@ -35,7 +35,7 @@
           >
             <label
               for="yes_or_no_item_content"
-              class="form-label-yes-or-no-block"
+              class="form-label-text-block"
             >答え</label>
             <v-radio-group
               v-model="yesOrNoItem.answer"

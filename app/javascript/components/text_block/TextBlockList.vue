@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="rounded-2xl bg-brown-200"
+    class="mb-10 bg-brown-200"
     v-show="isMyTextBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
@@ -38,7 +38,7 @@
           :key="textBlock.id"
           cols="12"
           sm="6"
-          class="border-b-2 border-blue-300 border-dashed"
+          class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard
             :text-block="textBlock"
@@ -47,13 +47,7 @@
           />
         </v-col>
       </transition-group>
-      <v-container v-else class="no-block-display-container">
-        <v-row justify="center">
-          <div class="font-bold text-2xl opacity-50">
-            社員のテキストブロックがありません
-          </div>
-        </v-row>
-      </v-container>
+      <NoBlockContainer block-name="テキスト" v-else />
     </div>
 
     <TextFormatDialog
@@ -72,12 +66,14 @@ import { mapState, mapActions, Store } from "vuex";
 import TextFormatDialog from "./TextFormatDialog";
 import TextBlockCard from "./TextBlockCard";
 import ProgressBar from "../ProgressBar";
+import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
   components: {
     TextFormatDialog,
     TextBlockCard,
     ProgressBar,
+    NoBlockContainer,
   },
   props: {
     isThisEditPage: {
@@ -146,7 +142,5 @@ export default {
   width: 100%;
 }
 
-.no-block-display-container {
-  height: 300px;
-}
+
 </style>

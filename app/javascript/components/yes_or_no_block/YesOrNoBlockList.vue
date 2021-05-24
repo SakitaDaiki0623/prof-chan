@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="rounded-2xl bg-brown-300"
+    class="mb-10 bg-brown-200"
     v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
@@ -40,7 +40,7 @@
           :key="yesOrNoBlock.id"
           cols="12"
           sm="4"
-          class="border-b-2 border-yellow-300 border-dashed"
+          class="border-b-2 border-brown-300 border-dashed"
         >
           <YesOrNoBlockCard
             :yes-or-no-block="yesOrNoBlock"
@@ -49,13 +49,7 @@
           />
         </v-col>
       </transition-group>
-      <v-container v-else class="no-block-display-container">
-        <v-row justify="center">
-          <div class="font-bold text-2xl opacity-50">
-            社員のYes or No ブロックがありません
-          </div>
-        </v-row>
-      </v-container>
+      <NoBlockContainer block-name="Yes or No " v-else />
     </div>
 
     <YesOrNoFormatDialog
@@ -74,12 +68,14 @@ import { mapState, mapActions } from "vuex";
 import YesOrNoFormatDialog from "./YesOrNoFormatDialog";
 import YesOrNoBlockCard from "./YesOrNoBlockCard";
 import ProgressBar from "../ProgressBar";
+import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
   components: {
     YesOrNoFormatDialog,
     YesOrNoBlockCard,
     ProgressBar,
+    NoBlockContainer,
   },
   props: {
     isThisEditPage: {
@@ -132,14 +128,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* .bg-color {
-  background-color: #ffebca;
-} */
-
-
-
-.no-block-display-container {
-  height: 300px;
-}
-</style>
+<style scoped></style>

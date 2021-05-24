@@ -1,4 +1,3 @@
-<!-- app/javascript/components/TextFormatDialog.vue -->
 <template>
   <div>
     <v-dialog
@@ -8,10 +7,7 @@
       @input="$emit('input', $event.target.isShownEditTextFormatDialog)"
     >
       <v-card :color="textBlockColor">
-        <v-row
-          justify="end"
-          class="mr-2 mt-2"
-        >
+        <v-row justify="end" class="mr-2 mt-2">
           <v-btn
             :color="textBlockColor"
             @click="hundleCloseEditTextFormatDialog"
@@ -19,25 +15,16 @@
             <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
-        <p
-          class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
-        >
+        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           テキストブロックを編集
         </p>
-        <div
-          id="text-block-form"
-          class="p-10 bg-text-prof-block bg-top"
-        >
-          <ValidationObserver
-            ref="observer"
-            v-slot="{ invalid }"
-          >
+        <div id="text-block-form" class="p-10 note-box">
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditTextBlock(editTextBlock)">
               <div>
-                <label
-                  class="form-label-text-block"
-                  for="text_block_title"
-                >タイトル</label>
+                <label class="form-label-text-block" for="text_block_title"
+                  >タイトル</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -50,15 +37,14 @@
                     name="text_block[text_block_title]"
                     type="text"
                     @input="editTextBlock.title = $event.target.value"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
-                <label
-                  class="form-label-text-block"
-                  for="text_block_text"
-                >テキスト</label>
+                <label class="form-label-text-block" for="text_block_text"
+                  >テキスト</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="テキスト"
@@ -141,4 +127,25 @@ export default {
 };
 </script>
 
+<style scoped>
+.note-box {
+  position: relative;
+  background: #a7ffeb;
+}
 
+.note-box::after {
+  content: "＊*"; /*花に見せかけるためのアスタリスク*/
+  color: #fff; /* アスタリスクの色 */
+  display: inline-block;
+  font-size: 30px; /* アスタリスクの大きさ */
+  font-weight: bold;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -webkit-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  text-shadow: 0px 0px 6px #eaa8bf, 0px 0px 4px #eaa8bf, 0 0 0.5px #eaa8bf; /* アスタリスク周りの影 */
+}
+</style>

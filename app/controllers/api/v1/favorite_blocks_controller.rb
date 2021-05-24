@@ -24,6 +24,7 @@ module Api
       end
 
       def update
+        authorize @favorite_block
         if @favorite_block.update(favorite_block_params)
           render json: @favorite_block, serializer: FavoriteBlockSerializer
         else
@@ -34,6 +35,7 @@ module Api
       def show; end
 
       def destroy
+        authorize @favorite_block, :update?
         @favorite_block.destroy!
         render json: @favorite_block
       end

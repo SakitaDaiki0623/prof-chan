@@ -8,10 +8,7 @@
       @input="$emit('input', $event.target.isShownEditRankingFormatDialog)"
     >
       <v-card :color="rankingBlockColor">
-        <v-row
-          justify="end"
-          class="mr-2 mt-2"
-        >
+        <v-row justify="end" class="mr-2 mt-2">
           <v-btn
             :color="rankingBlockColor"
             @click="hundleCloseEditRankingFormatDialog"
@@ -22,20 +19,13 @@
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           ランキングブロックを編集
         </p>
-        <div
-          id="ranking-block-form"
-          class="p-10 note-box"
-        >
-          <ValidationObserver
-            ref="observer"
-            v-slot="{ invalid }"
-          >
+        <div id="ranking-block-form" class="p-10 note-box">
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditRankingBlock(editRankingBlock)">
               <div>
-                <label
-                  class="form-label-ranking-block"
-                  for="ranking_block_title"
-                >タイトル</label>
+                <label class="form-label-text-block" for="ranking_block_title"
+                  >タイトル</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -48,7 +38,7 @@
                     name="ranking_block[ranking_block_title]"
                     type="text"
                     @input="editRankingBlock.title = $event.target.value"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
@@ -56,7 +46,8 @@
                 <label
                   class="form-label-text-block"
                   for="ranking_block_first_place"
-                >1st</label>
+                  >1st</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="1位"
@@ -68,7 +59,7 @@
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_first_place]"
                     @input="editRankingBlock.first_place = $event.target.value"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
@@ -76,7 +67,8 @@
                 <label
                   class="form-label-text-block"
                   for="ranking_block_second_place"
-                >2nd</label>
+                  >2nd</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="2位"
@@ -88,7 +80,7 @@
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_second_place]"
                     @input="editRankingBlock.second_place = $event.target.value"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
@@ -96,7 +88,8 @@
                 <label
                   class="form-label-text-block"
                   for="ranking_block_third_place"
-                >3rd</label>
+                  >3rd</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="3位"
@@ -108,7 +101,7 @@
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_third_place]"
                     @input="editRankingBlock.third_place = $event.target.value"
-                  >
+                  />
                   <span class="text-red-400">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
@@ -186,7 +179,7 @@ export default {
 .note-box::before {
   content: "";
   position: absolute;
-  border-right: dotted 10px #ddd; /*ドットの大きさ、高さ*/
+  border-right: dotted 10px #d7ccc8; /*ドットの大きさ、高さ*/
   height: 90%;
   top: 0.5em; /*位置*/
   left: 0.5em; /*位置*/

@@ -51,7 +51,7 @@ export default {
 <style scoped>
 .default {
   font-family: "prof-font", "Hannotate SC Regular", "sans-serif";
-  color: #505050;
+  color: #381c1c;
 }
 .v-main {
   background-color: #fffaf0;

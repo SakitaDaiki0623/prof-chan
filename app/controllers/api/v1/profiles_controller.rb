@@ -32,6 +32,7 @@ module Api
       end
 
       def update
+        authorize @profile
         if @profile.update(profile_params)
           render json: @profile, serializer: ProfileSerializer
         else

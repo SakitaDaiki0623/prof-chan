@@ -7,4 +7,8 @@ class ProfilePolicy < ApplicationPolicy
   def new?
     user.profile.nil?
   end
+
+  def update?
+    user.id == record.user_id
+  end
 end

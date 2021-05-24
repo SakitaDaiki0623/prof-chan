@@ -13,6 +13,7 @@ module Api
       end
 
       def update
+        authorize @question_item
         if @question_item.update(question_item_params)
           render json: @question_item, serializer: QuestionItemSerializer
         else
@@ -23,6 +24,7 @@ module Api
       def create
         @questioin_item = QuestionItem.new(question_item_params)
 
+        authorize @questioin_item, :update?
         if @questioin_item.save!
           render json: @questioin_item, serializer: QuestionItemSerializer
         else
@@ -31,6 +33,7 @@ module Api
       end
 
       def destroy
+        authorize @question_item, :update?
         @question_item.destroy!
         render json: @question_item
       end

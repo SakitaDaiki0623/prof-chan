@@ -2,7 +2,7 @@
 module Api
   module V1
     class YesOrNoBlocksController < ApiController
-      before_action :set_yes_or_no_block, only: %i[show update destroy]
+      before_action :set_yes_or_no_block, only: %i[update destroy]
 
       def index
         @yes_or_no_blocks = YesOrNoBlock.by_team(current_user)
@@ -22,9 +22,8 @@ module Api
         end
       end
 
-      def show; end
-
       def update
+        authorize @yes_or_no_block
         if @yes_or_no_block.update!(yes_or_no_block_params)
           render json: @yes_or_no_block
         else
@@ -33,6 +32,7 @@ module Api
       end
 
       def destroy
+        authorize @yes_or_no_block, :update?
         @yes_or_no_block.destroy!
         render json: @yes_or_no_block
       end
