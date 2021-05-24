@@ -13,6 +13,7 @@ module Api
       end
 
       def update
+        authorize @yes_or_no_item
         if @yes_or_no_item.update(yes_or_no_item_params)
           render json: @yes_or_no_item, serializer: YesOrNoItemSerializer
         else
@@ -21,16 +22,17 @@ module Api
       end
 
       def create
-        @questioin_item = YesOrNoItem.new(yes_or_no_item_params)
-
-        if @questioin_item.save!
-          render json: @questioin_item, serializer: YesOrNoItemSerializer
+        @yes_or_no_item = YesOrNoItem.new(yes_or_no_item_params)
+        authorize @yes_or_no_item, :update?
+        if @yes_or_no_item.save!
+          render json: @yes_or_no_item, serializer: YesOrNoItemSerializer
         else
-          render json: @questioin_item.errors, status: :bad_request
+          render json: @yes_or_no_item.errors, status: :bad_request
         end
       end
 
       def destroy
+        authorize @yes_or_no_item, :update?
         @yes_or_no_item.destroy!
         render json: @yes_or_no_item
       end
