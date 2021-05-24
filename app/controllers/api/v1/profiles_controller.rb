@@ -48,6 +48,14 @@ module Api
         ).to_json
       end
 
+      def birthday_user_profiles
+        @birthday_user_profiles = Profile.by_team(current_user).filter_by_birth_month(Date.today.month)
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @birthday_user_profiles,
+          serializer: ProfileSerializer
+        ).to_json
+      end
+
       private
 
       def set_profile
