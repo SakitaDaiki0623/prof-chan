@@ -21,6 +21,8 @@ gem "administrate"
 # API
 gem 'slack-ruby-client'
 gem 'active_model_serializers', '~> 0.10.0'
+# Active Model SerializersのN + 1問題を解消
+gem "ams_lazy_relationships"
 
 # Application server
 gem 'puma', '~> 4.1'
