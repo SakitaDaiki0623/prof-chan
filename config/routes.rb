@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       resources :profiles,       only: %i[index create show update] do
         collection do
           get 'recently_joined_user_profiles'
+          get 'birthday_user_profiles'
         end
       end
       resources :users,          only: %i[index show new] do
