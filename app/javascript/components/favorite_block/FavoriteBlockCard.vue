@@ -28,7 +28,7 @@
         ></favorite-block-like-button>
       </v-row>
       <label class="form-label">
-        {{ favoriteBlock.category_name }}
+        {{ favoriteBlock.title }}
       </label>
       <v-card
         class="p-3 rounded-lg text-center"

@@ -1,80 +1,28 @@
 <template>
-  <div class="top">
-    <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
-      <div class="text-center text-5xl text-white py-5 top-sub-title">
-        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-        あなたによくブックマークする社員TOP3
-        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-      </div>
-      <v-row class="py-5" justify="center" style="height: 30rem;">
-        <v-col align-self="center" cols="12" sm="3">
-          <v-card
-            class="second-place"
-            outlined
-            contain
-            v-if="secondPlaceUserExist"
-          >
-            <v-img
-              :src="secondPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
-          <PlaceDoesNotExistCard place-number="2" v-else />
-        </v-col>
-        <v-col align-self="center" align="center" cols="12" sm="4">
-          <v-card class="first-place" outlined contain>
-            <v-img
-              :src="firstPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
-        </v-col>
-        <v-col align-self="center" align="center" cols="12" sm="4">
-          <v-card
-            class="third-place"
-            outlined
-            contain
-            v-if="thirdPlaceUserExist"
-          >
-            <v-img
-              :src="thirdPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
-          <PlaceDoesNotExistCard v-else place-number="3" />
-        </v-col>
-      </v-row>
-    </div>
-
-    <div v-if="firstPlaceUserExist">
-      <div class="top-sub-title m-5">1番ブックマークしてくれる社員</div>
-      <v-row>
-        <v-col
-          v-for="block in firstPlaceUserLikesBlocks"
-          :key="block.id"
-          cols="12"
-          sm="4"
-        >
-          <div class="border-2 border-gray-500"></div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="red lighten-4"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
-              {{ block.title }}
-            </p>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
-    <NotAnyBookmarkBlock
-      v-else
-      prof-message="ブックマークされているブロックはまだないよ"
-    />
+  <div class="top" v-if="firstPlaceUserExist">
+    <v-row justify="center" align-content="center">
+      <v-col cols="12" sm="5" align="right">
+        <img src="../images/prof_normal.png" class="image" />
+      </v-col>
+      <v-col cols="12" sm="5" align="left">
+        <div class="text-center text-4xl balloon4">
+          あなたにおすすめの社員さん
+        </div>
+      </v-col>
+      <v-col
+        v-for="block in firstPlaceUserLikesBlocks"
+        :key="block.id"
+        cols="12"
+        sm="4"
+      >
+        <div class="border-2 border-gray-500"></div>
+        <v-card class="rounded-2xl p-5 note-box" outlined color="red lighten-4">
+          <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+            {{ block.title }}
+          </p>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -310,5 +258,39 @@ export default {
 .top-three-recommended-users-space {
   background-color: #b39e9e;
   padding: 2rem;
+}
+
+.image {
+  max-width: 20rem;
+}
+
+.balloon4 {
+  position: relative;
+  margin: 2em 4em 2em 40px;
+  padding: 5px;
+  background: #fff0c6;
+  border-radius: 30px;
+}
+
+.balloon4:before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  width: 13px;
+  height: 12px;
+  bottom: 0;
+  background: #fff0c6;
+  border-radius: 50%;
+}
+
+.balloon4:after {
+  content: "";
+  position: absolute;
+  left: -24px;
+  width: 20px;
+  height: 18px;
+  bottom: 3px;
+  background: #fff0c6;
+  border-radius: 50%;
 }
 </style>

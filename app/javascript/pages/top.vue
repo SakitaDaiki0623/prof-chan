@@ -1,13 +1,20 @@
 <template>
   <div class="top">
+    <!-- 共通画面 -->
     <TopImage v-if="isProviderSlack" />
     <TopImageForEmail v-else />
     <div class="p-20 text-center">
       <RecentlyJoined class="mb-10" />
-      <Birthday class="mb-10" />
+      <Birthday />
     </div>
+
+    <div class="top-sub-title m-5 text-center">
+      ・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・
+    </div>
+
+    <!-- ユーザごとに変動 -->
     <div>
-      
+      <RecommendedUsers />
     </div>
   </div>
 </template>
@@ -20,6 +27,7 @@ import TopImage from "../components/static/TopImage";
 import TopImageForEmail from "../components/static/TopImageForEmail";
 import RecentlyJoined from "../components/RecentlyJoined";
 import Birthday from "../components/Birthday";
+import RecommendedUsers from "./RecommendedUsers";
 
 export default {
   components: {
@@ -27,6 +35,7 @@ export default {
     TopImageForEmail,
     RecentlyJoined,
     Birthday,
+    RecommendedUsers,
   },
   data() {
     return {};
@@ -53,14 +62,14 @@ export default {
       fetchUsers: "users/fetchUsers",
     }),
     async firstRead() {
-      await this.fetchCurrentUser();
-      await this.fetchUsers();
-      await this.fetchTextBlocks();
-      await this.fetchRankingBlocks();
-      await this.fetchYesOrNoBlocks();
-      await this.fetchYesOrNoItems();
-      await this.fetchQuestionBlocks();
-      await this.fetchQuestionItems();
+      // await this.fetchCurrentUser();
+      // await this.fetchUsers();
+      // await this.fetchTextBlocks();
+      // await this.fetchRankingBlocks();
+      // await this.fetchYesOrNoBlocks();
+      // await this.fetchYesOrNoItems();
+      // await this.fetchQuestionBlocks();
+      // await this.fetchQuestionItems();
     },
   },
 };

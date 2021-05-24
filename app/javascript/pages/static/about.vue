@@ -134,7 +134,7 @@
                     color="brown lighten-3"
                   >
                     <label class="form-label">
-                      {{ favoriteBlock.category_name }}
+                      {{ favoriteBlock.title }}
                     </label>
                     <v-card
                       class="p-3 rounded-lg text-center"
@@ -351,7 +351,7 @@
 export default {
   data() {
     return {
-      favoriteBlock: { id: 1, category_name: "音楽", text: "星野源" },
+      favoriteBlock: { id: 1, title: "音楽", text: "星野源" },
       questionBlock: {
         id: 1,
         question_items: [
