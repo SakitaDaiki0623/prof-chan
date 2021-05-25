@@ -27,11 +27,43 @@
         />
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="length"
+        circle
+        @input="pageChange"
+        :color="favoriteBlockColor"
+        class="mb-10"
+        v-show="isPageSizeBiggerThanMyFavoriteBlocks && !isThisEditPage"
+      ></v-pagination>
+    </div>
     <div>
       <transition-group
         tag="v-row"
         name="list"
-        v-if="isMyFavoriteBlocksLengthNotZero"
+        v-if="isMyFavoriteBlocksLengthNotZero && !isThisEditPage"
+      >
+        <v-col
+          v-for="favoriteBlock in displayBlocks"
+          :key="favoriteBlock.id"
+          cols="12"
+          sm="3"
+          class="border-b-2 border-brown-300 border-dashed"
+        >
+          <FavoriteBlockCard
+            :favorite-block="favoriteBlock"
+            :is-this-edit-page="isThisEditPage"
+            :favorite-block-color="favoriteBlockColor"
+            @update-favorite-block="updateFavoriteBlock"
+            @retrieve-favorite-block="retrieveFavoriteBlock"
+          />
+        </v-col>
+      </transition-group>
+      <transition-group
+        tag="v-row"
+        name="list"
+        v-else-if="isMyFavoriteBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="favoriteBlock in myFavoriteBlocks"
@@ -94,6 +126,12 @@ export default {
       isShownFavoriteFormatDialog: false,
       favoriteBlockColor: "brown lighten-2",
       favoriteBlocks: [],
+
+      // pagination
+      page: 1,
+      displayBlocks: [],
+      pageSize: 8,
+      length: 0,
     };
   },
   mounted() {
@@ -106,8 +144,11 @@ export default {
       return this.myFavoriteBlocks.length !== 0 ? true : false;
     },
     percentageMyFavoriteBlocksLengt() {
-      if (this.myFavoriteBlocks.length / 10 >= 1) return 100;
+      if (this.myFavoriteBlocks.length / 10 > 1) return 100;
       return (this.myFavoriteBlocks.length / 10) * 100;
+    },
+    isPageSizeBiggerThanMyFavoriteBlocks() {
+      return this.myFavoriteBlocks.length > this.pageSize ? true : false;
     },
     myFavoriteBlocks() {
       return (
@@ -120,7 +161,8 @@ export default {
   },
   methods: {
     async firstRead() {
-      this.fetchFavoriteBlocks();
+      await this.fetchFavoriteBlocks();
+      this.pageFirstRead();
     },
     async fetchFavoriteBlocks() {
       await axios
@@ -148,10 +190,20 @@ export default {
       });
       this.favoriteBlocks.splice(index, 1);
     },
+
+    pageChange(pageNumber) {
+      this.displayBlocks = this.myFavoriteBlocks.slice(
+        this.pageSize * (pageNumber - 1),
+        this.pageSize * pageNumber
+      );
+    },
+    pageFirstRead() {
+      this.length = Math.ceil(this.myFavoriteBlocks.length / this.pageSize);
+      this.displayBlocks = this.myFavoriteBlocks.slice(0, this.pageSize);
+    },
   },
 };
 </script>
 
 <style scoped>
-
 </style>

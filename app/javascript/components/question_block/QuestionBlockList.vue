@@ -20,9 +20,7 @@
           class="ma-2 white--text"
           @click="openQuestionFormatDialog"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>
+          <v-icon left> mdi-plus </v-icon>
           クエスチョンブロックを追加する
         </v-btn>
       </v-col>
@@ -33,11 +31,45 @@
         />
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="length"
+        circle
+        @input="pageChange"
+        :color="questionBlockColor"
+        class="mb-10"
+        v-show="isPageSizeBiggerThanMyQuestionBlocks && !isThisEditPage"
+      ></v-pagination>
+    </div>
+
     <div>
+      <!-- 詳細画面用 -->
       <transition-group
         tag="v-row"
         name="list"
-        v-if="isMyQuestionBlocksLengthNotZero"
+        v-if="isMyQuestionBlocksLengthNotZero && !isThisEditPage"
+      >
+        <v-col
+          v-for="questionBlock in displayBlocks"
+          :key="questionBlock.id"
+          cols="12"
+          sm="4"
+          class="border-b-2 border-brown-300 border-dashed"
+        >
+          <QuestionBlockCard
+            :question-block="questionBlock"
+            :is-this-edit-page="isThisEditPage"
+            :question-block-color="questionBlockColor"
+          />
+        </v-col>
+      </transition-group>
+
+      <!-- 編集画面用 -->
+      <transition-group
+        tag="v-row"
+        name="list"
+        v-else-if="isMyQuestionBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="questionBlock in myQuestionBlocks"
@@ -53,6 +85,7 @@
           />
         </v-col>
       </transition-group>
+
       <NoBlockContainer block-name="クエスチョン" v-else />
     </div>
 
@@ -96,6 +129,12 @@ export default {
     return {
       isShownQuestionFormatDialog: false,
       questionBlockColor: "red lighten-3", // question block color
+
+      // pagination
+      page: 1,
+      displayBlocks: [],
+      pageSize: 3,
+      length: 0,
     };
   },
   computed: {
@@ -117,6 +156,12 @@ export default {
         ) || {}
       );
     },
+    isPageSizeBiggerThanMyQuestionBlocks() {
+      return this.myQuestionBlocks.length > this.pageSize ? true : false;
+    },
+  },
+  mounted() {
+    this.pageFirstRead();
   },
   methods: {
     openQuestionFormatDialog() {
@@ -124,6 +169,16 @@ export default {
     },
     closeQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = false;
+    },
+    pageChange(pageNumber) {
+      this.displayBlocks = this.myQuestionBlocks.slice(
+        this.pageSize * (pageNumber - 1),
+        this.pageSize * pageNumber
+      );
+    },
+    pageFirstRead() {
+      this.length = Math.ceil(this.myQuestionBlocks.length / this.pageSize);
+      this.displayBlocks = this.myQuestionBlocks.slice(0, this.pageSize);
     },
   },
 };
@@ -154,6 +209,4 @@ export default {
   right: 0;
   z-index: 1;
 }
-
-
 </style>

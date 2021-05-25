@@ -15,9 +15,7 @@
           class="ma-2 white--text"
           @click="openRankingFormatDialog"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>
+          <v-icon left> mdi-plus </v-icon>
           ランキングブロックを追加する
         </v-btn>
       </v-col>
@@ -28,11 +26,41 @@
         />
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="length"
+        circle
+        @input="pageChange"
+        color="green lighten-3"
+        class="mb-10"
+        v-show="isPageSizeBiggerThanMyRankingBlocks && !isThisEditPage"
+      ></v-pagination>
+    </div>
     <div>
       <transition-group
         tag="v-row"
         name="list"
-        v-if="isMyRankingBlocksLengthNotZero"
+        v-if="isMyRankingBlocksLengthNotZero && !isThisEditPage"
+      >
+        <v-col
+          v-for="rankingBlock in displayBlocks"
+          :key="rankingBlock.id"
+          cols="12"
+          sm="4"
+          class="border-b-2 border-brown-300 border-dashed"
+        >
+          <RankingBlockCard
+            :ranking-block="rankingBlock"
+            :is-this-edit-page="isThisEditPage"
+            :ranking-block-color="rankingBlockColor"
+          />
+        </v-col>
+      </transition-group>
+      <transition-group
+        tag="v-row"
+        name="list"
+        v-else-if="isMyRankingBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="rankingBlock in myRankingBlocks"
@@ -91,6 +119,12 @@ export default {
     return {
       isShownRankingFormatDialog: false,
       rankingBlockColor: "green lighten-3", // ranking block color
+
+      // pagination
+      page: 1,
+      displayBlocks: [],
+      pageSize: 3,
+      length: 0,
     };
   },
   computed: {
@@ -111,6 +145,12 @@ export default {
         ) || {}
       );
     },
+    isPageSizeBiggerThanMyRankingBlocks() {
+      return this.myRankingBlocks.length > this.pageSize ? true : false;
+    },
+  },
+  mounted() {
+    this.pageFirstRead();
   },
   methods: {
     openRankingFormatDialog() {
@@ -118,6 +158,16 @@ export default {
     },
     closeRankingFormatDialog() {
       this.isShownRankingFormatDialog = false;
+    },
+    pageChange(pageNumber) {
+      this.displayBlocks = this.myRankingBlocks.slice(
+        this.pageSize * (pageNumber - 1),
+        this.pageSize * pageNumber
+      );
+    },
+    pageFirstRead() {
+      this.length = Math.ceil(this.myRankingBlocks.length / this.pageSize);
+      this.displayBlocks = this.myRankingBlocks.slice(0, this.pageSize);
     },
   },
 };
