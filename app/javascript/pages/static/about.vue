@@ -379,63 +379,6 @@ export default {
 </script>
 
 <style scoped>
-.balloon1 {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0;
-  padding: 1rem;
-  min-width: 120px;
-  max-width: 100%;
-  color: #555;
-  font-size: 1rem;
-  background: #e0edff;
-  border-radius: 15px;
-}
-
-.balloon1:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -15px;
-  border: 15px solid transparent;
-  border-top: 15px solid #e0edff;
-}
-
-.balloon1 p {
-  margin: 0;
-  padding: 0;
-}
-
-.colorful-dot {
-  color: #ffffff; /* 文字色 */
-  overflow: hidden;
-  padding: 10px; /* 余白 */
-  position: relative;
-}
-.colorful-dot:after {
-  background-color: #f3a3a8; /* 1個目（一番左）のドットの色 */
-  border-radius: 50%;
-  content: "";
-  margin-left: 15px; /* 最後の文字とドットとの余白 */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px; /* ドットの幅 */
-  height: 5px; /* ドットの高さ */
-  box-shadow: 20px 0px 0px rgb(217, 204, 179),
-    /* 2個目のドットの位置と色 */ 40px 0px 0px rgb(217, 204, 179),
-    /* 3個目のドットの位置と色 */ 60px 0px 0px rgb(243, 163, 168),
-    /* 4個目のドットの位置と色 */ 80px 0px 0px rgb(217, 204, 179),
-    /* 5個目のドットの位置と色 */ 100px 0px 0px rgb(217, 204, 179),
-    /* 6個目のドットの位置と色 */ 120px 0px 0px rgb(243, 163, 168),
-    /* 7個目のドットの位置と色 */ 140px 0px 0px rgb(217, 204, 179),
-    /* 8個目のドットの位置と色 */ 160px 0px 0px rgb(217, 204, 179),
-    /* 9個目のドットの位置と色 */ 180px 0px 0px rgb(243, 163, 168),
-    /* 10個目のドットの位置と色 */ 200px 0px 0px rgb(217, 204, 179),
-    /* 11個目のドットの位置と色 */ 220px 0px 0px rgb(217, 204, 179); /* 12個目のドットの位置と色 */
-}
-
 .image {
   width: 200px;
   height: 200px;

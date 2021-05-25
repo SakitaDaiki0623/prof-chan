@@ -58,14 +58,14 @@ export default {
       fetchUsers: "users/fetchUsers",
     }),
     async firstRead() {
-      // await this.fetchCurrentUser();
-      // await this.fetchUsers();
-      // await this.fetchTextBlocks();
-      // await this.fetchRankingBlocks();
-      // await this.fetchYesOrNoBlocks();
-      // await this.fetchYesOrNoItems();
-      // await this.fetchQuestionBlocks();
-      // await this.fetchQuestionItems();
+      await this.fetchCurrentUser();
+      await this.fetchUsers();
+      await this.fetchTextBlocks();
+      await this.fetchRankingBlocks();
+      await this.fetchYesOrNoBlocks();
+      await this.fetchYesOrNoItems();
+      await this.fetchQuestionBlocks();
+      await this.fetchQuestionItems();
     },
   },
 };
