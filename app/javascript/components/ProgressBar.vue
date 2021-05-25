@@ -13,7 +13,7 @@
       >
       <img src="../images/prof_sad.png" class="image" />
     </div>
-    <div v-else-if="41 <= percentageForBlocks && percentageForBlocks <= 80">
+    <div v-else-if="41 <= percentageForBlocks && percentageForBlocks <= 90">
       <span class="text-lg text-center p-5 bg-white rounded-full"
         >充実度{{ percentageForBlocks }}%</span
       >

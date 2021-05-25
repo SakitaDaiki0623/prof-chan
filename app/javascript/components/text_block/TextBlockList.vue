@@ -33,19 +33,38 @@
         :length="length"
         circle
         @input="pageChange"
-        color="teal lighten-3"
+        :color="textBlockColor"
         class="mb-10"
-        v-show="isPageSizeBiggerThanMyTextBlocks"
+        v-show="isPageSizeBiggerThanMyTextBlocks && !isThisEditPage"
       ></v-pagination>
     </div>
     <div>
       <transition-group
         tag="v-row"
         name="list"
-        v-if="isMyTextBlocksLengthNotZero"
+        v-if="isMyTextBlocksLengthNotZero && !isThisEditPage"
       >
         <v-col
           v-for="textBlock in displayBlocks"
+          :key="textBlock.id"
+          cols="12"
+          sm="6"
+          class="border-b-2 border-brown-300 border-dashed"
+        >
+          <TextBlockCard
+            :text-block="textBlock"
+            :is-this-edit-page="isThisEditPage"
+            :text-block-color="textBlockColor"
+          />
+        </v-col>
+      </transition-group>
+      <transition-group
+        tag="v-row"
+        name="list"
+        v-else-if="isMyTextBlocksLengthNotZero && isThisEditPage"
+      >
+        <v-col
+          v-for="textBlock in myTextBlocks"
           :key="textBlock.id"
           cols="12"
           sm="6"
