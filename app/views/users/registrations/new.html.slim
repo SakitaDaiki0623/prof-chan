@@ -18,10 +18,10 @@
               | (
               = @minimum_password_length
               |  文字以上で入力してね)
-          = f.password_field :password, autocomplete: "new-password", class: "input-form-basic-block"
+          = f.password_field :password, class: "input-form-basic-block"
         .relative.w-full.mb-3
           = f.label :password_confirmation, class: 'form-label-text-block'
-          = f.password_field :password_confirmation, autocomplete: "new-password", class: "input-form-basic-block"
+          = f.password_field :password_confirmation, class: "input-form-basic-block"
         .relative.w-full.mb-3
           = f.label :image, class: 'form-label-text-block'
           = f.file_field :image, autofocus: true, autocomplete: "image", class: "input-form-basic-block"
