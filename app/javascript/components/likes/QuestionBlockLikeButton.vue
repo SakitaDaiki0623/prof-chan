@@ -1,16 +1,14 @@
 <template>
   <div>
     <div v-if="isLiked">
-      <v-btn icon color="teal lighten-3" @click="deleteLike()">
-        <v-icon>mdi-thumb-up</v-icon>
+      <v-btn icon color="red lighten-3" @click="deleteLike()">
+        <v-icon>mdi-bookmark</v-icon>
       </v-btn>
-      {{ likeCount }}
     </div>
     <div v-else>
       <v-btn icon @click="registerLike()">
-        <v-icon>mdi-thumb-up</v-icon>
+        <v-icon>mdi-bookmark-plus-outline</v-icon>
       </v-btn>
-      {{ likeCount }}
     </div>
   </div>
 </template>

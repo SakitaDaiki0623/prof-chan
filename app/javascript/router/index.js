@@ -9,7 +9,6 @@ import EditProfilesPage from "../pages/profile/edit";
 import Top from "../pages/top.vue";
 import popularBlocks from "../pages/popularBlocks.vue";
 import bookmarkPage from "../pages/bookmarkPage.vue";
-import recommendedUsers from "../pages/recommendedUsers.vue";
 import NotFound from "../pages/shared/NotFound";
 import About from "../pages/static/about";
 
@@ -69,11 +68,6 @@ const routes = [
     component: bookmarkPage,
   },
   {
-    path: "/recommended_users",
-    name: "recommendedUsers",
-    component: recommendedUsers,
-  },
-  {
     path: "/about",
     name: "About",
     component: About,
@@ -86,6 +80,12 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({ mode: "history", routes });
+const router = new VueRouter({
+  mode: "history",
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 }; // トップに移動
+  },
+});
 
 export default router;

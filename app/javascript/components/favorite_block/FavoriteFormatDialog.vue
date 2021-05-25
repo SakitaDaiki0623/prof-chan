@@ -8,18 +8,22 @@
       @input="$emit('input', $event.target.isShownFavoriteFormatDialog)"
     >
       <v-card :color="favoriteBlockColor">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn
-            :color="favoriteBlockColor"
-            @click="hundleCloseFavoriteFormatDialog"
+        <div class="bg-brown-300 p-3">
+          <v-row justify="end" class="m-2">
+            <v-btn
+              :color="favoriteBlockColor"
+              @click="hundleCloseFavoriteFormatDialog"
+            >
+              <v-icon> mdi-close-outline </v-icon>
+            </v-btn>
+          </v-row>
+          <p
+            class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
           >
-            <v-icon> mdi-close-outline </v-icon>
-          </v-btn>
-        </v-row>
-        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
-          Favorite ブロック作成
-        </p>
-        <div id="favorite-block-form" class="p-10 bg-text-prof-block bg-top">
+            Favorite ブロック作成
+          </p>
+        </div>
+        <div id="favorite-block-form" class="p-10 bg-text-prof-block">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateFavoriteBlock(favoriteBlock)">
               <div>
@@ -47,7 +51,7 @@
                       {{ category.name }}
                     </option>
                   </select>
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="text-red-200">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -57,7 +61,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="テキスト"
-                  rules="input_required|max:200"
+                  rules="input_required|max:20"
                 >
                   <input
                     id="favorite_block_text"
@@ -65,7 +69,7 @@
                     class="input-form-text-block"
                     name="favorite_block[favorite_block_text]"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="text-red-200">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">

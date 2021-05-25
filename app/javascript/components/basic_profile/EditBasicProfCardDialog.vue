@@ -2,38 +2,21 @@
 <template>
   <v-dialog
     :value="isShownEditBasicProfCardDialog"
-    max-width="800"
+    max-width="450"
     persistent
     @input="$emit('input', $event.target.isShownEditBasicProfCardDialog)"
   >
     <!-- Basic Info Card -->
     <v-card
       id="edit-basic-prof-card-dialog"
-      class="shadow rounded-2xl bg-question-prof-block bg-cover"
+      class="shadow rounded-2xl py-5 px-10"
+      color="brown lighten-4"
     >
-      <div class="flex p-3 text-gray-600">
-        <div class="md:w-2/4 p-4 text-center mt-10">
-          <div class="border-b-2 border-gray-600 border-4 border-gray-300 m-5">
-            ★基本情報★
-          </div>
-          <div class="flex justify-center">
-            <img
-              class="ring-4 ring-gray-600 w-9/12"
-              :src="currentUser.image.url"
-            >
-          </div>
-          <div class="text-xl font-bold inline-block mt-4">
-            <label
-              class="pt-2 text-xs font-medium bg-green-100 py-1 px-2 rounded text-green-500"
-            >名前</label>
-            <div
-              class="text-2xl pb-2 border-b-2 border-gray-600 inline-block font-bold text-center"
-            >
-              {{ currentUser.name }}
-            </div>
-          </div>
-        </div>
-        <div class="md:w-3/5 p-8 lg:ml-4">
+      <div class="top-sub-title text-2xl text-center">
+        基本情報
+      </div>
+      <v-row>
+        <v-col cols="12" sm="12" class="text-2xl">
           <v-row justify="end">
             <v-btn
               id="cancel-basic-prof-card-button"
@@ -46,22 +29,15 @@
             </v-btn>
           </v-row>
           <!-- FORM -->
-          <div
-            id="profile-basic-form"
-            class="p-6"
-          >
-            <ValidationObserver
-              ref="observer"
-              v-slot="{ invalid }"
-            >
+          <div id="profile-basic-form" class="p-6">
+            <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form
                 @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"
               >
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_gender"
-                  >性別</label>
+                  <label class="form-label-text-block" for="profile_gender"
+                    >性別</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="性別"
@@ -85,10 +61,9 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_height"
-                  >身長</label>
+                  <label class="form-label-text-block" for="profile_height"
+                    >身長</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="身長"
@@ -100,15 +75,14 @@
                       class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
-                    >
+                    />
                     <span class="text-red-400">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_blood_type"
-                  >血液型</label>
+                  <label class="form-label-text-block" for="profile_blood_type"
+                    >血液型</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="血液型"
@@ -133,9 +107,10 @@
                 </div>
                 <div>
                   <label
-                    class="form-label-basic-block"
+                    class="form-label-text-block"
                     for="profile_prefecture_id"
-                  >出身地</label>
+                    >出身地</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="出身地"
@@ -159,10 +134,9 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-basic-block"
-                    for="profile_birthday"
-                  >生年月日</label>
+                  <label class="form-label-text-block" for="profile_birthday"
+                    >生年月日</label
+                  >
                   <v-menu
                     ref="menu"
                     v-model="birthMenu"
@@ -185,7 +159,7 @@
                           name="profile[birthday]"
                           v-bind="attrs"
                           v-on="on"
-                        >
+                        />
                         <span class="text-red-400">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
@@ -204,9 +178,10 @@
                 </div>
                 <div>
                   <label
-                    class="form-label-basic-block"
+                    class="form-label-text-block"
                     for="profile_day_of_joinning"
-                  >入社日</label>
+                    >入社日</label
+                  >
                   <v-menu
                     ref="menu"
                     v-model="joinedMenu"
@@ -229,7 +204,7 @@
                           v-bind="attrs"
                           class="input-form-basic-block"
                           v-on="on"
-                        >
+                        />
                         <span class="text-red-400">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
@@ -252,7 +227,7 @@
                     elevation="4"
                     x-large
                     :disabled="invalid"
-                    color="blue-grey darken-2"
+                    color="brown lighten-2"
                     class="white--text"
                   >
                     基本情報を更新！
@@ -262,8 +237,8 @@
             </ValidationObserver>
           </div>
           <!-- /FORM -->
-        </div>
-      </div>
+        </v-col>
+      </v-row>
     </v-card>
     <!-- Basic Info Card -->
   </v-dialog>
@@ -352,7 +327,7 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    patchProfile: async function () {
+    patchProfile: async function() {
       const res = await axios.patch(
         `/api/v1/profiles/${this.editBasicProfile.public_uid}`,
         this.editBasicProfile

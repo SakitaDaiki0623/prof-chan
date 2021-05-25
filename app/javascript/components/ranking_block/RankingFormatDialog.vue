@@ -36,9 +36,7 @@
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
               <div>
-                <label
-                  class="form-label-ranking-block"
-                  for="ranking_block_title"
+                <label class="form-label-text-block" for="ranking_block_title"
                   >タイトル</label
                 >
                 <ValidationProvider
@@ -59,7 +57,7 @@
 
               <div class="mt-5">
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_first_place"
                   >1st</label
                 >
@@ -79,7 +77,7 @@
               </div>
               <div class="mt-5">
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_second_place"
                   >2nd</label
                 >
@@ -99,7 +97,7 @@
               </div>
               <div class="mt-5">
                 <label
-                  class="form-label-ranking-block"
+                  class="form-label-text-block"
                   for="ranking_block_third_place"
                   >3rd</label
                 >
@@ -179,7 +177,7 @@ export default {
     };
   },
   computed: {
-  ...mapState("users", ["currentUser"]),
+    ...mapState("users", ["currentUser"]),
   },
   methods: {
     ...mapActions("rankingBlocks", ["createRankingBlock"]),
@@ -234,7 +232,7 @@ export default {
 .note-box::before {
   content: "";
   position: absolute;
-  border-right: dotted 10px #ddd; /*ドットの大きさ、高さ*/
+  border-right: dotted 10px #d7ccc8; /*ドットの大きさ、高さ*/
   height: 90%;
   top: 0.5em; /*位置*/
   left: 0.5em; /*位置*/

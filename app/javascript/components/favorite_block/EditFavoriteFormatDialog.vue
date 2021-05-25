@@ -7,17 +7,21 @@
       @input="$emit('input', $event.target.isShownEditFavoriteFormatDialog)"
     >
       <v-card :color="favoriteBlockColor">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn
-            :color="favoriteBlockColor"
-            @click="hundleCloseEditFavoriteFormatDialog"
+        <div class="bg-brown-300 p-3">
+          <v-row justify="end" class="m-2">
+            <v-btn
+              :color="favoriteBlockColor"
+              @click="hundleCloseEditFavoriteFormatDialog"
+            >
+              <v-icon> mdi-close-outline </v-icon>
+            </v-btn>
+          </v-row>
+          <p
+            class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
           >
-            <v-icon> mdi-close-outline </v-icon>
-          </v-btn>
-        </v-row>
-        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
-          Favorite ブロックを編集
-        </p>
+            Favorite ブロック編集
+          </p>
+        </div>
         <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditFavoriteBlock(editFavoriteBlock)">
@@ -46,7 +50,7 @@
                       {{ category.name }}
                     </option>
                   </select>
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="text-red-200">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -65,7 +69,7 @@
                     name="text_block[text_block_text]"
                     @input="editFavoriteBlock.text = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="text-red-200">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">

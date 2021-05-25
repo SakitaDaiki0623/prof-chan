@@ -1,0 +1,2 @@
+class TextBlockPolicy < BlockPolicy
+end

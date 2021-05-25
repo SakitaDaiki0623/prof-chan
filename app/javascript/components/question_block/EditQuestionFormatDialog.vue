@@ -61,7 +61,7 @@
               <form>
                 <div>
                   <label
-                    class="form-label-question-block"
+                    class="form-label-text-block"
                     for="question_block_title"
                   >タイトル</label>
                   <ValidationProvider

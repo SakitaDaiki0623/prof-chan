@@ -7,7 +7,7 @@
         = render "users/shared/error_messages", resource: resource
         = f.hidden_field :reset_password_token
         .relative.w-full.mb-3
-          = f.label :password, class: 'form-label-basic-block'
+          = f.label :password, class: 'form-label-text-block'
           - if @minimum_password_length
             em
               | (
@@ -15,7 +15,7 @@
               |  文字以上で入力してね)
           = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "input-form-basic-block"
         .relative.w-full.mb-3
-          = f.label :password_confirmation, class: 'form-label-basic-block'
+          = f.label :password_confirmation, class: 'form-label-text-block'
           = f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "input-form-basic-block"
         .text-center.mt-6
           .actions

@@ -4,7 +4,7 @@
       <div class="loading-spacer"></div>
       <vue-loading
         type="spiningDubbles"
-        color="#aaa"
+        color="#A1887F"
         :size="{ width: '100px', height: '100px' }"
       >
       </vue-loading>
@@ -27,7 +27,7 @@ export default {
 .fullview {
   width: 100%;
   height: 100%;
-  background: #fefefe;
+  background: #fffaf0;
   position: fixed;
   top: 0;
   left: 0;

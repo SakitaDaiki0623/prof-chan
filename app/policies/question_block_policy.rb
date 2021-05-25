@@ -1,0 +1,3 @@
+class QuestionBlockPolicy < BlockPolicy
+
+end

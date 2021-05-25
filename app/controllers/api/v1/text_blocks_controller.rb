@@ -2,7 +2,7 @@
 module Api
   module V1
     class TextBlocksController < ApiController
-      before_action :set_text_block, only: %i[show update destroy]
+      before_action :set_text_block, only: %i[update destroy]
 
       def index
         @text_blocks = TextBlock.by_team(current_user)
@@ -23,6 +23,7 @@ module Api
       end
 
       def update
+        authorize @text_block
         if @text_block.update(text_block_params)
           render json: @text_block, serializer: TextBlockSerializer
         else
@@ -30,11 +31,10 @@ module Api
         end
       end
 
-      def show; end
-
       def destroy
+        authorize @text_block, :update?
         @text_block.destroy!
-        render json: @text_block
+        render json: @text_block, serializer: TextBlockSerializer
       end
 
       def popular_blocks

@@ -35,15 +35,15 @@
         {{ rankingBlock.title }}
       </p>
       <v-card class="p-2 m-3 rounded-full" outlined color="white">
-        <label for="1st place" class="ranking-label">1st</label
+        <label for="1st place" class="form-label-text-block mr-5">1st</label
         >{{ rankingBlock.first_place }}
       </v-card>
       <v-card class="p-2 m-3 rounded-full" outlined color="white">
-        <label for="2nd place" class="ranking-label">2nd</label
+        <label for="2nd place" class="form-label-text-block mr-5">2nd</label
         >{{ rankingBlock.second_place }}
       </v-card>
       <v-card class="p-2 m-3 rounded-full" outlined color="white">
-        <label for="3rd place" class="ranking-label">3rd</label
+        <label for="3rd place" class="form-label-text-block mr-5">3rd</label
         >{{ rankingBlock.third_place }}
       </v-card>
     </v-card>
@@ -120,7 +120,7 @@ export default {
 .note-box::before {
   content: "";
   position: absolute;
-  border-right: dotted 10px #ddd; /*ドットの大きさ、高さ*/
+  border-right: dotted 10px #d7ccc8; /*ドットの大きさ、高さ*/
   height: 90%;
   top: 0.5em; /*位置*/
   left: 0.5em; /*位置*/

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="text-gray-600">
+  <v-container>
     <v-row>
       <v-col cols="12" sm="4">
         <ProfCard :user="user" :is-this-edit-page="isThisEditPage" />
@@ -34,13 +34,11 @@
 <script>
 // components ----------
 import BasicProfCard from "./basic_profile/BasicProfCard";
-import AddressBlock from "./address_block/AddressBlock";
 import ProfCard from "./ProfCard";
 
 export default {
   components: {
     BasicProfCard,
-    AddressBlock,
     ProfCard,
   },
   props: {

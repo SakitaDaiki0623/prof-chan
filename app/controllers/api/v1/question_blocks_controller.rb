@@ -2,7 +2,7 @@
 module Api
   module V1
     class QuestionBlocksController < ApiController
-      before_action :set_question_block, only: %i[show update destroy]
+      before_action :set_question_block, only: %i[update destroy]
 
       def index
         @question_blocks = QuestionBlock.by_team(current_user)
@@ -23,9 +23,8 @@ module Api
         end
       end
 
-      def show; end
-
       def update
+        authorize @question_block
         if @question_block.update!(question_block_params)
           render json: @question_block
         else
@@ -34,6 +33,7 @@ module Api
       end
 
       def destroy
+        authorize @question_block, :update?
         @question_block.destroy!
         render json: @question_block
       end

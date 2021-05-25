@@ -2,7 +2,7 @@
 module Api
   module V1
     class RankingBlocksController < ApiController
-      before_action :set_ranking_block, only: %i[show update destroy]
+      before_action :set_ranking_block, only: %i[update destroy]
 
       def index
         @ranking_blocks = RankingBlock.by_team(current_user)
@@ -21,9 +21,8 @@ module Api
         end
       end
 
-      def show; end
-
       def update
+        authorize @ranking_block
         if @ranking_block.update!(ranking_block_params)
           render json: @ranking_block, serializer: RankingBlockSerializer
         else
@@ -32,6 +31,7 @@ module Api
       end
 
       def destroy
+        authorize @ranking_block, :update?
         @ranking_block.destroy!
         render json: @ranking_block, serializer: RankingBlockSerializer
       end

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       resources :profiles,       only: %i[index create show update] do
         collection do
           get 'recently_joined_user_profiles'
+          get 'birthday_user_profiles'
         end
       end
       resources :users,          only: %i[index show new] do
@@ -113,6 +114,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'terms', to: 'home#terms'
+  get 'privacy', to: 'home#privacy'
 
   get '*path', to: 'profiles#top'
 end

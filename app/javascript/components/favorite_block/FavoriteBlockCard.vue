@@ -28,7 +28,7 @@
         ></favorite-block-like-button>
       </v-row>
       <label class="form-label">
-        {{ favoriteBlock.category_name }}
+        {{ favoriteBlock.title }}
       </label>
       <v-card
         class="p-3 rounded-lg text-center"
@@ -100,7 +100,7 @@ export default {
       this.deleteFavoriteBlock(favoriteBlock);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
-        message: "テキストブロックを削除したよ！",
+        message: "Favorite ブロックを削除したよ！",
         color: this.favoriteBlockColor,
       });
     },

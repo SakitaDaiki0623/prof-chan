@@ -1,0 +1,3 @@
+class YesOrNoBlockPolicy < BlockPolicy
+
+end

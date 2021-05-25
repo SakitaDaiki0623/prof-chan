@@ -13,7 +13,7 @@
           >
             <label
               for="question_item_content"
-              class="form-label-question-block"
+              class="form-label-text-block"
             >質問</label>
             <ValidationProvider
               v-slot="{ errors }"
@@ -35,7 +35,7 @@
           >
             <label
               for="question_item_content"
-              class="form-label-question-block"
+              class="form-label-text-block"
             >答え</label>
             <ValidationProvider
               v-slot="{ errors }"
