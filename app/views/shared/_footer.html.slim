@@ -1,6 +1,6 @@
 .antialiased.bg-brown-300
-  .container.mx-auto.py-4.px-5.flex.flex-wrap.flex-col.sm:flex-row
-      p.text-white.text-sm.text-center.font-light.sm:text-left
+  .container.py-4
+      p.text-white.text-sm.font-light
         | &copy; 2021 プロフちゃん
-        =link_to '利用規約', '#', class: "ml-3"
-        =link_to  (t 'defaults.about_prof'), '#', class: 'ml-3'
+        =link_to '利用規約', terms_path, class: "ml-3"
+        =link_to 'プライバシー・ポリシー', privacy_path, class: "ml-3"

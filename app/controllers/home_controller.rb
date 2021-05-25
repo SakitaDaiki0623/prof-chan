@@ -1,6 +1,6 @@
 # app/controllers/home_controller.rb
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+  skip_before_action :authenticate_user!
   layout 'top'
 
   # TODO: Refactoring
@@ -11,5 +11,13 @@ class HomeController < ApplicationController
     elsif user_signed_in?
       redirect_to top_path
     end
+  end
+
+  def privacy
+
+  end
+
+  def terms
+
   end
 end

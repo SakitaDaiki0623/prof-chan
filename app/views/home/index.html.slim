@@ -25,27 +25,75 @@
       = link_to "ゲストログイン", users_guest_sign_in_path , method: :post, class: "bg-yellow-500 text-2xl hover:bg-yellow-600 text-white font-bold py-2 px-10 border border-yellow-600 rounded"
       .my-3.text-white
         | ゲストユーザとして閲覧します
-  .bg-brown-50.px-10
-    .p-20.text-center
-      .text-3xl.top-sub-title.mb-10
-        | リモートで会えない他の社員に自分のプロフィールを公開しよう
-      .grid.grid-cols-12.gap-2.px-20
-        .col-start-1.col-span-6
-          = image_tag "prof_open_normal.png", class: "max-w-sm flip-horizontal"
-        .col-start-7.col-span-6.mb-10
-          .text-lg.text-center.p-20.bg-white.rounded-full
-            | プロフちゃんはコロナ下で減ってしまった雑談を補完するために
-            | 社内でプロフィールを公開する社員プロフィール公開サービスです。
+  .bg-brown-50
+    .grid.grid-cols-12.gap-10.text-center.p-20.bg-brown-400.mt-10
+      .col-start-1.col-span-12
+        .text-4xl.inline.p-5.text-white.font-bold.border-t-8.border-b-8.border-white
+          | Sign In with Slackをしてみよう！
+      .col-start-2.col-span-6.p-10
+        .text-3xl.rounded-md.p-5.border-2.border-white.border-dashed.text-white
+          | 社内で「slack」をご利用の場合、slackと連携することで社内の人とのみプロフィールを共有することができます。
+          br
+          | 社員同士で自分のプロフィールを共有することで、直接会うことがなかなか生まれない雑談を補完します。
+      .col-start-8.col-span-3.p-10
+        = image_tag "https://platform.slack-edge.com/img/sign_in_with_slack.png", size: '600x600',  class: " pointer-events-none"
+        = image_tag  "prof_open_happy.png", class: 'w-52'
+      .col-start-1.col-span-12
+        .text-md.p-5.text-white.border-b-2.border-white.border-dotted
+          | ※通常ログイン版はアプリをご利用する全ての人にプロフィールを公開します。
+
+
+    // ステップ説明
+    .bg-brown-300.mt-10.h-96
+      .p-10.text-center
+        .grid.grid-cols-13.gap-6.px-32
+          .col-start-1.col-span-11
+            .text-4xl.border-t-8.border-b-8.border-white.inline-block.p-5.text-white.font-bold
+              | 社内でプロフィールを公開しよう！
+          .col-start-2.col-span-3.border-2.border-brown-100.bg-white.p-10
+            .text-xl.text-brown-300.font-bold.border-t-4.border-b-4.border-brown-300.text-center.w-1/3.inline-block
+              | 01
+            .text-4xl.text-brown-300.font-bold.py-2
+              | 書き込む
+            = image_tag  "undraw_Notebook_re_id0r.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center'
+            .text-xl.text-brown-300.p-2
+              | あなたに関する様々な情報をプロフィールに書き込みましょう。
+          .col-start-5.col-span-3.border-2.border-brown-100.bg-white.p-10
+            .text-xl.text-brown-300.font-bold.border-t-4.border-b-4.border-brown-300.text-center.w-1/3.inline-block
+              | 02
+            .text-4xl.text-brown-300.font-bold.py-2
+              | 見る、保存する
+            = image_tag  "undraw_Taking_notes_re_bnaf.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center'
+            .text-xl.text-brown-300.p-2
+              | 他の社員さんのプロフィールを見てみましょう。気に入ったものはブックマークで保存できます。
+          .col-start-8.col-span-3.border-2.border-brown-100.bg-white.p-10
+            .text-xl.text-brown-300.font-bold.border-t-4.border-b-4.border-brown-300.text-center.w-1/3.inline-block
+              | 03
+            .text-4xl.text-brown-300.font-bold.py-2
+              | 話す
+            = image_tag  "undraw_video_call_kxyp.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center'
+            .text-xl.text-brown-300.p-2
+              | あなたが知ったこと、共通の話題を社員さんと話してみましょう。
+    .my-96
+    .grid.grid-cols-13.gap-10.text-center.p-20.bg-brown-100
+      .col-start-1.col-span-11
+        .text-4xl.border-t-2.border-b-2.border-brown-600.inline.p-5.text-gray-600.font-bold.border-dotted
+          | キャラクターについて
+      .col-start-2.col-span-5.p-10
+        .text-2xl.rounded-md.p-5.bg-brown-300
+          .text-4xl.font-bold.colorful-dot
+            | CHARACTER PROFILE
+          .border-2.border-dotted.border-white.p-5.text-white
+            | ロボフスキハムスターのキャラクター。
             br
-            | 自分の趣味や好きなことをプロフィールに書いて
-            | 他の人が知らないあなたの情報をプロフィールに記録しよう！
-      .text-3xl.top-sub-title.mb-10
-        | 昔流行したプロフィール帳を再現！
-      .grid.grid-cols-12.gap-2.px-20
-        .col-start-1.col-span-6.mb-10
-          .text-lg.text-center.p-20.bg-white.rounded-full
-            | 作成するプロフィールはプロフィール帳を参考にしています。
-            br>/
-            | ノートに書き込む感覚で楽しくプロフィールを作成できます。
-        .col-start-7.col-span-6.mb-10
-          = image_tag "undraw_Notebook_re_id0r.svg"
+            | 自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。
+            br
+            | プロフが充実しているほど機嫌が良くなる。
+            br
+            | 三度の飯より自己紹介が大好き。
+            br
+          .font-bold.colorful-dot
+      .col-start-7.col-span-3
+        .balloon1
+          | このサイトを楽しむためにお手伝いします！
+        = image_tag  "prof_normal.png", class: 'max-w-sm'

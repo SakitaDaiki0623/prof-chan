@@ -1,32 +1,32 @@
-.flex.flex-col.items-center.justify-center.h-screen.select-none.mt-10
-  .flex.flex-col.-mt-32.bg-brown-50.px-4.sm:px-6.md:px-8.lg:px-10.py-8.rounded-xl.shadow-2xl.w-full.max-w-md.border-l-4.border-brown-600
-    .text-xl.top-sub-title.text-center
-      | ユーザ登録
-    .mt-10
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        = render "users/shared/error_messages", resource: resource
-        .relative.w-full.mb-3
-          = f.label :name, class: 'form-label-text-block'
-          = f.text_field :name, autofocus: true, autocomplete: "name", class: "input-form-basic-block"
-        .relative.w-full.mb-3
-          = f.label :email, class: 'form-label-text-block'
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-form-basic-block"
-        .relative.w-full.mb-3
-          = f.label :password, class: 'form-label-text-block'
-          - if @minimum_password_length
-            em
-              | (
-              = @minimum_password_length
-              |  文字以上で入力してね)
-          = f.password_field :password, autocomplete: "new-password", class: "input-form-basic-block"
-        .relative.w-full.mb-3
-          = f.label :password_confirmation, class: 'form-label-text-block'
-          = f.password_field :password_confirmation, autocomplete: "new-password", class: "input-form-basic-block"
-        .relative.w-full.mb-3
-          = f.label :image, class: 'form-label-text-block'
-          = f.file_field :image, autofocus: true, autocomplete: "image", class: "input-form-basic-block"
-        .text-center.mt-6
-          .actions
-            = f.submit "登録完了！", class: "p-3 rounded-lg bg-brown-600 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500"
-          div
-            = render  "shared/signup_links"
+  .flex.flex-col.items-center.justify-center.h-screen.select-none.mt-10
+    .flex.flex-col.-mt-32.bg-brown-50.px-4.sm:px-6.md:px-8.lg:px-10.py-8.rounded-xl.shadow-2xl.w-full.max-w-md.border-l-4.border-brown-600
+      .text-xl.top-sub-title.text-center
+        | ユーザ登録
+      .mt-10
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = render "users/shared/error_messages", resource: resource
+          .relative.w-full.mb-3
+            = f.label :name, class: 'form-label-text-block'
+            = f.text_field :name, autofocus: true, autocomplete: "name", class: "input-form-basic-block"
+          .relative.w-full.mb-3
+            = f.label :email, class: 'form-label-text-block'
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-form-basic-block"
+          .relative.w-full.mb-3
+            = f.label :password, class: 'form-label-text-block'
+            - if @minimum_password_length
+              em
+                | (
+                = @minimum_password_length
+                |  文字以上で入力してね)
+            = f.password_field :password, class: "input-form-basic-block"
+          .relative.w-full.mb-3
+            = f.label :password_confirmation, class: 'form-label-text-block'
+            = f.password_field :password_confirmation, class: "input-form-basic-block"
+          .relative.w-full.mb-3
+            = f.label :image, class: 'form-label-text-block'
+            = f.file_field :image, autofocus: true, autocomplete: "image", class: "input-form-basic-block"
+          .text-center.mt-6
+            .actions
+              = f.submit "登録完了！", class: "p-3 rounded-lg bg-brown-500 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500"
+            div
+              = render  "shared/signup_links"

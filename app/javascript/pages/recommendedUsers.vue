@@ -1,80 +1,117 @@
 <template>
-  <div class="top">
-    <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
-      <div class="text-center text-5xl text-white py-5 top-sub-title">
-        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-        あなたによく共感する社員TOP3
-        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-      </div>
-      <v-row class="py-5" justify="center" style="height: 30rem;">
-        <v-col align-self="center" cols="12" sm="3">
-          <v-card
-            class="second-place"
-            outlined
-            contain
-            v-if="secondPlaceUserExist"
+  <div class="bg" v-if="firstPlaceUserExist">
+    <v-row justify="center" align-content="center" class="p-10">
+      <v-col cols="12" sm="2">
+        <img src="../images/prof_normal.png" class="image" />
+      </v-col>
+      <v-col cols="12" sm="7">
+        <div class="text-center text-6xl balloon4">
+          あなたにおすすめの社員さん
+        </div>
+      </v-col>
+    </v-row>
+    <v-row
+      justify="center"
+      align-content="center"
+      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+    >
+      <v-col cols="12" sm="3">
+        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+        <v-btn
+          color="brown lighten-1"
+          class="white--text"
+          small
+          tile
+          @click="moveToUserProfilePage(firstPlaceUser.profile)"
+        >
+          社員ブロフィールを見る
+        </v-btn>
+      </v-col>
+      <v-row class="p-10">
+        <v-col cols="12" sm="12" align="center">
+          <div
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
           >
-            <v-img
-              :src="secondPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
-          <PlaceDoesNotExistCard place-number="2" v-else />
+            あなたと盛り上がりそうな話題
+          </div>
         </v-col>
-        <v-col align-self="center" align="center" cols="12" sm="4">
-          <v-card class="first-place" outlined contain>
-            <v-img
-              :src="firstPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
-        </v-col>
-        <v-col align-self="center" align="center" cols="12" sm="4">
-          <v-card
-            class="third-place"
-            outlined
-            contain
-            v-if="thirdPlaceUserExist"
-          >
-            <v-img
-              :src="thirdPlaceUser.image.url"
-              max-height="150"
-              max-width="250"
-            ></v-img>
-          </v-card>
-          <PlaceDoesNotExistCard v-else place-number="3" />
-        </v-col>
-      </v-row>
-    </div>
-
-    <div v-if="firstPlaceUserExist">
-      <div class="top-sub-title m-5">1番共感してくれる社員</div>
-      <v-row>
         <v-col
-          v-for="block in firstPlaceUserLikesBlocks"
+          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
           :key="block.id"
           cols="12"
           sm="4"
+          align="center"
         >
-          <div class="border-2 border-gray-500"></div>
-          <v-card
-            class="rounded-2xl p-5 note-box"
-            outlined
-            color="red lighten-4"
-          >
-            <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white p-2">
               {{ block.title }}
             </p>
           </v-card>
         </v-col>
       </v-row>
-    </div>
-    <NotAnyBookmarkBlock
-      v-else
-      prof-message="共感されているブロックはまだないよ"
-    />
+    </v-row>
+    <v-row
+      justify="center"
+      align-content="center"
+      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+    >
+      <v-col cols="12" sm="3">
+        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+      </v-col>
+      <v-row class="p-10">
+        <v-col cols="12" sm="12" align="center">
+          <div
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+          >
+            あなたと盛り上がりそうな話題
+          </div>
+        </v-col>
+        <v-col
+          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          :key="block.id"
+          cols="12"
+          sm="4"
+          align="center"
+        >
+          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white p-2">
+              {{ block.title }}
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-row>
+    <v-row
+      justify="center"
+      align-content="center"
+      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+    >
+      <v-col cols="12" sm="3">
+        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+      </v-col>
+      <v-row class="p-10">
+        <v-col cols="12" sm="12" align="center">
+          <div
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+          >
+            あなたと盛り上がりそうな話題
+          </div>
+        </v-col>
+        <v-col
+          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          :key="block.id"
+          cols="12"
+          sm="4"
+          align="center"
+        >
+          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white p-2">
+              {{ block.title }}
+            </p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-row>
   </div>
 </template>
 
@@ -83,11 +120,13 @@ import axios from "axios";
 import { mapState } from "vuex";
 import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
+import ProfCard from "../components/ProfCard";
 
 export default {
   components: {
     NotAnyBookmarkBlock,
     PlaceDoesNotExistCard,
+    ProfCard,
   },
   data() {
     return {
@@ -291,13 +330,17 @@ export default {
         .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[2].user_id}`)
         .then((res) => (this.thirdPlaceUser = res.data));
     },
+    moveToUserProfilePage(profile) {
+      this.$router.push(`/profiles/${profile.public_uid}`);
+    },
   },
 };
 </script>
 
 <style scoped>
-.top {
+.bg {
   color: rgb(77, 77, 77);
+  background: #d7ccc8;
 }
 
 .top-bg {
@@ -308,5 +351,39 @@ export default {
 .top-three-recommended-users-space {
   background-color: #b39e9e;
   padding: 2rem;
+}
+
+.image {
+  max-width: 20rem;
+}
+
+.balloon4 {
+  position: relative;
+  margin: 2em 4em 2em 40px;
+  padding: 5px;
+  background: #fffaf0;
+  border-radius: 30px;
+}
+
+.balloon4:before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  width: 13px;
+  height: 12px;
+  bottom: 0;
+  background: #fffaf0;
+  border-radius: 50%;
+}
+
+.balloon4:after {
+  content: "";
+  position: absolute;
+  left: -24px;
+  width: 20px;
+  height: 18px;
+  bottom: 3px;
+  background: #fffaf0;
+  border-radius: 50%;
 }
 </style>
