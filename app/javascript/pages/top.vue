@@ -46,6 +46,9 @@ export default {
   mounted() {
     this.firstRead();
   },
+  created() {
+    document.title = `プロフちゃん`;
+  },
   methods: {
     ...mapActions({
       fetchCurrentUser: "users/fetchCurrentUser",

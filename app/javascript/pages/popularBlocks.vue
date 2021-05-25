@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="12" sm="12">
             <div class="text-center text-5xl">
-              - - - - 社内人気のあるブロック- - - -
+              - - - - 社内で人気のブロック- - - -
             </div>
           </v-col>
         </v-row>
@@ -47,7 +47,7 @@
     <!-- /Favorite ブロック -->
 
     <!-- クエスチョンブロック -->
-    <div class="py-10 px-20 bg-brown-300  mb-20">
+    <div class="py-10 px-20 bg-brown-300 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
@@ -115,7 +115,7 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 px-20 bg-brown-300  mb-20">
+    <div class="py-10 px-20 bg-brown-300 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
@@ -328,6 +328,9 @@ export default {
         .get("/api/v1/text_blocks/popular_blocks")
         .then((res) => (this.textPopularBlocks = res.data));
     },
+  },
+  created() {
+    document.title = `人気ブロック - プロフちゃん`;
   },
 };
 </script>
