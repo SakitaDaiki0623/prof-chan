@@ -1,275 +1,278 @@
 <template>
-  <div class="top">
-    <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
-      <div class="text-center text-5xl text-white py-5 top-sub-title">
-        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-        あなたがよくブックマークする社員TOP3
-        <v-icon color="white" x-large>mdi-crown-outline</v-icon>
-      </div>
-      <v-row class="py-5" justify="center" style="height: 40rem;">
-        <v-col
-          align-self="center"
-          align="center"
-          cols="12"
-          sm="3"
-          class="border-2 border-white border-dotted"
-        >
-          <div v-if="secondPlaceUserExist">
-            <div class="place-text">
-              第2位
+  <div>
+    <Loading v-show="loading"></Loading>
+    <div class="top" v-show="!loading">
+      <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
+        <div class="text-center text-5xl text-white py-5 top-sub-title">
+          <v-icon color="white" x-large>mdi-crown-outline</v-icon>
+          あなたがよくブックマークする社員TOP3
+          <v-icon color="white" x-large>mdi-crown-outline</v-icon>
+        </div>
+        <v-row class="py-5" justify="center" style="height: 40rem;">
+          <v-col
+            align-self="center"
+            align="center"
+            cols="12"
+            sm="3"
+            class="border-2 border-white border-dotted"
+          >
+            <div v-if="secondPlaceUserExist">
+              <div class="place-text">
+                第2位
+              </div>
+              <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
             </div>
-            <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
-          </div>
 
-          <PlaceDoesNotExistCard place-number="2" v-else />
-        </v-col>
-        <v-col
-          align-self="start"
-          align="center"
-          cols="12"
-          sm="3"
-          class="border-2 border-white border-dotted"
-        >
-          <div class="place-text">
-            第1位
-          </div>
-          <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
-        </v-col>
-        <v-col
-          align-self="end"
-          align="center"
-          cols="12"
-          sm="3"
-          class="border-2 border-white border-dotted"
-        >
-          <div v-if="thirdPlaceUserExist">
+            <PlaceDoesNotExistCard place-number="2" v-else />
+          </v-col>
+          <v-col
+            align-self="start"
+            align="center"
+            cols="12"
+            sm="3"
+            class="border-2 border-white border-dotted"
+          >
             <div class="place-text">
-              第3位
+              第1位
             </div>
-            <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
-          </div>
-          <PlaceDoesNotExistCard v-else place-number="3" />
-        </v-col>
-      </v-row>
-    </div>
-    <div v-if="firstPlaceUserExist">
-      <div class="top-bg">
-        <v-row>
-          <v-col cols="12" sm="12">
-            <div class="text-center text-5xl">
-              - - - - ブックマーク一覧- - - -
+            <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+          </v-col>
+          <v-col
+            align-self="end"
+            align="center"
+            cols="12"
+            sm="3"
+            class="border-2 border-white border-dotted"
+          >
+            <div v-if="thirdPlaceUserExist">
+              <div class="place-text">
+                第3位
+              </div>
+              <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
             </div>
+            <PlaceDoesNotExistCard v-else place-number="3" />
           </v-col>
         </v-row>
       </div>
-
-      <div class="p-20">
-        <div
-          v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0"
-          class="mb-10"
-        >
-          <v-card color="brown lighten-2" class="p-10">
-            <div class="top-sub-title m-5">Favorite ブロック</div>
-            <div class="text-center">
-              <v-pagination
-                v-model="favoriteBlockPage"
-                :length="favoriteBlocklength"
-                circle
-                @input="favoriteBlockPageChange"
-                color="brown lighten-2"
-                class="mb-10"
-              ></v-pagination>
-            </div>
-            <v-row>
-              <v-col
-                v-for="favoriteBlock in displayFavoriteBlocks"
-                :key="favoriteBlock.id"
-                cols="12"
-                sm="3"
-                class="border-2 border-white border-dotted"
-              >
-                <div>
-                  <div class="bg-white inline-block">
-                    {{ favoriteBlock.owing_user.name }} さん
-                  </div>
-                  <v-img
-                    max-width="50px"
-                    :src="favoriteBlock.owing_user.image.url"
-                    class="inline"
-                  ></v-img>
-                </div>
-                <FavoriteBlockCard :favorite-block="favoriteBlock" />
-              </v-col>
-            </v-row>
-          </v-card>
+      <div v-if="firstPlaceUserExist">
+        <div class="top-bg">
+          <v-row>
+            <v-col cols="12" sm="12">
+              <div class="text-center text-5xl">
+                - - - - ブックマーク一覧- - - -
+              </div>
+            </v-col>
+          </v-row>
         </div>
 
-        <div
-          v-if="randomCurrentUserLikesQuestionBlocks.length !== 0"
-          class="mb-10"
-        >
-          <v-card color="brown lighten-2" class="p-10">
-            <div class="top-sub-title m-5">クエスチョンブロック</div>
-            <div class="text-center">
-              <v-pagination
-                v-model="questionBlockPage"
-                :length="questionBlocklength"
-                circle
-                @input="questionBlockPageChange"
-                color="red lighten-3"
-                class="mb-10"
-              ></v-pagination>
-            </div>
-            <v-row>
-              <v-col
-                v-for="questionBlock in displayQuestionBlocks"
-                :key="questionBlock.id"
-                cols="12"
-                sm="4"
-                class="border-2 border-white border-dotted"
-              >
-                <div>
-                  <div class="bg-white inline-block">
-                    {{ questionBlock.owing_user.name }} さん
+        <div class="p-20">
+          <div
+            v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0"
+            class="mb-10"
+          >
+            <v-card color="brown lighten-2" class="p-10">
+              <div class="top-sub-title m-5">Favorite ブロック</div>
+              <div class="text-center">
+                <v-pagination
+                  v-model="favoriteBlockPage"
+                  :length="favoriteBlocklength"
+                  circle
+                  @input="favoriteBlockPageChange"
+                  color="brown lighten-2"
+                  class="mb-10"
+                ></v-pagination>
+              </div>
+              <v-row>
+                <v-col
+                  v-for="favoriteBlock in displayFavoriteBlocks"
+                  :key="favoriteBlock.id"
+                  cols="12"
+                  sm="3"
+                  class="border-2 border-white border-dotted"
+                >
+                  <div>
+                    <div class="bg-white inline-block">
+                      {{ favoriteBlock.owing_user.name }} さん
+                    </div>
+                    <v-img
+                      max-width="50px"
+                      :src="favoriteBlock.owing_user.image.url"
+                      class="inline"
+                    ></v-img>
                   </div>
-                  <v-img
-                    max-width="50px"
-                    :src="questionBlock.owing_user.image.url"
-                    class="inline"
-                  ></v-img>
-                </div>
-                <QuestionBlockCard :question-block="questionBlock" />
-              </v-col>
-            </v-row>
-          </v-card>
-        </div>
+                  <FavoriteBlockCard :favorite-block="favoriteBlock" />
+                </v-col>
+              </v-row>
+            </v-card>
+          </div>
 
-        <div
-          v-if="randomCurrentUserLikesRankingBlocks.length !== 0"
-          class="mb-10"
-        >
-          <v-card color="brown lighten-2" class="p-10">
-            <div class="top-sub-title m-5">
-              ランキングブロック
-            </div>
-            <div class="text-center">
-              <v-pagination
-                v-model="rankingBlockPage"
-                :length="rankingBlocklength"
-                circle
-                @input="rankingBlockPageChange"
-                color="green lighten-3"
-                class="mb-10"
-              ></v-pagination>
-            </div>
-            <v-row>
-              <v-col
-                v-for="rankingBlock in displayRankingBlocks"
-                :key="rankingBlock.id"
-                cols="12"
-                sm="4"
-                class="border-2 border-white border-dotted"
-              >
-                <div>
-                  <div class="bg-white inline-block">
-                    {{ rankingBlock.owing_user.name }} さん
+          <div
+            v-if="randomCurrentUserLikesQuestionBlocks.length !== 0"
+            class="mb-10"
+          >
+            <v-card color="brown lighten-2" class="p-10">
+              <div class="top-sub-title m-5">クエスチョンブロック</div>
+              <div class="text-center">
+                <v-pagination
+                  v-model="questionBlockPage"
+                  :length="questionBlocklength"
+                  circle
+                  @input="questionBlockPageChange"
+                  color="red lighten-3"
+                  class="mb-10"
+                ></v-pagination>
+              </div>
+              <v-row>
+                <v-col
+                  v-for="questionBlock in displayQuestionBlocks"
+                  :key="questionBlock.id"
+                  cols="12"
+                  sm="4"
+                  class="border-2 border-white border-dotted"
+                >
+                  <div>
+                    <div class="bg-white inline-block">
+                      {{ questionBlock.owing_user.name }} さん
+                    </div>
+                    <v-img
+                      max-width="50px"
+                      :src="questionBlock.owing_user.image.url"
+                      class="inline"
+                    ></v-img>
                   </div>
-                  <v-img
-                    max-width="50px"
-                    :src="rankingBlock.owing_user.image.url"
-                    class="inline"
-                  ></v-img>
-                </div>
-                <RankingBlockCard :ranking-block="rankingBlock" />
-              </v-col>
-            </v-row>
-          </v-card>
-        </div>
+                  <QuestionBlockCard :question-block="questionBlock" />
+                </v-col>
+              </v-row>
+            </v-card>
+          </div>
 
-        <div
-          v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0"
-          class="mb-10"
-        >
-          <v-card color="brown lighten-2" class="p-10">
-            <div class="top-sub-title m-5">
-              Yes or No ブロック
-            </div>
-            <div class="text-center">
-              <v-pagination
-                v-model="yesOrNoBlockPage"
-                :length="yesOrNoBlocklength"
-                circle
-                @input="yesOrNoBlockPageChange"
-                color="orange lighten-3"
-                class="mb-10"
-              ></v-pagination>
-            </div>
-
-            <v-row>
-              <v-col
-                v-for="yesOrNoBlock in displayYesOrNoBlocks"
-                :key="yesOrNoBlock.id"
-                cols="12"
-                sm="4"
-                class="border-2 border-white border-dotted"
-              >
-                <div>
-                  <div class="bg-white inline-block">
-                    {{ yesOrNoBlock.owing_user.name }} さん
+          <div
+            v-if="randomCurrentUserLikesRankingBlocks.length !== 0"
+            class="mb-10"
+          >
+            <v-card color="brown lighten-2" class="p-10">
+              <div class="top-sub-title m-5">
+                ランキングブロック
+              </div>
+              <div class="text-center">
+                <v-pagination
+                  v-model="rankingBlockPage"
+                  :length="rankingBlocklength"
+                  circle
+                  @input="rankingBlockPageChange"
+                  color="green lighten-3"
+                  class="mb-10"
+                ></v-pagination>
+              </div>
+              <v-row>
+                <v-col
+                  v-for="rankingBlock in displayRankingBlocks"
+                  :key="rankingBlock.id"
+                  cols="12"
+                  sm="4"
+                  class="border-2 border-white border-dotted"
+                >
+                  <div>
+                    <div class="bg-white inline-block">
+                      {{ rankingBlock.owing_user.name }} さん
+                    </div>
+                    <v-img
+                      max-width="50px"
+                      :src="rankingBlock.owing_user.image.url"
+                      class="inline"
+                    ></v-img>
                   </div>
-                  <v-img
-                    max-width="50px"
-                    :src="yesOrNoBlock.owing_user.image.url"
-                    class="inline"
-                  ></v-img>
-                </div>
-                <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
-              </v-col>
-            </v-row>
-          </v-card>
-        </div>
+                  <RankingBlockCard :ranking-block="rankingBlock" />
+                </v-col>
+              </v-row>
+            </v-card>
+          </div>
 
-        <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
-          <v-card color="brown lighten-2" class="p-10">
-            <div class="top-sub-title my-10">
-              テキストブロック
-            </div>
-            <div class="text-center">
-              <v-pagination
-                v-model="textBlockPage"
-                :length="textBlocklength"
-                circle
-                @input="textBlockPageChange"
-                color="teal lighten-3"
-                class="mb-10"
-              ></v-pagination>
-            </div>
-            <transition-group tag="v-row" appear>
-              <v-col
-                v-for="textBlock in displayTextBlocks"
-                :key="textBlock.id"
-                cols="12"
-                sm="6"
-                class="border-2 border-white border-dotted"
-              >
-                <div>
-                  <div class="bg-white inline-block">
-                    {{ textBlock.owing_user.name }} さん
+          <div
+            v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0"
+            class="mb-10"
+          >
+            <v-card color="brown lighten-2" class="p-10">
+              <div class="top-sub-title m-5">
+                Yes or No ブロック
+              </div>
+              <div class="text-center">
+                <v-pagination
+                  v-model="yesOrNoBlockPage"
+                  :length="yesOrNoBlocklength"
+                  circle
+                  @input="yesOrNoBlockPageChange"
+                  color="orange lighten-3"
+                  class="mb-10"
+                ></v-pagination>
+              </div>
+
+              <v-row>
+                <v-col
+                  v-for="yesOrNoBlock in displayYesOrNoBlocks"
+                  :key="yesOrNoBlock.id"
+                  cols="12"
+                  sm="4"
+                  class="border-2 border-white border-dotted"
+                >
+                  <div>
+                    <div class="bg-white inline-block">
+                      {{ yesOrNoBlock.owing_user.name }} さん
+                    </div>
+                    <v-img
+                      max-width="50px"
+                      :src="yesOrNoBlock.owing_user.image.url"
+                      class="inline"
+                    ></v-img>
                   </div>
-                  <v-img
-                    max-width="50px"
-                    :src="textBlock.owing_user.image.url"
-                    class="inline"
-                  ></v-img>
-                </div>
-                <TextBlockCard :text-block="textBlock" />
-              </v-col>
-            </transition-group>
-          </v-card>
+                  <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
+                </v-col>
+              </v-row>
+            </v-card>
+          </div>
+
+          <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
+            <v-card color="brown lighten-2" class="p-10">
+              <div class="top-sub-title my-10">
+                テキストブロック
+              </div>
+              <div class="text-center">
+                <v-pagination
+                  v-model="textBlockPage"
+                  :length="textBlocklength"
+                  circle
+                  @input="textBlockPageChange"
+                  color="teal lighten-3"
+                  class="mb-10"
+                ></v-pagination>
+              </div>
+              <transition-group tag="v-row" appear>
+                <v-col
+                  v-for="textBlock in displayTextBlocks"
+                  :key="textBlock.id"
+                  cols="12"
+                  sm="6"
+                  class="border-2 border-white border-dotted"
+                >
+                  <div>
+                    <div class="bg-white inline-block">
+                      {{ textBlock.owing_user.name }} さん
+                    </div>
+                    <v-img
+                      max-width="50px"
+                      :src="textBlock.owing_user.image.url"
+                      class="inline"
+                    ></v-img>
+                  </div>
+                  <TextBlockCard :text-block="textBlock" />
+                </v-col>
+              </transition-group>
+            </v-card>
+          </div>
         </div>
       </div>
+      <NotAnyBookmarkBlock v-else />
     </div>
-    <NotAnyBookmarkBlock v-else />
   </div>
 </template>
 
@@ -283,6 +286,7 @@ import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
 import ProfCard from "../components/ProfCard";
+import Loading from "../components/shared/Loading";
 
 export default {
   components: {
@@ -294,9 +298,11 @@ export default {
     PlaceDoesNotExistCard,
     FavoriteBlockCard,
     ProfCard,
+    Loading,
   },
   data() {
     return {
+      loading: true,
       datas: [],
       randomCurrentUserLikesFavoriteBlocks: [],
       randomCurrentUserLikesQuestionBlocks: [],
@@ -399,6 +405,9 @@ export default {
     },
   },
   mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
     this.firstRead();
   },
   methods: {
