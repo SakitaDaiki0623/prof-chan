@@ -61,7 +61,7 @@ export default {
     };
   },
   mounted() {
-    document.title = `プロフ詳細 - プロフちゃん`;
+    document.title = `プロフ閲覧 - プロフちゃん`;
   },
   methods: {
     moveToProfilesPage() {
