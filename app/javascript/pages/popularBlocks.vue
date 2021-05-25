@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <div class="top-bg">
+    <div class="top-bg mb-20">
       <div>
         <v-row>
           <v-col cols="12" sm="12">
@@ -12,39 +12,68 @@
       </div>
     </div>
 
-    <div class="py-10 px-20">
-      <!-- Favorite ブロック -->
-      <div class="top-sub-title my-10">
-        Favorite ブロック
-      </div>
+    <!-- Favorite ブロック -->
+    <div class="py-10 px-20 bg-brown-400 mb-20">
       <v-row>
+        <v-col cols="12" sm="11">
+          <div
+            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+          >
+            Favorite ブロック
+          </div>
+        </v-col>
+        <v-col cols="12" sm="1">
+          <img src="../images/prof_normal.png" class="image" />
+        </v-col>
         <v-col
           v-for="favoriteBlock in favoritePopularBlocksTopThree"
           :key="favoriteBlock.id"
           cols="12"
           sm="4"
+          class="border-2 border-white border-dotted"
         >
-          <div>作成者: {{ favoriteBlock.owing_user.name }}</div>
+          <div class="bg-white p-1 inline-block">
+            {{ favoriteBlock.owing_user.name }}
+          </div>
+          <v-img
+            max-width="50px"
+            :src="favoriteBlock.owing_user.image.url"
+            class="inline"
+          ></v-img>
           <FavoriteBlockCard :favorite-block="favoriteBlock" />
         </v-col>
       </v-row>
     </div>
     <!-- /Favorite ブロック -->
 
-    <div class="py-10 px-20">
-      <!-- クエスチョンブロック -->
-      <div class="top-sub-title my-10">
-        クエスチョンブロック
-      </div>
-
+    <!-- クエスチョンブロック -->
+    <div class="py-10 px-20 bg-brown-300  mb-20">
       <v-row>
+        <v-col cols="12" sm="11">
+          <div
+            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+          >
+            クエスチョンブロック
+          </div>
+        </v-col>
+        <v-col cols="12" sm="1">
+          <img src="../images/prof_happy.png" class="image" />
+        </v-col>
         <v-col
           v-for="questionBlock in questionPopularBlocksTopThree"
           :key="questionBlock.id"
           cols="12"
           sm="4"
+          class="border-2 border-white border-dotted"
         >
-          <div>作成者: {{ questionBlock.owing_user.name }}</div>
+          <div class="bg-white p-1 inline-block">
+            {{ questionBlock.owing_user.name }}
+          </div>
+          <v-img
+            max-width="50px"
+            :src="questionBlock.owing_user.image.url"
+            class="inline"
+          ></v-img>
           <QuestionBlockCard :question-block="questionBlock" />
         </v-col>
       </v-row>
@@ -52,18 +81,33 @@
     <!-- /クエスチョンブロック -->
 
     <!-- ランキングブロック -->
-    <div class="py-10 px-20" v-show="visible" :class="{ fadeIn: visible }">
-      <div class="top-sub-title my-10">
-        ランキングブロック
-      </div>
+    <div class="py-10 px-20 bg-brown-400 mb-20">
       <v-row>
+        <v-col cols="12" sm="11">
+          <div
+            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+          >
+            ランキングブロック
+          </div>
+        </v-col>
+        <v-col cols="12" sm="1">
+          <img src="../images/prof_open_normal.png" class="image" />
+        </v-col>
         <v-col
           v-for="rankingBlock in rankingPopularBlocksTopThree"
           :key="rankingBlock.id"
           cols="12"
           sm="4"
+          class="border-2 border-white border-dotted"
         >
-          <div>作成者: {{ rankingBlock.owing_user.name }}</div>
+          <div class="bg-white p-1 inline-block">
+            {{ rankingBlock.owing_user.name }}
+          </div>
+          <v-img
+            max-width="50px"
+            :src="rankingBlock.owing_user.image.url"
+            class="inline"
+          ></v-img>
           <RankingBlockCard :ranking-block="rankingBlock" />
         </v-col>
       </v-row>
@@ -71,18 +115,33 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 px-20">
-      <div class="top-sub-title my-10">
-        Yes or No ブロック
-      </div>
+    <div class="py-10 px-20 bg-brown-300  mb-20">
       <v-row>
+        <v-col cols="12" sm="11">
+          <div
+            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+          >
+            Yes or No ブロック
+          </div>
+        </v-col>
+        <v-col cols="12" sm="1">
+          <img src="../images/prof_open_happy.png" class="image" />
+        </v-col>
         <v-col
           v-for="yesOrNoBlock in yesOrNoPopularBlocksTopThree"
           :key="yesOrNoBlock.id"
           cols="12"
           sm="4"
+          class="border-2 border-white border-dotted"
         >
-          <div>作成者: {{ yesOrNoBlock.owing_user.name }}</div>
+          <div class="bg-white p-1 inline-block">
+            {{ yesOrNoBlock.owing_user.name }}
+          </div>
+          <v-img
+            max-width="50px"
+            :src="yesOrNoBlock.owing_user.image.url"
+            class="inline"
+          ></v-img>
           <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
         </v-col>
       </v-row>
@@ -90,21 +149,36 @@
     <!-- /Yes or No ブロック -->
 
     <!-- テキストブロック -->
-    <div class="py-10 px-20">
-      <div class="top-sub-title my-10">
-        テキストブロック
-      </div>
-      <transition-group tag="v-row" appear>
+    <div class="py-10 px-20 bg-brown-400 mb-20">
+      <v-row>
+        <v-col cols="12" sm="11">
+          <div
+            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+          >
+            テキストブロック
+          </div>
+        </v-col>
+        <v-col cols="12" sm="1">
+          <img src="../images/prof_normal.png" class="image" />
+        </v-col>
         <v-col
           v-for="textBlock in textPopularBlocksTopThree"
           :key="textBlock.id"
           cols="12"
           sm="4"
+          class="border-2 border-white border-dotted"
         >
-          <div>作成者: {{ textBlock.owing_user.name }}</div>
+          <div class="bg-white p-1 inline-block">
+            {{ textBlock.owing_user.name }}
+          </div>
+          <v-img
+            max-width="50px"
+            :src="textBlock.owing_user.image.url"
+            class="inline"
+          ></v-img>
           <TextBlockCard :text-block="textBlock" />
         </v-col>
-      </transition-group>
+      </v-row>
     </div>
     <!-- /テキストブロック -->
   </div>
@@ -266,5 +340,9 @@ export default {
 .top-bg {
   background-color: #efebe9;
   padding: 2rem;
+}
+
+.image {
+  max-width: 5rem;
 }
 </style>
