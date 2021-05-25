@@ -27,6 +27,17 @@
         />
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="length"
+        circle
+        @input="pageChange"
+        color="teal lighten-3"
+        class="mb-10"
+        v-show="isPageSizeBiggerThanMyTextBlocks"
+      ></v-pagination>
+    </div>
     <div>
       <transition-group
         tag="v-row"
@@ -34,7 +45,7 @@
         v-if="isMyTextBlocksLengthNotZero"
       >
         <v-col
-          v-for="textBlock in myTextBlocks"
+          v-for="textBlock in displayBlocks"
           :key="textBlock.id"
           cols="12"
           sm="6"
@@ -91,6 +102,12 @@ export default {
       // Text Block
       isShownTextFormatDialog: false,
       textBlockColor: "teal lighten-3", // text block color
+
+      // pagination
+      page: 1,
+      displayBlocks: [],
+      pageSize: 2,
+      length: 0,
     };
   },
   computed: {
@@ -112,6 +129,12 @@ export default {
         ) || {}
       );
     },
+    isPageSizeBiggerThanMyTextBlocks() {
+      return this.myTextBlocks.length > this.pageSize ? true : false;
+    },
+  },
+  mounted() {
+    this.pageFirstRead();
   },
   methods: {
     openTextFormatDialog() {
@@ -119,6 +142,16 @@ export default {
     },
     closeTextFormatDialog() {
       this.isShownTextFormatDialog = false;
+    },
+    pageChange(pageNumber) {
+      this.displayBlocks = this.myTextBlocks.slice(
+        this.pageSize * (pageNumber - 1),
+        this.pageSize * pageNumber
+      );
+    },
+    pageFirstRead() {
+      this.length = Math.ceil(this.myTextBlocks.length / this.pageSize);
+      this.displayBlocks = this.myTextBlocks.slice(0, this.pageSize);
     },
   },
 };
@@ -141,6 +174,4 @@ export default {
   left: 0px;
   width: 100%;
 }
-
-
 </style>

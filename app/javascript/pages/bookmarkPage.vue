@@ -14,7 +14,7 @@
             align="center"
             cols="12"
             sm="3"
-            class="border-2 border-white border-dotted"
+            class="border-2 border-white border-dotted m-5"
           >
             <div v-if="secondPlaceUserExist">
               <div class="place-text">
@@ -30,7 +30,7 @@
             align="center"
             cols="12"
             sm="3"
-            class="border-2 border-white border-dotted"
+            class="border-2 border-white border-dotted m-5"
           >
             <div class="place-text">
               第1位
@@ -42,7 +42,7 @@
             align="center"
             cols="12"
             sm="3"
-            class="border-2 border-white border-dotted"
+            class="border-2 border-white border-dotted m-5"
           >
             <div v-if="thirdPlaceUserExist">
               <div class="place-text">
