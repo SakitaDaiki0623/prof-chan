@@ -5,9 +5,9 @@
         - if controller_name != 'registrations' && controller_name != 'passwords'
           = link_to  "パスワードをお忘れの方", new_user_password_url, class: 'bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white'
         - elsif controller_name != 'passwords'
-          = link_to "Log in", new_session_path(resource_name), class: 'bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white'
+          = link_to "ログイン", new_session_path(resource_name), class: 'bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white'
         -else
-          = link_to "Log in", new_session_path(resource_name)
+          = link_to "ログイン", new_session_path(resource_name), class: 'bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white'
   .w-1/2.text-right
       small
         = link_to "→トップページに戻る", root_path, class: "bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white"

@@ -35,12 +35,11 @@
           | 社内で「slack」をご利用の場合、slackと連携することで社内の人とのみプロフィールを共有することができます。
           br
           | 社員同士で自分のプロフィールを共有することで、直接会うことがなかなか生まれない雑談を補完します。
-      .col-start-8.col-span-3.p-10
-        = image_tag "https://platform.slack-edge.com/img/sign_in_with_slack.png", size: '600x600',  class: " pointer-events-none"
-        = image_tag  "prof_open_happy.png", class: 'w-52'
-      .col-start-1.col-span-12
         .text-md.p-5.text-white.border-b-2.border-white.border-dotted
           | ※通常ログイン版はアプリをご利用する全ての人にプロフィールを公開します。
+      .col-start-8.col-span-3.p-10
+        = image_tag "https://platform.slack-edge.com/img/sign_in_with_slack.png",  class: " pointer-events-none max-w-xl"
+        = image_tag  "prof_open_happy.png", class: 'max-w-xs'
 
 
     // ステップ説明
@@ -55,7 +54,7 @@
               | 01
             .text-4xl.text-brown-300.font-bold.py-2
               | 書き込む
-            = image_tag  "undraw_Notebook_re_id0r.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center'
+            = image_tag  "undraw_Notebook_re_id0r.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center mx-auto'
             .text-xl.text-brown-300.p-2
               | あなたに関する様々な情報をプロフィールに書き込みましょう。
           .col-start-5.col-span-3.border-2.border-brown-100.bg-white.p-10
@@ -63,7 +62,7 @@
               | 02
             .text-4xl.text-brown-300.font-bold.py-2
               | 見る、保存する
-            = image_tag  "undraw_Taking_notes_re_bnaf.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center'
+            = image_tag  "undraw_Taking_notes_re_bnaf.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center mx-auto'
             .text-xl.text-brown-300.p-2
               | 他の社員さんのプロフィールを見てみましょう。気に入ったものはブックマークで保存できます。
           .col-start-8.col-span-3.border-2.border-brown-100.bg-white.p-10
@@ -71,7 +70,7 @@
               | 03
             .text-4xl.text-brown-300.font-bold.py-2
               | 話す
-            = image_tag  "undraw_video_call_kxyp.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center'
+            = image_tag  "undraw_video_call_kxyp.svg", class: 'border-2 border-dotted border-brown-500 h-52 w-52 m-5 text-center mx-auto'
             .text-xl.text-brown-300.p-2
               | あなたが知ったこと、共通の話題を社員さんと話してみましょう。
     .my-96
