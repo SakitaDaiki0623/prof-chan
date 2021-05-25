@@ -23,7 +23,7 @@ import TopImage from "../components/static/TopImage";
 import TopImageForEmail from "../components/static/TopImageForEmail";
 import RecentlyJoined from "../components/RecentlyJoined";
 import Birthday from "../components/Birthday";
-import RecommendedUsers from "./RecommendedUsers";
+import RecommendedUsers from "./recommendedUsers";
 
 export default {
   components: {
