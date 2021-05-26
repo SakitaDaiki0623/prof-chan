@@ -19,6 +19,7 @@ module SlackLoginHelper
     fill_in 'profile_day_of_joinning',	with: profile.day_of_joinning
     sleep 0.5
     click_on '入力完了！'
+    click_on 'トップページに行く'
   end
 
   def slack_login_till_access_top_path

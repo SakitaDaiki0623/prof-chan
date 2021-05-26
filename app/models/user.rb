@@ -52,7 +52,7 @@ class User < ApplicationRecord
   validates :name,                      presence: true
   validates :image,                     presence: true
   validates :encrypted_password,        presence: true
-  validates_acceptance_of :agreement, allow_nil: false, on: :create
+  # validates_acceptance_of :agreement, allow_nil: false, on: :create
 
   # after_create Seedを入れるときコメントアウト
   after_create :create_profile_block

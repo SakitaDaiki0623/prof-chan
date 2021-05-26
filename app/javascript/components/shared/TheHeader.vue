@@ -49,7 +49,7 @@
       </v-menu>
 
       <v-btn
-        id="profile-edit-button"
+        id="about-button"
         class="m-2 white--text"
         color="brown lighten-2"
         @click="openAboutPage"
