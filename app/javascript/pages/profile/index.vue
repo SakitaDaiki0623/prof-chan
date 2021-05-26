@@ -1,16 +1,15 @@
 <!-- app/javascript/pages/profile/index.vue -->
 <template>
   <div class="bg-backimage bg-cover bg-fixed text-gray-600">
-    <v-container class="note shadow-lg mb-20 mt-20">
-      <p class="top-sub-title text-4xl text-center mb-20 p-5">
-        社員プロフ一覧
-      </p>
-      <v-row class="mb-10">
+    <v-container class="bg-brown-600 shadow-lg mb-20 mt-20">
+      <p class="top-sub-title text-4xl text-center mb-20 p-5">社員プロフ一覧</p>
+      <v-row class="mb-10 p-10">
         <v-col
           v-for="profile in displayProfiles"
           :key="profile.public_uid"
           cols="12"
           sm="4"
+          class="border-white border-2 border-dotted"
         >
           <IndexProfCard :profile="profile" />
         </v-col>
@@ -49,11 +48,10 @@ export default {
     };
   },
   mounted() {
+    this.firstRead();
     document.title = "プロフ一覧 - プロフちゃん";
   },
-  created() {
-    this.firstRead();
-  },
+
   methods: {
     async firstRead() {
       await this.fetchProfiles();

@@ -58,11 +58,9 @@ export default {
       fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       fetchQuestionItems: "questionBlocks/fetchQuestionItems",
-      fetchUsers: "users/fetchUsers",
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      await this.fetchUsers();
       await this.fetchTextBlocks();
       await this.fetchRankingBlocks();
       await this.fetchYesOrNoBlocks();

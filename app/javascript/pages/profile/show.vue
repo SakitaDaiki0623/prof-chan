@@ -1,24 +1,37 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <v-container class="border-gray-500 rounded-xl border-2 m-20 note">
-    <BasicAndAddressBlock :user="user" />
+  <div>
+    <v-container>
+      <v-row justify="center" align-content="center">
+        <v-btn class="m-5 white--text" color="brown">＜</v-btn>
+        <v-btn class="m-5 white--text" color="brown" @click="moveToProfilesPage"
+          >プロフィール一覧に戻る</v-btn
+        >
+        <v-btn class="m-5 white--text" color="brown">＞</v-btn>
+      </v-row>
+    </v-container>
+    <v-container
+      class="border-gray-500 rounded-xl border-2 m-20 note"
+      v-if="shown"
+    >
+      <BasicAndAddressBlock :user="user" />
 
-    <FavoriteBlockList :user="user" />
+      <FavoriteBlockList :user="user" />
 
-    <QuestionBlockList :user="user" />
+      <QuestionBlockList :user="user" />
 
-    <RankingBlockList :user="user" />
+      <RankingBlockList :user="user" />
 
-    <YesOrNoBlockList :user="user" />
+      <YesOrNoBlockList :user="user" />
 
-    <TextBlockList :user="user" />
-  </v-container>
+      <TextBlockList :user="user" />
+    </v-container>
+  </div>
 </template>
 
 <script>
 // plugins
 import axios from "axios";
-import { mapState } from "vuex";
 
 // Component ----------
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
@@ -46,24 +59,36 @@ export default {
       default: "",
     },
   },
-  computed: {
-    ...mapState("users", ["users"]),
-
-    user() {
-      return this.users.find(
-        (user) => this.$route.params.id == user.profile.public_uid
-      );
-    },
-  },
   data() {
     return {
-      profiles: [],
+      profile: {},
+      user: {},
+      shown: false,
     };
   },
   mounted() {
+    this.firstRead();
+  },
+  created() {
     document.title = `プロフ閲覧 - プロフちゃん`;
   },
   methods: {
+    async firstRead() {
+      await this.fetchProfile();
+      await this.fetchUser();
+      // これをしないと先に値を渡す前に子コンポーネントが読まれてしまう
+      this.shown = true;
+    },
+    async fetchProfile() {
+      await axios
+        .get(`/api/v1/profiles/${this.id}`)
+        .then((res) => (this.profile = res.data));
+    },
+    async fetchUser() {
+      await axios
+        .get(`/api/v1/users/${this.profile.user.id}`)
+        .then((res) => (this.user = res.data));
+    },
     moveToProfilesPage() {
       this.$router.push("/profiles");
     },
@@ -71,7 +96,9 @@ export default {
   beforeRouteEnter(to, from, next) {
     axios
       .get(`/api/v1/profiles/${to.params.id}`)
-      .then((res) => next())
+      .then((res) => {
+        next();
+      })
       .catch((err) => {
         next("/profiles");
       });
