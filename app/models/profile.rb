@@ -36,7 +36,7 @@ class Profile < ApplicationRecord
   # scope ==========
   scope :by_team, ->(user) { includes(user: :team).where(teams: { workspace_id: User.find(user.id).team.workspace_id }) }
   scope :recently_joined, -> { order(day_of_joinning: :desc).limit(3) }
-  scope :filter_by_birth_month, -> (month) { where('extract(month from birthday) = ?', month).order("extract(day from birthday) ASC") }
+  scope :filter_by_birth_month, -> (month) { where('extract(month from birthday) = ?', month).order(Arel.sql("extract(day from birthday) ASC"))}
 
   # custom validation =============
   def birthday_cannot_be_in_the_future
