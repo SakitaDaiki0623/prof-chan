@@ -140,7 +140,7 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 // components ----------
 
@@ -180,7 +180,6 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    ...mapActions("rankingBlocks", ["createRankingBlock"]),
 
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
@@ -195,6 +194,11 @@ export default {
         message: "ランキングブロックを作成したよ！",
         color: this.rankingBlockColor,
       });
+    },
+    createRankingBlock(rankingBlock) {
+      axios
+        .post("/api/v1/ranking_blocks", rankingBlock)
+        .then((res) => this.$emit("add-ranking-block", res.data));
     },
     async postToSlackAfterCreate(rankingBlock) {
       const res = await axios.post(

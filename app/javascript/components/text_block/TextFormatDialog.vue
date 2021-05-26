@@ -112,10 +112,7 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    ...mapActions("textBlocks", ["createTextBlock"]),
-
     hundleCreateTextBlock(textBlock) {
-      if (textBlock.title == "" || textBlock.text == "") return;
       this.createTextBlock(textBlock);
       if (this.currentUser.provider == "slack") {
         if (confirm("slackに通知しますか?")) {
@@ -128,6 +125,11 @@ export default {
         message: "テキストブロックを作成したよ！",
         color: this.textBlockColor,
       });
+    },
+    createTextBlock(textBlock) {
+      axios
+        .post("/api/v1/text_blocks", textBlock)
+        .then((res) => this.$emit("add-text-block", res.data));
     },
     async postToSlackAfterCreate(textBlock) {
       const res = await axios.post(

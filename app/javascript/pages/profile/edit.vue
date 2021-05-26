@@ -1,20 +1,23 @@
 <!-- app/javascript/pages/profile/edit.vue -->
 <template>
-  <v-container
-    class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color note"
-  >
-    <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
+  <div>
+    <v-container
+      class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color note"
+      v-if="shown"
+    >
+      <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <FavoriteBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <FavoriteBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
 
-    <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
-  </v-container>
+      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -48,22 +51,46 @@ export default {
     },
   },
   computed: {
-    ...mapState("users", ["users"]),
-
     isThisEditPage() {
       return this.$route.path ==
         `/profiles/${this.user.profile.public_uid}/edit`
         ? true
         : false;
     },
-    user() {
-      return this.users.find(
-        (user) => this.$route.params.id == user.profile.public_uid
-      );
-    },
+  },
+  data() {
+    return {
+      profile: {},
+      user: {},
+      shown: false,
+    };
   },
   created() {
     document.title = `プロフ編集 - プロフちゃん`;
+  },
+  mounted() {
+    this.firstRead();
+  },
+  methods: {
+    async firstRead() {
+      await this.fetchProfile();
+      await this.fetchUser();
+      // これをしないと先に値を渡す前に子コンポーネントが読まれてしまう
+      this.shown = true;
+    },
+    async fetchProfile() {
+      await axios
+        .get(`/api/v1/profiles/${this.id}`)
+        .then((res) => (this.profile = res.data));
+    },
+    async fetchUser() {
+      await axios
+        .get(`/api/v1/users/${this.profile.user.id}`)
+        .then((res) => (this.user = res.data));
+    },
+    moveToProfilesPage() {
+      this.$router.push("/profiles");
+    },
   },
 };
 </script>
@@ -111,6 +138,5 @@ export default {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   overflow: hidden;
-
 }
 </style>

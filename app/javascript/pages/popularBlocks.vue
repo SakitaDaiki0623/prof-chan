@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="12" sm="12">
             <div class="text-center text-5xl">
-              - - - - 社内人気のあるブロック- - - -
+              - - - - 社内で人気のブロック- - - -
             </div>
           </v-col>
         </v-row>
@@ -16,9 +16,7 @@
     <div class="py-10 px-20 bg-brown-400 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
-          <div
-            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
-          >
+          <div class="text-center text-4xl text-white p-5 mb-20 border-class font-bold">
             Favorite ブロック
           </div>
         </v-col>
@@ -30,7 +28,7 @@
           :key="favoriteBlock.id"
           cols="12"
           sm="4"
-          class="border-2 border-white border-dotted"
+          class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
             {{ favoriteBlock.owing_user.name }}
@@ -47,11 +45,11 @@
     <!-- /Favorite ブロック -->
 
     <!-- クエスチョンブロック -->
-    <div class="py-10 px-20 bg-brown-300  mb-20">
+    <div class="py-10 px-20 bg-brown-300 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
           >
             クエスチョンブロック
           </div>
@@ -64,7 +62,7 @@
           :key="questionBlock.id"
           cols="12"
           sm="4"
-          class="border-2 border-white border-dotted"
+          class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
             {{ questionBlock.owing_user.name }}
@@ -85,7 +83,7 @@
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
           >
             ランキングブロック
           </div>
@@ -98,7 +96,7 @@
           :key="rankingBlock.id"
           cols="12"
           sm="4"
-          class="border-2 border-white border-dotted"
+          class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
             {{ rankingBlock.owing_user.name }}
@@ -115,11 +113,11 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 px-20 bg-brown-300  mb-20">
+    <div class="py-10 px-20 bg-brown-300 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
           >
             Yes or No ブロック
           </div>
@@ -132,7 +130,7 @@
           :key="yesOrNoBlock.id"
           cols="12"
           sm="4"
-          class="border-2 border-white border-dotted"
+          class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
             {{ yesOrNoBlock.owing_user.name }}
@@ -153,7 +151,7 @@
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white border-2 p-5 border-white border-dashed mb-20"
+            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
           >
             テキストブロック
           </div>
@@ -166,7 +164,7 @@
           :key="textBlock.id"
           cols="12"
           sm="4"
-          class="border-2 border-white border-dotted"
+          class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
             {{ textBlock.owing_user.name }}
@@ -329,6 +327,9 @@ export default {
         .then((res) => (this.textPopularBlocks = res.data));
     },
   },
+  created() {
+    document.title = `人気ブロック - プロフちゃん`;
+  },
 };
 </script>
 
@@ -344,5 +345,9 @@ export default {
 
 .image {
   max-width: 5rem;
+}
+
+.border-class {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='10' stroke-dasharray='22%2c 22' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 </style>

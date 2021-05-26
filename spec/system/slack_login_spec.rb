@@ -28,8 +28,6 @@ RSpec.describe "SlackLogin", type: :system do
     it 'プロフィール新規作成画面にアクセスすること' do
       expect{ find("#sign_in_with_slack_button").click }.to change(User, :count).by(1), 'ユーザー数が1人増えていません'
       expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
-      expect(page).to have_selector("img[src$='-192.png']")
-      expect(page).to have_content("sample_name")
     end
   end
 

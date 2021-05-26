@@ -85,9 +85,6 @@ export default {
     };
   },
   methods: {
-    // ...mapActions({
-    //   deleteFavoriteBlock: "FavoriteBlocks/deleteFavoriteBlock",
-    // }),
     openEditFavoriteFormatDialog(favoriteBlock) {
       this.editFavoriteBlock = Object.assign({}, favoriteBlock);
       this.isShownEditFavoriteFormatDialog = true;

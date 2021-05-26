@@ -40,12 +40,14 @@ RSpec.describe 'TextBlock', type: :system do
 
       it '作成したブロックが詳細ページに反映されていること' do
         visit "/profiles/#{my_profile.public_uid}"
+        sleep 1
         expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
         expect(page).to have_content(factory_text_block.text),  'テキストブロックが作成されていません'
       end
 
       it '作成したブロックが他人の詳細ページに反映されていないこと' do
         visit "/profiles/#{others_profile.public_uid}"
+        sleep 1
         expect(page).not_to have_content(factory_text_block.title)
         expect(page).not_to have_content(factory_text_block.text)
       end
@@ -122,6 +124,7 @@ RSpec.describe 'TextBlock', type: :system do
 
       it '作成したブロックが詳細ページに反映されていること' do
         visit "/profiles/#{my_profile.public_uid}"
+        sleep 1
         expect(page).to have_content('編集されたタイトル'), 'タイトルが更新されていません'
         expect(page).to have_content('編集されたテキスト'), 'テキストが更新されていません'
       end
@@ -151,6 +154,7 @@ RSpec.describe 'TextBlock', type: :system do
 
       it '詳細ページから対象のテキストブロックが削除されること' do
         visit "/profiles/#{my_profile.public_uid}"
+        sleep 1
         expect(page).not_to have_content('削除されるテキストブロック'), '対象のテキストブロックが削除されていません'
       end
     end

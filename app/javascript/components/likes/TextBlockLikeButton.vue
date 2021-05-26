@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isLiked">
-      <v-btn icon color="teal lighten-3" @click="deleteLike()">
+      <v-btn icon color="cyan lighten-3" @click="deleteLike()">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
     </div>

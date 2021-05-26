@@ -130,7 +130,6 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapActions } from "vuex";
 
 // components ----------
 
@@ -153,7 +152,6 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("rankingBlocks", ["patchRankingBlock"]),
     hundleEditRankingBlock(editRankingBlock) {
       this.patchRankingBlock(editRankingBlock);
       this.hundleCloseEditRankingFormatDialog();
@@ -162,6 +160,14 @@ export default {
         message: "ランキングブロックを更新したよ！",
         color: this.rankingBlockColor,
       });
+    },
+    patchRankingBlock(editRankingBlock) {
+      axios
+        .patch(
+          `/api/v1/ranking_blocks/${editRankingBlock.id}`,
+          editRankingBlock
+        )
+        .then((res) => this.$emit("update-ranking-block", res.data));
     },
 
     hundleCloseEditRankingFormatDialog() {

@@ -1,21 +1,19 @@
 <template>
   <div class="text-gray-600 p-10">
-    <v-row justify="center" class="px-40">
-      <v-col cols="12" sm="4" align-self="center">
-        <div class="text-3xl font-bold mb-10 balloon1 text-center">
-          基本情報を入力してね♬
+    <v-row align-content="center" class="px-72">
+      <v-col cols="12" sm="3" align-self="end">
+        <div class="text-2xl font-bold bg-brown-100 p-5 border-2 border-dotted border-brown-400 rounded-full text-center">
+          基本情報を入力してね！
         </div>
-        <img src="../../images/prof_normal.png" class="image" />
+        <img src="../../images/prof_normal.png" class="shadow-outline" />
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col cols="12" sm="8">
         <!-- Basic Info Card -->
         <v-card class="rounded-2xl" color="brown lighten-4" outlined>
-          <div class="md:w-full p-8 lg:ml-4">
+          <div class="p-10">
             <!-- FORM -->
             <div id="profile-basic-form" class="p-6">
-              <div class="top-sub-title text-2xl text-center">
-                基本情報
-              </div>
+              <div class="top-sub-title text-2xl text-center">基本情報</div>
               <ValidationObserver ref="observer" v-slot="{ invalid }">
                 <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
                   <div>
@@ -33,12 +31,8 @@
                         class="input-form-basic-block"
                         name="profile[gender]"
                       >
-                        <option value="male">
-                          男性
-                        </option>
-                        <option value="female">
-                          女性
-                        </option>
+                        <option value="male">男性</option>
+                        <option value="female">女性</option>
                       </select>
                       <span class="text-red-400">{{ errors[0] }}</span>
                     </ValidationProvider>
@@ -79,18 +73,10 @@
                         class="input-form-basic-block"
                         name="profile[blood_type]"
                       >
-                        <option value="A">
-                          A型
-                        </option>
-                        <option value="B">
-                          B型
-                        </option>
-                        <option value="AB">
-                          AB型
-                        </option>
-                        <option value="O">
-                          O型
-                        </option>
+                        <option value="A">A型</option>
+                        <option value="B">B型</option>
+                        <option value="AB">AB型</option>
+                        <option value="O">O型</option>
                       </select>
                       <span class="text-red-400">{{ errors[0] }}</span>
                     </ValidationProvider>
@@ -386,17 +372,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   overflow: hidden;
-}
-
-.balloon1 {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0;
-  padding: 10px 10px;
-  min-width: 170px;
-  color: #795548;
-  background: #e0edff;
-  border-radius: 15px;
 }
 
 .balloon1:before {

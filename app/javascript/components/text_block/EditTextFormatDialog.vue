@@ -109,7 +109,6 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("textBlocks", ["patchTextBlock"]),
     hundleEditTextBlock(editTextBlock) {
       this.patchTextBlock(editTextBlock);
       this.hundleCloseEditTextFormatDialog();
@@ -118,6 +117,11 @@ export default {
         message: "テキストブロックを更新したよ！",
         color: this.textBlockColor,
       });
+    },
+    patchTextBlock(editTextBlock) {
+      axios
+        .patch(`/api/v1/text_blocks/${editTextBlock.id}`, editTextBlock)
+        .then((res) => this.$emit("update-text-block", res.data));
     },
 
     hundleCloseEditTextFormatDialog() {
