@@ -14,7 +14,7 @@
             align="center"
             cols="12"
             sm="3"
-            class="border-2 border-white border-dotted m-5"
+            class="border-2 border-white border-dashed m-5"
           >
             <div v-if="secondPlaceUserExist">
               <div class="place-text">第2位</div>
@@ -28,7 +28,7 @@
             align="center"
             cols="12"
             sm="3"
-            class="border-2 border-white border-dotted m-5"
+            class="border-2 border-white border-dashed m-5"
           >
             <div class="place-text">第1位</div>
             <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
@@ -38,7 +38,7 @@
             align="center"
             cols="12"
             sm="3"
-            class="border-2 border-white border-dotted m-5"
+            class="border-2 border-white border-dashed m-5"
           >
             <div v-if="thirdPlaceUserExist">
               <div class="place-text">第3位</div>
@@ -65,7 +65,7 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5">Favorite ブロック</div>
+              <div class="top-sub-title m-5 text-center text-4xl">Favorite ブロック</div>
               <div class="text-center">
                 <v-pagination
                   v-model="favoriteBlockPage"
@@ -82,7 +82,7 @@
                   :key="favoriteBlock.id"
                   cols="12"
                   sm="3"
-                  class="border-2 border-white border-dotted"
+                  class="border-2 border-white border-dashed"
                 >
                   <div>
                     <div class="bg-white inline-block">
@@ -105,7 +105,7 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5">クエスチョンブロック</div>
+              <div class="top-sub-title m-5 text-center text-4xl">クエスチョンブロック</div>
               <div class="text-center">
                 <v-pagination
                   v-model="questionBlockPage"
@@ -122,7 +122,7 @@
                   :key="questionBlock.id"
                   cols="12"
                   sm="4"
-                  class="border-2 border-white border-dotted"
+                  class="border-2 border-white border-dashed"
                 >
                   <div>
                     <div class="bg-white inline-block">
@@ -145,7 +145,7 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5">ランキングブロック</div>
+              <div class="top-sub-title m-5 text-center text-4xl">ランキングブロック</div>
               <div class="text-center">
                 <v-pagination
                   v-model="rankingBlockPage"
@@ -162,7 +162,7 @@
                   :key="rankingBlock.id"
                   cols="12"
                   sm="4"
-                  class="border-2 border-white border-dotted"
+                  class="border-2 border-white border-dashed"
                 >
                   <div>
                     <div class="bg-white inline-block">
@@ -185,7 +185,7 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5">Yes or No ブロック</div>
+              <div class="top-sub-title m-5 text-center text-4xl">Yes or No ブロック</div>
               <div class="text-center">
                 <v-pagination
                   v-model="yesOrNoBlockPage"
@@ -203,7 +203,7 @@
                   :key="yesOrNoBlock.id"
                   cols="12"
                   sm="4"
-                  class="border-2 border-white border-dotted"
+                  class="border-2 border-white border-dashed"
                 >
                   <div>
                     <div class="bg-white inline-block">
@@ -223,14 +223,14 @@
 
           <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title my-10">テキストブロック</div>
+              <div class="top-sub-title my-10 text-center text-4xl">テキストブロック</div>
               <div class="text-center">
                 <v-pagination
                   v-model="textBlockPage"
                   :length="textBlocklength"
                   circle
                   @input="textBlockPageChange"
-                  color="teal lighten-3"
+                  color="cyan lighten-3"
                   class="mb-10"
                 ></v-pagination>
               </div>
@@ -240,7 +240,7 @@
                   :key="textBlock.id"
                   cols="12"
                   sm="6"
-                  class="border-2 border-white border-dotted"
+                  class="border-2 border-white border-dashed"
                 >
                   <div>
                     <div class="bg-white inline-block">

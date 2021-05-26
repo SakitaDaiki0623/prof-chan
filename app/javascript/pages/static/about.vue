@@ -11,10 +11,10 @@
         <div class="text-2xl border-b-8 border-white pb-2 inline-block">
           THEME
         </div>
-        <div class="text-4xl pt-10">
+        <div class="text-6xl pt-10">
           - - - - REMOTELY PROMOTE YOURSELF.- - - -
         </div>
-        <div class="text-6xl pt-10">コロナ以前の雑談の補完。</div>
+        <div class="text-4xl pt-10">コロナ以前の雑談の補完。</div>
       </v-col>
       <v-col cols="12" sm="12" class="mb-20">
         <div class="text-6xl">
@@ -278,13 +278,13 @@
                   <v-card
                     class="rounded-2xl p-5 note-box"
                     outlined
-                    color="teal accent-1"
+                    color="cyan accent-1"
                   >
                     <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
                       自己紹介
                     </p>
                     <v-card class="p-3 rounded-lg" outlined color="white">
-                      私はロボフスキーハムスターだよ
+                      私はロボロフスキーハムスターだよ
                     </v-card>
                   </v-card>
                   <div class="text-lg text-center">
@@ -314,7 +314,7 @@
           >
             <div class="text-4xl font-bold colorful-dot">CHARACTER PROFILE</div>
             <div class="border-2 border-dotted border-white p-5">
-              ロボフスキハムスターのキャラクター。<br />
+              ロボロフスキーハムスターのキャラクター。<br />
               自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。<br />
               プロフが充実しているほど機嫌が良くなる。<br />
               三度の飯より自己紹介が大好き。<br />
@@ -324,7 +324,10 @@
         </div>
       </v-col>
       <v-col cols="12" sm="5" align="left">
-        <div class="balloon1">このサイトを楽しむためにお手伝いします！</div>
+        <div class="balloon1">
+          プロフちゃんって呼んでください！<br>
+          このサイトを楽しむためにお手伝いします！
+        </div>
         <div>
           <img src="../../images/prof_normal.png" class="max-w-sm" />
         </div>

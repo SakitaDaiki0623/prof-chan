@@ -81,7 +81,7 @@
               elevation="4"
               x-large
               :disabled="invalid"
-              color="teal lighten-3"
+              color="cyan lighten-3"
               class="white--text"
             >
               アドレスブロックを更新！

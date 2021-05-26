@@ -3,7 +3,7 @@
     <v-card
       class="rounded-2xl p-5 note-box"
       outlined
-      color="light-green lighten-5"
+      color="light-green lighten-4"
     >
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn

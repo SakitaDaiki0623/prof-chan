@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-card class="rounded-2xl p-5 note-box" outlined color="teal accent-1">
+    <v-card class="rounded-2xl p-5 note-box" outlined color="cyan lighten-4">
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + textBlock.id"
           tile
           small
-          color="teal lighten-4"
+          color="cyan lighten-4"
           @click="openEditTextFormatDialog(textBlock)"
         >
           <v-icon> mdi-pencil </v-icon>
@@ -15,7 +15,7 @@
           :id="'delete-text-block-button-' + textBlock.id"
           tile
           small
-          color="teal lighten-1"
+          color="cyan lighten-1"
           @click="hundleDeleteTextBlock(textBlock)"
         >
           <v-icon> mdi-delete </v-icon>
@@ -69,7 +69,7 @@ export default {
     textBlockColor: {
       type: String,
       requred: false,
-      default: "teal lighten-3",
+      default: "cyan lighten-3",
     },
   },
   data() {

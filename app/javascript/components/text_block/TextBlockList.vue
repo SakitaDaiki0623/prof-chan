@@ -123,7 +123,7 @@ export default {
     return {
       // Text Block
       isShownTextFormatDialog: false,
-      textBlockColor: "teal lighten-3", // text block color
+      textBlockColor: "cyan lighten-3", // text block color
       textBlocks: [],
 
       // pagination
