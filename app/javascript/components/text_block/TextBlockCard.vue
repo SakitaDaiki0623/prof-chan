@@ -39,15 +39,17 @@
       :text-block-color="textBlockColor"
       :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
+      @update-text-block="$listeners['update-text-block']"
     />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 import TextBlockLikeButton from "../likes/TextBlockLikeButton";
 import EditTextFormatDialog from "./EditTextFormatDialog";
 
-import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -77,9 +79,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      deleteTextBlock: "textBlocks/deleteTextBlock",
-    }),
     openEditTextFormatDialog(textBlock) {
       this.editTextBlock = Object.assign({}, textBlock);
       this.isShownEditTextFormatDialog = true;
@@ -95,6 +94,11 @@ export default {
         message: "テキストブロックを削除したよ！",
         color: this.textBlockColor,
       });
+    },
+    deleteTextBlock(textBlock) {
+      axios
+        .delete(`/api/v1/text_blocks/${textBlock.id}`, textBlock)
+        .then((res) => this.$emit("retrieve-text-block", res.data));
     },
   },
 };

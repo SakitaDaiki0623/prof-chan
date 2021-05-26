@@ -138,7 +138,6 @@ export default {
     };
   },
   methods: {
-    // ...mapActions("FavoriteBlocks", ["patchFavoriteBlock"]),
     hundleEditFavoriteBlock(editFavoriteBlock) {
       this.patchFavoriteBlock(editFavoriteBlock);
       this.hundleCloseEditFavoriteFormatDialog();

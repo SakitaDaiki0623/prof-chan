@@ -96,7 +96,6 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapState } from "vuex";
 
 import FavoriteFormatDialog from "./FavoriteFormatDialog";
 import FavoriteBlockCard from "./FavoriteBlockCard";
@@ -138,7 +137,6 @@ export default {
     this.firstRead();
   },
   computed: {
-    ...mapState("users", ["currentUser"]),
     isMyFavoriteBlocksLengthNotZeroAndisThisShowPage() {},
     isMyFavoriteBlocksLengthNotZero() {
       return this.myFavoriteBlocks.length !== 0 ? true : false;

@@ -9,7 +9,6 @@ import { flash } from "./modules/flash";
 import { isNotFound } from "./modules/isNotFound";
 
 // Blocks
-import { textBlocks } from "./modules/textBlocks";
 import { questionBlocks } from "./modules/questionBlocks";
 import { profileBlocks } from "./modules/profileBlocks";
 import { rankingBlocks } from "./modules/rankingBlocks";
@@ -26,7 +25,6 @@ export default new Vuex.Store({
 
     // Blocks
     profileBlocks,
-    textBlocks,
     questionBlocks,
     rankingBlocks,
     yesOrNoBlocks,
