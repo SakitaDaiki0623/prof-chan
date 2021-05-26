@@ -52,8 +52,6 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentUser: "users/fetchCurrentUser",
-      fetchTextBlocks: "textBlocks/fetchTextBlocks",
-      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
       fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
       fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
@@ -61,8 +59,6 @@ export default {
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      await this.fetchTextBlocks();
-      await this.fetchRankingBlocks();
       await this.fetchYesOrNoBlocks();
       await this.fetchYesOrNoItems();
       await this.fetchQuestionBlocks();

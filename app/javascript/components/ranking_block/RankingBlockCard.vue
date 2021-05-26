@@ -52,15 +52,16 @@
       :ranking-block-color="rankingBlockColor"
       :edit-ranking-block="editRankingBlock"
       @close-edit-ranking-format-dialog="closeEditRankingFormatDialog"
+      @update-ranking-block="$listeners['update-ranking-block']"
     />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 import EditRankingFormatDialog from "./EditRankingFormatDialog";
 import RankingBlockLikeButton from "../likes/RankingBlockLikeButton";
-
-import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -90,9 +91,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      deleteRankingBlock: "rankingBlocks/deleteRankingBlock",
-    }),
     openEditRankingFormatDialog(rankingBlock) {
       this.editRankingBlock = Object.assign({}, rankingBlock);
       this.isShownEditRankingFormatDialog = true;
@@ -108,6 +106,11 @@ export default {
         message: "ランキングブロックを削除したよ！",
         color: this.rankingBlockColor,
       });
+    },
+    deleteRankingBlock(rankingBlock) {
+      axios
+        .delete(`/api/v1/ranking_blocks/${rankingBlock.id}`, rankingBlock)
+        .then((res) => this.$emit("retrieve-ranking-block", res.data));
     },
   },
 };

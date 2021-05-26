@@ -10,8 +10,6 @@ import { isNotFound } from "./modules/isNotFound";
 
 // Blocks
 import { questionBlocks } from "./modules/questionBlocks";
-import { profileBlocks } from "./modules/profileBlocks";
-import { rankingBlocks } from "./modules/rankingBlocks";
 import { yesOrNoBlocks } from "./modules/yesOrNoBlocks";
 
 Vue.use(Vuex);
@@ -24,9 +22,7 @@ export default new Vuex.Store({
     isNotFound,
 
     // Blocks
-    profileBlocks,
     questionBlocks,
-    rankingBlocks,
     yesOrNoBlocks,
   },
   plugins: [
