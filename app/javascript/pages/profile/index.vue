@@ -8,7 +8,8 @@
           v-for="profile in displayProfiles"
           :key="profile.public_uid"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-white border-2 border-dotted"
         >
           <IndexProfCard :profile="profile" />
@@ -20,6 +21,8 @@
           :length="length"
           circle
           @input="pageChange"
+          @next="moveToTop"
+          @previous="moveToTop"
           color="brown lighten-1"
         ></v-pagination>
       </div>
@@ -63,11 +66,25 @@ export default {
         .get("/api/v1/profiles")
         .then((response) => (this.profiles = response.data));
     },
+
     pageChange(pageNumber) {
+      this.moveToTop();
       this.displayProfiles = this.profiles.slice(
         this.pageSize * (pageNumber - 1),
         this.pageSize * pageNumber
       );
+    },
+    moveToTop() {
+      const duration = 10; // 移動速度（1秒で終了）
+      const interval = 5; // 0.025秒ごとに移動
+      const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+      const timer = setInterval(() => {
+        window.scrollBy(0, step); // スクロール位置を移動
+
+        if (window.scrollY <= 0) {
+          clearInterval(timer);
+        }
+      }, interval);
     },
   },
 };
