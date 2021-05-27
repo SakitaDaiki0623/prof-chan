@@ -48,7 +48,7 @@
           v-for="textBlock in displayBlocks"
           :key="textBlock.id"
           cols="12"
-          sm="6"
+          md="6"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard
@@ -67,7 +67,7 @@
           v-for="textBlock in myTextBlocks"
           :key="textBlock.id"
           cols="12"
-          sm="6"
+          md="6"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard

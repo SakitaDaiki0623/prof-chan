@@ -54,7 +54,8 @@
           v-for="questionBlock in displayBlocks"
           :key="questionBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <QuestionBlockCard
@@ -75,7 +76,8 @@
           v-for="questionBlock in myQuestionBlocks"
           :key="questionBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <QuestionBlockCard
