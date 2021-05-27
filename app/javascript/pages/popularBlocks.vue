@@ -1,10 +1,10 @@
 <template>
   <div class="top">
-    <div class="top-bg mb-20">
+    <div class="top-bg mb-20" id="top">
       <div>
         <v-row>
           <v-col cols="12" sm="12">
-            <div class="text-center text-5xl">
+            <div class="text-center text-2xl md:text-4xl">
               - - - - 社内で人気のブロック- - - -
             </div>
           </v-col>
@@ -13,21 +13,23 @@
     </div>
 
     <!-- Favorite ブロック -->
-    <div class="py-10 px-20 bg-brown-400 mb-20">
+    <div class="py-10 sm:px-20 bg-brown-400 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
-          <div class="text-center text-4xl text-white p-5 mb-20 border-class font-bold">
+          <div
+            class="text-center text-4xl text-white p-5 border-class font-bold"
+          >
             Favorite ブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1">
-          <img src="../images/prof_normal.png" class="image" />
+        <v-col cols="12" sm="1" class="sm:mb-20">
+          <img src="../images/prof_normal.png" class="image mx-auto" />
         </v-col>
         <v-col
           v-for="favoriteBlock in favoritePopularBlocksTopThree"
           :key="favoriteBlock.id"
           cols="12"
-          sm="4"
+          md="4"
           class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
@@ -45,23 +47,24 @@
     <!-- /Favorite ブロック -->
 
     <!-- クエスチョンブロック -->
-    <div class="py-10 px-20 bg-brown-300 mb-20">
+    <div class="py-10 sm:px-20 bg-brown-300 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
+            class="text-center text-4xl text-white p-5 border-class font-bold"
           >
             クエスチョンブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1">
-          <img src="../images/prof_happy.png" class="image" />
+        <v-col cols="12" sm="1" class="sm:mb-20">
+          <img src="../images/prof_happy.png" class="image mx-auto" />
         </v-col>
         <v-col
           v-for="questionBlock in questionPopularBlocksTopThree"
           :key="questionBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
@@ -79,23 +82,24 @@
     <!-- /クエスチョンブロック -->
 
     <!-- ランキングブロック -->
-    <div class="py-10 px-20 bg-brown-400 mb-20">
+    <div class="py-10 sm:px-20 bg-brown-400 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
+            class="text-center text-4xl text-white p-5 border-class font-bold"
           >
             ランキングブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1">
-          <img src="../images/prof_open_normal.png" class="image" />
+        <v-col cols="12" sm="1" class="sm:mb-20">
+          <img src="../images/prof_open_normal.png" class="image mx-auto" />
         </v-col>
         <v-col
           v-for="rankingBlock in rankingPopularBlocksTopThree"
           :key="rankingBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
@@ -113,23 +117,24 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 px-20 bg-brown-300 mb-20">
+    <div class="py-10 sm:px-20 bg-brown-300 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
+            class="text-center text-4xl text-white p-5 border-class font-bold"
           >
             Yes or No ブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1">
-          <img src="../images/prof_open_happy.png" class="image" />
+        <v-col cols="12" sm="1" class="sm:mb-20">
+          <img src="../images/prof_open_happy.png" class="image mx-auto" />
         </v-col>
         <v-col
           v-for="yesOrNoBlock in yesOrNoPopularBlocksTopThree"
           :key="yesOrNoBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
@@ -147,23 +152,24 @@
     <!-- /Yes or No ブロック -->
 
     <!-- テキストブロック -->
-    <div class="py-10 px-20 bg-brown-400 mb-20">
+    <div class="py-10 sm:px-20 bg-brown-400 mb-20">
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 mb-20 border-class font-bold"
+            class="text-center text-4xl text-white p-5  border-class font-bold"
           >
             テキストブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1">
-          <img src="../images/prof_normal.png" class="image" />
+        <v-col cols="12" sm="1" class="sm:mb-20">
+          <img src="../images/prof_normal.png" class="image mx-auto" />
         </v-col>
         <v-col
           v-for="textBlock in textPopularBlocksTopThree"
           :key="textBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-2 border-white border-dashed"
         >
           <div class="bg-white p-1 inline-block">
@@ -179,6 +185,14 @@
       </v-row>
     </div>
     <!-- /テキストブロック -->
+    <div class="m-20">
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-btn v-scroll-to="toTop" color="brown" x-large fab class="white--text"
+          ><v-icon>mdi-arrow-up</v-icon></v-btn
+        >
+      </v-row>
+    </div>
   </div>
 </template>
 
@@ -207,6 +221,8 @@ export default {
       yesOrNoPopularBlocks: [],
       textPopularBlocks: [],
       visible: false,
+
+      toTop: "#top",
     };
   },
   computed: {
