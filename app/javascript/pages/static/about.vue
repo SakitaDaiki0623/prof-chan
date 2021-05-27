@@ -73,7 +73,7 @@
                   class="image"
                 />
                 <div class="text-xl text-brown-300 p-8">
-                  他の社員さんのプロフィールを見てみましょう。気に入ったものはブックマークで保存できます。
+                  社員さんのプロフィールを見てみましょう。気に入ったものはブックマークしましょう。
                 </div>
               </v-card>
             </v-col>
@@ -315,10 +315,10 @@
         <div class="p-10">
           <v-card
             color="brown lighten-3"
-            class="text-2xl white--text rounded-full p-5"
+            class="white--text rounded-full p-5"
           >
             <div class="text-4xl font-bold colorful-dot">CHARACTER PROFILE</div>
-            <div class="border-2 border-dotted border-white p-5">
+            <div class="md:text-2xl text-xl border-2 border-dotted border-white p-5">
               ロボロフスキーハムスターのキャラクター。<br />
               自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。<br />
               プロフが充実しているほど機嫌が良くなる。<br />
