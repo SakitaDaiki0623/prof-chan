@@ -48,7 +48,8 @@
           v-for="yesOrNoBlock in displayBlocks"
           :key="yesOrNoBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <YesOrNoBlockCard
@@ -67,7 +68,8 @@
           v-for="yesOrNoBlock in myYesOrNoBlocks"
           :key="yesOrNoBlock.id"
           cols="12"
-          sm="4"
+           md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <YesOrNoBlockCard

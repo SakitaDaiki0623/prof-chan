@@ -48,6 +48,7 @@
       </v-card>
     </v-card>
     <EditRankingFormatDialog
+      v-if="isThisEditPage"
       :is-shown-edit-ranking-format-dialog="isShownEditRankingFormatDialog"
       :ranking-block-color="rankingBlockColor"
       :edit-ranking-block="editRankingBlock"

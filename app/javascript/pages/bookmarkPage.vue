@@ -1,71 +1,125 @@
 <template>
-  <div>
+  <div id="top">
     <Loading v-show="loading"></Loading>
     <div class="top" v-show="!loading">
       <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
-        <div class="text-center text-5xl text-white py-5 top-sub-title">
-          <v-icon color="white" x-large>mdi-crown-outline</v-icon>
+        <div
+          class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10 text-center"
+        >
+          <v-icon color="white" large>mdi-crown-outline</v-icon>
           あなたがよくブックマークする社員TOP3
-          <v-icon color="white" x-large>mdi-crown-outline</v-icon>
+          <v-icon color="white" large>mdi-crown-outline</v-icon>
         </div>
-        <v-row class="py-5" justify="center" style="height: 40rem">
-          <v-col
-            align-self="center"
-            align="center"
-            cols="12"
-            sm="3"
-            class="border-2 border-white border-dashed m-5"
-          >
-            <div v-if="secondPlaceUserExist">
-              <div class="place-text">第2位</div>
-              <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
-            </div>
 
-            <PlaceDoesNotExistCard place-number="2" v-else />
-          </v-col>
-          <v-col
-            align-self="start"
-            align="center"
-            cols="12"
-            sm="3"
-            class="border-2 border-white border-dashed m-5"
-          >
-            <div class="place-text">第1位</div>
-            <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
-          </v-col>
-          <v-col
-            align-self="end"
-            align="center"
-            cols="12"
-            sm="3"
-            class="border-2 border-white border-dashed m-5"
-          >
-            <div v-if="thirdPlaceUserExist">
+        <!-- モバイル用 -->
+        <div v-if="isMdAndDown">
+          <v-row class="py-5" justify="center">
+            <v-col
+              align-self="start"
+              align="center"
+              cols="12"
+              lg="3"
+              class="border-2 border-white border-dashed m-5"
+            >
+              <div class="place-text">第1位</div>
+              <ProfCard
+                :user="firstPlaceUser"
+                :is-this-edit-page="false"
+              /> </v-col
+            ><v-col
+              align-self="center"
+              align="center"
+              cols="12"
+              lg="3"
+              class="border-2 border-white border-dashed m-5"
+            >
+              <div class="place-text">第2位</div>
+              <div v-if="secondPlaceUserExist">
+                <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
+              </div>
+
+              <PlaceDoesNotExistCard place-number="2" v-else />
+            </v-col>
+            <v-col
+              align-self="end"
+              align="center"
+              cols="12"
+              lg="3"
+              class="border-2 border-white border-dashed m-5"
+            >
               <div class="place-text">第3位</div>
-              <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
-            </div>
-            <PlaceDoesNotExistCard v-else place-number="3" />
-          </v-col>
-        </v-row>
+              <div v-if="thirdPlaceUserExist">
+                <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
+              </div>
+              <PlaceDoesNotExistCard v-else place-number="3" />
+            </v-col>
+          </v-row>
+        </div>
+
+        <!-- 画面サイズlg以上 -->
+        <div v-else>
+          <v-row class="py-5" justify="center" style="height: 40rem">
+            <v-col
+              align-self="center"
+              align="center"
+              cols="12"
+              sm="3"
+              class="border-2 border-white border-dashed m-5"
+            >
+              <div class="place-text">第2位</div>
+              <div v-if="secondPlaceUserExist">
+                <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
+              </div>
+
+              <PlaceDoesNotExistCard place-number="2" v-else />
+            </v-col>
+            <v-col
+              align-self="start"
+              align="center"
+              cols="12"
+              sm="3"
+              class="border-2 border-white border-dashed m-5"
+            >
+              <div class="place-text">第1位</div>
+              <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+            </v-col>
+            <v-col
+              align-self="end"
+              align="center"
+              cols="12"
+              sm="3"
+              class="border-2 border-white border-dashed m-5"
+            >
+              <div class="place-text">第3位</div>
+              <div v-if="thirdPlaceUserExist">
+                <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
+              </div>
+              <PlaceDoesNotExistCard v-else place-number="3" />
+            </v-col>
+          </v-row>
+        </div>
       </div>
+
       <div v-if="firstPlaceUserExist">
         <div class="top-bg">
           <v-row>
             <v-col cols="12" sm="12">
-              <div class="text-center text-5xl">
+              <div class="text-center text-2xl md:text-5xl">
                 - - - - ブックマーク一覧- - - -
               </div>
             </v-col>
           </v-row>
         </div>
 
-        <div class="p-20">
+        <div class="md:p-20">
           <div
             v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0"
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-4xl">Favorite ブロック</div>
+              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+                Favorite ブロック
+              </div>
               <div class="text-center">
                 <v-pagination
                   v-model="favoriteBlockPage"
@@ -81,7 +135,9 @@
                   v-for="favoriteBlock in displayFavoriteBlocks"
                   :key="favoriteBlock.id"
                   cols="12"
-                  sm="3"
+                  sm="6"
+                  md="4"
+                  lg="3"
                   class="border-2 border-white border-dashed"
                 >
                   <div>
@@ -105,7 +161,9 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-4xl">クエスチョンブロック</div>
+              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+                クエスチョンブロック
+              </div>
               <div class="text-center">
                 <v-pagination
                   v-model="questionBlockPage"
@@ -121,7 +179,8 @@
                   v-for="questionBlock in displayQuestionBlocks"
                   :key="questionBlock.id"
                   cols="12"
-                  sm="4"
+                  md="6"
+                  lg="4"
                   class="border-2 border-white border-dashed"
                 >
                   <div>
@@ -145,7 +204,9 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-4xl">ランキングブロック</div>
+              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+                ランキングブロック
+              </div>
               <div class="text-center">
                 <v-pagination
                   v-model="rankingBlockPage"
@@ -161,7 +222,8 @@
                   v-for="rankingBlock in displayRankingBlocks"
                   :key="rankingBlock.id"
                   cols="12"
-                  sm="4"
+                  md="6"
+                  lg="4"
                   class="border-2 border-white border-dashed"
                 >
                   <div>
@@ -185,7 +247,9 @@
             class="mb-10"
           >
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-4xl">Yes or No ブロック</div>
+              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+                Yes or No ブロック
+              </div>
               <div class="text-center">
                 <v-pagination
                   v-model="yesOrNoBlockPage"
@@ -202,7 +266,8 @@
                   v-for="yesOrNoBlock in displayYesOrNoBlocks"
                   :key="yesOrNoBlock.id"
                   cols="12"
-                  sm="4"
+                  md="6"
+                  lg="4"
                   class="border-2 border-white border-dashed"
                 >
                   <div>
@@ -223,7 +288,9 @@
 
           <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
             <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title my-10 text-center text-4xl">テキストブロック</div>
+              <div class="top-sub-title my-10 text-center text-2xl md:text-4xl">
+                テキストブロック
+              </div>
               <div class="text-center">
                 <v-pagination
                   v-model="textBlockPage"
@@ -239,7 +306,7 @@
                   v-for="textBlock in displayTextBlocks"
                   :key="textBlock.id"
                   cols="12"
-                  sm="6"
+                  lg="6"
                   class="border-2 border-white border-dashed"
                 >
                   <div>
@@ -260,6 +327,19 @@
         </div>
       </div>
       <NotAnyBookmarkBlock v-else />
+      <div class="m-20">
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-btn
+            v-scroll-to="toTop"
+            color="brown"
+            x-large
+            fab
+            class="white--text"
+            ><v-icon>mdi-arrow-up</v-icon></v-btn
+          >
+        </v-row>
+      </div>
     </div>
   </div>
 </template>
@@ -326,9 +406,15 @@ export default {
       displayTextBlocks: [],
       textBlockPageSize: 4,
       textBlocklength: 0,
+
+      toTop: "#top",
     };
   },
   computed: {
+    isMdAndDown() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
+
     firstPlaceUserExist() {
       return !!Object.keys(this.firstPlaceUser).length;
     },
@@ -350,14 +436,14 @@ export default {
       const dict = {};
 
       for (let key of allUserIds) {
-        dict[key] = allUserIds.filter(function (x) {
+        dict[key] = allUserIds.filter(function(x) {
           return x == key;
         }).length;
       }
 
       let arr = Object.keys(dict).map((e) => ({ user_id: e, value: dict[e] }));
 
-      arr.sort(function (a, b) {
+      arr.sort(function(a, b) {
         if (a.value < b.value) return 1;
         if (a.value > b.value) return -1;
         return 0;

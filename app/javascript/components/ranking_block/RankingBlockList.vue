@@ -47,7 +47,8 @@
           v-for="rankingBlock in displayBlocks"
           :key="rankingBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <RankingBlockCard
@@ -66,7 +67,8 @@
           v-for="rankingBlock in myRankingBlocks"
           :key="rankingBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <RankingBlockCard

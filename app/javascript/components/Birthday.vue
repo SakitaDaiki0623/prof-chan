@@ -1,15 +1,15 @@
 <template>
-  <v-row class="bg-brown-400" justify="center" align-content="center">
+  <v-row class="bg-brown-400 p-3" justify="center" align-content="center">
     <v-col cols="12" sm="12">
-      <div class="text-6xl top-sub-title mb-10">
-        <v-icon x-large color="white">mdi-cake-variant</v-icon>
+      <div class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10">
+        <v-icon large color="white">mdi-cake-variant</v-icon>
         今月誕生日の社員さん
-        <v-icon x-large color="white">mdi-cake-variant</v-icon>
+        <v-icon large color="white">mdi-cake-variant</v-icon>
       </div>
     </v-col>
     <v-col cols="12" sm="10">
       <div
-        class="text-6xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
+        class="text-2xl lg:text-6xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
       >
         HAPPY BIRTHDAY!!
       </div>
@@ -17,7 +17,9 @@
     <v-col
       v-for="birthdayUserProfile in birthdayUserProfiles"
       :key="birthdayUserProfile.public_uid"
-      cols="3"
+      cols="12"
+      sm="12"
+      md="3"
       class="border-dotted border-white border-2 m-5"
     >
       <v-card class="mx-auto" max-width="344" outlined color="brown lighten-5">

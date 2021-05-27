@@ -48,7 +48,9 @@
           v-for="favoriteBlock in displayBlocks"
           :key="favoriteBlock.id"
           cols="12"
-          sm="3"
+          sm="6"
+          md="4"
+          lg="3"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <FavoriteBlockCard
@@ -69,7 +71,9 @@
           v-for="favoriteBlock in myFavoriteBlocks"
           :key="favoriteBlock.id"
           cols="12"
-          sm="3"
+          sm="6"
+          md="4"
+          lg="3"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <FavoriteBlockCard
