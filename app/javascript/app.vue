@@ -41,7 +41,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$vuetify.breakpoint);
     setTimeout(() => {
       this.loading = false;
     }, 1000);
