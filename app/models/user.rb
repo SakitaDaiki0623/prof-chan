@@ -59,6 +59,8 @@ class User < ApplicationRecord
   # after_create Seedを入れるときコメントアウト
   after_create :create_profile_block
 
+  after_initialize :set_default_team_value
+
   def create_guest_profile
     profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 15, gender: "female", blood_type: "O", prefecture_id: 13 }
     profile = self.build_profile(profile_params)
@@ -71,6 +73,15 @@ class User < ApplicationRecord
       user.name = 'ゲストユーザー'
       user.remote_image_url = ENV['USER_IMAGE']
     end
+  end
+
+  def set_default_team_value
+    team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
+      team.name = 'normal login',
+      team.workspace_id = 'A123B123C123',
+      team.image = "https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png"
+    end
+    self.team = team
   end
 
   def self.from_omniauth(auth, user_info)

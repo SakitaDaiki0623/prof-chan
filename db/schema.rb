@@ -135,9 +135,9 @@ ActiveRecord::Schema.define(version: 2021_05_22_022730) do
   end
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "workspace_id", null: false
-    t.string "image", null: false
+    t.string "name", limit: 255, null: false
+    t.string "workspace_id", limit: 255, null: false
+    t.string "image", limit: 255, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["workspace_id"], name: "index_teams_on_workspace_id", unique: true
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2021_05_22_022730) do
     t.string "image", null: false
     t.string "email", null: false
     t.integer "role", default: 1, null: false
-    t.bigint "team_id", default: 1
+    t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email", "provider"], name: "index_users_on_email_and_provider", unique: true

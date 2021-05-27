@@ -32,7 +32,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string :image, null: false
       t.string :email, null: false
       t.integer :role, null: false, default: 1
-      t.references :team, foreign_key: true, default: "1"
+      t.references :team, foreign_key: true
 
       ## Tokens
       t.timestamps
