@@ -35,6 +35,7 @@
       </v-card>
     </v-card>
     <EditTextFormatDialog
+      v-if="isThisEditPage"
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
       :text-block-color="textBlockColor"
       :edit-text-block="editTextBlock"
@@ -49,7 +50,6 @@ import axios from "axios";
 
 import TextBlockLikeButton from "../likes/TextBlockLikeButton";
 import EditTextFormatDialog from "./EditTextFormatDialog";
-
 
 export default {
   components: {
