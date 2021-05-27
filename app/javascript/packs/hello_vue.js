@@ -15,6 +15,9 @@ import "vuetify/dist/vuetify.min.css"
 Vue.use(Vuetify)
 const vuetify = new Vuetify();
 
+const VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo)
+
 // veeValidate
 import veeValidate from "../plugins/vee-validate"
 Vue.mixin(veeValidate)

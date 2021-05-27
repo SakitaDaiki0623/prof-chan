@@ -43,6 +43,7 @@ RSpec.describe 'RankingBlock', type: :system do
 
       it '作成したブロックが詳細ページに反映されていること' do
         visit "/profiles/#{my_profile.public_uid}"
+        sleep 1
         expect(page).to have_content(factory_ranking_block.title),        'ランキングブロックが作成されていません'
         expect(page).to have_content(factory_ranking_block.first_place),  'ランキングブロックが作成されていません'
         expect(page).to have_content(factory_ranking_block.second_place), 'ランキングブロックが作成されていません'
@@ -51,6 +52,7 @@ RSpec.describe 'RankingBlock', type: :system do
 
       it '作成したブロックが他人の詳細ページに反映されていないこと' do
         visit "/profiles/#{others_profile.public_uid}"
+        sleep 1
         expect(page).not_to have_content(factory_ranking_block.title),        'ランキングブロックが作成されていません'
         expect(page).not_to have_content(factory_ranking_block.first_place),  'ランキングブロックが作成されていません'
         expect(page).not_to have_content(factory_ranking_block.second_place), 'ランキングブロックが作成されていません'
@@ -181,7 +183,7 @@ RSpec.describe 'RankingBlock', type: :system do
         fill_in 'ranking_block_third_place',  with: '編集されたランキング3位'
         click_on 'ランキングブロックを更新！'
       end
-      fit 'ランキングブロックの値が更新されていること' do
+      it 'ランキングブロックの値が更新されていること' do
         expect(page).to have_content('編集されたタイトル'),      'タイトルが更新されていません'
         expect(page).to have_content('編集されたランキング1位'), '1位が更新されていません'
         expect(page).to have_content('編集されたランキング2位'), '2位が更新されていません'
@@ -191,6 +193,7 @@ RSpec.describe 'RankingBlock', type: :system do
 
       it '編集したブロックが詳細ページに反映されていること' do
         visit "/profiles/#{my_profile.public_uid}"
+        sleep 1
         expect(page).to have_content('編集されたタイトル'),      'タイトルが更新されていません'
         expect(page).to have_content('編集されたランキング1位'), '1位が更新されていません'
         expect(page).to have_content('編集されたランキング2位'), '2位が更新されていません'
@@ -199,6 +202,7 @@ RSpec.describe 'RankingBlock', type: :system do
 
       it '編集したブロックが他人の詳細ページに反映されていないこと' do
         visit "/profiles/#{others_profile.public_uid}"
+        sleep 1
         expect(page).not_to have_content('編集されたタイトル'),      'タイトルが更新されていません'
         expect(page).not_to have_content('編集されたランキング1位'), '1位が更新されていません'
         expect(page).not_to have_content('編集されたランキング2位'), '2位が更新されていません'

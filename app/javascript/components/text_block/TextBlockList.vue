@@ -48,7 +48,7 @@
           v-for="textBlock in displayBlocks"
           :key="textBlock.id"
           cols="12"
-          sm="6"
+          md="6"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard
@@ -67,13 +67,15 @@
           v-for="textBlock in myTextBlocks"
           :key="textBlock.id"
           cols="12"
-          sm="6"
+          md="6"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard
             :text-block="textBlock"
             :is-this-edit-page="isThisEditPage"
             :text-block-color="textBlockColor"
+            @update-text-block="updateTextBlock"
+            @retrieve-text-block="retrieveTextBlock"
           />
         </v-col>
       </transition-group>
@@ -84,6 +86,7 @@
       :is-shown-text-format-dialog="isShownTextFormatDialog"
       :text-block-color="textBlockColor"
       @close-text-format-dialog="closeTextFormatDialog"
+      @add-text-block="addTextBlock"
     />
   </v-container>
 </template>
@@ -120,7 +123,8 @@ export default {
     return {
       // Text Block
       isShownTextFormatDialog: false,
-      textBlockColor: "teal lighten-3", // text block color
+      textBlockColor: "cyan lighten-3", // text block color
+      textBlocks: [],
 
       // pagination
       page: 1,
@@ -130,7 +134,6 @@ export default {
     };
   },
   computed: {
-    ...mapState("textBlocks", ["textBlocks"]),
     ...mapState("users", ["currentUser"]),
     isMyTextBlocksLengthNotZeroAndisThisShowPage() {},
     isMyTextBlocksLengthNotZero() {
@@ -153,15 +156,40 @@ export default {
     },
   },
   mounted() {
-    this.pageFirstRead();
+    this.firstRead();
   },
   methods: {
+    async firstRead() {
+      await this.fetchTextBlocks();
+      this.pageFirstRead();
+    },
+    async fetchTextBlocks() {
+      await axios
+        .get("/api/v1/text_blocks")
+        .then((res) => (this.textBlocks = res.data));
+    },
     openTextFormatDialog() {
       this.isShownTextFormatDialog = true;
     },
     closeTextFormatDialog() {
       this.isShownTextFormatDialog = false;
     },
+    addTextBlock(textBlock) {
+      this.textBlocks.push(textBlock);
+    },
+    updateTextBlock(textBlock) {
+      const index = this.textBlocks.findIndex((block) => {
+        return block.id == textBlock.id;
+      });
+      this.textBlocks.splice(index, 1, textBlock);
+    },
+    retrieveTextBlock(textBlock) {
+      const index = this.textBlocks.findIndex((block) => {
+        return block.id == textBlock.id;
+      });
+      this.textBlocks.splice(index, 1);
+    },
+
     pageChange(pageNumber) {
       this.displayBlocks = this.myTextBlocks.slice(
         this.pageSize * (pageNumber - 1),

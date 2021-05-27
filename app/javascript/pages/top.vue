@@ -46,26 +46,23 @@ export default {
   mounted() {
     this.firstRead();
   },
+  created() {
+    document.title = `プロフちゃん`;
+  },
   methods: {
     ...mapActions({
       fetchCurrentUser: "users/fetchCurrentUser",
-      fetchTextBlocks: "textBlocks/fetchTextBlocks",
-      fetchRankingBlocks: "rankingBlocks/fetchRankingBlocks",
       fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
       fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
       fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
       fetchQuestionItems: "questionBlocks/fetchQuestionItems",
-      fetchUsers: "users/fetchUsers",
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      await this.fetchUsers();
-      await this.fetchTextBlocks();
-      await this.fetchRankingBlocks();
-      await this.fetchYesOrNoBlocks();
-      await this.fetchYesOrNoItems();
-      await this.fetchQuestionBlocks();
-      await this.fetchQuestionItems();
+      // await this.fetchYesOrNoBlocks();
+      // await this.fetchYesOrNoItems();
+      // await this.fetchQuestionBlocks();
+      // await this.fetchQuestionItems();
     },
   },
 };

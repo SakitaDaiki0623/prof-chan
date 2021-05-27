@@ -14,7 +14,7 @@
           id="cancel-edit-my-favorite-block-button"
           tile
           small
-          color="teal lighten-4"
+          color="cyan lighten-4"
           @click="hundleCloseEditMyFavoriteFormatDialog"
         >
           <v-icon> mdi-close-outline </v-icon>
@@ -452,7 +452,7 @@
               elevation="4"
               x-large
               :disabled="invalid"
-              color="teal lighten-3"
+              color="cyan lighten-3"
               class="white--text"
             >
               My Favorite ブロックを更新！

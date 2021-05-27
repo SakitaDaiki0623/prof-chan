@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-card class="rounded-2xl p-5 note-box" outlined color="teal accent-1">
+    <v-card class="rounded-2xl p-5 note-box" outlined color="cyan lighten-4">
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + textBlock.id"
           tile
           small
-          color="teal lighten-4"
+          color="cyan lighten-4"
           @click="openEditTextFormatDialog(textBlock)"
         >
           <v-icon> mdi-pencil </v-icon>
@@ -15,7 +15,7 @@
           :id="'delete-text-block-button-' + textBlock.id"
           tile
           small
-          color="teal lighten-1"
+          color="cyan lighten-1"
           @click="hundleDeleteTextBlock(textBlock)"
         >
           <v-icon> mdi-delete </v-icon>
@@ -35,19 +35,21 @@
       </v-card>
     </v-card>
     <EditTextFormatDialog
+      v-if="isThisEditPage"
       :is-shown-edit-text-format-dialog="isShownEditTextFormatDialog"
       :text-block-color="textBlockColor"
       :edit-text-block="editTextBlock"
       @close-edit-text-format-dialog="closeEditTextFormatDialog"
+      @update-text-block="$listeners['update-text-block']"
     />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 import TextBlockLikeButton from "../likes/TextBlockLikeButton";
 import EditTextFormatDialog from "./EditTextFormatDialog";
-
-import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -67,7 +69,7 @@ export default {
     textBlockColor: {
       type: String,
       requred: false,
-      default: "teal lighten-3",
+      default: "cyan lighten-3",
     },
   },
   data() {
@@ -77,9 +79,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      deleteTextBlock: "textBlocks/deleteTextBlock",
-    }),
     openEditTextFormatDialog(textBlock) {
       this.editTextBlock = Object.assign({}, textBlock);
       this.isShownEditTextFormatDialog = true;
@@ -95,6 +94,11 @@ export default {
         message: "テキストブロックを削除したよ！",
         color: this.textBlockColor,
       });
+    },
+    deleteTextBlock(textBlock) {
+      axios
+        .delete(`/api/v1/text_blocks/${textBlock.id}`, textBlock)
+        .then((res) => this.$emit("retrieve-text-block", res.data));
     },
   },
 };

@@ -47,7 +47,8 @@
           v-for="rankingBlock in displayBlocks"
           :key="rankingBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <RankingBlockCard
@@ -66,13 +67,16 @@
           v-for="rankingBlock in myRankingBlocks"
           :key="rankingBlock.id"
           cols="12"
-          sm="4"
+          md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <RankingBlockCard
             :ranking-block="rankingBlock"
             :is-this-edit-page="isThisEditPage"
             :ranking-block-color="rankingBlockColor"
+            @update-ranking-block="updateRankingBlock"
+            @retrieve-ranking-block="retrieveRankingBlock"
           />
         </v-col>
       </transition-group>
@@ -83,6 +87,7 @@
       :is-shown-ranking-format-dialog="isShownRankingFormatDialog"
       :ranking-block-color="rankingBlockColor"
       @close-ranking-format-dialog="closeRankingFormatDialog"
+      @add-ranking-block="addRankingBlock"
     />
   </v-container>
 </template>
@@ -90,7 +95,6 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapState, mapActions, Store } from "vuex";
 
 import RankingFormatDialog from "./RankingFormatDialog";
 import RankingBlockCard from "./RankingBlockCard";
@@ -119,6 +123,7 @@ export default {
     return {
       isShownRankingFormatDialog: false,
       rankingBlockColor: "green lighten-3", // ranking block color
+      rankingBlocks: [],
 
       // pagination
       page: 1,
@@ -128,8 +133,6 @@ export default {
     };
   },
   computed: {
-    ...mapState("rankingBlocks", ["rankingBlocks"]),
-    ...mapState("users", ["currentUser"]),
     percentageMyRankingBlocksLengt() {
       if (this.myRankingBlocks.length / 5 >= 1) return 100;
       return (this.myRankingBlocks.length / 5) * 100;
@@ -150,15 +153,40 @@ export default {
     },
   },
   mounted() {
-    this.pageFirstRead();
+    this.firstRead();
   },
   methods: {
+    async firstRead() {
+      await this.fetchRankingBlocks();
+      this.pageFirstRead();
+    },
+    async fetchRankingBlocks() {
+      await axios
+        .get("/api/v1/ranking_blocks")
+        .then((res) => (this.rankingBlocks = res.data));
+    },
+    addRankingBlock(rankingBlock) {
+      this.rankingBlocks.push(rankingBlock);
+    },
+    updateRankingBlock(rankingBlock) {
+      const index = this.rankingBlocks.findIndex((block) => {
+        return block.id == rankingBlock.id;
+      });
+      this.rankingBlocks.splice(index, 1, rankingBlock);
+    },
+    retrieveRankingBlock(rankingBlock) {
+      const index = this.rankingBlocks.findIndex((block) => {
+        return block.id == rankingBlock.id;
+      });
+      this.rankingBlocks.splice(index, 1);
+    },
     openRankingFormatDialog() {
       this.isShownRankingFormatDialog = true;
     },
     closeRankingFormatDialog() {
       this.isShownRankingFormatDialog = false;
     },
+
     pageChange(pageNumber) {
       this.displayBlocks = this.myRankingBlocks.slice(
         this.pageSize * (pageNumber - 1),

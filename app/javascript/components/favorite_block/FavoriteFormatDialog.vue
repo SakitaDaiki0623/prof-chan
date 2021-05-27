@@ -141,8 +141,6 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-    // ...mapActions("favoriteBlocks", ["createfavoriteBlock"]),
-
     hundleCreateFavoriteBlock(favoriteBlock) {
       this.createFavoriteBlock(favoriteBlock);
       this.hundleCloseFavoriteFormatDialog();

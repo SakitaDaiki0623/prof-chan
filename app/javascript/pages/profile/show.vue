@@ -1,24 +1,53 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
-  <v-container class="border-gray-500 rounded-xl border-2 m-20 note">
-    <BasicAndAddressBlock :user="user" />
+  <div>
+    <Loading v-if="loading"></Loading>
+    <div v-else>
+      <v-container>
+        <v-row justify="center" align-content="center">
+          <v-btn
+            class="m-5 white--text"
+            color="brown"
+            @click="moveToNextProfilePage(previousProfile)"
+            >＜</v-btn
+          >
+          <v-btn
+            class="m-5 white--text"
+            color="brown"
+            @click="moveToProfilesPage"
+            >プロフィール一覧に戻る</v-btn
+          >
+          <v-btn
+            class="m-5 white--text"
+            color="brown"
+            @click="moveToNextProfilePage(nextProfile)"
+            >＞</v-btn
+          >
+        </v-row>
+      </v-container>
+      <v-container
+        class="border-gray-500 rounded-xl border-2 m-20 note"
+        v-if="shown"
+      >
+        <BasicAndAddressBlock :user="user" />
 
-    <FavoriteBlockList :user="user" />
+        <FavoriteBlockList :user="user" />
 
-    <QuestionBlockList :user="user" />
+        <QuestionBlockList :user="user" />
 
-    <RankingBlockList :user="user" />
+        <RankingBlockList :user="user" />
 
-    <YesOrNoBlockList :user="user" />
+        <YesOrNoBlockList :user="user" />
 
-    <TextBlockList :user="user" />
-  </v-container>
+        <TextBlockList :user="user" />
+      </v-container>
+    </div>
+  </div>
 </template>
 
 <script>
 // plugins
 import axios from "axios";
-import { mapState } from "vuex";
 
 // Component ----------
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
@@ -28,6 +57,7 @@ import QuestionBlockList from "../../components/question_block/QuestionBlockList
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
 import RankingBlockList from "../../components//ranking_block/RankingBlockList";
 import FavoriteBlockList from "../../components/favorite_block/FavoriteBlockList";
+import Loading from "../../components/shared/Loading";
 
 export default {
   components: {
@@ -38,6 +68,7 @@ export default {
     RankingBlockList,
     TextBlockList,
     FavoriteBlockList,
+    Loading,
   },
   props: {
     id: {
@@ -46,35 +77,106 @@ export default {
       default: "",
     },
   },
-  computed: {
-    ...mapState("users", ["users"]),
-
-    user() {
-      return this.users.find(
-        (user) => this.$route.params.id == user.profile.public_uid
-      );
-    },
-  },
   data() {
     return {
       profiles: [],
+      profile: {},
+      user: {},
+      shown: false,
+      loading: true,
     };
   },
   mounted() {
-    document.title = `プロフ詳細 - プロフちゃん`;
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+    this.firstRead();
+  },
+  created() {
+    document.title = `プロフ閲覧 - プロフちゃん`;
+  },
+  computed: {
+    nextProfile() {
+      const index = this.findProfileIndex + 1;
+      if (index == this.totalProfilesNum) {
+        return this.profiles[0];
+      } else {
+        return this.profiles[index];
+      }
+    },
+    previousProfile() {
+      const index = this.findProfileIndex - 1;
+      if (index < 0) {
+        return this.profiles[this.totalProfilesNum - 1];
+      } else {
+        return this.profiles[index];
+      }
+    },
+    totalProfilesNum() {
+      return this.profiles.length;
+    },
+    findProfileIndex() {
+      return this.profiles.findIndex(
+        (profile) => profile.public_uid == this.profile.public_uid
+      );
+    },
   },
   methods: {
+    async firstRead() {
+      await this.fetchProfile(this.id);
+      await this.fetchProfiles();
+      await this.fetchUser();
+      // これをしないと先に値を渡す前に子コンポーネントが読まれてしまう
+      this.shown = true;
+    },
+    async updateRead(id) {
+      await this.fetchProfile(id);
+      await this.fetchProfiles();
+      await this.fetchUser();
+    },
+    async fetchProfile(id) {
+      await axios
+        .get(`/api/v1/profiles/${id}`)
+        .then((res) => (this.profile = res.data));
+    },
+    async fetchProfiles() {
+      await axios
+        .get(`/api/v1/profiles`)
+        .then((res) => (this.profiles = res.data));
+    },
+    async fetchUser() {
+      await axios
+        .get(`/api/v1/users/${this.profile.user.id}`)
+        .then((res) => (this.user = res.data));
+    },
     moveToProfilesPage() {
       this.$router.push("/profiles");
+    },
+    moveToNextProfilePage(profile) {
+      this.$router.push(`/profiles/${profile.public_uid}`);
+    },
+    resetLoading() {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
     },
   },
   beforeRouteEnter(to, from, next) {
     axios
       .get(`/api/v1/profiles/${to.params.id}`)
-      .then((res) => next())
+      .then((res) => {
+        next();
+      })
       .catch((err) => {
         next("/profiles");
       });
+  },
+  beforeRouteUpdate(to, from, next) {
+    // URL の id が変わったときにリソースを再読み込みする
+    next();
+    this.resetLoading();
+    this.updateRead(to.params.id);
   },
 };
 </script>
