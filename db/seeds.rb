@@ -38,7 +38,7 @@ end
 if Rails.env.production?
   Team.create!(
     name: '通常ログイン用チーム',
-    workspace_id: (0...8).map{ ('A'..'Z').to_a[rand(26)] }.join
+    workspace_id: (0...8).map{ ('A'..'Z').to_a[rand(26)] }.join,
     image: "https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png"
   )
 end
