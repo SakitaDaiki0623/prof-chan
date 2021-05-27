@@ -59,10 +59,10 @@ export default {
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      await this.fetchYesOrNoBlocks();
-      await this.fetchYesOrNoItems();
-      await this.fetchQuestionBlocks();
-      await this.fetchQuestionItems();
+      // await this.fetchYesOrNoBlocks();
+      // await this.fetchYesOrNoItems();
+      // await this.fetchQuestionBlocks();
+      // await this.fetchQuestionItems();
     },
   },
 };
