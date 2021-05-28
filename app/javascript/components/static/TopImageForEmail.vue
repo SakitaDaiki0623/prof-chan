@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-bg">
-      <div class="border-t-2 border-pink-500 border-dashed">
+      <div class="border-t-2 border-brown-500 border-dashed">
         <v-row justify="center" align-content="center">
           <v-col cols="12" sm="12">
             <div class="text-center text-lg md:text-2xl lg:text-4xl">
@@ -21,7 +21,7 @@
             </div>
           </v-col>
           <v-col cols="12" sm="4" md="5">
-            <div class="balloon1 text-sm text-center md:text-3xl">通常ログイン版</div>
+            <div class="balloon1 text-sm text-center md:text-4xl">通常ログイン版</div>
             <img src="../../images/prof_happy.png" class="max-w-xs mx-auto md:max-w-sm" />
           </v-col>
         </v-row>
@@ -70,7 +70,7 @@ export default {};
 .balloon1 {
   position: relative;
   display: inline-block;
-  min-width: 170px;
+  min-width: 220px;
   color: #bcaaa4;
   background: #ffffff;
   border-radius: 15px;

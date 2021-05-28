@@ -1,6 +1,6 @@
 <template>
   <div class="top-bg">
-    <div class="border-t-2 border-pink-500 border-dashed">
+    <div class="border-t-2 border-brown-500 border-dashed">
       <v-row>
         <v-col cols="12" sm="12">
           <div class="text-center text-3xl">
