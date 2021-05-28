@@ -105,7 +105,7 @@
                     name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
 
