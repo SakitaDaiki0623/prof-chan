@@ -324,22 +324,22 @@
               </transition-group>
             </v-card>
           </div>
+          <div class="ma-16">
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-btn
+                v-scroll-to="toTop"
+                color="brown"
+                x-large
+                fab
+                class="white--text"
+                ><v-icon>mdi-arrow-up</v-icon></v-btn
+              >
+            </v-row>
+          </div>
         </div>
       </div>
       <NotAnyBookmarkBlock v-else />
-      <div class="ma-16">
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-btn
-            v-scroll-to="toTop"
-            color="brown"
-            x-large
-            fab
-            class="white--text"
-            ><v-icon>mdi-arrow-up</v-icon></v-btn
-          >
-        </v-row>
-      </div>
     </div>
   </div>
 </template>

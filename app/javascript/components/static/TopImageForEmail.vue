@@ -9,7 +9,7 @@
             </div>
           </v-col>
           <v-col cols="12" sm="12" md="7" align-self="center" align="right">
-            <div class="text-center bg-white rounded-full md:py-10 md:px-5 ma-5 max-w-xl border-2 border-black border-dashed">
+            <div class="text-center bg-white rounded-full md:py-16 md:px-5 ma-5 max-w-xl border-2 border-brown-500 border-dashed">
               <div class="text-md lg:text-xl mb-5">
                 コロナ時代のフルリモート社員に贈る
                 <br />
