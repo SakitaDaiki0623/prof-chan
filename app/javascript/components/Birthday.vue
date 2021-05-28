@@ -1,5 +1,5 @@
 <template>
-  <v-row class="bg-brown-400 p-3" justify="center" align-content="center">
+  <v-row class="bg-brown-400 pA-3" justify="center" align-content="center">
     <v-col cols="12" sm="12">
       <div class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10">
         <v-icon large color="white">mdi-cake-variant</v-icon>
@@ -20,7 +20,7 @@
       cols="12"
       sm="12"
       md="3"
-      class="border-dotted border-white border-2 m-5"
+      class="border-dotted border-white border-2 ma-5"
     >
       <v-card class="mx-auto" max-width="344" outlined color="brown lighten-5">
         <v-card color="brown lighten-2" class="white--text">

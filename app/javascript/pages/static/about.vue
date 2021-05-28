@@ -381,7 +381,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .image {
   width: 200px;
   height: 200px;

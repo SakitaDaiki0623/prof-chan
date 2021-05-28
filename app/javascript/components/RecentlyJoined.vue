@@ -20,7 +20,7 @@
       cols="12"
       sm="12"
       md="3"
-      class="border-dotted border-white border-2 m-5"
+      class="border-dotted border-white border-2 ma-5"
     >
       <v-card class="mx-auto" max-width="344" outlined color="brown lighten-5">
         <v-card color="brown lighten-2" class="white--text">

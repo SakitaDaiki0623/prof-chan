@@ -1,6 +1,6 @@
 <template>
   <div class="bg" v-if="firstPlaceUserExist">
-    <v-row justify="center" align-content="center" class="p-10">
+    <v-row justify="center" align-content="center" class="pa-10">
       <v-col cols="12" sm="2">
         <img src="../images/prof_normal.png" class="image" />
       </v-col>
@@ -13,7 +13,7 @@
     <v-row
       justify="center"
       align-content="center"
-      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+      class="pa-16 bg-brown-100 border-brown-400 border-2 border-dotted"
     >
       <v-col cols="12" sm="3">
         <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
@@ -27,10 +27,10 @@
           社員ブロフィールを見る
         </v-btn>
       </v-col>
-      <v-row class="p-10">
+      <v-row class="pa-10">
         <v-col cols="12" sm="12" align="center">
           <div
-            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block pa-10 rounded-full"
           >
             あなたと盛り上がりそうな話題
           </div>
@@ -42,8 +42,8 @@
           sm="4"
           align="center"
         >
-          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
-            <p class="text-center text-4xl font-bold text-white p-2">
+          <v-card class="rounded-2xl pa-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white pa-2">
               {{ block.title }}
             </p>
           </v-card>
@@ -53,15 +53,15 @@
     <v-row
       justify="center"
       align-content="center"
-      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+      class="pa-16 bg-brown-100 border-brown-400 border-2 border-dotted"
     >
       <v-col cols="12" sm="3">
         <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
       </v-col>
-      <v-row class="p-10">
+      <v-row class="pa-10">
         <v-col cols="12" sm="12" align="center">
           <div
-            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block pa-10 rounded-full"
           >
             あなたと盛り上がりそうな話題
           </div>
@@ -73,8 +73,8 @@
           sm="4"
           align="center"
         >
-          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
-            <p class="text-center text-4xl font-bold text-white p-2">
+          <v-card class="rounded-2xl pa-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white pa-2">
               {{ block.title }}
             </p>
           </v-card>
@@ -84,15 +84,15 @@
     <v-row
       justify="center"
       align-content="center"
-      class="p-20 bg-brown-100 border-brown-400 border-2 border-dotted"
+      class="pa-16 bg-brown-100 border-brown-400 border-2 border-dotted"
     >
       <v-col cols="12" sm="3">
         <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
       </v-col>
-      <v-row class="p-10">
+      <v-row class="pa-10">
         <v-col cols="12" sm="12" align="center">
           <div
-            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block p-10 rounded-full"
+            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block pa-10 rounded-full"
           >
             あなたと盛り上がりそうな話題
           </div>
@@ -104,8 +104,8 @@
           sm="4"
           align="center"
         >
-          <v-card class="rounded-2xl p-5 " outlined color="brown lighten-2">
-            <p class="text-center text-4xl font-bold text-white p-2">
+          <v-card class="rounded-2xl pa-5 " outlined color="brown lighten-2">
+            <p class="text-center text-4xl font-bold text-white pa-2">
               {{ block.title }}
             </p>
           </v-card>

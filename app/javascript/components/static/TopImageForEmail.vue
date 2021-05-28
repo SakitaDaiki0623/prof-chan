@@ -8,8 +8,8 @@
               - - - - REMOTELY PROMOTE YOURSELF.- - - -
             </div>
           </v-col>
-          <v-col cols="12" sm="12" md="7">
-            <div class="text-center bg-white rounded-full md:p-10 m-5">
+          <v-col cols="12" sm="12" md="7" align-self="center" align="right">
+            <div class="text-center bg-white rounded-full md:py-10 md:px-5 ma-5 max-w-xl border-2 border-black border-dashed">
               <div class="text-md lg:text-xl mb-5">
                 コロナ時代のフルリモート社員に贈る
                 <br />
@@ -20,14 +20,14 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12" sm="4" md="5">
-            <div class="balloon1 text-sm text-center md:text-4xl">通常ログイン版</div>
-            <img src="../../images/prof_happy.png" class="max-w-xs mx-auto md:max-w-sm" />
+          <v-col cols="12" sm="4" md="5" align="left">
+            <div class="balloon1 text-sm text-center md:text-2xl">通常ログイン版</div>
+            <img src="../../images/prof_happy.png" class="max-w-xs md:max-w-sm" />
           </v-col>
         </v-row>
       </div>
     </div>
-    <div class="bg-brown-500 p-10">
+    <div class="bg-brown-500 pa-10">
       <v-row justify="center" align-content="center">
         <v-col cols="12" sm="5" class="border-white border-dotted border-2">
           <div>
