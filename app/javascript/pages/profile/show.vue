@@ -150,10 +150,10 @@ export default {
         .then((res) => (this.user = res.data));
     },
     moveToProfilesPage() {
-      this.$router.push("/profiles");
+      this.$router.push("/profiles").catch((err) => {});
     },
     moveToNextProfilePage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`);
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});
     },
     resetLoading() {
       this.loading = true;

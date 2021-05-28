@@ -89,7 +89,7 @@ export default {
         .then((res) => (this.user = res.data));
     },
     moveToProfilesPage() {
-      this.$router.push("/profiles");
+      this.$router.push("/profiles").catch((err) => {});
     },
   },
 };

@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     openProfileShowPage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`);
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});;
     },
   },
 };
