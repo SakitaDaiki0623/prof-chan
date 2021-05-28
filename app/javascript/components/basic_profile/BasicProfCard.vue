@@ -17,30 +17,30 @@
               <v-icon> mdi-pencil </v-icon>
             </v-btn>
           </v-row>
-          <div class="p-2 m-2 bg-white rounded-full">
+          <div class="pa-2 ma-2 bg-white rounded-full">
             <label for="birthday" class="form-label-text-block">性別</label>
             <span class="text-center ">{{ profile.gender }}</span>
           </div>
 
-          <div class="p-2 m-2 bg-white rounded-full">
+          <div class="pa-2 ma-2 bg-white rounded-full">
             <label for="birthday" class="form-label-text-block">身長</label
             >{{ profile.height }} cm
           </div>
 
-          <div class="p-2 m-2 bg-white rounded-full">
+          <div class="pa-2 ma-2 bg-white rounded-full">
             <label for="birthday" class="form-label-text-block">血液型</label
             >{{ profile.blood_type }} 型
           </div>
 
-          <div class="p-2 m-2 bg-white rounded-full">
+          <div class="pa-2 ma-2 bg-white rounded-full">
             <label for="birthday" class="form-label-text-block">出身地</label
             >{{ profile.prefecture_id }}
           </div>
-          <div class="p-2 m-2 bg-white rounded-full">
+          <div class="pa-2 ma-2 bg-white rounded-full">
             <label for="birthday" class="form-label-text-block">誕生日</label>
             {{ profile.birthday | moment }}
           </div>
-          <div class="p-2 m-2 bg-white rounded-full">
+          <div class="pa-2 ma-2 bg-white rounded-full">
             <label for="birthday" class="form-label-text-block">入社日</label>
 
             {{ profile.day_of_joinning | moment }}

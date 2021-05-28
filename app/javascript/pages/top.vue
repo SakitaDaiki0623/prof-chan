@@ -3,7 +3,7 @@
     <!-- 共通画面 -->
     <TopImage v-if="isProviderSlack" />
     <TopImageForEmail v-else />
-    <div class="p-10 text-center">
+    <div class="pa-16 text-center">
       <RecentlyJoined class="mb-10" />
       <Birthday />
     </div>

@@ -1,6 +1,8 @@
 <template>
-  <v-container
-    class="mb-10 bg-brown-200"
+  <v-card
+    color="brown lighten-4"
+    outlined
+    class="mb-10 pa-5"
     v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
@@ -89,7 +91,7 @@
       @close-ranking-format-dialog="closeRankingFormatDialog"
       @add-ranking-block="addRankingBlock"
     />
-  </v-container>
+  </v-card>
 </template>
 
 <script>
