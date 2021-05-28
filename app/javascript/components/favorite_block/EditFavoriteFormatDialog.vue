@@ -7,8 +7,8 @@
       @input="$emit('input', $event.target.isShownEditFavoriteFormatDialog)"
     >
       <v-card :color="favoriteBlockColor">
-        <div class="bg-brown-300 p-3">
-          <v-row justify="end" class="m-2">
+        <div class="bg-brown-300 pa-3">
+          <v-row justify="end" class="ma-2">
             <v-btn
               :color="favoriteBlockColor"
               @click="hundleCloseEditFavoriteFormatDialog"
@@ -22,7 +22,7 @@
             Favorite ブロック編集
           </p>
         </div>
-        <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
+        <div id="text-block-form" class="pa-10 bg-text-prof-block bg-top">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditFavoriteBlock(editFavoriteBlock)">
               <div>
@@ -40,7 +40,7 @@
                     id="favorite_category_id"
                     v-model="editFavoriteBlock.category_id"
                     name="favorite[category_id]"
-                    class="input-form-basic-block"
+                    class="input-form-favorite-block"
                   >
                     <option
                       v-for="category in categories"
@@ -50,7 +50,7 @@
                       {{ category.name }}
                     </option>
                   </select>
-                  <span class="text-red-200">{{ errors[0] }}</span>
+                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -65,11 +65,11 @@
                   <input
                     id="text_block_text"
                     :value="editFavoriteBlock.text"
-                    class="input-form-text-block"
+                    class="input-form-favorite-block"
                     name="text_block[text_block_text]"
                     @input="editFavoriteBlock.text = $event.target.value"
                   />
-                  <span class="text-red-200">{{ errors[0] }}</span>
+                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">

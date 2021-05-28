@@ -5,7 +5,7 @@
     v-slot="{ invalid }"
   >
     <form id="individual-create-yes-or-no-block-item-form">
-      <div class="m-1">
+      <div class="ma-1">
         <v-row>
           <v-col
             cols="12"
@@ -26,7 +26,7 @@
                 name="yes_or_no_item[yes_or_no_item_content]"
                 type="text"
               >
-              <span class="text-red-400">{{ errors[0] }}</span>
+              <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
           <v-col

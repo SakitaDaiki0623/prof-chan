@@ -19,7 +19,7 @@
         <p class="font-weight-bold text-white text-4xl text-center my-10">
           ランキングブロック作成
         </p>
-        <div id="ranking-block-form" class="p-10 note-box">
+        <div id="ranking-block-form" class="pa-10 note-box">
           <v-btn
             id="input-ranking-title-button"
             type="submit"
@@ -51,7 +51,7 @@
                     name="ranking_block[ranking_block_title]"
                     type="text"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
 
@@ -72,7 +72,7 @@
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_first_place]"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -92,7 +92,7 @@
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_second_place]"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -112,7 +112,7 @@
                     class="input-form-ranking-block"
                     name="ranking_block[ranking_block_third_place]"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">
@@ -180,7 +180,6 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
       if (this.currentUser.provider == "slack") {
@@ -231,7 +230,7 @@ export default {
 <style scoped>
 .note-box {
   position: relative;
-  background-color: #f1f8e9;
+  background-color: #dcedc8;
 }
 .note-box::before {
   content: "";

@@ -19,7 +19,7 @@
             </v-col>
             <v-col cols="12" sm="6">
               <p
-                class="text-2xl bg-brown-100 text-center p-10 rounded-full max-w-sm font-weight-bold"
+                class="text-2xl bg-brown-100 text-center pa-10 rounded-full max-w-sm font-weight-bold"
               >
                 プロフちゃんの世界へようこそ！
               </p>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     moveToTopPage() {
-      this.$router.push("/top");
+      this.$router.push("/top").catch((err) => {});;
     },
   },
 };

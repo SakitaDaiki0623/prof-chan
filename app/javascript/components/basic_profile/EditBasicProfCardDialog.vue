@@ -29,7 +29,7 @@
             </v-btn>
           </v-row>
           <!-- FORM -->
-          <div id="profile-basic-form" class="p-6">
+          <div id="profile-basic-form" class="pa-6">
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form
                 @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"
@@ -57,7 +57,7 @@
                         {{ gender.text }}
                       </option>
                     </select>
-                    <span class="text-red-400">{{ errors[0] }}</span>
+                    <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
@@ -76,7 +76,7 @@
                       type="number"
                       name="profile[height]"
                     />
-                    <span class="text-red-400">{{ errors[0] }}</span>
+                    <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
@@ -102,7 +102,7 @@
                         {{ bloodType }}型
                       </option>
                     </select>
-                    <span class="text-red-400">{{ errors[0] }}</span>
+                    <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
@@ -130,7 +130,7 @@
                         {{ prefecture.text }}
                       </option>
                     </select>
-                    <span class="text-red-400">{{ errors[0] }}</span>
+                    <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
@@ -160,7 +160,7 @@
                           v-bind="attrs"
                           v-on="on"
                         />
-                        <span class="text-red-400">{{ errors[0] }}</span>
+                        <span class="red--text text-sm">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
                     <v-date-picker
@@ -205,7 +205,7 @@
                           class="input-form-basic-block"
                           v-on="on"
                         />
-                        <span class="text-red-400">{{ errors[0] }}</span>
+                        <span class="red--text text-sm">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
                     <v-date-picker

@@ -18,7 +18,7 @@
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           テキストブロックを編集
         </p>
-        <div id="text-block-form" class="p-10 note-box">
+        <div id="text-block-form" class="pa-10 note-box">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditTextBlock(editTextBlock)">
               <div>
@@ -38,7 +38,7 @@
                     type="text"
                     @input="editTextBlock.title = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -58,7 +58,7 @@
                     rows="7"
                     @input="editTextBlock.text = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">

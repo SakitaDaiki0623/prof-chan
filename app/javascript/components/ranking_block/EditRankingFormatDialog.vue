@@ -19,7 +19,7 @@
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           ランキングブロックを編集
         </p>
-        <div id="ranking-block-form" class="p-10 note-box">
+        <div id="ranking-block-form" class="pa-10 note-box">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditRankingBlock(editRankingBlock)">
               <div>
@@ -39,7 +39,7 @@
                     type="text"
                     @input="editRankingBlock.title = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -60,7 +60,7 @@
                     name="ranking_block[ranking_block_first_place]"
                     @input="editRankingBlock.first_place = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -81,7 +81,7 @@
                     name="ranking_block[ranking_block_second_place]"
                     @input="editRankingBlock.second_place = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -102,7 +102,7 @@
                     name="ranking_block[ranking_block_third_place]"
                     @input="editRankingBlock.third_place = $event.target.value"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">
@@ -180,7 +180,7 @@ export default {
 <style scoped>
 .note-box {
   position: relative;
-  background-color: #f1f8e9;
+  background-color: #dcedc8;
 }
 .note-box::before {
   content: "";

@@ -8,8 +8,8 @@
       @input="$emit('input', $event.target.isShownFavoriteFormatDialog)"
     >
       <v-card :color="favoriteBlockColor">
-        <div class="bg-brown-300 p-3">
-          <v-row justify="end" class="m-2">
+        <div class="bg-brown-300 pa-3">
+          <v-row justify="end" class="ma-2">
             <v-btn
               :color="favoriteBlockColor"
               @click="hundleCloseFavoriteFormatDialog"
@@ -23,7 +23,7 @@
             Favorite ブロック作成
           </p>
         </div>
-        <div id="favorite-block-form" class="p-10 bg-text-prof-block">
+        <div id="favorite-block-form" class="pa-10 bg-text-prof-block">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateFavoriteBlock(favoriteBlock)">
               <div>
@@ -41,7 +41,7 @@
                     id="favorite_category_id"
                     v-model="favoriteBlock.category_id"
                     name="favorite[category_id]"
-                    class="input-form-basic-block"
+                    class="input-form-favorite-block"
                   >
                     <option
                       v-for="category in categories"
@@ -66,7 +66,7 @@
                   <input
                     id="favorite_block_text"
                     v-model="favoriteBlock.text"
-                    class="input-form-text-block"
+                    class="input-form-favorite-block"
                     name="favorite_block[favorite_block_text]"
                   />
                   <span class="text-red-200">{{ errors[0] }}</span>

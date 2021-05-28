@@ -18,7 +18,7 @@
     </v-card>
     <v-card color="brown lighten-5 text-center" outlined>
       <div
-        class="p-3 text-4xl font-bold border-dotted	border-b-2 border-gray-400"
+        class="pa-3 text-4xl font-bold border-dotted	border-b-2 border-gray-400"
       >
         <span class="name-text">{{ profile.user.name }}</span
         >さん
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     openProfileShowPage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`);
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});;
     },
   },
 };

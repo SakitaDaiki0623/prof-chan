@@ -19,7 +19,7 @@
             テキストブロック作成
           </p>
         </div>
-        <div id="text-block-form" class="p-10 note-box">
+        <div id="text-block-form" class="pa-10 note-box">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateTextBlock(textBlock)">
               <div>
@@ -38,7 +38,7 @@
                     name="text_block[text_block_title]"
                     type="text"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="mt-5">
@@ -57,7 +57,7 @@
                     name="text_block[text_block_text]"
                     rows="7"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
               <div class="text-center mt-3">

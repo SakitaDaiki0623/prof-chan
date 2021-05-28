@@ -22,7 +22,7 @@
 
         <div
           id="yes-or-no-block-form"
-          class="p-10 note-box"
+          class="pa-10 note-box"
           color="orange lighten-4"
         >
           <v-row>
@@ -105,7 +105,7 @@
                     name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
                   />
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
 
@@ -131,7 +131,7 @@
                 :answer-name-for-validation="answerNameForValidation3"
               />
 
-              <div class="text-center p-10">
+              <div class="text-center pa-10">
                 <v-btn
                   id="creation_button"
                   type="submit"

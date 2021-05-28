@@ -4,7 +4,7 @@
       <template v-if="isThisEditPage">
         <v-col cols="12" sm="12" lg="4">
           <div
-            class="text-4xl text-center p-5 bg-white rounded-full text-center"
+            class="text-4xl text-center pa-5 bg-white rounded-full text-center"
           >
             プロフ編集
           </div>
@@ -17,7 +17,7 @@
       <template v-else>
         <v-col cols="12" sm="12" lg="4">
           <div
-            class="text-4xl text-center p-5 bg-white rounded-full text-center"
+            class="text-4xl text-center pa-5 bg-white rounded-full text-center"
           >
             プロフ閲覧
           </div>

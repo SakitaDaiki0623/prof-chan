@@ -1,7 +1,7 @@
 <template>
   <div
     :id="yesOrNoBlockItemId"
-    class="m-1"
+    class="ma-1"
   >
     <!-- Item Form -->
     <v-row
@@ -14,7 +14,7 @@
         md="10"
       >
         <v-card
-          class="p-5 rounded-lg"
+          class="pa-5 rounded-lg"
           outlined
         >
           <v-row>
@@ -29,7 +29,7 @@
               cols="12"
               sm="6"
             >
-              <span class="rounded-full border-red-500 border-2 p-2">YES</span>
+              <span class="rounded-full border-brown-500 border-2 pa-2">YES</span>
               / NO
             </v-col>
             <v-col
@@ -38,7 +38,7 @@
               sm="6"
             >
               YES /
-              <span class="rounded-full border-red-500 border-2 p-2">NO</span>
+              <span class="rounded-full border-brown-500 border-2 pa-2">NO</span>
             </v-col>
           </v-row>
         </v-card>
@@ -104,7 +104,7 @@
                   type="text"
                   @input="editYesOrNoItem.content = $event.target.value"
                 >
-                <span class="text-red-400">{{ errors[0] }}</span>
+                <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
             <v-col

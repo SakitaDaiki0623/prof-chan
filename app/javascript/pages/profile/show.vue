@@ -6,19 +6,19 @@
       <v-container>
         <v-row justify="center" align-content="center">
           <v-btn
-            class="m-5 white--text"
+            class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(previousProfile)"
             >＜</v-btn
           >
           <v-btn
-            class="m-5 white--text"
+            class="ma-5 white--text"
             color="brown"
             @click="moveToProfilesPage"
             >プロフィール一覧に戻る</v-btn
           >
           <v-btn
-            class="m-5 white--text"
+            class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(nextProfile)"
             >＞</v-btn
@@ -26,7 +26,7 @@
         </v-row>
       </v-container>
       <v-container
-        class="border-gray-500 rounded-xl border-2 m-20 note"
+        class="border-gray-500 rounded-xl border-2 ma-16 note"
         v-if="shown"
       >
         <BasicAndAddressBlock :user="user" />
@@ -150,10 +150,10 @@ export default {
         .then((res) => (this.user = res.data));
     },
     moveToProfilesPage() {
-      this.$router.push("/profiles");
+      this.$router.push("/profiles").catch((err) => {});
     },
     moveToNextProfilePage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`);
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});
     },
     resetLoading() {
       this.loading = true;

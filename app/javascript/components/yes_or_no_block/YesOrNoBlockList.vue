@@ -1,10 +1,12 @@
 <template>
-  <v-container
-    class="mb-10 bg-brown-200"
+  <v-card
+    color="brown lighten-4"
+    outlined
+    class="mb-10 pa-5"
     v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
   >
-    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
-      <span class="text-yellow-300 rounded-full px-2 bg-white">Y</span> Yes or
+    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+      <span class="yellow--text text--darken-3 rounded-full px-2 bg-white">Y</span> Yes or
       No コーナー
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">
@@ -68,7 +70,7 @@
           v-for="yesOrNoBlock in myYesOrNoBlocks"
           :key="yesOrNoBlock.id"
           cols="12"
-           md="6"
+          md="6"
           lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
@@ -87,7 +89,7 @@
       :yes-or-no-block-color="yesOrNoBlockColor"
       @close-yes-or-no-format-dialog="closeYesOrNoFormatDialog"
     />
-  </v-container>
+  </v-card>
 </template>
 
 <script>

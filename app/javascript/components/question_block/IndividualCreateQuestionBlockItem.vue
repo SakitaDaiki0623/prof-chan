@@ -5,7 +5,7 @@
     v-slot="{ invalid }"
   >
     <form id="individual-create-question-block-item-form">
-      <div class="m-1">
+      <div class="ma-1">
         <v-row>
           <v-col
             cols="12"
@@ -26,7 +26,7 @@
                 name="question_item[question_item_content]"
                 type="text"
               >
-              <span class="text-red-400">{{ errors[0] }}</span>
+              <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
           <v-col
@@ -48,7 +48,7 @@
                 name="question_item[question_item_answer]"
                 type="text"
               >
-              <span class="text-red-400">{{ errors[0] }}</span>
+              <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
         </v-row>

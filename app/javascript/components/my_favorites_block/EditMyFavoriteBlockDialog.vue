@@ -58,7 +58,7 @@
                       editMyFavoriteBlock.manga_anime = $event.target.value
                     "
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -83,7 +83,7 @@
                     :value="editMyFavoriteBlock.game_app"
                     @input="editMyFavoriteBlock.game_app = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -108,7 +108,7 @@
                     :value="editMyFavoriteBlock.character"
                     @input="editMyFavoriteBlock.character = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -133,7 +133,7 @@
                     :value="editMyFavoriteBlock.actor"
                     @input="editMyFavoriteBlock.actor = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -158,7 +158,7 @@
                     :value="editMyFavoriteBlock.music"
                     @input="editMyFavoriteBlock.music = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -183,7 +183,7 @@
                     :value="editMyFavoriteBlock.food"
                     @input="editMyFavoriteBlock.food = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -208,7 +208,7 @@
                     :value="editMyFavoriteBlock.animal"
                     @input="editMyFavoriteBlock.animal = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -233,7 +233,7 @@
                     :value="editMyFavoriteBlock.sports"
                     @input="editMyFavoriteBlock.sports = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -258,7 +258,7 @@
                     :value="editMyFavoriteBlock.book"
                     @input="editMyFavoriteBlock.book = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -283,7 +283,7 @@
                     :value="editMyFavoriteBlock.place"
                     @input="editMyFavoriteBlock.place = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -308,7 +308,7 @@
                     :value="editMyFavoriteBlock.snack"
                     @input="editMyFavoriteBlock.snack = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -335,7 +335,7 @@
                       editMyFavoriteBlock.alcohol_drink = $event.target.value
                     "
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -362,7 +362,7 @@
                       editMyFavoriteBlock.restaurants = $event.target.value
                     "
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -387,7 +387,7 @@
                     :value="editMyFavoriteBlock.musician"
                     @input="editMyFavoriteBlock.musician = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -412,7 +412,7 @@
                     :value="editMyFavoriteBlock.youtuber"
                     @input="editMyFavoriteBlock.youtuber = $event.target.value"
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>
@@ -439,7 +439,7 @@
                       editMyFavoriteBlock.entertainer = $event.target.value
                     "
                   >
-                  <span class="text-red-400">{{ errors[0] }}</span>
+                  <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </v-card>
             </v-col>

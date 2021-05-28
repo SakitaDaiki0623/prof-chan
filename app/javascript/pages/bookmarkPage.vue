@@ -1,5 +1,5 @@
 <template>
-  <div id="top">
+  <div>
     <Loading v-show="loading"></Loading>
     <div class="top" v-show="!loading">
       <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
@@ -19,7 +19,7 @@
               align="center"
               cols="12"
               lg="3"
-              class="border-2 border-white border-dashed m-5"
+              class="border-2 border-white border-dashed ma-5"
             >
               <div class="place-text">第1位</div>
               <ProfCard
@@ -31,7 +31,7 @@
               align="center"
               cols="12"
               lg="3"
-              class="border-2 border-white border-dashed m-5"
+              class="border-2 border-white border-dashed ma-5"
             >
               <div class="place-text">第2位</div>
               <div v-if="secondPlaceUserExist">
@@ -45,7 +45,7 @@
               align="center"
               cols="12"
               lg="3"
-              class="border-2 border-white border-dashed m-5"
+              class="border-2 border-white border-dashed ma-5"
             >
               <div class="place-text">第3位</div>
               <div v-if="thirdPlaceUserExist">
@@ -64,7 +64,7 @@
               align="center"
               cols="12"
               sm="3"
-              class="border-2 border-white border-dashed m-5"
+              class="border-2 border-white border-dashed ma-5"
             >
               <div class="place-text">第2位</div>
               <div v-if="secondPlaceUserExist">
@@ -78,7 +78,7 @@
               align="center"
               cols="12"
               sm="3"
-              class="border-2 border-white border-dashed m-5"
+              class="border-2 border-white border-dashed ma-5"
             >
               <div class="place-text">第1位</div>
               <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
@@ -88,7 +88,7 @@
               align="center"
               cols="12"
               sm="3"
-              class="border-2 border-white border-dashed m-5"
+              class="border-2 border-white border-dashed ma-5"
             >
               <div class="place-text">第3位</div>
               <div v-if="thirdPlaceUserExist">
@@ -104,20 +104,20 @@
         <div class="top-bg">
           <v-row>
             <v-col cols="12" sm="12">
-              <div class="text-center text-2xl md:text-5xl">
+              <div class="text-center text-2xl md:text-4xl">
                 - - - - ブックマーク一覧- - - -
               </div>
             </v-col>
           </v-row>
         </div>
 
-        <div class="md:p-20">
+        <div class="md:pa-16">
           <div
             v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+            <v-card color="brown lighten-2" class="pa-10">
+              <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 Favorite ブロック
               </div>
               <div class="text-center">
@@ -160,8 +160,8 @@
             v-if="randomCurrentUserLikesQuestionBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+            <v-card color="brown lighten-2" class="pa-10">
+              <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 クエスチョンブロック
               </div>
               <div class="text-center">
@@ -203,8 +203,8 @@
             v-if="randomCurrentUserLikesRankingBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+            <v-card color="brown lighten-2" class="pa-10">
+              <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 ランキングブロック
               </div>
               <div class="text-center">
@@ -246,8 +246,8 @@
             v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="p-10">
-              <div class="top-sub-title m-5 text-center text-2xl md:text-4xl">
+            <v-card color="brown lighten-2" class="pa-10">
+              <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 Yes or No ブロック
               </div>
               <div class="text-center">
@@ -287,7 +287,7 @@
           </div>
 
           <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
-            <v-card color="brown lighten-2" class="p-10">
+            <v-card color="brown lighten-2" class="pa-10">
               <div class="top-sub-title my-10 text-center text-2xl md:text-4xl">
                 テキストブロック
               </div>
@@ -327,7 +327,7 @@
         </div>
       </div>
       <NotAnyBookmarkBlock v-else />
-      <div class="m-20">
+      <div class="ma-16">
         <v-row>
           <v-spacer></v-spacer>
           <v-btn

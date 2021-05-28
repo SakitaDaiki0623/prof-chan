@@ -1,5 +1,5 @@
 <template>
-  <v-row class="bg-brown-400 p-3" justify="center" align-content="center">
+  <v-row class="bg-brown-400 pa-3" justify="center" align-content="center">
     <v-col cols="12" sm="12">
       <div class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10">
         <v-icon large color="white">mdi-account-group-outline</v-icon>
@@ -9,7 +9,7 @@
     </v-col>
     <v-col cols="12" sm="10">
       <div
-        class="text-2xl lg:text-6xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
+        class="text-2xl lg:text-4xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
       >
         WELCOME!!
       </div>
@@ -20,7 +20,7 @@
       cols="12"
       sm="12"
       md="3"
-      class="border-dotted border-white border-2 m-5"
+      class="border-dotted border-white border-2 ma-5"
     >
       <v-card class="mx-auto" max-width="344" outlined color="brown lighten-5">
         <v-card color="brown lighten-2" class="white--text">
@@ -71,7 +71,7 @@ export default {
         .then((res) => (this.recentlyJoinedUserProfiles = res.data));
     },
     moveToUserProfilePage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`);
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});;
     },
   },
 };

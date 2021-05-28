@@ -2,7 +2,7 @@
   <!-- Item Form -->
   <div
     :id="yesOrNoBlockItemId"
-    class="m-1"
+    class="ma-1"
   >
     <v-row>
       <v-col
@@ -25,7 +25,7 @@
             type="text"
             @input="yesOrNoItem.content = $event.target.value"
           >
-          <span class="text-red-400">{{ errors[0] }}</span>
+          <span class="red--text">{{ errors[0] }}</span>
         </ValidationProvider>
       </v-col>
       <v-col
