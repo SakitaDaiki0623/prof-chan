@@ -27,6 +27,7 @@ gem "ams_lazy_relationships"
 # Application server
 gem 'puma', '~> 4.1'
 gem 'carrierwave'
+gem 'fog-aws'
 
 # Config
 gem 'config'
