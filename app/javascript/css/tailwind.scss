@@ -50,6 +50,28 @@
     @apply ring-yellow-200;
   }
 }
+.input-form-favorite-block {
+  @apply w-full;
+  @apply bg-white;
+  @apply rounded;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-base;
+  @apply outline-none;
+  @apply text-gray-700;
+  @apply py-1;
+  @apply px-3;
+  @apply leading-8;
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-in-out;
+
+  &:focus {
+    @apply border-brown-500;
+    @apply ring-2;
+    @apply ring-brown-200;
+  }
+}
 
 .input-form-question-block {
   @apply w-full;

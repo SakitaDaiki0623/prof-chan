@@ -41,7 +41,7 @@
                     id="favorite_category_id"
                     v-model="favoriteBlock.category_id"
                     name="favorite[category_id]"
-                    class="input-form-basic-block"
+                    class="input-form-favorite-block"
                   >
                     <option
                       v-for="category in categories"
@@ -66,7 +66,7 @@
                   <input
                     id="favorite_block_text"
                     v-model="favoriteBlock.text"
-                    class="input-form-text-block"
+                    class="input-form-favorite-block"
                     name="favorite_block[favorite_block_text]"
                   />
                   <span class="text-red-200">{{ errors[0] }}</span>

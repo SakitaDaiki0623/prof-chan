@@ -40,7 +40,7 @@
                     id="favorite_category_id"
                     v-model="editFavoriteBlock.category_id"
                     name="favorite[category_id]"
-                    class="input-form-basic-block"
+                    class="input-form-favorite-block"
                   >
                     <option
                       v-for="category in categories"
@@ -65,7 +65,7 @@
                   <input
                     id="text_block_text"
                     :value="editFavoriteBlock.text"
-                    class="input-form-text-block"
+                    class="input-form-favorite-block"
                     name="text_block[text_block_text]"
                     @input="editFavoriteBlock.text = $event.target.value"
                   />
