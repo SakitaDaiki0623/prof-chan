@@ -20,7 +20,7 @@
           クエスチョンブロック
         </p>
 
-        <div id="question-block-form" class="p-10 note-box">
+        <div id="question-block-form" class="pa-10 note-box">
           <v-row>
             <v-col cols="12" sm="7">
               <v-btn
@@ -126,7 +126,7 @@
                 :answer-name-for-validation="answerNameForValidation3"
               />
 
-              <div class="text-center p-10">
+              <div class="text-center pa-10">
                 <v-btn
                   id="creation_button"
                   type="submit"

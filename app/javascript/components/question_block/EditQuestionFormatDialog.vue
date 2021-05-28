@@ -23,7 +23,7 @@
           クエスチョンブロックを編集
         </p>
 
-        <div class="p-10 note-box">
+        <div class="pa-10 note-box">
           <v-row
             v-show="!isShownForm"
             align="center"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="rounded-2xl p-5" outlined :color="favoriteBlockColor">
+    <v-card class="rounded-2xl pa-5" outlined :color="favoriteBlockColor">
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + favoriteBlock.id"
@@ -31,7 +31,7 @@
         {{ favoriteBlock.title }}
       </label>
       <v-card
-        class="p-3 rounded-lg text-center"
+        class="pa-3 rounded-lg text-center"
         outlined
         color="white"
         max-height="50px"

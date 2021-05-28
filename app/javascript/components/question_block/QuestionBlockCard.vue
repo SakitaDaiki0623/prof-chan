@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="rounded-2xl p-5 note-box" outlined color="red lighten-4">
+    <v-card class="rounded-2xl pa-5 note-box" outlined color="red lighten-4">
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-question-block-button-' + questionBlock.id"
@@ -38,7 +38,7 @@
                 {{ question_item.content }}
               </label>
               <v-col cols="12" sm="12" class="mb-2">
-                <v-card class="p-2" outlined color="white">
+                <v-card class="pa-2" outlined color="white">
                   {{ question_item.answer }}
                 </v-card>
               </v-col>

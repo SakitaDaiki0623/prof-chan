@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="rounded-2xl p-5 note-box" outlined color="cyan lighten-4">
+    <v-card class="rounded-2xl pa-5 note-box" outlined color="cyan lighten-4">
       <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + textBlock.id"
@@ -30,7 +30,7 @@
       <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
         {{ textBlock.title }}
       </p>
-      <v-card class="p-3 rounded-lg" outlined color="white" min-height="200px">
+      <v-card class="pa-3 rounded-lg" outlined color="white" min-height="200px">
         {{ textBlock.text }}
       </v-card>
     </v-card>

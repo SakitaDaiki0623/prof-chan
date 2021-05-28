@@ -19,7 +19,7 @@
         <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
           ランキングブロックを編集
         </p>
-        <div id="ranking-block-form" class="p-10 note-box">
+        <div id="ranking-block-form" class="pa-10 note-box">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditRankingBlock(editRankingBlock)">
               <div>

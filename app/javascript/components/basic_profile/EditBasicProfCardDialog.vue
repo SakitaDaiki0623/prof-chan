@@ -29,7 +29,7 @@
             </v-btn>
           </v-row>
           <!-- FORM -->
-          <div id="profile-basic-form" class="p-6">
+          <div id="profile-basic-form" class="pa-6">
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form
                 @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"

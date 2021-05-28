@@ -2,7 +2,7 @@
   <!-- Item Form -->
   <div
     :id="yesOrNoBlockItemId"
-    class="m-1"
+    class="ma-1"
   >
     <v-row>
       <v-col

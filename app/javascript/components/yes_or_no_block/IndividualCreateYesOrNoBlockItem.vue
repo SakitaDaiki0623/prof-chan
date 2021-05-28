@@ -5,7 +5,7 @@
     v-slot="{ invalid }"
   >
     <form id="individual-create-yes-or-no-block-item-form">
-      <div class="m-1">
+      <div class="ma-1">
         <v-row>
           <v-col
             cols="12"

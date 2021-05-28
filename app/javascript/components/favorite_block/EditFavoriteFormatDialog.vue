@@ -7,8 +7,8 @@
       @input="$emit('input', $event.target.isShownEditFavoriteFormatDialog)"
     >
       <v-card :color="favoriteBlockColor">
-        <div class="bg-brown-300 p-3">
-          <v-row justify="end" class="m-2">
+        <div class="bg-brown-300 pa-3">
+          <v-row justify="end" class="ma-2">
             <v-btn
               :color="favoriteBlockColor"
               @click="hundleCloseEditFavoriteFormatDialog"
@@ -22,7 +22,7 @@
             Favorite ブロック編集
           </p>
         </div>
-        <div id="text-block-form" class="p-10 bg-text-prof-block bg-top">
+        <div id="text-block-form" class="pa-10 bg-text-prof-block bg-top">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleEditFavoriteBlock(editFavoriteBlock)">
               <div>

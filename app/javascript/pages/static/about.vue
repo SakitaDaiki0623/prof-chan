@@ -53,7 +53,7 @@
                   src="../../images/undraw_Notebook_re_id0r.svg"
                   class="image"
                 />
-                <div class="text-xl text-brown-300 p-8">
+                <div class="text-xl text-brown-300 pa-8">
                   あなたに関する様々な情報をプロフィールに書き込みましょう。
                 </div>
               </v-card>
@@ -72,7 +72,7 @@
                   src="../../images/undraw_Taking_notes_re_bnaf.svg"
                   class="image"
                 />
-                <div class="text-xl text-brown-300 p-8">
+                <div class="text-xl text-brown-300 pa-8">
                   社員さんのプロフィールを見てみましょう。気に入ったものはブックマークしましょう。
                 </div>
               </v-card>
@@ -89,7 +89,7 @@
                   src="../../images/undraw_video_call_kxyp.svg"
                   class="image"
                 />
-                <div class="text-xl text-brown-300 p-8">
+                <div class="text-xl text-brown-300 pa-8">
                   あなたが知ったこと、共通の話題を社員さんと話してみましょう。
                 </div>
               </v-card>
@@ -133,7 +133,7 @@
                       {{ favoriteBlock.title }}
                     </label>
                     <v-card
-                      class="p-3 rounded-lg text-center"
+                      class="pa-3 rounded-lg text-center"
                       outlined
                       color="white"
                       max-height="50px"
@@ -172,7 +172,7 @@
                             </label>
                             <v-col cols="12" sm="12" class="mb-2">
                               <v-card
-                                class="p-2 text-center"
+                                class="pa-2 text-center"
                                 outlined
                                 color="white"
                               >
@@ -202,15 +202,15 @@
                     outlined
                     color="light-green lighten-4"
                   >
-                    <v-card class="p-2 m-3 rounded-full" outlined color="white">
+                    <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
                       <label for="1st place" class="form-label">1st</label>
                       鬼滅の刃
                     </v-card>
-                    <v-card class="p-2 m-3 rounded-full" outlined color="white">
+                    <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
                       <label for="2nd place" class="form-label">2nd</label>
                       呪術廻戦
                     </v-card>
-                    <v-card class="p-2 m-3 rounded-full" outlined color="white">
+                    <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
                       <label for="3rd place" class="form-label">3rd</label>
                       ONE PIECE
                     </v-card>
@@ -235,7 +235,7 @@
                       v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items"
                     >
                       <div :key="yes_or_no_item.id">
-                        <v-card class="p-2 m-2" outlined color="white">
+                        <v-card class="pa-2 ma-2" outlined color="white">
                           <v-row>
                             <v-col cols="12" sm="12">
                               {{ yes_or_no_item.content }}
@@ -247,7 +247,7 @@
                               align="center"
                             >
                               <span
-                                class="rounded-full border-red-500 border-2 p-2"
+                                class="rounded-full border-brown-500 border-2 pa-2"
                                 >YES</span
                               >
                               / NO
@@ -255,7 +255,7 @@
                             <v-col v-else cols="12" sm="5">
                               YES /
                               <span
-                                class="rounded-full border-red-500 border-2 p-2"
+                                class="rounded-full border-brown-500 border-2 pa-2"
                                 >NO</span
                               >
                             </v-col>
@@ -285,7 +285,7 @@
                     <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
                       自己紹介
                     </p>
-                    <v-card class="p-3 rounded-lg" outlined color="white">
+                    <v-card class="pa-3 rounded-lg" outlined color="white">
                       私はロボロフスキーハムスターだよ
                     </v-card>
                   </v-card>
@@ -309,7 +309,7 @@
         <div class="text-3xl">キャラクターについて</div>
       </v-col>
       <v-col cols="12" lg="5" align="center">
-        <div class="p-10">
+        <div class="pa-10">
           <v-card color="brown lighten-3" class="white--text rounded-full pa-5">
             <div class="text-4xl font-bold colorful-dot">CHARACTER PROFILE</div>
             <div

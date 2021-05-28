@@ -19,7 +19,7 @@
             テキストブロック作成
           </p>
         </div>
-        <div id="text-block-form" class="p-10 note-box">
+        <div id="text-block-form" class="pa-10 note-box">
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateTextBlock(textBlock)">
               <div>

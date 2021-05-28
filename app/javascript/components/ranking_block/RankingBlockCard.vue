@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      class="rounded-2xl p-5 note-box"
+      class="rounded-2xl pa-5 note-box"
       outlined
       color="light-green lighten-4"
     >
@@ -34,15 +34,15 @@
       <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
         {{ rankingBlock.title }}
       </p>
-      <v-card class="p-2 m-3 rounded-full" outlined color="white">
+      <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
         <label for="1st place" class="form-label-text-block mr-5">1st</label
         >{{ rankingBlock.first_place }}
       </v-card>
-      <v-card class="p-2 m-3 rounded-full" outlined color="white">
+      <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
         <label for="2nd place" class="form-label-text-block mr-5">2nd</label
         >{{ rankingBlock.second_place }}
       </v-card>
-      <v-card class="p-2 m-3 rounded-full" outlined color="white">
+      <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
         <label for="3rd place" class="form-label-text-block mr-5">3rd</label
         >{{ rankingBlock.third_place }}
       </v-card>

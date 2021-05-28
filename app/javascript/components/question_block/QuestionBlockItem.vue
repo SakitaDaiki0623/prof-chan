@@ -2,7 +2,7 @@
   <!-- Item Form -->
   <div
     :id="questionBlockItemId"
-    class="m-1"
+    class="ma-1"
   >
     <v-row>
       <v-col

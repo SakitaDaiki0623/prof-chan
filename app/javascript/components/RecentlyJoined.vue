@@ -1,5 +1,5 @@
 <template>
-  <v-row class="bg-brown-400 p-3" justify="center" align-content="center">
+  <v-row class="bg-brown-400 pa-3" justify="center" align-content="center">
     <v-col cols="12" sm="12">
       <div class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10">
         <v-icon large color="white">mdi-account-group-outline</v-icon>

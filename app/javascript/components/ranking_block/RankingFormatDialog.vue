@@ -19,7 +19,7 @@
         <p class="font-weight-bold text-white text-4xl text-center my-10">
           ランキングブロック作成
         </p>
-        <div id="ranking-block-form" class="p-10 note-box">
+        <div id="ranking-block-form" class="pa-10 note-box">
           <v-btn
             id="input-ranking-title-button"
             type="submit"

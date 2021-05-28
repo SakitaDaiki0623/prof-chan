@@ -1,8 +1,8 @@
 <template>
-  <div class="text-gray-600 p-10">
+  <div class="text-gray-600 pa-10">
     <v-row align-content="center" class="lg:px-32 xl:px72">
       <v-col cols="12" md="5" lg="4" align-self="end">
-        <div class="text-2xl font-bold bg-brown-100 p-5 border-2 border-dotted border-brown-400 rounded-full text-center">
+        <div class="text-2xl font-bold bg-brown-100 pa-5 border-2 border-dotted border-brown-400 rounded-full text-center">
           基本情報を入力してね！
         </div>
         <img src="../../images/prof_normal.png" class="mx-auto md:max-w-sm max-w-sm" />
@@ -10,9 +10,9 @@
       <v-col cols="12" sm="12" md="7" lg="8">
         <!-- Basic Info Card -->
         <v-card class="rounded-2xl" color="brown lighten-4" outlined>
-          <div class="p-10">
+          <div class="pa-10">
             <!-- FORM -->
-            <div id="profile-basic-form" class="p-6">
+            <div id="profile-basic-form" class="pa-6">
               <div class="top-sub-title text-2xl text-center">基本情報</div>
               <ValidationObserver ref="observer" v-slot="{ invalid }">
                 <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
