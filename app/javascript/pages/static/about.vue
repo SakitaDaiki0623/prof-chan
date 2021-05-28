@@ -14,7 +14,7 @@
         <div class="md:text-4xl text-2xl pt-10">
           - - - - REMOTELY PROMOTE YOURSELF.- - - -
         </div>
-        <div class="text-md md:text-4xl pt-10">コロナ以前の雑談の補完。</div>
+        <div class="text-md md:text-2xl pt-10">コロナ以前の雑談の補完。</div>
       </v-col>
       <v-col cols="12" sm="12" class="mb-20">
         <div class="text-xl sm:text-4xl md:text-4xl">
@@ -27,22 +27,22 @@
       </v-col>
 
       <!-- 説明欄1 -->
-      <v-col cols="12" sm="12" align="left" class="mb-60">
+      <v-col cols="12" sm="12" align="left">
         <v-card
-          height="500px"
+          min-height="500px"
           color="brown lighten-3"
           outlined
           align="center"
-          class="p-10"
+          class="pa-10"
         >
           <div
-            class="md:text-4xl text-2xl border-t-8 border-b-8 border-white inline-block p-5 text-white font-bold"
+            class="md:text-4xl text-2xl border-t-8 border-b-8 border-white inline-block pa-5 text-white font-bold"
           >
             社内でプロフィールを公開しよう！
           </div>
           <v-row class="py-10" justify="center">
             <v-col cols="12" lg="3" align-self="start">
-              <v-card outlined class="p-5" max-height="470px">
+              <v-card outlined class="pa-5" max-height="470px">
                 <div
                   class="text-xl text-brown-300 font-bold border-t-4 border-b-4 border-brown-300 w-1/3 mb-5"
                 >
@@ -59,7 +59,7 @@
               </v-card>
             </v-col>
             <v-col cols="12" lg="3" align-self="start">
-              <v-card outlined class="p-5" max-height="470px">
+              <v-card outlined class="pa-5" max-height="470px">
                 <div
                   class="text-xl text-brown-300 font-bold border-t-4 border-b-4 border-brown-300 w-1/3 mb-5"
                 >
@@ -78,7 +78,7 @@
               </v-card>
             </v-col>
             <v-col cols="12" lg="3" align-self="start">
-              <v-card outlined class="p-5" max-height="470px">
+              <v-card outlined class="pa-5" max-height="470px">
                 <div
                   class="text-xl text-brown-300 font-bold border-t-4 border-b-4 border-brown-300 w-1/3 mb-5"
                 >
@@ -99,14 +99,11 @@
       </v-col>
       <!-- /説明欄1 -->
 
-      <!-- mobileレスポンシブマージン調整用 -->
-      <div class="my-96 h-screen lg:my-0 lg:h-0"></div>
-
       <!-- ブロック説明欄 -->
-      <v-col cols="12" sm="12" align="left" class="mt-32 md:ma-0">
+      <v-col cols="12" sm="12" align="left">
         <v-card color="brown lighten-2" outlined align="center">
           <div class="ma-10">
-            <div class="text-2xl md:text-4xl p-5 text-white font-bold">
+            <div class="text-2xl md:text-4xl pa-5 text-white font-bold">
               ブロックを使い分けて
               <br />
               項目を入力しよう！
@@ -128,7 +125,7 @@
                   </div>
 
                   <v-card
-                    class="rounded-2xl p-5"
+                    class="rounded-2xl pa-5"
                     outlined
                     color="brown lighten-3"
                   >
@@ -157,7 +154,7 @@
                     クエスチョンブロック
                   </div>
                   <v-card
-                    class="rounded-2xl p-5"
+                    class="rounded-2xl pa-5"
                     outlined
                     color="red lighten-4"
                   >
@@ -201,7 +198,7 @@
                   </div>
 
                   <v-card
-                    class="rounded-2xl p-5 note-box"
+                    class="rounded-2xl pa-5 note-box"
                     outlined
                     color="light-green lighten-4"
                   >
@@ -230,7 +227,7 @@
                   </div>
 
                   <v-card
-                    class="rounded-2xl p-5 note-box"
+                    class="rounded-2xl pa-5 note-box"
                     outlined
                     color="orange lighten-4"
                   >
@@ -281,7 +278,7 @@
                   </div>
 
                   <v-card
-                    class="rounded-2xl p-5 note-box"
+                    class="rounded-2xl pa-5 note-box"
                     outlined
                     color="cyan accent-1"
                   >
@@ -313,10 +310,10 @@
       </v-col>
       <v-col cols="12" lg="5" align="center">
         <div class="p-10">
-          <v-card color="brown lighten-3" class="white--text rounded-full p-5">
+          <v-card color="brown lighten-3" class="white--text rounded-full pa-5">
             <div class="text-4xl font-bold colorful-dot">CHARACTER PROFILE</div>
             <div
-              class="md:text-2xl text-xl border-2 border-dotted border-white p-5"
+              class="md:text-2xl text-xl border-2 border-dotted border-white pa-5"
             >
               ロボロフスキーハムスターのキャラクター。<br />
               自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。<br />
@@ -337,7 +334,7 @@
         </div>
       </v-col>
     </v-row>
-    <div class="m-20">
+    <div class="ma-16">
       <v-row>
         <v-spacer></v-spacer>
         <v-btn v-scroll-to="toTop" color="brown" x-large fab class="white--text"
