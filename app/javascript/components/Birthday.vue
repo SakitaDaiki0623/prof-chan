@@ -9,7 +9,7 @@
     </v-col>
     <v-col cols="12" sm="10">
       <div
-        class="text-2xl lg:text-6xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
+        class="text-2xl lg:text-4xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
       >
         HAPPY BIRTHDAY!!
       </div>

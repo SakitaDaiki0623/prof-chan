@@ -12,7 +12,7 @@
             <div class="text-lg">
               コロナ時代のフルリモート社員に贈る社員プロフィール公開サービス(slack)
             </div>
-            <div class="text-8xl p-10 font-body">
+            <div class="text-4xl p-10 font-body">
               プロフちゃん
             </div>
           </div>

@@ -104,7 +104,7 @@
         <div class="top-bg">
           <v-row>
             <v-col cols="12" sm="12">
-              <div class="text-center text-2xl md:text-5xl">
+              <div class="text-center text-2xl md:text-4xl">
                 - - - - ブックマーク一覧- - - -
               </div>
             </v-col>

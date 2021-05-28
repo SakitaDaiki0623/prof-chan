@@ -6,7 +6,7 @@
       class="p-20"
     >
       <v-col cols="12" sm="12" align="center">
-        <div class="balloon1 text-6xl">
+        <div class="balloon1 text-4xl">
           {{ profMessage }}
         </div>
       </v-col>

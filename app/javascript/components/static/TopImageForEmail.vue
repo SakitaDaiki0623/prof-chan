@@ -15,7 +15,7 @@
                 <br />
                 社員プロフィール公開サービス
               </div>
-              <div class="text-4xl font-bold md:text-5xl lg:text-6xl">
+              <div class="text-4xl font-bold">
                 プロフちゃん
               </div>
             </div>

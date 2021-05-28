@@ -5,7 +5,7 @@
         <img src="../images/prof_normal.png" class="image" />
       </v-col>
       <v-col cols="12" sm="7">
-        <div class="text-center text-6xl balloon4">
+        <div class="text-center text-4xl balloon4">
           あなたにおすすめの社員さん
         </div>
       </v-col>

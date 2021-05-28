@@ -11,13 +11,13 @@
         <div class="text-2xl border-b-8 border-white pb-2 inline-block">
           THEME
         </div>
-        <div class="sm:text-4xl md:text-6xl text-2xl pt-10">
+        <div class="md:text-4xl text-2xl pt-10">
           - - - - REMOTELY PROMOTE YOURSELF.- - - -
         </div>
         <div class="text-md md:text-4xl pt-10">コロナ以前の雑談の補完。</div>
       </v-col>
       <v-col cols="12" sm="12" class="mb-20">
-        <div class="text-xl sm:text-4xl md:text-6xl">
+        <div class="text-xl sm:text-4xl md:text-4xl">
           プロフちゃんはコロナで減ってしまった雑談を補完する<br /><span
             class="border-b-8 border-brown-500"
           >
@@ -103,9 +103,9 @@
       <div class="my-96 h-screen lg:my-0 lg:h-0"></div>
 
       <!-- ブロック説明欄 -->
-      <v-col cols="12" sm="12" align="left" class="mt-32 md:m-0">
+      <v-col cols="12" sm="12" align="left" class="mt-32 md:ma-0">
         <v-card color="brown lighten-2" outlined align="center">
-          <div class="m-10">
+          <div class="ma-10">
             <div class="text-2xl md:text-4xl p-5 text-white font-bold">
               ブロックを使い分けて
               <br />
@@ -313,12 +313,11 @@
       </v-col>
       <v-col cols="12" lg="5" align="center">
         <div class="p-10">
-          <v-card
-            color="brown lighten-3"
-            class="white--text rounded-full p-5"
-          >
+          <v-card color="brown lighten-3" class="white--text rounded-full p-5">
             <div class="text-4xl font-bold colorful-dot">CHARACTER PROFILE</div>
-            <div class="md:text-2xl text-xl border-2 border-dotted border-white p-5">
+            <div
+              class="md:text-2xl text-xl border-2 border-dotted border-white p-5"
+            >
               ロボロフスキーハムスターのキャラクター。<br />
               自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。<br />
               プロフが充実しているほど機嫌が良くなる。<br />
@@ -385,11 +384,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .image {
   width: 200px;
   height: 200px;
   object-fit: contain;
   border: brown dotted 1px;
 }
+
 </style>
