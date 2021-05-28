@@ -1,5 +1,5 @@
 <template>
-  <div id="top">
+  <div>
     <Loading v-show="loading"></Loading>
     <div class="top" v-show="!loading">
       <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">

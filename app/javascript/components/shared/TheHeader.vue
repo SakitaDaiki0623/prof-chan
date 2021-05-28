@@ -1,6 +1,6 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
-  <header v-show="doesCurrentUserhaveProfile">
+  <header v-show="doesCurrentUserhaveProfile" id="top">
     <v-app-bar
       color="brown lighten-2"
       outlined
