@@ -1,10 +1,12 @@
 <template>
-  <v-container
-    class="mb-10 bg-brown-200"
+  <v-card
+    color="brown lighten-4"
+    outlined
+    class="mb-10 pa-5"
     v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
   >
-    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
-      <span class="text-green-300 rounded-full px-2 bg-white">R</span> My Best 3
+    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+      <span class="green--text text--lighten-3 px-2 bg-white">R</span> My Best 3
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">
       <v-col cols="12" sm="12" align="center">
@@ -89,7 +91,7 @@
       @close-ranking-format-dialog="closeRankingFormatDialog"
       @add-ranking-block="addRankingBlock"
     />
-  </v-container>
+  </v-card>
 </template>
 
 <script>

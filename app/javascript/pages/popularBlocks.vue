@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <div class="top-bg mb-20" id="top">
+    <div class="top-bg mb-16">
       <div>
         <v-row>
           <v-col cols="12" sm="12">
@@ -13,16 +13,19 @@
     </div>
 
     <!-- Favorite ブロック -->
-    <div class="py-10 sm:px-20 bg-brown-400 mb-20">
+    <div
+      class="py-10 sm:px-16 bg-brown-400 mb-16"
+      v-if="favoritePopularBlocksTopThree.length !== 0"
+    >
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 border-class font-bold"
+            class="text-center text-4xl text-white pa-5 border-class font-bold"
           >
             Favorite ブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1" class="sm:mb-20">
+        <v-col cols="12" sm="1" class="sm:mb-16">
           <img src="../images/prof_normal.png" class="image mx-auto" />
         </v-col>
         <v-col
@@ -32,7 +35,7 @@
           md="4"
           class="border-2 border-white border-dashed"
         >
-          <div class="bg-white p-1 inline-block">
+          <div class="bg-white pa-1 inline-block">
             {{ favoriteBlock.owing_user.name }}
           </div>
           <v-img
@@ -47,16 +50,19 @@
     <!-- /Favorite ブロック -->
 
     <!-- クエスチョンブロック -->
-    <div class="py-10 sm:px-20 bg-brown-300 mb-20">
+    <div
+      class="py-10 sm:px-16 bg-brown-300 mb-16"
+      v-if="questionPopularBlocksTopThree.length !== 0"
+    >
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 border-class font-bold"
+            class="text-center text-4xl text-white pa-5 border-class font-bold"
           >
             クエスチョンブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1" class="sm:mb-20">
+        <v-col cols="12" sm="1" class="sm:mb-16">
           <img src="../images/prof_happy.png" class="image mx-auto" />
         </v-col>
         <v-col
@@ -67,7 +73,7 @@
           lg="4"
           class="border-2 border-white border-dashed"
         >
-          <div class="bg-white p-1 inline-block">
+          <div class="bg-white pa-1 inline-block">
             {{ questionBlock.owing_user.name }}
           </div>
           <v-img
@@ -82,16 +88,19 @@
     <!-- /クエスチョンブロック -->
 
     <!-- ランキングブロック -->
-    <div class="py-10 sm:px-20 bg-brown-400 mb-20">
+    <div
+      class="py-10 sm:px-16 bg-brown-400 mb-16"
+      v-if="rankingPopularBlocksTopThree.length !== 0"
+    >
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 border-class font-bold"
+            class="text-center text-4xl text-white pa-5 border-class font-bold"
           >
             ランキングブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1" class="sm:mb-20">
+        <v-col cols="12" sm="1" class="sm:mb-16">
           <img src="../images/prof_open_normal.png" class="image mx-auto" />
         </v-col>
         <v-col
@@ -102,7 +111,7 @@
           lg="4"
           class="border-2 border-white border-dashed"
         >
-          <div class="bg-white p-1 inline-block">
+          <div class="bg-white pa-1 inline-block">
             {{ rankingBlock.owing_user.name }}
           </div>
           <v-img
@@ -117,16 +126,19 @@
     <!-- /ランキングブロック -->
 
     <!-- Yes or No ブロック -->
-    <div class="py-10 sm:px-20 bg-brown-300 mb-20">
+    <div
+      class="py-10 sm:px-16 bg-brown-300 mb-16"
+      v-if="yesOrNoPopularBlocksTopThree.length !== 0"
+    >
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5 border-class font-bold"
+            class="text-center text-4xl text-white pa-5 border-class font-bold"
           >
             Yes or No ブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1" class="sm:mb-20">
+        <v-col cols="12" sm="1" class="sm:mb-16">
           <img src="../images/prof_open_happy.png" class="image mx-auto" />
         </v-col>
         <v-col
@@ -137,7 +149,7 @@
           lg="4"
           class="border-2 border-white border-dashed"
         >
-          <div class="bg-white p-1 inline-block">
+          <div class="bg-white pa-1 inline-block">
             {{ yesOrNoBlock.owing_user.name }}
           </div>
           <v-img
@@ -152,16 +164,19 @@
     <!-- /Yes or No ブロック -->
 
     <!-- テキストブロック -->
-    <div class="py-10 sm:px-20 bg-brown-400 mb-20">
+    <div
+      class="py-10 sm:px-16 bg-brown-400 mb-16"
+      v-if="textPopularBlocksTopThree.length !== 0"
+    >
       <v-row>
         <v-col cols="12" sm="11">
           <div
-            class="text-center text-4xl text-white p-5  border-class font-bold"
+            class="text-center text-4xl text-white pa-5  border-class font-bold"
           >
             テキストブロック
           </div>
         </v-col>
-        <v-col cols="12" sm="1" class="sm:mb-20">
+        <v-col cols="12" sm="1" class="sm:mb-16">
           <img src="../images/prof_normal.png" class="image mx-auto" />
         </v-col>
         <v-col
@@ -172,7 +187,7 @@
           lg="4"
           class="border-2 border-white border-dashed"
         >
-          <div class="bg-white p-1 inline-block">
+          <div class="bg-white pa-1 inline-block">
             {{ textBlock.owing_user.name }}
           </div>
           <v-img
@@ -185,7 +200,7 @@
       </v-row>
     </div>
     <!-- /テキストブロック -->
-    <div class="m-20">
+    <div class="ma-16">
       <v-row>
         <v-spacer></v-spacer>
         <v-btn v-scroll-to="toTop" color="brown" x-large fab class="white--text"

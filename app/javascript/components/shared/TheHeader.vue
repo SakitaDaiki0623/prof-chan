@@ -1,6 +1,6 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
-  <header v-show="doesCurrentUserhaveProfile">
+  <header v-show="doesCurrentUserhaveProfile" id="top">
     <v-app-bar
       color="brown lighten-2"
       outlined
@@ -44,7 +44,7 @@
       <v-spacer />
 
       <v-btn
-        class="m-2 white--text"
+        class="ma-2 white--text"
         color="brown darken-1"
         href="/users/sign_out"
         data-method="delete"
@@ -67,7 +67,7 @@
 
       <v-btn
         id="profile-edit-button"
-        class="m-2 white--text"
+        class="ma-2 white--text"
         color="brown lighten-2"
         @click="openProfileEditPage"
       >
@@ -105,7 +105,7 @@
 
       <v-btn
         id="about-button"
-        class="m-2 white--text"
+        class="ma-2 white--text"
         color="brown lighten-2"
         @click="openAboutPage"
       >
@@ -116,7 +116,7 @@
       <v-spacer />
 
       <v-btn
-        class="m-2 white--text"
+        class="ma-2 white--text"
         color="brown darken-1"
         href="/users/sign_out"
         data-method="delete"

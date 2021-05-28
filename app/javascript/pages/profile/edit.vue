@@ -2,7 +2,7 @@
 <template>
   <div>
     <v-container
-      class="border-gray-500 rounded-xl border-2 m-20 bg-main-contain-color note"
+      class="border-gray-500 rounded-xl border-2 ma-16 bg-main-contain-color note"
       v-if="shown"
     >
       <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
@@ -89,7 +89,7 @@ export default {
         .then((res) => (this.user = res.data));
     },
     moveToProfilesPage() {
-      this.$router.push("/profiles");
+      this.$router.push("/profiles").catch((err) => {});
     },
   },
 };

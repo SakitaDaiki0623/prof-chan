@@ -3,14 +3,14 @@
     <!-- 共通画面 -->
     <TopImage v-if="isProviderSlack" />
     <TopImageForEmail v-else />
-    <div class="p-20 text-center">
+    <div class="pa-16 text-center">
       <RecentlyJoined class="mb-10" />
       <Birthday />
     </div>
 
     <!-- ユーザごとに変動 -->
-    <div>
-      <RecommendedUsers class="mb-10" />
+    <div class="mb-10">
+      <RecommendedUsers />
     </div>
   </div>
 </template>
@@ -59,10 +59,10 @@ export default {
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      // await this.fetchYesOrNoBlocks();
-      // await this.fetchYesOrNoItems();
-      // await this.fetchQuestionBlocks();
-      // await this.fetchQuestionItems();
+      await this.fetchYesOrNoBlocks();
+      await this.fetchYesOrNoItems();
+      await this.fetchQuestionBlocks();
+      await this.fetchQuestionItems();
     },
   },
 };

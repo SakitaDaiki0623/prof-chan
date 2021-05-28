@@ -1,10 +1,12 @@
 <template>
-  <v-container
-    class="bg-brown-200 mb-10"
+  <v-card
+    color="brown lighten-4"
+    outlined
+    class="mb-10 pa-5"
     v-show="isMyFavoriteBlocksLengthNotZero || isThisEditPage"
   >
-    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
-      <span class="text-brown-300 rounded-full px-2 bg-white">F</span>
+    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+      <span class="brown--text text--lighten-3 rounded-full px-2 bg-white">F</span>
       My Favorite コーナー
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">
@@ -94,7 +96,7 @@
       @close-favorite-format-dialog="closeFavoriteFormatDialog"
       @add-favorite-block="addFavoriteBlock"
     />
-  </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -207,5 +209,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

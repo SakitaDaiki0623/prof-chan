@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     moveToTopPage() {
-      this.$router.push("/top");
+      this.$router.push("/top").catch((err) => {});;
     },
   },
 };
