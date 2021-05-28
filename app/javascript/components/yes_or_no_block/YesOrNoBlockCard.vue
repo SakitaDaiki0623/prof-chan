@@ -38,14 +38,14 @@
                 {{ yes_or_no_item.content }}
               </v-col>
               <v-col v-if="yes_or_no_item.answer" cols="12" sm="5">
-                <span class="rounded-full border-red-500 border-2 p-2"
+                <span class="rounded-full border-brown-500 border-2 p-2"
                   >YES</span
                 >
                 / NO
               </v-col>
               <v-col v-else cols="12" sm="5">
                 YES /
-                <span class="rounded-full border-red-500 border-2 p-2">NO</span>
+                <span class="rounded-full border-brown-500 border-2 p-2">NO</span>
               </v-col>
             </v-row>
           </v-card>

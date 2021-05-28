@@ -29,7 +29,7 @@
               cols="12"
               sm="6"
             >
-              <span class="rounded-full border-red-500 border-2 p-2">YES</span>
+              <span class="rounded-full border-brown-500 border-2 p-2">YES</span>
               / NO
             </v-col>
             <v-col
@@ -38,7 +38,7 @@
               sm="6"
             >
               YES /
-              <span class="rounded-full border-red-500 border-2 p-2">NO</span>
+              <span class="rounded-full border-brown-500 border-2 p-2">NO</span>
             </v-col>
           </v-row>
         </v-card>
