@@ -180,7 +180,6 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
-
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
       if (this.currentUser.provider == "slack") {
@@ -231,7 +230,7 @@ export default {
 <style scoped>
 .note-box {
   position: relative;
-  background-color: #f1f8e9;
+  background-color: #dcedc8;
 }
 .note-box::before {
   content: "";
