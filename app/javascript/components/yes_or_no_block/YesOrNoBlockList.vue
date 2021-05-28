@@ -5,8 +5,8 @@
     class="mb-10 pa-5"
     v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
   >
-    <div class="text-center text-5xl text-white py-5 my-5 top-sub-title">
-      <span class="text-yellow-300 rounded-full px-2 bg-white">Y</span> Yes or
+    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+      <span class="yellow--text text--darken-3 rounded-full px-2 bg-white">Y</span> Yes or
       No コーナー
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">
