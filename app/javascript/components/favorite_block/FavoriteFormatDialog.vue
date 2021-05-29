@@ -118,27 +118,11 @@ export default {
         category_id: "",
         text: "",
       },
-      categories: [
-        { value: "1", name: "音楽" },
-        { value: "2", name: "ゲームアプリ" },
-        { value: "3", name: "キャラクター" },
-        { value: "4", name: "俳優・女優" },
-        { value: "5", name: "食べ物" },
-        { value: "6", name: "動物" },
-        { value: "7", name: "スポーツ" },
-        { value: "8", name: "本" },
-        { value: "9", name: "場所" },
-        { value: "10", name: "お菓子" },
-        { value: "11", name: "お酒" },
-        { value: "12", name: "飲食店" },
-        { value: "13", name: "歌手" },
-        { value: "14", name: "YouTuber" },
-        { value: "15", name: "お笑い芸人" },
-      ],
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    ...mapState("activeHash", ["categories"]),
   },
   methods: {
     hundleCreateFavoriteBlock(favoriteBlock) {
