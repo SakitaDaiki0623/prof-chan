@@ -9,7 +9,7 @@
           <img src="../../images/prof_sad.png" class="md:max-w-sm mx-auto" />
         </v-col>
         <v-col cols="12" sm="6">
-          <div class="balloon4 text-xl sm:text-md md:text-3xl px-3 pt-2">
+          <div class="balloon4 text-xl sm:text-md md:text-4xl px-3 pt-2">
             <p>お探しのページが見つかりませんでした。</p>
             <p>
               一時的にアクセスができない状況にあるか
