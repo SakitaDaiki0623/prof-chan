@@ -4,16 +4,16 @@
       .text-center.text-lg.md:text-2xl.lg:text-4xl
         | - - - - REMOTELY PROMOTE YOURSELF.- - - -
     .grid.grid-cols-12.gap-2.text-center
-      .mt-5.col-start-1.col-span-12.md:col-span-7
-        .bg-white.rounded-full.p-2.md:p-10.m-5
+      .mt-5.col-start-1.col-span-12.md:col-span-4.md:col-start-4
+        .bg-white.rounded-full.p-2.md:p-10.mt-20.max-w-xl.border-2.border-brown-500.border-dashed
           .text-md.lg:text-xl.mb-5
             | コロナ時代のフルリモート社員に贈る
             .br
             |  社員プロフィール公開サービス
-          .text-4xl.font-bold.md:text-5xl.lg:text-6xl
+          .text-4xl.font-bold
             | プロフちゃん
       .col-start-2.col-span-10.md:col-start-8.col-span-5
-        = image_tag  "prof_normal.png", class: "max-w-sm mx-auto"
+        = image_tag  "prof_normal.png", class: "max-w-sm mx-auto md:mx-0"
   .grid.grid-cols-12.text-center.bg-brown-500.mb-10.lg
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-10.md:col-span-4
       = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign_in_with_slack_button', class: "inline-block opacity-50"
