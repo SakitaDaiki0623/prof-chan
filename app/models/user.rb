@@ -72,7 +72,7 @@ class User < ApplicationRecord
     self.find_or_create_by(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = 'ゲストユーザー'
-      user.remote_image_url = ENV['USER_IMAGE']
+      user.image = File.open(File.join(Rails.root, 'app/assets/images/prof_normal.png'))
     end
   end
 
@@ -96,7 +96,7 @@ class User < ApplicationRecord
     user
   end
 
-  # ユーザーが所属するチームがTeamテーブルにあるかどうかを確認
+  # slackログイン時にユーザーが所属するチームがTeamテーブルにあるかどうかを確認
   def check_team_existence(team_info)
     workspace_id = team_info.dig('id')
     name = team_info.dig('name')
