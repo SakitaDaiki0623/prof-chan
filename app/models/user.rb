@@ -54,10 +54,11 @@ class User < ApplicationRecord
 
   validates :encrypted_password,        presence: true
   # TODO: slackログインにも対応させる
-  validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.name == 'ゲストユーザー'} # ゲストユーザは同意なしでログイン
+  validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.email == 'guest@example.com'} # ゲストユーザは同意なしでログイン
 
-  # after_create Seedを入れるときコメントアウト
-  after_create :create_profile_block
+  after_create do
+    self.create_profile_block unless profile_block.present?
+  end
 
   after_initialize :set_default_team_value
 
