@@ -54,10 +54,11 @@ class User < ApplicationRecord
 
   validates :encrypted_password,        presence: true
   # TODO: slackログインにも対応させる
-  validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.name == 'ゲストユーザー'} # ゲストユーザは同意なしでログイン
+  validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.email == 'guest@example.com'} # ゲストユーザは同意なしでログイン
 
-  # after_create Seedを入れるときコメントアウト
-  after_create :create_profile_block
+  after_create do
+    self.create_profile_block unless profile_block.present?
+  end
 
   after_initialize :set_default_team_value
 
@@ -71,7 +72,7 @@ class User < ApplicationRecord
     self.find_or_create_by(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = 'ゲストユーザー'
-      user.remote_image_url = ENV['USER_IMAGE']
+      user.image = File.open(File.join(Rails.root, 'app/assets/images/prof_normal.png'))
     end
   end
 
@@ -95,7 +96,7 @@ class User < ApplicationRecord
     user
   end
 
-  # ユーザーが所属するチームがTeamテーブルにあるかどうかを確認
+  # slackログイン時にユーザーが所属するチームがTeamテーブルにあるかどうかを確認
   def check_team_existence(team_info)
     workspace_id = team_info.dig('id')
     name = team_info.dig('name')

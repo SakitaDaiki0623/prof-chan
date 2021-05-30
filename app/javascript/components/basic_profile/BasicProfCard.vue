@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     openEditBasicProfCard() {
-      this.editBasicProfile = this.profile;
+      this.editBasicProfile = Object.assign({}, this.profile);
       this.isShownEditBasicProfCardDialog = true;
     },
     closeEditBasicProfCardDialog() {

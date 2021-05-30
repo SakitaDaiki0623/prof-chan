@@ -1,23 +1,39 @@
 <template>
   <v-footer app absolute color="brown lighten-3">
     <div>
-      <v-btn dense text class="white--text">
+      <small class="text-white"> &copy; {{ copyText }}</small>
+      <v-btn dense text class="white--text" @click="openTermsDialog">
         利用規約
       </v-btn>
-      <v-btn dense text class="white--text">
+      <v-btn dense text class="white--text" @click="openPrivacyDialog">
         プライバシー・ポリシー
       </v-btn>
     </div>
-    <v-spacer></v-spacer>
-    <small class="text-white"> &copy; {{ copyText }}</small>
+    <TheTerms
+      :is-shown-terms="isShownTerms"
+      @close-terms-dialog="closeTermsDialog"
+    />
+    <ThePrivacy
+      :is-shown-privacy="isShownPrivacy"
+      @close-privacy-dialog="closePrivacyDialog"
+    />
   </v-footer>
 </template>
 
 <script>
+import TheTerms from "../static/TheTerms";
+import ThePrivacy from "../static/ThePrivacy";
+
 export default {
+  components: {
+    TheTerms,
+    ThePrivacy,
+  },
   data() {
     return {
       startYear: 2021,
+      isShownTerms: false,
+      isShownPrivacy: false,
     };
   },
   computed: {
@@ -29,6 +45,20 @@ export default {
         return `${this.thisYear} - プロフちゃん`;
       }
       return `${this.startYear} - ${this.thisYear} - プロフちゃん`;
+    },
+  },
+  methods: {
+    openTermsDialog() {
+      this.isShownTerms = true;
+    },
+    openPrivacyDialog() {
+      this.isShownPrivacy = true;
+    },
+    closeTermsDialog() {
+      this.isShownTerms = false;
+    },
+    closePrivacyDialog() {
+      this.isShownPrivacy = false;
     },
   },
 };

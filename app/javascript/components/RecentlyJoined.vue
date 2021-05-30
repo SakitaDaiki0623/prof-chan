@@ -28,7 +28,7 @@
         </v-card>
         <v-img :src="recentlyJoinedUserProfile.user.image.url" height="180px" />
 
-        <div class="text-center font-bold text-3xl pt-5 text-brown-600">
+        <div class="text-center font-bold text-4xl pt-5 text-brown-600">
           {{ recentlyJoinedUserProfile.user.name }} さん
         </div>
 

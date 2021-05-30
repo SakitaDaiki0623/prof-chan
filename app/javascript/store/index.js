@@ -7,6 +7,7 @@ import createPersistedState from "vuex-persistedstate";
 import { users } from "./modules/users";
 import { flash } from "./modules/flash";
 import { isNotFound } from "./modules/isNotFound";
+import { activeHash } from "./modules/activeHash";
 
 // Blocks
 import { questionBlocks } from "./modules/questionBlocks";
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     users,
     flash,
     isNotFound,
+    activeHash,
 
     // Blocks
     questionBlocks,
