@@ -82,8 +82,10 @@
     p 本ポリシーに関するお問い合わせは，以下のメールアドレスにご連絡ください。
     p e-mail
     p.ml-5 profchan.profile@gmail.com
-    .mt-20.text-center 以上
+    .my-20.text-center 以上
+    .container.text-center.term-font
+      div
+        =link_to 'トップページに戻る', root_path, class: 'mx-10 hover:opacity-50 inline-block'
+      div
+        =link_to "新規登録はこちら", new_user_registration_path, class: 'mx-10 hover:opacity-50 inline-block'
 
-.container.text-center.term-font.mb-10
-  =link_to 'トップページに戻る', root_path, class: 'px-10 hover:opacity-50'
-  =link_to "新規登録はこちら", new_user_registration_path, class: 'px-10 hover:opacity-50'
