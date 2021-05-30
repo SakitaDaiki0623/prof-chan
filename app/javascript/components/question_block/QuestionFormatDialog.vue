@@ -22,7 +22,23 @@
 
         <div id="question-block-form" class="pa-10 note-box">
           <v-row>
-            <v-col cols="12" sm="7">
+            <v-col cols="12" sm="6">
+              <v-btn
+                id="input-yes-or-no-title-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="red lighten-2"
+                class="white--text py-2"
+                @click="inputTitleRandomly"
+              >
+                <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+              </v-btn>
+            </v-col>
+            <v-spacer />
+            <v-col cols="12" sm="6">
               <v-btn
                 id="add-question-item-button"
                 type="submit"
@@ -52,22 +68,6 @@
               >
                 <v-icon left> mdi-minus </v-icon>
                 質問と答えを減らす
-              </v-btn>
-            </v-col>
-            <v-spacer />
-            <v-col cols="12" sm="4">
-              <v-btn
-                id="input-yes-or-no-title-button"
-                type="submit"
-                depressed
-                elevation="4"
-                small
-                tile
-                color="red lighten-2"
-                class="white--text py-2"
-                @click="inputTitleRandomly"
-              >
-                <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
               </v-btn>
             </v-col>
           </v-row>

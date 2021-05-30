@@ -26,7 +26,23 @@
           color="orange lighten-4"
         >
           <v-row>
-            <v-col cols="12" sm="7">
+            <v-col cols="12" sm="6">
+              <v-btn
+                id="input-yes-or-no-title-button"
+                type="submit"
+                depressed
+                elevation="4"
+                small
+                tile
+                color="orange lighten-2"
+                class="white--text py-2"
+                @click="inputTitleRandomly"
+              >
+                <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+              </v-btn>
+            </v-col>
+            <v-spacer />
+            <v-col cols="12" sm="6">
               <v-btn
                 id="add-yes-or-no-item-button"
                 type="submit"
@@ -56,22 +72,6 @@
               >
                 <v-icon left> mdi-minus </v-icon>
                 質問と答えを減らす
-              </v-btn>
-            </v-col>
-            <v-spacer />
-            <v-col cols="12" sm="4">
-              <v-btn
-                id="input-yes-or-no-title-button"
-                type="submit"
-                depressed
-                elevation="4"
-                small
-                tile
-                color="orange lighten-2"
-                class="white--text py-2"
-                @click="inputTitleRandomly"
-              >
-                <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
               </v-btn>
             </v-col>
           </v-row>
