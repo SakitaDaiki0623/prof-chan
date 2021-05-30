@@ -97,8 +97,9 @@
     ol.ml-5.list-decimal
       li 本規約の解釈にあたっては，日本法を準拠法とします。
       li 本サービスに関して紛争が生じた場合には，当事務局の本店所在地を管轄する裁判所を専属的合意管轄とします。
-    .mt-20.text-center 以上
-
-    = link_to 'トップページに戻る', root_path, class: 'hover:opacity-50'
-
-    = link_to "新規登録はこちら", new_user_registration_path, class: 'hover:opacity-50'
+    .my-20.text-center 以上
+    .container.text-center.term-font
+      div
+        =link_to 'トップページに戻る', root_path, class: 'mx-10 hover:opacity-50 inline-block'
+      div
+        =link_to "新規登録はこちら", new_user_registration_path, class: 'mx-10 hover:opacity-50 inline-block'

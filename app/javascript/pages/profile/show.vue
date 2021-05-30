@@ -26,7 +26,7 @@
         </v-row>
       </v-container>
       <v-container
-        class="border-gray-500 rounded-xl border-2 ma-16 note"
+        class="border-gray-500 rounded-xl border-2 my-16 note"
         v-if="shown"
       >
         <BasicAndAddressBlock :user="user" />

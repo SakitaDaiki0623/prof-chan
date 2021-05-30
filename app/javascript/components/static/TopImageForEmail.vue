@@ -9,7 +9,9 @@
             </div>
           </v-col>
           <v-col cols="12" sm="12" md="7" align-self="center" align="right">
-            <div class="text-center bg-white rounded-full md:py-10 md:px-5 ma-5 max-w-xl border-2 border-black border-dashed">
+            <div
+              class="text-center bg-white rounded-full md:py-16 md:px-5 ma-5 max-w-xl border-2 border-brown-500 border-dashed"
+            >
               <div class="text-md lg:text-xl mb-5">
                 コロナ時代のフルリモート社員に贈る
                 <br />
@@ -21,8 +23,13 @@
             </div>
           </v-col>
           <v-col cols="12" sm="4" md="5" align="left">
-            <div class="balloon1 text-sm text-center md:text-2xl">通常ログイン版</div>
-            <img src="../../images/prof_happy.png" class="max-w-xs md:max-w-sm" />
+            <div class="balloon1 text-sm text-center md:text-2xl">
+              通常ログイン版
+            </div>
+            <img
+              src="../../images/prof_happy.png"
+              class="max-w-xs md:max-w-sm"
+            />
           </v-col>
         </v-row>
       </div>

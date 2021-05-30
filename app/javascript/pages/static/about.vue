@@ -4,7 +4,7 @@
       <v-col
         cols="12"
         sm="12"
-        class="mb-20 bg-brown-500 text-white"
+        class="bg-brown-500 text-white"
         align="center"
         align-self="end"
       >
@@ -16,7 +16,7 @@
         </div>
         <div class="text-md md:text-2xl pt-10">コロナ以前の雑談の補完。</div>
       </v-col>
-      <v-col cols="12" sm="12" class="mb-20">
+      <v-col cols="12" sm="12" class="my-16 ">
         <div class="text-xl sm:text-4xl md:text-4xl">
           プロフちゃんはコロナで減ってしまった雑談を補完する<br /><span
             class="border-b-8 border-brown-500"
@@ -306,7 +306,7 @@
         lg="8"
         class="border-t-2 border-b-2 border-brown-600 border-dotted my-10"
       >
-        <div class="text-3xl">キャラクターについて</div>
+        <div class="text-2xl md:text-4xl">キャラクターについて</div>
       </v-col>
       <v-col cols="12" lg="5" align="center">
         <div class="pa-10">
