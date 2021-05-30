@@ -20,6 +20,19 @@
           </p>
         </div>
         <div id="text-block-form" class="pa-10 note-box">
+          <v-btn
+            id="input-text-title-button"
+            type="submit"
+            depressed
+            elevation="4"
+            small
+            tile
+            color="cyan lighten-2"
+            class="white--text py-2"
+            @click="inputTitleRandomly"
+          >
+            <v-icon left> mdi-plus </v-icon>テキストフォーマットをランダムに入力
+          </v-btn>
           <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="hundleCreateTextBlock(textBlock)">
               <div>
@@ -85,7 +98,7 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 // components ----------
 
@@ -106,6 +119,18 @@ export default {
         title: "",
         text: "",
       },
+      randomTextTitles: [
+        {
+          title: "子供の時の私",
+          text:
+            "幼稚園の頃は【】子供でした。小学校では【】が印象に残ってます。中学では部活は【】に入りました。部活は【】だったなー。高校は【】って感じでした。高校の部活は【】でした。あのころはすごく【】ました。ああー【】だったなー",
+        },
+        {
+          title: "簡単な自己紹介",
+          text:
+            "私は【】年【】月【】日生まれの【】座だよ！性格はよく【】って言われます。1番の特技は【】で最近は【】にはまっています！私は芸能人でいうと【】と似ているかなと思う！",
+        },
+      ],
     };
   },
   computed: {
@@ -147,6 +172,14 @@ export default {
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
+    },
+
+    inputTitleRandomly() {
+      const randomNum = Math.floor(
+        Math.random() * this.randomTextTitles.length
+      );
+      this.textBlock.title = this.randomTextTitles[randomNum].title;
+      this.textBlock.text = this.randomTextTitles[randomNum].text;
     },
   },
 };
