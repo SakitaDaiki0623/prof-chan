@@ -33,23 +33,22 @@
                 >
                 <ValidationProvider
                   v-slot="{ errors }"
-                  name="出身地"
+                  name="カテゴリー"
                   rules="select_required"
                 >
-                  <select
+                  <v-select
                     id="favorite_category_id"
                     v-model="editFavoriteBlock.category_id"
                     name="favorite[category_id]"
                     class="input-form-favorite-block"
+                    :items="categories"
+                    item-text="name"
+                    item-value="value"
+                    color="brown lighten-3"
+                    persistent-hint
+                    single-line
                   >
-                    <option
-                      v-for="category in categories"
-                      :key="category.value"
-                      :value="category.value"
-                    >
-                      {{ category.name }}
-                    </option>
-                  </select>
+                  </v-select>
                   <span class="red--text text--lighten-3">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
