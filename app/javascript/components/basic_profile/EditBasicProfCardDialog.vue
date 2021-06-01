@@ -43,20 +43,19 @@
                     name="性別"
                     rules="select_required"
                   >
-                    <select
+                    <v-select
                       id="profile_gender"
                       v-model="editBasicProfile.gender"
                       class="input-form-basic-block"
                       name="profile[gender]"
+                      :items="genders"
+                      item-text="text"
+                      item-value="text"
+                      color="brown lighten-3"
+                      persistent-hint
+                      single-line
                     >
-                      <option
-                        v-for="gender in genders"
-                        :key="gender.value"
-                        :value="gender.text"
-                      >
-                        {{ gender.text }}
-                      </option>
-                    </select>
+                    </v-select>
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -88,20 +87,19 @@
                     name="血液型"
                     rules="select_required"
                   >
-                    <select
+                    <v-select
                       id="profile_blood_type"
                       v-model="editBasicProfile.blood_type"
                       class="input-form-basic-block"
                       name="profile[blood_type]"
+                      :items="bloodTypes"
+                      item-text="bloodTypes"
+                      item-value="bloodTypes"
+                      color="brown lighten-3"
+                      persistent-hint
+                      single-line
                     >
-                      <option
-                        v-for="bloodType in bloodTypes"
-                        :key="bloodType"
-                        :value="bloodType"
-                      >
-                        {{ bloodType }}型
-                      </option>
-                    </select>
+                    </v-select>
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -116,20 +114,19 @@
                     name="出身地"
                     rules="select_required"
                   >
-                    <select
+                    <v-select
                       id="profile_prefecture_id"
                       v-model="editBasicProfile.prefecture_id"
                       name="profile[prefecture_id]"
                       class="input-form-basic-block"
+                      :items="prefectures"
+                      item-text="text"
+                      item-value="text"
+                      color="brown lighten-3"
+                      persistent-hint
+                      single-line
                     >
-                      <option
-                        v-for="prefecture in prefectures"
-                        :key="prefecture.value"
-                        :value="prefecture.text"
-                      >
-                        {{ prefecture.text }}
-                      </option>
-                    </select>
+                    </v-select>
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -166,8 +163,8 @@
                     <v-date-picker
                       ref="picker"
                       v-model="editBasicProfile.birthday"
-                      color="blue-grey darken-3"
-                      header-color="blue-grey darken-2"
+                      color="brown lighten-3"
+                      header-color="brown lighten-2"
                       locale="ja-jp"
                       :day-format="(date) => new Date(date).getDate()"
                       :max="new Date().toISOString().substr(0, 10)"
@@ -211,8 +208,8 @@
                     <v-date-picker
                       ref="picker"
                       v-model="editBasicProfile.day_of_joinning"
-                      color="blue-grey darken-3"
-                      header-color="blue-grey darken-2"
+                      color="brown lighten-3"
+                      header-color="brown lighten-2"
                       locale="ja-jp"
                       :day-format="(date) => new Date(date).getDate()"
                       @change="saveJoinedDate"
@@ -320,3 +317,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/*  input type="date"のアイコンを非表示にする  */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+</style>
