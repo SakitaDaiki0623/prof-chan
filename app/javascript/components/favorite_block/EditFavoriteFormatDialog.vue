@@ -1,96 +1,92 @@
 <template>
-  <div>
-    <v-dialog
-      :value="isShownEditFavoriteFormatDialog"
-      max-width="400"
-      persistent
-      @input="$emit('input', $event.target.isShownEditFavoriteFormatDialog)"
-    >
-      <v-card :color="favoriteBlockColor">
-        <div class="bg-brown-300 pa-3">
-          <v-row justify="end" class="ma-2">
-            <v-btn
-              :color="favoriteBlockColor"
-              @click="hundleCloseEditFavoriteFormatDialog"
-            >
-              <v-icon> mdi-close-outline </v-icon>
-            </v-btn>
-          </v-row>
-          <p
-            class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
+  <v-dialog
+    :value="isShownEditFavoriteFormatDialog"
+    max-width="500"
+    @click:outside="hundleCloseEditFavoriteFormatDialog"
+    @input="$emit('input', $event.target.isShownEditFavoriteFormatDialog)"
+  >
+    <v-card :color="favoriteBlockColor">
+      <div class="bg-brown-300 pa-3">
+        <v-row justify="end" class="ma-2">
+          <v-btn
+            :color="favoriteBlockColor"
+            @click="hundleCloseEditFavoriteFormatDialog"
           >
-            Favorite ブロック編集
-          </p>
-        </div>
-        <div id="text-block-form" class="pa-10 bg-text-prof-block bg-top">
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
-            <form @submit.prevent="hundleEditFavoriteBlock(editFavoriteBlock)">
-              <div>
-                <label
-                  class="form-label-text-block"
-                  for="favorite_block_category_id"
-                  >カテゴリー</label
+            <v-icon> mdi-close-outline </v-icon>
+          </v-btn>
+        </v-row>
+        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
+          Favorite ブロック編集
+        </p>
+      </div>
+      <div id="text-block-form" class="pa-10 bg-text-prof-block bg-top">
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <form @submit.prevent="hundleEditFavoriteBlock(editFavoriteBlock)">
+            <div>
+              <label
+                class="form-label-text-block"
+                for="favorite_block_category_id"
+                >カテゴリー</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="カテゴリー"
+                rules="select_required"
+              >
+                <v-select
+                  id="favorite_category_id"
+                  v-model="editFavoriteBlock.category_id"
+                  name="favorite[category_id]"
+                  class="input-form-favorite-block"
+                  :items="categories"
+                  item-text="name"
+                  item-value="value"
+                  color="brown lighten-3"
+                  persistent-hint
+                  single-line
                 >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="カテゴリー"
-                  rules="select_required"
-                >
-                  <v-select
-                    id="favorite_category_id"
-                    v-model="editFavoriteBlock.category_id"
-                    name="favorite[category_id]"
-                    class="input-form-favorite-block"
-                    :items="categories"
-                    item-text="name"
-                    item-value="value"
-                    color="brown lighten-3"
-                    persistent-hint
-                    single-line
-                  >
-                  </v-select>
-                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="mt-5">
-                <label class="form-label-text-block" for="text_block_text"
-                  >テキスト</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="テキスト"
-                  rules="input_required|max:20"
-                >
-                  <input
-                    id="text_block_text"
-                    :value="editFavoriteBlock.text"
-                    class="input-form-favorite-block"
-                    name="text_block[text_block_text]"
-                    @input="editFavoriteBlock.text = $event.target.value"
-                  />
-                  <span class="red--text text--lighten-3">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="text-center mt-3">
-                <v-btn
-                  id="creation_button"
-                  type="submit"
-                  depressed
-                  elevation="4"
-                  x-large
-                  :disabled="invalid"
-                  :color="favoriteBlockColor"
-                  class="white--text"
-                >
-                  Favorite ブロックを更新！
-                </v-btn>
-              </div>
-            </form>
-          </ValidationObserver>
-        </div>
-      </v-card>
-    </v-dialog>
-  </div>
+                </v-select>
+                <span class="red--text text--lighten-3">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="mt-5">
+              <label class="form-label-text-block" for="text_block_text"
+                >テキスト</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="テキスト"
+                rules="input_required|max:20"
+              >
+                <input
+                  id="text_block_text"
+                  :value="editFavoriteBlock.text"
+                  class="input-form-favorite-block"
+                  name="text_block[text_block_text]"
+                  @input="editFavoriteBlock.text = $event.target.value"
+                />
+                <span class="red--text text--lighten-3">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="text-center mt-3">
+              <v-btn
+                id="creation_button"
+                type="submit"
+                depressed
+                elevation="4"
+                x-large
+                :disabled="invalid"
+                :color="favoriteBlockColor"
+                class="white--text"
+              >
+                Favorite ブロックを更新！
+              </v-btn>
+            </div>
+          </form>
+        </ValidationObserver>
+      </div>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>

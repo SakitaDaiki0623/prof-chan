@@ -1,140 +1,138 @@
 <!-- app/javascript/components/TextFormatDialog.vue -->
 <template>
-  <div>
-    <v-dialog
-      :value="isShownRankingFormatDialog"
-      max-width="800"
-      persistent
-      @input="$emit('input', $event.target.isShownRankingFormatDialog)"
-    >
-      <v-card :color="rankingBlockColor">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn
-            :color="rankingBlockColor"
-            @click="hundleCloseRankingFormatDialog"
-          >
-            <v-icon> mdi-close-outline </v-icon>
-          </v-btn>
-        </v-row>
-        <p class="font-weight-bold text-white text-4xl text-center my-10">
-          ランキングブロック作成
-        </p>
-        <div id="ranking-block-form" class="pa-10 note-box">
-          <v-btn
-            id="input-ranking-title-button"
-            type="submit"
-            depressed
-            elevation="4"
-            small
-            tile
-            color="green lighten-2"
-            class="white--text py-2"
-            @click="inputTitleRandomly"
-          >
-            <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
-          </v-btn>
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
-            <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
-              <div>
-                <label class="form-label-text-block" for="ranking_block_title"
-                  >タイトル</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="タイトル"
-                  rules="input_required|max:50"
-                >
-                  <input
-                    id="ranking_block_title"
-                    v-model="rankingBlock.title"
-                    class="input-form-ranking-block"
-                    name="ranking_block[ranking_block_title]"
-                    type="text"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
+  <v-dialog
+    :value="isShownRankingFormatDialog"
+    max-width="800"
+    @click:outside="hundleCloseRankingFormatDialog"
+    @input="$emit('input', $event.target.isShownRankingFormatDialog)"
+  >
+    <v-card :color="rankingBlockColor">
+      <v-row justify="end" class="mr-2 mt-2">
+        <v-btn
+          :color="rankingBlockColor"
+          @click="hundleCloseRankingFormatDialog"
+        >
+          <v-icon> mdi-close-outline </v-icon>
+        </v-btn>
+      </v-row>
+      <p class="font-weight-bold text-white text-4xl text-center my-10">
+        ランキングブロック作成
+      </p>
+      <div id="ranking-block-form" class="pa-10 note-box">
+        <v-btn
+          id="input-ranking-title-button"
+          type="submit"
+          depressed
+          elevation="4"
+          small
+          tile
+          color="green lighten-2"
+          class="white--text py-2"
+          @click="inputTitleRandomly"
+        >
+          <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+        </v-btn>
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
+            <div>
+              <label class="form-label-text-block" for="ranking_block_title"
+                >タイトル</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="タイトル"
+                rules="input_required|max:50"
+              >
+                <input
+                  id="ranking_block_title"
+                  v-model="rankingBlock.title"
+                  class="input-form-ranking-block"
+                  name="ranking_block[ranking_block_title]"
+                  type="text"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
 
-              <div class="mt-5">
-                <label
-                  class="form-label-text-block"
-                  for="ranking_block_first_place"
-                  >1st</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="1位"
-                  rules="input_required|max:50"
-                >
-                  <input
-                    id="ranking_block_first_place"
-                    v-model="rankingBlock.first_place"
-                    class="input-form-ranking-block"
-                    name="ranking_block[ranking_block_first_place]"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="mt-5">
-                <label
-                  class="form-label-text-block"
-                  for="ranking_block_second_place"
-                  >2nd</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="2位"
-                  rules="input_required|max:50"
-                >
-                  <input
-                    id="ranking_block_second_place"
-                    v-model="rankingBlock.second_place"
-                    class="input-form-ranking-block"
-                    name="ranking_block[ranking_block_second_place]"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="mt-5">
-                <label
-                  class="form-label-text-block"
-                  for="ranking_block_third_place"
-                  >3rd</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="3位"
-                  rules="input_required|max:50"
-                >
-                  <input
-                    id="ranking_block_third_place"
-                    v-model="rankingBlock.third_place"
-                    class="input-form-ranking-block"
-                    name="ranking_block[ranking_block_third_place]"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="text-center mt-3">
-                <v-btn
-                  id="creation_button"
-                  type="submit"
-                  depressed
-                  elevation="4"
-                  x-large
-                  :disabled="invalid"
-                  :color="rankingBlockColor"
-                  class="white--text"
-                >
-                  ランキングブロックを作成！
-                </v-btn>
-              </div>
-            </form>
-          </ValidationObserver>
-        </div>
-      </v-card>
-    </v-dialog>
-  </div>
+            <div class="mt-5">
+              <label
+                class="form-label-text-block"
+                for="ranking_block_first_place"
+                >1st</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="1位"
+                rules="input_required|max:50"
+              >
+                <input
+                  id="ranking_block_first_place"
+                  v-model="rankingBlock.first_place"
+                  class="input-form-ranking-block"
+                  name="ranking_block[ranking_block_first_place]"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="mt-5">
+              <label
+                class="form-label-text-block"
+                for="ranking_block_second_place"
+                >2nd</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="2位"
+                rules="input_required|max:50"
+              >
+                <input
+                  id="ranking_block_second_place"
+                  v-model="rankingBlock.second_place"
+                  class="input-form-ranking-block"
+                  name="ranking_block[ranking_block_second_place]"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="mt-5">
+              <label
+                class="form-label-text-block"
+                for="ranking_block_third_place"
+                >3rd</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="3位"
+                rules="input_required|max:50"
+              >
+                <input
+                  id="ranking_block_third_place"
+                  v-model="rankingBlock.third_place"
+                  class="input-form-ranking-block"
+                  name="ranking_block[ranking_block_third_place]"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="text-center mt-3">
+              <v-btn
+                id="creation_button"
+                type="submit"
+                depressed
+                elevation="4"
+                x-large
+                :disabled="invalid"
+                :color="rankingBlockColor"
+                class="white--text"
+              >
+                ランキングブロックを作成！
+              </v-btn>
+            </div>
+          </form>
+        </ValidationObserver>
+      </div>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
