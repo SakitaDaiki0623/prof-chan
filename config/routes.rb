@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     post '/users/guest_sign_in', to: 'users/sessions#new_guest'
   end
 
-  get '/auth/callback', to: 'add_to_slack#callback'
+  # get '/auth/callback', to: 'add_to_slack#callback'
 
 
   # redirect path after authentication

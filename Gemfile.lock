@@ -91,10 +91,6 @@ GEM
       active_model_serializers (>= 0.10.0.rc4)
       batch-loader
     ast (2.4.2)
-    async (1.29.0)
-      console (~> 1.10)
-      nio4r (~> 2.3)
-      timers (~> 4.1)
     batch-loader (2.0.1)
     bcrypt (3.1.16)
     better_errors (2.9.1)
@@ -137,16 +133,12 @@ GEM
     config (3.1.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
-    console (1.12.0)
-      fiber-local
     crack (0.4.5)
       rexml
     crass (1.0.6)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
     debug_inspector (1.1.0)
-    declarative (0.0.20)
-    declarative-option (0.1.0)
     deep_merge (1.2.1)
     devise-i18n (1.9.4)
       devise (>= 4.7.1)
@@ -214,7 +206,6 @@ GEM
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     ffi (1.15.0)
-    fiber-local (1.0.0)
     fog-aws (3.10.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -238,19 +229,6 @@ GEM
     gli (2.20.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    grape (1.5.3)
-      activesupport
-      builder
-      dry-types (>= 1.1)
-      mustermann-grape (~> 1.0.0)
-      rack (>= 1.3.0)
-      rack-accept
-    grape-roar (0.4.1)
-      grape
-      multi_json
-      roar (~> 1.1.0)
-    grape-swagger (1.4.0)
-      grape (~> 1.3)
     hashdiff (1.0.1)
     hashie (4.1.0)
     hpricot (0.8.6)
@@ -284,9 +262,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kaminari-grape (1.0.1)
-      grape
-      kaminari-core (~> 1.0)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.7.0)
@@ -322,10 +297,6 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    mustermann (1.1.1)
-      ruby2_keywords (~> 0.0.1)
-    mustermann-grape (1.0.1)
-      mustermann (>= 1.0.0)
     mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.5)
@@ -373,16 +344,9 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
-    rack-accept (0.4.5)
-      rack (>= 0.4)
-    rack-cors (1.1.1)
-      rack (>= 2.0.0)
     rack-protection (2.1.0)
       rack
     rack-proxy (0.6.5)
-      rack
-    rack-rewrite (1.5.1)
-    rack-server-pages (0.1.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -446,17 +410,11 @@ GEM
     redis-store (1.9.0)
       redis (>= 4, < 5)
     regexp_parser (2.1.1)
-    representable (3.0.4)
-      declarative (< 0.1.0)
-      declarative-option (< 0.2.0)
-      uber (< 0.2.0)
     require_all (3.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
-    roar (1.1.0)
-      representable (~> 3.0.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -515,17 +473,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
-    slack-ruby-bot-server (1.2.0)
-      async
-      foreman
-      grape
-      grape-roar (>= 0.4.0)
-      grape-swagger
-      kaminari-grape
-      rack-cors
-      rack-rewrite
-      rack-server-pages
-      slack-ruby-client
     slack-ruby-client (0.17.0)
       faraday (>= 1.0)
       faraday_middleware
@@ -559,10 +506,8 @@ GEM
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    timers (4.3.3)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    uber (0.1.0)
     unicode-display_width (1.6.1)
     uniform_notifier (1.14.2)
     vcr (6.0.0)
@@ -644,7 +589,6 @@ DEPENDENCIES
   rubocop-rspec
   sass-rails (>= 6)
   simplecov
-  slack-ruby-bot-server
   slack-ruby-client
   slim-rails
   spring
