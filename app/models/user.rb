@@ -92,7 +92,6 @@ class User < ApplicationRecord
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
     user.remote_image_url = user_info.dig('user', 'image_192')
-    binding.pry
     user.check_team_existence(user_info.dig('team'))
     user.save!
     user
