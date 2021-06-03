@@ -19,6 +19,6 @@ VCR.configure do |c|
   c.filter_sensitive_data('<SLACK CLIENT SECRET>') { ENV['SLACK_CLIENT_SECRET'] }
   c.filter_sensitive_data('<USER TOKEN>') { ENV['USER_TOKEN'] }
   c.filter_sensitive_data('<BOT_USER_TOKEN>') { ENV['BOT_USER_TOKEN'] }
-  c.filter_sensitive_data('<SIGNING SECRET>') { ENV['SIGNING_SECRET'] }
+  c.filter_sensitive_data('<SIGNING SECRET>') { ENV['SLACK_SIGNING_SECRET'] }
 end
 

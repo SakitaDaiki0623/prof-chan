@@ -2,7 +2,7 @@
   <v-dialog
     :value="isShownTerms"
     max-width="1200"
-    persistent
+    @click:outside="hundleCloseTermsDialog"
     @input="$emit('input', $event.target.isShownTerms)"
   >
     <v-card color="brown lighten-5" class="term-font">

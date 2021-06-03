@@ -1,150 +1,148 @@
 <!-- app/javascript/components/QuestionFormatDialog.vue -->
 <template>
-  <div>
-    <v-dialog
-      :value="isShownQuestionFormatDialog"
-      max-width="1000"
-      persistent
-      @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
-    >
-      <v-card :color="questionBlockColor">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn
-            :color="questionBlockColor"
-            @click="hundleCloseQuestioniFormatDialog"
-          >
-            <v-icon> mdi-close-outline </v-icon>
-          </v-btn>
-        </v-row>
-        <p class="font-weight-bold text-white text-4xl text-center mt-10">
-          クエスチョンブロック
-        </p>
+  <v-dialog
+    :value="isShownQuestionFormatDialog"
+    max-width="1000"
+    @click:outside="hundleCloseQuestioniFormatDialog"
+    @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
+  >
+    <v-card :color="questionBlockColor">
+      <v-row justify="end" class="mr-2 mt-2">
+        <v-btn
+          :color="questionBlockColor"
+          @click="hundleCloseQuestioniFormatDialog"
+        >
+          <v-icon> mdi-close-outline </v-icon>
+        </v-btn>
+      </v-row>
+      <p class="font-weight-bold text-white text-4xl text-center mt-10">
+        クエスチョンブロック
+      </p>
 
-        <div id="question-block-form" class="pa-10 note-box">
-          <v-row>
-            <v-col cols="12" sm="6">
-              <v-btn
-                id="input-yes-or-no-title-button"
-                type="submit"
-                depressed
-                elevation="4"
-                small
-                tile
-                color="red lighten-2"
-                class="white--text py-2"
-                @click="inputTitleRandomly"
+      <div id="question-block-form" class="pa-10 note-box">
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-btn
+              id="input-yes-or-no-title-button"
+              type="submit"
+              depressed
+              elevation="4"
+              small
+              tile
+              color="red lighten-2"
+              class="white--text py-2"
+              @click="inputTitleRandomly"
+            >
+              <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+            </v-btn>
+          </v-col>
+          <v-spacer />
+          <v-col cols="12" sm="6">
+            <v-btn
+              id="add-question-item-button"
+              type="submit"
+              depressed
+              elevation="4"
+              small
+              tile
+              color="red lighten-2"
+              class="white--text"
+              :disabled="questionItemNum >= 3"
+              @click="addQuestionItemNum"
+            >
+              <v-icon left> mdi-plus </v-icon>
+              質問と答えを追加する
+            </v-btn>
+            <v-btn
+              id="delete-question-item-button"
+              type="submit"
+              depressed
+              elevation="4"
+              small
+              tile
+              color="grey darken-3"
+              class="white--text"
+              :disabled="questionItemNum <= 1"
+              @click="deleteQuestionItemNum"
+            >
+              <v-icon left> mdi-minus </v-icon>
+              質問と答えを減らす
+            </v-btn>
+          </v-col>
+        </v-row>
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <form
+            @submit.prevent="
+              hundleCreateQuestionBlock(
+                questionBlock,
+                questionItem1,
+                questionItem2,
+                questionItem3
+              )
+            "
+          >
+            <div>
+              <label class="form-label-text-block" for="question_block_title"
+                >タイトル</label
               >
-                <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
-              </v-btn>
-            </v-col>
-            <v-spacer />
-            <v-col cols="12" sm="6">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="タイトル"
+                rules="input_required|max:50"
+              >
+                <input
+                  id="question_block_title"
+                  v-model="questionBlock.title"
+                  class="input-form-question-block"
+                  name="question_block[question_block_title]"
+                  type="text"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+
+            <!-- Item Form -->
+            <QuestionBlockItem
+              question-block-item-id="create-question-item-1"
+              :question-item="questionItem1"
+              :question-name-for-validation="questionNameForValidation1"
+              :answer-name-for-validation="answerNameForValidation1"
+            />
+            <QuestionBlockItem
+              v-if="questionItemNum >= 2"
+              question-block-item-id="create-question-item-2"
+              :question-item="questionItem2"
+              :question-name-for-validation="questionNameForValidation2"
+              :answer-name-for-validation="answerNameForValidation2"
+            />
+            <QuestionBlockItem
+              v-if="questionItemNum >= 3"
+              question-block-item-id="create-question-item-3"
+              :question-item="questionItem3"
+              :question-name-for-validation="questionNameForValidation3"
+              :answer-name-for-validation="answerNameForValidation3"
+            />
+
+            <div class="text-center pa-10">
               <v-btn
-                id="add-question-item-button"
+                id="creation_button"
                 type="submit"
                 depressed
                 elevation="4"
-                small
-                tile
-                color="red lighten-2"
+                x-large
+                :disabled="invalid"
+                :color="questionBlockColor"
                 class="white--text"
-                :disabled="questionItemNum >= 3"
-                @click="addQuestionItemNum"
               >
                 <v-icon left> mdi-plus </v-icon>
-                質問と答えを追加する
+                クエスチョンブロックを作成！
               </v-btn>
-              <v-btn
-                id="delete-question-item-button"
-                type="submit"
-                depressed
-                elevation="4"
-                small
-                tile
-                color="grey darken-3"
-                class="white--text"
-                :disabled="questionItemNum <= 1"
-                @click="deleteQuestionItemNum"
-              >
-                <v-icon left> mdi-minus </v-icon>
-                質問と答えを減らす
-              </v-btn>
-            </v-col>
-          </v-row>
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
-            <form
-              @submit.prevent="
-                hundleCreateQuestionBlock(
-                  questionBlock,
-                  questionItem1,
-                  questionItem2,
-                  questionItem3
-                )
-              "
-            >
-              <div>
-                <label class="form-label-text-block" for="question_block_title"
-                  >タイトル</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="タイトル"
-                  rules="input_required|max:50"
-                >
-                  <input
-                    id="question_block_title"
-                    v-model="questionBlock.title"
-                    class="input-form-question-block"
-                    name="question_block[question_block_title]"
-                    type="text"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-
-              <!-- Item Form -->
-              <QuestionBlockItem
-                question-block-item-id="create-question-item-1"
-                :question-item="questionItem1"
-                :question-name-for-validation="questionNameForValidation1"
-                :answer-name-for-validation="answerNameForValidation1"
-              />
-              <QuestionBlockItem
-                v-if="questionItemNum >= 2"
-                question-block-item-id="create-question-item-2"
-                :question-item="questionItem2"
-                :question-name-for-validation="questionNameForValidation2"
-                :answer-name-for-validation="answerNameForValidation2"
-              />
-              <QuestionBlockItem
-                v-if="questionItemNum >= 3"
-                question-block-item-id="create-question-item-3"
-                :question-item="questionItem3"
-                :question-name-for-validation="questionNameForValidation3"
-                :answer-name-for-validation="answerNameForValidation3"
-              />
-
-              <div class="text-center pa-10">
-                <v-btn
-                  id="creation_button"
-                  type="submit"
-                  depressed
-                  elevation="4"
-                  x-large
-                  :disabled="invalid"
-                  :color="questionBlockColor"
-                  class="white--text"
-                >
-                  <v-icon left> mdi-plus </v-icon>
-                  クエスチョンブロックを作成！
-                </v-btn>
-              </div>
-            </form>
-          </ValidationObserver>
-        </div>
-      </v-card>
-    </v-dialog>
-  </div>
+            </div>
+          </form>
+        </ValidationObserver>
+      </div>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>

@@ -54,7 +54,7 @@ class User < ApplicationRecord
 
   validates :encrypted_password,        presence: true
   # TODO: slackログインにも対応させる
-  validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.email == 'guest@example.com'} # ゲストユーザは同意なしでログイン
+  validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.email == 'guest@example.com' || u.provider == 'slack'} # ゲストユーザは同意なしでログイン
 
   after_create do
     self.create_profile_block unless profile_block.present?
@@ -77,6 +77,7 @@ class User < ApplicationRecord
   end
 
   def set_default_team_value
+    return if self.provider == 'slack'
     team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
       team.name = 'normal login',
       team.workspace_id = 'A123B123C123',
@@ -91,6 +92,7 @@ class User < ApplicationRecord
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
     user.remote_image_url = user_info.dig('user', 'image_192')
+    binding.pry
     user.check_team_existence(user_info.dig('team'))
     user.save!
     user

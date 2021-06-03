@@ -1,98 +1,94 @@
 <template>
-  <div>
-    <v-dialog
-      :value="isShownTextFormatDialog"
-      max-width="800"
-      persistent
-      @input="$emit('input', $event.target.isShownTextFormatDialog)"
-    >
-      <v-card :color="textBlockColor">
-        <div>
-          <v-row justify="end" class="mr-2 mt-2">
-            <v-btn :color="textBlockColor" @click="hundleCloseTextFormatDialog">
-              <v-icon> mdi-close-outline </v-icon>
-            </v-btn>
-          </v-row>
-          <p
-            class="font-weight-bold text-white text-4xl text-center mt-10 mb-10"
-          >
-            テキストブロック作成
-          </p>
-        </div>
-        <div id="text-block-form" class="pa-10 note-box">
-          <v-btn
-            id="input-text-title-button"
-            type="submit"
-            depressed
-            elevation="4"
-            small
-            tile
-            color="cyan lighten-2"
-            class="white--text py-2"
-            @click="inputTitleRandomly"
-          >
-            <v-icon left> mdi-plus </v-icon>テキストフォーマットをランダムに入力
+  <v-dialog
+    :value="isShownTextFormatDialog"
+    max-width="800"
+    @click:outside="hundleCloseTextFormatDialog"
+    @input="$emit('input', $event.target.isShownTextFormatDialog)"
+  >
+    <v-card :color="textBlockColor">
+      <div>
+        <v-row justify="end" class="mr-2 mt-2">
+          <v-btn :color="textBlockColor" @click="hundleCloseTextFormatDialog">
+            <v-icon> mdi-close-outline </v-icon>
           </v-btn>
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
-            <form @submit.prevent="hundleCreateTextBlock(textBlock)">
-              <div>
-                <label class="form-label-text-block" for="text_block_title"
-                  >タイトル</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="タイトル"
-                  rules="input_required|max:50"
-                >
-                  <input
-                    id="text_block_title"
-                    v-model="textBlock.title"
-                    class="input-form-text-block"
-                    name="text_block[text_block_title]"
-                    type="text"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="mt-5">
-                <label class="form-label-text-block" for="text_block_text"
-                  >テキスト</label
-                >
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="テキスト"
-                  rules="input_required|max:200"
-                >
-                  <textarea
-                    id="text_block_text"
-                    v-model="textBlock.text"
-                    class="input-form-text-block"
-                    name="text_block[text_block_text]"
-                    rows="7"
-                  />
-                  <span class="red--text">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-              <div class="text-center mt-3">
-                <v-btn
-                  id="creation_button"
-                  type="submit"
-                  depressed
-                  elevation="4"
-                  x-large
-                  :disabled="invalid"
-                  :color="textBlockColor"
-                  class="white--text"
-                >
-                  テキストブロックを作成！
-                </v-btn>
-              </div>
-            </form>
-          </ValidationObserver>
-        </div>
-      </v-card>
-    </v-dialog>
-  </div>
+        </v-row>
+        <p class="font-weight-bold text-white text-4xl text-center mt-10 mb-10">
+          テキストブロック作成
+        </p>
+      </div>
+      <div id="text-block-form" class="pa-10 note-box">
+        <v-btn
+          id="input-text-title-button"
+          type="submit"
+          depressed
+          elevation="4"
+          small
+          tile
+          color="cyan lighten-2"
+          class="white--text py-2"
+          @click="inputTitleRandomly"
+        >
+          <v-icon left> mdi-plus </v-icon>テキストフォーマットをランダムに入力
+        </v-btn>
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <form @submit.prevent="hundleCreateTextBlock(textBlock)">
+            <div>
+              <label class="form-label-text-block" for="text_block_title"
+                >タイトル</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="タイトル"
+                rules="input_required|max:50"
+              >
+                <input
+                  id="text_block_title"
+                  v-model="textBlock.title"
+                  class="input-form-text-block"
+                  name="text_block[text_block_title]"
+                  type="text"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="mt-5">
+              <label class="form-label-text-block" for="text_block_text"
+                >テキスト</label
+              >
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="テキスト"
+                rules="input_required|max:200"
+              >
+                <textarea
+                  id="text_block_text"
+                  v-model="textBlock.text"
+                  class="input-form-text-block"
+                  name="text_block[text_block_text]"
+                  rows="7"
+                />
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+            <div class="text-center mt-3">
+              <v-btn
+                id="creation_button"
+                type="submit"
+                depressed
+                elevation="4"
+                x-large
+                :disabled="invalid"
+                :color="textBlockColor"
+                class="white--text"
+              >
+                テキストブロックを作成！
+              </v-btn>
+            </div>
+          </form>
+        </ValidationObserver>
+      </div>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
