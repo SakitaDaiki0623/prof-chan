@@ -1,5 +1,5 @@
 # # app/controllers/add_to_slack_controller.rb
-# class AddToSlackController < ApplicationController
+class AddToSlackController < ApplicationController
 #   skip_before_action :authenticate_user!
 
 #   def callback
@@ -42,4 +42,4 @@
 #       render text: "Oops! There was a problem."
 #     end
 #   end
-# end
+endz
