@@ -14,12 +14,15 @@ gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 gem "omniauth-rails_csrf_protection"
 
+# Slack API
+gem 'slack-ruby-client'
+gem 'slack-ruby-bot-server'
+
 # 権限
 gem "pundit"
 gem "administrate"
 
-# API
-gem 'slack-ruby-client'
+# Serializer
 gem 'active_model_serializers', '~> 0.10.0'
 # Active Model SerializersのN + 1問題を解消
 gem "ams_lazy_relationships"

@@ -3,7 +3,7 @@
   <v-dialog
     :value="isShownEditBasicProfCardDialog"
     max-width="450"
-    persistent
+    @click:outside="hundleCloseEditBasicProfCardDialog"
     @input="$emit('input', $event.target.isShownEditBasicProfCardDialog)"
   >
     <!-- Basic Info Card -->

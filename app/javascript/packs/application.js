@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start();
-require("turbolinks").start();
+// vue画面でブラウザバックで白画面になるのを防ぐ
+// require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 

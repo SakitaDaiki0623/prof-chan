@@ -9,18 +9,10 @@
             </div>
           </v-col>
           <v-col cols="12" sm="12" md="7" align-self="center" align="right">
-            <div
-              class="text-center bg-white rounded-full md:py-16 md:px-5 ma-5 max-w-xl border-2 border-brown-500 border-dashed"
-            >
-              <div class="text-md lg:text-xl mb-5">
-                コロナ時代のフルリモート社員に贈る
-                <br />
-                社員プロフィール公開サービス
-              </div>
-              <div class="text-4xl font-bold">
-                プロフちゃん
-              </div>
-            </div>
+            <img
+              src="../../../assets/images/logo.png"
+              class="max-w-md md:max-w-xl mx-auto"
+            />
           </v-col>
           <v-col cols="12" sm="4" md="5" align="left">
             <div class="balloon1 text-sm text-center md:text-2xl">
@@ -36,7 +28,7 @@
     </div>
     <div class="bg-brown-500 pa-10">
       <v-row justify="center" align-content="center">
-        <v-col cols="12" sm="5" class="border-white border-dotted border-2">
+        <v-col cols="12" sm="7" class="border-white border-dotted border-2">
           <div>
             <div class="text-white text-2xl text-center">
               こちらは通常ログイン版の画面です。<br />
