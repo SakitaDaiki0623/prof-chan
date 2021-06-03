@@ -35,12 +35,12 @@
               >
                 <v-select
                   id="favorite_category_id"
-                  v-model="editFavoriteBlock.category_id"
+                  v-model="editFavoriteBlock.title"
                   name="favorite[category_id]"
                   class="input-form-favorite-block"
                   :items="categories"
                   item-text="name"
-                  item-value="value"
+                  item-value="name"
                   color="brown lighten-3"
                   persistent-hint
                   single-line
@@ -119,6 +119,14 @@ export default {
   },
   methods: {
     hundleEditFavoriteBlock(editFavoriteBlock) {
+      console.log(editFavoriteBlock);
+
+      // category_idの変換
+      const selectedCategory = this.categories.find(
+        (category) => category.name == editFavoriteBlock.title
+      );
+      editFavoriteBlock.category_id = selectedCategory.value;
+
       this.patchFavoriteBlock(editFavoriteBlock);
       this.hundleCloseEditFavoriteFormatDialog();
       this.$store.dispatch("flash/setFlash", {
