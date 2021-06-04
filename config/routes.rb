@@ -42,9 +42,6 @@ Rails.application.routes.draw do
     post '/users/guest_sign_in', to: 'users/sessions#new_guest'
   end
 
-  get '/auth/callback', to: 'add_to_slack#callback'
-
-
   # redirect path after authentication
   resources :profiles,  only: %i[new index]
 
@@ -118,6 +115,11 @@ Rails.application.routes.draw do
 
   get 'terms', to: 'home#terms'
   get 'privacy', to: 'home#privacy'
+
+  resources :contacts, only: [:new, :create]
+  post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+  post 'contacts/back', to: 'contacts#back', as: 'back'
+  get 'contacts/done', to: 'contacts#done', as: 'done'
 
   get '*path', to: 'profiles#top'
 end

@@ -2,8 +2,14 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate_user!, only: %i[slack failure]
+    include SlackApiActivatable
+
     def slack
-      user_info = get_user_info(request.env['omniauth.strategy'])
+      bot_token = request.env['omniauth.strategy'].access_token
+      user_token = bot_token.user_token
+      user_info = get_user_info(user_token)
+      create_channel(user_info, bot_token)
+
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info)
 
       if @user.persisted?
@@ -11,10 +17,6 @@ module Users
       else
         redirect_to root_path
       end
-    end
-
-    def get_user_info(request)
-      request.access_token.user_token.get('/api/users.identity').parsed
     end
 
     def failure

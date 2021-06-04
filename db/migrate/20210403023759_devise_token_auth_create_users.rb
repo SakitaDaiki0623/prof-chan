@@ -38,10 +38,9 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :users, [:email, :provider],   unique: true
+    add_index :users, [:email, :team_id, :provider],    unique: true
     add_index :users, :uid,                  unique: true
     add_index :users, [:uid, :provider],     unique: true
-    # add_index :users, :unlock_token,         unique: true
   end
 
   def self.down
