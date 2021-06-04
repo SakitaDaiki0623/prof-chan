@@ -1,0 +1,20 @@
+= content_for(:title, 'お問い合わせ' )
+.container.mx-auto.mt-10.term-font.px-10.lg:px-60.h-screen
+  .text-center.text-4xl.font-bold
+    | お問い合わせ
+  = form_for(@contact, url: confirm_path) do |f|
+    = render "users/shared/error_messages", resource: @contact
+    .m-3
+      = f.label :name, 'お名前*', class: 'form-label-text-block'
+      = f.text_field :name, autofocus: true, class: 'input-form-basic-block'
+    .m-3
+      = f.label :email, '返信先メールアドレス*', class: 'form-label-text-block'
+      = f.text_field :email, autofocus: true, class: 'input-form-basic-block'
+    .m-3
+      = f.label :message, 'メッセージ*', class: 'form-label-text-block'
+      = f.text_area :message, size: '10x10', class: 'input-form-basic-block'
+    .m-3.text-center
+      = f.submit '入力内容確認', class: 'p-3 rounded-lg bg-brown-500 outline-none text-white shadow w-32 justify-center hover:bg-brown-700 mb-10'
+    .container.text-center.term-font
+      div
+        =link_to 'トップページに戻る', root_path, class: 'mx-10 hover:opacity-50 inline-block'
