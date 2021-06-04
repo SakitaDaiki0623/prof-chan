@@ -1,0 +1,14 @@
+= content_for(:title, 'お問い合わせ完了！' )
+.container.mx-auto.mt-10.term-font.px-10.lg:px-60.h-screen
+  .text-center.text-4xl.font-bold
+    | お問い合わせが正常に送信されました！
+  .m-10.text-xl
+    | この度はお問い合わせいただきありがとうございます。
+    br
+    | いただいた内容につきましては、近日中にお返事させていただきますので少々お待ちください。
+    br
+    | 今後も本サービスについて何かございましたらお問い合わせフォームよりお問い合わせください。
+  = image_tag  "prof_happy.png", class: 'max-w-sm mx-auto'
+  .container.text-center.term-font
+    div
+      =link_to 'トップページに戻る', root_path, class: 'mx-10 hover:opacity-50 inline-block'

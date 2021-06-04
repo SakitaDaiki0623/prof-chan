@@ -26,7 +26,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable, :omniauthable
+        :recoverable, :rememberable, :omniauthable
 
   mount_uploader :image, ImageUploader
 
@@ -51,6 +51,7 @@ class User < ApplicationRecord
   # validation
   validates :name,                      presence: true
   validates :image,                     presence: true
+  validates :email, uniqueness: { scope: [:team_id, :provider] }
 
   validates :encrypted_password,        presence: true
   # TODO: slackログインにも対応させる

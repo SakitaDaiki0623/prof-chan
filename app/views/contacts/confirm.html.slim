@@ -1,0 +1,33 @@
+= content_for(:title, '入力内容確認' )
+.container.mx-auto.mt-10.term-font.px-10.lg:px-60.h-screen
+  .text-4xl.font-bold.text-center
+    | 入力内容確認
+  .text-xl.m-10
+    .form-label-text-block.inline-block
+      | お名前*
+    .text-center.bg-white.p-3
+      = @contact.name
+    .form-label-text-block.inline-block
+      | 返信先メールアドレス*
+    .text-center.bg-white.p-3
+      = @contact.email
+    .form-label-text-block.inline-block
+      | メッセージ*
+    .bg-white.p-3
+      = @contact.message
+
+  = form_for(@contact) do |f|
+    = f.hidden_field :name
+    = f.hidden_field :email
+    = f.hidden_field :message
+    .text-center
+      = f.submit '送信', class: 'p-3 rounded-lg bg-brown-500 outline-none text-white shadow w-32 justify-center hover:bg-brown-700'
+  .container.text-center.my-5
+    = form_for @contact, url: back_path do |f|
+      = f.hidden_field :name
+      = f.hidden_field :email
+      = f.hidden_field :message
+      div
+        = f.submit '入力画面に戻る', class: 'mx-10 hover:opacity-50 inline-block'
+      div
+        =link_to 'トップページに戻る', root_path, class: 'mx-10 hover:opacity-50 inline-block'
