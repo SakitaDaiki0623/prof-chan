@@ -31,7 +31,7 @@
         <v-col cols="12" sm="4" class="border-white border-dotted border-2">
           <div>
             <div class="text-white text-2xl text-center">
-              こちらは通常{{ team.name }}の画面です。<br />
+              こちらは{{ team.name }}の本サイトのワークスペースです。<br />
               {{
                 team.name
               }}のワークスペース内の人とのみプロフを共有します。<br />
