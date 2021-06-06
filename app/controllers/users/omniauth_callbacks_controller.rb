@@ -6,9 +6,12 @@ module Users
 
     def slack
       bot_token = request.env['omniauth.strategy'].access_token
+      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], bot_token.to_hash)
       user_token = bot_token.user_token
       user_info = get_user_info(user_token)
-      create_channel(user_info, bot_token)
+
+      # 初ログインであればチャンネル作成、招待
+      check_channel(user_info, access_token) unless User.find_by(uid: request.env['omniauth.auth'].uid)
 
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info)
 
