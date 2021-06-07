@@ -1,40 +1,29 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                 :bigint           not null, primary key
-#  name               :string(255)      default(""), not null
-#  email              :string(255)      not null, unique: true
-#  provider           :string(255)      default(""), not null
-#  uid                :string(255)      not null, unique: true
-#  image              :string(255)
-#  team_id            :string(255)      not null
-#  encrypted_password :string(255)      not null
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  reset_password_token    :string(255)
-#  reset_password_sent_at  :string(255)
-#  remember_created_at     :string(255)
-#
-# Indexes
-#
-#  index_users_on_email                    (email)
-#  index_users_on_reset_password_token     (reset_password_token)
-
 # app/models/user.rb
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # before
+  before_save :encrypt_access_token
+
+  # after
+  after_create do
+    self.create_profile_block unless profile_block.present?
+  end
+  after_initialize :set_default_team_value
+
+  # devise
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :omniauthable
 
+  # carriwave
   mount_uploader :image, ImageUploader
 
+  # enum
   enum role: { admin: 0, general: 1 }
 
   # association
   has_one :profile,       dependent: :destroy
   has_one :profile_block, dependent: :destroy
+
   belongs_to :team
 
   has_many :text_block_likes, dependent: :destroy
@@ -51,17 +40,11 @@ class User < ApplicationRecord
   # validation
   validates :name,                      presence: true
   validates :image,                     presence: true
+  validates :access_token,              presence: true
   validates :email, uniqueness: { scope: [:team_id, :provider] }
-
   validates :encrypted_password,        presence: true
   # TODO: slackログインにも対応させる
   validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.email == 'guest@example.com' || u.provider == 'slack'} # ゲストユーザは同意なしでログイン
-
-  after_create do
-    self.create_profile_block unless profile_block.present?
-  end
-
-  after_initialize :set_default_team_value
 
   def create_guest_profile
     profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 15, gender: "female", blood_type: "O", prefecture_id: 13 }
@@ -77,6 +60,13 @@ class User < ApplicationRecord
     end
   end
 
+  def encrypt_access_token
+    key_len = ActiveSupport::MessageEncryptor.key_len
+    secret = Rails.application.key_generator.generate_key('salt', key_len)
+    crypt = ActiveSupport::MessageEncryptor.new(secret)
+    self.access_token = crypt.encrypt_and_sign(access_token)
+  end
+
   def set_default_team_value
     return if self.provider == 'slack'
     team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
@@ -87,11 +77,12 @@ class User < ApplicationRecord
     self.team = team
   end
 
-  def self.from_omniauth(auth, user_info)
+  def self.from_omniauth(auth, user_info, hash_token)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
+    user.access_token = hash_token
     user.remote_image_url = user_info.dig('user', 'image_192')
     user.check_team_existence(user_info.dig('team'))
     user.save!

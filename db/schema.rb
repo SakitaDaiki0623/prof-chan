@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
     t.string "name", null: false
     t.string "image", null: false
     t.string "email", null: false
+    t.json "access_token", null: false
     t.integer "role", default: 1, null: false
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
