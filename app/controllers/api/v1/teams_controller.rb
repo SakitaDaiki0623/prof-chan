@@ -1,13 +1,16 @@
 module Api
   module V1
     class TeamsController < ApiController
+      before_action :set_team, only: %i[show]
+
       def show
-        @user = User.find(current_user.id)
-        @team = Team.includes(:users).where(workspace_id: @user.team.workspace_id)
-        render json: ActiveModel::Serializer::CollectionSerializer.new(
-          @team,
-          serializer: TeamSerializer
-        ).to_json
+        render json: @team
+      end
+
+      private
+
+      def set_team
+        @team = Team.find_by!(workspace_id: params[:id])
       end
     end
   end
