@@ -35,7 +35,7 @@ module PostMessageModule
   def post_ranking_block(block)
     access_token = set_access_token
     text = "@#{current_user.name}さんがランキングブロックを作成したよ:bangbang:\n :star2:*#{block.title}* :star2:"
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
