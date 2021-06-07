@@ -145,9 +145,11 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "workspace_id", null: false
+    t.string "share_channel_id", null: false
     t.string "image", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["share_channel_id"], name: "index_teams_on_share_channel_id", unique: true
     t.index ["workspace_id"], name: "index_teams_on_workspace_id", unique: true
   end
 

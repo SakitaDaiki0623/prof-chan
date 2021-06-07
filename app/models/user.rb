@@ -77,29 +77,30 @@ class User < ApplicationRecord
     self.team = team
   end
 
-  def self.from_omniauth(auth, user_info, hash_token)
+  def self.from_omniauth(auth, user_info, hash_token, channel)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
     user.access_token = hash_token
     user.remote_image_url = user_info.dig('user', 'image_192')
-    user.check_team_existence(user_info.dig('team'))
+    user.check_team_existence(user_info.dig('team'), channel)
     user.save!
     user
   end
 
   # slackログイン時にユーザーが所属するチームがTeamテーブルにあるかどうかを確認
-  def check_team_existence(team_info)
+  def check_team_existence(team_info, channel)
     workspace_id = team_info.dig('id')
-    name = team_info.dig('name')
-    image = team_info.dig('image_230')
 
     self.team = if Team.exists?(workspace_id: workspace_id)
                   Team.find_by(workspace_id: workspace_id)
                 else
                   # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
-                  Team.create!(name: name, workspace_id: workspace_id, image: image)
+                  name = team_info.dig('name')
+                  image = team_info.dig('image_230')
+                  share_channel_id = channel.dig("id")
+                  Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id)
                 end
   end
 end
