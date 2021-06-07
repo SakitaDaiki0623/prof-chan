@@ -45,4 +45,10 @@ module SlackApiActivatable
     encoded_text = URI.encode_www_form_component(text)
     access_token.post("api/chat.postMessage?channel=#{user_id}&blocks=#{encoded_mgs}&text=#{encoded_text}&pretty=1").parsed
   end
+
+  def get_block_kit_msg
+    message = '[ { "type": "section", "text": { "type": "mrkdwn", "text": "プロフちゃんの世界へようこそ:musical_note:\nこれからよろしくお願いします！\n*<https://prof-chan.herokuapp.com/|プロフちゃんのサイト>*" } }, { "type": "divider" }, { "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "基本的にプロフィールは#プロフ共有スペースで共有するよ！あなたが入力した内容を共有チャンネルでシェアしよう！" } } ]'
+    return ERB::Util.url_encode(message)
+  end
+
 end

@@ -3,7 +3,7 @@ module Api
   module V1
     class RankingBlocksController < ApiController
       before_action :set_ranking_block, only: %i[update destroy]
-      include SlackBlockKit
+      include PostMessageModule
 
       def index
         @ranking_blocks = RankingBlock.by_team(current_user)

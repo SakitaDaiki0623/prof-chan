@@ -1,13 +1,8 @@
-module SlackBlockKit
-
-  def get_block_kit_msg
-    message = '[ { "type": "section", "text": { "type": "mrkdwn", "text": "プロフちゃんの世界へようこそ:musical_note:\nこれからよろしくお願いします！\n*<https://prof-chan.herokuapp.com/|プロフちゃんのサイト>*" } }, { "type": "divider" }, { "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "基本的にプロフィールは#プロフ共有スペースで共有するよ！あなたが入力した内容を共有チャンネルでシェアしよう！" } } ]'
-    return ERB::Util.url_encode(message)
-  end
+module PostMessageModule
 
   def post_questioin_block(register)
     access_token = set_access_token
-
+    text = "@#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:\n :star2:#{register.question_title} :star2:"
     post_text = if register.question_item_content3.present? && register.question_item_answer3.present?
                   " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}*\n"
                 elsif register.question_item_content2.present? && register.question_item_answer2.present?
@@ -15,12 +10,40 @@ module SlackBlockKit
                 else
                   " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*"
                 end
-    text = "@#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:\n タイトル: :star2:#{register.question_title} :star2:"
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
-    encoded_msg = ERB::Util.url_encode(msg)
-    encoded_text = ERB::Util.url_encode(text)
-    channel_id = current_user.team.share_channel_id
-    access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+    post_block(text, msg, access_token)
+  end
+
+  def post_yes_or_no_block(register)
+    access_token = set_access_token
+    text = "@#{current_user.name}さんがYes or No ブロックを作成したよ:bangbang:\n :star2:*#{register.yes_or_no_title}* :star2:"
+    post_text = if register.yes_or_no_item_content3.present?
+                  " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
+                elsif register.yes_or_no_item_content2.present?
+                  " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
+                else
+                  " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
+                end
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    post_block(text, msg, access_token)
+  end
+
+  def translate_boolean(answer)
+    answer ? 'YES！:laughing:' : 'NO！ :weary:'
+  end
+
+  def post_ranking_block(block)
+    access_token = set_access_token
+    text = "@#{current_user.name}さんがランキングブロックを作成したよ:bangbang:\n :star2:*#{block.title}* :star2:"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' } }, { 'type': 'divider' } ]"
+    post_block(text, msg, access_token)
+  end
+
+  def post_text_block(block)
+    access_token = set_access_token
+    text = "@#{current_user.name}さんがテキストブロックを作成したよ:bangbang:\n :star2:*#{block.title}* :star2:"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    post_block(text, msg, access_token)
   end
 
   def set_access_token
@@ -33,4 +56,10 @@ module SlackBlockKit
     return access_token
   end
 
+  def post_block(text, msg, access_token)
+    channel_id = current_user.team.share_channel_id
+    encoded_msg = ERB::Util.url_encode(msg)
+    encoded_text = ERB::Util.url_encode(text)
+    access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+  end
 end
