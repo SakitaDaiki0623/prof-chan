@@ -8,7 +8,7 @@ class CreateTeams < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :teams, [:workspace_id],             unique: true
-    add_index :teams, [:share_channel_id],         unique: true
+    add_index :teams, [:workspace_id],                      unique: true
+    add_index :teams, [:share_channel_id, :workspace_id],   unique: true
   end
 end

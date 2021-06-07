@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
     t.string "image", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["share_channel_id"], name: "index_teams_on_share_channel_id", unique: true
+    t.index ["share_channel_id", "workspace_id"], name: "index_teams_on_share_channel_id_and_workspace_id", unique: true
     t.index ["workspace_id"], name: "index_teams_on_workspace_id", unique: true
   end
 
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
     t.string "name", null: false
     t.string "image", null: false
     t.string "email", null: false
-    t.json "access_token", null: false
+    t.json "access_token"
     t.integer "role", default: 1, null: false
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false

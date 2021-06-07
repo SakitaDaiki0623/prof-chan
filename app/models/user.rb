@@ -2,7 +2,7 @@
 class User < ApplicationRecord
 
   # before
-  before_save :encrypt_access_token
+  before_save :encrypt_access_token, :if => Proc.new {|u|  u.access_token.present? }
 
   # after
   after_create do
@@ -40,11 +40,12 @@ class User < ApplicationRecord
   # validation
   validates :name,                      presence: true
   validates :image,                     presence: true
-  validates :access_token,              presence: true
   validates :email, uniqueness: { scope: [:team_id, :provider] }
   validates :encrypted_password,        presence: true
   # TODO: slackログインにも対応させる
   validates_acceptance_of :agreement, allow_nil: false, on: :create, unless: Proc.new{|u| u.email == 'guest@example.com' || u.provider == 'slack'} # ゲストユーザは同意なしでログイン
+
+  # methods ===========================
 
   def create_guest_profile
     profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 15, gender: "female", blood_type: "O", prefecture_id: 13 }
@@ -71,7 +72,8 @@ class User < ApplicationRecord
     return if self.provider == 'slack'
     team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
       team.name = 'normal login',
-      team.workspace_id = 'A123B123C123',
+      team.workspace_id     = 'A123B123C123',
+      team.share_channel_id = 'A123B123C123',
       team.image = "https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png"
     end
     self.team = team
