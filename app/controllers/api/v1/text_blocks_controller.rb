@@ -3,6 +3,7 @@ module Api
   module V1
     class TextBlocksController < ApiController
       before_action :set_text_block, only: %i[update destroy]
+      include SlackBlockKit
 
       def index
         @text_blocks = TextBlock.by_team(current_user)
@@ -60,48 +61,12 @@ module Api
       def post_to_slack_after_create
         @text_block = current_user.profile_block.text_blocks.build(text_block_params)
         if @text_block.valid?
-          chat_post_message(@text_block)
+          post_text_block(@text_block)
           render json: @text_block, status: :no_content
 
         else
           render json: @text_block.errors, status: :bad_request
         end
-      end
-
-      def chat_post_message(block)
-        client = Slack::Web::Client.new
-        text = "#{current_user.name}さんがテキストブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
-        client.chat_postMessage(
-          channel: '#プロフちゃん実験',
-          text: text,
-          blocks: [
-            {
-              "type": 'section',
-              "text": {
-                "type": 'mrkdwn',
-                "text": text
-              }
-            },
-            {
-              "type": 'divider'
-            },
-            {
-              "type": 'section',
-              "text": {
-                "type": 'mrkdwn',
-                "text": block.text
-              },
-              "accessory": {
-                "type": 'image',
-                "image_url": current_user.image.to_s,
-                "alt_text": 'computer thumbnail'
-              }
-            },
-            {
-              "type": 'divider'
-            }
-          ]
-        )
       end
 
       private
