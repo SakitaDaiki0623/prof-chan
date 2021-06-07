@@ -28,7 +28,7 @@
     </div>
     <div class="bg-brown-500 pa-10">
       <v-row justify="center" align-content="center">
-        <v-col cols="12" sm="7" class="border-white border-dotted border-2">
+        <v-col cols="12" sm="12" class="border-white border-dotted border-2">
           <div>
             <div class="text-white text-2xl text-center">
               こちらは通常ログイン版の画面です。<br />
