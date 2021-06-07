@@ -1,4 +1,5 @@
 module SlackApiActivatable
+  include SlackBlockKit
 
   def check_channel(info, access_token)
     uid = info.dig('user', 'id')
@@ -14,6 +15,7 @@ module SlackApiActivatable
       invite_result = try_invite_user(info, channel, access_token)
       post_direct_message_to_user(info, access_token)
     end
+    return channel
   end
 
   # API Methods
@@ -41,9 +43,6 @@ module SlackApiActivatable
     encoded_mgs = get_block_kit_msg
     text = "プロフちゃんの世界へようこそ"
     encoded_text = URI.encode_www_form_component(text)
-
-    binding.pry
-
     access_token.post("api/chat.postMessage?channel=#{user_id}&blocks=#{encoded_mgs}&text=#{encoded_text}&pretty=1").parsed
   end
 
@@ -51,4 +50,5 @@ module SlackApiActivatable
     message = '[ { "type": "section", "text": { "type": "mrkdwn", "text": "プロフちゃんの世界へようこそ:musical_note:\nこれからよろしくお願いします！\n*<https://prof-chan.herokuapp.com/|プロフちゃんのサイト>*" } }, { "type": "divider" }, { "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "基本的にプロフィールは#プロフ共有スペースで共有するよ！あなたが入力した内容を共有チャンネルでシェアしよう！" } } ]'
     return ERB::Util.url_encode(message)
   end
+
 end
