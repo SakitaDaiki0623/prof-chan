@@ -28,34 +28,25 @@
         md="3"
         class="border-dotted border-white border-2 ma-5"
       >
-        <v-card
-          class="mx-auto"
-          max-width="344"
-          outlined
-          color="brown lighten-5"
-        >
-          <v-card color="brown lighten-2" class="white--text">
-            誕生日 {{ birthdayUserProfile.birthday | moment }}
+        <v-hover v-slot="{ hover }">
+          <v-card
+            class="mx-auto"
+            :class="{ 'on-hover': hover }"
+            max-width="344"
+            outlined
+            color="brown lighten-5"
+            @click="moveToUserProfilePage(birthdayUserProfile)"
+          >
+            <v-card color="brown lighten-2" class="white--text">
+              誕生日 {{ birthdayUserProfile.birthday | moment }}
+            </v-card>
+            <v-img :src="birthdayUserProfile.user.image.url" height="180px" />
+
+            <div class="text-center font-bold text-4xl pt-5 text-brown-600">
+              {{ birthdayUserProfile.user.name }} さん
+            </div>
           </v-card>
-          <v-img :src="birthdayUserProfile.user.image.url" height="180px" />
-
-          <div class="text-center font-bold text-4xl pt-5 text-brown-600">
-            {{ birthdayUserProfile.user.name }} さん
-          </div>
-
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              color="brown lighten-1"
-              class="white--text"
-              small
-              tile
-              @click="moveToUserProfilePage(birthdayUserProfile)"
-            >
-              社員プロフィールを見る
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        </v-hover>
       </v-col>
     </v-row>
   </div>
@@ -99,3 +90,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.v-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.v-card:not(.on-hover) {
+  transform: scale(0.95);
+}
+</style>

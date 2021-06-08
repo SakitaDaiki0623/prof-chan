@@ -1,10 +1,11 @@
 module SlackApiActivatable
 
-  def check_channel(info, access_token)
-    uid = info.dig('user', 'id')
+  def check_channel(info, auth, access_token)
     channels = get_channel_list(access_token).dig("channels")
     channel_name = "プロフ共有スペース"
     channel = channels.select { |c| c.dig("name") == channel_name }[0]
+
+    return channel if User.find_by(uid: auth.uid).present?
 
     if channel.nil?
       created_channel = create_channel_in_team(channel_name, access_token).dig("channel")

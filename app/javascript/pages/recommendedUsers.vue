@@ -186,7 +186,9 @@ export default {
           user.id !== this.currentUser.id;
         }
       );
-      const allUserIds = currentUserBlocklikesUsresExeptCurrentUser.map((user) => user.id);
+      const allUserIds = currentUserBlocklikesUsresExeptCurrentUser.map(
+        (user) => user.id
+      );
 
       const dict = {};
 
@@ -342,5 +344,15 @@ export default {
 .top-three-recommended-users-space {
   background-color: #b39e9e;
   padding: 2rem;
+}
+</style>
+
+<style scoped>
+.v-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.v-card:not(.on-hover) {
+  transform: scale(0.95);
 }
 </style>
