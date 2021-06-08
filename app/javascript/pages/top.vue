@@ -52,17 +52,9 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentUser: "users/fetchCurrentUser",
-      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
-      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      await this.fetchYesOrNoBlocks();
-      await this.fetchYesOrNoItems();
-      await this.fetchQuestionBlocks();
-      await this.fetchQuestionItems();
     },
   },
 };
