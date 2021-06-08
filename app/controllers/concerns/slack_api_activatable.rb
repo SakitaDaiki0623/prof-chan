@@ -1,5 +1,4 @@
 module SlackApiActivatable
-  include SlackBlockKit
 
   def check_channel(info, access_token)
     uid = info.dig('user', 'id')

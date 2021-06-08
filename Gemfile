@@ -37,6 +37,9 @@ gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'parser', '< 2.6.6.0'
 
+# cron
+gem 'whenever', require: false
+
 # Database
 gem 'mysql2', '>= 0.4.4'
 gem 'redis-rails'
