@@ -67,6 +67,7 @@ Rails.application.routes.draw do
         collection do
           get  'random_current_user_likes_blocks'
           get  'popular_blocks'
+          get  'current_user_having'
         end
       end
       resources :text_blocks,        only: %i[index create show update destroy] do
@@ -74,6 +75,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'current_user_having'
         end
       end
       resources :question_blocks,    only: %i[index create show update destroy] do
@@ -81,6 +83,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'current_user_having'
         end
       end
       resources :question_items,     only: %i[index create update destroy]
@@ -89,6 +92,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'current_user_having'
         end
       end
       resources :yes_or_no_blocks,   only: %i[index create show update destroy] do
@@ -96,6 +100,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'current_user_having'
         end
       end
       resources :yes_or_no_items,    only: %i[index create update destroy]

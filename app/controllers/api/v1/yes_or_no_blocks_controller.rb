@@ -47,13 +47,21 @@ module Api
       end
 
       def random_current_user_likes_blocks
-        yes_or_no_blocks = []
+        @yes_or_no_blocks = []
         @random_current_user_likes = YesOrNoBlockLike.filter_by_current_user(current_user.id)
         @random_current_user_likes.each do |like|
-          yes_or_no_blocks << YesOrNoBlock.find(like.yes_or_no_block_id)
+          @yes_or_no_blocks << YesOrNoBlock.find(like.yes_or_no_block_id)
         end
         render json: ActiveModel::Serializer::CollectionSerializer.new(
-          yes_or_no_blocks,
+          @yes_or_no_blocks,
+          serializer: YesOrNoBlockSerializer
+        ).to_json
+      end
+
+      def current_user_having
+        @yes_or_no_blocks = current_user.profile_block.yes_or_no_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @yes_or_no_blocks,
           serializer: YesOrNoBlockSerializer
         ).to_json
       end

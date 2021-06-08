@@ -50,13 +50,21 @@ module Api
       end
 
       def random_current_user_likes_blocks
-        favorite_blocks = []
+        @favorite_blocks = []
         @random_current_user_likes = FavoriteBlockLike.filter_by_current_user(current_user.id)
         @random_current_user_likes.each do |like|
-          favorite_blocks << FavoriteBlock.find(like.favorite_block_id)
+          @favorite_blocks << FavoriteBlock.find(like.favorite_block_id)
         end
         render json: ActiveModel::Serializer::CollectionSerializer.new(
-          favorite_blocks,
+          @favorite_blocks,
+          serializer: FavoriteBlockSerializer
+        ).to_json
+      end
+
+      def current_user_having
+        @favorite_blocks = current_user.profile_block.favorite_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @favorite_blocks,
           serializer: FavoriteBlockSerializer
         ).to_json
       end
