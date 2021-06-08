@@ -12,7 +12,7 @@ module Users
       user_info = get_user_info(user_token)
 
       # 初ログインであればチャンネル作成、招待
-      channel = check_channel(user_info, access_token) unless User.find_by(uid: request.env['omniauth.auth'].uid)
+      channel = check_channel(user_info, request.env['omniauth.auth'], access_token)
 
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info, hash_token, channel)
 
