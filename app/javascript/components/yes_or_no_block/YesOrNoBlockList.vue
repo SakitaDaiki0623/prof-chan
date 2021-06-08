@@ -6,8 +6,10 @@
     v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="yellow--text text--darken-3 rounded-full px-2 bg-white">Y</span> Yes or
-      No コーナー
+      <span class="yellow--text text--darken-3 rounded-full px-2 bg-white"
+        >Y</span
+      >
+      Yes or No コーナー
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">
       <v-col cols="12" sm="12" align="center">
@@ -163,6 +165,10 @@ export default {
     this.pageFirstRead();
   },
   methods: {
+    ...mapActions({
+      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
+      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
+    }),
     openYesOrNoFormatDialog() {
       this.isShownYesOrNoFormatDialog = true;
     },
@@ -175,7 +181,9 @@ export default {
         this.pageSize * pageNumber
       );
     },
-    pageFirstRead() {
+    async pageFirstRead() {
+      await this.fetchYesOrNoBlocks();
+      await this.fetchYesOrNoItems();
       this.length = Math.ceil(this.myYesOrNoBlocks.length / this.pageSize);
       this.displayBlocks = this.myYesOrNoBlocks.slice(0, this.pageSize);
     },

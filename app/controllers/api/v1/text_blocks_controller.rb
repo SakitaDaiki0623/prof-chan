@@ -47,13 +47,21 @@ module Api
       end
 
       def random_current_user_likes_blocks
-        text_blocks = []
+        @text_blocks = []
         @random_current_user_likes = TextBlockLike.filter_by_current_user(current_user.id)
         @random_current_user_likes.each do |like|
-          text_blocks << TextBlock.find(like.text_block_id)
+          @text_blocks << TextBlock.find(like.text_block_id)
         end
         render json: ActiveModel::Serializer::CollectionSerializer.new(
-          text_blocks,
+          @text_blocks,
+          serializer: TextBlockSerializer
+        ).to_json
+      end
+
+      def current_user_having
+        @text_blocks = current_user.profile_block.text_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @text_blocks,
           serializer: TextBlockSerializer
         ).to_json
       end
