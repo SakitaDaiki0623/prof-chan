@@ -41,6 +41,7 @@
 
         <TextBlockList :user="user" />
       </v-container>
+      <ToTopButton />
     </div>
   </div>
 </template>
@@ -58,6 +59,7 @@ import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList"
 import RankingBlockList from "../../components//ranking_block/RankingBlockList";
 import FavoriteBlockList from "../../components/favorite_block/FavoriteBlockList";
 import Loading from "../../components/shared/Loading";
+import ToTopButton from "../../components/parts/ToTopButton";
 
 export default {
   components: {
@@ -69,6 +71,7 @@ export default {
     TextBlockList,
     FavoriteBlockList,
     Loading,
+    ToTopButton,
   },
   props: {
     id: {

@@ -202,15 +202,27 @@
                     outlined
                     color="light-green lighten-4"
                   >
-                    <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
+                    <v-card
+                      class="pa-2 ma-3 rounded-full"
+                      outlined
+                      color="white"
+                    >
                       <label for="1st place" class="form-label">1st</label>
                       鬼滅の刃
                     </v-card>
-                    <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
+                    <v-card
+                      class="pa-2 ma-3 rounded-full"
+                      outlined
+                      color="white"
+                    >
                       <label for="2nd place" class="form-label">2nd</label>
                       呪術廻戦
                     </v-card>
-                    <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
+                    <v-card
+                      class="pa-2 ma-3 rounded-full"
+                      outlined
+                      color="white"
+                    >
                       <label for="3rd place" class="form-label">3rd</label>
                       ONE PIECE
                     </v-card>
@@ -334,19 +346,16 @@
         </div>
       </v-col>
     </v-row>
-    <div class="ma-16">
-      <v-row>
-        <v-spacer></v-spacer>
-        <v-btn v-scroll-to="toTop" color="brown" x-large fab class="white--text"
-          ><v-icon>mdi-arrow-up</v-icon></v-btn
-        >
-      </v-row>
-    </div>
+    <ToTopButton />
   </div>
 </template>
 
 <script>
+import ToTopButton from "../../components/parts/ToTopButton";
 export default {
+  components: {
+    ToTopButton,
+  },
   data() {
     return {
       favoriteBlock: { id: 1, title: "音楽", text: "星野源" },
@@ -388,5 +397,4 @@ export default {
   object-fit: contain;
   border: brown dotted 1px;
 }
-
 </style>

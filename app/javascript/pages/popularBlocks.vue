@@ -202,19 +202,7 @@
           </v-row>
         </div>
         <!-- /テキストブロック -->
-        <div class="ma-16">
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-btn
-              v-scroll-to="toTop"
-              color="brown"
-              x-large
-              fab
-              class="white--text"
-              ><v-icon>mdi-arrow-up</v-icon></v-btn
-            >
-          </v-row>
-        </div>
+        <ToTopButton />
       </div>
       <div v-else>
         <NotAnyBookmarkBlock prof-message="まだブロックが作成されていないよ" />
@@ -232,6 +220,7 @@ import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
 import Loading from "../components/shared/Loading";
+import ToTopButton from "../components/parts/ToTopButton";
 
 export default {
   components: {
@@ -242,6 +231,7 @@ export default {
     FavoriteBlockCard,
     NotAnyBookmarkBlock,
     Loading,
+    ToTopButton,
   },
   data() {
     return {
@@ -253,8 +243,6 @@ export default {
       textPopularBlocks: [],
       visible: false,
       loading: true,
-
-      toTop: "#top",
     };
   },
   computed: {

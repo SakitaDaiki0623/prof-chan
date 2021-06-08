@@ -17,6 +17,7 @@
 
       <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
     </v-container>
+    <ToTopButton />
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import QuestionBlockList from "../../components/question_block/QuestionBlockList
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
 import RankingBlockList from "../../components/ranking_block/RankingBlockList";
 import FavoriteBlockList from "../../components/favorite_block/FavoriteBlockList";
+import ToTopButton from "../../components/parts/ToTopButton";
 
 export default {
   components: {
@@ -42,6 +44,7 @@ export default {
     RankingBlockList,
     TextBlockList,
     FavoriteBlockList,
+    ToTopButton,
   },
   props: {
     id: {
