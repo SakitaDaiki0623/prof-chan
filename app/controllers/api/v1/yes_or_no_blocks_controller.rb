@@ -3,6 +3,7 @@ module Api
   module V1
     class YesOrNoBlocksController < ApiController
       before_action :set_yes_or_no_block, only: %i[update destroy]
+      include PostMessageModule
 
       def index
         @yes_or_no_blocks = YesOrNoBlock.by_team(current_user)
@@ -46,13 +47,21 @@ module Api
       end
 
       def random_current_user_likes_blocks
-        yes_or_no_blocks = []
+        @yes_or_no_blocks = []
         @random_current_user_likes = YesOrNoBlockLike.filter_by_current_user(current_user.id)
         @random_current_user_likes.each do |like|
-          yes_or_no_blocks << YesOrNoBlock.find(like.yes_or_no_block_id)
+          @yes_or_no_blocks << YesOrNoBlock.find(like.yes_or_no_block_id)
         end
         render json: ActiveModel::Serializer::CollectionSerializer.new(
-          yes_or_no_blocks,
+          @yes_or_no_blocks,
+          serializer: YesOrNoBlockSerializer
+        ).to_json
+      end
+
+      def current_user_having
+        @yes_or_no_blocks = current_user.profile_block.yes_or_no_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @yes_or_no_blocks,
           serializer: YesOrNoBlockSerializer
         ).to_json
       end
@@ -60,62 +69,12 @@ module Api
       def post_to_slack_after_create
         @yes_or_no_block_item_register = YesOrNoBlockItemRegister.new(set_params)
         if @yes_or_no_block_item_register.valid?
-          chat_post_message(@yes_or_no_block_item_register)
+          post_yes_or_no_block(@yes_or_no_block_item_register)
           render json: @yes_or_no_block_item_register, status: :no_content
 
         else
           render json: @yes_or_no_block_item_register.errors, status: :bad_request
         end
-      end
-
-      def chat_post_message(register)
-        client = Slack::Web::Client.new
-
-        post_text = if register.yes_or_no_item_content3.present?
-                      " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
-                    elsif register.yes_or_no_item_content2.present?
-                      " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
-                    else
-                      " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
-                    end
-
-        text = "*#{current_user.name}さんがYes or No ブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{register.yes_or_no_title}* :star2:"
-
-        client.chat_postMessage(
-          channel: '#プロフちゃん実験',
-          text: text,
-          blocks: [
-            {
-              "type": 'section',
-              "text": {
-                "type": 'mrkdwn',
-                "text": text
-              }
-            },
-            {
-              "type": 'divider'
-            },
-            {
-              "type": 'section',
-              "text": {
-                "type": 'mrkdwn',
-                "text": post_text
-              },
-              "accessory": {
-                "type": 'image',
-                "image_url": current_user.image.to_s,
-                "alt_text": 'computer thumbnail'
-              }
-            },
-            {
-              "type": 'divider'
-            }
-          ]
-        )
-      end
-
-      def translate_boolean(answer)
-        answer ? 'YES！:laughing:' : 'NO！ :weary:'
       end
 
       private

@@ -28,8 +28,8 @@ module ProfChan
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Load CustomFailure for Devise Authentication
-    config.autoload_paths << Rails.root.join('lib')
+    # # Load CustomFailure for Devise Authentication
+    # config.autoload_paths << Rails.root.join('lib')
 
     # Prevent the $ rails g from generating assets, helper, test files and routing
     config.generators do |g|
@@ -44,5 +44,9 @@ module ProfChan
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]
 
     config.middleware.use BatchLoader::Middleware
+
+    # wheneverの読み込みを許可
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
   end
 end

@@ -1,21 +1,25 @@
 <template>
   <div class="bg" v-if="firstPlaceUserExist">
-    <v-row justify="center" align-content="center" class="pa-10">
-      <v-col cols="12" sm="2">
-        <img src="../images/prof_normal.png" class="image" />
-      </v-col>
-      <v-col cols="12" sm="7">
-        <div class="text-center text-4xl balloon4">
+    <v-row justify="center" align-content="center">
+      <v-col cols="12" sm="8" align-self="center">
+        <div
+          class="ext-4xl bordertext-xl text-center bg-brown-50 pa-10 ma-5 rounded-full md:t-brown-500 border-4 border-dashed"
+        >
+          <v-icon medium>mdi-star-box</v-icon>
           あなたにおすすめの社員さん
+          <v-icon medium>mdi-star-box</v-icon>
         </div>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <img src="../images/prof_open_happy.png" class="max-w-xs mx-auto" />
       </v-col>
     </v-row>
     <v-row
       justify="center"
       align-content="center"
-      class="pa-16 bg-brown-100 border-brown-400 border-2 border-dotted"
+      class="pa-10 bg-brown-500 border-brown-900 border-2 border-dotted"
     >
-      <v-col cols="12" sm="3">
+      <v-col cols="12" sm="12" md="6" lg="4" xl="3">
         <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
         <v-btn
           color="brown lighten-1"
@@ -30,7 +34,7 @@
       <v-row class="pa-10">
         <v-col cols="12" sm="12" align="center">
           <div
-            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block pa-10 rounded-full"
+            class="border-white border-dashed border-2 text-center text-white text-lg inline-block pa-5 md:text-2xl"
           >
             あなたと盛り上がりそうな話題
           </div>
@@ -39,11 +43,12 @@
           v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
           :key="block.id"
           cols="12"
-          sm="4"
+          sm="12"
+          md="4"
           align="center"
         >
-          <v-card class="rounded-2xl pa-5 " outlined color="brown lighten-2">
-            <p class="text-center text-4xl font-bold text-white pa-2">
+          <v-card class="rounded-2xl pa-5" outlined color="brown lighten-2">
+            <p class="text-center text-2xl font-bold text-white">
               {{ block.title }}
             </p>
           </v-card>
@@ -53,28 +58,39 @@
     <v-row
       justify="center"
       align-content="center"
-      class="pa-16 bg-brown-100 border-brown-400 border-2 border-dotted"
+      class="pa-10 bg-brown-500 border-brown-900 border-2 border-dotted"
+      v-if="secondPlaceUserExist"
     >
-      <v-col cols="12" sm="3">
-        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+      <v-col cols="12" sm="12" md="6" lg="4" xl="3">
+        <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
+        <v-btn
+          color="brown lighten-1"
+          class="white--text"
+          small
+          tile
+          @click="moveToUserProfilePage(secondPlaceUser.profile)"
+        >
+          社員ブロフィールを見る
+        </v-btn>
       </v-col>
       <v-row class="pa-10">
         <v-col cols="12" sm="12" align="center">
           <div
-            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block pa-10 rounded-full"
+            class="border-white border-dashed border-2 text-center text-white text-lg inline-block pa-5 md:text-2xl"
           >
             あなたと盛り上がりそうな話題
           </div>
         </v-col>
         <v-col
-          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          v-for="block in secondPlaceUserLikesBlocks.splice(0, 3)"
           :key="block.id"
           cols="12"
-          sm="4"
+          sm="12"
+          md="4"
           align="center"
         >
-          <v-card class="rounded-2xl pa-5 " outlined color="brown lighten-2">
-            <p class="text-center text-4xl font-bold text-white pa-2">
+          <v-card class="rounded-2xl pa-5" outlined color="brown lighten-2">
+            <p class="text-center text-2xl font-bold text-white">
               {{ block.title }}
             </p>
           </v-card>
@@ -84,28 +100,39 @@
     <v-row
       justify="center"
       align-content="center"
-      class="pa-16 bg-brown-100 border-brown-400 border-2 border-dotted"
+      class="pa-10 bg-brown-500 border-brown-900 border-2 border-dotted"
+      v-if="thirdPlaceUserExist"
     >
-      <v-col cols="12" sm="3">
-        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+      <v-col cols="12" sm="12" md="6" lg="4" xl="3">
+        <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
+        <v-btn
+          color="brown lighten-1"
+          class="white--text"
+          small
+          tile
+          @click="moveToUserProfilePage(thirdPlaceUser.profile)"
+        >
+          社員ブロフィールを見る
+        </v-btn>
       </v-col>
       <v-row class="pa-10">
         <v-col cols="12" sm="12" align="center">
           <div
-            class="border-brown-400 border-dotted border-2 text-center text-4xl inline-block pa-10 rounded-full"
+            class="border-white border-dashed border-2 text-center text-white text-lg inline-block pa-5 md:text-2xl"
           >
             あなたと盛り上がりそうな話題
           </div>
         </v-col>
         <v-col
-          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
+          v-for="block in thirdPlaceUserLikesBlocks.splice(0, 3)"
           :key="block.id"
           cols="12"
-          sm="4"
+          sm="12"
+          md="4"
           align="center"
         >
-          <v-card class="rounded-2xl pa-5 " outlined color="brown lighten-2">
-            <p class="text-center text-4xl font-bold text-white pa-2">
+          <v-card class="rounded-2xl pa-5" outlined color="brown lighten-2">
+            <p class="text-center text-2xl font-bold text-white">
               {{ block.title }}
             </p>
           </v-card>
@@ -133,12 +160,11 @@ export default {
       firstPlaceUser: {},
       secondPlaceUser: {},
       thirdPlaceUser: {},
-      currentUserProfileBlock: {},
-      favoriteBlocks: [],
-      questionBlocks: [],
-      rankingBlocks: [],
-      yesOrNoBlocks: [],
-      textBlocks: [],
+      currentUserFavoriteBlocks: [],
+      currentUserQuestionBlocks: [],
+      currentUserRankingBlocks: [],
+      currentUserYesOrNoBlocks: [],
+      currentUserTextBlocks: [],
     };
   },
   computed: {
@@ -155,7 +181,14 @@ export default {
     },
 
     topThreeUserIdAndTotalLikes() {
-      const allUserIds = this.currentUserBlocklikesUsres.map((user) => user.id);
+      const currentUserBlocklikesUsresExeptCurrentUser = this.currentUserBlocklikesUsres.filter(
+        (user) => {
+          user.id !== this.currentUser.id;
+        }
+      );
+      const allUserIds = currentUserBlocklikesUsresExeptCurrentUser.map(
+        (user) => user.id
+      );
 
       const dict = {};
 
@@ -228,46 +261,6 @@ export default {
         this.currentUserTextBlocks
       );
     },
-    currentUserFavoriteBlocks() {
-      return (
-        this.favoriteBlocks.filter(
-          (favoriteBlock) =>
-            favoriteBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
-    currentUserQuestionBlocks() {
-      return (
-        this.questionBlocks.filter(
-          (questionBlock) =>
-            questionBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
-    currentUserRankingBlocks() {
-      return (
-        this.rankingBlocks.filter(
-          (rankingBlock) =>
-            rankingBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
-    currentUserYesOrNoBlocks() {
-      return (
-        this.yesOrNoBlocks.filter(
-          (yesOrNoBlock) =>
-            yesOrNoBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
-    currentUserTextBlocks() {
-      return (
-        this.textBlocks.filter(
-          (textBlock) =>
-            textBlock.profile_block.id == this.currentUser.profile_block.id
-        ) || {}
-      );
-    },
   },
   mounted() {
     this.firstRead();
@@ -275,39 +268,39 @@ export default {
 
   methods: {
     async firstRead() {
-      await this.fetchFavoriteBlocks();
-      await this.fetchQuestionBlocks();
-      await this.fetchRankingBlocks();
-      await this.fetchYesOrNoBlocks();
-      await this.fetchTextBlocks();
+      await this.fetchFavoriteBlocksCurrentUserHaving();
+      await this.fetchQuestionBlocksCurrentUserHaving();
+      await this.fetchRankingBlocksCurrentUserHaving();
+      await this.fetchYesOrNoBlocksCurrentUserHaving();
+      await this.fetchTextBlocksCurrentUserHaving();
       await this.fecthFirstPlaceUser();
       await this.fecthSecondPlaceUser();
       await this.fecthThirdPlaceUser();
     },
-    async fetchFavoriteBlocks() {
+    async fetchFavoriteBlocksCurrentUserHaving() {
       await axios
-        .get("/api/v1/favorite_blocks")
-        .then((res) => (this.favoriteBlocks = res.data));
+        .get("/api/v1/favorite_blocks/current_user_having")
+        .then((res) => (this.currentUserFavoriteBlocks = res.data));
     },
-    async fetchQuestionBlocks() {
+    async fetchQuestionBlocksCurrentUserHaving() {
       await axios
-        .get("/api/v1/question_blocks")
-        .then((res) => (this.questionBlocks = res.data));
+        .get("/api/v1/question_blocks/current_user_having")
+        .then((res) => (this.currentUserQuestionBlocks = res.data));
     },
-    async fetchRankingBlocks() {
+    async fetchRankingBlocksCurrentUserHaving() {
       await axios
-        .get("/api/v1/ranking_blocks")
-        .then((res) => (this.rankingBlocks = res.data));
+        .get("/api/v1/ranking_blocks/current_user_having")
+        .then((res) => (this.currentUserRankingBlocks = res.data));
     },
-    async fetchYesOrNoBlocks() {
+    async fetchYesOrNoBlocksCurrentUserHaving() {
       await axios
-        .get("/api/v1/yes_or_no_blocks")
-        .then((res) => (this.yesOrNoBlocks = res.data));
+        .get("/api/v1/yes_or_no_blocks/current_user_having")
+        .then((res) => (this.currentUserYesOrNoBlocks = res.data));
     },
-    async fetchTextBlocks() {
+    async fetchTextBlocksCurrentUserHaving() {
       await axios
-        .get("/api/v1/text_blocks")
-        .then((res) => (this.textBlocks = res.data));
+        .get("/api/v1/text_blocks/current_user_having")
+        .then((res) => (this.currentUserTextBlocks = res.data));
     },
     async fecthFirstPlaceUser() {
       if (this.topThreeUserIdAndTotalLikes[0] == undefined) return;
@@ -331,7 +324,7 @@ export default {
         .then((res) => (this.thirdPlaceUser = res.data));
     },
     moveToUserProfilePage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});;
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});
     },
   },
 };
@@ -352,38 +345,14 @@ export default {
   background-color: #b39e9e;
   padding: 2rem;
 }
+</style>
 
-.image {
-  max-width: 20rem;
+<style scoped>
+.v-card {
+  transition: transform 0.3s ease-in-out;
 }
 
-.balloon4 {
-  position: relative;
-  margin: 2em 4em 2em 40px;
-  padding: 5px;
-  background: #fffaf0;
-  border-radius: 30px;
-}
-
-.balloon4:before {
-  content: "";
-  position: absolute;
-  left: -38px;
-  width: 13px;
-  height: 12px;
-  bottom: 0;
-  background: #fffaf0;
-  border-radius: 50%;
-}
-
-.balloon4:after {
-  content: "";
-  position: absolute;
-  left: -24px;
-  width: 20px;
-  height: 18px;
-  bottom: 3px;
-  background: #fffaf0;
-  border-radius: 50%;
+.v-card:not(.on-hover) {
+  transform: scale(0.95);
 }
 </style>

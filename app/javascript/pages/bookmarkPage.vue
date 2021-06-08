@@ -324,19 +324,7 @@
               </transition-group>
             </v-card>
           </div>
-          <div class="ma-16">
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-btn
-                v-scroll-to="toTop"
-                color="brown"
-                x-large
-                fab
-                class="white--text"
-                ><v-icon>mdi-arrow-up</v-icon></v-btn
-              >
-            </v-row>
-          </div>
+          <ToTopButton />
         </div>
       </div>
       <NotAnyBookmarkBlock v-else />
@@ -355,6 +343,7 @@ import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
 import ProfCard from "../components/ProfCard";
 import Loading from "../components/shared/Loading";
+import ToTopButton from "../components/parts/ToTopButton";
 
 export default {
   components: {
@@ -367,6 +356,7 @@ export default {
     FavoriteBlockCard,
     ProfCard,
     Loading,
+    ToTopButton,
   },
   data() {
     return {
@@ -406,8 +396,6 @@ export default {
       displayTextBlocks: [],
       textBlockPageSize: 4,
       textBlocklength: 0,
-
-      toTop: "#top",
     };
   },
   computed: {

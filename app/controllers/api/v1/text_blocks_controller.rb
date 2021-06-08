@@ -3,6 +3,7 @@ module Api
   module V1
     class TextBlocksController < ApiController
       before_action :set_text_block, only: %i[update destroy]
+      include PostMessageModule
 
       def index
         @text_blocks = TextBlock.by_team(current_user)
@@ -46,13 +47,21 @@ module Api
       end
 
       def random_current_user_likes_blocks
-        text_blocks = []
+        @text_blocks = []
         @random_current_user_likes = TextBlockLike.filter_by_current_user(current_user.id)
         @random_current_user_likes.each do |like|
-          text_blocks << TextBlock.find(like.text_block_id)
+          @text_blocks << TextBlock.find(like.text_block_id)
         end
         render json: ActiveModel::Serializer::CollectionSerializer.new(
-          text_blocks,
+          @text_blocks,
+          serializer: TextBlockSerializer
+        ).to_json
+      end
+
+      def current_user_having
+        @text_blocks = current_user.profile_block.text_blocks
+        render json: ActiveModel::Serializer::CollectionSerializer.new(
+          @text_blocks,
           serializer: TextBlockSerializer
         ).to_json
       end
@@ -60,48 +69,12 @@ module Api
       def post_to_slack_after_create
         @text_block = current_user.profile_block.text_blocks.build(text_block_params)
         if @text_block.valid?
-          chat_post_message(@text_block)
+          post_text_block(@text_block)
           render json: @text_block, status: :no_content
 
         else
           render json: @text_block.errors, status: :bad_request
         end
-      end
-
-      def chat_post_message(block)
-        client = Slack::Web::Client.new
-        text = "#{current_user.name}さんがテキストブロックを作成したよ:bangbang:*\n タイトル: :star2:*#{block.title}* :star2:"
-        client.chat_postMessage(
-          channel: '#プロフちゃん実験',
-          text: text,
-          blocks: [
-            {
-              "type": 'section',
-              "text": {
-                "type": 'mrkdwn',
-                "text": text
-              }
-            },
-            {
-              "type": 'divider'
-            },
-            {
-              "type": 'section',
-              "text": {
-                "type": 'mrkdwn',
-                "text": block.text
-              },
-              "accessory": {
-                "type": 'image',
-                "image_url": current_user.image.to_s,
-                "alt_text": 'computer thumbnail'
-              }
-            },
-            {
-              "type": 'divider'
-            }
-          ]
-        )
       end
 
       private

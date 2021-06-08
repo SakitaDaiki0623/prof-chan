@@ -12,6 +12,7 @@
     <div class="mb-10">
       <RecommendedUsers />
     </div>
+    <ToTopButton />
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import TopImageForEmail from "../components/static/TopImageForEmail";
 import RecentlyJoined from "../components/RecentlyJoined";
 import Birthday from "../components/Birthday";
 import RecommendedUsers from "./recommendedUsers";
+import ToTopButton from "../components/parts/ToTopButton";
 
 export default {
   components: {
@@ -32,6 +34,7 @@ export default {
     RecentlyJoined,
     Birthday,
     RecommendedUsers,
+    ToTopButton,
   },
   data() {
     return {};
@@ -52,17 +55,9 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentUser: "users/fetchCurrentUser",
-      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
-      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
     }),
     async firstRead() {
       await this.fetchCurrentUser();
-      await this.fetchYesOrNoBlocks();
-      await this.fetchYesOrNoItems();
-      await this.fetchQuestionBlocks();
-      await this.fetchQuestionItems();
     },
   },
 };

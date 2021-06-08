@@ -6,7 +6,8 @@
     v-if="isMyQuestionBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span>質問コーナー
+      <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span
+      >質問コーナー
     </div>
     <v-row
       v-show="isThisEditPage"
@@ -168,6 +169,10 @@ export default {
     this.pageFirstRead();
   },
   methods: {
+    ...mapActions({
+      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
+      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
+    }),
     openQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = true;
     },
@@ -180,7 +185,9 @@ export default {
         this.pageSize * pageNumber
       );
     },
-    pageFirstRead() {
+    async pageFirstRead() {
+      await this.fetchQuestionBlocks();
+      await this.fetchQuestionItems();
       this.length = Math.ceil(this.myQuestionBlocks.length / this.pageSize);
       this.displayBlocks = this.myQuestionBlocks.slice(0, this.pageSize);
     },
