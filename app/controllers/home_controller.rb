@@ -13,11 +13,10 @@ class HomeController < ApplicationController
     end
   end
 
-  def privacy
+  def agreement; end
 
-  end
+  def privacy; end
 
-  def terms
+  def terms; end
 
-  end
 end

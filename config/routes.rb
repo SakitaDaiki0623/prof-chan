@@ -118,6 +118,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'agreement', to: 'home#agreement'
   get 'terms', to: 'home#terms'
   get 'privacy', to: 'home#privacy'
 
