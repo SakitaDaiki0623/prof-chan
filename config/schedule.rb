@@ -18,4 +18,8 @@ every :day, at: '9:00 pm' do
   rake "blocks:post_blocks"
 end
 
+every :day, at: '12pm' do
+  rake "update_share_right:update_share_right"
+end
+
 # Learn more: http://github.com/javan/whenever

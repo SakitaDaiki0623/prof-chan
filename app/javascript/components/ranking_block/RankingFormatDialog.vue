@@ -114,6 +114,9 @@
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
+            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
+              ※Slackへの投稿は1日に1回のみです。
+            </div>
             <div class="text-center mt-3">
               <v-btn
                 id="creation_button"
@@ -138,7 +141,7 @@
 <script>
 // plugins
 import axios from "axios";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 // components ----------
 
@@ -184,11 +187,18 @@ export default {
     ...mapState("users", ["currentUser"]),
   },
   methods: {
+    ...mapActions({
+      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
+    }),
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
-      if (this.currentUser.provider == "slack") {
+      if (
+        this.currentUser.provider == "slack" &&
+        this.currentUser.share_right == "not_shared_yet"
+      ) {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(rankingBlock);
+          this.updateCurrentUserShareRight(this.currentUser);
         }
       }
       this.hundleCloseRankingFormatDialog();

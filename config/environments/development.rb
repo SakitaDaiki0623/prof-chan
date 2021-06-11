@@ -62,6 +62,8 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  config.assets.precompile += ['agreement.js']
+
   config.hosts.clear
 
   # Raises error for missing translations.
@@ -84,4 +86,5 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+  
 end

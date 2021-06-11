@@ -47,7 +47,7 @@ module PostMessageModule
   end
 
   def set_access_token
-    encrypted_access_token = current_user.access_token
+    encrypted_access_token = current_user.authentication.access_token
     key_len = ActiveSupport::MessageEncryptor.key_len
     secret = Rails.application.key_generator.generate_key('salt', key_len)
     crypt = ActiveSupport::MessageEncryptor.new(secret)

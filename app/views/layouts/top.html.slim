@@ -8,9 +8,9 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = favicon_link_tag('prof_normal')
-    = stylesheet_pack_tag "application", "data-turbo-track": "reload"
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body.flex.flex-col.min-h-screen.text-gray-600.font.bg-brown-100
+    = stylesheet_pack_tag "application"
+    = javascript_pack_tag 'application'
+  body.flex.flex-col.min-h-screen.text-gray-600.font.bg-brown-100.justify-between
     = render  "shared/flash_message"
     = yield
     = render  "shared/footer"

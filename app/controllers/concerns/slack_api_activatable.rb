@@ -11,11 +11,12 @@ module SlackApiActivatable
       created_channel = create_channel_in_team(channel_name, access_token).dig("channel")
       invite_result = try_invite_user(info, created_channel, access_token)
       post_direct_message_to_user(info, access_token)
+      return created_channel
     else
       invite_result = try_invite_user(info, channel, access_token)
       post_direct_message_to_user(info, access_token)
+      return channel
     end
-    return channel
   end
 
   # API Methods
