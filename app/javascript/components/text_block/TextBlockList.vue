@@ -6,7 +6,9 @@
     v-show="isMyTextBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="blue--text text--lighten-3 rounded-full px-2 bg-white">T</span>
+      <span class="blue--text text--lighten-3 rounded-full px-2 bg-white"
+        >T</span
+      >
       テキストコーナー
     </div>
     <v-row v-show="isThisEditPage" justify="center" class="py-5">
@@ -70,6 +72,7 @@
           :key="textBlock.id"
           cols="12"
           md="6"
+          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard
