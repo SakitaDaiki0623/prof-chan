@@ -1,6 +1,6 @@
 <template>
   <v-footer app absolute color="brown lighten-3">
-    <div>
+    <div class="term-font">
       <small class="text-white"> &copy; {{ copyText }}</small>
       <v-btn dense text class="white--text" @click="openTermsDialog">
         利用規約
