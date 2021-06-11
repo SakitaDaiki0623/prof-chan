@@ -70,6 +70,10 @@
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
+
+            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
+              ※Slackへの投稿は1日に1回のみです。
+            </div>
             <div class="text-center mt-3">
               <v-btn
                 id="creation_button"

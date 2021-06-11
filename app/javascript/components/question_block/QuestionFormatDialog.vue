@@ -123,6 +123,10 @@
               :answer-name-for-validation="answerNameForValidation3"
             />
 
+            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
+              ※Slackへの投稿は1日に1回のみです。
+            </div>
+
             <div class="text-center pa-10">
               <v-btn
                 id="creation_button"
