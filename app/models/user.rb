@@ -18,7 +18,8 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   # enum
-  enum role: { admin: 0, general: 1 }
+  enum role:        { admin: 0, general: 1 }
+  enum share_right: { not_shared_yet: 0, already_shared: 1 }
 
   # association
   has_one :profile,       dependent: :destroy
@@ -48,7 +49,7 @@ class User < ApplicationRecord
   # methods ===========================
 
   def create_guest_profile
-    profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 15, gender: "female", blood_type: "O", prefecture_id: 13 }
+    profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 5, gender: "female", blood_type: "O", prefecture_id: 13 }
     profile = self.build_profile(profile_params)
     profile.save!
   end

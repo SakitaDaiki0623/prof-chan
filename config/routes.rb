@@ -54,9 +54,12 @@ Rails.application.routes.draw do
           get 'birthday_user_profiles'
         end
       end
-      resources :users,          only: %i[index show new] do
+      resources :users,          only: %i[index show new update] do
         collection do
           get 'get_current_user'
+        end
+        member do
+          patch 'update_share_right'
         end
       end
       resources :teams,          only: %i[show]

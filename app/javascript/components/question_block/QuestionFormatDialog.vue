@@ -281,6 +281,7 @@ export default {
   methods: {
     ...mapActions({
       createQuestionBlock: "questionBlocks/createQuestionBlock",
+      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
     }),
     addQuestionItemNum() {
       this.questionItemNum++;
@@ -295,7 +296,7 @@ export default {
         this.questionItem2.answer = "";
       }
     },
-    hundleCreateQuestionBlock(
+    async hundleCreateQuestionBlock(
       questionBlock,
       questionItem1,
       questionItem2,
@@ -318,9 +319,13 @@ export default {
         color: this.questionBlockColor,
       });
 
-      if (this.currentUser.provider == "slack") {
+      if (
+        this.currentUser.provider == "slack" &&
+        this.currentUser.share_right == "not_shared_yet"
+      ) {
         if (confirm("slackに通知しますか?")) {
-          this.postToSlackAfterCreate(params);
+          await this.postToSlackAfterCreate(params);
+          this.updateCurrentUserShareRight(this.currentUser);
         }
       }
     },

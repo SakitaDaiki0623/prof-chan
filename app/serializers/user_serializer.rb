@@ -1,5 +1,5 @@
 class UserSerializer < ApplicationSerializer
-  attributes :id, :name, :image, :provider, :workspace_id
+  attributes :id, :name, :image, :provider, :workspace_id, :share_right
   lazy_has_one :profile
   lazy_has_one :profile_block
 

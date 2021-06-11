@@ -253,6 +253,7 @@ export default {
   methods: {
     ...mapActions({
       createYesOrNoBlock: "yesOrNoBlocks/createYesOrNoBlock",
+      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
     }),
     addYesOrNoItemNum() {
       this.yesOrNoItemNum++;
@@ -289,9 +290,13 @@ export default {
         message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
-      if (this.currentUser.provider == "slack") {
+      if (
+        this.currentUser.provider == "slack" &&
+        this.currentUser.share_right == "not_shared_yet"
+      ) {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(params);
+          this.updateCurrentUserShareRight(this.currentUser);
         }
       }
     },
