@@ -39,6 +39,7 @@ if Rails.env.production?
   Team.create!(
     name: 'normal login',
     workspace_id: 'A123B123C123',
+    share_channel_id: 'A123B123C123',
     image: "https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png"
   )
 end
