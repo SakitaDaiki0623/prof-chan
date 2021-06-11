@@ -8,7 +8,6 @@ namespace :blocks do
         encoded_msg = ERB::Util.url_encode(msg)
         encoded_text = ERB::Util.url_encode(text)
         message = access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
-        p message
       end
 
       def translate_boolean(answer)
@@ -41,12 +40,13 @@ namespace :blocks do
 
       # アクセストークンの生成
       logger.debug "creating access_token..."
-      encrypted_access_token = user.access_token
+      encrypted_access_token = user.authentication.access_token
       key_len = ActiveSupport::MessageEncryptor.key_len
       secret = Rails.application.key_generator.generate_key('salt', key_len)
       crypt = ActiveSupport::MessageEncryptor.new(secret)
       decrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
       access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], decrypted_access_token)
+      p access_token.post("api/auth.test").parsed
       logger.info  "created access_token!"
 
       # 投稿先チャンネルIDの取得

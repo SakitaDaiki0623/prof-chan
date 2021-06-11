@@ -1,9 +1,6 @@
 # app/models/user.rb
 class User < ApplicationRecord
 
-  # before
-  before_save :encrypt_access_token, :if => Proc.new {|u|  u.access_token.present? }
-
   # after
   after_create do
     self.create_profile_block unless profile_block.present?
@@ -22,8 +19,9 @@ class User < ApplicationRecord
   enum share_right: { not_shared_yet: 0, already_shared: 1 }
 
   # association
-  has_one :profile,       dependent: :destroy
-  has_one :profile_block, dependent: :destroy
+  has_one :profile,        dependent: :destroy
+  has_one :profile_block,  dependent: :destroy
+  has_one :authentication, dependent: :destroy
 
   belongs_to :team
 
@@ -62,13 +60,6 @@ class User < ApplicationRecord
     end
   end
 
-  def encrypt_access_token
-    key_len = ActiveSupport::MessageEncryptor.key_len
-    secret = Rails.application.key_generator.generate_key('salt', key_len)
-    crypt = ActiveSupport::MessageEncryptor.new(secret)
-    self.access_token = crypt.encrypt_and_sign(access_token)
-  end
-
   def set_default_team_value
     return if self.provider == 'slack'
     team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
@@ -85,11 +76,20 @@ class User < ApplicationRecord
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')
-    user.access_token = hash_token
     user.remote_image_url = user_info.dig('user', 'image_192')
+    user.check_authentication_existence(hash_token)
     user.check_team_existence(user_info.dig('team'), channel)
     user.save!
     user
+  end
+
+  def check_authentication_existence(hash_token)
+    if self.authentication.present?
+      self.authentication.update!(access_token: hash_token)
+    else
+      @authentication = self.build_authentication(access_token: hash_token)
+      @authentication.save!
+    end
   end
 
   # slackログイン時にユーザーが所属するチームがTeamテーブルにあるかどうかを確認

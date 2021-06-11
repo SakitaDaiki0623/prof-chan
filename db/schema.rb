@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_215553) do
+ActiveRecord::Schema.define(version: 2021_06_11_084905) do
 
   create_table "address_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "twitter"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_block_id"], name: "index_address_blocks_on_profile_block_id"
+  end
+
+  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.json "access_token"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -183,7 +191,6 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
     t.string "name", null: false
     t.string "image", null: false
     t.string "email", null: false
-    t.json "access_token"
     t.integer "role", default: 1, null: false
     t.integer "share_right", default: 0, null: false
     t.bigint "team_id"
@@ -223,6 +230,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_215553) do
   end
 
   add_foreign_key "address_blocks", "profile_blocks"
+  add_foreign_key "authentications", "users"
   add_foreign_key "favorite_block_likes", "favorite_blocks"
   add_foreign_key "favorite_block_likes", "users"
   add_foreign_key "favorite_blocks", "profile_blocks"
