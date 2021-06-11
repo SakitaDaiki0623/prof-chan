@@ -24,10 +24,11 @@ export const users = {
       });
     },
     updateCurrentUserShareRight({ commit }, payload) {
-      console.log(payload);
-      axios.patch(`users/${payload.id}/update_share_right`, payload).then((response) => {
-        commit("updateCurrentUser", response.data);
-      });
+      axios
+        .patch(`users/${payload.id}/update_share_right`, payload)
+        .then((response) => {
+          commit("updateCurrentUser", response.data);
+        });
     },
   },
 };
