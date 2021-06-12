@@ -51,11 +51,10 @@ module PostMessageModule
     key_len = ActiveSupport::MessageEncryptor.key_len
     secret = Rails.application.key_generator.generate_key('salt', key_len)
     crypt = ActiveSupport::MessageEncryptor.new(secret)
-    decrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
-    while decrypted_access_token.kind_of?(String)
-      decrypted_access_token = crypt.decrypt_and_verify(decrypted_access_token)
+    while encrypted_access_token.kind_of?(String)
+      encrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
     end
-    access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], decrypted_access_token)
+    access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
     return access_token
   end
 
