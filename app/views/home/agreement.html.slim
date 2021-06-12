@@ -15,7 +15,7 @@
     | #{link_to '利用規約', terms_path, class: 'border-b-2 border-gray-600 hover:opacity-50'}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50'}に同意します
 
   .text-center.p-5
-    = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign-in-with-slack-button', class: 'inline-block opacity-50 pointer-events-none'
+    = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign-in-with-slack-button', class: 'inline-block opacity-50 pointer-events-none hover:opacity-50'
 
   .text-center.my-5
     = link_to 'トップページに戻る', root_path, class: 'bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white mx-auto'
