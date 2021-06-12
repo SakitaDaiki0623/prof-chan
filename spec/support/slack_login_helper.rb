@@ -4,7 +4,10 @@ module SlackLoginHelper
     Rails.application.env_config["omniauth.auth"] = set_slack_omniauth # omniauth.authの値を代入
     allow_any_instance_of(Users::OmniauthCallbacksController).to receive(:get_user_info).and_return(set_user_info) # strategy.authの値を代入
     visit root_path
-    find("#sign_in_with_slack_button").click
+    find("#agreement-path-button").click
+    expect(current_path).to eq(agreement_path)
+    find("#agreement").click
+    find("#sign-in-with-slack-button").click
     expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
   end
 

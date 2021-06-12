@@ -10,7 +10,7 @@
       br
       | チェックを入れてログインボタンを押してください！
       = image_tag  "prof_normal.png", class: 'max-w-xs mx-auto'
-  = check_box_tag :agreement, class: 'p-5', id: 'agreement-button'
+  = check_box_tag :agreement, class: 'p-5'
   = label_tag :agreement, class: 'text-xl md:text-2xl'
     | #{link_to '利用規約', terms_path, class: 'border-b-2 border-gray-600 hover:opacity-50'}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50'}に同意します
 
