@@ -2,6 +2,6 @@
   .container.py-4
       p.text-white.text-sm.font-light
         | &copy; 2021 - プロフちゃん
-        =link_to '利用規約', terms_path, class: "p-2 hover:opacity-50"
-        =link_to 'プライバシー・ポリシー', privacy_path, class: "p-2 hover:opacity-50"
-        =link_to 'お問い合わせ', new_contact_path, class: "p-2 hover:opacity-50"
+        =link_to '利用規約', terms_path, class: "p-2 hover:opacity-50", :target=>["_blank"]
+        =link_to 'プライバシー・ポリシー', privacy_path, class: "p-2 hover:opacity-50", :target=>["_blank"]
+        =link_to 'お問い合わせ', new_contact_path, class: "p-2 hover:opacity-50", :target=>["_blank"]
