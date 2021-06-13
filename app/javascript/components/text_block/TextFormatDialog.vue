@@ -138,17 +138,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
+      updateCurrentUserTextShareRight: "users/updateCurrentUserTextShareRight",
     }),
     hundleCreateTextBlock(textBlock) {
       this.createTextBlock(textBlock);
       if (
         this.currentUser.provider == "slack" &&
-        this.currentUser.share_right == "not_shared_yet"
+        this.currentUser.text_share_right == "text_not_shared_yet"
       ) {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(textBlock);
-          this.updateCurrentUserShareRight(this.currentUser);
+          this.updateCurrentUserTextShareRight();
         }
       }
       this.hundleCloseTextFormatDialog();

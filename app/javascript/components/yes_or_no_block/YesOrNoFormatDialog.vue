@@ -257,7 +257,8 @@ export default {
   methods: {
     ...mapActions({
       createYesOrNoBlock: "yesOrNoBlocks/createYesOrNoBlock",
-      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
+      updateCurrentUserYesOrNoShareRight:
+        "users/updateCurrentUserYesOrNoShareRight",
     }),
     addYesOrNoItemNum() {
       this.yesOrNoItemNum++;
@@ -296,11 +297,11 @@ export default {
       });
       if (
         this.currentUser.provider == "slack" &&
-        this.currentUser.share_right == "not_shared_yet"
+        this.currentUser.yes_or_no_share_right == "yes_or_no_not_shared_yet"
       ) {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(params);
-          this.updateCurrentUserShareRight(this.currentUser);
+          this.updateCurrentUserYesOrNoShareRight();
         }
       }
     },

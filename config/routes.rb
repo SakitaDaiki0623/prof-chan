@@ -57,9 +57,10 @@ Rails.application.routes.draw do
       resources :users,          only: %i[index show new update] do
         collection do
           get 'get_current_user'
-        end
-        member do
-          patch 'update_share_right'
+          patch 'update_question_share_right'
+          patch 'update_ranking_share_right'
+          patch 'update_yes_or_no_share_right'
+          patch 'update_text_share_right'
         end
       end
       resources :teams,          only: %i[show]

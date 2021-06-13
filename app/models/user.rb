@@ -16,7 +16,10 @@ class User < ApplicationRecord
 
   # enum
   enum role:        { admin: 0, general: 1 }
-  enum share_right: { not_shared_yet: 0, already_shared: 1 }
+  enum question_share_right: { question_not_shared_yet: 0, question_already_shared: 1 }
+  enum ranking_share_right: { ranking_not_shared_yet: 0, ranking_already_shared: 1 }
+  enum yes_or_no_share_right: { yes_or_no_not_shared_yet: 0, yes_or_no_already_shared: 1 }
+  enum text_share_right: { text_not_shared_yet: 0, text_already_shared: 1 }
 
   # association
   has_one :profile,        dependent: :destroy
