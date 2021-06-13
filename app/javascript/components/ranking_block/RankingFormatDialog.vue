@@ -188,17 +188,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
+      updateCurrentUserRankingShareRight: "users/updateCurrentUserRankingShareRight",
     }),
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
       if (
         this.currentUser.provider == "slack" &&
-        this.currentUser.share_right == "not_shared_yet"
+        this.currentUser.ranking_share_right == "ranking_not_shared_yet"
       ) {
         if (confirm("slackに通知しますか?")) {
           this.postToSlackAfterCreate(rankingBlock);
-          this.updateCurrentUserShareRight(this.currentUser);
+          this.updateCurrentUserRankingShareRight();
         }
       }
       this.hundleCloseRankingFormatDialog();

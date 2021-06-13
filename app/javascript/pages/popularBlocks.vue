@@ -17,7 +17,7 @@
         <!-- Favorite ブロック -->
         <div
           class="py-10 sm:px-16 bg-brown-400 mb-16"
-          v-if="favoritePopularBlocksTopThree.length !== 0"
+          v-if="favoritePopularBlocks.length !== 0"
         >
           <v-row>
             <v-col cols="12" sm="11">
@@ -31,7 +31,7 @@
               <img src="../images/prof_normal.png" class="image mx-auto" />
             </v-col>
             <v-col
-              v-for="favoriteBlock in favoritePopularBlocksTopThree"
+              v-for="favoriteBlock in favoritePopularBlocks"
               :key="favoriteBlock.id"
               cols="12"
               md="4"
@@ -54,7 +54,7 @@
         <!-- クエスチョンブロック -->
         <div
           class="py-10 sm:px-16 bg-brown-300 mb-16"
-          v-if="questionPopularBlocksTopThree.length !== 0"
+          v-if="questionPopularBlocks.length !== 0"
         >
           <v-row>
             <v-col cols="12" sm="11">
@@ -68,7 +68,7 @@
               <img src="../images/prof_happy.png" class="image mx-auto" />
             </v-col>
             <v-col
-              v-for="questionBlock in questionPopularBlocksTopThree"
+              v-for="questionBlock in questionPopularBlocks"
               :key="questionBlock.id"
               cols="12"
               md="6"
@@ -92,7 +92,7 @@
         <!-- ランキングブロック -->
         <div
           class="py-10 sm:px-16 bg-brown-400 mb-16"
-          v-if="rankingPopularBlocksTopThree.length !== 0"
+          v-if="rankingPopularBlocks.length !== 0"
         >
           <v-row>
             <v-col cols="12" sm="11">
@@ -106,7 +106,7 @@
               <img src="../images/prof_open_normal.png" class="image mx-auto" />
             </v-col>
             <v-col
-              v-for="rankingBlock in rankingPopularBlocksTopThree"
+              v-for="rankingBlock in rankingPopularBlocks"
               :key="rankingBlock.id"
               cols="12"
               md="6"
@@ -130,7 +130,7 @@
         <!-- Yes or No ブロック -->
         <div
           class="py-10 sm:px-16 bg-brown-300 mb-16"
-          v-if="yesOrNoPopularBlocksTopThree.length !== 0"
+          v-if="yesOrNoPopularBlocks.length !== 0"
         >
           <v-row>
             <v-col cols="12" sm="11">
@@ -144,7 +144,7 @@
               <img src="../images/prof_open_happy.png" class="image mx-auto" />
             </v-col>
             <v-col
-              v-for="yesOrNoBlock in yesOrNoPopularBlocksTopThree"
+              v-for="yesOrNoBlock in yesOrNoPopularBlocks"
               :key="yesOrNoBlock.id"
               cols="12"
               md="6"
@@ -168,12 +168,12 @@
         <!-- テキストブロック -->
         <div
           class="py-10 sm:px-16 bg-brown-400 mb-16"
-          v-if="textPopularBlocksTopThree.length !== 0"
+          v-if="textPopularBlocks.length !== 0"
         >
           <v-row>
             <v-col cols="12" sm="11">
               <div
-                class="text-center text-4xl text-white pa-5  border-class font-bold"
+                class="text-center text-4xl text-white pa-5 border-class font-bold"
               >
                 テキストブロック
               </div>
@@ -182,7 +182,7 @@
               <img src="../images/prof_normal.png" class="image mx-auto" />
             </v-col>
             <v-col
-              v-for="textBlock in textPopularBlocksTopThree"
+              v-for="textBlock in textPopularBlocks"
               :key="textBlock.id"
               cols="12"
               md="6"
@@ -235,7 +235,6 @@ export default {
   },
   data() {
     return {
-      recentlyJoinedUserProfiles: [],
       favoritePopularBlocks: [],
       questionPopularBlocks: [],
       rankingPopularBlocks: [],
@@ -248,76 +247,16 @@ export default {
   computed: {
     isThereAnyBlock() {
       if (
-        this.favoritePopularBlocksTopThree.length == 0 &&
-        this.questionPopularBlocksTopThree.length == 0 &&
-        this.rankingPopularBlocksTopThree.length == 0 &&
-        this.yesOrNoPopularBlocksTopThree.length == 0 &&
-        this.textPopularBlocksTopThree.length == 0
+        this.favoritePopularBlocks.length == 0 &&
+        this.questionPopularBlocks.length == 0 &&
+        this.rankingPopularBlocks.length == 0 &&
+        this.yesOrNoPopularBlocks.length == 0 &&
+        this.textPopularBlocks.length == 0
       ) {
         return false;
       } else {
         return true;
       }
-    },
-    favoritePopularBlocksFirstPlace() {
-      return this.favoritePopularBlocksTopThree[0];
-    },
-    favoritePopularBlocksSecondPlace() {
-      return this.favoritePopularBlocksTopThree[1];
-    },
-    favoritePopularBlocksThirdPlace() {
-      return this.favoritePopularBlocksTopThree[2];
-    },
-    favoritePopularBlocksTopThree() {
-      return this.favoritePopularBlocks.splice(0, 3);
-    },
-    questionPopularBlocksFirstPlace() {
-      return this.questionPopularBlocksTopThree[0];
-    },
-    questionPopularBlocksSecondPlace() {
-      return this.questionPopularBlocksTopThree[1];
-    },
-    questionPopularBlocksThirdPlace() {
-      return this.questionPopularBlocksTopThree[2];
-    },
-    questionPopularBlocksTopThree() {
-      return this.questionPopularBlocks.splice(0, 3);
-    },
-    rankingPopularBlocksFirstPlace() {
-      return this.rankingPopularBlocksTopThree[0];
-    },
-    rankingPopularBlocksSecondPlace() {
-      return this.rankingPopularBlocksTopThree[1];
-    },
-    rankingPopularBlocksThirdPlace() {
-      return this.rankingPopularBlocksTopThree[2];
-    },
-    rankingPopularBlocksTopThree() {
-      return this.rankingPopularBlocks.splice(0, 3);
-    },
-    yesOrNoPopularBlocksFirstPlace() {
-      return this.yesOrNoPopularBlocksTopThree[0];
-    },
-    yesOrNoPopularBlocksSecondPlace() {
-      return this.yesOrNoPopularBlocksTopThree[1];
-    },
-    yesOrNoPopularBlocksThirdPlace() {
-      return this.yesOrNoPopularBlocksTopThree[2];
-    },
-    yesOrNoPopularBlocksTopThree() {
-      return this.yesOrNoPopularBlocks.splice(0, 3);
-    },
-    textPopularBlocksFirstPlace() {
-      return this.textPopularBlocksTopThree[0];
-    },
-    textPopularBlocksSecondPlace() {
-      return this.textPopularBlocksTopThree[1];
-    },
-    textPopularBlocksThirdPlace() {
-      return this.textPopularBlocksTopThree[2];
-    },
-    textPopularBlocksTopThree() {
-      return this.textPopularBlocks.splice(0, 3);
     },
   },
   mounted() {
@@ -340,7 +279,6 @@ export default {
       }
     },
     async firstRead() {
-      await this.fetchRecentlyJoinedUserProfiles();
       await this.fetchFavoritePopularBlocks();
       await this.fetchQuestionPopularBlocks();
       await this.fetchRankingPopularBlocks();
@@ -348,11 +286,6 @@ export default {
       await this.fetchTextPopularBlocks();
     },
 
-    async fetchRecentlyJoinedUserProfiles() {
-      await axios
-        .get("/api/v1/profiles/recently_joined_user_profiles")
-        .then((res) => (this.recentlyJoinedUserProfiles = res.data));
-    },
     async fetchFavoritePopularBlocks() {
       await axios
         .get("/api/v1/favorite_blocks/popular_blocks")

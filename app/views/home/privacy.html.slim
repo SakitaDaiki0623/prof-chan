@@ -79,13 +79,10 @@
       li 当事務局が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。
 
     .text-2xl.font-bold.mt-10.mb-5 第10条（お問い合わせ窓口）
-    p 本ポリシーに関するお問い合わせは，以下のメールアドレスにご連絡ください。
-    p e-mail
-    p.ml-5 profchan.profile@gmail.com
+    p 本ポリシーに関するお問い合わせは，#{link_to 'お問い合わせフォーム', new_contact_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}までお願いいたします。
     .my-20.text-center 以上
     .container.text-center.term-font
       div
         =link_to 'トップページに戻る', root_path, class: 'mx-10 hover:opacity-50 inline-block'
       div
         =link_to "新規登録はこちら", new_user_registration_path, class: 'mx-10 hover:opacity-50 inline-block'
-

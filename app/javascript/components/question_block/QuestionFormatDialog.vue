@@ -285,7 +285,7 @@ export default {
   methods: {
     ...mapActions({
       createQuestionBlock: "questionBlocks/createQuestionBlock",
-      updateCurrentUserShareRight: "users/updateCurrentUserShareRight",
+      updateCurrentUserQuestionShareRight: "users/updateCurrentUserQuestionShareRight",
     }),
     addQuestionItemNum() {
       this.questionItemNum++;
@@ -325,11 +325,11 @@ export default {
 
       if (
         this.currentUser.provider == "slack" &&
-        this.currentUser.share_right == "not_shared_yet"
+        this.currentUser.question_share_right == "question_not_shared_yet"
       ) {
         if (confirm("slackに通知しますか?")) {
           await this.postToSlackAfterCreate(params);
-          this.updateCurrentUserShareRight(this.currentUser);
+          this.updateCurrentUserQuestionShareRight();
         }
       }
     },

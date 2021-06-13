@@ -23,11 +23,33 @@ export const users = {
         commit("loadCurrentUser", response.data);
       });
     },
-    updateCurrentUserShareRight({ commit }, payload) {
-      console.log(payload);
-      axios.patch(`users/${payload.id}/update_share_right`, payload).then((response) => {
-        commit("updateCurrentUser", response.data);
-      });
+    updateCurrentUserQuestionShareRight({ commit }) {
+      axios
+        .patch(`users/update_question_share_right`)
+        .then((response) => {
+          commit("updateCurrentUser", response.data);
+        });
+    },
+    updateCurrentUserRankingShareRight({ commit }) {
+      axios
+        .patch(`users/update_ranking_share_right`)
+        .then((response) => {
+          commit("updateCurrentUser", response.data);
+        });
+    },
+    updateCurrentUserYesOrNoShareRight({ commit }) {
+      axios
+        .patch(`users/update_yes_or_no_share_right`)
+        .then((response) => {
+          commit("updateCurrentUser", response.data);
+        });
+    },
+    updateCurrentUserTextShareRight({ commit }) {
+      axios
+        .patch(`users/update_text_share_right`)
+        .then((response) => {
+          commit("updateCurrentUser", response.data);
+        });
     },
   },
 };

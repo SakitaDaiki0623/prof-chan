@@ -176,10 +176,13 @@
             第10条（お問い合わせ窓口）
           </div>
           <p>
-            本ポリシーに関するお問い合わせは，以下のメールアドレスにご連絡ください。
+            本ポリシーに関するお問い合わせは，<a
+              class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
+              target="_blank"
+              href="/contacts/new"
+              >お問い合わせフォーム</a
+            >までお願いいたします。
           </p>
-          <p>e-mail</p>
-          <p class="ml-5">profchan.profile@gmail.com</p>
           <div class="mt-20 text-center">以上</div>
         </div>
       </div>

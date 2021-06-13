@@ -72,7 +72,6 @@
           :key="textBlock.id"
           cols="12"
           md="6"
-          lg="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard

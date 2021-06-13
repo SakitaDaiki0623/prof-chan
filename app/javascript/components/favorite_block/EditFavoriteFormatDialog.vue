@@ -119,8 +119,6 @@ export default {
   },
   methods: {
     hundleEditFavoriteBlock(editFavoriteBlock) {
-      console.log(editFavoriteBlock);
-
       // category_idの変換
       const selectedCategory = this.categories.find(
         (category) => category.name == editFavoriteBlock.title

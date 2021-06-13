@@ -192,7 +192,10 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.string "image", null: false
     t.string "email", null: false
     t.integer "role", default: 1, null: false
-    t.integer "share_right", default: 0, null: false
+    t.integer "question_share_right", default: 0, null: false
+    t.integer "ranking_share_right", default: 0, null: false
+    t.integer "yes_or_no_share_right", default: 0, null: false
+    t.integer "text_share_right", default: 0, null: false
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

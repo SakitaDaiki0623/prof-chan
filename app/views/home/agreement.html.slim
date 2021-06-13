@@ -4,18 +4,21 @@
   .grid.grid-cols-12.gap-10.text-center.bg-brown-100
     .col-start-1.col-span-12.p-10
       .text-xl.inline.p-5.text-gray-600.font-bold.border-dotted.text-center.top-sub-title.lg:text-3xl
-        | アプリをslackにインストールする前に
+        | Slackでログインをする前に
     .col-start-1.col-span-12.md:text-xl.lg:text-3xl
       | 利用規約とプライバシー・ポリシーを確認したら
       br
       | チェックを入れてログインボタンを押してください！
       = image_tag  "prof_normal.png", class: 'max-w-xs mx-auto'
-  = check_box_tag :agreement, class: 'p-5', id: 'agreement-button'
+  = check_box_tag :agreement, class: 'p-5'
   = label_tag :agreement, class: 'text-xl md:text-2xl'
-    | #{link_to '利用規約', terms_path, class: 'border-b-2 border-gray-600 hover:opacity-50'}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50'}に同意します
+    | #{link_to '利用規約', terms_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}に同意します
 
   .text-center.p-5
-    = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign-in-with-slack-button', class: 'inline-block opacity-50 pointer-events-none'
+    = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign-in-with-slack-button', class: 'inline-block opacity-50 pointer-events-none hover:opacity-50'
 
-  .text-center.my-5
-    = link_to 'トップページに戻る', root_path, class: 'bg-white rounded-full p-4 hover:bg-brown-500 hover:text-white mx-auto'
+  .text-center.mb-5
+    p Sign in with Slackの方法については#{link_to 'こちら', 'https://www.notion.so/Sign-in-with-Slack-ba505d2b4d3a45fbbf4a90356b279514', class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}のドキュメントをご覧ください。
+
+  .text-center.my-20
+    = link_to 'トップページに戻る', root_path, class: 'mx-auto hover:opacity-50'
