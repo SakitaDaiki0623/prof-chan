@@ -58,7 +58,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="テキスト"
-                rules="input_required|max:200"
+                rules="input_required|max:400"
               >
                 <textarea
                   id="text_block_text"

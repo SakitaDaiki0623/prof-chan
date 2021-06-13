@@ -18,5 +18,5 @@ class TextBlock < ApplicationRecord
 
   # validation =============
   validates :title, presence: true,      length: { maximum: 50 }
-  validates :text,  presence: true,      length: { maximum: 200 }
+  validates :text,  presence: true,      length: { maximum: 400 }
 end
