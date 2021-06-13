@@ -25,7 +25,7 @@ module SlackApiActivatable
   end
 
   def get_channel_list(access_token)
-    access_token.get('/api/conversations.list').parsed
+    access_token.get('/api/conversations.list?limit=1000&pretty=1').parsed
   end
 
   def create_channel_in_team(channel_name, access_token)
