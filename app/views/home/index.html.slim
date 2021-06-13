@@ -10,12 +10,13 @@
         = image_tag  "prof_normal.png", class: "max-w-xs mx-auto md:mx-0"
   .grid.grid-cols-12.text-center.bg-brown-500.mb-10
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-10.mb-5
-      .inline-block.hover:opacity-50
-        = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), agreement_path, class: 'inline-block', id: 'agreement-path-button'
-      .my-3.text-white.md:text-xl
-        | 本サービスの正規ログイン方法です。
-        br
-        | Slackのワークスペースのメンバーでプロフィールを共有します。
+      .border-2.border-dashed.border-brown-300.p-3.rounded-full
+        .inline-block.hover:opacity-50
+          = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), agreement_path, class: 'inline-block', id: 'agreement-path-button'
+        .my-3.text-white.md:text-xl
+          | 本サービスの正規ログイン方法です。
+          br
+          | Slackのワークスペースのメンバーでプロフィールを共有します。
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-5.md:col-span-6.md:col-start-1
       = link_to "お試し版ログイン", new_user_session_path, class: "bg-brown-400 hover:opacity-50 text-2xl text-white font-bold py-2 px-10 border border-brown-700 rounded md:px-5 md:text-xl md:px-10"
       .my-3.text-white.md:text-xl

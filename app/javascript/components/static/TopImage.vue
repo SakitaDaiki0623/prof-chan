@@ -31,10 +31,12 @@
         <v-col cols="12" sm="4" class="border-white border-dotted border-2">
           <div>
             <div class="text-white text-2xl text-center">
-              こちらは{{ team.name }}の本サイトのワークスペースです。<br />
+              こちらは{{ team.name }}のワークスペースの画面です。<br />
               {{
                 team.name
               }}のワークスペース内の人とのみプロフを共有します。<br />
+              別のワークスペースでログインしたい場合は一度ログアウトを行い、別のワークスペースを指定してSign
+              in with slackを行ってください。
             </div>
           </div>
         </v-col>
@@ -42,7 +44,7 @@
           <v-img
             :src="team.image"
             max-width="10rem"
-            class="border-8 border-white shadow-md"
+            class="border-2 border-white shadow-md"
           ></v-img>
         </v-col>
       </v-row>
