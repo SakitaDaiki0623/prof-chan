@@ -1,7 +1,6 @@
 # app/controllers/api/v1/favorite_blocks_controller.rb
 module Api
   module V1
-
     class FavoriteBlocksController < ApiController
       before_action :set_favorite_block, only: %i[show update destroy]
 

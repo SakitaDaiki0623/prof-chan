@@ -25,18 +25,21 @@ module Api
           render json: @user, serializer: UserSerializer
         end
       end
+
       def update_ranking_share_right
         if @user.ranking_not_shared_yet?
           @user.ranking_already_shared!
           render json: @user, serializer: UserSerializer
         end
       end
+
       def update_yes_or_no_share_right
         if @user.yes_or_no_not_shared_yet?
           @user.yes_or_no_already_shared!
           render json: @user, serializer: UserSerializer
         end
       end
+
       def update_text_share_right
         if @user.text_not_shared_yet?
           @user.text_already_shared!

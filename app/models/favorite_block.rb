@@ -4,7 +4,7 @@ class FavoriteBlock < ApplicationRecord
   has_many :users, through: :favorite_block_likes
 
   # validation =============
-  validates :text, presence: true,      length: { maximum: 20 }
+  validates :text, presence: true, length: { maximum: 20 }
 
   # active hash =============
   extend ActiveHash::Associations::ActiveRecordExtensions

@@ -28,8 +28,7 @@ class ContactsController < ApplicationController
     end
   end
 
-  def done
-  end
+  def done; end
 
   private
 
@@ -37,7 +36,6 @@ class ContactsController < ApplicationController
     params.require(:contact)
           .permit(:email,
                   :name,
-                  :message
-                 )
+                  :message)
   end
 end

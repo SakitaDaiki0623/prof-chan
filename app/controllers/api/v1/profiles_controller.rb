@@ -27,7 +27,7 @@ module Api
           render json: @profile, serializer: ProfileSerializer
         else
           render json: { title: 'Profile Not Found' },
-           status: 404
+                 status: 404
         end
       end
 

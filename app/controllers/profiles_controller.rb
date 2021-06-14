@@ -8,7 +8,9 @@ class ProfilesController < ApplicationController
     authorize Profile
   end
 
-  def top; end
+  def top
+    redirect_to new_profile_path if current_user.profile.nil?
+  end
 
   private
 

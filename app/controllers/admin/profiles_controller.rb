@@ -35,9 +35,9 @@ module Admin
     # and `dashboard`:
     #
     def resource_params
-      params.require(resource_class.model_name.param_key).
-        permit(dashboard.permitted_attributes).
-        transform_values { |value| value == "" ? nil : value }
+      params.require(resource_class.model_name.param_key)
+            .permit(dashboard.permitted_attributes)
+            .transform_values { |value| value == '' ? nil : value }
     end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
