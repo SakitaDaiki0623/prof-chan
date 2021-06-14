@@ -31,9 +31,6 @@
           color="brown lighten-5"
           @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
         >
-          <v-card color="brown lighten-2" class="white--text">
-            {{ recentlyJoinedUserProfile.day_of_joinning }} 入社
-          </v-card>
           <v-img
             :src="recentlyJoinedUserProfile.user.image.url"
             height="180px"
@@ -42,6 +39,9 @@
           <div class="text-center font-bold text-4xl pt-5 text-brown-600">
             {{ recentlyJoinedUserProfile.user.name }} さん
           </div>
+          <v-card color="brown lighten-2" class="white--text">
+            {{ recentlyJoinedUserProfile.day_of_joinning | moment }} 入社
+          </v-card>
         </v-card>
       </v-hover>
     </v-col>
@@ -50,8 +50,14 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
+  filters: {
+    moment: function (date) {
+      return moment(date).format("YYYY年MM月DD日");
+    },
+  },
   data() {
     return {
       recentlyJoinedUserProfiles: [],

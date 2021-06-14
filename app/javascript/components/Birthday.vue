@@ -37,14 +37,14 @@
             color="brown lighten-5"
             @click="moveToUserProfilePage(birthdayUserProfile)"
           >
-            <v-card color="brown lighten-2" class="white--text">
-              誕生日 {{ birthdayUserProfile.birthday | moment }}
-            </v-card>
             <v-img :src="birthdayUserProfile.user.image.url" height="180px" />
 
             <div class="text-center font-bold text-4xl pt-5 text-brown-600">
               {{ birthdayUserProfile.user.name }} さん
             </div>
+            <v-card color="brown lighten-2" class="white--text">
+              誕生日 {{ birthdayUserProfile.birthday | moment }}
+            </v-card>
           </v-card>
         </v-hover>
       </v-col>
@@ -58,7 +58,7 @@ import moment from "moment";
 
 export default {
   filters: {
-    moment: function(date) {
+    moment: function (date) {
       return moment(date).format("MM月DD日");
     },
   },
