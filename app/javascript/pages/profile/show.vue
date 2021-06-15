@@ -190,8 +190,6 @@ export default {
 
 <style scoped>
 .note {
-  width: 80%;
-  padding: 0 1em;
   background: linear-gradient(rgb(255, 245, 245) 5px, transparent 0.6px) #fffbf2;
   background-size: auto 5em;
   border-top: 1px solid #ccc;

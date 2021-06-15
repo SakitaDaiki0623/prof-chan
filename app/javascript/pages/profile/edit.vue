@@ -3,7 +3,7 @@
   <div>
     <v-container
       v-if="shown"
-      class="border-gray-500 rounded-xl border-2 my-16 bg-main-contain-color note"
+      class="border-gray-500 rounded-xl border-2 my-16 note"
     >
       <BasicAndAddressBlock
         :is-this-edit-page="isThisEditPage"
@@ -148,8 +148,6 @@ export default {
 }
 
 .note {
-  width: 80%;
-  padding: 0 1em;
   background: linear-gradient(rgb(255, 245, 245) 5px, transparent 0.6px) #fffbf2;
   background-size: auto 5em;
   border-top: 1px solid #ccc;
