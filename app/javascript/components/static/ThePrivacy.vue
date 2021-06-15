@@ -5,19 +5,10 @@
     @click:outside="hundleClosePrivacyDialog"
     @input="$emit('input', $event.target.isShownPrivacy)"
   >
-    <v-card
-      color="brown lighten-5"
-      class="term-font"
-    >
+    <v-card color="brown lighten-5" class="term-font">
       <div class="container mx-auto my-4 term-font px-10 lg:px-16 lg:py-16">
-        <v-row
-          justify="end"
-          class="mr-2 mt-2"
-        >
-          <v-btn
-            color="brown lighten-5"
-            @click="hundleClosePrivacyDialog"
-          >
+        <v-row justify="end" class="mr-2 mt-2">
+          <v-btn color="brown lighten-5" @click="hundleClosePrivacyDialog">
             <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
@@ -66,6 +57,35 @@
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
             第4条（利用目的の変更）
           </div>
+          <ol class="ml-4">
+            <li>
+              当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」・LogRocket社の提供するサービスである「LogRocket」を使用しています。このGoogleアナリティクス・LogRocketはデータの収集のためにCookieを使用しています。
+            </li>
+            <li>
+              この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関しての詳細は<a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
+                href="https://marketingplatform.google.com/about/analytics/terms/jp/"
+                >Googleアナリティクスサービス利用規約</a
+              >や<a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
+                href="https://policies.google.com/technologies/ads?hl=ja"
+                >Googleポリシーと規約</a
+              >・<a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
+                href="https://logrocket.com/privacy/"
+                >LogRocketプライバシポリシー</a
+              >をご覧ください。
+            </li>
+          </ol>
+          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+            第5条（利用目的の変更）
+          </div>
           <ol class="ml-5 list-decimal">
             <li>
               当事務局は，利用目的が変更前と関連性を有すると合理的に認められる場合に限り，個人情報の利用目的を変更するものとします。
@@ -75,7 +95,7 @@
             </li>
           </ol>
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第5条（個人情報の第三者提供）
+            第6条（個人情報の第三者提供）
           </div>
           <ol class="ml-5 list-decimal">
             <li>
@@ -120,7 +140,7 @@
             </li>
           </ol>
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第6条（個人情報の開示）
+            第7条（個人情報の開示）
           </div>
           <ol class="ml-5 list-decimal">
             <li>
@@ -140,7 +160,7 @@
             </li>
           </ol>
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第7条（個人情報の訂正および削除）
+            第8条（個人情報の訂正および削除）
           </div>
           <ol class="ml-5 list-decimal">
             <li>
@@ -154,7 +174,7 @@
             </li>
           </ol>
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第8条（個人情報の利用停止等）
+            第9条（個人情報の利用停止等）
           </div>
           <ol class="ml-5 list-decimal">
             <li>
@@ -171,7 +191,7 @@
             </li>
           </ol>
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第9条（プライバシーポリシーの変更）
+            第10条（プライバシーポリシーの変更）
           </div>
           <ol class="ml-5 list-decimal">
             <li>
@@ -182,18 +202,17 @@
             </li>
           </ol>
           <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第10条（お問い合わせ窓口）
+            第11条（お問い合わせ窓口）
           </div>
           <p>
             本ポリシーに関するお問い合わせは，<a
               class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
               target="_blank"
               href="/contacts/new"
-            >お問い合わせフォーム</a>までお願いいたします。
+              >お問い合わせフォーム</a
+            >までお願いいたします。
           </p>
-          <div class="mt-20 text-center">
-            以上
-          </div>
+          <div class="mt-20 text-center">以上</div>
         </div>
       </div>
     </v-card>
