@@ -61,6 +61,9 @@ gem 'html2slim'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+# Performance monitoring
+gem 'newrelic_rpm'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do

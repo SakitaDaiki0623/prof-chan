@@ -299,6 +299,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     mysql2 (0.5.3)
+    newrelic_rpm (7.1.0)
     nio4r (2.5.7)
     nokogiri (1.11.5)
       mini_portile2 (~> 2.5.0)
@@ -582,6 +583,7 @@ DEPENDENCIES
   letter_opener_web
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
+  newrelic_rpm
   omniauth-rails_csrf_protection
   parser (< 2.6.6.0)
   pry
