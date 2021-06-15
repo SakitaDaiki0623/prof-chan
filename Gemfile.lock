@@ -467,6 +467,16 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sentry-rails (4.5.1)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.5.0)
+    sentry-ruby (4.5.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      faraday (>= 1.0)
+      sentry-ruby-core (= 4.5.1)
+    sentry-ruby-core (4.5.1)
+      concurrent-ruby
+      faraday
     sexp_processor (4.15.3)
     simplecov (0.21.2)
       docile (~> 1.1)
@@ -591,6 +601,8 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   sass-rails (>= 6)
+  sentry-rails
+  sentry-ruby
   simplecov
   slack-ruby-client
   slim-rails

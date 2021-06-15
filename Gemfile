@@ -57,6 +57,10 @@ gem "tailwindcss-rails", "~> 0.3.3"
 gem 'slim-rails'
 gem 'html2slim'
 
+# Error monitoring
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
