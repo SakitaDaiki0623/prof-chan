@@ -55,7 +55,7 @@
           >
             <v-img
               :src="birthdayUserProfile.user.image.url"
-              height="180px"
+              max-height="250px"
             />
 
             <div class="text-center font-bold text-4xl pt-5 text-brown-600">
