@@ -1,0 +1,13 @@
+/ Analytics
+- if Rails.env.production?
+  script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1KP3HML26Y"
+  javascript:
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1KP3HML26Y');
+  / Log Rocket
+  script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"
+  javascript:
+    window.LogRocket && window.LogRocket.init('9mwyop/prof-chan');

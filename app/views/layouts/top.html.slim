@@ -11,10 +11,7 @@ html
     = stylesheet_pack_tag "application"
     = javascript_pack_tag 'application'
 
-    / Log Rocket
-    script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"
-    javascript:
-      window.LogRocket && window.LogRocket.init('9mwyop/prof-chan');
+    = render  "shared/analytics"
   body.flex.flex-col.min-h-screen.text-gray-600.font.bg-brown-100.justify-between
     = render  "shared/flash_message"
     = yield
