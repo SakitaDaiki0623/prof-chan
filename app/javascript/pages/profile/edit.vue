@@ -2,20 +2,38 @@
 <template>
   <div>
     <v-container
-      class="border-gray-500 rounded-xl border-2 my-16 bg-main-contain-color note"
       v-if="shown"
+      class="border-gray-500 rounded-xl border-2 my-16 bg-main-contain-color note"
     >
-      <BasicAndAddressBlock :is-this-edit-page="isThisEditPage" :user="user" />
+      <BasicAndAddressBlock
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <FavoriteBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <FavoriteBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <QuestionBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <QuestionBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <RankingBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <RankingBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <YesOrNoBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <YesOrNoBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
 
-      <TextBlockList :is-this-edit-page="isThisEditPage" :user="user" />
+      <TextBlockList
+        :is-this-edit-page="isThisEditPage"
+        :user="user"
+      />
     </v-container>
     <ToTopButton />
   </div>
@@ -27,7 +45,6 @@ import axios from "axios";
 import { mapState } from "vuex";
 
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
-import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
@@ -38,7 +55,6 @@ import ToTopButton from "../../components/parts/ToTopButton";
 export default {
   components: {
     BasicAndAddressBlock,
-    MyFavoriteBlock,
     QuestionBlockList,
     YesOrNoBlockList,
     RankingBlockList,
@@ -53,6 +69,13 @@ export default {
       default: "",
     },
   },
+  data() {
+    return {
+      profile: {},
+      user: {},
+      shown: false,
+    };
+  },
   computed: {
     isThisEditPage() {
       return this.$route.path ==
@@ -60,13 +83,6 @@ export default {
         ? true
         : false;
     },
-  },
-  data() {
-    return {
-      profile: {},
-      user: {},
-      shown: false,
-    };
   },
   created() {
     document.title = `プロフ編集 - プロフちゃん`;

@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div class="balloon1">{{ placeNumber }}位はまだいないよ</div>
-    <img src="../../images/prof_normal.png" class="image" />
+    <div class="balloon1">
+      {{ placeNumber }}位はまだいないよ
+    </div>
+    <img
+      src="../../images/prof_normal.png"
+      class="image"
+    >
   </div>
 </template>
 

@@ -1,19 +1,35 @@
 <template>
   <div>
     <v-row
+      v-if="length !== 0"
       class="bg-brown-400 pA-3"
       justify="center"
       align-content="center"
-      v-if="length !== 0"
     >
-      <v-col cols="12" sm="12">
+      <v-col
+        cols="12"
+        sm="12"
+      >
         <div class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10">
-          <v-icon large color="white">mdi-cake-variant</v-icon>
+          <v-icon
+            large
+            color="white"
+          >
+            mdi-cake-variant
+          </v-icon>
           今月誕生日の社員さん
-          <v-icon large color="white">mdi-cake-variant</v-icon>
+          <v-icon
+            large
+            color="white"
+          >
+            mdi-cake-variant
+          </v-icon>
         </div>
       </v-col>
-      <v-col cols="12" sm="10">
+      <v-col
+        cols="12"
+        sm="10"
+      >
         <div
           class="text-2xl lg:text-4xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
         >
@@ -37,14 +53,20 @@
             color="brown lighten-5"
             @click="moveToUserProfilePage(birthdayUserProfile)"
           >
-            <v-card color="brown lighten-2" class="white--text">
-              誕生日 {{ birthdayUserProfile.birthday | moment }}
-            </v-card>
-            <v-img :src="birthdayUserProfile.user.image.url" height="180px" />
+            <v-img
+              :src="birthdayUserProfile.user.image.url"
+              max-height="250px"
+            />
 
             <div class="text-center font-bold text-4xl pt-5 text-brown-600">
               {{ birthdayUserProfile.user.name }} さん
             </div>
+            <v-card
+              color="brown lighten-2"
+              class="white--text"
+            >
+              誕生日 {{ birthdayUserProfile.birthday | moment }}
+            </v-card>
           </v-card>
         </v-hover>
       </v-col>
@@ -58,7 +80,7 @@ import moment from "moment";
 
 export default {
   filters: {
-    moment: function(date) {
+    moment: function (date) {
       return moment(date).format("MM月DD日");
     },
   },

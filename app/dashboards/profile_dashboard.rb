@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class ProfileDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -18,7 +18,7 @@ class ProfileDashboard < Administrate::BaseDashboard
     day_of_joinning: Field::DateTime,
     public_uid: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

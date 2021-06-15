@@ -6,9 +6,9 @@ module TaskLogging
         begin
           block.call(task)
           Rails.logger.debug "[#{task.name}] finished"
-        rescue => exception
+        rescue StandardError => e
           Rails.logger.debug "[#{task.name}] failed"
-          raise exception
+          raise e
         end
       end
     end

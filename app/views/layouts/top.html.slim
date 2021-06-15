@@ -10,6 +10,8 @@ html
     = favicon_link_tag('prof_normal')
     = stylesheet_pack_tag "application"
     = javascript_pack_tag 'application'
+
+    = render  "shared/analytics"
   body.flex.flex-col.min-h-screen.text-gray-600.font.bg-brown-100.justify-between
     = render  "shared/flash_message"
     = yield

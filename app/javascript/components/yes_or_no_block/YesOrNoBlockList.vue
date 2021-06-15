@@ -1,18 +1,26 @@
 <template>
   <v-card
+    v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
     color="brown lighten-4"
     outlined
     class="mb-10 pa-5"
-    v-show="isMyYesOrNoBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="yellow--text text--darken-3 rounded-full px-2 bg-white"
-        >Y</span
-      >
+      <span
+        class="yellow--text text--darken-3 rounded-full px-2 bg-white"
+      >Y</span>
       Yes or No コーナー
     </div>
-    <v-row v-show="isThisEditPage" justify="center" class="py-5">
-      <v-col cols="12" sm="12" align="center">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+      class="py-5"
+    >
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <v-btn
           id="add-yes-or-no-block-btn"
           tile
@@ -20,11 +28,17 @@
           class="ma-2 white--text"
           @click="openYesOrNoFormatDialog"
         >
-          <v-icon left> mdi-plus </v-icon>
+          <v-icon left>
+            mdi-plus
+          </v-icon>
           Yes or No ブロックを追加する
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="8" align="right">
+      <v-col
+        cols="12"
+        sm="8"
+        align="right"
+      >
         <ProgressBar
           :percentage-for-blocks="percentageMyYesOrNoBlocksLengt"
           :block-color="yesOrNoBlockColor"
@@ -33,20 +47,20 @@
     </v-row>
     <div class="text-center">
       <v-pagination
+        v-show="isPageSizeBiggerThanMyYesOrNoBlocks && !isThisEditPage"
         v-model="page"
         :length="length"
         circle
-        @input="pageChange"
         :color="yesOrNoBlockColor"
         class="mb-10"
-        v-show="isPageSizeBiggerThanMyYesOrNoBlocks && !isThisEditPage"
-      ></v-pagination>
+        @input="pageChange"
+      />
     </div>
     <div>
       <transition-group
+        v-if="isMyYesOrNoBlocksLengthNotZero && !isThisEditPage"
         tag="v-row"
         name="list"
-        v-if="isMyYesOrNoBlocksLengthNotZero && !isThisEditPage"
       >
         <v-col
           v-for="yesOrNoBlock in displayBlocks"
@@ -64,9 +78,9 @@
         </v-col>
       </transition-group>
       <transition-group
+        v-else-if="isMyYesOrNoBlocksLengthNotZero && isThisEditPage"
         tag="v-row"
         name="list"
-        v-else-if="isMyYesOrNoBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="yesOrNoBlock in myYesOrNoBlocks"
@@ -83,7 +97,10 @@
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer block-name="Yes or No " v-else />
+      <NoBlockContainer
+        v-else
+        block-name="Yes or No "
+      />
     </div>
 
     <YesOrNoFormatDialog

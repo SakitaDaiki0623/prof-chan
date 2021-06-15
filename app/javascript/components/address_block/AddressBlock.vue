@@ -94,7 +94,6 @@ export default {
     user: {
       type: Object,
       required: false,
-      default: false,
     },
   },
   data() {

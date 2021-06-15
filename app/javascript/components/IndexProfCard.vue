@@ -1,12 +1,17 @@
 <template>
   <div
     :id="'profile-index-card-' + profile.public_uid"
-    class="bg-prof-card bg-cover shadow rounded-2xl duration-300 hover:shadow-xl transform hover:scale-105"
     @click="openProfileShowPage(profile)"
   >
-    <v-card color="brown lighten-2" outlined>
+    <v-card
+      color="brown lighten-2"
+      outlined
+    >
       <div>
-        <v-row justify="center" align-content="center">
+        <v-row
+          justify="center"
+          align-content="center"
+        >
           <v-img
             class="ring-4 rounded-full ring-gray-600 text-center sample_box2_3"
             :src="profile.user.image.url"
@@ -16,12 +21,14 @@
         </v-row>
       </div>
     </v-card>
-    <v-card color="brown lighten-5 text-center" outlined>
+    <v-card
+      color="brown lighten-5 text-center"
+      outlined
+    >
       <div
         class="pa-3 text-4xl font-bold border-dotted	border-b-2 border-gray-400"
       >
-        <span class="name-text">{{ profile.user.name }}</span
-        >さん
+        <span class="name-text">{{ profile.user.name }}</span>さん
       </div>
     </v-card>
   </div>

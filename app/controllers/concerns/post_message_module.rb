@@ -1,8 +1,7 @@
 module PostMessageModule
-
   def post_questioin_block(register)
     access_token = set_access_token
-    text = "@#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:\n :star2:#{register.question_title} :star2:"
+    text = "@#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:\n :star2:*#{register.question_title}*:star2:"
     post_text = if register.question_item_content3.present? && register.question_item_answer3.present?
                   " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}*\n"
                 elsif register.question_item_content2.present? && register.question_item_answer2.present?
@@ -10,7 +9,7 @@ module PostMessageModule
                 else
                   " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*"
                 end
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
@@ -24,7 +23,7 @@ module PostMessageModule
                 else
                   " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
                 end
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
@@ -35,14 +34,14 @@ module PostMessageModule
   def post_ranking_block(block)
     access_token = set_access_token
     text = "@#{current_user.name}さんがランキングブロックを作成したよ:bangbang:\n :star2:*#{block.title}* :star2:"
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
   def post_text_block(block)
     access_token = set_access_token
     text = "@#{current_user.name}さんがテキストブロックを作成したよ:bangbang:\n :star2:*#{block.title}* :star2:"
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image.to_s}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
@@ -51,11 +50,11 @@ module PostMessageModule
     key_len = ActiveSupport::MessageEncryptor.key_len
     secret = Rails.application.key_generator.generate_key('salt', key_len)
     crypt = ActiveSupport::MessageEncryptor.new(secret)
-    while encrypted_access_token.kind_of?(String)
+    while encrypted_access_token.is_a?(String)
       encrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
     end
     access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
-    return access_token
+    access_token
   end
 
   def post_block(text, msg, access_token)

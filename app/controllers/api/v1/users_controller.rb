@@ -20,28 +20,31 @@ module Api
       def new; end
 
       def update_question_share_right
-        if @user.question_not_shared_yet?
-          @user.question_already_shared!
-          render json: @user, serializer: UserSerializer
-        end
+        return unless @user.question_not_shared_yet?
+
+        @user.question_already_shared!
+        render json: @user, serializer: UserSerializer
       end
+
       def update_ranking_share_right
-        if @user.ranking_not_shared_yet?
-          @user.ranking_already_shared!
-          render json: @user, serializer: UserSerializer
-        end
+        return unless @user.ranking_not_shared_yet?
+
+        @user.ranking_already_shared!
+        render json: @user, serializer: UserSerializer
       end
+
       def update_yes_or_no_share_right
-        if @user.yes_or_no_not_shared_yet?
-          @user.yes_or_no_already_shared!
-          render json: @user, serializer: UserSerializer
-        end
+        return unless @user.yes_or_no_not_shared_yet?
+
+        @user.yes_or_no_already_shared!
+        render json: @user, serializer: UserSerializer
       end
+
       def update_text_share_right
-        if @user.text_not_shared_yet?
-          @user.text_already_shared!
-          render json: @user, serializer: UserSerializer
-        end
+        return unless @user.text_not_shared_yet?
+
+        @user.text_already_shared!
+        render json: @user, serializer: UserSerializer
       end
 
       def get_current_user

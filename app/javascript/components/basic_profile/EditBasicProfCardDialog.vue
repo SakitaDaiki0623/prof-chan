@@ -16,7 +16,11 @@
         基本情報
       </div>
       <v-row>
-        <v-col cols="12" sm="12" class="text-2xl">
+        <v-col
+          cols="12"
+          sm="12"
+          class="text-2xl"
+        >
           <v-row justify="end">
             <v-btn
               id="cancel-basic-prof-card-button"
@@ -29,15 +33,22 @@
             </v-btn>
           </v-row>
           <!-- FORM -->
-          <div id="profile-basic-form" class="pa-6">
-            <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <div
+            id="profile-basic-form"
+            class="pa-6"
+          >
+            <ValidationObserver
+              ref="observer"
+              v-slot="{ invalid }"
+            >
               <form
                 @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"
               >
                 <div>
-                  <label class="form-label-text-block" for="profile_gender"
-                    >性別</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_gender"
+                  >性別</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="性別"
@@ -54,15 +65,15 @@
                       color="brown lighten-3"
                       persistent-hint
                       single-line
-                    >
-                    </v-select>
+                    />
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label class="form-label-text-block" for="profile_height"
-                    >身長</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_height"
+                  >身長</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="身長"
@@ -74,14 +85,15 @@
                       class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
-                    />
+                    >
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label class="form-label-text-block" for="profile_blood_type"
-                    >血液型</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_blood_type"
+                  >血液型</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="血液型"
@@ -98,8 +110,7 @@
                       color="brown lighten-3"
                       persistent-hint
                       single-line
-                    >
-                    </v-select>
+                    />
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
@@ -107,8 +118,7 @@
                   <label
                     class="form-label-text-block"
                     for="profile_prefecture_id"
-                    >出身地</label
-                  >
+                  >出身地</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="出身地"
@@ -125,15 +135,15 @@
                       color="brown lighten-3"
                       persistent-hint
                       single-line
-                    >
-                    </v-select>
+                    />
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label class="form-label-text-block" for="profile_birthday"
-                    >生年月日</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_birthday"
+                  >生年月日</label>
                   <v-menu
                     ref="menu"
                     v-model="birthMenu"
@@ -156,7 +166,7 @@
                           name="profile[birthday]"
                           v-bind="attrs"
                           v-on="on"
-                        />
+                        >
                         <span class="red--text text-sm">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
@@ -177,8 +187,7 @@
                   <label
                     class="form-label-text-block"
                     for="profile_day_of_joinning"
-                    >入社日</label
-                  >
+                  >入社日</label>
                   <v-menu
                     ref="menu"
                     v-model="joinedMenu"
@@ -201,7 +210,7 @@
                           v-bind="attrs"
                           class="input-form-basic-block"
                           v-on="on"
-                        />
+                        >
                         <span class="red--text text-sm">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>

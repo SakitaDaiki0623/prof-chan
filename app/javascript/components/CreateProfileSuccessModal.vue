@@ -12,12 +12,28 @@
         >
           基本情報の入力が完了しました
         </div>
-        <v-card color="brown lighten-2" outlined>
-          <v-row align="center" align-content="center">
-            <v-col cols="12" sm="6" align="right">
-              <img src="../images/prof_happy.png" class="max-w-sm" />
+        <v-card
+          color="brown lighten-2"
+          outlined
+        >
+          <v-row
+            align="center"
+            align-content="center"
+          >
+            <v-col
+              cols="12"
+              sm="6"
+              align="right"
+            >
+              <img
+                src="../images/prof_happy.png"
+                class="max-w-sm"
+              >
             </v-col>
-            <v-col cols="12" sm="6">
+            <v-col
+              cols="12"
+              sm="6"
+            >
               <p
                 class="text-2xl bg-brown-100 text-center pa-10 rounded-full max-w-sm font-weight-bold"
               >

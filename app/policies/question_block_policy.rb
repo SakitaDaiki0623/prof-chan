@@ -1,3 +1,2 @@
 class QuestionBlockPolicy < BlockPolicy
-
 end

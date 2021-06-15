@@ -8,7 +8,10 @@
   >
     <v-card :color="favoriteBlockColor">
       <div class="bg-brown-300 pa-3">
-        <v-row justify="end" class="ma-2">
+        <v-row
+          justify="end"
+          class="ma-2"
+        >
           <v-btn
             :color="favoriteBlockColor"
             @click="hundleCloseFavoriteFormatDialog"
@@ -20,15 +23,20 @@
           Favorite ブロック作成
         </p>
       </div>
-      <div id="favorite-block-form" class="pa-10 bg-text-prof-block">
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <div
+        id="favorite-block-form"
+        class="pa-10 bg-text-prof-block"
+      >
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
           <form @submit.prevent="hundleCreateFavoriteBlock(favoriteBlock)">
             <div>
               <label
                 class="form-label-text-block"
                 for="favorite_block_category_id"
-                >カテゴリー</label
-              >
+              >カテゴリー</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="カテゴリー"
@@ -45,15 +53,15 @@
                   color="brown lighten-3"
                   persistent-hint
                   single-line
-                >
-                </v-select>
+                />
                 <span class="text-red-200">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
-              <label class="form-label-text-block" for="favorite_block_text"
-                >テキスト</label
-              >
+              <label
+                class="form-label-text-block"
+                for="favorite_block_text"
+              >テキスト</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="テキスト"
@@ -64,7 +72,7 @@
                   v-model="favoriteBlock.text"
                   class="input-form-favorite-block"
                   name="favorite_block[favorite_block_text]"
-                />
+                >
                 <span class="text-red-200">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>

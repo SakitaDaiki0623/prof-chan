@@ -1,11 +1,25 @@
 <template>
-  <v-footer app absolute color="brown lighten-3">
+  <v-footer
+    app
+    absolute
+    color="brown lighten-3"
+  >
     <div class="term-font">
       <small class="text-white"> &copy; {{ copyText }}</small>
-      <v-btn dense text class="white--text" @click="openTermsDialog">
+      <v-btn
+        dense
+        text
+        class="white--text"
+        @click="openTermsDialog"
+      >
         利用規約
       </v-btn>
-      <v-btn dense text class="white--text" @click="openPrivacyDialog">
+      <v-btn
+        dense
+        text
+        class="white--text"
+        @click="openPrivacyDialog"
+      >
         プライバシー・ポリシー
       </v-btn>
     </div>

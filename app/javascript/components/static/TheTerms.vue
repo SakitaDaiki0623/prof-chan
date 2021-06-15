@@ -5,10 +5,19 @@
     @click:outside="hundleCloseTermsDialog"
     @input="$emit('input', $event.target.isShownTerms)"
   >
-    <v-card color="brown lighten-5" class="term-font">
+    <v-card
+      color="brown lighten-5"
+      class="term-font"
+    >
       <div class="container mx-auto my-4 term-font px-10 lg:px-16 lg:py-16">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn color="brown lighten-5" @click="hundleCloseTermsDialog">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
+          <v-btn
+            color="brown lighten-5"
+            @click="hundleCloseTermsDialog"
+          >
             <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
@@ -16,7 +25,9 @@
           利用規約
         </div>
         <div class="grid grid-rows-1">
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">利用規約</div>
+          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+            利用規約
+          </div>
           <p>
             この利用規約（以下，「本規約」といいます。）は，プロフちゃん（以下，「当事務局」といいます。）がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
           </p>
@@ -201,7 +212,9 @@
               本サービスに関して紛争が生じた場合には，当事務局の本店所在地を管轄する裁判所を専属的合意管轄とします。
             </li>
           </ol>
-          <div class="mt-20 text-center">以上</div>
+          <div class="mt-20 text-center">
+            以上
+          </div>
         </div>
       </div>
     </v-card>

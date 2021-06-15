@@ -27,7 +27,7 @@ module Api
           render json: @profile, serializer: ProfileSerializer
         else
           render json: { title: 'Profile Not Found' },
-           status: 404
+                 status: 404
         end
       end
 
@@ -49,7 +49,7 @@ module Api
       end
 
       def birthday_user_profiles
-        @birthday_user_profiles = Profile.by_team(current_user).filter_by_birth_month(Date.today.month)
+        @birthday_user_profiles = Profile.by_team(current_user).filter_by_birth_month(Time.zone.today.month)
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @birthday_user_profiles,
           serializer: ProfileSerializer

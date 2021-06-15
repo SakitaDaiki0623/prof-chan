@@ -1,8 +1,11 @@
 <!-- app/javascript/app.vue -->
 <template>
-  <v-app id="app" class="default kawaii">
+  <v-app
+    id="app"
+    class="default kawaii"
+  >
     <TheHeader />
-    <Loading v-show="loading"></Loading>
+    <Loading v-show="loading" />
     <v-main v-show="!loading">
       <TheNotFound v-if="isNotFound" />
       <TheFlashMessage v-if="isFlash" />

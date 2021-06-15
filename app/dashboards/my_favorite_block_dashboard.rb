@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class MyFavoriteBlockDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -27,7 +27,7 @@ class MyFavoriteBlockDashboard < Administrate::BaseDashboard
     youtuber: Field::String,
     actor: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

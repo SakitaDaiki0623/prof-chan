@@ -1,7 +1,14 @@
 <template>
   <div>
-    <v-card class="rounded-2xl pa-5" outlined :color="favoriteBlockColor">
-      <v-row v-if="isThisEditPage" justify="end">
+    <v-card
+      class="rounded-2xl pa-5"
+      outlined
+      :color="favoriteBlockColor"
+    >
+      <v-row
+        v-if="isThisEditPage"
+        justify="end"
+      >
         <v-btn
           :id="'edit-text-block-button-' + favoriteBlock.id"
           tile
@@ -25,7 +32,7 @@
         <v-spacer />
         <favorite-block-like-button
           :favorite-block-id="favoriteBlock.id"
-        ></favorite-block-like-button>
+        />
       </v-row>
       <label class="form-label">
         {{ favoriteBlock.title }}

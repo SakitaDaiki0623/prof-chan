@@ -1,6 +1,10 @@
 <template>
   <div class="text-center text-gray-600">
-    <v-row justify="center" align-content="center" class="my-10">
+    <v-row
+      justify="center"
+      align-content="center"
+      class="my-10"
+    >
       <v-col
         cols="12"
         sm="12"
@@ -14,20 +18,29 @@
         <div class="md:text-4xl text-2xl pt-10">
           - - - - REMOTELY PROMOTE YOURSELF.- - - -
         </div>
-        <div class="text-md md:text-2xl pt-10">コロナ以前の雑談の補完。</div>
+        <div class="text-md md:text-2xl pt-10">
+          コロナ以前の雑談の補完。
+        </div>
       </v-col>
-      <v-col cols="12" sm="12" class="my-16 ">
+      <v-col
+        cols="12"
+        sm="12"
+        class="my-16 "
+      >
         <div class="text-xl sm:text-4xl md:text-4xl">
-          プロフちゃんはコロナで減ってしまった雑談を補完する<br /><span
+          プロフちゃんはコロナで減ってしまった雑談を補完する<br><span
             class="border-b-8 border-brown-500"
           >
-            「社内プロフィール公開サービス」</span
-          >です。
+            「社内プロフィール公開サービス」</span>です。
         </div>
       </v-col>
 
       <!-- 説明欄1 -->
-      <v-col cols="12" sm="12" align="left">
+      <v-col
+        cols="12"
+        sm="12"
+        align="left"
+      >
         <v-card
           min-height="500px"
           color="brown lighten-3"
@@ -40,26 +53,47 @@
           >
             社内でプロフィールを公開しよう！
           </div>
-          <v-row class="py-10" justify="center">
-            <v-col cols="12" lg="3" align-self="start">
-              <v-card outlined class="pa-5" max-height="470px">
+          <v-row
+            class="py-10"
+            justify="center"
+          >
+            <v-col
+              cols="12"
+              lg="3"
+              align-self="start"
+            >
+              <v-card
+                outlined
+                class="pa-5"
+                max-height="470px"
+              >
                 <div
                   class="text-xl text-brown-300 font-bold border-t-4 border-b-4 border-brown-300 w-1/3 mb-5"
                 >
                   01
                 </div>
-                <div class="text-4xl text-brown-300 font-bold">書き込む</div>
+                <div class="text-4xl text-brown-300 font-bold">
+                  書き込む
+                </div>
                 <img
                   src="../../images/undraw_Notebook_re_id0r.svg"
                   class="image"
-                />
+                >
                 <div class="text-xl text-brown-300 pa-8">
                   あなたに関する様々な情報をプロフィールに書き込みましょう。
                 </div>
               </v-card>
             </v-col>
-            <v-col cols="12" lg="3" align-self="start">
-              <v-card outlined class="pa-5" max-height="470px">
+            <v-col
+              cols="12"
+              lg="3"
+              align-self="start"
+            >
+              <v-card
+                outlined
+                class="pa-5"
+                max-height="470px"
+              >
                 <div
                   class="text-xl text-brown-300 font-bold border-t-4 border-b-4 border-brown-300 w-1/3 mb-5"
                 >
@@ -71,24 +105,34 @@
                 <img
                   src="../../images/undraw_Taking_notes_re_bnaf.svg"
                   class="image"
-                />
+                >
                 <div class="text-xl text-brown-300 pa-8">
                   社員さんのプロフィールを見てみましょう。気に入ったものはブックマークしましょう。
                 </div>
               </v-card>
             </v-col>
-            <v-col cols="12" lg="3" align-self="start">
-              <v-card outlined class="pa-5" max-height="470px">
+            <v-col
+              cols="12"
+              lg="3"
+              align-self="start"
+            >
+              <v-card
+                outlined
+                class="pa-5"
+                max-height="470px"
+              >
                 <div
                   class="text-xl text-brown-300 font-bold border-t-4 border-b-4 border-brown-300 w-1/3 mb-5"
                 >
                   03
                 </div>
-                <div class="text-4xl text-brown-300 font-bold">話す</div>
+                <div class="text-4xl text-brown-300 font-bold">
+                  話す
+                </div>
                 <img
                   src="../../images/undraw_video_call_kxyp.svg"
                   class="image"
-                />
+                >
                 <div class="text-xl text-brown-300 pa-8">
                   あなたが知ったこと、共通の話題を社員さんと話してみましょう。
                 </div>
@@ -100,23 +144,36 @@
       <!-- /説明欄1 -->
 
       <!-- ブロック説明欄 -->
-      <v-col cols="12" sm="12" align="left">
-        <v-card color="brown lighten-2" outlined align="center">
+      <v-col
+        cols="12"
+        sm="12"
+        align="left"
+      >
+        <v-card
+          color="brown lighten-2"
+          outlined
+          align="center"
+        >
           <div class="ma-10">
             <div class="text-2xl md:text-4xl pa-5 text-white font-bold">
               ブロックを使い分けて
-              <br />
+              <br>
               項目を入力しよう！
             </div>
             <div class="text-xl md:text-2xl text-white my-5">
-              全5種類のブロックを使用してあなたのことを紹介してみてください。<br />
+              全5種類のブロックを使用してあなたのことを紹介してみてください。<br>
               カラフルなブロックでプロフィールを埋めてあなたのプロフィールを充実させよう！
             </div>
             <v-row
               class="py-10 border-2 border-white border-dashed md:px-72 lg:px-0"
               justify="center"
             >
-              <v-col cols="10" lg="2" align="left" align-self="start">
+              <v-col
+                cols="10"
+                lg="2"
+                align="left"
+                align-self="start"
+              >
                 <div class="text-white">
                   <div
                     class="text-xl text-center font-bold border-l-4 border-r-4 border-white mb-5"
@@ -146,7 +203,12 @@
                   </div>
                 </div>
               </v-col>
-              <v-col cols="10" lg="2" align="left" align-self="start">
+              <v-col
+                cols="10"
+                lg="2"
+                align="left"
+                align-self="start"
+              >
                 <div class="text-white">
                   <div
                     class="text-xl text-center font-bold border-l-4 border-r-4 border-white mb-5"
@@ -170,7 +232,11 @@
                             >
                               {{ question_item.content }}
                             </label>
-                            <v-col cols="12" sm="12" class="mb-2">
+                            <v-col
+                              cols="12"
+                              sm="12"
+                              class="mb-2"
+                            >
                               <v-card
                                 class="pa-2 text-center"
                                 outlined
@@ -189,7 +255,12 @@
                   </div>
                 </div>
               </v-col>
-              <v-col cols="10" lg="2" align="left" align-self="start">
+              <v-col
+                cols="10"
+                lg="2"
+                align="left"
+                align-self="start"
+              >
                 <div class="text-white">
                   <div
                     class="text-xl text-center font-bold border-l-4 border-r-4 border-white mb-5"
@@ -207,7 +278,10 @@
                       outlined
                       color="white"
                     >
-                      <label for="1st place" class="form-label">1st</label>
+                      <label
+                        for="1st place"
+                        class="form-label"
+                      >1st</label>
                       鬼滅の刃
                     </v-card>
                     <v-card
@@ -215,7 +289,10 @@
                       outlined
                       color="white"
                     >
-                      <label for="2nd place" class="form-label">2nd</label>
+                      <label
+                        for="2nd place"
+                        class="form-label"
+                      >2nd</label>
                       呪術廻戦
                     </v-card>
                     <v-card
@@ -223,14 +300,24 @@
                       outlined
                       color="white"
                     >
-                      <label for="3rd place" class="form-label">3rd</label>
+                      <label
+                        for="3rd place"
+                        class="form-label"
+                      >3rd</label>
                       ONE PIECE
                     </v-card>
                   </v-card>
-                  <div class="text-lg text-center">順位付けを書き込む</div>
+                  <div class="text-lg text-center">
+                    順位付けを書き込む
+                  </div>
                 </div>
               </v-col>
-              <v-col cols="10" lg="2" align="left" align-self="start">
+              <v-col
+                cols="10"
+                lg="2"
+                align="left"
+                align-self="start"
+              >
                 <div class="text-white">
                   <div
                     class="text-xl text-center font-bold border-l-4 border-r-4 border-white mb-5"
@@ -247,9 +334,16 @@
                       v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items"
                     >
                       <div :key="yes_or_no_item.id">
-                        <v-card class="pa-2 ma-2" outlined color="white">
+                        <v-card
+                          class="pa-2 ma-2"
+                          outlined
+                          color="white"
+                        >
                           <v-row>
-                            <v-col cols="12" sm="12">
+                            <v-col
+                              cols="12"
+                              sm="12"
+                            >
                               {{ yes_or_no_item.content }}
                             </v-col>
                             <v-col
@@ -260,16 +354,18 @@
                             >
                               <span
                                 class="rounded-full border-brown-500 border-2 pa-2"
-                                >YES</span
-                              >
+                              >YES</span>
                               / NO
                             </v-col>
-                            <v-col v-else cols="12" sm="5">
+                            <v-col
+                              v-else
+                              cols="12"
+                              sm="5"
+                            >
                               YES /
                               <span
                                 class="rounded-full border-brown-500 border-2 pa-2"
-                                >NO</span
-                              >
+                              >NO</span>
                             </v-col>
                           </v-row>
                         </v-card>
@@ -281,7 +377,12 @@
                   </div>
                 </div>
               </v-col>
-              <v-col cols="10" lg="2" align="left" align-self="start">
+              <v-col
+                cols="10"
+                lg="2"
+                align="left"
+                align-self="start"
+              >
                 <div class="text-white">
                   <div
                     class="text-xl text-center font-bold border-l-4 border-r-4 border-white mb-5"
@@ -297,7 +398,11 @@
                     <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
                       自己紹介
                     </p>
-                    <v-card class="pa-3 rounded-lg" outlined color="white">
+                    <v-card
+                      class="pa-3 rounded-lg"
+                      outlined
+                      color="white"
+                    >
                       私はロボロフスキーハムスターだよ
                     </v-card>
                   </v-card>
@@ -318,31 +423,49 @@
         lg="8"
         class="border-t-2 border-b-2 border-brown-600 border-dotted my-10"
       >
-        <div class="text-2xl md:text-4xl">キャラクターについて</div>
+        <div class="text-2xl md:text-4xl">
+          キャラクターについて
+        </div>
       </v-col>
-      <v-col cols="12" lg="5" align="center">
+      <v-col
+        cols="12"
+        lg="5"
+        align="center"
+      >
         <div class="pa-10">
-          <v-card color="brown lighten-3" class="white--text rounded-full pa-5">
-            <div class="text-4xl font-bold colorful-dot">CHARACTER PROFILE</div>
+          <v-card
+            color="brown lighten-3"
+            class="white--text rounded-full pa-5"
+          >
+            <div class="text-4xl font-bold colorful-dot">
+              CHARACTER PROFILE
+            </div>
             <div
               class="md:text-2xl text-xl border-2 border-dotted border-white pa-5"
             >
-              ロボロフスキーハムスターのキャラクター。<br />
-              自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。<br />
-              プロフが充実しているほど機嫌が良くなる。<br />
-              三度の飯より自己紹介が大好き。<br />
+              ロボロフスキーハムスターのキャラクター。<br>
+              自分のことを紹介するのが大好きでいつもプロフィール手帳を持ち歩いている。<br>
+              プロフが充実しているほど機嫌が良くなる。<br>
+              三度の飯より自己紹介が大好き。<br>
             </div>
-            <div class="font-bold colorful-dot"></div>
+            <div class="font-bold colorful-dot" />
           </v-card>
         </div>
       </v-col>
-      <v-col cols="12" lg="5" align="center">
+      <v-col
+        cols="12"
+        lg="5"
+        align="center"
+      >
         <div class="balloon1 text-2xl text-center">
-          プロフちゃんって呼んでください！<br />
+          プロフちゃんって呼んでください！<br>
           このサイトを楽しむためにお手伝いします！
         </div>
         <div>
-          <img src="../../images/prof_normal.png" class="max-w-sm mx-auto" />
+          <img
+            src="../../images/prof_normal.png"
+            class="max-w-sm mx-auto"
+          >
         </div>
       </v-col>
     </v-row>

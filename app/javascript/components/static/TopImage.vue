@@ -2,50 +2,77 @@
   <div>
     <div class="top-bg">
       <div class="border-t-2 border-brown-500 border-dashed">
-        <v-row justify="center" align-content="center">
-          <v-col cols="12" sm="12">
+        <v-row
+          justify="center"
+          align-content="center"
+        >
+          <v-col
+            cols="12"
+            sm="12"
+          >
             <div class="text-center text-lg md:text-2xl lg:text-4xl">
               - - - - REMOTELY PROMOTE YOURSELF.- - - -
             </div>
           </v-col>
-          <v-col cols="12" sm="12" md="7" align-self="center" align="right">
+          <v-col
+            cols="12"
+            sm="12"
+            md="7"
+            align-self="center"
+            align="right"
+          >
             <img
               src="../../../assets/images/logo.png"
               class="max-w-md md:max-w-xl mx-auto"
-            />
+            >
           </v-col>
-          <v-col cols="12" sm="4" md="5" align="left">
+          <v-col
+            cols="12"
+            sm="4"
+            md="5"
+            align="left"
+          >
             <div class="balloon1 text-sm text-center md:text-2xl">
               slackログイン版
             </div>
             <img
               src="../../images/prof_happy.png"
               class="max-w-xs md:max-w-sm"
-            />
+            >
           </v-col>
         </v-row>
       </div>
     </div>
     <div class="bg-brown-500 pa-10">
-      <v-row justify="center" align-content="center">
-        <v-col cols="12" sm="4" class="border-white border-dotted border-2">
+      <v-row
+        justify="center"
+        align-content="center"
+      >
+        <v-col
+          cols="12"
+          sm="4"
+          class="border-white border-dotted border-2"
+        >
           <div>
             <div class="text-white text-2xl text-center">
-              こちらは{{ team.name }}のワークスペースの画面です。<br />
+              こちらは{{ team.name }}のワークスペースの画面です。<br>
               {{
                 team.name
-              }}のワークスペース内の人とのみプロフを共有します。<br />
+              }}のワークスペース内の人とのみプロフを共有します。<br>
               別のワークスペースでログインしたい場合は一度ログアウトを行い、別のワークスペースを指定してSign
               in with slackを行ってください。
             </div>
           </div>
         </v-col>
-        <v-col cols="4" align="center">
+        <v-col
+          cols="4"
+          align="center"
+        >
           <v-img
             :src="team.image"
             max-width="10rem"
             class="border-2 border-white shadow-md"
-          ></v-img>
+          />
         </v-col>
       </v-row>
     </div>

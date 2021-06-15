@@ -7,7 +7,10 @@
     @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
   >
     <v-card :color="questionBlockColor">
-      <v-row justify="end" class="mr-2 mt-2">
+      <v-row
+        justify="end"
+        class="mr-2 mt-2"
+      >
         <v-btn
           :color="questionBlockColor"
           @click="hundleCloseQuestioniFormatDialog"
@@ -19,9 +22,15 @@
         クエスチョンブロック
       </p>
 
-      <div id="question-block-form" class="pa-10 note-box">
+      <div
+        id="question-block-form"
+        class="pa-10 note-box"
+      >
         <v-row>
-          <v-col cols="12" sm="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <v-btn
               id="input-yes-or-no-title-button"
               type="submit"
@@ -33,11 +42,16 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+              <v-icon left>
+                mdi-plus
+              </v-icon>タイトルをランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />
-          <v-col cols="12" sm="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <v-btn
               id="add-question-item-button"
               type="submit"
@@ -50,7 +64,9 @@
               :disabled="questionItemNum >= 3"
               @click="addQuestionItemNum"
             >
-              <v-icon left> mdi-plus </v-icon>
+              <v-icon left>
+                mdi-plus
+              </v-icon>
               質問と答えを追加する
             </v-btn>
             <v-btn
@@ -65,12 +81,17 @@
               :disabled="questionItemNum <= 1"
               @click="deleteQuestionItemNum"
             >
-              <v-icon left> mdi-minus </v-icon>
+              <v-icon left>
+                mdi-minus
+              </v-icon>
               質問と答えを減らす
             </v-btn>
           </v-col>
         </v-row>
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
           <form
             @submit.prevent="
               hundleCreateQuestionBlock(
@@ -82,9 +103,10 @@
             "
           >
             <div>
-              <label class="form-label-text-block" for="question_block_title"
-                >タイトル</label
-              >
+              <label
+                class="form-label-text-block"
+                for="question_block_title"
+              >タイトル</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -96,7 +118,7 @@
                   class="input-form-question-block"
                   name="question_block[question_block_title]"
                   type="text"
-                />
+                >
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
@@ -138,7 +160,9 @@
                 :color="questionBlockColor"
                 class="white--text"
               >
-                <v-icon left> mdi-plus </v-icon>
+                <v-icon left>
+                  mdi-plus
+                </v-icon>
                 クエスチョンブロックを作成！
               </v-btn>
             </div>

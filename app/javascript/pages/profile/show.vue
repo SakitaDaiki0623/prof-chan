@@ -1,33 +1,39 @@
 <!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div>
-    <Loading v-if="loading"></Loading>
+    <Loading v-if="loading" />
     <div v-else>
       <v-container>
-        <v-row justify="center" align-content="center">
+        <v-row
+          justify="center"
+          align-content="center"
+        >
           <v-btn
             class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(previousProfile)"
-            >＜</v-btn
           >
+            ＜
+          </v-btn>
           <v-btn
             class="ma-5 white--text"
             color="brown"
             @click="moveToProfilesPage"
-            >プロフィール一覧に戻る</v-btn
           >
+            プロフィール一覧に戻る
+          </v-btn>
           <v-btn
             class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(nextProfile)"
-            >＞</v-btn
           >
+            ＞
+          </v-btn>
         </v-row>
       </v-container>
       <v-container
-        class="border-gray-500 rounded-xl border-2 my-16 note"
         v-if="shown"
+        class="border-gray-500 rounded-xl border-2 my-16 note"
       >
         <BasicAndAddressBlock :user="user" />
 
@@ -52,7 +58,6 @@ import axios from "axios";
 
 // Component ----------
 import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
-import MyFavoriteBlock from "../../components/my_favorites_block/MyFavoriteBlock";
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
@@ -64,7 +69,6 @@ import ToTopButton from "../../components/parts/ToTopButton";
 export default {
   components: {
     BasicAndAddressBlock,
-    MyFavoriteBlock,
     QuestionBlockList,
     YesOrNoBlockList,
     RankingBlockList,
@@ -72,6 +76,22 @@ export default {
     FavoriteBlockList,
     Loading,
     ToTopButton,
+  },
+  beforeRouteEnter(to, from, next) {
+    axios
+      .get(`/api/v1/profiles/${to.params.id}`)
+      .then((res) => {
+        next();
+      })
+      .catch((err) => {
+        next("/profiles");
+      });
+  },
+  beforeRouteUpdate(to, from, next) {
+    // URL の id が変わったときにリソースを再読み込みする
+    next();
+    this.resetLoading();
+    this.updateRead(to.params.id);
   },
   props: {
     id: {
@@ -88,15 +108,6 @@ export default {
       shown: false,
       loading: true,
     };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
-    this.firstRead();
-  },
-  created() {
-    document.title = `プロフ閲覧 - プロフちゃん`;
   },
   computed: {
     nextProfile() {
@@ -123,6 +134,15 @@ export default {
         (profile) => profile.public_uid == this.profile.public_uid
       );
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+    this.firstRead();
+  },
+  created() {
+    document.title = `プロフ閲覧 - プロフちゃん`;
   },
   methods: {
     async firstRead() {
@@ -164,22 +184,6 @@ export default {
         this.loading = false;
       }, 1000);
     },
-  },
-  beforeRouteEnter(to, from, next) {
-    axios
-      .get(`/api/v1/profiles/${to.params.id}`)
-      .then((res) => {
-        next();
-      })
-      .catch((err) => {
-        next("/profiles");
-      });
-  },
-  beforeRouteUpdate(to, from, next) {
-    // URL の id が変わったときにリソースを再読み込みする
-    next();
-    this.resetLoading();
-    this.updateRead(to.params.id);
   },
 };
 </script>

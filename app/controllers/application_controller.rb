@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   private
+
   # Divise認証時に分岐
   def after_sign_in_path_for(user)
     if user.admin?
