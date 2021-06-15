@@ -1,11 +1,18 @@
 <template>
   <!-- Item Form -->
-  <div :id="yesOrNoBlockItemId" class="ma-1">
+  <div
+    :id="yesOrNoBlockItemId"
+    class="ma-1"
+  >
     <v-row>
-      <v-col cols="12" sm="6">
-        <label for="yes_or_no_item_content" class="form-label-text-block"
-          >質問</label
-        >
+      <v-col
+        cols="12"
+        sm="6"
+      >
+        <label
+          for="yes_or_no_item_content"
+          class="form-label-text-block"
+        >質問</label>
         <ValidationProvider
           v-slot="{ errors }"
           :name="yesOrNoNameForValidation"
@@ -17,18 +24,25 @@
             name="yes_or_no_item[yes_or_no_item_content]"
             type="text"
             @input="yesOrNoItem.content = $event.target.value"
-          />
+          >
           <span class="red--text">{{ errors[0] }}</span>
         </ValidationProvider>
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <label
           for="yes_or_no_item_answer"
           class="form-label-text-block inline-block"
         >
           答え
         </label>
-        <v-radio-group v-model="yesOrNoItem.answer" mandatory row>
+        <v-radio-group
+          v-model="yesOrNoItem.answer"
+          mandatory
+          row
+        >
           <v-radio
             label="YES"
             :value="true"

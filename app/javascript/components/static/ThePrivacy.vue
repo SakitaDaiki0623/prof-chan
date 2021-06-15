@@ -5,10 +5,19 @@
     @click:outside="hundleClosePrivacyDialog"
     @input="$emit('input', $event.target.isShownPrivacy)"
   >
-    <v-card color="brown lighten-5" class="term-font">
+    <v-card
+      color="brown lighten-5"
+      class="term-font"
+    >
       <div class="container mx-auto my-4 term-font px-10 lg:px-16 lg:py-16">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn color="brown lighten-5" @click="hundleClosePrivacyDialog">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
+          <v-btn
+            color="brown lighten-5"
+            @click="hundleClosePrivacyDialog"
+          >
             <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
@@ -180,10 +189,11 @@
               class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
               target="_blank"
               href="/contacts/new"
-              >お問い合わせフォーム</a
-            >までお願いいたします。
+            >お問い合わせフォーム</a>までお願いいたします。
           </p>
-          <div class="mt-20 text-center">以上</div>
+          <div class="mt-20 text-center">
+            以上
+          </div>
         </div>
       </div>
     </v-card>

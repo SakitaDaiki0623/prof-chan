@@ -1,17 +1,25 @@
 <template>
   <v-card
+    v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
     color="brown lighten-4"
     outlined
     class="mb-10 pa-5"
-    v-show="isMyRankingBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="green--text text--lighten-3 px-2 bg-white rounded-full"
-        >R</span
-      >My Best 3
+      <span
+        class="green--text text--lighten-3 px-2 bg-white rounded-full"
+      >R</span>My Best 3
     </div>
-    <v-row v-show="isThisEditPage" justify="center" class="py-5">
-      <v-col cols="12" sm="12" align="center">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+      class="py-5"
+    >
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <v-btn
           id="add-ranking-block-btn"
           tile
@@ -19,11 +27,17 @@
           class="ma-2 white--text"
           @click="openRankingFormatDialog"
         >
-          <v-icon left> mdi-plus </v-icon>
+          <v-icon left>
+            mdi-plus
+          </v-icon>
           ランキングブロックを追加する
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="8" align="right">
+      <v-col
+        cols="12"
+        sm="8"
+        align="right"
+      >
         <ProgressBar
           :percentage-for-blocks="percentageMyRankingBlocksLengt"
           :block-color="rankingBlockColor"
@@ -32,20 +46,20 @@
     </v-row>
     <div class="text-center">
       <v-pagination
+        v-show="isPageSizeBiggerThanMyRankingBlocks && !isThisEditPage"
         v-model="page"
         :length="length"
         circle
-        @input="pageChange"
         color="green lighten-3"
         class="mb-10"
-        v-show="isPageSizeBiggerThanMyRankingBlocks && !isThisEditPage"
-      ></v-pagination>
+        @input="pageChange"
+      />
     </div>
     <div>
       <transition-group
+        v-if="isMyRankingBlocksLengthNotZero && !isThisEditPage"
         tag="v-row"
         name="list"
-        v-if="isMyRankingBlocksLengthNotZero && !isThisEditPage"
       >
         <v-col
           v-for="rankingBlock in displayBlocks"
@@ -63,9 +77,9 @@
         </v-col>
       </transition-group>
       <transition-group
+        v-else-if="isMyRankingBlocksLengthNotZero && isThisEditPage"
         tag="v-row"
         name="list"
-        v-else-if="isMyRankingBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="rankingBlock in myRankingBlocks"
@@ -84,7 +98,10 @@
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer block-name="ランキング" v-else />
+      <NoBlockContainer
+        v-else
+        block-name="ランキング"
+      />
     </div>
 
     <RankingFormatDialog

@@ -1,13 +1,24 @@
 <template>
   <v-fade-transition>
     <div class="flash">
-      <v-alert dense outlined border="left" :color="flash.color">
+      <v-alert
+        dense
+        outlined
+        border="left"
+        :color="flash.color"
+      >
         <div v-if="flash.type == 'success'">
-          <img src="../../images/prof_happy.png" class="width	 inline-block" />
+          <img
+            src="../../images/prof_happy.png"
+            class="width	 inline-block"
+          >
           {{ flash.message }}
         </div>
         <div v-if="flash.type == 'error'">
-          <img src="../../images/prof_sad.png" class="width	 inline-block" />
+          <img
+            src="../../images/prof_sad.png"
+            class="width	 inline-block"
+          >
           {{ flash.message }}
         </div>
       </v-alert>

@@ -2,7 +2,9 @@
 <template>
   <div class="bg-backimage bg-cover bg-fixed text-gray-600">
     <v-container class="bg-brown-600 shadow-lg mb-20 mt-20">
-      <p class="top-sub-title text-4xl text-center mb-20 pa-5">社員プロフ一覧</p>
+      <p class="top-sub-title text-4xl text-center mb-20 pa-5">
+        社員プロフ一覧
+      </p>
       <v-row class="mb-10 pa-10">
         <v-col
           v-for="profile in displayProfiles"
@@ -20,11 +22,11 @@
           v-model="page"
           :length="length"
           circle
+          color="brown lighten-1"
           @input="pageChange"
           @next="moveToTop"
           @previous="moveToTop"
-          color="brown lighten-1"
-        ></v-pagination>
+        />
       </div>
     </v-container>
   </div>

@@ -1,12 +1,23 @@
 <template>
   <div class="rounded-2xl">
-    <v-card outlined color="brown lighten-4" class="py-5 px-10">
+    <v-card
+      outlined
+      color="brown lighten-4"
+      class="py-5 px-10"
+    >
       <div class="top-sub-title text-2xl text-center">
         基本情報
       </div>
       <v-row>
-        <v-col cols="12" sm="12" class="text-2xl">
-          <v-row v-show="isThisEditPage" justify="end">
+        <v-col
+          cols="12"
+          sm="12"
+          class="text-2xl"
+        >
+          <v-row
+            v-show="isThisEditPage"
+            justify="end"
+          >
             <v-btn
               id="edit-basic-prof-card-button"
               tile
@@ -18,30 +29,45 @@
             </v-btn>
           </v-row>
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">性別</label>
+            <label
+              for="birthday"
+              class="form-label-text-block"
+            >性別</label>
             <span class="text-center ">{{ profile.gender }}</span>
           </div>
 
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">身長</label
-            >{{ profile.height }} cm
+            <label
+              for="birthday"
+              class="form-label-text-block"
+            >身長</label>{{ profile.height }} cm
           </div>
 
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">血液型</label
-            >{{ profile.blood_type }} 型
+            <label
+              for="birthday"
+              class="form-label-text-block"
+            >血液型</label>{{ profile.blood_type }} 型
           </div>
 
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">出身地</label
-            >{{ profile.prefecture_id }}
+            <label
+              for="birthday"
+              class="form-label-text-block"
+            >出身地</label>{{ profile.prefecture_id }}
           </div>
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">誕生日</label>
+            <label
+              for="birthday"
+              class="form-label-text-block"
+            >誕生日</label>
             {{ profile.birthday | moment }}
           </div>
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">入社日</label>
+            <label
+              for="birthday"
+              class="form-label-text-block"
+            >入社日</label>
 
             {{ profile.day_of_joinning | moment }}
           </div>

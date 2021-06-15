@@ -7,7 +7,10 @@
     @input="$emit('input', $event.target.isShownYesOrNoFormatDialog)"
   >
     <v-card :color="yesOrNoBlockColor">
-      <v-row justify="end" class="mr-2 mt-2">
+      <v-row
+        justify="end"
+        class="mr-2 mt-2"
+      >
         <v-btn
           :color="yesOrNoBlockColor"
           @click="hundleCloseYesOrNoFormatDialog"
@@ -25,7 +28,10 @@
         color="orange lighten-4"
       >
         <v-row>
-          <v-col cols="12" sm="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <v-btn
               id="input-yes-or-no-title-button"
               type="submit"
@@ -37,11 +43,16 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+              <v-icon left>
+                mdi-plus
+              </v-icon>タイトルをランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />
-          <v-col cols="12" sm="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <v-btn
               id="add-yes-or-no-item-button"
               type="submit"
@@ -54,7 +65,9 @@
               :disabled="yesOrNoItemNum >= 3"
               @click="addYesOrNoItemNum"
             >
-              <v-icon left> mdi-plus </v-icon>
+              <v-icon left>
+                mdi-plus
+              </v-icon>
               質問と答えを追加する
             </v-btn>
             <v-btn
@@ -69,13 +82,18 @@
               :disabled="yesOrNoItemNum <= 1"
               @click="deleteYesOrNoItemNum"
             >
-              <v-icon left> mdi-minus </v-icon>
+              <v-icon left>
+                mdi-minus
+              </v-icon>
               質問と答えを減らす
             </v-btn>
           </v-col>
         </v-row>
 
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
           <form
             @submit.prevent="
               hundleCreateYesOrNoBlock(
@@ -87,9 +105,10 @@
             "
           >
             <div>
-              <label class="form-label-text-block" for="yes_or_no_block_title"
-                >タイトル</label
-              >
+              <label
+                class="form-label-text-block"
+                for="yes_or_no_block_title"
+              >タイトル</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -101,7 +120,7 @@
                   class="input-form-yes-or-no-block"
                   name="yes_or_no_block[yes_or_no_block_title]"
                   type="text"
-                />
+                >
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
@@ -143,7 +162,9 @@
                 :color="yesOrNoBlockColor"
                 class="white--text"
               >
-                <v-icon left> mdi-plus </v-icon>
+                <v-icon left>
+                  mdi-plus
+                </v-icon>
                 Yes or No ブロックを作成！
               </v-btn>
             </div>
@@ -207,7 +228,7 @@ export default {
           ],
         },
         {
-          title: "二鳥対立あるある",
+          title: "二項対立あるある",
           contents: [
             "山より海が好きだ",
             "犬より猫派だ",

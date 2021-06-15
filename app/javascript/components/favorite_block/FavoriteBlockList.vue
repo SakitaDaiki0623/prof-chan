@@ -1,16 +1,24 @@
 <template>
   <v-card
+    v-show="isMyFavoriteBlocksLengthNotZero || isThisEditPage"
     color="brown lighten-4"
     outlined
     class="mb-10 pa-5"
-    v-show="isMyFavoriteBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
       <span class="brown--text text--lighten-3 rounded-full px-2 bg-white">F</span>
       My Favorite コーナー
     </div>
-    <v-row v-show="isThisEditPage" justify="center" class="py-5">
-      <v-col cols="12" sm="12" align="center">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+      class="py-5"
+    >
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <v-btn
           id="add-favorite-block-btn"
           tile
@@ -18,11 +26,17 @@
           class="ma-2 white--text"
           @click="openFavoriteFormatDialog"
         >
-          <v-icon left> mdi-plus </v-icon>
+          <v-icon left>
+            mdi-plus
+          </v-icon>
           Favorite ブロックを追加する
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="8" align="right">
+      <v-col
+        cols="12"
+        sm="8"
+        align="right"
+      >
         <ProgressBar
           :percentage-for-blocks="percentageMyFavoriteBlocksLengt"
           :block-color="favoriteBlockColor"
@@ -31,20 +45,20 @@
     </v-row>
     <div class="text-center">
       <v-pagination
+        v-show="isPageSizeBiggerThanMyFavoriteBlocks && !isThisEditPage"
         v-model="page"
         :length="length"
         circle
-        @input="pageChange"
         :color="favoriteBlockColor"
         class="mb-10"
-        v-show="isPageSizeBiggerThanMyFavoriteBlocks && !isThisEditPage"
-      ></v-pagination>
+        @input="pageChange"
+      />
     </div>
     <div>
       <transition-group
+        v-if="isMyFavoriteBlocksLengthNotZero && !isThisEditPage"
         tag="v-row"
         name="list"
-        v-if="isMyFavoriteBlocksLengthNotZero && !isThisEditPage"
       >
         <v-col
           v-for="favoriteBlock in displayBlocks"
@@ -65,9 +79,9 @@
         </v-col>
       </transition-group>
       <transition-group
+        v-else-if="isMyFavoriteBlocksLengthNotZero && isThisEditPage"
         tag="v-row"
         name="list"
-        v-else-if="isMyFavoriteBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="favoriteBlock in myFavoriteBlocks"
@@ -87,7 +101,10 @@
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer block-name="Favorite" v-else />
+      <NoBlockContainer
+        v-else
+        block-name="Favorite"
+      />
     </div>
 
     <FavoriteFormatDialog
@@ -139,9 +156,6 @@ export default {
       length: 0,
     };
   },
-  mounted() {
-    this.firstRead();
-  },
   computed: {
     isMyFavoriteBlocksLengthNotZeroAndisThisShowPage() {},
     isMyFavoriteBlocksLengthNotZero() {
@@ -162,6 +176,9 @@ export default {
         ) || {}
       );
     },
+  },
+  mounted() {
+    this.firstRead();
   },
   methods: {
     async firstRead() {

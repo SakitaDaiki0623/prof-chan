@@ -5,13 +5,23 @@
       align-content="center"
       class="pa-16"
     >
-      <v-col cols="12" sm="12" align="center">
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <div class="balloon1 text-4xl">
           {{ profMessage }}
         </div>
       </v-col>
-      <v-col cols="12" sm="12">
-        <img src="../images/prof_normal.png" class="image mx-auto" />
+      <v-col
+        cols="12"
+        sm="12"
+      >
+        <img
+          src="../images/prof_normal.png"
+          class="image mx-auto"
+        >
       </v-col>
     </v-row>
   </v-container>

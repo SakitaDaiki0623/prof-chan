@@ -1,19 +1,38 @@
 <template>
   <div>
-    <Loading v-show="loading"></Loading>
-    <div class="top" v-show="!loading">
-      <div class="top-three-recommended-users-space" v-if="firstPlaceUserExist">
+    <Loading v-show="loading" />
+    <div
+      v-show="!loading"
+      class="top"
+    >
+      <div
+        v-if="firstPlaceUserExist"
+        class="top-three-recommended-users-space"
+      >
         <div
           class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10 text-center"
         >
-          <v-icon color="white" large>mdi-crown-outline</v-icon>
+          <v-icon
+            color="white"
+            large
+          >
+            mdi-crown-outline
+          </v-icon>
           あなたがよくブックマークする社員TOP3
-          <v-icon color="white" large>mdi-crown-outline</v-icon>
+          <v-icon
+            color="white"
+            large
+          >
+            mdi-crown-outline
+          </v-icon>
         </div>
 
         <!-- モバイル用 -->
         <div v-if="isMdAndDown">
-          <v-row class="py-5" justify="center">
+          <v-row
+            class="py-5"
+            justify="center"
+          >
             <v-col
               align-self="start"
               align="center"
@@ -21,24 +40,34 @@
               lg="3"
               class="border-2 border-white border-dashed ma-5"
             >
-              <div class="place-text">第1位</div>
+              <div class="place-text">
+                第1位
+              </div>
               <ProfCard
                 :user="firstPlaceUser"
                 :is-this-edit-page="false"
-              /> </v-col
-            ><v-col
+              />
+            </v-col><v-col
               align-self="center"
               align="center"
               cols="12"
               lg="3"
               class="border-2 border-white border-dashed ma-5"
             >
-              <div class="place-text">第2位</div>
+              <div class="place-text">
+                第2位
+              </div>
               <div v-if="secondPlaceUserExist">
-                <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
+                <ProfCard
+                  :user="secondPlaceUser"
+                  :is-this-edit-page="false"
+                />
               </div>
 
-              <PlaceDoesNotExistCard place-number="2" v-else />
+              <PlaceDoesNotExistCard
+                v-else
+                place-number="2"
+              />
             </v-col>
             <v-col
               align-self="end"
@@ -47,18 +76,30 @@
               lg="3"
               class="border-2 border-white border-dashed ma-5"
             >
-              <div class="place-text">第3位</div>
-              <div v-if="thirdPlaceUserExist">
-                <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
+              <div class="place-text">
+                第3位
               </div>
-              <PlaceDoesNotExistCard v-else place-number="3" />
+              <div v-if="thirdPlaceUserExist">
+                <ProfCard
+                  :user="thirdPlaceUser"
+                  :is-this-edit-page="false"
+                />
+              </div>
+              <PlaceDoesNotExistCard
+                v-else
+                place-number="3"
+              />
             </v-col>
           </v-row>
         </div>
 
         <!-- 画面サイズlg以上 -->
         <div v-else>
-          <v-row class="py-5" justify="center" style="height: 40rem">
+          <v-row
+            class="py-5"
+            justify="center"
+            style="height: 40rem"
+          >
             <v-col
               align-self="center"
               align="center"
@@ -66,12 +107,20 @@
               sm="3"
               class="border-2 border-white border-dashed ma-5"
             >
-              <div class="place-text">第2位</div>
+              <div class="place-text">
+                第2位
+              </div>
               <div v-if="secondPlaceUserExist">
-                <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
+                <ProfCard
+                  :user="secondPlaceUser"
+                  :is-this-edit-page="false"
+                />
               </div>
 
-              <PlaceDoesNotExistCard place-number="2" v-else />
+              <PlaceDoesNotExistCard
+                v-else
+                place-number="2"
+              />
             </v-col>
             <v-col
               align-self="start"
@@ -80,8 +129,13 @@
               sm="3"
               class="border-2 border-white border-dashed ma-5"
             >
-              <div class="place-text">第1位</div>
-              <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
+              <div class="place-text">
+                第1位
+              </div>
+              <ProfCard
+                :user="firstPlaceUser"
+                :is-this-edit-page="false"
+              />
             </v-col>
             <v-col
               align-self="end"
@@ -90,11 +144,19 @@
               sm="3"
               class="border-2 border-white border-dashed ma-5"
             >
-              <div class="place-text">第3位</div>
-              <div v-if="thirdPlaceUserExist">
-                <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
+              <div class="place-text">
+                第3位
               </div>
-              <PlaceDoesNotExistCard v-else place-number="3" />
+              <div v-if="thirdPlaceUserExist">
+                <ProfCard
+                  :user="thirdPlaceUser"
+                  :is-this-edit-page="false"
+                />
+              </div>
+              <PlaceDoesNotExistCard
+                v-else
+                place-number="3"
+              />
             </v-col>
           </v-row>
         </div>
@@ -103,7 +165,10 @@
       <div v-if="firstPlaceUserExist">
         <div class="top-bg">
           <v-row>
-            <v-col cols="12" sm="12">
+            <v-col
+              cols="12"
+              sm="12"
+            >
               <div class="text-center text-2xl md:text-4xl">
                 - - - - ブックマーク一覧- - - -
               </div>
@@ -116,7 +181,10 @@
             v-if="randomCurrentUserLikesFavoriteBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="pa-10">
+            <v-card
+              color="brown lighten-2"
+              class="pa-10"
+            >
               <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 Favorite ブロック
               </div>
@@ -125,10 +193,10 @@
                   v-model="favoriteBlockPage"
                   :length="favoriteBlocklength"
                   circle
-                  @input="favoriteBlockPageChange"
                   color="brown lighten-2"
                   class="mb-10"
-                ></v-pagination>
+                  @input="favoriteBlockPageChange"
+                />
               </div>
               <v-row>
                 <v-col
@@ -148,7 +216,7 @@
                       max-width="50px"
                       :src="favoriteBlock.owing_user.image.url"
                       class="inline"
-                    ></v-img>
+                    />
                   </div>
                   <FavoriteBlockCard :favorite-block="favoriteBlock" />
                 </v-col>
@@ -160,7 +228,10 @@
             v-if="randomCurrentUserLikesQuestionBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="pa-10">
+            <v-card
+              color="brown lighten-2"
+              class="pa-10"
+            >
               <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 クエスチョンブロック
               </div>
@@ -169,10 +240,10 @@
                   v-model="questionBlockPage"
                   :length="questionBlocklength"
                   circle
-                  @input="questionBlockPageChange"
                   color="red lighten-3"
                   class="mb-10"
-                ></v-pagination>
+                  @input="questionBlockPageChange"
+                />
               </div>
               <v-row>
                 <v-col
@@ -191,7 +262,7 @@
                       max-width="50px"
                       :src="questionBlock.owing_user.image.url"
                       class="inline"
-                    ></v-img>
+                    />
                   </div>
                   <QuestionBlockCard :question-block="questionBlock" />
                 </v-col>
@@ -203,7 +274,10 @@
             v-if="randomCurrentUserLikesRankingBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="pa-10">
+            <v-card
+              color="brown lighten-2"
+              class="pa-10"
+            >
               <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 ランキングブロック
               </div>
@@ -212,10 +286,10 @@
                   v-model="rankingBlockPage"
                   :length="rankingBlocklength"
                   circle
-                  @input="rankingBlockPageChange"
                   color="green lighten-3"
                   class="mb-10"
-                ></v-pagination>
+                  @input="rankingBlockPageChange"
+                />
               </div>
               <v-row>
                 <v-col
@@ -234,7 +308,7 @@
                       max-width="50px"
                       :src="rankingBlock.owing_user.image.url"
                       class="inline"
-                    ></v-img>
+                    />
                   </div>
                   <RankingBlockCard :ranking-block="rankingBlock" />
                 </v-col>
@@ -246,7 +320,10 @@
             v-if="randomCurrentUserLikesYesOrNoBlocks.length !== 0"
             class="mb-10"
           >
-            <v-card color="brown lighten-2" class="pa-10">
+            <v-card
+              color="brown lighten-2"
+              class="pa-10"
+            >
               <div class="top-sub-title ma-5 text-center text-2xl md:text-4xl">
                 Yes or No ブロック
               </div>
@@ -255,10 +332,10 @@
                   v-model="yesOrNoBlockPage"
                   :length="yesOrNoBlocklength"
                   circle
-                  @input="yesOrNoBlockPageChange"
                   color="orange lighten-3"
                   class="mb-10"
-                ></v-pagination>
+                  @input="yesOrNoBlockPageChange"
+                />
               </div>
 
               <v-row>
@@ -278,7 +355,7 @@
                       max-width="50px"
                       :src="yesOrNoBlock.owing_user.image.url"
                       class="inline"
-                    ></v-img>
+                    />
                   </div>
                   <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
                 </v-col>
@@ -287,7 +364,10 @@
           </div>
 
           <div v-if="randomCurrentUserLikesTextBlocks.length !== 0">
-            <v-card color="brown lighten-2" class="pa-10">
+            <v-card
+              color="brown lighten-2"
+              class="pa-10"
+            >
               <div class="top-sub-title my-10 text-center text-2xl md:text-4xl">
                 テキストブロック
               </div>
@@ -296,12 +376,15 @@
                   v-model="textBlockPage"
                   :length="textBlocklength"
                   circle
-                  @input="textBlockPageChange"
                   color="cyan lighten-3"
                   class="mb-10"
-                ></v-pagination>
+                  @input="textBlockPageChange"
+                />
               </div>
-              <transition-group tag="v-row" appear>
+              <transition-group
+                tag="v-row"
+                appear
+              >
                 <v-col
                   v-for="textBlock in displayTextBlocks"
                   :key="textBlock.id"
@@ -317,7 +400,7 @@
                       max-width="50px"
                       :src="textBlock.owing_user.image.url"
                       class="inline"
-                    ></v-img>
+                    />
                   </div>
                   <TextBlockCard :text-block="textBlock" />
                 </v-col>

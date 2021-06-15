@@ -1,25 +1,34 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
-  <header v-show="doesCurrentUserhaveProfile" id="top">
+  <header
+    v-show="doesCurrentUserhaveProfile"
+    id="top"
+  >
     <v-app-bar
+      v-if="isMobile"
       color="brown lighten-2"
       outlined
       height="80px"
-      v-if="isMobile"
     >
       <v-toolbar-title>
         <router-link to="/top">
-          <img src="../../images/prof_normal.png" class="logo" />
+          <img
+            src="../../images/prof_normal.png"
+            class="logo"
+          >
         </router-link>
       </v-toolbar-title>
 
-      <v-menu right bottom>
-        <template v-slot:activator="{ on, attrs }">
+      <v-menu
+        right
+        bottom
+      >
+        <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
-            v-on="on"
             color="brown lighten-3"
             class="white--text"
+            v-on="on"
           >
             <v-icon>mdi-dots-horizontal</v-icon>プロフ関連
           </v-btn>
@@ -34,9 +43,11 @@
             <v-list-item-avatar color="white">
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-avatar>
-            <v-list-item-title class="white--text">{{
-              item.text
-            }}</v-list-item-title>
+            <v-list-item-title class="white--text">
+              {{
+                item.text
+              }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -54,14 +65,17 @@
     </v-app-bar>
 
     <v-app-bar
+      v-if="!isMobile"
       color="brown lighten-2"
       outlined
       height="80px"
-      v-if="!isMobile"
     >
       <v-toolbar-title>
         <router-link to="/top">
-          <img src="../../images/prof_normal.png" class="logo" />
+          <img
+            src="../../images/prof_normal.png"
+            class="logo"
+          >
         </router-link>
       </v-toolbar-title>
 
@@ -71,17 +85,22 @@
         color="brown lighten-2"
         @click="openProfileEditPage"
       >
-        <v-icon left> mdi-pencil </v-icon>
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
         プロフ編集
       </v-btn>
 
-      <v-menu right bottom>
-        <template v-slot:activator="{ on, attrs }">
+      <v-menu
+        right
+        bottom
+      >
+        <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
-            v-on="on"
             color="brown lighten-3"
             class="white--text"
+            v-on="on"
           >
             <v-icon>mdi-dots-horizontal</v-icon>プロフ関連
           </v-btn>
@@ -96,9 +115,11 @@
             <v-list-item-avatar color="white">
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-avatar>
-            <v-list-item-title class="white--text">{{
-              item.text
-            }}</v-list-item-title>
+            <v-list-item-title class="white--text">
+              {{
+                item.text
+              }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -109,7 +130,9 @@
         color="brown lighten-2"
         @click="openAboutPage"
       >
-        <v-icon left> mdi-information-outline </v-icon>
+        <v-icon left>
+          mdi-information-outline
+        </v-icon>
         プロフちゃんとは
       </v-btn>
 

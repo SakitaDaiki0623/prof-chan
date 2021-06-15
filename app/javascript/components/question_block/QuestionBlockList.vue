@@ -1,13 +1,12 @@
 <template>
   <v-card
+    v-if="isMyQuestionBlocksLengthNotZero || isThisEditPage"
     color="brown lighten-4"
     outlined
     class="mb-10 pa-5"
-    v-if="isMyQuestionBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span
-      >質問コーナー
+      <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span>質問コーナー
     </div>
     <v-row
       v-show="isThisEditPage"
@@ -15,7 +14,11 @@
       justify="center"
       align-content="center"
     >
-      <v-col cols="12" sm="12" align="center">
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <v-btn
           id="add-question-block-btn"
           tile
@@ -23,11 +26,17 @@
           class="ma-2 white--text"
           @click="openQuestionFormatDialog"
         >
-          <v-icon left> mdi-plus </v-icon>
+          <v-icon left>
+            mdi-plus
+          </v-icon>
           クエスチョンブロックを追加する
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="8" align="right">
+      <v-col
+        cols="12"
+        sm="8"
+        align="right"
+      >
         <ProgressBar
           :percentage-for-blocks="percentageMyQuestionBlocksLengt"
           :block-color="questionBlockColor"
@@ -36,22 +45,22 @@
     </v-row>
     <div class="text-center">
       <v-pagination
+        v-show="isPageSizeBiggerThanMyQuestionBlocks && !isThisEditPage"
         v-model="page"
         :length="length"
         circle
-        @input="pageChange"
         :color="questionBlockColor"
         class="mb-10"
-        v-show="isPageSizeBiggerThanMyQuestionBlocks && !isThisEditPage"
-      ></v-pagination>
+        @input="pageChange"
+      />
     </div>
 
     <div>
       <!-- 詳細画面用 -->
       <transition-group
+        v-if="isMyQuestionBlocksLengthNotZero && !isThisEditPage"
         tag="v-row"
         name="list"
-        v-if="isMyQuestionBlocksLengthNotZero && !isThisEditPage"
       >
         <v-col
           v-for="questionBlock in displayBlocks"
@@ -71,9 +80,9 @@
 
       <!-- 編集画面用 -->
       <transition-group
+        v-else-if="isMyQuestionBlocksLengthNotZero && isThisEditPage"
         tag="v-row"
         name="list"
-        v-else-if="isMyQuestionBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="questionBlock in myQuestionBlocks"
@@ -91,7 +100,10 @@
         </v-col>
       </transition-group>
 
-      <NoBlockContainer block-name="クエスチョン" v-else />
+      <NoBlockContainer
+        v-else
+        block-name="クエスチョン"
+      />
     </div>
 
     <QuestionFormatDialog

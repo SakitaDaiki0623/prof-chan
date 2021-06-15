@@ -1,18 +1,26 @@
 <template>
   <v-card
+    v-show="isMyTextBlocksLengthNotZero || isThisEditPage"
     color="brown lighten-4"
     outlined
     class="mb-10 pa-5"
-    v-show="isMyTextBlocksLengthNotZero || isThisEditPage"
   >
     <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="blue--text text--lighten-3 rounded-full px-2 bg-white"
-        >T</span
-      >
+      <span
+        class="blue--text text--lighten-3 rounded-full px-2 bg-white"
+      >T</span>
       テキストコーナー
     </div>
-    <v-row v-show="isThisEditPage" justify="center" class="py-5">
-      <v-col cols="12" sm="12" align="center">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+      class="py-5"
+    >
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <v-btn
           id="add-text-block-btn"
           tile
@@ -20,11 +28,17 @@
           class="ma-2 white--text"
           @click="openTextFormatDialog"
         >
-          <v-icon left> mdi-plus </v-icon>
+          <v-icon left>
+            mdi-plus
+          </v-icon>
           テキストブロックを追加する
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="8" align="right">
+      <v-col
+        cols="12"
+        sm="8"
+        align="right"
+      >
         <ProgressBar
           :percentage-for-blocks="percentageMyTextBlocksLengt"
           :block-color="textBlockColor"
@@ -33,20 +47,20 @@
     </v-row>
     <div class="text-center">
       <v-pagination
+        v-show="isPageSizeBiggerThanMyTextBlocks && !isThisEditPage"
         v-model="page"
         :length="length"
         circle
-        @input="pageChange"
         :color="textBlockColor"
         class="mb-10"
-        v-show="isPageSizeBiggerThanMyTextBlocks && !isThisEditPage"
-      ></v-pagination>
+        @input="pageChange"
+      />
     </div>
     <div>
       <transition-group
+        v-if="isMyTextBlocksLengthNotZero && !isThisEditPage"
         tag="v-row"
         name="list"
-        v-if="isMyTextBlocksLengthNotZero && !isThisEditPage"
       >
         <v-col
           v-for="textBlock in displayBlocks"
@@ -63,9 +77,9 @@
         </v-col>
       </transition-group>
       <transition-group
+        v-else-if="isMyTextBlocksLengthNotZero && isThisEditPage"
         tag="v-row"
         name="list"
-        v-else-if="isMyTextBlocksLengthNotZero && isThisEditPage"
       >
         <v-col
           v-for="textBlock in myTextBlocks"
@@ -83,7 +97,10 @@
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer block-name="テキスト" v-else />
+      <NoBlockContainer
+        v-else
+        block-name="テキスト"
+      />
     </div>
 
     <TextFormatDialog

@@ -7,7 +7,10 @@
     @input="$emit('input', $event.target.isShownEditYesOrNoFormatDialog)"
   >
     <v-card :color="yesOrNoBlockColor">
-      <v-row justify="end" class="mr-2 mt-2">
+      <v-row
+        justify="end"
+        class="mr-2 mt-2"
+      >
         <v-btn
           :color="yesOrNoBlockColor"
           @click="hundleCloseYesOrNoBlockEditDialog"
@@ -20,13 +23,22 @@
       </p>
 
       <div class="pa-10 note-box">
-        <v-row v-show="!isShownForm" align="center">
-          <v-col cols="12" md="10">
+        <v-row
+          v-show="!isShownForm"
+          align="center"
+        >
+          <v-col
+            cols="12"
+            md="10"
+          >
             <p class="text-2xl font-bold text-gray-600 pt-3">
               {{ editYesOrNoBlock.title }}
             </p>
           </v-col>
-          <v-col cols="12" md="1">
+          <v-col
+            cols="12"
+            md="1"
+          >
             <v-btn
               :id="'edit-yes-or-no-block-title-button-' + editYesOrNoBlock.id"
               tile
@@ -41,12 +53,16 @@
 
         <!-- タイトル編集フォーム -->
         <div v-show="isShownForm">
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <ValidationObserver
+            ref="observer"
+            v-slot="{ invalid }"
+          >
             <form>
               <div>
-                <label class="form-label-text-block" for="yes_or_no_block_title"
-                  >タイトル</label
-                >
+                <label
+                  class="form-label-text-block"
+                  for="yes_or_no_block_title"
+                >タイトル</label>
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -61,12 +77,19 @@
                     name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
                     @input="editYesOrNoBlockForForm.title = $event.target.value"
-                  />
+                  >
                   <span class="red--text">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
-              <v-row justify="end" align="center" class="pt-3">
-                <v-col cols="12" md="1">
+              <v-row
+                justify="end"
+                align="center"
+                class="pt-3"
+              >
+                <v-col
+                  cols="12"
+                  md="1"
+                >
                   <v-btn
                     :id="
                       'update-yes-or-no-item-button-' +
@@ -83,7 +106,10 @@
                     更新
                   </v-btn>
                 </v-col>
-                <v-col cols="12" md="1">
+                <v-col
+                  cols="12"
+                  md="1"
+                >
                   <v-btn
                     :id="
                       'cancel-yes-or-no-item-update-button-' +

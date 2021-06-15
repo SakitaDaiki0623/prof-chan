@@ -1,7 +1,14 @@
 <template>
   <div>
-    <v-card class="rounded-2xl pa-5 note-box" outlined color="red lighten-4">
-      <v-row v-if="isThisEditPage" justify="end">
+    <v-card
+      class="rounded-2xl pa-5 note-box"
+      outlined
+      color="red lighten-4"
+    >
+      <v-row
+        v-if="isThisEditPage"
+        justify="end"
+      >
         <v-btn
           :id="'edit-question-block-button-' + questionBlock.id"
           tile
@@ -25,7 +32,7 @@
         <v-spacer />
         <question-block-like-button
           :question-block-id="questionBlock.id"
-        ></question-block-like-button>
+        />
       </v-row>
       <p class="text-2xl font-bold text-gray-600 px-3 py-3">
         {{ questionBlock.title }}
@@ -34,11 +41,22 @@
         <div :key="question_item.id">
           <div class="rounded-lg">
             <v-row>
-              <label for="question_item_content" class="mx-5 text-sm">
+              <label
+                for="question_item_content"
+                class="mx-5 text-sm"
+              >
                 {{ question_item.content }}
               </label>
-              <v-col cols="12" sm="12" class="mb-2">
-                <v-card class="pa-2" outlined color="white">
+              <v-col
+                cols="12"
+                sm="12"
+                class="mb-2"
+              >
+                <v-card
+                  class="pa-2"
+                  outlined
+                  color="white"
+                >
                   {{ question_item.answer }}
                 </v-card>
               </v-col>

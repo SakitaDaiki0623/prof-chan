@@ -1,6 +1,9 @@
 <template>
   <transition>
-    <div class="ma-16" v-show="visible">
+    <div
+      v-show="visible"
+      class="ma-16"
+    >
       <v-row>
         <v-btn
           v-scroll-to="toTop"
@@ -11,8 +14,9 @@
           bottom
           fixed
           right
-          ><v-icon>mdi-arrow-up</v-icon></v-btn
         >
+          <v-icon>mdi-arrow-up</v-icon>
+        </v-btn>
       </v-row>
     </div>
   </transition>
