@@ -65,13 +65,13 @@ class User < ApplicationRecord
   def set_default_team_value
     return if provider == 'slack'
 
-    team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
+    default_team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
       team.name = 'normal login',
                   team.workspace_id     = 'A123B123C123',
                   team.share_channel_id = 'A123B123C123',
                   team.image = 'https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png'
     end
-    self.team = team
+    self.team = default_team
   end
 
   def self.from_omniauth(auth, user_info, hash_token, channel)

@@ -6,7 +6,7 @@ namespace :blocks do
       def post_block(text, msg, channel_id, access_token)
         encoded_msg = ERB::Util.url_encode(msg)
         encoded_text = ERB::Util.url_encode(text)
-        message = access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+        access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
       end
 
       def translate_boolean(answer)
@@ -20,7 +20,7 @@ namespace :blocks do
     Team.all.includes(:users).each do |team|
       logger.debug 'post_blocks started!'
       # 通常ログインはプロフィール公開しない
-      next if team.users.count == 0 || team.users[0].provider == 'email'
+      next if team.users.count.zero? || team.users[0].provider == 'email'
 
       # 各ブロックをランダムに1つ取得する
       logger.debug 'selecting blocks...'
@@ -80,7 +80,7 @@ namespace :blocks do
                         " #{question_block.question_items[0].content}\n :arrow_right:* #{question_block.question_items[0].answer}*\n #{question_block.question_items[1].content}\n :arrow_right:* #{question_block.question_items[1].answer}*"
                       else
                         " #{question_block.question_items[0].content}\n :arrow_right:* #{question_block.question_items[0].answer}*"
-          end
+                      end
           question_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{question_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{question_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
           post_block(question_text, question_msg, channel_id, access_token)
           logger.info  'posted question_block!'
@@ -103,7 +103,7 @@ namespace :blocks do
                         " #{yes_or_no_block.yes_or_no_items[0].content}\n :arrow_right:* #{translate_boolean(yes_or_no_block.yes_or_no_items[0].answer)}*\n #{yes_or_no_block.yes_or_no_items[1].content}\n :arrow_right:* #{translate_boolean(yes_or_no_block.yes_or_no_items[1].answer)}*"
                       else
                         " #{yes_or_no_block.yes_or_no_items[0].content}\n :arrow_right: *#{translate_boolean(yes_or_no_block.yes_or_no_items[0].answer)}*"
-          end
+                      end
           yes_or_no_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{yes_or_no_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{yes_or_no_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
           post_block(yes_or_no_text, yes_or_no_msg, channel_id, access_token)
           logger.info  'posted yes_or_no_block!'
