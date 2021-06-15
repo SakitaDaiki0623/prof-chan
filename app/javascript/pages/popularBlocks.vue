@@ -23,7 +23,7 @@
         <!-- Favorite ブロック -->
         <div
           v-if="favoritePopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-400 mb-16"
+          class="pa-10 sm:px-16 bg-brown-400 mb-16"
         >
           <v-row>
             <v-col
@@ -70,7 +70,7 @@
         <!-- クエスチョンブロック -->
         <div
           v-if="questionPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-300 mb-16"
+          class="pa-10 sm:px-16 bg-brown-300 mb-16"
         >
           <v-row>
             <v-col
@@ -118,7 +118,7 @@
         <!-- ランキングブロック -->
         <div
           v-if="rankingPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-400 mb-16"
+          class="pa-10 sm:px-16 bg-brown-400 mb-16"
         >
           <v-row>
             <v-col
@@ -166,7 +166,7 @@
         <!-- Yes or No ブロック -->
         <div
           v-if="yesOrNoPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-300 mb-16"
+          class="pa-10 sm:px-16 bg-brown-300 mb-16"
         >
           <v-row>
             <v-col
@@ -214,7 +214,7 @@
         <!-- テキストブロック -->
         <div
           v-if="textPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-400 mb-16"
+          class="pa-10 sm:px-16 bg-brown-400 mb-16"
         >
           <v-row>
             <v-col
