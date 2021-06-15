@@ -1,7 +1,7 @@
 module PostMessageModule
   def post_questioin_block(register)
     access_token = set_access_token
-    text = "@#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:\n :star2:#{register.question_title} :star2:"
+    text = "@#{current_user.name}さんがクエスチョンブロックを作成したよ:bangbang:\n :star2:*#{register.question_title}*:star2:"
     post_text = if register.question_item_content3.present? && register.question_item_answer3.present?
                   " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}*\n"
                 elsif register.question_item_content2.present? && register.question_item_answer2.present?
