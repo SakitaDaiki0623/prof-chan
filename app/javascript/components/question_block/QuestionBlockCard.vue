@@ -43,7 +43,7 @@
             <v-row>
               <label
                 for="question_item_content"
-                class="mx-5 text-sm"
+                class="mx-5"
               >
                 {{ question_item.content }}
               </label>
