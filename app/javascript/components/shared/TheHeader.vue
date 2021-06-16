@@ -1,36 +1,34 @@
 <!-- app/javascript/components/TheHeader.vue -->
 <template>
-  <header
-    v-show="doesCurrentUserhaveProfile"
-    id="top"
-  >
-    <v-app-bar
-      v-if="isMobile"
-      color="brown lighten-2"
-      outlined
-      height="80px"
-    >
+  <header v-show="doesCurrentUserhaveProfile" id="top">
+    <v-app-bar v-if="isMobile" color="brown lighten-2" outlined height="80px">
       <v-toolbar-title>
         <router-link to="/top">
-          <img
-            src="../../images/prof_normal.png"
-            class="logo"
-          >
+          <img src="../../images/prof_normal.png" class="logo" />
         </router-link>
       </v-toolbar-title>
 
-      <v-menu
-        right
-        bottom
+      <v-btn
+        id="profile-edit-button"
+        class="ma-2 white--text"
+        color="brown lighten-2"
+        @click="openProfileEditPage"
       >
+        <v-icon left> mdi-pencil </v-icon>
+        プロフ編集
+      </v-btn>
+
+      <v-menu right bottom>
         <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
             color="brown lighten-3"
             class="white--text"
             v-on="on"
+            fab
+            small
           >
-            <v-icon>mdi-dots-horizontal</v-icon>プロフ関連
+            <v-icon>mdi-dots-horizontal</v-icon>
           </v-btn>
         </template>
 
@@ -44,9 +42,7 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-avatar>
             <v-list-item-title class="white--text">
-              {{
-                item.text
-              }}
+              {{ item.text }}
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -64,18 +60,10 @@
       </v-btn>
     </v-app-bar>
 
-    <v-app-bar
-      v-if="!isMobile"
-      color="brown lighten-2"
-      outlined
-      height="80px"
-    >
+    <v-app-bar v-if="!isMobile" color="brown lighten-2" outlined height="80px">
       <v-toolbar-title>
         <router-link to="/top">
-          <img
-            src="../../images/prof_normal.png"
-            class="logo"
-          >
+          <img src="../../images/prof_normal.png" class="logo" />
         </router-link>
       </v-toolbar-title>
 
@@ -85,16 +73,21 @@
         color="brown lighten-2"
         @click="openProfileEditPage"
       >
-        <v-icon left>
-          mdi-pencil
-        </v-icon>
+        <v-icon left> mdi-pencil </v-icon>
         プロフ編集
       </v-btn>
 
-      <v-menu
-        right
-        bottom
+      <v-btn
+        id="profile-edit-button"
+        class="ma-2 white--text"
+        color="brown lighten-2"
+        @click="openProfilesPage"
       >
+        <v-icon left> mdi-account-group </v-icon>
+        プロフ一覧
+      </v-btn>
+
+      <v-menu right bottom>
         <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
@@ -102,7 +95,7 @@
             class="white--text"
             v-on="on"
           >
-            <v-icon>mdi-dots-horizontal</v-icon>プロフ関連
+            <v-icon>mdi-dots-horizontal</v-icon>その他
           </v-btn>
         </template>
 
@@ -116,27 +109,22 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-avatar>
             <v-list-item-title class="white--text">
-              {{
-                item.text
-              }}
+              {{ item.text }}
             </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
 
+      <v-spacer />
       <v-btn
         id="about-button"
         class="ma-2 white--text"
         color="brown lighten-2"
         @click="openAboutPage"
       >
-        <v-icon left>
-          mdi-information-outline
-        </v-icon>
+        <v-icon left> mdi-information-outline </v-icon>
         プロフちゃんとは
       </v-btn>
-
-      <v-spacer />
 
       <v-btn
         class="ma-2 white--text"
@@ -161,18 +149,12 @@ export default {
       itemLists: [
         {
           id: 1,
-          text: "プロフ一覧",
-          icon: "mdi-account-group",
-          clickEvent: this.openProfilesPage,
-        },
-        {
-          id: 2,
           text: "人気のプロフブロック",
           icon: "mdi-crown-outline",
           clickEvent: this.openPopularBlocksPage,
         },
         {
-          id: 3,
+          id: 2,
           text: "ブックマーク",
           icon: "mdi-account-star-outline",
           clickEvent: this.openBookmarkPage,
@@ -181,30 +163,24 @@ export default {
       mobileLists: [
         {
           id: 1,
-          text: "プロフ編集",
-          icon: "mdi-pencil",
-          clickEvent: this.openProfileEditPage,
-        },
-        {
-          id: 2,
           text: "プロフ一覧",
           icon: "mdi-account-group",
           clickEvent: this.openProfilesPage,
         },
         {
-          id: 3,
+          id: 2,
           text: "人気のプロフブロック",
           icon: "mdi-crown-outline",
           clickEvent: this.openPopularBlocksPage,
         },
         {
-          id: 4,
+          id: 3,
           text: "ブックマーク",
           icon: "mdi-account-star-outline",
           clickEvent: this.openBookmarkPage,
         },
         {
-          id: 5,
+          id: 4,
           text: "プロフちゃんとは",
           icon: "mdi-information-outline",
           clickEvent: this.openAboutPage,
@@ -224,10 +200,9 @@ export default {
 
     // responsive =============================
     isMobile() {
-      return this.$vuetify.breakpoint.xsOnly;
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
-  created() {},
   methods: {
     openProfilesPage() {
       this.$router.push(`/profiles`).catch((err) => {});
