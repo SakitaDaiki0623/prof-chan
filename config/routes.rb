@@ -122,6 +122,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :slack do
+    namespace :settings do
+      post 'activate_share_right',   to: 'share#activate'
+      post 'inactivate_share_right', to: 'share#inactivate'
+    end
+  end
+
   get 'agreement', to: 'home#agreement'
   get 'terms', to: 'home#terms'
   get 'privacy', to: 'home#privacy'

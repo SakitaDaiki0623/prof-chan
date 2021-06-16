@@ -75,7 +75,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth, user_info, hash_token, channel)
-    user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    user = find_or_initialize_by(provider: auth.provider, uid: auth.info.authed_user.id)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')

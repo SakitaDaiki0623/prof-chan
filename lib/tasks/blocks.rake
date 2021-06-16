@@ -20,7 +20,7 @@ namespace :blocks do
     Team.all.includes(:users).each do |team|
       logger.debug 'post_blocks started!'
       # 通常ログインはプロフィール公開しない
-      next if team.users.count.zero? || team.users[0].provider == 'email'
+      next if team.users.count.zero? || team.users[0].provider == 'email' || team.share_right_inactive?
 
       # 各ブロックをランダムに1つ取得する
       logger.debug 'selecting blocks...'
