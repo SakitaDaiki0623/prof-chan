@@ -20,7 +20,7 @@
             color="brown"
             @click="moveToProfilesPage"
           >
-            プロフィール一覧に戻る
+            プロフ一覧に戻る
           </v-btn>
           <v-btn
             class="ma-5 white--text"
