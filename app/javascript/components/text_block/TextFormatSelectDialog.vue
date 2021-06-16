@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     :value="isShownTextFormatSelectDialog"
-    max-width="1000"
+    max-width="800"
     @click:outside="hundleCloseTextFormatSelectDialog"
     set="$emit('input', $event.target.isShownTextFormatSelectDialog)"
     transition="slide-x-transition"
@@ -87,7 +87,7 @@ export default {
           id: 2,
           title: "簡単な自己紹介",
           text:
-            "私は【】年【】月【】日生まれの【】座だよ！性格はよく【】って言われます。1番の特技は【】で最近は【】にはまっています！私は芸能人でいうと【】と似ているかなと思う！",
+            "私は【】年【】月【】日生まれの【】座だよ！性格はよく【】って言われます。1番の特技は【】で最近は【】にはまっています！私は芸能人でいうと【】に似ているかなと思う！",
         },
       ],
     };

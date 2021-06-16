@@ -7,10 +7,7 @@
     @input="$emit('input', $event.target.isShownRankingFormatDialog)"
   >
     <v-card :color="rankingBlockColor">
-      <v-row
-        justify="end"
-        class="mr-2 mt-2"
-      >
+      <v-row justify="end" class="mr-2 mt-2">
         <v-btn
           :color="rankingBlockColor"
           @click="hundleCloseRankingFormatDialog"
@@ -21,10 +18,7 @@
       <p class="font-weight-bold text-white text-4xl text-center my-10">
         ランキングブロック作成
       </p>
-      <div
-        id="ranking-block-form"
-        class="pa-10 note-box"
-      >
+      <div id="ranking-block-form" class="pa-10 note-box">
         <v-btn
           id="input-ranking-title-button"
           type="submit"
@@ -36,20 +30,14 @@
           class="white--text py-2"
           @click="inputTitleRandomly"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>ランダムに入力
+          <v-icon left> mdi-plus </v-icon>ランダムに入力
         </v-btn>
-        <ValidationObserver
-          ref="observer"
-          v-slot="{ invalid }"
-        >
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
           <form @submit.prevent="hundleCreateRankingBlock(rankingBlock)">
             <div>
-              <label
-                class="form-label-text-block"
-                for="ranking_block_title"
-              >タイトル</label>
+              <label class="form-label-text-block" for="ranking_block_title"
+                >タイトル</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -61,7 +49,7 @@
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_title]"
                   type="text"
-                >
+                />
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
@@ -70,7 +58,8 @@
               <label
                 class="form-label-text-block"
                 for="ranking_block_first_place"
-              >1st</label>
+                >1st</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="1位"
@@ -81,7 +70,7 @@
                   v-model="rankingBlock.first_place"
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_first_place]"
-                >
+                />
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
@@ -89,7 +78,8 @@
               <label
                 class="form-label-text-block"
                 for="ranking_block_second_place"
-              >2nd</label>
+                >2nd</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="2位"
@@ -100,7 +90,7 @@
                   v-model="rankingBlock.second_place"
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_second_place]"
-                >
+                />
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
@@ -108,7 +98,8 @@
               <label
                 class="form-label-text-block"
                 for="ranking_block_third_place"
-              >3rd</label>
+                >3rd</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="3位"
@@ -119,12 +110,20 @@
                   v-model="rankingBlock.third_place"
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_third_place]"
-                >
+                />
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
-            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
-              ※Slackへの投稿は1日に1回のみです。
+
+            <div v-if="isProviderSlack && notSharedYet">
+              <v-checkbox
+                v-model="check"
+                label="slackに投稿しますか?"
+                :color="rankingBlockColor"
+              ></v-checkbox>
+              <div class="text-gray-600 text-sm">
+                ※Slackへの投稿は1日に1回のみです。
+              </div>
             </div>
             <div class="text-center mt-3">
               <v-btn
@@ -173,6 +172,7 @@ export default {
         second_place: "",
         third_place: "",
       },
+      check: false,
 
       randomeTitles: [
         "アニメ・漫画",
@@ -194,21 +194,25 @@ export default {
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isProviderSlack() {
+      return this.currentUser.provider == "slack" ? true : false;
+    },
+    notSharedYet() {
+      return this.currentUser.ranking_share_right == "ranking_not_shared_yet"
+        ? true
+        : false;
+    },
   },
   methods: {
     ...mapActions({
-      updateCurrentUserRankingShareRight: "users/updateCurrentUserRankingShareRight",
+      updateCurrentUserRankingShareRight:
+        "users/updateCurrentUserRankingShareRight",
     }),
     hundleCreateRankingBlock(rankingBlock) {
       this.createRankingBlock(rankingBlock);
-      if (
-        this.currentUser.provider == "slack" &&
-        this.currentUser.ranking_share_right == "ranking_not_shared_yet"
-      ) {
-        if (confirm("slackに通知しますか?")) {
-          this.postToSlackAfterCreate(rankingBlock);
-          this.updateCurrentUserRankingShareRight();
-        }
+      if (this.isProviderSlack && this.check && this.notSharedYet) {
+        this.postToSlackAfterCreate(rankingBlock);
+        this.updateCurrentUserRankingShareRight();
       }
       this.hundleCloseRankingFormatDialog();
       this.$store.dispatch("flash/setFlash", {

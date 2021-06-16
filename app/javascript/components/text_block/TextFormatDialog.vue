@@ -71,9 +71,17 @@
               </ValidationProvider>
             </div>
 
-            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
-              ※Slackへの投稿は1日に1回のみです。
+            <div v-if="isProviderSlack && notSharedYet">
+              <v-checkbox
+                v-model="check"
+                :color="textBlockColor"
+                label="slackに投稿しますか?"
+              ></v-checkbox>
+              <div class="text-gray-600 text-sm">
+                ※Slackへの投稿は1日に1回のみです。
+              </div>
             </div>
+
             <div class="text-center mt-3">
               <v-btn
                 id="creation_button"
@@ -130,10 +138,17 @@ export default {
         text: "",
       },
       isShownTextFormatSelectDialog: false,
+      check: false,
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isProviderSlack() {
+      return this.currentUser.provider == "slack" ? true : false;
+    },
+    notSharedYet() {
+      return this.currentUser.text_share_right == "text_not_shared_yet" ? true : false;
+    }
   },
   methods: {
     ...mapActions({
@@ -142,13 +157,12 @@ export default {
     hundleCreateTextBlock(textBlock) {
       this.createTextBlock(textBlock);
       if (
-        this.currentUser.provider == "slack" &&
-        this.currentUser.text_share_right == "text_not_shared_yet"
+        this.isProviderSlack &&
+        this.check &&
+        this.notSharedYet
       ) {
-        if (confirm("slackに通知しますか?")) {
-          this.postToSlackAfterCreate(textBlock);
-          this.updateCurrentUserTextShareRight();
-        }
+        this.postToSlackAfterCreate(textBlock);
+        this.updateCurrentUserTextShareRight();
       }
       this.hundleCloseTextFormatDialog();
       this.$store.dispatch("flash/setFlash", {

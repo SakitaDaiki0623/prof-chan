@@ -123,8 +123,15 @@
               :answer-name-for-validation="answerNameForValidation3"
             />
 
-            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
-              ※Slackへの投稿は1日に1回のみです。
+            <div v-if="isProviderSlack && notSharedYet">
+              <v-checkbox
+                v-model="check"
+                label="slackに投稿しますか?"
+                :color="questionBlockColor"
+              ></v-checkbox>
+              <div class="text-gray-600 text-sm">
+                ※Slackへの投稿は1日に1回のみです。
+              </div>
             </div>
 
             <div class="text-center pa-10">
@@ -277,10 +284,20 @@ export default {
       answerNameForValidation2: "2番目の答え",
       questionNameForValidation3: "3番目の質問",
       answerNameForValidation3: "3番目の答え",
+
+      check: false,
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isProviderSlack() {
+      return this.currentUser.provider == "slack" ? true : false;
+    },
+    notSharedYet() {
+      return this.currentUser.question_share_right == "question_not_shared_yet"
+        ? true
+        : false;
+    },
   },
   methods: {
     ...mapActions({
@@ -317,22 +334,16 @@ export default {
         question_item_answer3: questionItem3.answer,
       };
       this.createQuestionBlock(params);
+      if (this.isProviderSlack && this.check && this.notSharedYet) {
+        await this.postToSlackAfterCreate(params);
+        this.updateCurrentUserQuestionShareRight();
+      }
       this.hundleCloseQuestioniFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
         color: this.questionBlockColor,
       });
-
-      if (
-        this.currentUser.provider == "slack" &&
-        this.currentUser.question_share_right == "question_not_shared_yet"
-      ) {
-        if (confirm("slackに通知しますか?")) {
-          await this.postToSlackAfterCreate(params);
-          this.updateCurrentUserQuestionShareRight();
-        }
-      }
     },
     async postToSlackAfterCreate(params) {
       const res = await axios.post(
