@@ -97,7 +97,7 @@
                   name="question_block[question_block_title]"
                   type="text"
                 />
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
 

@@ -69,7 +69,7 @@
                           女性
                         </option>
                       </select>
-                      <span class="red--text">{{ errors[0] }}</span>
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
@@ -89,7 +89,7 @@
                         type="number"
                         name="profile[height]"
                       >
-                      <span class="red--text">{{ errors[0] }}</span>
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
@@ -121,7 +121,7 @@
                           O型
                         </option>
                       </select>
-                      <span class="red--text">{{ errors[0] }}</span>
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
@@ -148,7 +148,7 @@
                           {{ prefecture.text }}
                         </option>
                       </select>
-                      <span class="red--text">{{ errors[0] }}</span>
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
@@ -179,7 +179,7 @@
                             v-bind="attrs"
                             v-on="on"
                           >
-                          <span class="red--text">{{ errors[0] }}</span>
+                          <span class="red--text text-sm">{{ errors[0] }}</span>
                         </ValidationProvider>
                       </template>
                       <v-date-picker
@@ -223,7 +223,7 @@
                             class="input-form-basic-block"
                             v-on="on"
                           >
-                          <span class="red--text">{{ errors[0] }}</span>
+                          <span class="red--text text-sm">{{ errors[0] }}</span>
                         </ValidationProvider>
                       </template>
                       <v-date-picker

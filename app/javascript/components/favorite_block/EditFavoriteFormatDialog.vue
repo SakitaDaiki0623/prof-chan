@@ -53,7 +53,7 @@
                   persistent-hint
                   single-line
                 />
-                <span class="red--text text--lighten-3">{{ errors[0] }}</span>
+                <span class="red--text text-sm text--lighten-3">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -73,7 +73,7 @@
                   name="text_block[text_block_text]"
                   @input="editFavoriteBlock.text = $event.target.value"
                 >
-                <span class="red--text text--lighten-3">{{ errors[0] }}</span>
+                <span class="red--text text-sm text--lighten-3">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="text-center mt-3">

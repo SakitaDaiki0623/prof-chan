@@ -48,7 +48,7 @@
                   type="text"
                   @input="editRankingBlock.title = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -68,7 +68,7 @@
                   name="ranking_block[ranking_block_first_place]"
                   @input="editRankingBlock.first_place = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -88,7 +88,7 @@
                   name="ranking_block[ranking_block_second_place]"
                   @input="editRankingBlock.second_place = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -108,7 +108,7 @@
                   name="ranking_block[ranking_block_third_place]"
                   @input="editRankingBlock.third_place = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="text-center mt-3">

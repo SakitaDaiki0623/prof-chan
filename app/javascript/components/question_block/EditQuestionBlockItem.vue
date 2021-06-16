@@ -95,7 +95,7 @@
                   type="text"
                   @input="editQuestionItem.content = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
             <v-col
@@ -119,7 +119,7 @@
                   type="text"
                   @input="editQuestionItem.answer = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
           </v-row>

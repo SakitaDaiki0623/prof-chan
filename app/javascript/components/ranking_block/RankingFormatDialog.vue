@@ -62,7 +62,7 @@
                   name="ranking_block[ranking_block_title]"
                   type="text"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
 
@@ -82,7 +82,7 @@
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_first_place]"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -101,7 +101,7 @@
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_second_place]"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -120,7 +120,7 @@
                   class="input-form-ranking-block"
                   name="ranking_block[ranking_block_third_place]"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-3 font-weight-bold text-gray-600 text-sm">

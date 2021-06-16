@@ -47,7 +47,7 @@
                   type="text"
                   @input="editTextBlock.title = $event.target.value"
                 >
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -68,7 +68,7 @@
                   rows="7"
                   @input="editTextBlock.text = $event.target.value"
                 />
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="text-center mt-3">

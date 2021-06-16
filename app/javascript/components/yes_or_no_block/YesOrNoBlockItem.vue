@@ -25,7 +25,7 @@
             type="text"
             @input="yesOrNoItem.content = $event.target.value"
           >
-          <span class="red--text">{{ errors[0] }}</span>
+          <span class="red--text text-sm">{{ errors[0] }}</span>
         </ValidationProvider>
       </v-col>
       <v-col
