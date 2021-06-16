@@ -34,7 +34,7 @@
           :text-block-id="textBlock.id"
         />
       </v-row>
-      <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+      <p class="text-2xl font-bold px-3 pt-3">
         {{ textBlock.title }}
       </p>
       <v-card
