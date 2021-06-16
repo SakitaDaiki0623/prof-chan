@@ -37,7 +37,7 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+              <v-icon left> mdi-plus </v-icon>ランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />

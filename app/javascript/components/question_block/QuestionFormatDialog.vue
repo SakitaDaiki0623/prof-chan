@@ -33,7 +33,7 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left> mdi-plus </v-icon>タイトルをランダムに入力
+              <v-icon left> mdi-plus </v-icon>ランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />
@@ -367,50 +367,62 @@ export default {
       this.questionBlock.title = selectedRandomTitle.title;
 
       if (this.questionItemNum == 1) {
-        const randomItemContentIndexForItem1 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem1.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem1,
-          1
-        )[0];
+        if (!this.questionItem1.answer) {
+          const randomItemContentIndexForItem1 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem1.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem1,
+            1
+          )[0];
+        }
       } else if (this.questionItemNum == 2) {
-        const randomItemContentIndexForItem1 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem1.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem1,
-          1
-        )[0];
-        const randomItemContentIndexForItem2 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem2.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem2,
-          1
-        )[0];
+        if (!this.questionItem1.answer) {
+          const randomItemContentIndexForItem1 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem1.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem1,
+            1
+          )[0];
+        }
+        if (!this.questionItem2.answer) {
+          const randomItemContentIndexForItem2 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem2.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem2,
+            1
+          )[0];
+        }
       } else if (this.questionItemNum == 3) {
-        const randomItemContentIndexForItem1 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem1.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem1,
-          1
-        )[0];
-        const randomItemContentIndexForItem2 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem2.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem2,
-          1
-        )[0];
-        const randomItemContentIndexForItem3 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem3.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem3,
-          1
-        )[0];
+        if (!this.questionItem1.answer) {
+          const randomItemContentIndexForItem1 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem1.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem1,
+            1
+          )[0];
+        }
+        if (!this.questionItem2.answer) {
+          const randomItemContentIndexForItem2 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem2.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem2,
+            1
+          )[0];
+        }
+        if (!this.questionItem3.answer) {
+          const randomItemContentIndexForItem3 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem3.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem3,
+            1
+          )[0];
+        }
       }
     },
   },

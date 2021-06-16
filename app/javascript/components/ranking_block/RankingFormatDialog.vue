@@ -38,7 +38,7 @@
         >
           <v-icon left>
             mdi-plus
-          </v-icon>タイトルをランダムに入力
+          </v-icon>ランダムに入力
         </v-btn>
         <ValidationObserver
           ref="observer"
