@@ -46,9 +46,9 @@ module SlackApiActivatable
 
   def post_welcome_message_to_channel(info, channel, access_token)
     channel_id = channel.dig('id')
-    user_name = info.dig('user', 'name')
+    user_id = info.dig('user', 'id')
     encoded_mgs = get_block_kit_welcome_msg(info)
-    text = "@#{user_name}さんがプロフちゃんを始めました！"
+    text = "<@#{user_id}>さんがプロフちゃんを始めました！"
     encoded_text = URI.encode_www_form_component(text)
     access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_mgs}&text=#{encoded_text}&pretty=1").parsed
   end
@@ -62,9 +62,9 @@ module SlackApiActivatable
   end
 
   def get_block_kit_welcome_msg(info)
-    user_name = info.dig('user', 'name')
+    user_id = info.dig('user', 'id')
     user_image = info.dig('user', 'image_192')
-    message = "[ { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '@here \n @#{user_name}さんがプロフちゃんを始めました！:hamster:\n プロフを確認して気になる話題を探してみよう！:star: \n 共通の話題があると嬉しいな！' }, 'accessory': { 'type': 'image', 'image_url': '#{user_image}', 'alt_text': 'alt text for image' } }, { 'type': 'divider' } ]"
+    message = "[ { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '@here \n #<@#{user_id}>さんがプロフちゃんを始めました！:hamster:\n プロフを確認して気になる話題を探してみよう！:star: \n 共通の話題があると嬉しいな！' }, 'accessory': { 'type': 'image', 'image_url': '#{user_image}', 'alt_text': 'alt text for image' } }, { 'type': 'divider' } ]"
     ERB::Util.url_encode(message)
   end
 
