@@ -1,6 +1,7 @@
 // app/javascript/plugins/vee-validate.js
 import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
-import { required, max, regex } from "vee-validate/dist/rules";
+import { required, max } from "vee-validate/dist/rules";
+import moment from "moment";
 
 extend("input_required", {
   ...required,
@@ -22,8 +23,14 @@ extend("max_no_field", {
   message: "最大{length}文字で入力してね",
 });
 
-extend("regex_postcode", {
-  ...regex,
+extend("available_age", (value) => {
+  const birthday = moment(new Date(value));
+  const today = moment(new Date());
+  const age = birthday.diff(today, "years");
+  if (age >= -70 && age <= -18) {
+    return true;
+  }
+  return "18歳から70歳までしか入力できないよ";
 });
 
 export default {

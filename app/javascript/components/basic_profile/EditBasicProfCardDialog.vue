@@ -2,7 +2,7 @@
 <template>
   <v-dialog
     :value="isShownEditBasicProfCardDialog"
-    max-width="450"
+    max-width="600"
     @click:outside="hundleCloseEditBasicProfCardDialog"
     @input="$emit('input', $event.target.isShownEditBasicProfCardDialog)"
   >
@@ -12,15 +12,9 @@
       class="shadow rounded-2xl py-5 px-10"
       color="brown lighten-4"
     >
-      <div class="top-sub-title text-2xl text-center">
-        基本情報
-      </div>
+      <div class="top-sub-title text-2xl text-center">基本情報</div>
       <v-row>
-        <v-col
-          cols="12"
-          sm="12"
-          class="text-2xl"
-        >
+        <v-col cols="12" sm="12" class="text-2xl">
           <v-row justify="end">
             <v-btn
               id="cancel-basic-prof-card-button"
@@ -33,22 +27,15 @@
             </v-btn>
           </v-row>
           <!-- FORM -->
-          <div
-            id="profile-basic-form"
-            class="pa-6"
-          >
-            <ValidationObserver
-              ref="observer"
-              v-slot="{ invalid }"
-            >
+          <div id="profile-basic-form" class="pa-6">
+            <ValidationObserver ref="observer" v-slot="{ invalid }">
               <form
                 @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"
               >
                 <div>
-                  <label
-                    class="form-label-text-block"
-                    for="profile_gender"
-                  >性別</label>
+                  <label class="form-label-text-block" for="profile_gender"
+                    >性別</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="性別"
@@ -70,10 +57,9 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-text-block"
-                    for="profile_height"
-                  >身長</label>
+                  <label class="form-label-text-block" for="profile_height"
+                    >身長</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="身長"
@@ -85,15 +71,14 @@
                       class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
-                    >
+                    />
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-text-block"
-                    for="profile_blood_type"
-                  >血液型</label>
+                  <label class="form-label-text-block" for="profile_blood_type"
+                    >血液型</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="血液型"
@@ -118,7 +103,8 @@
                   <label
                     class="form-label-text-block"
                     for="profile_prefecture_id"
-                  >出身地</label>
+                    >出身地</label
+                  >
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="出身地"
@@ -140,10 +126,9 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label
-                    class="form-label-text-block"
-                    for="profile_birthday"
-                  >生年月日</label>
+                  <label class="form-label-text-block" for="profile_birthday"
+                    >生年月日</label
+                  >
                   <v-menu
                     ref="menu"
                     v-model="birthMenu"
@@ -156,7 +141,7 @@
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="生年月日"
-                        rules="input_required"
+                        rules="input_required|available_age"
                       >
                         <input
                           id="profile_birthday"
@@ -164,22 +149,33 @@
                           type="date"
                           class="input-form-basic-block"
                           name="profile[birthday]"
+                        />
+                        <v-btn
                           v-bind="attrs"
                           v-on="on"
+                          tile
+                          small
+                          color="brown"
+                          class="white--text"
                         >
+                          モーダルで入力する
+                        </v-btn>
                         <span class="red--text text-sm">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
                     <v-date-picker
                       ref="picker"
                       v-model="editBasicProfile.birthday"
-                      color="brown lighten-3"
-                      header-color="brown lighten-2"
+                      color="brown darken-2"
+                      header-color="brown darken-2"
                       locale="ja-jp"
                       :day-format="(date) => new Date(date).getDate()"
-                      :max="new Date().toISOString().substr(0, 10)"
-                      min="1950-01-01"
+                      :max="maxDate"
+                      :min="minDate"
                       @change="saveBirthDate"
+                      year-icon="mdi-calendar-blank"
+                      prev-icon="mdi-skip-previous"
+                      next-icon="mdi-skip-next"
                     />
                   </v-menu>
                 </div>
@@ -187,7 +183,8 @@
                   <label
                     class="form-label-text-block"
                     for="profile_day_of_joinning"
-                  >入社日</label>
+                    >入社日</label
+                  >
                   <v-menu
                     ref="menu"
                     v-model="joinedMenu"
@@ -207,21 +204,32 @@
                           v-model="editBasicProfile.day_of_joinning"
                           type="date"
                           name="profile[day_of_joinning]"
-                          v-bind="attrs"
                           class="input-form-basic-block"
+                        />
+                        <v-btn
+                          v-bind="attrs"
                           v-on="on"
+                          tile
+                          small
+                          color="brown"
+                          class="white--text"
                         >
+                          モーダルで入力する
+                        </v-btn>
                         <span class="red--text text-sm">{{ errors[0] }}</span>
                       </ValidationProvider>
                     </template>
                     <v-date-picker
                       ref="picker"
                       v-model="editBasicProfile.day_of_joinning"
-                      color="brown lighten-3"
-                      header-color="brown lighten-2"
+                      color="brown darken-2"
+                      header-color="brown darken-2"
                       locale="ja-jp"
                       :day-format="(date) => new Date(date).getDate()"
                       @change="saveJoinedDate"
+                      year-icon="mdi-calendar-blank"
+                      prev-icon="mdi-skip-previous"
+                      next-icon="mdi-skip-next"
                     />
                   </v-menu>
                 </div>
@@ -283,9 +291,19 @@ export default {
   computed: {
     ...mapState("users", ["currentUser"]),
     ...mapState("activeHash", ["prefectures"]),
+    maxDate() {
+      let dt = new Date();
+      dt.setFullYear(dt.getFullYear() - 18);
+      return dt.toISOString().substr(0, 10);
+    },
+    minDate() {
+      let dt = new Date();
+      dt.setFullYear(dt.getFullYear() - 70);
+      return dt.toISOString().substr(0, 10);
+    },
   },
   methods: {
-    patchProfile: async function() {
+    patchProfile: async function () {
       const res = await axios.patch(
         `/api/v1/profiles/${this.editBasicProfile.public_uid}`,
         this.editBasicProfile
