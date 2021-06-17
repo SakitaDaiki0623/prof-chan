@@ -60,6 +60,11 @@ module Api
         ).to_json
       end
 
+      def recommended_topic_block
+        @favorite_block =  current_user.profile_block.favorite_blocks.popular_blocks[0]
+        render json: @favorite_block
+      end
+
       private
 
       def favorite_block_params

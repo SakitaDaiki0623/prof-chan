@@ -1,19 +1,12 @@
 <template>
   <div>
     <div v-if="isLiked">
-      <v-btn
-        icon
-        color="yellow lighten-1"
-        @click="deleteLike()"
-      >
+      <v-btn icon color="yellow lighten-1" @click="deleteLike()">
         <v-icon>mdi-bookmark</v-icon>
       </v-btn>
     </div>
     <div v-else>
-      <v-btn
-        icon
-        @click="registerLike()"
-      >
+      <v-btn icon @click="registerLike()">
         <v-icon>mdi-bookmark-plus-outline</v-icon>
       </v-btn>
     </div>
@@ -54,13 +47,13 @@ export default {
     },
   },
 
-  created: function() {
+  created: function () {
     this.fetchLikeByTextBlockId().then((result) => {
       this.likeList = result;
     });
   },
   methods: {
-    fetchLikeByTextBlockId: async function() {
+    fetchLikeByTextBlockId: async function () {
       const res = await axios.get(
         `/api/v1/likes/text_block_likes/?text_block_id=${this.textBlockId}`
       );
@@ -70,7 +63,7 @@ export default {
       return res.data;
     },
 
-    registerLike: async function() {
+    registerLike: async function () {
       const res = await axios.post("/api/v1/likes/text_block_likes", {
         text_block_id: this.textBlockId,
       });
@@ -82,7 +75,7 @@ export default {
       });
     },
 
-    deleteLike: async function() {
+    deleteLike: async function () {
       const likeId = this.findLikeId();
       const res = await axios.delete(
         `/api/v1/likes/text_block_likes/${likeId}`
@@ -93,7 +86,7 @@ export default {
       this.likeList = this.likeList.filter((n) => n.id !== likeId);
     },
 
-    findLikeId: function() {
+    findLikeId: function () {
       const like = this.likeList.find((like) => {
         return like.user_id === this.userId;
       });

@@ -63,10 +63,14 @@ module Api
         if @question_block_item_register.valid?
           post_questioin_block(@question_block_item_register)
           render json: @question_block_item_register, status: :no_content
-
         else
           render json: @question_block_item_register.errors, status: :bad_request
         end
+      end
+
+      def recommended_topic_block
+        @question_block =  current_user.profile_block.question_blocks.popular_blocks[0]
+        render json: @question_block
       end
 
       private

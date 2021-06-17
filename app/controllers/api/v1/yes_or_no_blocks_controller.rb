@@ -69,6 +69,11 @@ module Api
         end
       end
 
+      def recommended_topic_block
+        @yes_or_no_block =  current_user.profile_block.yes_or_no_blocks.popular_blocks[0]
+        render json: @yes_or_no_block
+      end
+
       private
 
       def set_params

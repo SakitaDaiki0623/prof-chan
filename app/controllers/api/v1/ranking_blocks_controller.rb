@@ -67,6 +67,11 @@ module Api
         end
       end
 
+      def recommended_topic_block
+        @ranking_block =  current_user.profile_block.ranking_blocks.popular_blocks[0]
+        render json: @ranking_block
+      end
+
       private
 
       def ranking_block_params

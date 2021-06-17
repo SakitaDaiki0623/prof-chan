@@ -1,12 +1,16 @@
 <template>
-  <div v-if="firstPlaceUserExist" class="bg">
-    <v-row justify="center" align-content="center">
+  <div class="bg">
+    <v-row
+      justify="center"
+      align-content="center"
+      class="border-2 border-brown-500 border-dashed"
+    >
       <v-col cols="12" sm="8" align-self="center">
         <div
           class="ext-4xl bordertext-xl text-center bg-brown-50 pa-10 ma-5 rounded-full md:t-brown-500 border-4 border-dashed"
         >
           <v-icon medium> mdi-star-box </v-icon>
-          あなたにおすすめの社員さん
+          よくブックマークされるあなたのブロック
           <v-icon medium> mdi-star-box </v-icon>
         </div>
       </v-col>
@@ -14,130 +18,74 @@
         <img src="../images/prof_open_happy.png" class="max-w-xs mx-auto" />
       </v-col>
     </v-row>
+
+    <!-- Favorite Block -->
     <v-row
+      class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      class="pa-10 bg-brown-500 border-brown-900 border-2 border-dotted"
+      v-if="favoriteBlock"
     >
-      <v-col cols="12" sm="12" md="6" lg="4" xl="3">
-        <ProfCard :user="firstPlaceUser" :is-this-edit-page="false" />
-        <v-btn
-          color="brown lighten-1"
-          class="white--text"
-          small
-          tile
-          @click="moveToUserProfilePage(firstPlaceUser.profile)"
-        >
-          社員ブロフィールを見る
-        </v-btn>
+      <v-col cols="12" md="5">
+        <FavoriteBlockCard :favorite-block="favoriteBlock"
+      /></v-col>
+      <v-col cols="12" md="5" class="pa-5" align-self="center">
+        <BookmarkUserList :block="favoriteBlock" />
       </v-col>
-      <v-row class="pa-10">
-        <v-col cols="12" sm="12" align="center">
-          <div
-            class="border-white border-dashed border-2 text-center text-white text-lg inline-block pa-5 md:text-2xl"
-          >
-            あなたと盛り上がりそうな話題
-          </div>
-        </v-col>
-        <v-col
-          v-for="block in firstPlaceUserLikesBlocks.splice(0, 3)"
-          :key="block.id"
-          cols="12"
-          sm="12"
-          md="4"
-          align="center"
-        >
-          <v-card class="rounded-2xl pa-5" outlined color="brown lighten-2">
-            <p class="text-center text-2xl font-bold text-white">
-              {{ block.title }}
-            </p>
-          </v-card>
-        </v-col>
-      </v-row>
     </v-row>
+    <!-- Question Block -->
     <v-row
-      v-if="secondPlaceUserExist"
+      class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      class="pa-10 bg-brown-500 border-brown-900 border-2 border-dotted"
+      v-if="questionBlock"
     >
-      <v-col cols="12" sm="12" md="6" lg="4" xl="3">
-        <ProfCard :user="secondPlaceUser" :is-this-edit-page="false" />
-        <v-btn
-          color="brown lighten-1"
-          class="white--text"
-          small
-          tile
-          @click="moveToUserProfilePage(secondPlaceUser.profile)"
-        >
-          社員ブロフィールを見る
-        </v-btn>
+      <v-col cols="12" md="5">
+        <QuestionBlockCard :question-block="questionBlock"
+      /></v-col>
+      <v-col cols="12" md="5" class="pa-5" align-self="center">
+        <BookmarkUserList :block="questionBlock" />
       </v-col>
-      <v-row class="pa-10">
-        <v-col cols="12" sm="12" align="center">
-          <div
-            class="border-white border-dashed border-2 text-center text-white text-lg inline-block pa-5 md:text-2xl"
-          >
-            あなたと盛り上がりそうな話題
-          </div>
-        </v-col>
-        <v-col
-          v-for="block in secondPlaceUserLikesBlocks.splice(0, 3)"
-          :key="block.id"
-          cols="12"
-          sm="12"
-          md="4"
-          align="center"
-        >
-          <v-card class="rounded-2xl pa-5" outlined color="brown lighten-2">
-            <p class="text-center text-2xl font-bold text-white">
-              {{ block.title }}
-            </p>
-          </v-card>
-        </v-col>
-      </v-row>
     </v-row>
+    <!-- Ranking Block -->
     <v-row
-      v-if="thirdPlaceUserExist"
+      class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      class="pa-10 bg-brown-500 border-brown-900 border-2 border-dotted"
+      v-if="rankingBlock"
     >
-      <v-col cols="12" sm="12" md="6" lg="4" xl="3">
-        <ProfCard :user="thirdPlaceUser" :is-this-edit-page="false" />
-        <v-btn
-          color="brown lighten-1"
-          class="white--text"
-          small
-          tile
-          @click="moveToUserProfilePage(thirdPlaceUser.profile)"
-        >
-          社員ブロフィールを見る
-        </v-btn>
+      <v-col cols="12" md="5">
+        <RankingBlockCard :ranking-block="rankingBlock"
+      /></v-col>
+      <v-col cols="12" md="5" class="pa-5" align-self="center">
+        <BookmarkUserList :block="rankingBlock" />
       </v-col>
-      <v-row class="pa-10">
-        <v-col cols="12" sm="12" align="center">
-          <div
-            class="border-white border-dashed border-2 text-center text-white text-lg inline-block pa-5 md:text-2xl"
-          >
-            あなたと盛り上がりそうな話題
-          </div>
-        </v-col>
-        <v-col
-          v-for="block in thirdPlaceUserLikesBlocks.splice(0, 3)"
-          :key="block.id"
-          cols="12"
-          sm="12"
-          md="4"
-          align="center"
-        >
-          <v-card class="rounded-2xl pa-5" outlined color="brown lighten-2">
-            <p class="text-center text-2xl font-bold text-white">
-              {{ block.title }}
-            </p>
-          </v-card>
-        </v-col>
-      </v-row>
+    </v-row>
+    <!-- YesOrNo Block -->
+    <v-row
+      class="bg-brown-100 border-2 border-brown-500 border-dashed"
+      justify="center"
+      align-content="center"
+      v-if="yesOrNoBlock !== null"
+    >
+      <v-col cols="12" md="5">
+        <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock"
+      /></v-col>
+      <v-col cols="12" md="5" class="pa-5" align-self="center">
+        <BookmarkUserList :block="yesOrNoBlock" />
+      </v-col>
+    </v-row>
+    <!-- Text Block -->
+    <v-row
+      class="bg-brown-100 border-2 border-brown-500 border-dashed"
+      justify="center"
+      align-content="center"
+      v-if="textBlock"
+    >
+      <v-col cols="12" md="5"> <TextBlockCard :text-block="textBlock" /></v-col>
+      <v-col cols="12" md="5" class="pa-5" align-self="center">
+        <BookmarkUserList :block="textBlock" />
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -145,31 +93,33 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import ProfCard from "../components/ProfCard";
+import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
+import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
+import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
+import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
+import TextBlockCard from "../components/text_block/TextBlockCard";
+import BookmarkUserList from "../components/parts/BookmarkUserList";
 
 export default {
   components: {
-    ProfCard,
+    FavoriteBlockCard,
+    QuestionBlockCard,
+    RankingBlockCard,
+    YesOrNoBlockCard,
+    TextBlockCard,
+    BookmarkUserList,
   },
   data() {
     return {
-      firstPlaceUser: {},
-      secondPlaceUser: {},
-      thirdPlaceUser: {},
+      favoriteBlock: {},
+      questionBlock: {},
+      rankingBlock: {},
+      yesOrNoBlock: {},
+      textBlock: {},
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
-
-    firstPlaceUserExist() {
-      return !!Object.keys(this.firstPlaceUser).length;
-    },
-    secondPlaceUserExist() {
-      return !!Object.keys(this.secondPlaceUser).length;
-    },
-    thirdPlaceUserExist() {
-      return !!Object.keys(this.thirdPlaceUser).length;
-    },
   },
   mounted() {
     this.firstRead();
@@ -177,24 +127,36 @@ export default {
 
   methods: {
     async firstRead() {
-      await this.fecthFirstPlaceUser();
-      await this.fecthSecondPlaceUser();
-      await this.fecthThirdPlaceUser();
+      await this.fecthFavoriteBlock();
+      await this.fecthQuestionBlock();
+      await this.fecthRankingBlock();
+      await this.fecthYesOrNoBlock();
+      await this.fecthTextBlock();
     },
-    async fecthFirstPlaceUser() {
+    async fecthFavoriteBlock() {
       await axios
-        .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[0].user_id}`)
-        .then((res) => (this.firstPlaceUser = res.data));
+        .get(`/api/v1/favorite_blocks/recommended_topic_block`)
+        .then((res) => (this.favoriteBlock = res.data));
     },
-    async fecthSecondPlaceUser() {
+    async fecthQuestionBlock() {
       await axios
-        .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[1].user_id}`)
-        .then((res) => (this.secondPlaceUser = res.data));
+        .get(`/api/v1/question_blocks/recommended_topic_block`)
+        .then((res) => (this.questionBlock = res.data));
     },
-    async fecthThirdPlaceUser() {
+    async fecthRankingBlock() {
       await axios
-        .get(`/api/v1/users/${this.topThreeUserIdAndTotalLikes[2].user_id}`)
-        .then((res) => (this.thirdPlaceUser = res.data));
+        .get(`/api/v1/ranking_blocks/recommended_topic_block`)
+        .then((res) => (this.rankingBlock = res.data));
+    },
+    async fecthYesOrNoBlock() {
+      await axios
+        .get(`/api/v1/yes_or_no_blocks/recommended_topic_block`)
+        .then((res) => (this.yesOrNoBlock = res.data));
+    },
+    async fecthTextBlock() {
+      await axios
+        .get(`/api/v1/text_blocks/recommended_topic_block`)
+        .then((res) => (this.textBlock = res.data));
     },
     moveToUserProfilePage(profile) {
       this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});

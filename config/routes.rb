@@ -54,6 +54,7 @@ Rails.application.routes.draw do
           get 'birthday_user_profiles'
         end
       end
+
       resources :users,          only: %i[index show new update] do
         collection do
           get   'get_current_user'
@@ -62,8 +63,12 @@ Rails.application.routes.draw do
           patch 'update_ranking_share_right'
           patch 'update_yes_or_no_share_right'
           patch 'update_text_share_right'
+
+          # recommended
+          get  'recommended_users'
         end
       end
+
       resources :teams,          only: %i[show]
 
       # プロフブロック
@@ -72,6 +77,7 @@ Rails.application.routes.draw do
         collection do
           get  'random_current_user_likes_blocks'
           get  'popular_blocks'
+          get  'recommended_topic_block'
         end
       end
       resources :text_blocks,        only: %i[index create show update destroy] do
@@ -79,6 +85,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'recommended_topic_block'
         end
       end
       resources :question_blocks,    only: %i[index create show update destroy] do
@@ -86,6 +93,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'recommended_topic_block'
         end
       end
       resources :question_items,     only: %i[index create update destroy]
@@ -94,6 +102,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'recommended_topic_block'
         end
       end
       resources :yes_or_no_blocks,   only: %i[index create show update destroy] do
@@ -101,6 +110,7 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
+          get  'recommended_topic_block'
         end
       end
       resources :yes_or_no_items,    only: %i[index create update destroy]

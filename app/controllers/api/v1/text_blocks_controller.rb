@@ -69,6 +69,11 @@ module Api
         end
       end
 
+      def recommended_topic_block
+        @text_block =  current_user.profile_block.text_blocks.popular_blocks[0]
+        render json: @text_block
+      end
+
       private
 
       def text_block_params

@@ -19,6 +19,7 @@ module Api
 
       def new; end
 
+      # Share right
       def update_question_share_right
         return unless @user.question_not_shared_yet?
 
