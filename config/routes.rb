@@ -134,6 +134,9 @@ Rails.application.routes.draw do
       post 'activate_share_right',   to: 'share#activate'
       post 'inactivate_share_right', to: 'share#inactivate'
     end
+    namespace :post do
+      post 'random_block', to: 'random_post#random_block'
+    end
   end
 
   # 同意画面

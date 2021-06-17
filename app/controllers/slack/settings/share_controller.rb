@@ -1,7 +1,5 @@
 
-class Slack::Settings::ShareController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!
+class Slack::Settings::ShareController < Slack::ApplicationController
   before_action :set_user_team_token, only: %i[activate inactivate]
 
   def activate
