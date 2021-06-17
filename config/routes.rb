@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   # ROOT_PATH
   root to: 'home#index'
-
+  # LOGIN_ROOT_PATH
   get 'top', to: 'profiles#top'
 
   # authetication
@@ -56,7 +56,8 @@ Rails.application.routes.draw do
       end
       resources :users,          only: %i[index show new update] do
         collection do
-          get 'get_current_user'
+          get   'get_current_user'
+          # share right
           patch 'update_question_share_right'
           patch 'update_ranking_share_right'
           patch 'update_yes_or_no_share_right'
@@ -71,7 +72,6 @@ Rails.application.routes.draw do
         collection do
           get  'random_current_user_likes_blocks'
           get  'popular_blocks'
-          get  'current_user_having'
         end
       end
       resources :text_blocks,        only: %i[index create show update destroy] do
@@ -79,7 +79,6 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
-          get  'current_user_having'
         end
       end
       resources :question_blocks,    only: %i[index create show update destroy] do
@@ -87,7 +86,6 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
-          get  'current_user_having'
         end
       end
       resources :question_items,     only: %i[index create update destroy]
@@ -96,7 +94,6 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
-          get  'current_user_having'
         end
       end
       resources :yes_or_no_blocks,   only: %i[index create show update destroy] do
@@ -104,7 +101,6 @@ Rails.application.routes.draw do
           get  'random_current_user_likes_blocks'
           post 'post_to_slack_after_create'
           get  'popular_blocks'
-          get  'current_user_having'
         end
       end
       resources :yes_or_no_items,    only: %i[index create update destroy]
@@ -122,6 +118,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # slackコマンド
   namespace :slack do
     namespace :settings do
       post 'activate_share_right',   to: 'share#activate'
@@ -129,10 +126,16 @@ Rails.application.routes.draw do
     end
   end
 
+  # 同意画面
   get 'agreement', to: 'home#agreement'
+
+  # 利用規約
   get 'terms', to: 'home#terms'
+
+  # プライバシーポリシー
   get 'privacy', to: 'home#privacy'
 
+  # お問い合わせフォーム
   resources :contacts, only: [:new, :create]
   post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
   post 'contacts/back', to: 'contacts#back', as: 'back'

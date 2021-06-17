@@ -60,14 +60,6 @@ module Api
         ).to_json
       end
 
-      def current_user_having
-        @favorite_blocks = current_user.profile_block.favorite_blocks
-        render json: ActiveModel::Serializer::CollectionSerializer.new(
-          @favorite_blocks,
-          serializer: FavoriteBlockSerializer
-        ).to_json
-      end
-
       private
 
       def favorite_block_params
