@@ -71,6 +71,7 @@ module Api
 
       def recommended_topic_block
         @yes_or_no_block =  current_user.profile_block.yes_or_no_blocks.popular_blocks[0]
+        return if @yes_or_no_block.nil? || @yes_or_no_block.users.blank?
         render json: @yes_or_no_block
       end
 

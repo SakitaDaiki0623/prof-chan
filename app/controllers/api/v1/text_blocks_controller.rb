@@ -71,6 +71,7 @@ module Api
 
       def recommended_topic_block
         @text_block =  current_user.profile_block.text_blocks.popular_blocks[0]
+        return if @text_block.nil? || @text_block.users.blank?
         render json: @text_block
       end
 

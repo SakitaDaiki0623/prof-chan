@@ -66,7 +66,7 @@
       class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      v-if="yesOrNoBlock !== null"
+      v-if="yesOrNoBlock"
     >
       <v-col cols="12" md="5">
         <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock"
@@ -120,6 +120,15 @@ export default {
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isBlocksZero() {
+      return this.favoriteBlock == "" &&
+        this.questionBlock == "" &&
+        this.rankingBlock == "" &&
+        this.yesOrNoBlock == "" &&
+        this.textBlock == ""
+        ? false
+        : true;
+    },
   },
   mounted() {
     this.firstRead();

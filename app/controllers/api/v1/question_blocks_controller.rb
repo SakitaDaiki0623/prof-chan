@@ -70,6 +70,7 @@ module Api
 
       def recommended_topic_block
         @question_block =  current_user.profile_block.question_blocks.popular_blocks[0]
+        return if @question_block.nil? || @question_block.users.blank?
         render json: @question_block
       end
 

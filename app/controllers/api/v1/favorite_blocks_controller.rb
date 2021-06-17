@@ -62,6 +62,7 @@ module Api
 
       def recommended_topic_block
         @favorite_block =  current_user.profile_block.favorite_blocks.popular_blocks[0]
+        return if @favorite_block.nil? || @favorite_block.users.blank?
         render json: @favorite_block
       end
 
