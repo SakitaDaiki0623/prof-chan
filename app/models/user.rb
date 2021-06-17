@@ -4,7 +4,7 @@ class User < ApplicationRecord
   after_create do
     create_profile_block if profile_block.blank?
   end
-  after_initialize :set_default_team_value
+  before_save :set_default_team_value, unless: proc { |u| u.provider == 'slack' }
 
   # devise
   devise :database_authenticatable, :registerable,
@@ -63,8 +63,6 @@ class User < ApplicationRecord
   end
 
   def set_default_team_value
-    return if provider == 'slack'
-
     default_team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
       team.name = 'normal login',
                   team.workspace_id     = 'A123B123C123',

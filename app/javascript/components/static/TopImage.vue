@@ -101,7 +101,7 @@ export default {
     },
     async fetchTeam() {
       await axios
-        .get(`/api/v1/teams/${this.currentUser.workspace_id}`)
+        .get(`/api/v1/teams/${this.currentUser.team.workspace_id}`)
         .then((res) => (this.team = res.data));
     },
   },
