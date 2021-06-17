@@ -210,11 +210,11 @@
                 >
                   <div>
                     <div class="bg-white inline-block">
-                      {{ favoriteBlock.owing_user.name }} さん
+                      {{ favoriteBlock.owing_user_name }} さん
                     </div>
                     <v-img
                       max-width="50px"
-                      :src="favoriteBlock.owing_user.image.url"
+                      :src="favoriteBlock.owing_user_image.url"
                       class="inline"
                     />
                   </div>
@@ -256,11 +256,11 @@
                 >
                   <div>
                     <div class="bg-white inline-block">
-                      {{ questionBlock.owing_user.name }} さん
+                      {{ questionBlock.owing_user_name }} さん
                     </div>
                     <v-img
                       max-width="50px"
-                      :src="questionBlock.owing_user.image.url"
+                      :src="questionBlock.owing_user_image.url"
                       class="inline"
                     />
                   </div>
@@ -302,11 +302,11 @@
                 >
                   <div>
                     <div class="bg-white inline-block">
-                      {{ rankingBlock.owing_user.name }} さん
+                      {{ rankingBlock.owing_user_name }} さん
                     </div>
                     <v-img
                       max-width="50px"
-                      :src="rankingBlock.owing_user.image.url"
+                      :src="rankingBlock.owing_user_image.url"
                       class="inline"
                     />
                   </div>
@@ -349,11 +349,11 @@
                 >
                   <div>
                     <div class="bg-white inline-block">
-                      {{ yesOrNoBlock.owing_user.name }} さん
+                      {{ yesOrNoBlock.owing_user_name }} さん
                     </div>
                     <v-img
                       max-width="50px"
-                      :src="yesOrNoBlock.owing_user.image.url"
+                      :src="yesOrNoBlock.owing_user_image.url"
                       class="inline"
                     />
                   </div>
@@ -394,11 +394,11 @@
                 >
                   <div>
                     <div class="bg-white inline-block">
-                      {{ textBlock.owing_user.name }} さん
+                      {{ textBlock.owing_user_name }} さん
                     </div>
                     <v-img
                       max-width="50px"
-                      :src="textBlock.owing_user.image.url"
+                      :src="textBlock.owing_user_image.url"
                       class="inline"
                     />
                   </div>
@@ -525,27 +525,27 @@ export default {
     },
     favoriteLikedUserIds() {
       return this.randomCurrentUserLikesFavoriteBlocks.map(
-        (value) => value.owing_user.id
+        (value) => value.owing_user_id
       );
     },
     questionLikedUserIds() {
       return this.randomCurrentUserLikesQuestionBlocks.map(
-        (value) => value.owing_user.id
+        (value) => value.owing_user_id
       );
     },
     rankingLikedUserIds() {
       return this.randomCurrentUserLikesRankingBlocks.map(
-        (value) => value.owing_user.id
+        (value) => value.owing_user_id
       );
     },
     yesOrNoLikedUserIds() {
       return this.randomCurrentUserLikesYesOrNoBlocks.map(
-        (value) => value.owing_user.id
+        (value) => value.owing_user_id
       );
     },
     textLikedUserIds() {
       return this.randomCurrentUserLikesTextBlocks.map(
-        (value) => value.owing_user.id
+        (value) => value.owing_user_id
       );
     },
   },
