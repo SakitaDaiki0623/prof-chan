@@ -147,8 +147,10 @@ export default {
       return this.currentUser.provider == "slack" ? true : false;
     },
     notSharedYet() {
-      return this.currentUser.text_share_right == "text_not_shared_yet" ? true : false;
-    }
+      return this.currentUser.text_share_right == "text_not_shared_yet"
+        ? true
+        : false;
+    },
   },
   methods: {
     ...mapActions({
@@ -156,11 +158,7 @@ export default {
     }),
     hundleCreateTextBlock(textBlock) {
       this.createTextBlock(textBlock);
-      if (
-        this.isProviderSlack &&
-        this.check &&
-        this.notSharedYet
-      ) {
+      if (this.isProviderSlack && this.check && this.notSharedYet) {
         this.postToSlackAfterCreate(textBlock);
         this.updateCurrentUserTextShareRight();
       }
@@ -184,6 +182,7 @@ export default {
     },
     hundleCloseTextFormatDialog() {
       this.$emit("close-text-format-dialog");
+      this.check = false;
       this.clearTextBlock();
     },
     clearTextBlock() {

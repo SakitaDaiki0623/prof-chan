@@ -353,6 +353,7 @@ export default {
     },
     hundleCloseQuestioniFormatDialog() {
       this.$emit("close-question-format-dialog");
+      this.check = false;
       this.clearQuestionBlock();
     },
 

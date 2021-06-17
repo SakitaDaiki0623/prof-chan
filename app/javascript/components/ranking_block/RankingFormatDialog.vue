@@ -234,6 +234,7 @@ export default {
     },
     hundleCloseRankingFormatDialog() {
       this.$emit("close-ranking-format-dialog");
+      this.check = false;
       this.clearRankingBlock();
     },
     clearRankingBlock() {

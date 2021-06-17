@@ -326,6 +326,7 @@ export default {
     },
     hundleCloseYesOrNoFormatDialog() {
       this.$emit("close-yes-or-no-format-dialog");
+      this.check = false;
       this.clearYesOrNoBlock();
     },
 
