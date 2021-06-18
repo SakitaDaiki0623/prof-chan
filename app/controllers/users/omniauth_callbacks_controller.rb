@@ -13,7 +13,6 @@ module Users
 
       # 初ログインであればチャンネル作成、招待
       channel = check_channel(user_info, request.env['omniauth.auth'], access_token)
-
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info, hash_token, channel)
 
       if @user.persisted?

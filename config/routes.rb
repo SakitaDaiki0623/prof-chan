@@ -138,6 +138,8 @@ Rails.application.routes.draw do
       post 'random_block', to: 'direct_post#random_block'
       post 'help', to: 'direct_post#help'
     end
+    post 'challenge', to: 'app_home_opened#respond'
+    post 'actions', to: 'app_home_opened#actions'
   end
 
   # 同意画面

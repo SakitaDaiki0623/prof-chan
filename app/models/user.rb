@@ -65,6 +65,7 @@ class User < ApplicationRecord
       team.name = 'normal login',
                   team.workspace_id     = 'A123B123C123',
                   team.share_channel_id = 'A123B123C123',
+                  team.domain = 'A123B123C123',
                   team.image = 'https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png'
     end
     self.team = default_team
@@ -100,8 +101,9 @@ class User < ApplicationRecord
                   # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
                   name = team_info.dig('name')
                   image = team_info.dig('image_230')
+                  domain = team_info.dig('domain')
                   share_channel_id = channel.dig('id')
-                  Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id, share_right: "active")
+                  Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id, domain: domain, share_right: "active")
                 end
   end
 end

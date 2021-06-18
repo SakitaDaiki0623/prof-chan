@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.string "name", null: false
     t.string "workspace_id", null: false
     t.string "share_channel_id", null: false
+    t.string "domain", null: false
     t.integer "share_right", default: 0, null: false
     t.string "image", null: false
     t.datetime "created_at", precision: 6, null: false
