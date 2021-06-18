@@ -135,7 +135,8 @@ Rails.application.routes.draw do
       post 'inactivate_share_right', to: 'share#inactivate'
     end
     namespace :post do
-      post 'random_block', to: 'random_post#random_block'
+      post 'random_block', to: 'direct_post#random_block'
+      post 'help', to: 'direct_post#help'
     end
   end
 
