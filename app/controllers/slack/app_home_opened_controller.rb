@@ -3,7 +3,7 @@ module Slack
     before_action :set_user_team_token, only: %i[publish_to_home_tab]
     def respond
       p params
-      render :json params[:challenge]
+      render json: params[:challenge], status: 200
     end
 
     def publish_to_home_tab(team, user, access_token)
