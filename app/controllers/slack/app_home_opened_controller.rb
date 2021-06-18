@@ -3,6 +3,7 @@ module Slack
     before_action :set_user_team_token, only: %i[respond]
     def respond
       return @team.nil? || @user.nil? || @team.workspace_id != @user.team.workspace_id
+      p params
       if params[:event][:type] == "app_home_opened"
         publish_to_home_tab(@team, @user, @access_token)
       elsif params[:event][:type] == "message"
