@@ -1,14 +1,7 @@
 <template>
   <div>
-    <v-card
-      class="rounded-2xl pa-5"
-      outlined
-      :color="favoriteBlockColor"
-    >
-      <v-row
-        v-if="isThisEditPage"
-        justify="end"
-      >
+    <v-card class="rounded-2xl pa-5" outlined :color="favoriteBlockColor">
+      <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + favoriteBlock.id"
           tile
@@ -30,9 +23,7 @@
       </v-row>
       <v-row v-else>
         <v-spacer />
-        <favorite-block-like-button
-          :favorite-block-id="favoriteBlock.id"
-        />
+        <favorite-block-like-button :favorite-block-id="favoriteBlock.id" v-if="isThisNotTopPage" />
       </v-row>
       <label class="form-label">
         {{ favoriteBlock.title }}
@@ -90,6 +81,11 @@ export default {
       isShownEditFavoriteFormatDialog: false,
       editFavoriteBlock: {},
     };
+  },
+  computed: {
+    isThisNotTopPage() {
+      return this.$route.path == `/top` ? false : true;
+    },
   },
   methods: {
     openEditFavoriteFormatDialog(favoriteBlock) {

@@ -26,7 +26,7 @@
                 name="question_item[question_item_content]"
                 type="text"
               >
-              <span class="red--text">{{ errors[0] }}</span>
+              <span class="red--text text-sm">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
           <v-col
@@ -48,7 +48,7 @@
                 name="question_item[question_item_answer]"
                 type="text"
               >
-              <span class="red--text">{{ errors[0] }}</span>
+              <span class="red--text text-sm">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
         </v-row>

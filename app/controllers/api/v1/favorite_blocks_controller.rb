@@ -60,12 +60,10 @@ module Api
         ).to_json
       end
 
-      def current_user_having
-        @favorite_blocks = current_user.profile_block.favorite_blocks
-        render json: ActiveModel::Serializer::CollectionSerializer.new(
-          @favorite_blocks,
-          serializer: FavoriteBlockSerializer
-        ).to_json
+      def recommended_topic_block
+        @favorite_block =  current_user.profile_block.favorite_blocks.popular_blocks[0]
+        return if @favorite_block.nil? || @favorite_block.users.blank?
+        render json: @favorite_block
       end
 
       private

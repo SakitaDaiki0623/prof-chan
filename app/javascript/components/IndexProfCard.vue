@@ -1,37 +1,33 @@
 <template>
-  <div
-    :id="'profile-index-card-' + profile.public_uid"
-    @click="openProfileShowPage(profile)"
-  >
-    <v-card
-      color="brown lighten-2"
-      outlined
+  <v-hover v-slot="{ hover }">
+    <div
+      :id="'profile-index-card-' + profile.public_uid"
+      @click="openProfileShowPage(profile)"
+      :class="{ 'on-hover': hover }"
+      class="cursor-pointer"
     >
-      <div>
-        <v-row
-          justify="center"
-          align-content="center"
+      <v-card color="brown lighten-2" outlined>
+        <div>
+          <v-row justify="center" align-content="center">
+            <v-img
+              class="ring-4 rounded-full ring-gray-600 text-center sample_box2_3"
+              :src="profile.user.image.url"
+              max-height="250px"
+              max-width="250px"
+            />
+          </v-row>
+        </div>
+      </v-card>
+      <v-card color="brown lighten-5 text-center" outlined>
+        <div
+          class="pa-3 text-4xl font-bold border-dotted border-b-2 border-gray-400"
         >
-          <v-img
-            class="ring-4 rounded-full ring-gray-600 text-center sample_box2_3"
-            :src="profile.user.image.url"
-            max-height="250px"
-            max-width="250px"
-          />
-        </v-row>
-      </div>
-    </v-card>
-    <v-card
-      color="brown lighten-5 text-center"
-      outlined
-    >
-      <div
-        class="pa-3 text-4xl font-bold border-dotted	border-b-2 border-gray-400"
-      >
-        <span class="name-text">{{ profile.user.name }}</span>さん
-      </div>
-    </v-card>
-  </div>
+          <span class="name-text">{{ profile.user.name }}</span
+          >さん
+        </div>
+      </v-card>
+    </div>
+  </v-hover>
 </template>
 
 <script>
@@ -39,7 +35,7 @@ import moment from "moment";
 
 export default {
   filters: {
-    moment: function(date) {
+    moment: function (date) {
       return moment(date).format("YYYY/MM/DD");
     },
   },
@@ -56,7 +52,7 @@ export default {
   },
   methods: {
     openProfileShowPage(profile) {
-      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});;
+      this.$router.push(`/profiles/${profile.public_uid}`).catch((err) => {});
     },
   },
 };
@@ -70,5 +66,13 @@ export default {
   box-shadow: 0 0 0 8px #ffc6c6; /*背景色外側*/
   border: 2px dashed #ffffff; /*線*/
   color: #000000; /*文字色*/
+}
+
+div {
+  transition: transform 0.3s ease-in-out;
+}
+
+div:not(.on-hover) {
+  transform: scale(0.95);
 }
 </style>

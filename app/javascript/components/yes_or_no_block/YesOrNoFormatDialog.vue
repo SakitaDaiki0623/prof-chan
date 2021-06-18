@@ -7,10 +7,7 @@
     @input="$emit('input', $event.target.isShownYesOrNoFormatDialog)"
   >
     <v-card :color="yesOrNoBlockColor">
-      <v-row
-        justify="end"
-        class="mr-2 mt-2"
-      >
+      <v-row justify="end" class="mr-2 mt-2">
         <v-btn
           :color="yesOrNoBlockColor"
           @click="hundleCloseYesOrNoFormatDialog"
@@ -28,10 +25,7 @@
         color="orange lighten-4"
       >
         <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-btn
               id="input-yes-or-no-title-button"
               type="submit"
@@ -43,16 +37,11 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left>
-                mdi-plus
-              </v-icon>タイトルをランダムに入力
+              <v-icon left> mdi-plus </v-icon>ランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-btn
               id="add-yes-or-no-item-button"
               type="submit"
@@ -65,9 +54,7 @@
               :disabled="yesOrNoItemNum >= 3"
               @click="addYesOrNoItemNum"
             >
-              <v-icon left>
-                mdi-plus
-              </v-icon>
+              <v-icon left> mdi-plus </v-icon>
               質問と答えを追加する
             </v-btn>
             <v-btn
@@ -82,18 +69,13 @@
               :disabled="yesOrNoItemNum <= 1"
               @click="deleteYesOrNoItemNum"
             >
-              <v-icon left>
-                mdi-minus
-              </v-icon>
+              <v-icon left> mdi-minus </v-icon>
               質問と答えを減らす
             </v-btn>
           </v-col>
         </v-row>
 
-        <ValidationObserver
-          ref="observer"
-          v-slot="{ invalid }"
-        >
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
           <form
             @submit.prevent="
               hundleCreateYesOrNoBlock(
@@ -105,10 +87,9 @@
             "
           >
             <div>
-              <label
-                class="form-label-text-block"
-                for="yes_or_no_block_title"
-              >タイトル</label>
+              <label class="form-label-text-block" for="yes_or_no_block_title"
+                >タイトル</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -120,8 +101,8 @@
                   class="input-form-yes-or-no-block"
                   name="yes_or_no_block[yes_or_no_block_title]"
                   type="text"
-                >
-                <span class="red--text">{{ errors[0] }}</span>
+                />
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
 
@@ -147,8 +128,15 @@
               :answer-name-for-validation="answerNameForValidation3"
             />
 
-            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
-              ※Slackへの投稿は1日に1回のみです。
+            <div v-if="isProviderSlack && notSharedYet">
+              <v-checkbox
+                v-model="check"
+                label="slackに投稿しますか?"
+                :color="yesOrNoBlockColor"
+              ></v-checkbox>
+              <div class="text-gray-600 text-sm">
+                ※Slackへの投稿は1日に1回のみです。
+              </div>
             </div>
 
             <div class="text-center pa-10">
@@ -162,9 +150,7 @@
                 :color="yesOrNoBlockColor"
                 class="white--text"
               >
-                <v-icon left>
-                  mdi-plus
-                </v-icon>
+                <v-icon left> mdi-plus </v-icon>
                 Yes or No ブロックを作成！
               </v-btn>
             </div>
@@ -270,10 +256,21 @@ export default {
       answerNameForValidation2: "2番目の答え",
       yesOrNoNameForValidation3: "3番目の質問",
       answerNameForValidation3: "3番目の答え",
+
+      check: false,
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isProviderSlack() {
+      return this.currentUser.provider == "slack" ? true : false;
+    },
+    notSharedYet() {
+      return this.currentUser.yes_or_no_share_right ==
+        "yes_or_no_not_shared_yet"
+        ? true
+        : false;
+    },
   },
   methods: {
     ...mapActions({
@@ -310,21 +307,16 @@ export default {
         yes_or_no_item_answer3: yesOrNoItem3.answer,
       };
       this.createYesOrNoBlock(params);
+      if (this.isProviderSlack && this.check && this.notSharedYet) {
+        this.postToSlackAfterCreate(params);
+        this.updateCurrentUserYesOrNoShareRight();
+      }
       this.hundleCloseYesOrNoFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "Yes or No ブロックを作成したよ！",
         color: this.yesOrNoBlockColor,
       });
-      if (
-        this.currentUser.provider == "slack" &&
-        this.currentUser.yes_or_no_share_right == "yes_or_no_not_shared_yet"
-      ) {
-        if (confirm("slackに通知しますか?")) {
-          this.postToSlackAfterCreate(params);
-          this.updateCurrentUserYesOrNoShareRight();
-        }
-      }
     },
     async postToSlackAfterCreate(params) {
       const res = await axios.post(
@@ -334,6 +326,7 @@ export default {
     },
     hundleCloseYesOrNoFormatDialog() {
       this.$emit("close-yes-or-no-format-dialog");
+      this.check = false;
       this.clearYesOrNoBlock();
     },
 
@@ -413,6 +406,7 @@ export default {
 .note-box {
   position: relative;
   background-color: #ffe0b2;
+  min-height: 670px;
 }
 .note-box::before {
   content: "";

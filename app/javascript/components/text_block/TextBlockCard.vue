@@ -1,14 +1,7 @@
 <template>
   <div>
-    <v-card
-      class="rounded-2xl pa-5 note-box"
-      outlined
-      color="cyan lighten-4"
-    >
-      <v-row
-        v-if="isThisEditPage"
-        justify="end"
-      >
+    <v-card class="rounded-2xl pa-5 note-box" outlined color="cyan lighten-4">
+      <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-text-block-button-' + textBlock.id"
           tile
@@ -30,19 +23,12 @@
       </v-row>
       <v-row v-else>
         <v-spacer />
-        <text-block-like-button
-          :text-block-id="textBlock.id"
-        />
+        <text-block-like-button :text-block-id="textBlock.id" v-if="isThisNotTopPage" />
       </v-row>
-      <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+      <p class="text-2xl font-bold px-3 pt-3">
         {{ textBlock.title }}
       </p>
-      <v-card
-        class="pa-3 rounded-lg"
-        outlined
-        color="white"
-        min-height="200px"
-      >
+      <v-card class="pa-3 rounded-lg" outlined color="white" min-height="200px">
         {{ textBlock.text }}
       </v-card>
     </v-card>
@@ -89,6 +75,11 @@ export default {
       isShownEditTextFormatDialog: false,
       editTextBlock: {},
     };
+  },
+  computed: {
+    isThisNotTopPage() {
+      return this.$route.path == `/top` ? false : true;
+    },
   },
   methods: {
     openEditTextFormatDialog(textBlock) {

@@ -57,14 +57,6 @@ module Api
         ).to_json
       end
 
-      def current_user_having
-        @ranking_blocks = current_user.profile_block.ranking_blocks
-        render json: ActiveModel::Serializer::CollectionSerializer.new(
-          @ranking_blocks,
-          serializer: RankingBlockSerializer
-        ).to_json
-      end
-
       def post_to_slack_after_create
         @ranking_block = current_user.profile_block.ranking_blocks.build(ranking_block_params)
         if @ranking_block.valid?
@@ -73,6 +65,12 @@ module Api
         else
           render json: @ranking_block.errors, status: :bad_request
         end
+      end
+
+      def recommended_topic_block
+        @ranking_block =  current_user.profile_block.ranking_blocks.popular_blocks[0]
+        return if @ranking_block.nil? || @ranking_block.users.blank?
+        render json: @ranking_block
       end
 
       private

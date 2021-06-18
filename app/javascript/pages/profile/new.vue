@@ -1,82 +1,43 @@
 <template>
-  <div class="text-gray-600 pa-10">
-    <v-row
-      align-content="center"
-      class="lg:px-32 xl:px72"
-    >
-      <v-col
-        cols="12"
-        md="5"
-        lg="4"
-        align-self="end"
-      >
-        <div
-          class="text-2xl font-bold bg-brown-100 pa-5 border-2 border-dotted border-brown-400 rounded-full text-center"
-        >
-          基本情報を入力してね！
-        </div>
-        <img
-          src="../../images/prof_normal.png"
-          class="mx-auto md:max-w-sm max-w-sm"
-        >
-      </v-col>
-      <v-col
-        cols="12"
-        sm="12"
-        md="7"
-        lg="8"
-      >
+  <div class="text-gray-600 md:pa-10">
+    <v-row align-content="center" justify="center" class="lg:px-32 xl:px72">
+      <v-col cols="12" sm="12" md="6">
         <!-- Basic Info Card -->
-        <v-card
-          class="rounded-2xl"
-          color="brown lighten-4"
-          outlined
-        >
+        <v-card class="rounded-2xl" color="brown lighten-4" outlined>
           <div class="pa-10">
             <!-- FORM -->
-            <div
-              id="profile-basic-form"
-              class="pa-6"
-            >
-              <div class="top-sub-title text-2xl text-center">
-                基本情報
-              </div>
-              <ValidationObserver
-                ref="observer"
-                v-slot="{ invalid }"
-              >
+            <div id="profile-basic-form" class="pa-6">
+              <div class="top-sub-title text-2xl text-center">基本情報</div>
+              <ValidationObserver ref="observer" v-slot="{ invalid }">
                 <form @submit.prevent="hundleSubmitBasicProfileInfo(profile)">
                   <div>
-                    <label
-                      class="form-label-text-block"
-                      for="profile_gender"
-                    >性別</label>
+                    <label class="form-label-text-block" for="profile_gender"
+                      >性別</label
+                    >
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="性別"
                       rules="select_required"
                     >
-                      <select
+                      <v-select
                         id="profile_gender"
                         v-model="profile.gender"
                         class="input-form-basic-block"
                         name="profile[gender]"
-                      >
-                        <option value="male">
-                          男性
-                        </option>
-                        <option value="female">
-                          女性
-                        </option>
-                      </select>
-                      <span class="red--text">{{ errors[0] }}</span>
+                        :items="genders"
+                        item-text="text"
+                        item-value="text"
+                        color="brown lighten-3"
+                        persistent-hint
+                        single-line
+                      />
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
-                    <label
-                      class="form-label-text-block"
-                      for="profile_height"
-                    >身長</label>
+                    <label class="form-label-text-block" for="profile_height"
+                      >身長(cm)</label
+                    >
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="身長"
@@ -88,74 +49,66 @@
                         class="input-form-basic-block"
                         type="number"
                         name="profile[height]"
-                      >
-                      <span class="red--text">{{ errors[0] }}</span>
+                      />
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
                     <label
                       class="form-label-text-block"
                       for="profile_blood_type"
-                    >血液型</label>
+                      >血液型</label
+                    >
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="血液型"
                       rules="select_required"
                     >
-                      <select
+                      <v-select
                         id="profile_blood_type"
                         v-model="profile.blood_type"
                         class="input-form-basic-block"
                         name="profile[blood_type]"
-                      >
-                        <option value="A">
-                          A型
-                        </option>
-                        <option value="B">
-                          B型
-                        </option>
-                        <option value="AB">
-                          AB型
-                        </option>
-                        <option value="O">
-                          O型
-                        </option>
-                      </select>
-                      <span class="red--text">{{ errors[0] }}</span>
+                        :items="bloodTypes"
+                        item-text="bloodTypes"
+                        item-value="bloodTypes"
+                        color="brown lighten-3"
+                        persistent-hint
+                        single-line
+                      />
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
                     <label
                       class="form-label-text-block"
                       for="profile_prefecture_id"
-                    >出身地</label>
+                      >出身地</label
+                    >
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="出身地"
                       rules="select_required"
                     >
-                      <select
+                      <v-select
                         id="profile_prefecture_id"
                         v-model="profile.prefecture_id"
                         name="profile[prefecture_id]"
                         class="input-form-basic-block"
-                      >
-                        <option
-                          v-for="prefecture in prefectures"
-                          :key="prefecture.value"
-                          :value="prefecture.value"
-                        >
-                          {{ prefecture.text }}
-                        </option>
-                      </select>
-                      <span class="red--text">{{ errors[0] }}</span>
+                        :items="prefectures"
+                        item-text="text"
+                        item-value="text"
+                        color="brown lighten-3"
+                        persistent-hint
+                        single-line
+                      />
+                      <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
                   <div>
-                    <label
-                      class="form-label-text-block"
-                      for="profile_birthday"
-                    >生年月日</label>
+                    <label class="form-label-text-block" for="profile_birthday"
+                      >生年月日</label
+                    >
                     <v-menu
                       ref="menu"
                       v-model="birthMenu"
@@ -168,7 +121,7 @@
                         <ValidationProvider
                           v-slot="{ errors }"
                           name="生年月日"
-                          rules="input_required"
+                          rules="input_required|available_age"
                         >
                           <input
                             id="profile_birthday"
@@ -176,22 +129,33 @@
                             type="date"
                             class="input-form-basic-block"
                             name="profile[birthday]"
+                          />
+                          <v-btn
                             v-bind="attrs"
                             v-on="on"
+                            tile
+                            small
+                            color="brown"
+                            class="white--text"
                           >
-                          <span class="red--text">{{ errors[0] }}</span>
+                            モーダルで入力する
+                          </v-btn>
+                          <span class="red--text text-sm">{{ errors[0] }}</span>
                         </ValidationProvider>
                       </template>
                       <v-date-picker
                         ref="picker"
                         v-model="profile.birthday"
-                        color="brown darken-3"
+                        color="brown darken-2"
                         header-color="brown darken-2"
                         locale="ja-jp"
                         :day-format="(date) => new Date(date).getDate()"
-                        :max="new Date().toISOString().substr(0, 10)"
-                        min="1950-01-01"
+                        :max="maxDate"
+                        :min="minDate"
                         @change="saveBirthDate"
+                        year-icon="mdi-calendar-blank"
+                        prev-icon="mdi-skip-previous"
+                        next-icon="mdi-skip-next"
                       />
                     </v-menu>
                   </div>
@@ -199,7 +163,8 @@
                     <label
                       class="form-label-text-block"
                       for="profile_day_of_joinning"
-                    >入社日</label>
+                      >入社日</label
+                    >
                     <v-menu
                       ref="menu"
                       v-model="joinedMenu"
@@ -219,21 +184,32 @@
                             v-model="profile.day_of_joinning"
                             type="date"
                             name="profile[day_of_joinning]"
-                            v-bind="attrs"
                             class="input-form-basic-block"
+                          />
+                          <v-btn
+                            v-bind="attrs"
                             v-on="on"
+                            tile
+                            small
+                            color="brown"
+                            class="white--text"
                           >
-                          <span class="red--text">{{ errors[0] }}</span>
+                            モーダルで入力する
+                          </v-btn>
+                          <span class="red--text text-sm">{{ errors[0] }}</span>
                         </ValidationProvider>
                       </template>
                       <v-date-picker
                         ref="picker"
                         v-model="profile.day_of_joinning"
-                        color="brown darken-3"
+                        color="brown darken-2"
                         header-color="brown darken-2"
                         locale="ja-jp"
                         :day-format="(date) => new Date(date).getDate()"
                         @change="saveJoinedDate"
+                        year-icon="mdi-calendar-blank"
+                        prev-icon="mdi-skip-previous"
+                        next-icon="mdi-skip-next"
                       />
                     </v-menu>
                   </div>
@@ -255,12 +231,14 @@
               </ValidationObserver>
             </div>
             <!-- /FORM -->
-          </div>
-        </v-card><!-- Basic Info Card -->
+          </div> </v-card
+        ><!-- Basic Info Card -->
       </v-col>
     </v-row>
     <CreateProfileSuccessModal
-      :is-shown-create-profile-success-dialog="isShownCreateProfileSuccessDialog"
+      :is-shown-create-profile-success-dialog="
+        isShownCreateProfileSuccessDialog
+      "
     />
   </div>
 </template>
@@ -287,13 +265,19 @@ export default {
         gender: "",
         blood_type: "",
         prefecture_id: "",
-        birthday: "",
+        birthday: "2000",
         day_of_joinning: "",
       },
       date: null,
       birthMenu: false,
       joinedMenu: false,
       isShownCreateProfileSuccessDialog: false,
+
+      genders: [
+        { text: "男性", value: "male" },
+        { text: "女性", value: "female" },
+      ],
+      bloodTypes: ["A", "B", "AB", "O"],
     };
   },
   computed: {
@@ -302,6 +286,16 @@ export default {
 
     user() {
       return this.currentUser;
+    },
+    maxDate() {
+      let dt = new Date();
+      dt.setFullYear(dt.getFullYear() - 18);
+      return dt.toISOString().substr(0, 10);
+    },
+    minDate() {
+      let dt = new Date();
+      dt.setFullYear(dt.getFullYear() - 70);
+      return dt.toISOString().substr(0, 10);
     },
   },
   watch: {
@@ -318,15 +312,18 @@ export default {
   methods: {
     ...mapActions("users", ["fetchCurrentUser"]),
     hundleSubmitBasicProfileInfo(profile) {
-      if (
-        profile.height == "" ||
-        profile.gender == "" ||
-        profile.blood_type == "" ||
-        profile.prefecture_id == "" ||
-        profile.birthday == "" ||
-        profile.day_of_joinning == ""
-      )
-        return;
+      // genderの変換
+      if (profile.gender == "男性") {
+        profile.gender = "male";
+      } else {
+        profile.gender = "female";
+      }
+
+      // prefecture_idの変換
+      const selectedPrefecture = this.prefectures.find(
+        (prefecture) => prefecture.text == profile.prefecture_id
+      );
+      profile.prefecture_id = selectedPrefecture.value;
       this.createBasicProfile(profile);
       this.openDialog();
     },

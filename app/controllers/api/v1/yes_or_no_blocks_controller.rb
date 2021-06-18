@@ -16,7 +16,7 @@ module Api
       def create
         @yes_or_no_block_item_register = YesOrNoBlockItemRegister.new(set_params)
         if @yes_or_no_block_item_register.save_block_and_items
-          @yes_or_no_block = YesOrNoBlock.last # TODO: リファクタリング YesOrNoBlock.last => より確実に作成されたブロックを取得
+          @yes_or_no_block = current_user.profile_block.yes_or_no_blocks.last
           render json: @yes_or_no_block
         else
           render json: @yes_or_no_block_item_register.errors, status: :bad_request
@@ -58,14 +58,6 @@ module Api
         ).to_json
       end
 
-      def current_user_having
-        @yes_or_no_blocks = current_user.profile_block.yes_or_no_blocks
-        render json: ActiveModel::Serializer::CollectionSerializer.new(
-          @yes_or_no_blocks,
-          serializer: YesOrNoBlockSerializer
-        ).to_json
-      end
-
       def post_to_slack_after_create
         @yes_or_no_block_item_register = YesOrNoBlockItemRegister.new(set_params)
         if @yes_or_no_block_item_register.valid?
@@ -75,6 +67,12 @@ module Api
         else
           render json: @yes_or_no_block_item_register.errors, status: :bad_request
         end
+      end
+
+      def recommended_topic_block
+        @yes_or_no_block =  current_user.profile_block.yes_or_no_blocks.popular_blocks[0]
+        return if @yes_or_no_block.nil? || @yes_or_no_block.users.blank?
+        render json: @yes_or_no_block
       end
 
       private

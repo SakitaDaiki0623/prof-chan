@@ -24,7 +24,7 @@ class QuestionBlockItemRegister
   validates :question_item_answer3,                         length: { maximum: 50 }
   validates :profile_block_id, presence: true
 
-  def save
+  def save_block_and_items
     return false if invalid?
 
     ActiveRecord::Base.transaction do

@@ -5,10 +5,7 @@
       outlined
       color="light-green lighten-4"
     >
-      <v-row
-        v-if="isThisEditPage"
-        justify="end"
-      >
+      <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-ranking-block-button-' + rankingBlock.id"
           tile
@@ -32,40 +29,23 @@
         <v-spacer />
         <ranking-block-like-button
           :ranking-block-id="rankingBlock.id"
+          v-if="isThisNotTopPage"
         />
       </v-row>
       <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
         {{ rankingBlock.title }}
       </p>
-      <v-card
-        class="pa-2 ma-3 rounded-full"
-        outlined
-        color="white"
-      >
-        <label
-          for="1st place"
-          class="form-label-text-block mr-5"
-        >1st</label>{{ rankingBlock.first_place }}
+      <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
+        <label for="1st place" class="form-label-text-block mr-5">1st</label
+        >{{ rankingBlock.first_place }}
       </v-card>
-      <v-card
-        class="pa-2 ma-3 rounded-full"
-        outlined
-        color="white"
-      >
-        <label
-          for="2nd place"
-          class="form-label-text-block mr-5"
-        >2nd</label>{{ rankingBlock.second_place }}
+      <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
+        <label for="2nd place" class="form-label-text-block mr-5">2nd</label
+        >{{ rankingBlock.second_place }}
       </v-card>
-      <v-card
-        class="pa-2 ma-3 rounded-full"
-        outlined
-        color="white"
-      >
-        <label
-          for="3rd place"
-          class="form-label-text-block mr-5"
-        >3rd</label>{{ rankingBlock.third_place }}
+      <v-card class="pa-2 ma-3 rounded-full" outlined color="white">
+        <label for="3rd place" class="form-label-text-block mr-5">3rd</label
+        >{{ rankingBlock.third_place }}
       </v-card>
     </v-card>
     <EditRankingFormatDialog
@@ -111,6 +91,11 @@ export default {
       isShownEditRankingFormatDialog: false,
       editRankingBlock: {},
     };
+  },
+  computed: {
+    isThisNotTopPage() {
+      return this.$route.path == `/top` ? false : true;
+    },
   },
   methods: {
     openEditRankingFormatDialog(rankingBlock) {

@@ -26,7 +26,7 @@
                 name="yes_or_no_item[yes_or_no_item_content]"
                 type="text"
               >
-              <span class="red--text">{{ errors[0] }}</span>
+              <span class="red--text text-sm">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
           <v-col

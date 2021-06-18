@@ -5,7 +5,7 @@
     color="brown lighten-3"
   >
     <div class="term-font">
-      <small class="text-white"> &copy; {{ copyText }}</small>
+      <small class="text-white text-sm leading-10"> &copy; {{ copyText }}</small>
       <v-btn
         dense
         text

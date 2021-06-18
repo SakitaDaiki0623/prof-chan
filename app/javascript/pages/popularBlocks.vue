@@ -23,7 +23,7 @@
         <!-- Favorite ブロック -->
         <div
           v-if="favoritePopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-400 mb-16"
+          class="pa-10 sm:px-16 bg-brown-400 mb-16"
         >
           <v-row>
             <v-col
@@ -54,11 +54,11 @@
               class="border-2 border-white border-dashed"
             >
               <div class="bg-white pa-1 inline-block">
-                {{ favoriteBlock.owing_user.name }}
+                {{ favoriteBlock.owing_user_name }}
               </div>
               <v-img
                 max-width="50px"
-                :src="favoriteBlock.owing_user.image.url"
+                :src="favoriteBlock.owing_user_image.url"
                 class="inline"
               />
               <FavoriteBlockCard :favorite-block="favoriteBlock" />
@@ -70,7 +70,7 @@
         <!-- クエスチョンブロック -->
         <div
           v-if="questionPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-300 mb-16"
+          class="pa-10 sm:px-16 bg-brown-300 mb-16"
         >
           <v-row>
             <v-col
@@ -102,11 +102,11 @@
               class="border-2 border-white border-dashed"
             >
               <div class="bg-white pa-1 inline-block">
-                {{ questionBlock.owing_user.name }}
+                {{ questionBlock.owing_user_name }}
               </div>
               <v-img
                 max-width="50px"
-                :src="questionBlock.owing_user.image.url"
+                :src="questionBlock.owing_user_image.url"
                 class="inline"
               />
               <QuestionBlockCard :question-block="questionBlock" />
@@ -118,7 +118,7 @@
         <!-- ランキングブロック -->
         <div
           v-if="rankingPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-400 mb-16"
+          class="pa-10 sm:px-16 bg-brown-400 mb-16"
         >
           <v-row>
             <v-col
@@ -150,11 +150,11 @@
               class="border-2 border-white border-dashed"
             >
               <div class="bg-white pa-1 inline-block">
-                {{ rankingBlock.owing_user.name }}
+                {{ rankingBlock.owing_user_name }}
               </div>
               <v-img
                 max-width="50px"
-                :src="rankingBlock.owing_user.image.url"
+                :src="rankingBlock.owing_user_image.url"
                 class="inline"
               />
               <RankingBlockCard :ranking-block="rankingBlock" />
@@ -166,7 +166,7 @@
         <!-- Yes or No ブロック -->
         <div
           v-if="yesOrNoPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-300 mb-16"
+          class="pa-10 sm:px-16 bg-brown-300 mb-16"
         >
           <v-row>
             <v-col
@@ -198,11 +198,11 @@
               class="border-2 border-white border-dashed"
             >
               <div class="bg-white pa-1 inline-block">
-                {{ yesOrNoBlock.owing_user.name }}
+                {{ yesOrNoBlock.owing_user_name }}
               </div>
               <v-img
                 max-width="50px"
-                :src="yesOrNoBlock.owing_user.image.url"
+                :src="yesOrNoBlock.owing_user_image.url"
                 class="inline"
               />
               <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock" />
@@ -214,7 +214,7 @@
         <!-- テキストブロック -->
         <div
           v-if="textPopularBlocks.length !== 0"
-          class="py-10 sm:px-16 bg-brown-400 mb-16"
+          class="pa-10 sm:px-16 bg-brown-400 mb-16"
         >
           <v-row>
             <v-col
@@ -246,11 +246,11 @@
               class="border-2 border-white border-dashed"
             >
               <div class="bg-white pa-1 inline-block">
-                {{ textBlock.owing_user.name }}
+                {{ textBlock.owing_user_name }}
               </div>
               <v-img
                 max-width="50px"
-                :src="textBlock.owing_user.image.url"
+                :src="textBlock.owing_user_image.url"
                 class="inline"
               />
               <TextBlockCard :text-block="textBlock" />

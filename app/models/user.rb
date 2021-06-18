@@ -4,7 +4,7 @@ class User < ApplicationRecord
   after_create do
     create_profile_block if profile_block.blank?
   end
-  after_initialize :set_default_team_value
+  before_save :set_default_team_value, unless: proc { |u| u.provider == 'slack' }
 
   # devise
   devise :database_authenticatable, :registerable,
@@ -63,8 +63,6 @@ class User < ApplicationRecord
   end
 
   def set_default_team_value
-    return if provider == 'slack'
-
     default_team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
       team.name = 'normal login',
                   team.workspace_id     = 'A123B123C123',
@@ -75,7 +73,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth, user_info, hash_token, channel)
-    user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    user = find_or_initialize_by(provider: auth.provider, uid: auth.info.authed_user.id)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
     user.email = user_info.dig('user', 'email')

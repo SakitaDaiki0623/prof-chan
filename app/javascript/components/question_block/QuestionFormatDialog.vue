@@ -7,10 +7,7 @@
     @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
   >
     <v-card :color="questionBlockColor">
-      <v-row
-        justify="end"
-        class="mr-2 mt-2"
-      >
+      <v-row justify="end" class="mr-2 mt-2">
         <v-btn
           :color="questionBlockColor"
           @click="hundleCloseQuestioniFormatDialog"
@@ -22,15 +19,9 @@
         クエスチョンブロック
       </p>
 
-      <div
-        id="question-block-form"
-        class="pa-10 note-box"
-      >
+      <div id="question-block-form" class="pa-10 note-box">
         <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-btn
               id="input-yes-or-no-title-button"
               type="submit"
@@ -42,16 +33,11 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left>
-                mdi-plus
-              </v-icon>タイトルをランダムに入力
+              <v-icon left> mdi-plus </v-icon>ランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-btn
               id="add-question-item-button"
               type="submit"
@@ -64,9 +50,7 @@
               :disabled="questionItemNum >= 3"
               @click="addQuestionItemNum"
             >
-              <v-icon left>
-                mdi-plus
-              </v-icon>
+              <v-icon left> mdi-plus </v-icon>
               質問と答えを追加する
             </v-btn>
             <v-btn
@@ -81,17 +65,12 @@
               :disabled="questionItemNum <= 1"
               @click="deleteQuestionItemNum"
             >
-              <v-icon left>
-                mdi-minus
-              </v-icon>
+              <v-icon left> mdi-minus </v-icon>
               質問と答えを減らす
             </v-btn>
           </v-col>
         </v-row>
-        <ValidationObserver
-          ref="observer"
-          v-slot="{ invalid }"
-        >
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
           <form
             @submit.prevent="
               hundleCreateQuestionBlock(
@@ -103,10 +82,9 @@
             "
           >
             <div>
-              <label
-                class="form-label-text-block"
-                for="question_block_title"
-              >タイトル</label>
+              <label class="form-label-text-block" for="question_block_title"
+                >タイトル</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -118,8 +96,8 @@
                   class="input-form-question-block"
                   name="question_block[question_block_title]"
                   type="text"
-                >
-                <span class="red--text">{{ errors[0] }}</span>
+                />
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
 
@@ -145,8 +123,15 @@
               :answer-name-for-validation="answerNameForValidation3"
             />
 
-            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
-              ※Slackへの投稿は1日に1回のみです。
+            <div v-if="isProviderSlack && notSharedYet">
+              <v-checkbox
+                v-model="check"
+                label="slackに投稿しますか?"
+                :color="questionBlockColor"
+              ></v-checkbox>
+              <div class="text-gray-600 text-sm">
+                ※Slackへの投稿は1日に1回のみです。
+              </div>
             </div>
 
             <div class="text-center pa-10">
@@ -160,9 +145,7 @@
                 :color="questionBlockColor"
                 class="white--text"
               >
-                <v-icon left>
-                  mdi-plus
-                </v-icon>
+                <v-icon left> mdi-plus </v-icon>
                 クエスチョンブロックを作成！
               </v-btn>
             </div>
@@ -301,15 +284,26 @@ export default {
       answerNameForValidation2: "2番目の答え",
       questionNameForValidation3: "3番目の質問",
       answerNameForValidation3: "3番目の答え",
+
+      check: false,
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isProviderSlack() {
+      return this.currentUser.provider == "slack" ? true : false;
+    },
+    notSharedYet() {
+      return this.currentUser.question_share_right == "question_not_shared_yet"
+        ? true
+        : false;
+    },
   },
   methods: {
     ...mapActions({
       createQuestionBlock: "questionBlocks/createQuestionBlock",
-      updateCurrentUserQuestionShareRight: "users/updateCurrentUserQuestionShareRight",
+      updateCurrentUserQuestionShareRight:
+        "users/updateCurrentUserQuestionShareRight",
     }),
     addQuestionItemNum() {
       this.questionItemNum++;
@@ -340,22 +334,16 @@ export default {
         question_item_answer3: questionItem3.answer,
       };
       this.createQuestionBlock(params);
+      if (this.isProviderSlack && this.check && this.notSharedYet) {
+        await this.postToSlackAfterCreate(params);
+        this.updateCurrentUserQuestionShareRight();
+      }
       this.hundleCloseQuestioniFormatDialog();
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
         color: this.questionBlockColor,
       });
-
-      if (
-        this.currentUser.provider == "slack" &&
-        this.currentUser.question_share_right == "question_not_shared_yet"
-      ) {
-        if (confirm("slackに通知しますか?")) {
-          await this.postToSlackAfterCreate(params);
-          this.updateCurrentUserQuestionShareRight();
-        }
-      }
     },
     async postToSlackAfterCreate(params) {
       const res = await axios.post(
@@ -365,6 +353,7 @@ export default {
     },
     hundleCloseQuestioniFormatDialog() {
       this.$emit("close-question-format-dialog");
+      this.check = false;
       this.clearQuestionBlock();
     },
 
@@ -390,50 +379,62 @@ export default {
       this.questionBlock.title = selectedRandomTitle.title;
 
       if (this.questionItemNum == 1) {
-        const randomItemContentIndexForItem1 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem1.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem1,
-          1
-        )[0];
+        if (!this.questionItem1.answer) {
+          const randomItemContentIndexForItem1 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem1.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem1,
+            1
+          )[0];
+        }
       } else if (this.questionItemNum == 2) {
-        const randomItemContentIndexForItem1 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem1.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem1,
-          1
-        )[0];
-        const randomItemContentIndexForItem2 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem2.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem2,
-          1
-        )[0];
+        if (!this.questionItem1.answer) {
+          const randomItemContentIndexForItem1 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem1.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem1,
+            1
+          )[0];
+        }
+        if (!this.questionItem2.answer) {
+          const randomItemContentIndexForItem2 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem2.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem2,
+            1
+          )[0];
+        }
       } else if (this.questionItemNum == 3) {
-        const randomItemContentIndexForItem1 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem1.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem1,
-          1
-        )[0];
-        const randomItemContentIndexForItem2 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem2.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem2,
-          1
-        )[0];
-        const randomItemContentIndexForItem3 = Math.floor(
-          Math.random() * selectedRandomTitle.contents.length
-        );
-        this.questionItem3.content = selectedRandomTitle.contents.splice(
-          randomItemContentIndexForItem3,
-          1
-        )[0];
+        if (!this.questionItem1.answer) {
+          const randomItemContentIndexForItem1 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem1.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem1,
+            1
+          )[0];
+        }
+        if (!this.questionItem2.answer) {
+          const randomItemContentIndexForItem2 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem2.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem2,
+            1
+          )[0];
+        }
+        if (!this.questionItem3.answer) {
+          const randomItemContentIndexForItem3 = Math.floor(
+            Math.random() * selectedRandomTitle.contents.length
+          );
+          this.questionItem3.content = selectedRandomTitle.contents.splice(
+            randomItemContentIndexForItem3,
+            1
+          )[0];
+        }
       }
     },
   },
@@ -447,5 +448,6 @@ export default {
     radial-gradient(#ffffff 20%, transparent 20%);
   background-size: 40px 40px;
   background-position: 0 0, 20px 20px;
+  min-height: 600px;
 }
 </style>

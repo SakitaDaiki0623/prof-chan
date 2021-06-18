@@ -3,7 +3,7 @@
     <div v-if="isLiked">
       <v-btn
         icon
-        color="brown lighten-1"
+        color="yellow lighten-1"
         @click="deleteLike()"
       >
         <v-icon>mdi-bookmark</v-icon>

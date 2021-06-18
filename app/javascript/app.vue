@@ -1,9 +1,6 @@
 <!-- app/javascript/app.vue -->
 <template>
-  <v-app
-    id="app"
-    class="default kawaii"
-  >
+  <v-app id="app" class="default kawaii">
     <TheHeader />
     <Loading v-show="loading" />
     <v-main v-show="!loading">
@@ -55,6 +52,7 @@ export default {
 .default {
   font-family: "prof-font", "Hannotate SC Regular", "sans-serif";
   color: #381c1c;
+  font-size: 1.5rem;
 }
 .v-main {
   background-color: #fffaf0;

@@ -7,14 +7,8 @@
   >
     <v-card :color="textBlockColor">
       <div>
-        <v-row
-          justify="end"
-          class="mr-2 mt-2"
-        >
-          <v-btn
-            :color="textBlockColor"
-            @click="hundleCloseTextFormatDialog"
-          >
+        <v-row justify="end" class="mr-2 mt-2">
+          <v-btn :color="textBlockColor" @click="hundleCloseTextFormatDialog">
             <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
@@ -22,10 +16,7 @@
           テキストブロック作成
         </p>
       </div>
-      <div
-        id="text-block-form"
-        class="pa-10 note-box"
-      >
+      <div id="text-block-form" class="pa-10 note-box">
         <v-btn
           id="input-text-title-button"
           type="submit"
@@ -35,22 +26,16 @@
           tile
           color="cyan lighten-2"
           class="white--text py-2"
-          @click="inputTitleRandomly"
+          @click="openTextFormatSelectDialog"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>テキストフォーマットをランダムに入力
+          <v-icon left> mdi-plus </v-icon>テキストフォーマットを選択
         </v-btn>
-        <ValidationObserver
-          ref="observer"
-          v-slot="{ invalid }"
-        >
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
           <form @submit.prevent="hundleCreateTextBlock(textBlock)">
             <div>
-              <label
-                class="form-label-text-block"
-                for="text_block_title"
-              >タイトル</label>
+              <label class="form-label-text-block" for="text_block_title"
+                >タイトル</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -62,15 +47,14 @@
                   class="input-form-text-block"
                   name="text_block[text_block_title]"
                   type="text"
-                >
-                <span class="red--text">{{ errors[0] }}</span>
+                />
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
-              <label
-                class="form-label-text-block"
-                for="text_block_text"
-              >テキスト</label>
+              <label class="form-label-text-block" for="text_block_text"
+                >テキスト</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="テキスト"
@@ -83,13 +67,21 @@
                   name="text_block[text_block_text]"
                   rows="7"
                 />
-                <span class="red--text">{{ errors[0] }}</span>
+                <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
 
-            <div class="mt-3 font-weight-bold text-gray-600 text-sm">
-              ※Slackへの投稿は1日に1回のみです。
+            <div v-if="isProviderSlack && notSharedYet">
+              <v-checkbox
+                v-model="check"
+                :color="textBlockColor"
+                label="slackに投稿しますか?"
+              ></v-checkbox>
+              <div class="text-gray-600 text-sm">
+                ※Slackへの投稿は1日に1回のみです。
+              </div>
             </div>
+
             <div class="text-center mt-3">
               <v-btn
                 id="creation_button"
@@ -108,6 +100,12 @@
         </ValidationObserver>
       </div>
     </v-card>
+    <TextFormatSelectDialog
+      :is-shown-text-format-select-dialog="isShownTextFormatSelectDialog"
+      :text-block-color="textBlockColor"
+      @close-text-format-select-dialog="closeTextFormatSelectDialog"
+      @set-title-and-text="setTitleAndText"
+    />
   </v-dialog>
 </template>
 
@@ -117,8 +115,12 @@ import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
 // components ----------
+import TextFormatSelectDialog from "./TextFormatSelectDialog";
 
 export default {
+  components: {
+    TextFormatSelectDialog,
+  },
   props: {
     isShownTextFormatDialog: {
       type: Boolean,
@@ -135,22 +137,20 @@ export default {
         title: "",
         text: "",
       },
-      randomTextTitles: [
-        {
-          title: "子供の時の私",
-          text:
-            "幼稚園の頃は【】子供でした。小学校では【】が印象に残ってます。中学では部活は【】に入りました。部活は【】だったなー。高校は【】って感じでした。高校の部活は【】でした。あのころはすごく【】ました。ああー【】だったなー",
-        },
-        {
-          title: "簡単な自己紹介",
-          text:
-            "私は【】年【】月【】日生まれの【】座だよ！性格はよく【】って言われます。1番の特技は【】で最近は【】にはまっています！私は芸能人でいうと【】と似ているかなと思う！",
-        },
-      ],
+      isShownTextFormatSelectDialog: false,
+      check: false,
     };
   },
   computed: {
     ...mapState("users", ["currentUser"]),
+    isProviderSlack() {
+      return this.currentUser.provider == "slack" ? true : false;
+    },
+    notSharedYet() {
+      return this.currentUser.text_share_right == "text_not_shared_yet"
+        ? true
+        : false;
+    },
   },
   methods: {
     ...mapActions({
@@ -158,14 +158,9 @@ export default {
     }),
     hundleCreateTextBlock(textBlock) {
       this.createTextBlock(textBlock);
-      if (
-        this.currentUser.provider == "slack" &&
-        this.currentUser.text_share_right == "text_not_shared_yet"
-      ) {
-        if (confirm("slackに通知しますか?")) {
-          this.postToSlackAfterCreate(textBlock);
-          this.updateCurrentUserTextShareRight();
-        }
+      if (this.isProviderSlack && this.check && this.notSharedYet) {
+        this.postToSlackAfterCreate(textBlock);
+        this.updateCurrentUserTextShareRight();
       }
       this.hundleCloseTextFormatDialog();
       this.$store.dispatch("flash/setFlash", {
@@ -187,6 +182,7 @@ export default {
     },
     hundleCloseTextFormatDialog() {
       this.$emit("close-text-format-dialog");
+      this.check = false;
       this.clearTextBlock();
     },
     clearTextBlock() {
@@ -196,13 +192,17 @@ export default {
         this.$refs.observer.reset();
       });
     },
-
-    inputTitleRandomly() {
-      const randomNum = Math.floor(
-        Math.random() * this.randomTextTitles.length
-      );
-      this.textBlock.title = this.randomTextTitles[randomNum].title;
-      this.textBlock.text = this.randomTextTitles[randomNum].text;
+    openTextFormatSelectDialog() {
+      this.$emit("close-text-format-dialog");
+      this.isShownTextFormatSelectDialog = true;
+    },
+    closeTextFormatSelectDialog() {
+      this.isShownTextFormatSelectDialog = false;
+      this.$emit("open-text-format-dialog");
+    },
+    setTitleAndText(titleAndText) {
+      this.textBlock.title = titleAndText.title;
+      this.textBlock.text = titleAndText.text;
     },
   },
 };

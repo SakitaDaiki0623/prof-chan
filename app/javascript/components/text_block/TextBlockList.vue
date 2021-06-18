@@ -108,6 +108,7 @@
       :text-block-color="textBlockColor"
       @close-text-format-dialog="closeTextFormatDialog"
       @add-text-block="addTextBlock"
+      @open-text-format-dialog="openTextFormatDialog"
     />
   </v-card>
 </template>
