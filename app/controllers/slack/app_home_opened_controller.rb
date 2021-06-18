@@ -1,9 +1,13 @@
 module Slack
   class AppHomeOpenedController < Slack::ApplicationController
-    before_action :set_user_team_token, only: %i[publish_to_home_tab]
+    before_action :set_user_team_token, only: %i[respond]
     def respond
-      p params
-      render json: params[:challenge], status: 200
+      return @team.nil? || @user.nil? || @team.workspace_id != @user.team.workspace_id
+      if params[:event][:type] == "app_home_opened"
+        publish_to_home_tab(@team, @user, @access_token)
+      elsif params[:event][:type] == "message"
+        send_help_msg(@team, @user, @access_token)
+      end
     end
 
     def publish_to_home_tab(team, user, access_token)
