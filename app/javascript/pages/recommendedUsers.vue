@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">
+  <div class="bg" v-if="isBlocksZero">
     <v-row
       justify="center"
       align-content="center"
