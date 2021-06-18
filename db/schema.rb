@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.string "image", null: false
-    t.string "email", null: false
+    t.string "email"
     t.integer "role", default: 1, null: false
     t.integer "question_share_right", default: 0, null: false
     t.integer "ranking_share_right", default: 0, null: false

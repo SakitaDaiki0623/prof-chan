@@ -273,7 +273,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic, identity.avatar, identity.email, identity.team', scope: 'channels:manage, channels:read, chat:write'
+  config.omniauth :slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], user_scope: 'identity.basic, identity.avatar, identity.team', scope: 'channels:manage, channels:read, chat:write'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

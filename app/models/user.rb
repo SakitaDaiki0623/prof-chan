@@ -74,7 +74,6 @@ class User < ApplicationRecord
     user = find_or_initialize_by(provider: auth.provider, uid: auth.info.authed_user.id)
     user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     user.name = user_info.dig('user', 'name')
-    user.email = user_info.dig('user', 'email')
     user.remote_image_url = user_info.dig('user', 'image_192')
     user.check_authentication_existence(hash_token)
     user.check_team_existence(user_info.dig('team'), channel)
