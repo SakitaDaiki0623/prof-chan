@@ -34,6 +34,7 @@
               cols="12"
               sm="12"
               md="6"
+              align-self="center"
             >
               <p
                 class="text-2xl bg-brown-100 text-center pa-10 rounded-full max-w-sm font-weight-bold"

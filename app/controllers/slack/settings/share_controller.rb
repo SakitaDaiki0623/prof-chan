@@ -35,25 +35,25 @@ class Slack::Settings::ShareController < Slack::ApplicationController
   end
 
   def activate_msg(user)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を停止する時は `/inactivate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を停止する時は `/prof_inactivate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
 
   def already_activated_msg(user)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/activate_share` が実行されましたが既に18時の投稿はONになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_activate_share` が実行されましたが既に18時の投稿はONになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
 
   def inactivate_msg(user)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}>が毎日18時の投稿をOFFにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を元に戻す時は `/activate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}>が毎日18時の投稿をOFFにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を元に戻す時は `/prof_activate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
 
   def already_inactivated_msg(user)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/inactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_inactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end

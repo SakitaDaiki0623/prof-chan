@@ -11,7 +11,7 @@ module Slack
       end
 
       def get_encoded_help_message
-        msg = '[ { "type": "section", "text": { "type": "mrkdwn", "text": ":hamster:プロフちゃんの使い方" } }, { "type": "divider" }, { "type": "section", "fields": [ { "type": "mrkdwn", "text": ":information_source: `/prof_help` \nDMでヘルプメッセージを送るよ" }, { "type": "mrkdwn", "text": ":postbox: `/prof_random_block` \n DMでランダムにブロックを1つ送るよ" } ] }, { "type": "section", "fields": [ { "type": "mrkdwn", "text": ":ok_hand: `/activate_share` \n毎日18時の投稿を有効するよ" }, { "type": "mrkdwn", "text": ":raised_back_of_hand: `/inactivate_share` \n 毎日18時の投稿を止めるよ" } ] } ]'
+        msg = '[ { "type": "section", "text": { "type": "mrkdwn", "text": ":hamster:プロフちゃんの使い方" } }, { "type": "divider" }, { "type": "section", "fields": [ { "type": "mrkdwn", "text": ":information_source: `/prof_help` \nDMでヘルプメッセージを送るよ" }, { "type": "mrkdwn", "text": ":postbox: `/prof_random_block` \n DMでランダムにブロックを1つ送るよ" } ] }, { "type": "section", "fields": [ { "type": "mrkdwn", "text": ":ok_hand: `/prof_activate_share` \n毎日18時の投稿を有効するよ" }, { "type": "mrkdwn", "text": ":raised_back_of_hand: `/prof_inactivate_share` \n 毎日18時の投稿を止めるよ" } ] } ]'
         encoded_msg = encode_msg(msg)
         return encoded_msg
       end
