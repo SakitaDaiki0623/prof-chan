@@ -4,8 +4,6 @@ class User < ApplicationRecord
   after_create do
     create_profile_block if profile_block.blank?
   end
-  before_save :set_default_team_value, unless: proc { |u| u.provider == 'slack' }
-
   # devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :omniauthable

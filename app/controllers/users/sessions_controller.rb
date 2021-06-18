@@ -7,6 +7,7 @@ module Users
 
     def new_guest
       user = User.guest
+      user.set_default_team_value if user.team.nil?
       user.create_guest_profile if user.profile.nil?
       sign_in user
       redirect_to top_path
