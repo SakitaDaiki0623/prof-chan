@@ -102,7 +102,7 @@ class User < ApplicationRecord
                   name = team_info.dig('name')
                   image = team_info.dig('image_230')
                   share_channel_id = channel.dig('id')
-                  Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id)
+                  Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id, share_right: "active")
                 end
   end
 end
