@@ -54,7 +54,7 @@
                   persistent-hint
                   single-line
                 />
-                <span class="text-red-200">{{ errors[0] }}</span>
+                <span class="red--text text-sm text--lighten-3">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
@@ -73,7 +73,7 @@
                   class="input-form-favorite-block"
                   name="favorite_block[favorite_block_text]"
                 >
-                <span class="text-red-200">{{ errors[0] }}</span>
+                <span class="red--text text-sm text--lighten-3">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="text-center mt-3">
