@@ -3,12 +3,12 @@ module Slack
     before_action :set_user_team_token, only: %i[publish]
 
     def respond
-      render json: params[:challenge], status: 200
-      # if params[:event][:type] == "app_home_opened"
-      #   views_publish
-      # elsif params[:event][:type] == 'message' && params[:event][:text].present?
-      #   send_help_msg
-      # end
+      # render json: params[:challenge], status: 200
+      if params[:event][:type] == "app_home_opened"
+        views_publish
+      elsif params[:event][:type] == 'message' && params[:event][:text].present?
+        send_help_msg
+      end
     end
 
     def views_publish
