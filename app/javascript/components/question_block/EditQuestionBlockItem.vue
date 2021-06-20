@@ -249,7 +249,6 @@ export default {
 
     // 削除
     hundleDeleteQuestionItem(questionItem) {
-      if (!confirm("削除してよろしいですか?")) return;
       this.deleteQuestionItem(questionItem);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
