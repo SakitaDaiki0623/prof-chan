@@ -4,7 +4,7 @@
       :id="'profile-index-card-' + profile.public_uid"
       @click="openProfileShowPage(profile)"
       :class="{ 'on-hover': hover }"
-      class="cursor-pointer"
+      class="prof-card"
     >
       <v-card color="brown lighten-2" outlined>
         <div>
@@ -74,5 +74,9 @@ div {
 
 div:not(.on-hover) {
   transform: scale(0.95);
+}
+
+.prof-card {
+  cursor: pointer;
 }
 </style>
