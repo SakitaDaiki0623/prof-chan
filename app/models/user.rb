@@ -95,15 +95,17 @@ class User < ApplicationRecord
   def check_team_existence(team_info, channel)
     workspace_id = team_info.dig('id')
 
-    self.team = if Team.exists?(workspace_id: workspace_id)
-                  Team.find_by(workspace_id: workspace_id)
-                else
-                  # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
-                  name = team_info.dig('name')
-                  image = team_info.dig('image_230')
-                  domain = team_info.dig('domain')
-                  share_channel_id = channel.dig('id')
-                  Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id, domain: domain, share_right: "active")
-                end
+    if Team.exists?(workspace_id: workspace_id)
+      team = Team.find_by(workspace_id: workspace_id)
+      team.update!(image: team_info.dig('image_230')) unless team.image == team_info.dig('image_230')
+    else
+      # 無い場合は新規チームを作成し、ユーザーをそこに所属させる
+      name = team_info.dig('name')
+      image = team_info.dig('image_230')
+      domain = team_info.dig('domain')
+      share_channel_id = channel.dig('id')
+      team = Team.create!(name: name, workspace_id: workspace_id, image: image, share_channel_id: share_channel_id, domain: domain, share_right: "active")
+    end
+    self.team = team
   end
 end
