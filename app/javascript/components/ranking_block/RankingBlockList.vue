@@ -5,7 +5,7 @@
     outlined
     class="mb-10 pa-5"
   >
-    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+    <div class="corner-title top-sub-title">
       <span
         class="green--text text--lighten-3 px-2 bg-white rounded-full"
       >R</span> My Best 3

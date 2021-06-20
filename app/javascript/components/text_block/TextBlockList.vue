@@ -5,7 +5,7 @@
     outlined
     class="mb-10 pa-5"
   >
-    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+    <div class="corner-title top-sub-title">
       <span
         class="blue--text text--lighten-3 rounded-full px-2 bg-white"
       >T</span>
@@ -67,6 +67,7 @@
           :key="textBlock.id"
           cols="12"
           md="6"
+          xl="4"
           class="border-b-2 border-brown-300 border-dashed"
         >
           <TextBlockCard

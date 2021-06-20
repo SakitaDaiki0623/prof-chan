@@ -28,7 +28,7 @@
           v-if="isThisNotTopPage"
         />
       </v-row>
-      <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+      <p class="profile-block-title">
         {{ yesOrNoBlock.title }}
       </p>
       <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">

@@ -220,3 +220,26 @@
   @apply shadow-md;
 }
 
+// ブロック
+.corner-title {
+  @apply text-center;
+  @apply text-4xl;
+  @apply text-white;
+  @apply py-5;
+  @apply my-10;
+}
+
+.profile-block-title {
+  @apply text-2xl;
+  @apply font-bold;
+  @apply px-3;
+  @apply pt-3;
+}
+
+// ブックマークページ
+.bookmark-place-num-title {
+  @apply border-2;
+  @apply border-white;
+  @apply border-dashed;
+  @apply m-5;
+}

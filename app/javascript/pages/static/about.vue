@@ -395,7 +395,7 @@
                     outlined
                     color="cyan accent-1"
                   >
-                    <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+                    <p class="profile-block-title">
                       自己紹介
                     </p>
                     <v-card

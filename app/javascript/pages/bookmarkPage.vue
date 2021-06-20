@@ -38,7 +38,7 @@
               align="center"
               cols="12"
               lg="3"
-              class="border-2 border-white border-dashed ma-5"
+              class="bookmark-place-num-title"
             >
               <div class="place-text">
                 第1位
@@ -52,7 +52,7 @@
               align="center"
               cols="12"
               lg="3"
-              class="border-2 border-white border-dashed ma-5"
+              class="bookmark-place-num-title"
             >
               <div class="place-text">
                 第2位
@@ -74,7 +74,7 @@
               align="center"
               cols="12"
               lg="3"
-              class="border-2 border-white border-dashed ma-5"
+              class="bookmark-place-num-title"
             >
               <div class="place-text">
                 第3位
@@ -105,7 +105,7 @@
               align="center"
               cols="12"
               sm="3"
-              class="border-2 border-white border-dashed ma-5"
+              class="bookmark-place-num-title"
             >
               <div class="place-text">
                 第2位
@@ -127,7 +127,7 @@
               align="center"
               cols="12"
               sm="3"
-              class="border-2 border-white border-dashed ma-5"
+              class="bookmark-place-num-title"
             >
               <div class="place-text">
                 第1位
@@ -142,7 +142,7 @@
               align="center"
               cols="12"
               sm="3"
-              class="border-2 border-white border-dashed ma-5"
+              class="bookmark-place-num-title"
             >
               <div class="place-text">
                 第3位

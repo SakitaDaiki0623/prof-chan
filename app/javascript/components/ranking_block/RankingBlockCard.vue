@@ -32,7 +32,7 @@
           v-if="isThisNotTopPage"
         />
       </v-row>
-      <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+      <p class="profile-block-title">
         {{ rankingBlock.title }}
       </p>
       <v-card class="pa-2 ma-3 rounded-full" outlined color="white">

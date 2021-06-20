@@ -5,7 +5,7 @@
     outlined
     class="mb-10 pa-5"
   >
-    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+    <div class="corner-title top-sub-title">
       <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span>質問コーナー
     </div>
     <v-row

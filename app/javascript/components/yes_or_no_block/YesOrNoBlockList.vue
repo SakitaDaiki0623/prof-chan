@@ -5,7 +5,7 @@
     outlined
     class="mb-10 pa-5"
   >
-    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+    <div class="corner-title top-sub-title">
       <span
         class="yellow--text text--darken-3 rounded-full px-2 bg-white"
       >Y</span>
