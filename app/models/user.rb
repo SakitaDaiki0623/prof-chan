@@ -47,7 +47,7 @@ class User < ApplicationRecord
   # methods ===========================
 
   def create_guest_profile
-    profile_params = { birthday: Date.new(2021, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 5, gender: 'female', blood_type: 'O', prefecture_id: 13 }
+    profile_params = { birthday: Date.new(2000, 5, 4), day_of_joinning: Date.new(2021, 6, 4), height: 5, gender: 'female', blood_type: 'O', prefecture_id: 13 }
     profile = build_profile(profile_params)
     profile.save!
   end

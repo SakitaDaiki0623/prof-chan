@@ -12,6 +12,9 @@
           <v-icon medium> mdi-star-box </v-icon>
           よくブックマークされるあなたのブロック
           <v-icon medium> mdi-star-box </v-icon>
+          <div class="text-sm">
+            よくブックマークされるブロックは共通の話題になりそう
+          </div>
         </div>
       </v-col>
       <v-col cols="12" sm="4">
