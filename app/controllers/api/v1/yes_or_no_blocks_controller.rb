@@ -39,7 +39,7 @@ module Api
       end
 
       def popular_blocks
-        @yes_or_no_popular_blocks = YesOrNoBlock.by_team(current_user).popular_blocks
+        @yes_or_no_popular_blocks = YesOrNoBlock.by_team(current_user).includes([:users]).popular_blocks
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @yes_or_no_popular_blocks,
           serializer: YesOrNoBlockSerializer
@@ -70,7 +70,7 @@ module Api
       end
 
       def recommended_topic_block
-        @yes_or_no_block =  current_user.profile_block.yes_or_no_blocks.popular_blocks[0]
+        @yes_or_no_block =  current_user.profile_block.yes_or_no_blocks.includes([:yes_or_no_block_likes, :users]).popular_blocks[0]
         return if @yes_or_no_block.nil? || @yes_or_no_block.users.blank?
         render json: @yes_or_no_block
       end

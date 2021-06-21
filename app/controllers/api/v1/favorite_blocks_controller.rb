@@ -40,7 +40,7 @@ module Api
       end
 
       def popular_blocks
-        @favorite_popular_blocks = FavoriteBlock.by_team(current_user).popular_blocks
+        @favorite_popular_blocks = FavoriteBlock.by_team(current_user).includes([:users]).popular_blocks
 
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @favorite_popular_blocks,
@@ -61,7 +61,7 @@ module Api
       end
 
       def recommended_topic_block
-        @favorite_block =  current_user.profile_block.favorite_blocks.popular_blocks[0]
+        @favorite_block =  current_user.profile_block.favorite_blocks.includes([:favorite_block_likes, :users]).popular_blocks[0]
         return if @favorite_block.nil? || @favorite_block.users.blank?
         render json: @favorite_block
       end
