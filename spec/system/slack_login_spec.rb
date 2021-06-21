@@ -33,11 +33,9 @@ RSpec.describe "SlackLogin", type: :system do
       expect(current_path).to eq(agreement_path)
       find("#agreement").click
     end
-    fit 'プロフィール新規作成画面にアクセスすること' do
-      VCR.use_cassette "npi_search" do
-        find("#sign-in-with-slack-button").click
-        expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
-      end
+    it 'プロフィール新規作成画面にアクセスすること' do
+      find("#sign-in-with-slack-button").click
+      expect(current_path).to eq(new_profile_path), 'パスがnew_profile_pathではありません'
     end
   end
 
