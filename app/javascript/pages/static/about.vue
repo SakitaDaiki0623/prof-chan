@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center text-gray-600">
+  <div class="text-center">
     <v-row
       justify="center"
       align-content="center"

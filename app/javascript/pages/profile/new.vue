@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-600 md:pa-10 ma-10">
+  <div class="md:pa-10 ma-10">
     <v-row align-content="center" justify="center" class="lg:px-32 xl:px72">
       <v-col cols="12" sm="12" md="6" class="ma-5">
         <!-- Basic Info Card -->

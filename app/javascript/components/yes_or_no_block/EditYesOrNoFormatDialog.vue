@@ -31,7 +31,7 @@
             cols="12"
             md="10"
           >
-            <p class="text-2xl font-bold text-gray-600 pt-3">
+            <p class="text-2xl font-bold pt-3">
               {{ editYesOrNoBlock.title }}
             </p>
           </v-col>
@@ -171,7 +171,7 @@
           :parent-yes-or-no-block-id="parentYesOrNoBlockId"
         />
 
-        <div class="mt-3 font-weight-bold text-gray-600 text-sm">
+        <div class="mt-3 font-weight-bold text-sm">
           {{ certainlyPushUpdateButton }}
         </div>
         <div class="text-center mt-3">

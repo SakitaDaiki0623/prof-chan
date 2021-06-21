@@ -77,7 +77,7 @@
                 :color="textBlockColor"
                 label="slackに投稿しますか?"
               ></v-checkbox>
-              <div class="text-gray-600 text-sm">
+              <div class="text-sm">
                 ※Slackへの投稿は1日に1回のみです。
               </div>
             </div>
