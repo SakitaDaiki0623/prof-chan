@@ -4,6 +4,12 @@ class User < ApplicationRecord
   after_create do
     create_profile_block if profile_block.blank?
   end
+
+  # before
+  after_initialize do
+    set_default_team if provider == 'email' && name != 'ゲストユーザー'
+  end
+
   # devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :omniauthable
@@ -60,7 +66,7 @@ class User < ApplicationRecord
     end
   end
 
-  def set_default_team_value
+  def set_default_team
     default_team = Team.find_or_create_by(workspace_id: 'A123B123C123') do |team|
       team.name = 'normal login',
                   team.workspace_id     = 'A123B123C123',
