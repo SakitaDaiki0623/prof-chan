@@ -1,4 +1,3 @@
-<!-- app/javascript/components/TextFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownRankingFormatDialog"
@@ -147,11 +146,8 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
-
-// components ----------
 
 export default {
   props: {

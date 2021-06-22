@@ -1,4 +1,3 @@
-# app/controllers/api/v1/profiles_controller.rb
 module Api
   module V1
     class ProfilesController < ApiController

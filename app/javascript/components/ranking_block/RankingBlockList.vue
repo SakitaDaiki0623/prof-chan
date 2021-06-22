@@ -114,7 +114,6 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 
 import RankingFormatDialog from "./RankingFormatDialog";
@@ -143,10 +142,9 @@ export default {
   data() {
     return {
       isShownRankingFormatDialog: false,
-      rankingBlockColor: "green lighten-3", // ranking block color
+      rankingBlockColor: "green lighten-3",
       rankingBlocks: [],
 
-      // pagination
       page: 1,
       displayBlocks: [],
       pageSize: 3,
@@ -221,5 +219,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

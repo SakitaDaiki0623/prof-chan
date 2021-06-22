@@ -453,28 +453,22 @@ export default {
       firstPlaceUser: {},
       secondPlaceUser: {},
       thirdPlaceUser: {},
-
-      // Favorite Blocks
       favoriteBlockPage: 1,
       displayFavoriteBlocks: [],
       favoriteBlockPageSize: 12,
       favoriteBlocklength: 0,
-      // Question Blocks
       questionBlockPage: 1,
       displayQuestionBlocks: [],
       questionBlockPageSize: 6,
       questionBlocklength: 0,
-      // Ranking Blocks
       rankingBlockPage: 1,
       displayRankingBlocks: [],
       rankingBlockPageSize: 6,
       rankingBlocklength: 0,
-      // YesOrNo Blocks
       yesOrNoBlockPage: 1,
       displayYesOrNoBlocks: [],
       yesOrNoBlockPageSize: 6,
       yesOrNoBlocklength: 0,
-      // Text Blocks
       textBlockPage: 1,
       displayTextBlocks: [],
       textBlockPageSize: 4,
@@ -503,7 +497,6 @@ export default {
         this.favoriteLikedUserIds
       );
 
-      // 要素数が多いユーザートップ3のidを取得
       const dict = {};
 
       for (let key of allUserIds) {
@@ -521,7 +514,7 @@ export default {
       });
 
       const topThreeUserIdAndLikesCount = arr.splice(0, 3);
-      return topThreeUserIdAndLikesCount; // ex.0: {user_id: "2", value: 12}, 1: {user_id: "3", value: 6}, 2: {user_id: "1", value: 3}
+      return topThreeUserIdAndLikesCount;
     },
     favoriteLikedUserIds() {
       return this.randomCurrentUserLikesFavoriteBlocks.map(

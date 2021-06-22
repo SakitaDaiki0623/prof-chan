@@ -1,4 +1,3 @@
-<!-- app/javascript/components/QuestionFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownQuestionFormatDialog"
@@ -157,11 +156,9 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
-// components ----------
 import QuestionBlockItem from "./QuestionBlockItem";
 
 export default {
@@ -183,7 +180,7 @@ export default {
       questionBlock: {
         title: "",
       },
-      questionItemNum: 1, // アイテム数
+      questionItemNum: 1,
       questionItem1: {
         content: "",
         answer: "",
@@ -277,7 +274,6 @@ export default {
         },
       ],
 
-      // Validator
       questionNameForValidation1: "1番目の質問",
       answerNameForValidation1: "1番目の答え",
       questionNameForValidation2: "2番目の質問",
@@ -358,7 +354,7 @@ export default {
     },
 
     clearQuestionBlock() {
-      this.questionItemNum = 1; // アイテム数のリセット
+      this.questionItemNum = 1;
       this.questionBlock.title = "";
       this.questionItem1.content = "";
       this.questionItem1.answer = "";

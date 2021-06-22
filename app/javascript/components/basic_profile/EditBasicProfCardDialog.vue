@@ -1,4 +1,3 @@
-<!-- app/javascript/components/basic_profile/EditBasicProfCardDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditBasicProfCardDialog"
@@ -314,14 +313,12 @@ export default {
       return res.data;
     },
     hundleUpdateBasicProfile(editBasicProfile) {
-      // genderの変換
       if (editBasicProfile.gender == "男性") {
         editBasicProfile.gender = "male";
       } else {
         editBasicProfile.gender = "female";
       }
 
-      // prefecture_idの変換
       const selectedPrefecture = this.prefectures.find(
         (prefecture) => prefecture.text == editBasicProfile.prefecture_id
       );
@@ -346,7 +343,6 @@ export default {
 </script>
 
 <style scoped>
-/*  input type="date"のアイコンを非表示にする  */
 input[type="time"]::-webkit-calendar-picker-indicator {
   display: none;
 }

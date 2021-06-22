@@ -102,7 +102,6 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 
 import FavoriteFormatDialog from "./FavoriteFormatDialog";
@@ -134,7 +133,6 @@ export default {
       favoriteBlockColor: "brown lighten-2",
       favoriteBlocks: [],
 
-      // pagination
       page: 1,
       displayBlocks: [],
       pageSize: 8,
@@ -210,5 +208,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

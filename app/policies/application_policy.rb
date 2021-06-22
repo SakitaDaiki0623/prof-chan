@@ -1,4 +1,3 @@
-# app/policies/application_policy.rb
 class ApplicationPolicy
   attr_reader :user, :record
 

@@ -1,4 +1,3 @@
-# app/controllers/api/v1/ranking_blocks_controller.rb
 module Api
   module V1
     class RankingBlocksController < ApiController

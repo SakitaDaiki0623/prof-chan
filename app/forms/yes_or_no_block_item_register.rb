@@ -1,5 +1,3 @@
-# [参考] https://qiita.com/kumackey/items/b469143f1a0c4902cf4e
-# app/forms/yes_or_no_block_item_register.rb
 class YesOrNoBlockItemRegister
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -14,7 +12,6 @@ class YesOrNoBlockItemRegister
   attribute :yes_or_no_item_answer3,  :boolean
   attribute :profile_block_id, :integer
 
-  # validation =============
   validates :yes_or_no_title,         presence: true,        length: { maximum: 50 }
   validates :yes_or_no_item_content1, presence: true,        length: { maximum: 50 }
   validates :yes_or_no_item_content2,                        length: { maximum: 50 }

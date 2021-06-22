@@ -112,7 +112,6 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
@@ -141,11 +140,9 @@ export default {
   },
   data() {
     return {
-      // YesOrNo Block
       isShownYesOrNoFormatDialog: false,
       yesOrNoBlockColor: "orange lighten-3", // block color
 
-      // pagination
       page: 1,
       displayBlocks: [],
       pageSize: 3,
@@ -207,5 +204,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

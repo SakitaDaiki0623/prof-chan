@@ -1,4 +1,3 @@
-<!-- app/javascript/components/TheHeader.vue -->
 <template>
   <header v-show="doesCurrentUserhaveProfile" id="top">
     <v-app-bar v-if="isMobile" color="brown lighten-2" outlined height="80px">

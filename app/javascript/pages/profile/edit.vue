@@ -1,4 +1,3 @@
-<!-- app/javascript/pages/profile/edit.vue -->
 <template>
   <div>
     <v-container
@@ -40,7 +39,6 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState } from "vuex";
 
@@ -94,7 +92,6 @@ export default {
     async firstRead() {
       await this.fetchProfile();
       await this.fetchUser();
-      // これをしないと先に値を渡す前に子コンポーネントが読まれてしまう
       this.shown = true;
     },
     async fetchProfile() {

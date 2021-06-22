@@ -1,4 +1,3 @@
-<!-- app/javascript/components/TextFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditQuestionFormatDialog"
@@ -196,11 +195,9 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
-// components ----------
 import EditQuestionBlockItem from "../question_block/EditQuestionBlockItem";
 import IndividualCreateQuestionBlockItem from "../question_block/IndividualCreateQuestionBlockItem";
 
@@ -321,7 +318,6 @@ export default {
       this.closeEditQuestionFormatDialog();
 
       if (this.questionItemLength < 3) {
-        // 子コンポーネントのメソッドの呼び出し
         this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
       }
       requestAnimationFrame(() => {
@@ -329,7 +325,6 @@ export default {
       });
     },
 
-    // FORMごとの表示・非表示の切り替え
     showEditQuestionBlockTitleForm() {
       this.isShownForm = true;
     },
@@ -355,7 +350,6 @@ export default {
       this.isTheThirdItemEditing = false;
     },
 
-    // 全てのフォームの表示をオフにする
     hideAllEditQuestionItemForm() {
       this.hideEditQuestionBlockTitleForm();
       this.hideTheFirstEditQuestionItemForm();

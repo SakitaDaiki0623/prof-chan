@@ -1,4 +1,3 @@
-<!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div>
     <Loading v-if="loading" />
@@ -53,10 +52,8 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 
-// Component ----------
 import BasicAndProfCardBlock from "../../components/basic_profile/BasicAndProfCardBlock";
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
@@ -88,7 +85,6 @@ export default {
       });
   },
   beforeRouteUpdate(to, from, next) {
-    // URL の id が変わったときにリソースを再読み込みする
     next();
     this.resetLoading();
     this.updateRead(to.params.id);

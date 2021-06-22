@@ -1,4 +1,3 @@
-# app/policies/profile_policy.rb
 class ProfilePolicy < ApplicationPolicy
   def index?
     user.profile.present?

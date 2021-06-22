@@ -98,11 +98,8 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState } from "vuex";
-
-// components ----------
 
 export default {
   props: {
@@ -127,7 +124,6 @@ export default {
   },
   methods: {
     hundleEditFavoriteBlock(editFavoriteBlock) {
-      // category_idの変換
       const selectedCategory = this.categories.find(
         (category) => category.name == editFavoriteBlock.title
       );

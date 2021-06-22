@@ -115,7 +115,6 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
@@ -147,7 +146,6 @@ export default {
       isShownQuestionFormatDialog: false,
       questionBlockColor: "red lighten-3", // question block color
 
-      // pagination
       page: 1,
       displayBlocks: [],
       pageSize: 3,

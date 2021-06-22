@@ -1,4 +1,3 @@
-<!-- app/javascript/components/address_block/EditAddressBlockDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditAddressBlockDialog"

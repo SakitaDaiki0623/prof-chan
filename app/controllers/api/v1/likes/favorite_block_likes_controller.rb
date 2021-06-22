@@ -1,4 +1,3 @@
-# app/controllers/api/v1/favorite_block_likes_controller.rb
 module Api
   module V1
     module Likes

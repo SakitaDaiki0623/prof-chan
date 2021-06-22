@@ -227,7 +227,6 @@ export default {
       this.$emit("hide-edit-question-item-form");
     },
 
-    // TODO: [FIX] 編集前の値に戻るように修正
     cancelEditQuestionItem() {
       this.hideEditQuestionItemForm();
       requestAnimationFrame(() => {
@@ -235,7 +234,6 @@ export default {
       });
     },
 
-    // 更新
     hundleUpdateQuestionItem(questionItem) {
       this.patchQuestionItem(questionItem);
       this.editQuestionItem = questionItem;
@@ -247,7 +245,6 @@ export default {
       });
     },
 
-    // 削除
     hundleDeleteQuestionItem(questionItem) {
       this.deleteQuestionItem(questionItem);
       this.$store.dispatch("flash/setFlash", {

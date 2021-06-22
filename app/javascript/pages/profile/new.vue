@@ -244,11 +244,9 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
-// components ----------
 import CreateProfileSuccessModal from "../../components/others/CreateProfileSuccessModal";
 
 export default {
@@ -345,7 +343,6 @@ export default {
 </script>
 
 <style scoped>
-/*  input type="date"のアイコンを非表示にする  */
 input[type="time"]::-webkit-calendar-picker-indicator {
   display: none;
 }

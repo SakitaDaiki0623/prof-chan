@@ -1,4 +1,3 @@
-# app/controllers/api/v1/text_blocks_controller.rb
 module Api
   module V1
     class TextBlocksController < ApiController

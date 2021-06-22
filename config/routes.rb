@@ -23,27 +23,19 @@ Rails.application.routes.draw do
     resources :contacts
     resources :authentications
 
-    # ADMIN_ROOT_PATH
     root to: "users#index"
   end
 
-  # ROOT_PATH
   root to: 'home#index'
-  # LOGIN_ROOT_PATH
   get 'top', to: 'profiles#top'
 
-  # authetication
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords', :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
-    # guest login
-    # 参考: https://qiita.com/take18k_tech/items/35f9b5883f5be4c6e104
     post '/users/guest_sign_in', to: 'users/sessions#new_guest'
   end
 
-  # redirect path after authentication
   resources :profiles,  only: %i[new index]
 
-  # API
   namespace :api, {format: 'json'} do
     namespace :v1 do
       resources :profiles,       only: %i[index create show update] do
@@ -69,7 +61,6 @@ Rails.application.routes.draw do
 
       resources :teams,          only: %i[show]
 
-      # プロフブロック
       resources :profile_blocks,     only: %i[index show]
       resources :favorite_blocks,        only: %i[index create show update destroy] do
         collection do
@@ -115,7 +106,6 @@ Rails.application.routes.draw do
       resources :my_favorite_blocks, only: %i[index update]
       resources :address_blocks,     only: %i[index update]
 
-      # 各ブロックのいいね機能
       namespace :likes do
         resources :text_block_likes,      only: [:index, :create, :destroy]
         resources :question_block_likes,  only: [:index, :create, :destroy]
@@ -126,7 +116,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # slackコマンド
   namespace :slack do
     namespace :settings do
       post 'activate_share_right',   to: 'share#activate'
@@ -139,16 +128,10 @@ Rails.application.routes.draw do
     post 'events', to: 'app_home_opened#respond'
   end
 
-  # 同意画面
   get 'agreement', to: 'home#agreement'
-
-  # 利用規約
   get 'terms', to: 'home#terms'
-
-  # プライバシーポリシー
   get 'privacy', to: 'home#privacy'
 
-  # お問い合わせフォーム
   resources :contacts, only: [:new, :create]
   post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
   post 'contacts/back', to: 'contacts#back', as: 'back'

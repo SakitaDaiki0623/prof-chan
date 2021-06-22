@@ -1,4 +1,3 @@
-<!-- app/javascript/app.vue -->
 <template>
   <v-app id="app" class="default kawaii">
     <TheHeader />

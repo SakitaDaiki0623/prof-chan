@@ -241,7 +241,6 @@ export default {
       this.$emit("hide-edit-yes-or-no-item-form");
     },
 
-    // TODO: [FIX] 編集前の値に戻るように修正
     cancelYesOrNoItemUpdate() {
       this.hideEditYesOrNoForm();
       requestAnimationFrame(() => {
@@ -249,7 +248,6 @@ export default {
       });
     },
 
-    // 更新
     hundleUpdateYesOrNoItem(yesOrNoItem) {
       this.patchYesOrNoItem(yesOrNoItem);
       this.editYesOrNoItem = yesOrNoItem;

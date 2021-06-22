@@ -1,5 +1,4 @@
 <template>
-  <!-- Item Form -->
   <div
     :id="yesOrNoBlockItemId"
     class="ma-1"

@@ -1,9 +1,7 @@
 # app/models/my_favorite_block.rb
 class MyFavoriteBlock < ApplicationRecord
-  # association ==========
   belongs_to :profile_block
 
-  # validation =============
   with_options length: { maximum: 15 } do
     validates :manga_anime
     validates :game_app

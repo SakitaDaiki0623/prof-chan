@@ -1,4 +1,3 @@
-<!-- app/javascript/components/FavoriteFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownFavoriteFormatDialog"
@@ -101,8 +100,6 @@
 // plugins
 import axios from "axios";
 import { mapState } from "vuex";
-
-// components ----------
 
 export default {
   props: {

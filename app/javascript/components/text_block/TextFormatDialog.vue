@@ -110,13 +110,10 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
-// components ----------
 import TextFormatSelectDialog from "./TextFormatSelectDialog";
-
 export default {
   components: {
     TextFormatSelectDialog,

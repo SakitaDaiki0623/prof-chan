@@ -23,7 +23,10 @@
       </v-row>
       <v-row v-else>
         <v-spacer />
-        <favorite-block-like-button :favorite-block-id="favoriteBlock.id" v-if="isThisNotTopPage" />
+        <favorite-block-like-button
+          :favorite-block-id="favoriteBlock.id"
+          v-if="isThisNotTopPage"
+        />
       </v-row>
       <label class="form-label">
         {{ favoriteBlock.title }}
@@ -113,4 +116,3 @@ export default {
 };
 </script>
 
-<style scoped></style>
