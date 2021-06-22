@@ -169,7 +169,7 @@
               justify="center"
             >
               <v-col
-                cols="10"
+                cols="12"
                 lg="2"
                 align="left"
                 align-self="start"
@@ -204,7 +204,7 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
+                cols="12"
                 lg="2"
                 align="left"
                 align-self="start"
@@ -256,8 +256,8 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
-                lg="2"
+                cols="12"
+                lg="3"
                 align="left"
                 align-self="start"
               >
@@ -313,8 +313,8 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
-                lg="2"
+                cols="12"
+                lg="3"
                 align="left"
                 align-self="start"
               >
@@ -378,7 +378,7 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
+                cols="12"
                 lg="2"
                 align="left"
                 align-self="start"
