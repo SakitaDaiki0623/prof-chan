@@ -3,13 +3,36 @@ ja:
   activerecord:
     models:
       user: 'ユーザー'
+      team: 'チーム'
       profile: 'プロフィール'
+      profile_block: 'プロフィールブロック'
+      contact: 'お問い合わせ'
+      favorite_block: 'フェイバリットブロック'
+      favorite_block_like: 'フェイバリットブロックブックマーク'
+      question_block: 'クエスチョンブロック'
+      question_item: 'クエスチョンブロックブックマーク項目'
+      question_block_like: 'クエスチョンブロックブックマーク'
+      ranking_block: 'ランキングブロック'
+      ranking_block_like: 'ランキングブロックブックマーク'
+      yes_or_no_block: 'Yes Or No ブロック項目'
+      yes_or_no_item: 'Yes Or No ブロック'
+      yes_or_no_block_like: 'Yes Or No ブロックブックマーク'
+      text_block: 'テキストブロック'
+      text_block_like: 'テキストブロックブックマーク'
+      authentication: '認証'
     attributes:
       user:
         name: '名前'
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
+      team:
+        name: '名前'
+        workspace_id: 'ワークスペースID'
+        share_channel_id: 'チャンネルID'
+        domain: 'ドメイン'
+        share_right: '共有'
+        image: 'チーム画像'
       profile:
         birthday: '生年月日'
         day_of_joinning: '入社日'

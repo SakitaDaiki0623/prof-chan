@@ -20,10 +20,8 @@ Rails.application.routes.draw do
     resources :yes_or_no_block_likes
     resources :yes_or_no_items
     resources :question_items
-
-    # active hash
-    resources :categories
-    resources :prefectures
+    resources :contacts
+    resources :authentications
 
     # ADMIN_ROOT_PATH
     root to: "users#index"
