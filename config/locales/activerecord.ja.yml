@@ -21,5 +21,6 @@ ja:
       contact:
         name: '名前'
         email: '返信先メールアドレス'
+        category: 'カテゴリー'
         message: 'メッセージ'
 
