@@ -19,7 +19,7 @@
         sm="12"
       >
         <img
-          src="../images/prof_normal.png"
+          src="../../images/prof_normal.png"
           class="image mx-auto"
         >
       </v-col>

@@ -107,7 +107,7 @@ import axios from "axios";
 
 import FavoriteFormatDialog from "./FavoriteFormatDialog";
 import FavoriteBlockCard from "./FavoriteBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {

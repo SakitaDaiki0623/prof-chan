@@ -8,7 +8,7 @@
     >
       <div class="bg-brown-100">
         <div
-          class="font-weight-bold  text-2xl md:text-4xl text-center bg-brown-200 py-10"
+          class="font-weight-bold text-2xl md:text-4xl text-center bg-brown-200 py-10"
         >
           基本情報の入力が完了しました
         </div>
@@ -26,7 +26,7 @@
               align="right"
             >
               <img
-                src="../images/prof_happy.png"
+                src="../../images/prof_happy.png"
                 class="max-w-sm"
               >
             </v-col>

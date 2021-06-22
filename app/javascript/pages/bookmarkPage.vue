@@ -417,14 +417,14 @@
 
 <script>
 import axios from "axios";
-import NotAnyBookmarkBlock from "../components/NotAnyBookmarkBlock";
+import NotAnyBookmarkBlock from "../components/others/NotAnyBookmarkBlock";
 import TextBlockCard from "../components/text_block/TextBlockCard";
 import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
 import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
 import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
 import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
 import PlaceDoesNotExistCard from "../components/static/PlaceDoesNotExistCard";
-import ProfCard from "../components/ProfCard";
+import ProfCard from "../components/basic_profile/ProfCard";
 import Loading from "../components/shared/Loading";
 import ToTopButton from "../components/parts/ToTopButton";
 

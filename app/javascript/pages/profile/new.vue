@@ -249,7 +249,7 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // components ----------
-import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
+import CreateProfileSuccessModal from "../../components/others/CreateProfileSuccessModal";
 
 export default {
   components: {

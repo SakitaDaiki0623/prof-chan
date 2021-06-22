@@ -122,7 +122,7 @@ import { mapState, mapActions, Store } from "vuex";
 
 import TextFormatDialog from "./TextFormatDialog";
 import TextBlockCard from "./TextBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {

@@ -37,7 +37,7 @@ import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 // Component ----------
-import IndexProfCard from "../../components/IndexProfCard";
+import IndexProfCard from "../../components/basic_profile/IndexProfCard";
 
 export default {
   components: {

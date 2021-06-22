@@ -18,7 +18,7 @@
         </div>
       </v-col>
       <v-col cols="12" sm="4">
-        <img src="../images/prof_open_happy.png" class="max-w-xs mx-auto" />
+        <img src="../../images/prof_open_happy.png" class="max-w-xs mx-auto" />
       </v-col>
     </v-row>
 
@@ -96,12 +96,12 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import FavoriteBlockCard from "../components/favorite_block/FavoriteBlockCard";
-import QuestionBlockCard from "../components/question_block/QuestionBlockCard";
-import RankingBlockCard from "../components/ranking_block/RankingBlockCard";
-import YesOrNoBlockCard from "../components/yes_or_no_block/YesOrNoBlockCard";
-import TextBlockCard from "../components/text_block/TextBlockCard";
-import BookmarkUserList from "../components/parts/BookmarkUserList";
+import FavoriteBlockCard from "../favorite_block/FavoriteBlockCard";
+import QuestionBlockCard from "../question_block/QuestionBlockCard";
+import RankingBlockCard from "../ranking_block/RankingBlockCard";
+import YesOrNoBlockCard from "../yes_or_no_block/YesOrNoBlockCard";
+import TextBlockCard from "../text_block/TextBlockCard";
+import BookmarkUserList from "../parts/BookmarkUserList";
 
 export default {
   components: {

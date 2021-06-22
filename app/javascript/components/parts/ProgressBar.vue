@@ -11,7 +11,7 @@
         class="text-lg blue--text text-center pa-5 bg-white rounded-full"
       >充実度{{ percentageForBlocks }}%</span>
       <img
-        src="../images/prof_sad.png"
+        src="../../images/prof_sad.png"
         class="image"
       >
     </div>
@@ -20,7 +20,7 @@
         class="text-lg text-center pa-5 bg-white rounded-full"
       >充実度{{ percentageForBlocks }}%</span>
       <img
-        src="../images/prof_normal.png"
+        src="../../images/prof_normal.png"
         class="image"
       >
     </div>
@@ -29,7 +29,7 @@
         class="text-lg red--text text-center pa-5 bg-white rounded-full"
       >充実度{{ percentageForBlocks }}%</span>
       <img
-        src="../images/prof_happy.png"
+        src="../../images/prof_happy.png"
         class="image"
       >
     </div>

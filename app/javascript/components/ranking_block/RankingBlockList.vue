@@ -119,7 +119,7 @@ import axios from "axios";
 
 import RankingFormatDialog from "./RankingFormatDialog";
 import RankingBlockCard from "./RankingBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {

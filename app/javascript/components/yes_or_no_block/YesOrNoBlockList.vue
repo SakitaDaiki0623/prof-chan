@@ -118,7 +118,7 @@ import { mapState, mapActions } from "vuex";
 
 import YesOrNoFormatDialog from "./YesOrNoFormatDialog";
 import YesOrNoBlockCard from "./YesOrNoBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {

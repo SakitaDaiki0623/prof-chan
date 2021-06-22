@@ -5,7 +5,7 @@
       v-if="shown"
       class="border-gray-500 rounded-xl border-2 my-16 note"
     >
-      <BasicAndAddressBlock
+      <BasicAndProfCardBlock
         :is-this-edit-page="isThisEditPage"
         :user="user"
       />
@@ -44,7 +44,7 @@
 import axios from "axios";
 import { mapState } from "vuex";
 
-import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
+import BasicAndProfCardBlock from "../../components/basic_profile/BasicAndProfCardBlock";
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
@@ -54,7 +54,7 @@ import ToTopButton from "../../components/parts/ToTopButton";
 
 export default {
   components: {
-    BasicAndAddressBlock,
+    BasicAndProfCardBlock,
     QuestionBlockList,
     YesOrNoBlockList,
     RankingBlockList,

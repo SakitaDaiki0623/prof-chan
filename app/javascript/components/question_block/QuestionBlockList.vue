@@ -121,7 +121,7 @@ import { mapState, mapActions } from "vuex";
 
 import QuestionFormatDialog from "./QuestionFormatDialog";
 import QuestionBlockCard from "./QuestionBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
