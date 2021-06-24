@@ -1,6 +1,6 @@
 <template>
-  <div class="md:pa-10 ma-10">
-    <v-row align-content="center" justify="center" class="lg:px-32 xl:px72">
+  <div class="md:ma-10 mb-16">
+    <v-row align-content="center" justify="center" >
       <v-col cols="12" sm="12" md="6" class="ma-5">
         <!-- Basic Info Card -->
         <v-card class="rounded-2xl" color="brown lighten-4" outlined>
@@ -30,6 +30,7 @@
                         color="brown lighten-3"
                         persistent-hint
                         single-line
+                        autofocus
                       />
                       <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>

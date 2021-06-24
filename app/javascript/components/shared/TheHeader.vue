@@ -90,8 +90,8 @@
         <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
-            color="brown lighten-3"
-            class="white--text"
+            color="brown lighten-2"
+            class="white--text ma-2"
             v-on="on"
           >
             <v-icon>mdi-dots-horizontal</v-icon>その他

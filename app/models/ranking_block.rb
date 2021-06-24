@@ -4,8 +4,8 @@ class RankingBlock < ApplicationRecord
   has_many :users, through: :ranking_block_likes
 
   with_options presence: true do
-    with_options length: { maximum: 50 } do
-      validates :title
+    validates :title, length: { maximum: 15 }
+    with_options length: { maximum: 20 } do
       validates :first_place
       validates :second_place
       validates :third_place

@@ -11,7 +11,7 @@
             sm="12"
           >
             <div class="text-center text-lg md:text-2xl lg:text-4xl">
-              - - - - REMOTELY PROMOTE YOURSELF.- - - -
+              - - - - REMOTELY PROMOTE YOURSELF- - - -
             </div>
           </v-col>
           <v-col
@@ -67,6 +67,7 @@
         <v-col
           cols="4"
           align="center"
+          align-self="center"
         >
           <v-img
             :src="team.image"

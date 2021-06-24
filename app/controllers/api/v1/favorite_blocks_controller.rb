@@ -60,8 +60,9 @@ module Api
       end
 
       def recommended_topic_block
-        @favorite_block =  current_user.profile_block.favorite_blocks.includes([:favorite_block_likes, :users]).popular_blocks[0]
+        @favorite_block = current_user.profile_block.favorite_blocks.includes(%i[favorite_block_likes users]).popular_blocks[0]
         return if @favorite_block.nil? || @favorite_block.users.blank?
+
         render json: @favorite_block
       end
 

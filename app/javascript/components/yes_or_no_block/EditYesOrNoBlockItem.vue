@@ -94,7 +94,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="yesOrNoNameForValidation"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   :id="'edit-yes-or-no-item-content-form-' + editYesOrNoItem.id"

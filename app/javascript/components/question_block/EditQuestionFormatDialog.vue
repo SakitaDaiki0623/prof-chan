@@ -65,7 +65,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
-                  rules="input_required|max:50"
+                  rules="input_required|max:15"
                 >
                   <input
                     :id="

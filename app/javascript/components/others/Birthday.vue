@@ -6,30 +6,14 @@
       justify="center"
       align-content="center"
     >
-      <v-col
-        cols="12"
-        sm="12"
-      >
+      <v-col cols="12" sm="12">
         <div class="text-xl top-sub-title mb-5 lg:text-4xl lg:mb-10">
-          <v-icon
-            large
-            color="white"
-          >
-            mdi-cake-variant
-          </v-icon>
+          <v-icon large color="white"> mdi-cake-variant </v-icon>
           今月誕生日の社員さん
-          <v-icon
-            large
-            color="white"
-          >
-            mdi-cake-variant
-          </v-icon>
+          <v-icon large color="white"> mdi-cake-variant </v-icon>
         </div>
       </v-col>
-      <v-col
-        cols="12"
-        sm="10"
-      >
+      <v-col cols="12" sm="10">
         <div
           class="text-2xl lg:text-4xl text-white border-dashed border-t-8 border-b-8 border-white pb-2 inline-block"
         >
@@ -41,34 +25,32 @@
         :key="birthdayUserProfile.public_uid"
         cols="12"
         sm="12"
-        md="3"
-        class="border-dotted border-white border-2 ma-5"
+        lg="4"
       >
-        <v-hover v-slot="{ hover }">
-          <v-card
-            class="mx-auto"
-            :class="{ 'on-hover': hover }"
-            max-width="344"
-            outlined
-            color="brown lighten-5"
-            @click="moveToUserProfilePage(birthdayUserProfile)"
-          >
-            <v-img
-              :src="birthdayUserProfile.user.image.url"
-              max-height="250px"
-            />
-
-            <div class="text-center font-bold text-4xl pt-5 text-brown-600">
-              {{ birthdayUserProfile.user.name }} さん
-            </div>
+        <div class="border-2 border-dotted border-white pa-5">
+          <v-hover v-slot="{ hover }">
             <v-card
-              color="brown lighten-2"
-              class="white--text"
+              class="mx-auto"
+              :class="{ 'on-hover': hover }"
+              max-width="344"
+              outlined
+              color="brown lighten-5"
+              @click="moveToUserProfilePage(birthdayUserProfile)"
             >
-              誕生日 {{ birthdayUserProfile.birthday | moment }}
+              <v-img
+                :src="birthdayUserProfile.user.image.url"
+                max-height="250px"
+              />
+
+              <div class="text-center font-bold text-4xl pt-5 text-brown-600">
+                {{ birthdayUserProfile.user.name }} さん
+              </div>
+              <v-card color="brown lighten-2" class="white--text">
+                誕生日 {{ birthdayUserProfile.birthday | moment }}
+              </v-card>
             </v-card>
-          </v-card>
-        </v-hover>
+          </v-hover>
+        </div>
       </v-col>
     </v-row>
   </div>

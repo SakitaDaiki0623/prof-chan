@@ -64,7 +64,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="テキスト"
-                rules="input_required|max:20"
+                rules="input_required|max:10"
               >
                 <input
                   id="favorite_block_text"

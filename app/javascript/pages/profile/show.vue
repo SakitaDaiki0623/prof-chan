@@ -11,6 +11,7 @@
             class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(previousProfile)"
+            large
           >
             ＜
           </v-btn>
@@ -18,6 +19,7 @@
             class="ma-5 white--text"
             color="brown"
             @click="moveToProfilesPage"
+            large
           >
             プロフ一覧に戻る
           </v-btn>
@@ -25,14 +27,15 @@
             class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(nextProfile)"
+            large
           >
             ＞
           </v-btn>
         </v-row>
       </v-container>
-      <v-container
+      <div
         v-if="shown"
-        class="border-gray-500 rounded-xl border-2 my-16 note"
+        class="border-gray-500 rounded-xl border-2 ma-16 note"
       >
         <BasicAndProfCardBlock :user="user" />
 
@@ -45,7 +48,7 @@
         <YesOrNoBlockList :user="user" />
 
         <TextBlockList :user="user" />
-      </v-container>
+      </div>
       <ToTopButton />
     </div>
   </div>

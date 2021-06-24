@@ -16,7 +16,7 @@
           THEME
         </div>
         <div class="md:text-4xl text-2xl pt-10">
-          - - - - REMOTELY PROMOTE YOURSELF.- - - -
+          - - - - REMOTELY PROMOTE YOURSELF- - - -
         </div>
         <div class="text-md md:text-2xl pt-10">
           コロナ以前の雑談の補完。

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-container
+    <div
       v-if="shown"
-      class="border-gray-500 rounded-xl border-2 my-16 note"
+      class="border-gray-500 rounded-xl border-2 ma-16 note"
     >
       <BasicAndProfCardBlock
         :is-this-edit-page="isThisEditPage"
@@ -33,7 +33,7 @@
         :is-this-edit-page="isThisEditPage"
         :user="user"
       />
-    </v-container>
+    </div>
     <ToTopButton />
   </div>
 </template>

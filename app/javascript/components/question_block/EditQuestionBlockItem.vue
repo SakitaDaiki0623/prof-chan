@@ -85,7 +85,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="questionNameForValidation"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   :id="'edit-question-item-content-form-' + editQuestionItem.id"
@@ -109,7 +109,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="answerNameForValidation"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   :id="'edit-question-item-answer-form-' + editQuestionItem.id"

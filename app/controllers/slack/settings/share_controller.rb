@@ -1,4 +1,3 @@
-
 class Slack::Settings::ShareController < Slack::ApplicationController
   before_action :set_user_team_token, only: %i[activate inactivate]
 
@@ -28,19 +27,20 @@ class Slack::Settings::ShareController < Slack::ApplicationController
     @team = Team.find_by(workspace_id: params[:team_id])
     @user = User.find_by(uid: params[:user_id])
     return unless @team.workspace_id == @user.team.workspace_id
+
     @text = "<#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:"
     @encoded_text = ERB::Util.url_encode(@text)
     @channel_id = @team.share_channel_id
     @access_token = set_access_token(@user.authentication.access_token)
   end
 
-  def activate_msg(user)
+  def activate_msg(_user)
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を停止する時は `/prof_inactivate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
 
-  def already_activated_msg(user)
+  def already_activated_msg(_user)
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_activate_share` が実行されましたが既に18時の投稿はONになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
@@ -52,7 +52,7 @@ class Slack::Settings::ShareController < Slack::ApplicationController
     encoded_msg
   end
 
-  def already_inactivated_msg(user)
+  def already_inactivated_msg(_user)
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_inactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
@@ -66,6 +66,6 @@ class Slack::Settings::ShareController < Slack::ApplicationController
       encrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
     end
     access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
-    return access_token
+    access_token
   end
 end

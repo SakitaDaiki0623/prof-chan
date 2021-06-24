@@ -7,7 +7,7 @@ module Users
     def slack
       bot_token = request.env['omniauth.strategy'].access_token
       hash_token = bot_token.to_hash
-      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], hash_token)
+      access_token = get_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], hash_token)
       user_token = bot_token.user_token
       user_info = get_user_info(user_token)
 

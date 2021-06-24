@@ -68,8 +68,9 @@ module Api
       end
 
       def recommended_topic_block
-        @question_block =  current_user.profile_block.question_blocks.includes([:question_block_likes, :users]).popular_blocks[0]
+        @question_block = current_user.profile_block.question_blocks.includes(%i[question_block_likes users]).popular_blocks[0]
         return if @question_block.nil? || @question_block.users.blank?
+
         render json: @question_block
       end
 

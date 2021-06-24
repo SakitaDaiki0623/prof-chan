@@ -1,14 +1,12 @@
-# pass 3
-# spec/system/slack_login_spec.rb
 require 'rails_helper'
 
 RSpec.describe "SlackLogin", type: :system do
 
   describe "失敗" do
     before do
-      Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # Devise使用時に必要な記載
-      Rails.application.env_config["omniauth.auth"] = set_slack_omniauth # omniauth.authの値を代入
-      allow_any_instance_of(Users::OmniauthCallbacksController).to receive(:get_user_info).and_return(set_user_info) # strategy.authの値を代入
+      Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+      Rails.application.env_config["omniauth.auth"] = set_slack_omniauth
+      allow_any_instance_of(Users::OmniauthCallbacksController).to receive(:get_user_info).and_return(get_user_info)
     end
     context 'oauthがinvalid_omniauthの場合' do
       before do

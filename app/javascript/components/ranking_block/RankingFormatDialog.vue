@@ -40,7 +40,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
-                rules="input_required|max:50"
+                rules="input_required|max:15"
               >
                 <input
                   id="ranking_block_title"
@@ -62,7 +62,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="1位"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   id="ranking_block_first_place"
@@ -82,7 +82,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="2位"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   id="ranking_block_second_place"
@@ -102,7 +102,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="3位"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   id="ranking_block_third_place"
