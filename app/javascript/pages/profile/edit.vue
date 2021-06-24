@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="shown"
-      class="border-gray-500 rounded-xl border-2 ma-5 note"
+      class="border-gray-500 rounded-xl border-2 mx-5 my-16 note"
     >
       <BasicAndProfCardBlock
         :is-this-edit-page="isThisEditPage"
