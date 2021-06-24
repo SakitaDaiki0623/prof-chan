@@ -1,4 +1,3 @@
-# spec/models/my_favorite_block_spec.rb
 require 'rails_helper'
 
 RSpec.describe MyFavoriteBlock, type: :model do
