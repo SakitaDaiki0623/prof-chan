@@ -1,4 +1,3 @@
-# app/controllers/api/v1/yes_or_no_items_controller.rb
 module Api
   module V1
     class YesOrNoItemsController < ApiController

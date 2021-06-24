@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const agreementBox = document.getElementById("agreement");
+  window.onpageshow = function() {
+    agreementBox.checked = false;
+  };
   agreementBox.addEventListener("change", () => {
     toggleButtonClass();
   });

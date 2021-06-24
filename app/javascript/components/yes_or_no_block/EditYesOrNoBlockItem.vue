@@ -94,7 +94,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="yesOrNoNameForValidation"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   :id="'edit-yes-or-no-item-content-form-' + editYesOrNoItem.id"
@@ -241,7 +241,6 @@ export default {
       this.$emit("hide-edit-yes-or-no-item-form");
     },
 
-    // TODO: [FIX] 編集前の値に戻るように修正
     cancelYesOrNoItemUpdate() {
       this.hideEditYesOrNoForm();
       requestAnimationFrame(() => {
@@ -249,7 +248,6 @@ export default {
       });
     },
 
-    // 更新
     hundleUpdateYesOrNoItem(yesOrNoItem) {
       this.patchYesOrNoItem(yesOrNoItem);
       this.editYesOrNoItem = yesOrNoItem;
@@ -263,7 +261,6 @@ export default {
 
     // 削除
     hundleDeleteYesOrNoItem(yesOrNoItem) {
-      if (!confirm("削除してよろしいですか?")) return;
       this.deleteYesOrNoItem(yesOrNoItem);
       this.$store.dispatch("flash/setFlash", {
         type: "success",

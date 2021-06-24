@@ -85,7 +85,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="questionNameForValidation"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   :id="'edit-question-item-content-form-' + editQuestionItem.id"
@@ -109,7 +109,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="answerNameForValidation"
-                rules="input_required|max:50"
+                rules="input_required|max:20"
               >
                 <input
                   :id="'edit-question-item-answer-form-' + editQuestionItem.id"
@@ -227,7 +227,6 @@ export default {
       this.$emit("hide-edit-question-item-form");
     },
 
-    // TODO: [FIX] 編集前の値に戻るように修正
     cancelEditQuestionItem() {
       this.hideEditQuestionItemForm();
       requestAnimationFrame(() => {
@@ -235,7 +234,6 @@ export default {
       });
     },
 
-    // 更新
     hundleUpdateQuestionItem(questionItem) {
       this.patchQuestionItem(questionItem);
       this.editQuestionItem = questionItem;
@@ -247,9 +245,7 @@ export default {
       });
     },
 
-    // 削除
     hundleDeleteQuestionItem(questionItem) {
-      if (!confirm("削除してよろしいですか?")) return;
       this.deleteQuestionItem(questionItem);
       this.$store.dispatch("flash/setFlash", {
         type: "success",

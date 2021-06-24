@@ -5,7 +5,7 @@
     outlined
     class="mb-10 pa-5"
   >
-    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
+    <div class="corner-title top-sub-title">
       <span
         class="yellow--text text--darken-3 rounded-full px-2 bg-white"
       >Y</span>
@@ -112,13 +112,12 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
 import YesOrNoFormatDialog from "./YesOrNoFormatDialog";
 import YesOrNoBlockCard from "./YesOrNoBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
@@ -141,11 +140,9 @@ export default {
   },
   data() {
     return {
-      // YesOrNo Block
       isShownYesOrNoFormatDialog: false,
       yesOrNoBlockColor: "orange lighten-3", // block color
 
-      // pagination
       page: 1,
       displayBlocks: [],
       pageSize: 3,
@@ -207,5 +204,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

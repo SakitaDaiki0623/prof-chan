@@ -1,4 +1,3 @@
-# app/controllers/api/v1/my_favorite_blocks_controller.rb
 module Api
   module V1
     class MyFavoriteBlocksController < ApiController

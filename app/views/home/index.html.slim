@@ -2,7 +2,7 @@
   .top-bg.pt-10.px-5.md:px-10
     .border-t-2.border-brown-500.border-dashed
       .text-center.text-lg.md:text-2xl.lg:text-4xl
-        | - - - - REMOTELY PROMOTE YOURSELF.- - - -
+        | - - - - REMOTELY PROMOTE YOURSELF- - - -
     .grid.grid-cols-12.gap-2.text-center
       .col-start-1.col-span-12.md:col-span-4.md:col-start-2
         = image_tag  "logo.png", class: "md:max-w-lg max-w-md mx-auto mt-20"
@@ -21,6 +21,8 @@
       = link_to "お試し版ログイン", new_user_session_path, class: "bg-brown-400 hover:opacity-50 text-2xl text-white font-bold py-2 px-10 border border-brown-700 rounded md:px-5 md:text-xl md:px-10"
       .my-3.text-white.md:text-xl
         | 本サービスをお試しで使用したい方はこちら
+        br
+        | ※ Slackとの連携がある機能はご利用できません。
       .my-3.text-white
         = link_to "お試し版の新規登録", new_user_registration_path, class: "border-dashed border-2 border-white p-1 hover:opacity-50"
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-5.md:col-start-7.md:col-span-6

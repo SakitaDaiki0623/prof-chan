@@ -1,6 +1,5 @@
-<!-- app/javascript/pages/profile/index.vue -->
 <template>
-  <div class="bg-backimage bg-cover bg-fixed text-gray-600">
+  <div class="bg-backimage bg-cover bg-fixed">
     <v-container class="bg-brown-600 shadow-lg mb-20 mt-20">
       <p class="top-sub-title text-4xl text-center mb-20 pa-5">
         社員プロフ一覧
@@ -36,8 +35,7 @@
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
-// Component ----------
-import IndexProfCard from "../../components/IndexProfCard";
+import IndexProfCard from "../../components/basic_profile/IndexProfCard";
 
 export default {
   components: {
@@ -77,11 +75,11 @@ export default {
       );
     },
     moveToTop() {
-      const duration = 10; // 移動速度（1秒で終了）
-      const interval = 5; // 0.025秒ごとに移動
-      const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+      const duration = 10;
+      const interval = 5;
+      const step = -window.scrollY / Math.ceil(duration / interval);
       const timer = setInterval(() => {
-        window.scrollBy(0, step); // スクロール位置を移動
+        window.scrollBy(0, step);
 
         if (window.scrollY <= 0) {
           clearInterval(timer);
@@ -91,5 +89,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

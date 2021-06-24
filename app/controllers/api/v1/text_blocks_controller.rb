@@ -1,4 +1,3 @@
-# app/controllers/api/v1/text_blocks_controller.rb
 module Api
   module V1
     class TextBlocksController < ApiController
@@ -39,7 +38,7 @@ module Api
       end
 
       def popular_blocks
-        @text_popular_blocks = TextBlock.by_team(current_user).popular_blocks
+        @text_popular_blocks = TextBlock.by_team(current_user).includes([:users]).popular_blocks
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @text_popular_blocks,
           serializer: TextBlockSerializer
@@ -70,8 +69,9 @@ module Api
       end
 
       def recommended_topic_block
-        @text_block =  current_user.profile_block.text_blocks.popular_blocks[0]
+        @text_block = current_user.profile_block.text_blocks.includes(%i[text_block_likes users]).popular_blocks[0]
         return if @text_block.nil? || @text_block.users.blank?
+
         render json: @text_block
       end
 

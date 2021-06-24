@@ -1,7 +1,7 @@
 <template>
-  <div class="text-gray-600 md:pa-10">
-    <v-row align-content="center" justify="center" class="lg:px-32 xl:px72">
-      <v-col cols="12" sm="12" md="6">
+  <div class="md:ma-10 mb-16">
+    <v-row align-content="center" justify="center" >
+      <v-col cols="12" sm="12" md="6" class="ma-5">
         <!-- Basic Info Card -->
         <v-card class="rounded-2xl" color="brown lighten-4" outlined>
           <div class="pa-10">
@@ -30,6 +30,7 @@
                         color="brown lighten-3"
                         persistent-hint
                         single-line
+                        autofocus
                       />
                       <span class="red--text text-sm">{{ errors[0] }}</span>
                     </ValidationProvider>
@@ -244,12 +245,10 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
-// components ----------
-import CreateProfileSuccessModal from "../../components/CreateProfileSuccessModal";
+import CreateProfileSuccessModal from "../../components/others/CreateProfileSuccessModal";
 
 export default {
   components: {
@@ -345,7 +344,6 @@ export default {
 </script>
 
 <style scoped>
-/*  input type="date"のアイコンを非表示にする  */
 input[type="time"]::-webkit-calendar-picker-indicator {
   display: none;
 }

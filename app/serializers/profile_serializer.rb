@@ -1,4 +1,3 @@
-# app/serializers/profile_serializer.rb
 class ProfileSerializer < ApplicationSerializer
   attributes :id, :birthday, :day_of_joinning, :height, :gender, :blood_type, :prefecture_id, :public_uid
   belongs_to :user

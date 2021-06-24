@@ -3,7 +3,7 @@
     <!-- 共通画面 -->
     <TopImage v-if="isProviderSlack" />
     <TopImageForEmail v-else />
-    <div class="pa-16 text-center">
+    <div class="pa-5 text-center">
       <RecentlyJoined class="mb-10" />
       <Birthday />
     </div>
@@ -22,9 +22,9 @@ import { mapState, mapActions } from "vuex";
 
 import TopImage from "../components/static/TopImage";
 import TopImageForEmail from "../components/static/TopImageForEmail";
-import RecentlyJoined from "../components/RecentlyJoined";
-import Birthday from "../components/Birthday";
-import RecommendedUsers from "./recommendedUsers";
+import RecentlyJoined from "../components/others/RecentlyJoined";
+import Birthday from "../components/others/Birthday";
+import RecommendedUsers from "./../components/others/recommendedUsers";
 import ToTopButton from "../components/parts/ToTopButton";
 
 export default {

@@ -1,5 +1,4 @@
 <template>
-  <!-- Item Form -->
   <div
     :id="yesOrNoBlockItemId"
     class="ma-1"
@@ -16,7 +15,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           :name="yesOrNoNameForValidation"
-          rules="input_required|max:50"
+          rules="input_required|max:20"
         >
           <input
             :value="yesOrNoItem.content"

@@ -5,20 +5,14 @@
     outlined
     class="mb-10 pa-5"
   >
-    <div class="text-center text-4xl text-white py-5 my-5 top-sub-title">
-      <span class="brown--text text--lighten-3 rounded-full px-2 bg-white">F</span>
+    <div class="corner-title top-sub-title">
+      <span class="brown--text text--lighten-3 rounded-full px-2 bg-white"
+        >F</span
+      >
       My Favorite コーナー
     </div>
-    <v-row
-      v-show="isThisEditPage"
-      justify="center"
-      class="py-5"
-    >
-      <v-col
-        cols="12"
-        sm="12"
-        align="center"
-      >
+    <v-row v-show="isThisEditPage" justify="center" class="py-5">
+      <v-col cols="12" sm="12" align="center">
         <v-btn
           id="add-favorite-block-btn"
           tile
@@ -26,17 +20,11 @@
           class="ma-2 white--text"
           @click="openFavoriteFormatDialog"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>
+          <v-icon left> mdi-plus </v-icon>
           Favorite ブロックを追加する
         </v-btn>
       </v-col>
-      <v-col
-        cols="12"
-        sm="8"
-        align="right"
-      >
+      <v-col cols="12" sm="8" align="right">
         <ProgressBar
           :percentage-for-blocks="percentageMyFavoriteBlocksLengt"
           :block-color="favoriteBlockColor"
@@ -101,10 +89,7 @@
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer
-        v-else
-        block-name="Favorite"
-      />
+      <NoBlockContainer v-else block-name="Favorite" />
     </div>
 
     <FavoriteFormatDialog
@@ -117,12 +102,11 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 
 import FavoriteFormatDialog from "./FavoriteFormatDialog";
 import FavoriteBlockCard from "./FavoriteBlockCard";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "../parts/ProgressBar";
 import NoBlockContainer from "../static/NoBlockContainer";
 
 export default {
@@ -149,7 +133,6 @@ export default {
       favoriteBlockColor: "brown lighten-2",
       favoriteBlocks: [],
 
-      // pagination
       page: 1,
       displayBlocks: [],
       pageSize: 8,
@@ -225,5 +208,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

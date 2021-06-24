@@ -1,4 +1,3 @@
-<!-- app/javascript/components/TextFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditQuestionFormatDialog"
@@ -31,7 +30,7 @@
             cols="12"
             md="10"
           >
-            <p class="text-2xl font-bold text-gray-600 pt-3">
+            <p class="text-2xl font-bold pt-3">
               {{ editQuestionBlock.title }}
             </p>
           </v-col>
@@ -66,7 +65,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
-                  rules="input_required|max:50"
+                  rules="input_required|max:15"
                 >
                   <input
                     :id="
@@ -173,7 +172,7 @@
           :parent-question-block-id="parentQuestionBlockId"
         />
 
-        <div class="mt-3 font-weight-bold text-gray-600 text-sm">
+        <div class="mt-3 font-weight-bold text-sm">
           {{ certainlyPushUpdateButton }}
         </div>
         <div class="text-center mt-3">
@@ -196,11 +195,9 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
-// components ----------
 import EditQuestionBlockItem from "../question_block/EditQuestionBlockItem";
 import IndividualCreateQuestionBlockItem from "../question_block/IndividualCreateQuestionBlockItem";
 
@@ -321,7 +318,6 @@ export default {
       this.closeEditQuestionFormatDialog();
 
       if (this.questionItemLength < 3) {
-        // 子コンポーネントのメソッドの呼び出し
         this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
       }
       requestAnimationFrame(() => {
@@ -329,7 +325,6 @@ export default {
       });
     },
 
-    // FORMごとの表示・非表示の切り替え
     showEditQuestionBlockTitleForm() {
       this.isShownForm = true;
     },
@@ -355,7 +350,6 @@ export default {
       this.isTheThirdItemEditing = false;
     },
 
-    // 全てのフォームの表示をオフにする
     hideAllEditQuestionItemForm() {
       this.hideEditQuestionBlockTitleForm();
       this.hideTheFirstEditQuestionItemForm();

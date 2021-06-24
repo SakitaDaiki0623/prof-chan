@@ -1,4 +1,3 @@
-<!-- app/javascript/components/TextFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownEditYesOrNoFormatDialog"
@@ -31,7 +30,7 @@
             cols="12"
             md="10"
           >
-            <p class="text-2xl font-bold text-gray-600 pt-3">
+            <p class="text-2xl font-bold pt-3">
               {{ editYesOrNoBlock.title }}
             </p>
           </v-col>
@@ -66,7 +65,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
-                  rules="input_required|max:50"
+                  rules="input_required|max:20"
                 >
                   <input
                     :id="
@@ -171,7 +170,7 @@
           :parent-yes-or-no-block-id="parentYesOrNoBlockId"
         />
 
-        <div class="mt-3 font-weight-bold text-gray-600 text-sm">
+        <div class="mt-3 font-weight-bold text-sm">
           {{ certainlyPushUpdateButton }}
         </div>
         <div class="text-center mt-3">
@@ -194,11 +193,9 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState, mapActions } from "vuex";
 
-// components ----------
 import EditYesOrNoBlockItem from "../yes_or_no_block/EditYesOrNoBlockItem";
 import IndividualCreateYesOrNoBlockItem from "../yes_or_no_block/IndividualCreateYesOrNoBlockItem";
 
@@ -309,7 +306,6 @@ export default {
       this.hideAllEditYesOrNoItemForm();
     },
 
-    // 元のアイテムの状態に戻す
     revertItemStateBeforeEdit() {
       this.$emit("close-yes-or-no-block-edit-dialog", this.editYesOrNoBlock);
     },
@@ -319,7 +315,6 @@ export default {
       this.closeEditYesOrNoFormatDialog();
 
       if (this.yesOrNoItemLength < 3) {
-        // 子コンポーネントのメソッドの呼び出し
         this.$refs.IndividualCreateYesOrNoBlockItem.resetYesOrNoItem();
       }
       requestAnimationFrame(() => {
@@ -327,7 +322,6 @@ export default {
       });
     },
 
-    // FORMごとの表示・非表示の切り替え
     showEditYesOrNoBlockTitleForm() {
       this.isShownForm = true;
     },
@@ -353,7 +347,6 @@ export default {
       this.isTheThirdItemEditing = false;
     },
 
-    // 全てのフォームの表示をオフにする
     hideAllEditYesOrNoItemForm() {
       this.hideEditYesOrNoBlockTitleForm();
       this.hideTheFirstEditYesOrNoItemForm();

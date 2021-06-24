@@ -1,4 +1,3 @@
-# app/serializers/ranking_block_serializer.rb
 class RankingBlockSerializer < ApplicationSerializer
   attributes :id, :title, :first_place, :second_place, :third_place, :owing_user_id, :owing_user_image, :owing_user_name
   belongs_to :profile_block, serializer: ProfileBlockSerializer

@@ -1,4 +1,3 @@
-# app/controllers/api/v1/question_blocks_controller.rb
 module Api
   module V1
     class QuestionBlocksController < ApiController
@@ -39,7 +38,7 @@ module Api
       end
 
       def popular_blocks
-        @question_popular_blocks = QuestionBlock.by_team(current_user).popular_blocks
+        @question_popular_blocks = QuestionBlock.by_team(current_user).includes([:users]).popular_blocks
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @question_popular_blocks,
           serializer: QuestionBlockSerializer
@@ -69,8 +68,9 @@ module Api
       end
 
       def recommended_topic_block
-        @question_block =  current_user.profile_block.question_blocks.popular_blocks[0]
+        @question_block = current_user.profile_block.question_blocks.includes(%i[question_block_likes users]).popular_blocks[0]
         return if @question_block.nil? || @question_block.users.blank?
+
         render json: @question_block
       end
 

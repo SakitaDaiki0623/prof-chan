@@ -1,4 +1,3 @@
-<!-- app/javascript/components/FavoriteFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownFavoriteFormatDialog"
@@ -65,7 +64,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="テキスト"
-                rules="input_required|max:20"
+                rules="input_required|max:10"
               >
                 <input
                   id="favorite_block_text"
@@ -101,8 +100,6 @@
 // plugins
 import axios from "axios";
 import { mapState } from "vuex";
-
-// components ----------
 
 export default {
   props: {

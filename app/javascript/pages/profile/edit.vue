@@ -1,11 +1,10 @@
-<!-- app/javascript/pages/profile/edit.vue -->
 <template>
   <div>
-    <v-container
+    <div
       v-if="shown"
-      class="border-gray-500 rounded-xl border-2 my-16 note"
+      class="border-gray-500 rounded-xl border-2 ma-16 note"
     >
-      <BasicAndAddressBlock
+      <BasicAndProfCardBlock
         :is-this-edit-page="isThisEditPage"
         :user="user"
       />
@@ -34,17 +33,16 @@
         :is-this-edit-page="isThisEditPage"
         :user="user"
       />
-    </v-container>
+    </div>
     <ToTopButton />
   </div>
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapState } from "vuex";
 
-import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
+import BasicAndProfCardBlock from "../../components/basic_profile/BasicAndProfCardBlock";
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
@@ -54,7 +52,7 @@ import ToTopButton from "../../components/parts/ToTopButton";
 
 export default {
   components: {
-    BasicAndAddressBlock,
+    BasicAndProfCardBlock,
     QuestionBlockList,
     YesOrNoBlockList,
     RankingBlockList,
@@ -94,7 +92,6 @@ export default {
     async firstRead() {
       await this.fetchProfile();
       await this.fetchUser();
-      // これをしないと先に値を渡す前に子コンポーネントが読まれてしまう
       this.shown = true;
     },
     async fetchProfile() {

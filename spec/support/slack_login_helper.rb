@@ -2,7 +2,7 @@ module SlackLoginHelper
   def slack_login_first_time
     Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # Devise使用時に必要な記載
     Rails.application.env_config["omniauth.auth"] = set_slack_omniauth # omniauth.authの値を代入
-    allow_any_instance_of(Users::OmniauthCallbacksController).to receive(:get_user_info).and_return(set_user_info) # strategy.authの値を代入
+    allow_any_instance_of(Users::OmniauthCallbacksController).to receive(:get_user_info).and_return(get_user_info) # strategy.authの値を代入
     visit root_path
     find("#agreement-path-button").click
     expect(current_path).to eq(agreement_path)

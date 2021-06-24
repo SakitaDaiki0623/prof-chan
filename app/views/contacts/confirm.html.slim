@@ -12,6 +12,10 @@
     .text-center.bg-white.p-3
       = @contact.email
     .form-label-text-block.inline-block
+      | カテゴリー*
+    .text-center.bg-white.p-3
+      = @contact.category
+    .form-label-text-block.inline-block
       | メッセージ*
     .bg-white.p-3
       = @contact.message
@@ -19,6 +23,7 @@
   = form_for(@contact) do |f|
     = f.hidden_field :name
     = f.hidden_field :email
+    = f.hidden_field :category
     = f.hidden_field :message
     .text-center
       = f.submit '送信', class: 'p-3 rounded-lg bg-brown-500 outline-none text-white shadow w-32 justify-center hover:bg-brown-700'
@@ -26,6 +31,7 @@
     = form_for @contact, url: back_path do |f|
       = f.hidden_field :name
       = f.hidden_field :email
+      = f.hidden_field :category
       = f.hidden_field :message
       div
         = f.submit '入力画面に戻る', class: 'mx-10 hover:opacity-50 inline-block'

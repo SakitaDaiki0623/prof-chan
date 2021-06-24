@@ -1,5 +1,3 @@
-// app/javascript/css/tailwind.scss
-//  カスタムクラスファイル
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -165,17 +163,6 @@
   }
 }
 
-.my-favorite-block-index {
-  @apply w-full;
-  @apply bg-white;
-  @apply rounded;
-  @apply border;
-  @apply border-gray-300;
-  @apply py-2;
-  @apply text-center;
-  @apply text-gray-600;
-}
-
 // 入力フォームラベル ====================
 // 雛形
 .form-label {
@@ -190,7 +177,6 @@
 }
 
 .form-label-text-block {
-  @apply pt-2;
   @apply text-sm;
   @apply font-medium;
   @apply bg-yellow-100;
@@ -220,3 +206,26 @@
   @apply shadow-md;
 }
 
+// ブロック
+.corner-title {
+  @apply text-center;
+  @apply text-4xl;
+  @apply text-white;
+  @apply py-5;
+  @apply my-10;
+}
+
+.profile-block-title {
+  @apply text-2xl;
+  @apply font-bold;
+  @apply px-3;
+  @apply pt-3;
+}
+
+// ブックマークページ
+.bookmark-place-num-title {
+  @apply border-2;
+  @apply border-white;
+  @apply border-dashed;
+  @apply m-5;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center text-gray-600">
+  <div class="text-center">
     <v-row
       justify="center"
       align-content="center"
@@ -16,7 +16,7 @@
           THEME
         </div>
         <div class="md:text-4xl text-2xl pt-10">
-          - - - - REMOTELY PROMOTE YOURSELF.- - - -
+          - - - - REMOTELY PROMOTE YOURSELF- - - -
         </div>
         <div class="text-md md:text-2xl pt-10">
           コロナ以前の雑談の補完。
@@ -169,7 +169,7 @@
               justify="center"
             >
               <v-col
-                cols="10"
+                cols="12"
                 lg="2"
                 align="left"
                 align-self="start"
@@ -204,7 +204,7 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
+                cols="12"
                 lg="2"
                 align="left"
                 align-self="start"
@@ -256,8 +256,8 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
-                lg="2"
+                cols="12"
+                lg="3"
                 align="left"
                 align-self="start"
               >
@@ -313,8 +313,8 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
-                lg="2"
+                cols="12"
+                lg="3"
                 align="left"
                 align-self="start"
               >
@@ -378,7 +378,7 @@
                 </div>
               </v-col>
               <v-col
-                cols="10"
+                cols="12"
                 lg="2"
                 align="left"
                 align-self="start"
@@ -395,7 +395,7 @@
                     outlined
                     color="cyan accent-1"
                   >
-                    <p class="text-2xl font-bold text-gray-600 px-3 pt-3">
+                    <p class="profile-block-title">
                       自己紹介
                     </p>
                     <v-card

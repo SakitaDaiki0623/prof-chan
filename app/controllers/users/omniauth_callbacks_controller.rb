@@ -7,13 +7,12 @@ module Users
     def slack
       bot_token = request.env['omniauth.strategy'].access_token
       hash_token = bot_token.to_hash
-      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], hash_token)
+      access_token = get_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], hash_token)
       user_token = bot_token.user_token
       user_info = get_user_info(user_token)
 
       # 初ログインであればチャンネル作成、招待
       channel = check_channel(user_info, request.env['omniauth.auth'], access_token)
-
       @user = User.from_omniauth(request.env['omniauth.auth'], user_info, hash_token, channel)
 
       if @user.persisted?

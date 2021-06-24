@@ -13,7 +13,7 @@
             プロフ編集
           </div>
           <img
-            src="../images/prof_normal.png"
+            src="../../images/prof_normal.png"
             class="md:max-w-sm max-w-xs mx-auto"
           >
         </v-col>
@@ -30,7 +30,7 @@
             プロフ閲覧
           </div>
           <img
-            src="../images/prof_open_normal.png"
+            src="../../images/prof_open_normal.png"
             class="md:max-w-sm max-w-xs mx-auto"
           >
         </v-col>
@@ -61,7 +61,7 @@
 
 <script>
 // components ----------
-import BasicProfCard from "./basic_profile/BasicProfCard";
+import BasicProfCard from "./BasicProfCard";
 import ProfCard from "./ProfCard";
 
 export default {

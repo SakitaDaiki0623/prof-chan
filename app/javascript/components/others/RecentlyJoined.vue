@@ -39,14 +39,15 @@
       :key="recentlyJoinedUserProfile.public_uid"
       cols="12"
       sm="12"
-      md="3"
-      class="border-dotted border-white border-2 ma-5"
+      lg="4"
     >
+    <div class="border-2 border-dotted border-white pa-5">
       <v-hover v-slot="{ hover }">
         <v-card
           class="mx-auto"
           :class="{ 'on-hover': hover }"
           max-width="344"
+          max-height="344"
           outlined
           color="brown lighten-5"
           @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
@@ -56,7 +57,7 @@
             max-height="250px"
           />
 
-          <div class="text-center font-bold text-4xl pt-5 text-brown-600">
+          <div class="text-center font-bold text-2xl pt-5 text-brown-600">
             {{ recentlyJoinedUserProfile.user.name }} さん
           </div>
           <v-card
@@ -67,6 +68,8 @@
           </v-card>
         </v-card>
       </v-hover>
+    </div>
+      
     </v-col>
   </v-row>
 </template>

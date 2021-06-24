@@ -1,4 +1,3 @@
-<!-- app/javascript/pages/profile/show.vue -->
 <template>
   <div>
     <Loading v-if="loading" />
@@ -12,6 +11,7 @@
             class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(previousProfile)"
+            large
           >
             ＜
           </v-btn>
@@ -19,6 +19,7 @@
             class="ma-5 white--text"
             color="brown"
             @click="moveToProfilesPage"
+            large
           >
             プロフ一覧に戻る
           </v-btn>
@@ -26,16 +27,17 @@
             class="ma-5 white--text"
             color="brown"
             @click="moveToNextProfilePage(nextProfile)"
+            large
           >
             ＞
           </v-btn>
         </v-row>
       </v-container>
-      <v-container
+      <div
         v-if="shown"
-        class="border-gray-500 rounded-xl border-2 my-16 note"
+        class="border-gray-500 rounded-xl border-2 ma-16 note"
       >
-        <BasicAndAddressBlock :user="user" />
+        <BasicAndProfCardBlock :user="user" />
 
         <FavoriteBlockList :user="user" />
 
@@ -46,18 +48,16 @@
         <YesOrNoBlockList :user="user" />
 
         <TextBlockList :user="user" />
-      </v-container>
+      </div>
       <ToTopButton />
     </div>
   </div>
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 
-// Component ----------
-import BasicAndAddressBlock from "../../components/BasicAndAddressBlock";
+import BasicAndProfCardBlock from "../../components/basic_profile/BasicAndProfCardBlock";
 import TextBlockList from "../../components/text_block/TextBlockList";
 import QuestionBlockList from "../../components/question_block/QuestionBlockList";
 import YesOrNoBlockList from "../../components/yes_or_no_block/YesOrNoBlockList";
@@ -68,7 +68,7 @@ import ToTopButton from "../../components/parts/ToTopButton";
 
 export default {
   components: {
-    BasicAndAddressBlock,
+    BasicAndProfCardBlock,
     QuestionBlockList,
     YesOrNoBlockList,
     RankingBlockList,
@@ -88,7 +88,6 @@ export default {
       });
   },
   beforeRouteUpdate(to, from, next) {
-    // URL の id が変わったときにリソースを再読み込みする
     next();
     this.resetLoading();
     this.updateRead(to.params.id);

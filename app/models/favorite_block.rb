@@ -3,10 +3,8 @@ class FavoriteBlock < ApplicationRecord
   has_many :favorite_block_likes, dependent: :destroy
   has_many :users, through: :favorite_block_likes
 
-  # validation =============
-  validates :text, presence: true, length: { maximum: 20 }
+  validates :text, presence: true, length: { maximum: 10 }
 
-  # active hash =============
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
 end

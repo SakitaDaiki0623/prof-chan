@@ -15,5 +15,4 @@ module TaskLogging
   end
 end
 
-# Override Rake::DSL#task to inject logging
 extend TaskLogging

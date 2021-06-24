@@ -39,7 +39,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
-                rules="input_required|max:50"
+                rules="input_required|max:15"
               >
                 <input
                   id="text_block_title"
@@ -77,7 +77,7 @@
                 :color="textBlockColor"
                 label="slackに投稿しますか?"
               ></v-checkbox>
-              <div class="text-gray-600 text-sm">
+              <div class="text-sm">
                 ※Slackへの投稿は1日に1回のみです。
               </div>
             </div>
@@ -110,13 +110,10 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
-// components ----------
 import TextFormatSelectDialog from "./TextFormatSelectDialog";
-
 export default {
   components: {
     TextFormatSelectDialog,

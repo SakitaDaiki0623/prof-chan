@@ -1,4 +1,3 @@
-<!-- app/javascript/components/yes_or_no_block/YesOrNoFormatDialog.vue -->
 <template>
   <v-dialog
     :value="isShownYesOrNoFormatDialog"
@@ -93,7 +92,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
-                rules="input_required|max:50"
+                rules="input_required|max:15"
               >
                 <input
                   id="yes_or_no_block_title"
@@ -134,7 +133,7 @@
                 label="slackに投稿しますか?"
                 :color="yesOrNoBlockColor"
               ></v-checkbox>
-              <div class="text-gray-600 text-sm">
+              <div class="text-sm">
                 ※Slackへの投稿は1日に1回のみです。
               </div>
             </div>
@@ -162,11 +161,9 @@
 </template>
 
 <script>
-// plugins
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
 
-// components ----------
 import YesOrNoBlockItem from "./YesOrNoBlockItem";
 
 export default {
@@ -188,7 +185,7 @@ export default {
       yesOrNoBlock: {
         title: "",
       },
-      yesOrNoItemNum: 1, // アイテム数
+      yesOrNoItemNum: 1,
       yesOrNoItem1: {
         content: "",
         answer: "",

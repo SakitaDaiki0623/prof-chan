@@ -11,14 +11,14 @@ module Slack
         encrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
       end
       access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
-      return access_token
+      access_token
     end
 
     def convert_favorite_msg(favorite_block)
       favorite_text = "favoriteブロック\n :star2:*#{favorite_block.category.name}* :star2:"
       favorite_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{favorite_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{favorite_block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{favorite_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
       encoded_msg = encode_msg(favorite_msg)
-      return encoded_msg
+      encoded_msg
     end
 
     def convert_question_msg(question_block)
@@ -32,14 +32,14 @@ module Slack
                   end
       question_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{question_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{question_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
       encoded_msg = encode_msg(question_msg)
-      return encoded_msg
+      encoded_msg
     end
 
     def convert_ranking_msg(ranking_block)
       ranking_text = "ランキングブロック\n :star2:*#{ranking_block.title}* :star2:"
       ranking_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{ranking_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{ranking_block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{ranking_block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{ranking_block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{ranking_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
       encoded_msg = encode_msg(ranking_msg)
-      return encoded_msg
+      encoded_msg
     end
 
     def convert_yes_or_no_msg(yes_or_no_block)
@@ -53,7 +53,7 @@ module Slack
                   end
       yes_or_no_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{yes_or_no_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{yes_or_no_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
       encoded_msg = encode_msg(yes_or_no_msg)
-      return encoded_msg
+      encoded_msg
     end
 
     def translate_boolean(answer)
@@ -64,13 +64,12 @@ module Slack
       text_text = "テキストブロック\n :star2:*#{text_block.title}* :star2:"
       text_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text_block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{text_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
       encoded_msg = encode_msg(text_msg)
-      return encoded_msg
+      encoded_msg
     end
 
     def encode_msg(msg)
       encoded_msg = ERB::Util.url_encode(msg)
-      return encoded_msg
+      encoded_msg
     end
-
   end
 end

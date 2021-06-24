@@ -1,4 +1,3 @@
-# app/controllers/api/v1/ranking_blocks_controller.rb
 module Api
   module V1
     class RankingBlocksController < ApiController
@@ -38,7 +37,7 @@ module Api
       end
 
       def popular_blocks
-        @ranking_popular_blocks = RankingBlock.by_team(current_user).popular_blocks
+        @ranking_popular_blocks = RankingBlock.by_team(current_user).includes([:users]).popular_blocks
         render json: ActiveModel::Serializer::CollectionSerializer.new(
           @ranking_popular_blocks,
           serializer: RankingBlockSerializer
@@ -68,8 +67,9 @@ module Api
       end
 
       def recommended_topic_block
-        @ranking_block =  current_user.profile_block.ranking_blocks.popular_blocks[0]
+        @ranking_block =  current_user.profile_block.ranking_blocks.includes(%i[ranking_block_likes users]).popular_blocks[0]
         return if @ranking_block.nil? || @ranking_block.users.blank?
+
         render json: @ranking_block
       end
 

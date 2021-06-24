@@ -1,4 +1,3 @@
-# app/serializers/yes_or_no_block_serializer.rb
 class YesOrNoBlockSerializer < ApplicationSerializer
   attributes :id, :title, :owing_user_id, :owing_user_image, :owing_user_name
   lazy_has_many   :yes_or_no_items, serializer: YesOrNoItemSerializer

@@ -34,6 +34,7 @@ class ContactsController < ApplicationController
     params.require(:contact)
           .permit(:email,
                   :name,
+                  :category,
                   :message)
   end
 end

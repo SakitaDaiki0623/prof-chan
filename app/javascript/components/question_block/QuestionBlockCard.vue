@@ -25,14 +25,14 @@
         <v-spacer />
         <question-block-like-button :question-block-id="questionBlock.id" v-if="isThisNotTopPage" />
       </v-row>
-      <p class="text-2xl font-bold text-gray-600 px-3 py-3">
+      <p class="profile-block-title">
         {{ questionBlock.title }}
       </p>
       <template v-for="question_item in questionBlock.question_items">
         <div :key="question_item.id">
           <div class="rounded-lg">
             <v-row>
-              <label for="question_item_content" class="mx-5">
+              <label for="question_item_content" class="mx-5 text-xl">
                 {{ question_item.content }}
               </label>
               <v-col cols="12" sm="12" class="mb-2">

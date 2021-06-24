@@ -10,9 +10,9 @@
       br
       | チェックを入れてログインボタンを押してください！
       = image_tag  "prof_normal.png", class: 'max-w-xs mx-auto'
-  = check_box_tag :agreement, class: 'p-5'
+  = check_box_tag :agreement, { class: 'p-5' }
   = label_tag :agreement, class: 'text-xl md:text-2xl'
-    | #{link_to '利用規約', terms_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}に同意します
+    | #{link_to '利用規約', terms_path, class: 'mx-3 border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}に同意します
 
   .text-center.p-5
     = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), user_slack_omniauth_authorize_path, method: :post, id: 'sign-in-with-slack-button', class: 'inline-block opacity-50 pointer-events-none hover:opacity-50'

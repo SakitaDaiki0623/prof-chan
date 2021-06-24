@@ -1,4 +1,3 @@
-# app/controllers/api/v1/question_items_controller.rb
 module Api
   module V1
     class QuestionItemsController < ApiController

@@ -1,5 +1,4 @@
 class Authentication < ApplicationRecord
-  # before
   before_save :encrypt_access_token
 
   belongs_to :user
