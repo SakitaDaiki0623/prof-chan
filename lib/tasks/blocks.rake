@@ -15,7 +15,7 @@ namespace :blocks do
     end
   }
 
-  desc '各チームに存在する各タイプのブロックをプロフ共有チャンネルに投稿'
+  desc '各チームに存在する各タイプのブロックをプロフ投稿チャンネルに投稿'
   task post_blocks: :environment do
     Team.all.includes(:users).each do |team|
       logger.debug 'post_blocks started!'
@@ -37,8 +37,8 @@ namespace :blocks do
 
       # アクセストークンの生成
       logger.debug 'creating access_token...'
-      token_test_result = ""
-      access_token = ""
+      token_test_result = ''
+      access_token = ''
       team.users.each do |user|
         encrypted_access_token = user.authentication.access_token
         key_len = ActiveSupport::MessageEncryptor.key_len
@@ -49,10 +49,11 @@ namespace :blocks do
         end
         access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
         token_test_result = access_token.post('api/auth.test').parsed
-        break if token_test_result.dig("ok")
+        break if token_test_result.dig('ok')
       end
       # 最後のtoken_test_resultもfalseであるならば投稿はできないので次に進む
-      next unless token_test_result.dig("ok")
+      next unless token_test_result.dig('ok')
+
       logger.info  'created access_token!'
 
       # 投稿先チャンネルIDの取得
