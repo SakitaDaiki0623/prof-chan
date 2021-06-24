@@ -6,6 +6,3 @@ RSpec.describe QuestionItem, type: :model do
     expect(create(:question_item)).to be_valid
   end
 end
-
-# フォームオブジェクトでテスト
-# spec/models/question_block_item_register_spec.rb

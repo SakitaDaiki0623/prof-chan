@@ -1,21 +1,3 @@
-# manga_anime
-# game_app
-# character
-# entertainer
-# musician
-# music
-# food
-# animal
-# sports
-# book
-# place
-# snack
-# alcohol_drink
-# restaurants
-# youtuber
-# actor
-
-# spec/factories/my_favorite_block.rb
 FactoryBot.define do
   factory :my_favorite_block do
     manga_anime { 'a' * 10 }

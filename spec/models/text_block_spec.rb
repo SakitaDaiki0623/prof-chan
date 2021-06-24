@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: text_blocks
-#
-#  id                 :bigint           not null, primary key
-#  title              :string(255)      not null
-#  text               :text             not null
-#  profile_block_id   :string(255)      not null
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-
-# spec/models/text_block.rb
 require 'rails_helper'
 
 RSpec.describe TextBlock, type: :model do

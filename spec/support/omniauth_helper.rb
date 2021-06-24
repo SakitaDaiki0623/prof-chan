@@ -1,5 +1,3 @@
-# [参考]https://github.com/yukihirop/GrapeSlack/blob/master/spec/support/omniauth_helper.rb
-# spec/support/omniauth_helper.rb
 module OmniauthHelpers
   def set_slack_omniauth
     OmniAuth.config.mock_auth[:slack] =

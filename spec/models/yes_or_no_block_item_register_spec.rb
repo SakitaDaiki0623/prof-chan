@@ -1,4 +1,3 @@
-# spec/models/yes_or_no_item_spec.rb
 require 'rails_helper'
 
 RSpec.describe YesOrNoBlockItemRegister, type: :model do

@@ -1,7 +1,3 @@
-# spec/models/question_block_item_register_spec.rb
-
-# [対象フォーム] app/forms/question_block_item_register.rb
-
 require 'rails_helper'
 
 RSpec.describe QuestionBlockItemRegister, type: :model do
