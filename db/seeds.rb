@@ -40,6 +40,7 @@ if Rails.env.production?
     name: 'normal login',
     workspace_id: 'A123B123C123',
     share_channel_id: 'A123B123C123',
+    share_channel_name: 'A123B123C123',
     domain: 'A123B123C123',
     image: "https://i.gyazo.com/f0c0826c1358634f1821320e5530f8ec.png"
   )
