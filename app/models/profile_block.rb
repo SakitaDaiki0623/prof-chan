@@ -7,8 +7,6 @@ class ProfileBlock < ApplicationRecord
   has_many :favorite_blocks, dependent: :destroy
   has_one  :address_block, dependent: :destroy
   belongs_to :user
-  has_one :my_favorite_block, dependent: :destroy
 
   after_create  :create_address_block
-  after_create  :create_my_favorite_block
 end

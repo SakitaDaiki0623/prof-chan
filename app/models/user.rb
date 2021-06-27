@@ -8,7 +8,7 @@ class User < ApplicationRecord
   end
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable, :validatable
+         :recoverable, :rememberable, :omniauthable
 
   mount_uploader :image, ImageUploader
 
@@ -37,10 +37,9 @@ class User < ApplicationRecord
 
   validates :name,                      presence: true
   validates :image,                     presence: true
-  validates :email,                     presence: true
   validates :provider,                  presence: true
-  validates_uniqueness_of :email, scope: %i[team_id provider]
-  validates :encrypted_password, presence: true
+  validates_uniqueness_of :email, scope: %i[team_id provider uid]
+  validates :password, presence: true, length: { minimum:6 }
   validates :agreement, acceptance: { allow_nil: false, on: :create, unless: proc { |u| u.email == 'guest@example.com' || u.provider == 'slack' } }
 
   def create_guest_profile
@@ -73,7 +72,6 @@ class User < ApplicationRecord
     user = find_or_initialize_by(provider: auth.provider, uid: auth.info.authed_user.id)
     user.password = Devise.friendly_token[0, 20]
     user.name = user_info.dig('user', 'name')
-    user.email = user_info.dig('user', 'email')
     user.remote_image_url = user_info.dig('user', 'image_192')
     user.check_authentication_existence(hash_token)
     user.check_team_existence(user_info.dig('team'), channel)

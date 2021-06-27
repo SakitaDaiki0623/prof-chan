@@ -30,7 +30,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       ## User Info
       t.string  :name, null: false
       t.string  :image, null: false
-      t.string  :email, null: false
+      t.string  :email
       t.integer :role, null: false, default: 1
       t.integer :question_share_right, null: false, default: 0
       t.integer :ranking_share_right, null: false, default: 0
@@ -41,9 +41,8 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :users, [:email, :team_id, :provider],    unique: true
+    add_index :users, [:email, :team_id, :provider, :uid],    unique: true
     add_index :users, :uid,                  unique: true
-    add_index :users, [:uid, :provider],     unique: true
   end
 
   def self.down

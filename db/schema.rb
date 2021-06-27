@@ -194,7 +194,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.string "image", null: false
-    t.string "email", null: false
+    t.string "email"
     t.integer "role", default: 1, null: false
     t.integer "question_share_right", default: 0, null: false
     t.integer "ranking_share_right", default: 0, null: false
@@ -203,9 +203,8 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email", "team_id", "provider"], name: "index_users_on_email_and_team_id_and_provider", unique: true
+    t.index ["email", "team_id", "provider", "uid"], name: "index_users_on_email_and_team_id_and_provider_and_uid", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
