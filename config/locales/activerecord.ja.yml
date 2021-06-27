@@ -35,7 +35,7 @@ ja:
         image: 'チーム画像'
       profile:
         birthday: '生年月日'
-        day_of_joinning: '入社日'
+        day_of_joinning: 'Slack参加日'
         introduction: '自己紹介'
         height: '身長'
         gender: '性別'

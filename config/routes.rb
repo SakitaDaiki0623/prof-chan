@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     resources :favorite_block_likes
     resources :yes_or_no_blocks
     resources :ranking_blocks
-    resources :my_favorite_blocks
     resources :favorite_blocks
     resources :address_blocks
     resources :teams
@@ -103,7 +102,6 @@ Rails.application.routes.draw do
         end
       end
       resources :yes_or_no_items,    only: %i[index create update destroy]
-      resources :my_favorite_blocks, only: %i[index update]
       resources :address_blocks,     only: %i[index update]
 
       namespace :likes do
