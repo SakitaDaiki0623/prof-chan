@@ -16,7 +16,6 @@ gem "omniauth-rails_csrf_protection"
 
 # Slack API
 gem 'slack-ruby-client'
-# gem 'slack-ruby-bot-server'
 
 # 権限
 gem "pundit"
@@ -24,16 +23,13 @@ gem "administrate"
 
 # Serializer
 gem 'active_model_serializers', '~> 0.10.0'
-# Active Model SerializersのN + 1問題を解消
 gem "ams_lazy_relationships"
 
-# Application server
 gem 'puma', '~> 4.1'
 gem 'carrierwave'
 gem 'fog-aws'
 
 # Config
-gem 'config'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'parser', '< 2.6.6.0'
 
@@ -67,9 +63,6 @@ gem 'newrelic_rpm'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  # Email
-  gem 'letter_opener_web'
-
   # Test
   gem 'factory_bot_rails'
   gem 'rspec-rails'
@@ -98,7 +91,6 @@ group :development, :test do
 end
 
 group :development do
-  # N + 1問題
   gem 'bullet'
 
   gem 'foreman'
