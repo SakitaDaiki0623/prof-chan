@@ -31,7 +31,7 @@
       <p class="text-2xl font-bold px-3 pt-3">
         {{ textBlock.title }}
       </p>
-      <v-card class="pa-3 rounded-lg" outlined color="white" min-height="200px">
+      <v-card class="pa-3 rounded-lg" outlined color="white" min-height="200px" v-if="textBlock.text">
         <div v-for="str of textBlock.text.split('\n')" :key="str">
           {{ str }}
         </div>
