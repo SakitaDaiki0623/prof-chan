@@ -19,8 +19,10 @@ namespace :blocks do
   task post_blocks: :environment do
     Team.all.includes(:users).each do |team|
       logger.debug 'post_blocks started!'
+      # 通常ログインはプロフィール公開しない
       next if team.users.count.zero? || team.users[0].provider == 'email' || team.share_right_inactive?
 
+      # 各ブロックをランダムに1つ取得する
       logger.debug 'selecting blocks...'
       favorite_block = FavoriteBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: team.workspace_id }).sample
       question_block = QuestionBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: team.workspace_id }).sample
@@ -28,10 +30,12 @@ namespace :blocks do
       yes_or_no_block = YesOrNoBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: team.workspace_id }).sample
       text_block = TextBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: team.workspace_id }).sample
 
+      # 全てのブロックがない場合は投稿しない
       next if favorite_block.nil? && question_block.nil? && ranking_block.nil? && yes_or_no_block.nil? && text_block.nil?
 
       logger.info 'possible to post blocks!'
 
+      # アクセストークンの生成
       logger.debug 'creating access_token...'
       token_test_result = ''
       access_token = ''
@@ -47,18 +51,23 @@ namespace :blocks do
         token_test_result = access_token.post('api/auth.test').parsed
         break if token_test_result.dig('ok')
       end
+      # 最後のtoken_test_resultもfalseであるならば投稿はできないので次に進む
       next unless token_test_result.dig('ok')
 
       logger.info  'created access_token!'
 
+      # 投稿先チャンネルIDの取得
       channel_id = team.share_channel_id
 
+      # プロフちゃんのメッセージを最初に送信
       prof_text = '本日の社員紹介!:hamster:'
       prof_msg = '[ { "type": "section", "text": { "type": "mrkdwn", "text": "本日の社員紹介!:hamster: \n 今日も社員さんの中から素敵なブロックを紹介します！:star2: \n 気になった話題には是非スタンプを押してね:thumbsup:" } }, { "type": "divider" }, { "type": "divider" } ]'
       post_block(prof_text, prof_msg, channel_id, access_token)
 
+      # 各ブロックを共有スペースに投稿する===================
       logger.debug 'posting blocks...'
       begin
+        ## favoriteブロック
         if favorite_block.present?
           logger.debug 'posting favorite_block...'
           favorite_text = " `favoriteブロック` \n :star2:*#{favorite_block.category.name}* :star2:"
@@ -66,6 +75,7 @@ namespace :blocks do
           post_block(favorite_text, favorite_msg, channel_id, access_token)
           logger.info  'posted favorite_block!'
         end
+        ## クエスチョンブロック
         if question_block.present?
           logger.debug 'posting question_block...'
           question_text = " `クエスチョンブロック` \n :star2:*#{question_block.title}* :star2:"
@@ -80,6 +90,7 @@ namespace :blocks do
           post_block(question_text, question_msg, channel_id, access_token)
           logger.info  'posted question_block!'
         end
+        ## ランキングブロック
         if ranking_block.present?
           logger.debug 'posting ranking_block...'
           ranking_text = " `ランキングブロック` \n :star2:*#{ranking_block.title}* :star2:"
@@ -87,6 +98,7 @@ namespace :blocks do
           post_block(ranking_text, ranking_msg, channel_id, access_token)
           logger.info  'posted ranking_block!'
         end
+        ## yes or Yes or No ブロック
         if yes_or_no_block.present?
           logger.debug 'posting yes_or_no_block...'
           yes_or_no_text = " `Yes or No ブロック` \n :star2:*#{yes_or_no_block.title}* :star2:"
@@ -101,6 +113,7 @@ namespace :blocks do
           post_block(yes_or_no_text, yes_or_no_msg, channel_id, access_token)
           logger.info  'posted yes_or_no_block!'
         end
+        ## テキストブロック
         if text_block.present?
           logger.debug 'posting text_block...'
           text_text = " `テキストブロック` \n :star2:*#{text_block.title}* :star2:"
