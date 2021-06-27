@@ -25,9 +25,9 @@ RSpec.describe "QuestionBlock", type: :system do
 
   # 編集画面まで遷移
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_normal_team_with_users(users_count: 3)
+    create_real_team_with_users(users_count: 3)
+    login
     find('#profile-edit-button').click
   end
 
@@ -49,7 +49,6 @@ RSpec.describe "QuestionBlock", type: :system do
           end
           expect(page).to have_button 'クエスチョンブロックを作成！', disabled: false
           click_on 'クエスチョンブロックを作成！'
-          page.driver.browser.switch_to.alert.dismiss
         end
 
         it 'クエスチョンブロックが作成されること' do
@@ -222,7 +221,6 @@ RSpec.describe "QuestionBlock", type: :system do
               end
               expect(page).to have_button 'クエスチョンブロックを作成！', disabled: false
               click_on 'クエスチョンブロックを作成！'
-              page.driver.browser.switch_to.alert.dismiss
             end
             it 'アイテム数が3つのクエスチョンブロックが作成されること' do
               expect(page).to have_content(question_block_title),   'クエスチョンブロックが作成されていません'
@@ -322,7 +320,6 @@ RSpec.describe "QuestionBlock", type: :system do
         fill_in 'question_item[question_item_answer]',  with:  question_item_answer1
       end
       click_on 'クエスチョンブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
       sleep 1
       find("#edit-question-block-button-#{last_question_block.id}").click
       expect(page).to have_content('クエスチョンブロックを編集'), 'クエスチョンブロック編集モーダルが表示されていません'
@@ -465,7 +462,6 @@ RSpec.describe "QuestionBlock", type: :system do
           within ("#edit-question-item-2") do
             expect(page).to have_selector("#delete-question-item-button-#{question_item_2.id}")
             find("#delete-question-item-button-#{question_item_2.id}").click
-            page.driver.browser.switch_to.alert.accept
           end
         end
         it 'アイテムが1つ消えること' do
@@ -493,7 +489,6 @@ RSpec.describe "QuestionBlock", type: :system do
           within ("#edit-question-item-3") do
             expect(page).to have_selector("#delete-question-item-button-#{question_item_3.id}")
             find("#delete-question-item-button-#{question_item_3.id}").click
-            page.driver.browser.switch_to.alert.accept
           end
         end
         it '新規作成フォームが表示されること' do
@@ -512,7 +507,6 @@ RSpec.describe "QuestionBlock", type: :system do
         fill_in 'question_item[question_item_answer]',  with:  question_item_answer1
       end
       click_on 'クエスチョンブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do

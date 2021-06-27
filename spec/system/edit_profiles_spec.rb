@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'EditProfile', type: :system do
 
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_normal_team_with_users(users_count: 3)
+    create_real_team_with_users(users_count: 3)
+    login
   end
 
   let(:my_profile) { Profile.last }

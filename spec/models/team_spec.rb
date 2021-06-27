@@ -26,6 +26,24 @@ RSpec.describe Team, type: :model do
       expect(team2.errors[:workspace_id]).to include("はすでに存在します")
     end
 
+    it 'share_channel_idがなかったら、ユーザー登録に失敗すること' do
+      team = build(:team, share_channel_id: nil)
+      team.valid?
+      expect(team.errors[:share_channel_id]).to include("を入力してください")
+    end
+
+    it 'share_channel_nameがなかったら、ユーザー登録に失敗すること' do
+      team = build(:team, share_channel_name: nil)
+      team.valid?
+      expect(team.errors[:share_channel_name]).to include("を入力してください")
+    end
+
+    it 'domainがなかったら、ユーザー登録に失敗すること' do
+      team = build(:team, domain: nil)
+      team.valid?
+      expect(team.errors[:domain]).to include("を入力してください")
+    end
+
     it 'imageがなかったら、ユーザー登録に失敗すること' do
       team = build(:team, image: nil)
       team.valid?

@@ -6,9 +6,9 @@ RSpec.describe 'NotFoundPage', type: :system do
   describe 'ログイン後' do
     describe 'プロフ一覧画面' do
       before do
-        create_real_team_with_users(users_count: 15)
-        create_normal_team_with_users
-        slack_login_till_access_top_path
+        create_normal_team_with_users(users_count: 3)
+        create_real_team_with_users(users_count: 3)
+        login
       end
       context '存在しないURLにアクセスした時' do
         before { visit '/profiles/404test' }

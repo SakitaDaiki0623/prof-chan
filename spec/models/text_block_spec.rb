@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe TextBlock, type: :model do
-
+  let(:over_fifteen_words) { 'あ' * 16 }
+  let(:over_four_hundreds_words)  { 'あ' * 401 }
   it '有効なファクトリを持つこと' do
     expect(create(:text_block)).to be_valid
   end
@@ -13,10 +14,10 @@ RSpec.describe TextBlock, type: :model do
       expect(text_block.errors[:title]).to include("を入力してください")
     end
 
-    it 'タイトルが51文字以上なら、テキストブロックの登録に失敗すること' do
-      text_block = build(:text_block, title: 'a' * 51)
+    it 'タイトルが15文字以上なら、テキストブロックの登録に失敗すること' do
+      text_block = build(:text_block, title: over_fifteen_words)
       text_block.valid?
-      expect(text_block.errors[:title]).to include("は50文字以内で入力してください")
+      expect(text_block.errors[:title]).to include("は15文字以内で入力してください")
     end
 
     it 'テキストがなかったら、テキストブロックの登録に失敗すること' do
@@ -25,10 +26,10 @@ RSpec.describe TextBlock, type: :model do
       expect(text_block.errors[:text]).to include("を入力してください")
     end
 
-    it 'テキストが201文字以上なら、テキストブロックの登録に失敗すること' do
-      text_block = build(:text_block, text: 'a' * 201)
+    it 'テキストが400文字以上なら、テキストブロックの登録に失敗すること' do
+      text_block = build(:text_block, text: over_four_hundreds_words)
       text_block.valid?
-      expect(text_block.errors[:text]).to include("は200文字以内で入力してください")
+      expect(text_block.errors[:text]).to include("は400文字以内で入力してください")
     end
   end
 end

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe RankingBlock, type: :model do
+  let(:over_fifteen_words) { 'あ' * 16 }
+  let(:over_twenty_words)  { 'あ' * 21 }
   it '有効なファクトリを持つこと' do
     expect(create(:ranking_block)).to be_valid
   end
@@ -12,10 +14,10 @@ RSpec.describe RankingBlock, type: :model do
       expect(ranking_block.errors[:title]).to include("を入力してください")
     end
 
-    it 'タイトルが51文字以上なら、ランキングブロックの登録に失敗すること' do
-      ranking_block = build(:ranking_block, title: 'a' * 51)
+    it 'タイトルが15文字以上なら、ランキングブロックの登録に失敗すること' do
+      ranking_block = build(:ranking_block, title: over_fifteen_words)
       ranking_block.valid?
-      expect(ranking_block.errors[:title]).to include("は50文字以内で入力してください")
+      expect(ranking_block.errors[:title]).to include("は15文字以内で入力してください")
     end
 
     it '第1位がなかったら、ランキングブロックの登録に失敗すること' do
@@ -24,10 +26,10 @@ RSpec.describe RankingBlock, type: :model do
       expect(ranking_block.errors[:first_place]).to include("を入力してください")
     end
 
-    it '第1位が51文字以上なら、ランキングブロックの登録に失敗すること' do
-      ranking_block = build(:ranking_block, first_place: 'a' * 51)
+    it '第1位が20文字以上なら、ランキングブロックの登録に失敗すること' do
+      ranking_block = build(:ranking_block, first_place: over_twenty_words)
       ranking_block.valid?
-      expect(ranking_block.errors[:first_place]).to include("は50文字以内で入力してください")
+      expect(ranking_block.errors[:first_place]).to include("は20文字以内で入力してください")
     end
 
     it '第2位がなかったら、ランキングブロックの登録に失敗すること' do
@@ -36,10 +38,10 @@ RSpec.describe RankingBlock, type: :model do
       expect(ranking_block.errors[:second_place]).to include("を入力してください")
     end
 
-    it '第2位が51文字以上なら、ランキングブロックの登録に失敗すること' do
-      ranking_block = build(:ranking_block, second_place: 'a' * 51)
+    it '第2位が20文字以上なら、ランキングブロックの登録に失敗すること' do
+      ranking_block = build(:ranking_block, second_place: over_twenty_words)
       ranking_block.valid?
-      expect(ranking_block.errors[:second_place]).to include("は50文字以内で入力してください")
+      expect(ranking_block.errors[:second_place]).to include("は20文字以内で入力してください")
     end
 
     it '第3位がなかったら、ランキングブロックの登録に失敗すること' do
@@ -48,10 +50,10 @@ RSpec.describe RankingBlock, type: :model do
       expect(ranking_block.errors[:third_place]).to include("を入力してください")
     end
 
-    it '第3位が51文字以上なら、ランキングブロックの登録に失敗すること' do
-      ranking_block = build(:ranking_block, third_place: 'a' * 51)
+    it '第3位が20文字以上なら、ランキングブロックの登録に失敗すること' do
+      ranking_block = build(:ranking_block, third_place: over_twenty_words)
       ranking_block.valid?
-      expect(ranking_block.errors[:third_place]).to include("は50文字以内で入力してください")
+      expect(ranking_block.errors[:third_place]).to include("は20文字以内で入力してください")
     end
   end
 end

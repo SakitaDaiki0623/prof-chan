@@ -5,9 +5,9 @@ RSpec.describe 'ProfilesPage', type: :system do
   let(:user) {build(:user, :real_workspace_id)}
 
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_real_team_with_users(users_count: 3)
+    create_normal_team_with_users(users_count: 3)
+    login
   end
 
   describe 'ページの基本検証' do

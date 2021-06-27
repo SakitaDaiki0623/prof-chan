@@ -14,9 +14,9 @@ RSpec.describe 'RankingBlock', type: :system do
 
   # 編集画面まで遷移
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_normal_team_with_users(users_count: 3)
+    create_real_team_with_users(users_count: 3)
+    login
     find('#profile-edit-button').click
   end
 
@@ -31,7 +31,6 @@ RSpec.describe 'RankingBlock', type: :system do
         fill_in 'ranking_block_third_place',	with: factory_ranking_block.third_place
         expect(page).to have_button 'ランキングブロックを作成！', disabled: false
         click_on 'ランキングブロックを作成！'
-        page.driver.browser.switch_to.alert.dismiss
       end
       it 'ランキングブロックが作成されること' do
         expect(page).to have_content(factory_ranking_block.title),        'ランキングブロックが作成されていません'
@@ -170,7 +169,6 @@ RSpec.describe 'RankingBlock', type: :system do
       fill_in 'ranking_block_second_place',	with: factory_ranking_block.second_place
       fill_in 'ranking_block_third_place',	with: factory_ranking_block.third_place
       click_on 'ランキングブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
       sleep 0.5
     end
     context 'ランキングブロックを更新した時' do

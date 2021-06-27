@@ -29,21 +29,6 @@ module OmniauthHelpers
     user_info
   end
 
-  def get_access_token
-    user_info = {
-      "user"=>
-        {"name"=>'sample_name',
-        "email"=>Faker::Internet.email,
-        "image_192"=>ENV['USER_IMAGE'],},
-      "team"=>
-        {"id"=>ENV['TEAM_ID'],
-        "name"=>"show_profile_development",
-        "image_230"=>ENV['TEAM_IMAGE'],
-        }
-    }
-    user_info
-  end
-
   def set_invalid_omniauth
     OmniAuth.config.mock_auth[:slack] = :invalid_credentials
   end

@@ -73,4 +73,5 @@ RSpec.configure do |config|
   config.include OmniauthHelpers
   config.include SlackLoginHelper
   config.include FactoryHelper
+  config.include LoginHelper
 end

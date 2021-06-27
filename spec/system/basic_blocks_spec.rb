@@ -9,9 +9,9 @@ RSpec.describe "BasicBlocks", type: :system do
 
   # 編集画面まで遷移
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_normal_team_with_users(users_count: 3)
+    create_real_team_with_users(users_count: 3)
+    login
     find('#profile-edit-button').click
   end
 

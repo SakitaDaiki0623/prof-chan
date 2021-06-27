@@ -1,5 +1,3 @@
-# Finished in 1 minute 45.06 seconds (files took 5.08 seconds to load)
-# 12 examples, 0 failures
 require 'rails_helper'
 
 RSpec.describe 'TextBlock', type: :system do
@@ -7,16 +5,16 @@ RSpec.describe 'TextBlock', type: :system do
   let(:text_block) { TextBlock.last }
   let!(:factory_text_block) { create(:text_block) }
 
-  let(:words_over_fifty)      { 'あ' * 51 }
-  let(:words_over_two_hundreds) { 'あ' * 201 }
+  let(:words_over_fifteen)      { 'あ' * 16 }
+  let(:words_over_four_hundreds) { 'あ' * 401 }
 
   let(:my_profile) { Profile.last }
   let(:others_profile) { Profile.second }
 
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_normal_team_with_users(users_count: 3)
+    create_real_team_with_users(users_count: 3)
+    login
     find('#profile-edit-button').click
   end
 
@@ -30,7 +28,6 @@ RSpec.describe 'TextBlock', type: :system do
         fill_in 'text_block_text',	with: factory_text_block.text
         expect(page).to have_button 'テキストブロックを作成！', disabled: false
         click_on 'テキストブロックを作成！'
-        page.driver.browser.switch_to.alert.dismiss
       end
       it 'テキストブロックが作成されること' do
         expect(page).to have_content(factory_text_block.title), 'テキストブロックが作成されていません'
@@ -69,28 +66,28 @@ RSpec.describe 'TextBlock', type: :system do
       end
     end
 
-    context 'タイトルが51文字以上の時' do
+    context 'タイトルが15文字以上の時' do
       before do
         click_on 'テキストブロックを追加する'
-        fill_in 'text_block_title',	with: words_over_fifty
+        fill_in 'text_block_title',	with: words_over_fifteen
         sleep 0.5
-        fill_in 'text_block_title',	with: words_over_fifty
+        fill_in 'text_block_title',	with: words_over_fifteen
       end
       it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-        expect(page).to have_content('タイトルは最大50文字だよ'), 'バリデーションメッセージが表示されていません'
+        expect(page).to have_content('タイトルは最大15文字だよ'), 'バリデーションメッセージが表示されていません'
         expect(page).to have_button 'テキストブロックを作成！', disabled: true
       end
     end
 
-    context 'テキストが201文字以上の時' do
+    context 'テキストが400文字以上の時' do
       before do
         click_on 'テキストブロックを追加する'
-        fill_in 'text_block_text', with: words_over_two_hundreds
+        fill_in 'text_block_text', with: words_over_four_hundreds
         sleep 0.5
-        fill_in 'text_block_text', with: words_over_two_hundreds
+        fill_in 'text_block_text', with: words_over_four_hundreds
       end
       it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-        expect(page).to have_content('テキストは最大200文字だよ'), 'バリデーションメッセージが表示されていません'
+        expect(page).to have_content('テキストは最大400文字だよ'), 'バリデーションメッセージが表示されていません'
         expect(page).to have_button 'テキストブロックを作成！', disabled: true
       end
     end
@@ -104,7 +101,6 @@ RSpec.describe 'TextBlock', type: :system do
       fill_in 'text_block_text', with: 'テキスト'
       expect(page).to have_button 'テキストブロックを作成！', disabled: false
       click_on 'テキストブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
     end
     context 'テキストブロックを更新した時' do
       before do
@@ -139,7 +135,6 @@ RSpec.describe 'TextBlock', type: :system do
       fill_in 'text_block_text',	with: '削除されるテキストブロック'
       expect(page).to have_button 'テキストブロックを作成！', disabled: false
       click_on 'テキストブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do

@@ -7,23 +7,24 @@ RSpec.describe "YesOrNoBlock", type: :system do
   let(:yes_or_no_item_1)     { YesOrNoBlock.last.yes_or_no_items[0] }
   let(:yes_or_no_item_2)     { YesOrNoBlock.last.yes_or_no_items[1] }
   let(:yes_or_no_item_3)     { YesOrNoBlock.last.yes_or_no_items[2] }
-  let(:words_over_fifty)      { 'あ' * 51 }
+  let(:over_fifteen_words) { 'あ' * 16 }
+  let(:over_twenty_words)  { 'あ' * 21 }
 
-  let(:yes_or_no_block_title) { 'Yes or No ブロック タイトル' }
-  let(:edit_yes_or_no_block_title) { 'Yes or No ブロック タイトル 編集済み' }
-  let(:yes_or_no_item_content1) { 'Yes or No アイテム1 質問' }
-  let(:edit_yes_or_no_item_content1) { 'Yes or No アイテム1 質問 編集済み' }
-  let(:yes_or_no_item_content2) { 'Yes or No アイテム2 質問' }
-  let(:yes_or_no_item_content3) { 'Yes or No アイテム3 質問' }
+  let(:yes_or_no_block_title) { 'YesorNoタイトル' }
+  let(:edit_yes_or_no_block_title) { '編集YesorNoタイトル' }
+  let(:yes_or_no_item_content1) { 'YesorNo質問1' }
+  let(:edit_yes_or_no_item_content1) { '編集YesorNo質問1' }
+  let(:yes_or_no_item_content2) { 'YesorNo質問2' }
+  let(:yes_or_no_item_content3) { 'YesorNo質問3' }
 
   let(:my_profile) { Profile.last }
   let(:others_profile) { Profile.second }
 
   # 編集画面まで遷移
   before do
-    create_real_team_with_users(users_count: 15)
-    create_normal_team_with_users
-    slack_login_till_access_top_path
+    create_normal_team_with_users(users_count: 3)
+    create_real_team_with_users(users_count: 3)
+    login
     find('#profile-edit-button').click
   end
 
@@ -46,7 +47,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
           end
           expect(page).to have_button 'Yes or No ブロックを作成！', disabled: false
           click_on 'Yes or No ブロックを作成！'
-          page.driver.browser.switch_to.alert.dismiss
         end
 
         it 'Yes or No ブロックが作成されること' do
@@ -66,7 +66,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
 
         it '作成ボタンがdisableに戻っていること' do
           click_on 'Yes or No ブロックを追加する'
-          expect(page).to have_content('Yes or No ブロック')
           expect(page).to have_button 'Yes or No ブロックを作成！', disabled: true
         end
       end
@@ -81,14 +80,14 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
       end
 
-      context 'タイトルが51文字以上の時' do
+      context 'タイトルが15文字以上の時' do
         before do
-          fill_in 'yes_or_no_block_title', with: words_over_fifty
+          fill_in 'yes_or_no_block_title', with: over_fifteen_words
           sleep 0.5
-          fill_in 'yes_or_no_block_title', with: words_over_fifty
+          fill_in 'yes_or_no_block_title', with: over_fifteen_words
         end
         it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-          expect(page).to have_content(' タイトルは最大50文字だよ'), 'バリデーションメッセージが表示されていません'
+          expect(page).to have_content(' タイトルは最大15文字だよ'), 'バリデーションメッセージが表示されていません'
           expect(page).to have_button 'Yes or No ブロックを作成！', disabled: true
         end
       end
@@ -105,16 +104,16 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
       end
 
-      context '1番目の質問が51文字以上の時' do
+      context '1番目の質問が20文字以上の時' do
         before do
           within ("#create-yes-or-no-item-1") do
-            fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+            fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
             sleep 0.5
-            fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+            fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
           end
         end
         it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-          expect(page).to have_content('1番目の質問は最大50文字だよ'), 'バリデーションメッセージが表示されていません'
+          expect(page).to have_content('1番目の質問は最大20文字だよ'), 'バリデーションメッセージが表示されていません'
           expect(page).to have_button 'Yes or No ブロックを作成！', disabled: true
         end
       end
@@ -192,7 +191,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
               end
               expect(page).to have_button 'Yes or No ブロックを作成！', disabled: false
               click_on 'Yes or No ブロックを作成！'
-              page.driver.browser.switch_to.alert.dismiss
             end
             it 'アイテム数が3つのYes or No ブロックが作成されること' do
               expect(page).to have_content(yes_or_no_block_title),   'Yes or No ブロックが作成されていません'
@@ -231,7 +229,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
             end
           end
 
-          context '全ての値が50文字以上でで入力された時' do
+          context '全ての値が20文字以上でで入力された時' do
             before do
               fill_in 'yes_or_no_block_title', with:  words_over_fifty
               sleep 0.5
@@ -253,10 +251,10 @@ RSpec.describe "YesOrNoBlock", type: :system do
               end
             end
             it "それぞれの空値のバリデーションメッセージが表示されること" do
-              expect(page).to have_content('タイトルは最大50文字だよ'), 'バリデーションメッセージが表示されていません'
-              expect(page).to have_content('1番目の質問は最大50文字だよ'), 'バリデーションメッセージが表示されていません'
-              expect(page).to have_content('2番目の質問は最大50文字だよ'), 'バリデーションメッセージが表示されていません'
-              expect(page).to have_content('3番目の質問は最大50文字だよ'), 'バリデーションメッセージが表示されていません'
+              expect(page).to have_content('タイトルは最大15文字だよ'), 'バリデーションメッセージが表示されていません'
+              expect(page).to have_content('1番目の質問は最20文字だよ'), 'バリデーションメッセージが表示されていません'
+              expect(page).to have_content('2番目の質問は最大20文字だよ'), 'バリデーションメッセージが表示されていません'
+              expect(page).to have_content('3番目の質問は最大20文字だよ'), 'バリデーションメッセージが表示されていません'
             end
           end
         end
@@ -272,7 +270,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
         fill_in 'yes_or_no_item[yes_or_no_item_content]', with: yes_or_no_item_content1
       end
       click_on 'Yes or No ブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
       sleep 1
       find("#edit-yes-or-no-block-button-#{last_yes_or_no_block.id}").click
       sleep 1
@@ -417,7 +414,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
           within ("#edit-yes-or-no-item-2") do
             expect(page).to have_selector("#delete-yes-or-no-item-button-#{yes_or_no_item_2.id}")
             find("#delete-yes-or-no-item-button-#{yes_or_no_item_2.id}").click
-            page.driver.browser.switch_to.alert.accept
           end
         end
         it 'アイテムが1つ消えること' do
@@ -443,7 +439,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
           within ("#edit-yes-or-no-item-3") do
             expect(page).to have_selector("#delete-yes-or-no-item-button-#{yes_or_no_item_3.id}")
             find("#delete-yes-or-no-item-button-#{yes_or_no_item_3.id}").click
-            page.driver.browser.switch_to.alert.accept
           end
         end
         it '新規作成フォームが表示されること' do
@@ -462,7 +457,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
         find(".no-for-rspec").click
       end
       click_on 'Yes or No ブロックを作成！'
-      page.driver.browser.switch_to.alert.dismiss
     end
     context '削除ボタンを押してconfirmダイアログで「OK」を選択した時' do
       before do

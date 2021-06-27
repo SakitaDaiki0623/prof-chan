@@ -64,13 +64,13 @@ RSpec.describe 'NewProfiles', type: :system do
         expect(page).to have_button '入力完了！', disabled: true
       end
     end
-    context '入社日が未入力の時' do
+    context 'Slack参加日が未入力の時' do
       before do
         fill_in 'profile_day_of_joinning', with: ''
         select profile.blood_type, from: 'profile_blood_type'
       end
       it 'バリデーションエラーメッセージが表示されること' do
-        expect(page).to have_content('入社日を入力してね'), 'エラーメッセージが表示されていません'
+        expect(page).to have_content('Slack参加日を入力してね'), 'エラーメッセージが表示されていません'
         expect(page).to have_button '入力完了！', disabled: true
       end
     end
