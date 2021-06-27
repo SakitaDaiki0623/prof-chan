@@ -3,7 +3,7 @@ class Team < ApplicationRecord
 
   validates :name, presence: true
   validates :workspace_id,     presence: true, uniqueness: { case_sensitive: true }
-  validates :share_channel_id, presence: true, uniqueness: { scope: [:workspace_id] }
+  validates :share_channel_id, presence: true, uniqueness: { scope: [:workspace_id], case_sensitive: true }
   validates :domain, presence: true
   validates :share_channel_name, presence: true
   validates :image, presence: true

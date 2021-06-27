@@ -1,4 +1,3 @@
-// app/javascript/store/modules/isNotFound.js
 const state = () => ({
   categories: [
     { value: "1", name: "音楽" },
@@ -65,6 +64,7 @@ const state = () => ({
     { text: "宮崎県", value: "45" },
     { text: "鹿児島県", value: "46" },
     { text: "沖縄県", value: "47" },
+    { text: "海外生まれ", value: "48" },
   ],
 });
 

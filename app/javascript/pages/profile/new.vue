@@ -42,7 +42,7 @@
                     <ValidationProvider
                       v-slot="{ errors }"
                       name="身長"
-                      rules="input_required"
+                      rules="input_required|nurmeric_max:3"
                     >
                       <input
                         id="profile_height"
@@ -164,7 +164,7 @@
                     <label
                       class="form-label-text-block"
                       for="profile_day_of_joinning"
-                      >入社日</label
+                      >Slack参加日</label
                     >
                     <v-menu
                       ref="menu"
@@ -177,7 +177,7 @@
                       <template #activator="{ on, attrs }">
                         <ValidationProvider
                           v-slot="{ errors }"
-                          name="入社日"
+                          name="Slack参加日"
                           rules="input_required"
                         >
                           <input

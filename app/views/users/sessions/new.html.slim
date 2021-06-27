@@ -11,14 +11,14 @@
           = f.email_field :email, autofocus: true, autocomplete: "email", class: "input-form-basic-block"
         .relative.w-full.mb-3
           = f.label :password, class: 'form-label-text-block'
-          = f.password_field :password, autocomplete: "new-password", class: "input-form-basic-block"
+          = f.password_field :password, autocomplete: "new-password", class: "input-form-basic-block term-font"
           - if devise_mapping.rememberable?
           .field
             = f.check_box :remember_me
             = f.label :remember_me
         .text-center.mt-6
           .actions
-            = f.submit "ログイン", class: "p-3 rounded-lg bg-brown-600 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500"
+            = f.submit "ログイン", class: "p-3 rounded-lg bg-brown-600 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500 cursor-pointer", id: 'login-button'
             = render  "shared/signup_links"
 
 

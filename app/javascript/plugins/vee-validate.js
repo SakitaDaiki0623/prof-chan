@@ -18,6 +18,11 @@ extend("max", {
   message: "{_field_}は最大{length}文字だよ",
 });
 
+extend("nurmeric_max", {
+  ...max,
+  message: "{_field_}は最大{length}桁だよ",
+});
+
 extend("max_no_field", {
   ...max,
   message: "最大{length}文字で入力してね",

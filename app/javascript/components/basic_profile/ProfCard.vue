@@ -1,14 +1,8 @@
 <template>
   <div>
-    <v-card
-      color="brown lighten-2"
-      outlined
-    >
+    <v-card color="brown lighten-2" outlined>
       <div>
-        <v-row
-          justify="center"
-          align-content="center"
-        >
+        <v-row justify="center" align-content="center">
           <v-img
             class="ring-4 rounded-full ring-gray-600 text-center sample_box2_3"
             :src="user.image.url"
@@ -18,14 +12,12 @@
         </v-row>
       </div>
     </v-card>
-    <v-card
-      color="brown lighten-5 text-center"
-      outlined
-    >
+    <v-card color="brown lighten-5 text-center" outlined>
       <div
         class="pa-3 text-4xl font-bold border-dotted	border-b-2 border-gray-400"
       >
-        <span class="name-text">{{ user.name }}</span>さん
+        <span class="name-text">{{ user.name }}</span
+        >さん
       </div>
     </v-card>
   </div>
@@ -48,7 +40,7 @@ export default {
 
 <style scoped>
 .sample_box2_3 {
-  padding: 1em 1.5em;
+  padding: 1.2em;
   margin: 2em 0;
   background-color: #ffc6c6; /*背景色*/
   box-shadow: 0 0 0 8px #ffc6c6; /*背景色外側*/

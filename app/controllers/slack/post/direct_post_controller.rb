@@ -41,7 +41,7 @@ module Slack
           blocks.push(block) if block.present?
         end
         block = blocks.sample
-        return block
+        block
       end
 
       def convert_block_msg(block)

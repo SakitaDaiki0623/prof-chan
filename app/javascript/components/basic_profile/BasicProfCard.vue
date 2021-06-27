@@ -39,7 +39,7 @@
             {{ profile.birthday | moment }}
           </div>
           <div class="pa-2 ma-2 bg-white rounded-full">
-            <label for="birthday" class="form-label-text-block">入社日</label>
+            <label for="birthday" class="form-label-text-block">Slack参加日</label>
 
             {{ profile.day_of_joinning | moment }}
           </div>

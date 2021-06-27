@@ -35,7 +35,6 @@
         class="pa-3 rounded-lg text-center"
         outlined
         color="white"
-        max-height="50px"
       >
         {{ favoriteBlock.text }}
       </v-card>

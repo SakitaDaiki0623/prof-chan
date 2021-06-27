@@ -60,12 +60,12 @@ export default {
 
 <style scoped>
 .sample_box2_3 {
-  padding: 1em 1.5em;
+  padding: 1.2em;
   margin: 2em 0;
-  background-color: #ffc6c6; /*背景色*/
-  box-shadow: 0 0 0 8px #ffc6c6; /*背景色外側*/
-  border: 2px dashed #ffffff; /*線*/
-  color: #000000; /*文字色*/
+  background-color: #ffc6c6;
+  box-shadow: 0 0 0 8px #ffc6c6;
+  border: 2px dashed #ffffff;
+  color: #000000;
 }
 
 div {

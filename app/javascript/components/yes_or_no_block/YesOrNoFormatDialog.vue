@@ -92,7 +92,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
-                rules="input_required|max:15"
+                rules="input_required|max:20"
               >
                 <input
                   id="yes_or_no_block_title"

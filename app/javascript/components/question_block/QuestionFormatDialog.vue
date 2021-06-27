@@ -87,7 +87,7 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
-                rules="input_required|max:15"
+                rules="input_required|max:20"
               >
                 <input
                   id="question_block_title"

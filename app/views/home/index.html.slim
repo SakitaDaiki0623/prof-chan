@@ -18,13 +18,13 @@
           br
           | Slackのワークスペースのメンバーでプロフィールを共有します。
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-5.md:col-span-6.md:col-start-1
-      = link_to "お試し版ログイン", new_user_session_path, class: "bg-brown-400 hover:opacity-50 text-2xl text-white font-bold py-2 px-10 border border-brown-700 rounded md:px-5 md:text-xl md:px-10"
+      = link_to "お試し版ログイン", new_user_session_path, class: "bg-brown-400 hover:opacity-50 text-2xl text-white font-bold py-2 px-10 border border-brown-700 rounded md:px-5 md:text-xl md:px-10", id: 'to-login-button'
       .my-3.text-white.md:text-xl
         | 本サービスをお試しで使用したい方はこちら
         br
         | ※ Slackとの連携がある機能はご利用できません。
       .my-3.text-white
-        = link_to "お試し版の新規登録", new_user_registration_path, class: "border-dashed border-2 border-white p-1 hover:opacity-50"
+        = link_to "お試し版の新規登録", new_user_registration_path, class: "border-dashed border-2 border-white p-1 hover:opacity-50", id: 'new-registration-button'
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-5.md:col-start-7.md:col-span-6
       = link_to "ゲストログイン", users_guest_sign_in_path , method: :post, class: "bg-yellow-500 text-2xl hover:opacity-50 text-white font-bold py-2 px-10 border border-yellow-600 rounded md:px-5 md:text-xl md:px-10"
       .my-3.text-white.md:text-xl

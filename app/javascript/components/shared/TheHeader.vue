@@ -77,7 +77,7 @@
       </v-btn>
 
       <v-btn
-        id="profile-edit-button"
+        id="profile-index-button"
         class="ma-2 white--text"
         color="brown lighten-2"
         @click="openProfilesPage"

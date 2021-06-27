@@ -1,7 +1,5 @@
 module Slack
   class AppHomeOpenedController < Slack::ApplicationController
-    before_action :set_user_team_token, only: %i[publish]
-
     def respond
       # render json: params[:challenge], status: 200
       if params[:event][:type] == 'app_home_opened'
@@ -22,7 +20,7 @@ module Slack
 
     def publish_to_home_tab(team, user, access_token)
       encoded_msg = encoded_home_tab_block_msg(team)
-      res = access_token.post("api/views.publish?user_id=#{user.uid}&view=#{encoded_msg}&pretty=1").parsed
+      access_token.post("api/views.publish?user_id=#{user.uid}&view=#{encoded_msg}&pretty=1").parsed
     end
 
     def encoded_home_tab_block_msg(team)

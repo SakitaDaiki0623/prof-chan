@@ -36,7 +36,6 @@ module SlackApiActivatable
     created_channel
   end
 
-
   def invite_user_flow(info, channel, access_token)
     invite_result = try_invite_user(info, channel, access_token)
     if invite_result.dig('ok')
@@ -71,11 +70,11 @@ module SlackApiActivatable
     if channel.nil?
       encoded_name = URI.encode_www_form_component(channel_name)
       create_result = access_token.post("api/conversations.create?name=#{encoded_name}&pretty=1").parsed
-      return create_result.dig("channel")
+      create_result.dig('channel')
     else
-      channel_id = channel.dig("id")
+      channel_id = channel.dig('id')
       info_result = access_token.post("api/conversations.info?channel=#{channel_id}&pretty=1").parsed
-      return info_result.dig("channel")
+      info_result.dig('channel')
     end
   end
 

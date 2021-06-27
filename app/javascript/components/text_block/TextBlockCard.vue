@@ -23,13 +23,18 @@
       </v-row>
       <v-row v-else>
         <v-spacer />
-        <text-block-like-button :text-block-id="textBlock.id" v-if="isThisNotTopPage" />
+        <text-block-like-button
+          :text-block-id="textBlock.id"
+          v-if="isThisNotTopPage"
+        />
       </v-row>
       <p class="text-2xl font-bold px-3 pt-3">
         {{ textBlock.title }}
       </p>
       <v-card class="pa-3 rounded-lg" outlined color="white" min-height="200px">
-        {{ textBlock.text }}
+        <div v-for="str of textBlock.text.split('\n')" :key="str">
+          {{ str }}
+        </div>
       </v-card>
     </v-card>
     <EditTextFormatDialog

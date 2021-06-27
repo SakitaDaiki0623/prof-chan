@@ -12,7 +12,7 @@ class QuestionBlockItemRegister
   attribute :question_item_answer3,  :string
   attribute :profile_block_id,       :integer
 
-  validates :question_title,         presence: true,        length: { maximum: 15 }
+  validates :question_title,         presence: true,        length: { maximum: 20 }
   validates :question_item_content1, presence: true,        length: { maximum: 20 }
   validates :question_item_answer1,                         length: { maximum: 20 }
   validates :question_item_content2,                        length: { maximum: 20 }

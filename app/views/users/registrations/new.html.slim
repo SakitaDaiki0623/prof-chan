@@ -19,18 +19,18 @@
               | (
               = @minimum_password_length
               |  文字以上で入力してね)
-          = f.password_field :password, class: "input-form-basic-block"
+          = f.password_field :password, class: "input-form-basic-block term-font"
         .relative.w-full.mb-3
           = f.label :password_confirmation, class: 'form-label-text-block'
-          = f.password_field :password_confirmation, class: "input-form-basic-block"
+          = f.password_field :password_confirmation, class: "input-form-basic-block term-font"
         .relative.w-full.mb-3
           = f.label :image, class: 'form-label-text-block'
           = f.file_field :image, autofocus: true, autocomplete: "image", class: "input-form-basic-block"
         .relative
-          = f.check_box :agreement, :as => :boolean, checked:false
+          = f.check_box :agreement, :as => :boolean, checked:false, class: 'mr-3'
           | #{link_to '利用規約', terms_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}と#{link_to 'プライバシー・ポリシー', privacy_path, class: 'border-b-2 border-gray-600 hover:opacity-50', :target=>["_blank"]}に同意します
         .text-center.mt-6
           .actions
-            = f.submit "登録完了！", class: "p-3 rounded-lg bg-brown-500 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500"
+            = f.submit "登録完了！", class: "p-3 rounded-lg bg-brown-500 outline-none text-white shadow w-32 justify-center focus:bg-brown-700 hover:bg-brown-500", id: "complete-registration-button"
           div
             = render  "shared/signup_links"

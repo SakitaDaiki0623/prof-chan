@@ -3,12 +3,12 @@ class User < ApplicationRecord
     create_profile_block if profile_block.blank?
   end
 
-  after_initialize do
-    set_default_team if provider == 'email' && name != 'ゲストユーザー'
+  before_validation do
+    set_default_team if team.nil?
   end
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable
+         :recoverable, :rememberable, :omniauthable, :validatable
 
   mount_uploader :image, ImageUploader
 
@@ -38,7 +38,8 @@ class User < ApplicationRecord
   validates :name,                      presence: true
   validates :image,                     presence: true
   validates :email,                     presence: true
-  validates :email, uniqueness: { scope: %i[team_id provider] }
+  validates :provider,                  presence: true
+  validates_uniqueness_of :email, scope: %i[team_id provider]
   validates :encrypted_password, presence: true
   validates :agreement, acceptance: { allow_nil: false, on: :create, unless: proc { |u| u.email == 'guest@example.com' || u.provider == 'slack' } }
 
