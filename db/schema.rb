@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_084905) do
+ActiveRecord::Schema.define(version: 2021_06_27_114711) do
 
   create_table "address_blocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "twitter"
@@ -151,6 +151,17 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.index ["profile_block_id"], name: "index_ranking_blocks_on_profile_block_id"
   end
 
+  create_table "share_rights", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "question", default: 0, null: false
+    t.integer "ranking", default: 0, null: false
+    t.integer "yes_or_no", default: 0, null: false
+    t.integer "text", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_share_rights_on_user_id"
+  end
+
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "workspace_id", null: false
@@ -196,10 +207,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
     t.string "image", null: false
     t.string "email"
     t.integer "role", default: 1, null: false
-    t.integer "question_share_right", default: 0, null: false
-    t.integer "ranking_share_right", default: 0, null: false
-    t.integer "yes_or_no_share_right", default: 0, null: false
-    t.integer "text_share_right", default: 0, null: false
     t.bigint "team_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -250,6 +257,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_084905) do
   add_foreign_key "ranking_block_likes", "ranking_blocks"
   add_foreign_key "ranking_block_likes", "users"
   add_foreign_key "ranking_blocks", "profile_blocks"
+  add_foreign_key "share_rights", "users"
   add_foreign_key "text_block_likes", "text_blocks"
   add_foreign_key "text_block_likes", "users"
   add_foreign_key "text_blocks", "profile_blocks"

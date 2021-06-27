@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   after_create do
     create_profile_block if profile_block.blank?
+    create_share_right if share_right.blank?
   end
 
   before_validation do
@@ -13,13 +14,10 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   enum role: { admin: 0, general: 1 }
-  enum question_share_right: { question_not_shared_yet: 0, question_already_shared: 1 }
-  enum ranking_share_right: { ranking_not_shared_yet: 0, ranking_already_shared: 1 }
-  enum yes_or_no_share_right: { yes_or_no_not_shared_yet: 0, yes_or_no_already_shared: 1 }
-  enum text_share_right: { text_not_shared_yet: 0, text_already_shared: 1 }
 
   has_one :profile,        dependent: :destroy
   has_one :profile_block,  dependent: :destroy
+  has_one :share_right,  dependent: :destroy
   has_one :authentication, dependent: :destroy
 
   belongs_to :team

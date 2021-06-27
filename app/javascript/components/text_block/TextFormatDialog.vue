@@ -144,7 +144,7 @@ export default {
       return this.currentUser.provider == "slack" ? true : false;
     },
     notSharedYet() {
-      return this.currentUser.text_share_right == "text_not_shared_yet"
+      return this.currentUser.share_right.text == "active"
         ? true
         : false;
     },

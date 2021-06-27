@@ -290,7 +290,7 @@ export default {
       return this.currentUser.provider == "slack" ? true : false;
     },
     notSharedYet() {
-      return this.currentUser.question_share_right == "question_not_shared_yet"
+      return this.currentUser.share_right.question == "active"
         ? true
         : false;
     },

@@ -32,10 +32,6 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string  :image, null: false
       t.string  :email
       t.integer :role, null: false, default: 1
-      t.integer :question_share_right, null: false, default: 0
-      t.integer :ranking_share_right, null: false, default: 0
-      t.integer :yes_or_no_share_right, null: false, default: 0
-      t.integer :text_share_right, null: false, default: 0
       t.references :team, foreign_key: true
 
       t.timestamps

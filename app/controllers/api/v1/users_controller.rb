@@ -21,30 +21,30 @@ module Api
 
       # Share right
       def update_question_share_right
-        return unless @user.question_not_shared_yet?
+        return if @user.share_right.question_inactive?
 
-        @user.question_already_shared!
+        @user.share_right.question_inactive!
         render json: @user, serializer: UserSerializer
       end
 
       def update_ranking_share_right
-        return unless @user.ranking_not_shared_yet?
+        return if @user.share_right.ranking_inactive?
 
-        @user.ranking_already_shared!
+        @user.share_right.ranking_inactive!
         render json: @user, serializer: UserSerializer
       end
 
       def update_yes_or_no_share_right
-        return unless @user.yes_or_no_not_shared_yet?
+        return if @user.share_right.yes_or_no_inactive?
 
-        @user.yes_or_no_already_shared!
+        @user.share_right.yes_or_no_inactive!
         render json: @user, serializer: UserSerializer
       end
 
       def update_text_share_right
-        return unless @user.text_not_shared_yet?
+        return if @user.share_right.text_inactive?
 
-        @user.text_already_shared!
+        @user.share_right.text_inactive!
         render json: @user, serializer: UserSerializer
       end
 
@@ -64,7 +64,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:name, :image, :email, :role, :share_right)
+        params.require(:user).permit(:name, :image, :email, :role)
       end
     end
   end
