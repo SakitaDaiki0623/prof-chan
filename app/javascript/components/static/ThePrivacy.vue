@@ -6,32 +6,55 @@
     @input="$emit('input', $event.target.isShownPrivacy)"
   >
     <v-card color="brown lighten-5" class="term-font">
-      <div class="container mx-auto my-4 term-font px-10 lg:px-16 lg:py-16">
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn color="brown lighten-5" @click="hundleClosePrivacyDialog">
-            <v-icon> mdi-close-outline </v-icon>
-          </v-btn>
-        </v-row>
-        <div class="text-center text-2xl md:text-4xl font-bold my-10">
+      <div class="container mx-auto my-4 term-font px-10 lg:px-60 lg:py-20">
+        <div class="text-center text-4xl font-bold my-10">
           プライバシー・ポリシー
         </div>
         <div class="grid grid-rows-1">
           <p>
             プロフちゃん（以下，「当事務局」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。
           </p>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第1条（個人情報）
-          </div>
+          <div class="text-2xl font-bold mt-10 mb-5">第1条（個人情報）</div>
           <p>
             「個人情報」とは，個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって，当該情報に含まれる氏名，生年月日，住所，電話番号，連絡先その他の記述等により特定の個人を識別できる情報及び容貌，指紋，声紋にかかるデータ，及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。
           </p>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第2条（個人情報の収集方法）
           </div>
           <p>
-            当事務局は，ユーザーが利用登録をする際に氏名，生年月日，住所，電話番号，メールアドレス，銀行口座番号，クレジットカード番号，運転免許証番号などの個人情報をお尋ねすることがあります。また，ユーザーと提携先などとの間でなされたユーザーの個人情報を含む取引記録や決済に関する情報を,当事務局の提携先（情報提供元，広告主，広告配信先などを含みます。以下，｢提携先｣といいます。）などから収集することがあります。
+            本ポリシーにおいて、「利用者情報」とは、ユーザーの識別に係る情報、通信サービス上の行動履歴、その他ユーザーのスマートフォン、PC
+            等の端末においてユーザーまたはユーザーの端末に関連して生成または蓄積された情報であって、本ポリシーに基づき当社が収集するものを意味するものとします。
           </p>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="my-3">
+            本サービスにおいて当社が収集する利用者情報は、その収集方法に応じて、以下のようなものとなります。
+          </div>
+          <div class="my-3 text-xl font-bold">
+            1. ユーザーからご提供いただく情報
+          </div>
+          <div class="my-3">
+            ユーザーが本サービスを利用するために、ご提供いただく情報は以下のとおりです。
+          </div>
+          <ul class="ml-5 list-disc">
+            <li>氏名</li>
+            <li>メールアドレス</li>
+            <li>写真</li>
+            <li>職歴その他の経歴</li>
+            <li>その他当社が定める入力フォームにユーザーが入力する情報</li>
+          </ul>
+          <div class="my-3 text-xl font-bold">
+            2.
+            ユーザーが本サービスの利用において、他のサービスと連携を許可することにより、当該他のサービスからご提供いただく情報
+          </div>
+          <div class="my-3">
+            ユーザーが、本サービスを利用するにあたり、ソーシャルネットワークサービス等の外部サービスとの連携を許可した場合には、その許可の際にご同意いただいた内容に基づき、以下の情報を当該外部サービスから収集します。
+          </div>
+          <ul class="ml-5 list-disc">
+            <li>当該外部サービスでユーザーが利用する ID</li>
+            <li>
+              その他当該外部サービスのプライバシー設定によりユーザーが連携先に開示を認めた情報
+            </li>
+          </ul>
+          <div class="text-2xl font-bold mt-10 mb-5">
             第3条（個人情報を収集・利用する目的）
           </div>
           <div class="mb-3">
@@ -54,8 +77,8 @@
             </li>
             <li>上記の利用目的に付随する目的</li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
-            第4条（利用目的の変更）
+          <div class="text-2xl font-bold mt-10 mb-5">
+            第4条（アクセス解析ツール）
           </div>
           <ol class="ml-4">
             <li>
@@ -83,7 +106,7 @@
               >をご覧ください。
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第5条（利用目的の変更）
           </div>
           <ol class="ml-5 list-decimal">
@@ -94,7 +117,7 @@
               利用目的の変更を行った場合には，変更後の目的について，当事務局所定の方法により，ユーザーに通知し，または本ウェブサイト上に公表するものとします。
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第6条（個人情報の第三者提供）
           </div>
           <ol class="ml-5 list-decimal">
@@ -139,7 +162,7 @@
               </ol>
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第7条（個人情報の開示）
           </div>
           <ol class="ml-5 list-decimal">
@@ -159,7 +182,7 @@
               前項の定めにかかわらず，履歴情報および特性情報などの個人情報以外の情報については，原則として開示いたしません。
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第8条（個人情報の訂正および削除）
           </div>
           <ol class="ml-5 list-decimal">
@@ -173,7 +196,7 @@
               当事務局は，前項の規定に基づき訂正等を行った場合，または訂正等を行わない旨の決定をしたときは遅滞なく，これをユーザーに通知します。
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第9条（個人情報の利用停止等）
           </div>
           <ol class="ml-5 list-decimal">
@@ -190,7 +213,7 @@
               前2項にかかわらず，利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって，ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は，この代替策を講じるものとします。
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第10条（プライバシーポリシーの変更）
           </div>
           <ol class="ml-5 list-decimal">
@@ -201,7 +224,7 @@
               当事務局が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。
             </li>
           </ol>
-          <div class="text-xl md:text-2xl font-bold mt-10 mb-5">
+          <div class="text-2xl font-bold mt-10 mb-5">
             第11条（お問い合わせ窓口）
           </div>
           <p>
@@ -212,7 +235,7 @@
               >お問い合わせフォーム</a
             >までお願いいたします。
           </p>
-          <div class="mt-20 text-center">以上</div>
+          <div class="my-20 text-center">以上</div>
         </div>
       </div>
     </v-card>
