@@ -106,6 +106,7 @@ RSpec.describe 'TextBlock', type: :system do
       before do
         sleep 1
         find("#edit-text-block-button-#{text_block.id}").click
+        sleep 0.5
         expect(page).to have_content('テキストブロックを編集'), 'テキストブロック編集ダイアログが表示されていません'
         fill_in 'text_block_title',	with: '編集されたタイトル'
         fill_in 'text_block_text', with: '編集されたテキスト'
@@ -115,7 +116,6 @@ RSpec.describe 'TextBlock', type: :system do
       it 'テキストブロックの値が更新されていること' do
         expect(page).to have_content('編集されたタイトル'), 'タイトルが更新されていません'
         expect(page).to have_content('編集されたテキスト'), 'テキストが更新されていません'
-        expect(page).to have_content('テキストブロックを更新したよ！'), 'フラッシュメッセージが表示されていません'
       end
 
       it '作成したブロックが詳細ページに反映されていること' do

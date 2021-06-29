@@ -7,7 +7,6 @@ RSpec.describe "YesOrNoBlock", type: :system do
   let(:yes_or_no_item_1)     { YesOrNoBlock.last.yes_or_no_items[0] }
   let(:yes_or_no_item_2)     { YesOrNoBlock.last.yes_or_no_items[1] }
   let(:yes_or_no_item_3)     { YesOrNoBlock.last.yes_or_no_items[2] }
-  let(:over_fifteen_words) { 'あ' * 16 }
   let(:over_twenty_words)  { 'あ' * 21 }
 
   let(:yes_or_no_block_title) { 'YesorNoタイトル' }
@@ -80,14 +79,14 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
       end
 
-      context 'タイトルが15文字以上の時' do
+      context 'タイトルが20文字以上の時' do
         before do
-          fill_in 'yes_or_no_block_title', with: over_fifteen_words
+          fill_in 'yes_or_no_block_title', with: over_twenty_words
           sleep 0.5
-          fill_in 'yes_or_no_block_title', with: over_fifteen_words
+          fill_in 'yes_or_no_block_title', with: over_twenty_words
         end
         it 'バリデーションメッセージが表示され、作成ボタンがdisabledであること' do
-          expect(page).to have_content(' タイトルは最大15文字だよ'), 'バリデーションメッセージが表示されていません'
+          expect(page).to have_content(' タイトルは最大20文字だよ'), 'バリデーションメッセージが表示されていません'
           expect(page).to have_button 'Yes or No ブロックを作成！', disabled: true
         end
       end
@@ -194,8 +193,8 @@ RSpec.describe "YesOrNoBlock", type: :system do
             end
             it 'アイテム数が3つのYes or No ブロックが作成されること' do
               expect(page).to have_content(yes_or_no_block_title),   'Yes or No ブロックが作成されていません'
-              expect(page).to have_selector 'span.border-red-500', text: 'YES'
-              expect(page).to have_selector 'span.border-red-500', text: 'NO'
+              expect(page).to have_selector 'span.border-brown-500', text: 'YES'
+              expect(page).to have_selector 'span.border-brown-500', text: 'NO'
               expect(last_yes_or_no_block.yes_or_no_items.count).to eq(3), 'Yes or No ブロックのアイテム数が合っていません'
               expect(page).to have_content('Yes or No ブロックを作成したよ！'), 'フラッシュメッセージが表示されていません'
             end
@@ -203,8 +202,8 @@ RSpec.describe "YesOrNoBlock", type: :system do
             it '作成したブロックが詳細ページに反映されていること' do
               visit "/profiles/#{my_profile.public_uid}"
               expect(page).to have_content(yes_or_no_block_title),   'Yes or No ブロックが作成されていません'
-              expect(page).to have_selector 'span.border-red-500', text: 'YES'
-              expect(page).to have_selector 'span.border-red-500', text: 'NO'
+              expect(page).to have_selector 'span.border-brown-500', text: 'YES'
+              expect(page).to have_selector 'span.border-brown-500', text: 'NO'
             end
           end
 
@@ -231,27 +230,27 @@ RSpec.describe "YesOrNoBlock", type: :system do
 
           context '全ての値が20文字以上でで入力された時' do
             before do
-              fill_in 'yes_or_no_block_title', with:  words_over_fifty
+              fill_in 'yes_or_no_block_title', with:  over_twenty_words
               sleep 0.5
-              fill_in 'yes_or_no_block_title', with:  words_over_fifty
+              fill_in 'yes_or_no_block_title', with:  over_twenty_words
               within ("#create-yes-or-no-item-1") do
-                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
                 sleep 0.5
-                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
               end
               within ("#create-yes-or-no-item-2") do
-                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
                 sleep 0.5
-                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
               end
               within ("#create-yes-or-no-item-3") do
-                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
                 sleep 0.5
-                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: words_over_fifty
+                fill_in 'yes_or_no_item[yes_or_no_item_content]',	with: over_twenty_words
               end
             end
             it "それぞれの空値のバリデーションメッセージが表示されること" do
-              expect(page).to have_content('タイトルは最大15文字だよ'), 'バリデーションメッセージが表示されていません'
+              expect(page).to have_content('タイトルは最大20文字だよ'), 'バリデーションメッセージが表示されていません'
               expect(page).to have_content('1番目の質問は最20文字だよ'), 'バリデーションメッセージが表示されていません'
               expect(page).to have_content('2番目の質問は最大20文字だよ'), 'バリデーションメッセージが表示されていません'
               expect(page).to have_content('3番目の質問は最大20文字だよ'), 'バリデーションメッセージが表示されていません'
@@ -276,7 +275,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
       expect(page).to have_content('Yes or No ブロックを編集'), 'Yes or No ブロック編集モーダルが表示されていません'
       expect(page).to have_content(yes_or_no_block_title),   '作成したYes or No ブロックのタイトルが表示されていません'
       expect(page).to have_content(yes_or_no_item_content1), '作成したYes or No ブロックの質問が表示されていません'
-      expect(page).to have_selector 'span.border-red-500', text: 'YES'
+      expect(page).to have_selector 'span.border-brown-500', text: 'YES'
     end
     describe '編集機能' do
       context 'タイトルを正常に編集した時' do
@@ -324,7 +323,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
         it 'アイテムが更新されること' do
           expect(page).to have_content(edit_yes_or_no_item_content1), '更新したYes or No ブロックのアイテムの質問が表示されていません'
-          expect(page).to have_selector 'span.border-red-500', text: 'NO'
+          expect(page).to have_selector 'span.border-brown-500', text: 'NO'
           expect(YesOrNoBlock.last.yes_or_no_items[0].content).to eq(edit_yes_or_no_item_content1), 'アイテムが更新されていません' # DB上でも更新されているか確認
           expect(page).to have_content('Yes or No アイテムを更新したよ！'), 'フラッシュメッセージが表示されていません'
         end
@@ -332,7 +331,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         it '作成したブロックが詳細ページに反映されていること' do
           visit "/profiles/#{my_profile.public_uid}"
           expect(page).to have_content(edit_yes_or_no_item_content1), '更新したYes or No ブロックのアイテムの質問が表示されていません'
-          expect(page).to have_selector 'span.border-red-500', text: 'NO'
+          expect(page).to have_selector 'span.border-brown-500', text: 'NO'
         end
       end
 
@@ -349,7 +348,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         end
         it '編集前のアイテムが表示されていること' do
           expect(page).to have_content(yes_or_no_item_content1), '編集前のアイテムが表示されていません'
-          expect(page).to have_selector 'span.border-red-500', text: 'YES'
+          expect(page).to have_selector 'span.border-brown-500', text: 'YES'
         end
       end
     end
@@ -368,7 +367,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         it '新しいアイテムが作成されること' do
           expect(page).to have_button '作成', disabled: true
           expect(page).to have_content(yes_or_no_item_content2), '2番目のアイテムの質問が作成されていません'
-          expect(page).to have_selector 'span.border-red-500', text: 'NO'
+          expect(page).to have_selector 'span.border-brown-500', text: 'NO'
         end
       end
       context '2つ作成した場合' do
@@ -407,7 +406,7 @@ RSpec.describe "YesOrNoBlock", type: :system do
         expect(page).to have_button '作成', disabled: false
         click_on '作成'
         expect(page).to have_content(yes_or_no_item_content2), '2番目のアイテムの質問が作成されていません'
-        expect(page).to have_selector 'span.border-red-500', text: 'YES'
+        expect(page).to have_selector 'span.border-brown-500', text: 'YES'
       end
       context '一つのアイテムを削除した場合' do
         before do
