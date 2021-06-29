@@ -9,7 +9,7 @@ module PostMessageModule
                 else
                   " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*"
                 end
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
@@ -23,7 +23,7 @@ module PostMessageModule
                 else
                   " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
                 end
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
@@ -34,14 +34,14 @@ module PostMessageModule
   def post_ranking_block(block)
     access_token = set_access_token
     text = "<@#{current_user.uid}>さんがランキングブロックを作成したよ:hamster:\n :star2:*#{block.title}* :star2:"
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
   def post_text_block(block)
     access_token = set_access_token
     text = "<@#{current_user.uid}>さんがテキストブロックを作成したよ:hamster:\n :star2:*#{block.title}* :star2:"
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
     post_block(text, msg, access_token)
   end
 
@@ -55,6 +55,10 @@ module PostMessageModule
     end
     access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
     access_token
+  end
+
+  def user_profile_link
+    ":hamster:<https://c6926315d522.ngrok.io/profiles/#{current_user.profile.public_uid}/|#{current_user.name}さんのプロフページ>:hamster:"
   end
 
   def post_block(text, msg, access_token)

@@ -9,6 +9,10 @@ namespace :blocks do
         access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
       end
 
+      def user_profile_link(user)
+        ":hamster:<https://c6926315d522.ngrok.io/profiles/#{user.profile.public_uid}/|#{user.name}さんのプロフページ>:hamster:"
+      end
+
       def translate_boolean(answer)
         answer ? 'YES！:laughing:' : 'NO！ :weary:'
       end
@@ -71,7 +75,7 @@ namespace :blocks do
         if favorite_block.present?
           logger.debug 'posting favorite_block...'
           favorite_text = " `favoriteブロック` \n :star2:*#{favorite_block.category.name}* :star2:"
-          favorite_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{favorite_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{favorite_block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{favorite_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+          favorite_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{favorite_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{favorite_block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{favorite_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link(favorite_block.profile_block.user)}' } }, { 'type': 'divider' } ]"
           post_block(favorite_text, favorite_msg, channel_id, access_token)
           logger.info  'posted favorite_block!'
         end
@@ -86,7 +90,7 @@ namespace :blocks do
                       else
                         " #{question_block.question_items[0].content}\n :arrow_right:* #{question_block.question_items[0].answer}*"
                       end
-          question_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{question_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{question_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+          question_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{question_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{question_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link(question_block.profile_block.user)}' } }, { 'type': 'divider' } ]"
           post_block(question_text, question_msg, channel_id, access_token)
           logger.info  'posted question_block!'
         end
@@ -94,7 +98,7 @@ namespace :blocks do
         if ranking_block.present?
           logger.debug 'posting ranking_block...'
           ranking_text = " `ランキングブロック` \n :star2:*#{ranking_block.title}* :star2:"
-          ranking_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{ranking_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{ranking_block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{ranking_block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{ranking_block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{ranking_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+          ranking_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{ranking_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{ranking_block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{ranking_block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{ranking_block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{ranking_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link(ranking_block.profile_block.user)}' } }, { 'type': 'divider' } ]"
           post_block(ranking_text, ranking_msg, channel_id, access_token)
           logger.info  'posted ranking_block!'
         end
@@ -109,7 +113,7 @@ namespace :blocks do
                       else
                         " #{yes_or_no_block.yes_or_no_items[0].content}\n :arrow_right: *#{translate_boolean(yes_or_no_block.yes_or_no_items[0].answer)}*"
                       end
-          yes_or_no_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{yes_or_no_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{yes_or_no_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+          yes_or_no_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{yes_or_no_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{yes_or_no_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link(yes_or_no_block.profile_block.user)}' } }, { 'type': 'divider' } ]"
           post_block(yes_or_no_text, yes_or_no_msg, channel_id, access_token)
           logger.info  'posted yes_or_no_block!'
         end
@@ -117,7 +121,7 @@ namespace :blocks do
         if text_block.present?
           logger.debug 'posting text_block...'
           text_text = " `テキストブロック` \n :star2:*#{text_block.title}* :star2:"
-          text_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text_block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{text_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' } ]"
+          text_msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text_text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text_block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{text_block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link(text_block.profile_block.user)}' } }, { 'type': 'divider' } ]"
           post_block(text_text, text_msg, channel_id, access_token)
           logger.info 'posted text_block!'
         end
