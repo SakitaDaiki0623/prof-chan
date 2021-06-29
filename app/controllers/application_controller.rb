@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include ErrorRenderable
   before_action :authenticate_user!
 
+  protect_from_forgery with: :exception
+
   rescue_from Exception, with: :notify_500
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_not_found
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
