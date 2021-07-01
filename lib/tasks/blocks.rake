@@ -10,7 +10,7 @@ namespace :blocks do
       end
 
       def user_profile_link(user)
-        ":hamster:<https://c6926315d522.ngrok.io/profiles/#{user.profile.public_uid}/|#{user.name}さんのプロフページ>:hamster:"
+        ":hamster:<https://www.prof-chan.com/profiles/#{user.profile.public_uid}/|#{user.name}さんのプロフページ>:hamster:"
       end
 
       def translate_boolean(answer)

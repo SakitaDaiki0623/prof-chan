@@ -58,7 +58,7 @@ module PostMessageModule
   end
 
   def user_profile_link
-    ":hamster:<https://c6926315d522.ngrok.io/profiles/#{current_user.profile.public_uid}/|#{current_user.name}さんのプロフページ>:hamster:"
+    ":hamster:<https://www.prof-chan.com/profiles/#{current_user.profile.public_uid}/|#{current_user.name}さんのプロフページ>:hamster:"
   end
 
   def post_block(text, msg, access_token)
