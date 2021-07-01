@@ -7,8 +7,14 @@
   >
     <v-card :color="textBlockColor">
       <div>
-        <v-row justify="end" class="mr-2 mt-2">
-          <v-btn :color="textBlockColor" @click="hundleCloseTextFormatDialog">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
+          <v-btn
+            :color="textBlockColor"
+            @click="hundleCloseTextFormatDialog"
+          >
             <v-icon> mdi-close-outline </v-icon>
           </v-btn>
         </v-row>
@@ -16,7 +22,10 @@
           テキストブロック作成
         </p>
       </div>
-      <div id="text-block-form" class="pa-10 note-box">
+      <div
+        id="text-block-form"
+        class="pa-10 note-box"
+      >
         <v-btn
           id="input-text-title-button"
           type="submit"
@@ -28,14 +37,20 @@
           class="white--text py-2"
           @click="openTextFormatSelectDialog"
         >
-          <v-icon left> mdi-plus </v-icon>テキストフォーマットを選択
+          <v-icon left>
+            mdi-plus
+          </v-icon>テキストフォーマットを選択
         </v-btn>
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
           <form @submit.prevent="hundleCreateTextBlock(textBlock)">
             <div>
-              <label class="form-label-text-block" for="text_block_title"
-                >タイトル</label
-              >
+              <label
+                class="form-label-text-block"
+                for="text_block_title"
+              >タイトル</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -47,14 +62,15 @@
                   class="input-form-text-block"
                   name="text_block[text_block_title]"
                   type="text"
-                />
+                >
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
             <div class="mt-5">
-              <label class="form-label-text-block" for="text_block_text"
-                >テキスト</label
-              >
+              <label
+                class="form-label-text-block"
+                for="text_block_text"
+              >テキスト</label>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="テキスト"
@@ -76,7 +92,7 @@
                 v-model="check"
                 :color="textBlockColor"
                 label="slackに投稿しますか?"
-              ></v-checkbox>
+              />
               <div class="text-sm">
                 ※Slackへの投稿は1日に1回のみです。
               </div>

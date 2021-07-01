@@ -41,35 +41,34 @@
       sm="12"
       lg="4"
     >
-    <div class="border-2 border-dotted border-white pa-5">
-      <v-hover v-slot="{ hover }">
-        <v-card
-          class="mx-auto"
-          :class="{ 'on-hover': hover }"
-          max-width="344"
-          max-height="344"
-          outlined
-          color="brown lighten-5"
-          @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
-        >
-          <v-img
-            :src="recentlyJoinedUserProfile.user.image.url"
-            max-height="250px"
-          />
-
-          <div class="text-center font-bold text-2xl pt-5 text-brown-600">
-            {{ recentlyJoinedUserProfile.user.name }} さん
-          </div>
+      <div class="border-2 border-dotted border-white pa-5">
+        <v-hover v-slot="{ hover }">
           <v-card
-            color="brown lighten-2"
-            class="white--text"
+            class="mx-auto"
+            :class="{ 'on-hover': hover }"
+            max-width="344"
+            max-height="344"
+            outlined
+            color="brown lighten-5"
+            @click="moveToUserProfilePage(recentlyJoinedUserProfile)"
           >
-            {{ recentlyJoinedUserProfile.day_of_joinning | moment }} 入社
+            <v-img
+              :src="recentlyJoinedUserProfile.user.image.url"
+              max-height="250px"
+            />
+
+            <div class="text-center font-bold text-2xl pt-5 text-brown-600">
+              {{ recentlyJoinedUserProfile.user.name }} さん
+            </div>
+            <v-card
+              color="brown lighten-2"
+              class="white--text"
+            >
+              {{ recentlyJoinedUserProfile.day_of_joinning | moment }} 入社
+            </v-card>
           </v-card>
-        </v-card>
-      </v-hover>
-    </div>
-      
+        </v-hover>
+      </div>
     </v-col>
   </v-row>
 </template>

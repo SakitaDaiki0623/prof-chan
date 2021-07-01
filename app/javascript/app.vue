@@ -1,5 +1,8 @@
 <template>
-  <v-app id="app" class="default kawaii">
+  <v-app
+    id="app"
+    class="default kawaii"
+  >
     <TheHeader />
     <Loading v-show="loading" />
     <v-main v-show="!loading">

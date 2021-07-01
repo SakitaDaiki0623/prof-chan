@@ -6,13 +6,21 @@
     class="mb-10 pa-5"
   >
     <div class="corner-title top-sub-title">
-      <span class="brown--text text--lighten-3 rounded-full px-2 bg-white"
-        >F</span
-      >
+      <span
+        class="brown--text text--lighten-3 rounded-full px-2 bg-white"
+      >F</span>
       My Favorite コーナー
     </div>
-    <v-row v-show="isThisEditPage" justify="center" class="py-5">
-      <v-col cols="12" sm="12" align="center">
+    <v-row
+      v-show="isThisEditPage"
+      justify="center"
+      class="py-5"
+    >
+      <v-col
+        cols="12"
+        sm="12"
+        align="center"
+      >
         <v-btn
           id="add-favorite-block-btn"
           tile
@@ -20,11 +28,17 @@
           class="ma-2 white--text"
           @click="openFavoriteFormatDialog"
         >
-          <v-icon left> mdi-plus </v-icon>
+          <v-icon left>
+            mdi-plus
+          </v-icon>
           Favorite ブロックを追加する
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="8" align="right">
+      <v-col
+        cols="12"
+        sm="8"
+        align="right"
+      >
         <ProgressBar
           :percentage-for-blocks="percentageMyFavoriteBlocksLengt"
           :block-color="favoriteBlockColor"
@@ -89,7 +103,10 @@
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer v-else block-name="Favorite" />
+      <NoBlockContainer
+        v-else
+        block-name="Favorite"
+      />
     </div>
 
     <FavoriteFormatDialog

@@ -1,9 +1,20 @@
 <template>
-  <header v-show="doesCurrentUserhaveProfile" id="top">
-    <v-app-bar v-if="isMobile" color="brown lighten-2" outlined height="80px">
+  <header
+    v-show="doesCurrentUserhaveProfile"
+    id="top"
+  >
+    <v-app-bar
+      v-if="isMobile"
+      color="brown lighten-2"
+      outlined
+      height="80px"
+    >
       <v-toolbar-title>
         <router-link to="/top">
-          <img src="../../images/prof_normal.png" class="logo" />
+          <img
+            src="../../images/prof_normal.png"
+            class="logo"
+          >
         </router-link>
       </v-toolbar-title>
 
@@ -13,19 +24,24 @@
         color="brown lighten-2"
         @click="openProfileEditPage"
       >
-        <v-icon left> mdi-pencil </v-icon>
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
         プロフ編集
       </v-btn>
 
-      <v-menu right bottom>
+      <v-menu
+        right
+        bottom
+      >
         <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
             color="brown lighten-3"
             class="white--text"
-            v-on="on"
             fab
             small
+            v-on="on"
           >
             <v-icon>mdi-dots-horizontal</v-icon>
           </v-btn>
@@ -59,10 +75,18 @@
       </v-btn>
     </v-app-bar>
 
-    <v-app-bar v-if="!isMobile" color="brown lighten-2" outlined height="80px">
+    <v-app-bar
+      v-if="!isMobile"
+      color="brown lighten-2"
+      outlined
+      height="80px"
+    >
       <v-toolbar-title>
         <router-link to="/top">
-          <img src="../../images/prof_normal.png" class="logo" />
+          <img
+            src="../../images/prof_normal.png"
+            class="logo"
+          >
         </router-link>
       </v-toolbar-title>
 
@@ -72,7 +96,9 @@
         color="brown lighten-2"
         @click="openProfileEditPage"
       >
-        <v-icon left> mdi-pencil </v-icon>
+        <v-icon left>
+          mdi-pencil
+        </v-icon>
         プロフ編集
       </v-btn>
 
@@ -82,11 +108,16 @@
         color="brown lighten-2"
         @click="openProfilesPage"
       >
-        <v-icon left> mdi-account-group </v-icon>
+        <v-icon left>
+          mdi-account-group
+        </v-icon>
         プロフ一覧
       </v-btn>
 
-      <v-menu right bottom>
+      <v-menu
+        right
+        bottom
+      >
         <template #activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
@@ -121,7 +152,9 @@
         color="brown lighten-2"
         @click="openAboutPage"
       >
-        <v-icon left> mdi-information-outline </v-icon>
+        <v-icon left>
+          mdi-information-outline
+        </v-icon>
         プロフちゃんとは
       </v-btn>
 

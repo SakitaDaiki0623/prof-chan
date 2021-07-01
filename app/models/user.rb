@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   has_one :profile,        dependent: :destroy
   has_one :profile_block,  dependent: :destroy
-  has_one :share_right,  dependent: :destroy
+  has_one :share_right, dependent: :destroy
   has_one :authentication, dependent: :destroy
 
   belongs_to :team
@@ -36,8 +36,8 @@ class User < ApplicationRecord
   validates :name,                      presence: true
   validates :image,                     presence: true
   validates :provider,                  presence: true
-  validates_uniqueness_of :email, scope: %i[team_id provider uid], case_sensitive: true
-  validates :password, presence: true, length: { minimum:6 }
+  validates :email, uniqueness: { scope: %i[team_id provider uid], case_sensitive: true }
+  validates :password, presence: true, length: { minimum: 6 }
   validates :agreement, acceptance: { allow_nil: false, on: :create, unless: proc { |u| u.email == 'guest@example.com' || u.provider == 'slack' } }
 
   def create_guest_profile

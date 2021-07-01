@@ -1,7 +1,14 @@
 <template>
   <div>
-    <v-card class="rounded-2xl pa-5 note-box" outlined color="cyan lighten-4">
-      <v-row v-if="isThisEditPage" justify="end">
+    <v-card
+      class="rounded-2xl pa-5 note-box"
+      outlined
+      color="cyan lighten-4"
+    >
+      <v-row
+        v-if="isThisEditPage"
+        justify="end"
+      >
         <v-btn
           :id="'edit-text-block-button-' + textBlock.id"
           tile
@@ -24,15 +31,24 @@
       <v-row v-else>
         <v-spacer />
         <text-block-like-button
-          :text-block-id="textBlock.id"
           v-if="isThisNotTopPage"
+          :text-block-id="textBlock.id"
         />
       </v-row>
       <p class="text-2xl font-bold px-3 pt-3">
         {{ textBlock.title }}
       </p>
-      <v-card class="pa-3 rounded-lg" outlined color="white" min-height="200px" v-if="textBlock.text">
-        <div v-for="str of textBlock.text.split('\n')" :key="str">
+      <v-card
+        v-if="textBlock.text"
+        class="pa-3 rounded-lg"
+        outlined
+        color="white"
+        min-height="200px"
+      >
+        <div
+          v-for="str of textBlock.text.split('\n')"
+          :key="str"
+        >
           {{ str }}
         </div>
       </v-card>

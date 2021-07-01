@@ -2,13 +2,16 @@
   <v-dialog
     :value="isShownTextFormatSelectDialog"
     max-width="800"
-    @click:outside="hundleCloseTextFormatSelectDialog"
     set="$emit('input', $event.target.isShownTextFormatSelectDialog)"
     transition="slide-x-transition"
+    @click:outside="hundleCloseTextFormatSelectDialog"
   >
     <v-card :color="textBlockColor">
       <div>
-        <v-row justify="end" class="mr-2 mt-2">
+        <v-row
+          justify="end"
+          class="mr-2 mt-2"
+        >
           <v-btn
             :color="textBlockColor"
             @click="hundleCloseTextFormatSelectDialog"

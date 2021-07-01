@@ -5,15 +5,24 @@
     @click:outside="hundleCloseTermsDialog"
     @input="$emit('input', $event.target.isShownTerms)"
   >
-    <v-card color="brown lighten-5" class="term-font">
+    <v-card
+      color="brown lighten-5"
+      class="term-font"
+    >
       <div class="container mx-auto my-4 term-font px-10 lg:px-60 lg:py-20">
-        <div class="text-center text-4xl font-bold my-10">利用規約</div>
+        <div class="text-center text-4xl font-bold my-10">
+          利用規約
+        </div>
         <div class="grid grid-rows-1">
-          <div class="text-2xl font-bold mt-10 mb-5">利用規約</div>
+          <div class="text-2xl font-bold mt-10 mb-5">
+            利用規約
+          </div>
           <p>
             この利用規約（以下，「本規約」といいます。）は，プロフちゃん（以下，「当事務局」といいます。）がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
           </p>
-          <div class="text-2xl font-bold mt-10 mb-5">第1条（適用）</div>
+          <div class="text-2xl font-bold mt-10 mb-5">
+            第1条（適用）
+          </div>
           <ol class="ml-5 list-decimal">
             <li>
               本規約は，ユーザーと当事務局との間の本サービスの利用に関わる一切の関係に適用されるものとします。
@@ -25,7 +34,9 @@
               本規約の規定が前条の個別規定の規定と矛盾する場合には，個別規定において特段の定めなき限り，個別規定の規定が優先されるものとします。
             </li>
           </ol>
-          <div class="text-2xl font-bold mt-10 mb-5">第2条（利用登録）</div>
+          <div class="text-2xl font-bold mt-10 mb-5">
+            第2条（利用登録）
+          </div>
           <ol class="ml-5 list-decimal">
             <li>
               本サービスにおいては，登録希望者が本規約に同意の上，当事務局の定める方法によって利用登録を申請し，当事務局がこれを承認することによって，利用登録が完了するものとします。
@@ -119,7 +130,9 @@
               サービス利用契約が終了した場合、保存データ、利用状況データ及びプラットフォームデータの取扱いについては、法令に反しない限りにおいて、当事務局がその裁量により決することができるものとします。
             </li>
           </ol>
-          <div class="text-2xl font-bold mt-10 mb-5">第5条（禁止事項）</div>
+          <div class="text-2xl font-bold mt-10 mb-5">
+            第5条（禁止事項）
+          </div>
           <div class="mb-3">
             ユーザーは，本サービスの利用にあたり，以下の行為をしてはなりません。
           </div>
@@ -188,7 +201,9 @@
               当事務局は，本条に基づき当事務局が行った行為によりユーザーに生じた損害について，一切の責任を負いません。
             </li>
           </ol>
-          <div class="text-2xl font-bold mt-10 mb-5">第8条（退会）</div>
+          <div class="text-2xl font-bold mt-10 mb-5">
+            第8条（退会）
+          </div>
           <p>
             ユーザーは，当事務局の定める退会手続により，本サービスから退会できるものとします。
           </p>
@@ -282,7 +297,9 @@
               本サービスに関して紛争が生じた場合には，当事務局の本店所在地を管轄する裁判所を専属的合意管轄とします。
             </li>
           </ol>
-          <div class="my-20 text-center">以上</div>
+          <div class="my-20 text-center">
+            以上
+          </div>
         </div>
       </div>
     </v-card>

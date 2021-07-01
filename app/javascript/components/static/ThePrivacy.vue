@@ -5,7 +5,10 @@
     @click:outside="hundleClosePrivacyDialog"
     @input="$emit('input', $event.target.isShownPrivacy)"
   >
-    <v-card color="brown lighten-5" class="term-font">
+    <v-card
+      color="brown lighten-5"
+      class="term-font"
+    >
       <div class="container mx-auto my-4 term-font px-10 lg:px-60 lg:py-20">
         <div class="text-center text-4xl font-bold my-10">
           プライバシー・ポリシー
@@ -14,7 +17,9 @@
           <p>
             プロフちゃん（以下，「当事務局」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。
           </p>
-          <div class="text-2xl font-bold mt-10 mb-5">第1条（個人情報）</div>
+          <div class="text-2xl font-bold mt-10 mb-5">
+            第1条（個人情報）
+          </div>
           <p>
             「個人情報」とは，個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって，当該情報に含まれる氏名，生年月日，住所，電話番号，連絡先その他の記述等により特定の個人を識別できる情報及び容貌，指紋，声紋にかかるデータ，及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。
           </p>
@@ -90,20 +95,17 @@
                 rel="noopener noreferrer"
                 class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
                 href="https://marketingplatform.google.com/about/analytics/terms/jp/"
-                >Googleアナリティクスサービス利用規約</a
-              >や<a
+              >Googleアナリティクスサービス利用規約</a>や<a
                 target="_blank"
                 rel="noopener noreferrer"
                 class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
                 href="https://policies.google.com/technologies/ads?hl=ja"
-                >Googleポリシーと規約</a
-              >・<a
+              >Googleポリシーと規約</a>・<a
                 target="_blank"
                 rel="noopener noreferrer"
                 class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
                 href="https://logrocket.com/privacy/"
-                >LogRocketプライバシポリシー</a
-              >をご覧ください。
+              >LogRocketプライバシポリシー</a>をご覧ください。
             </li>
           </ol>
           <div class="text-2xl font-bold mt-10 mb-5">
@@ -232,10 +234,11 @@
               class="border-b-2 border-gray-600 hover:opacity-50 brown--text"
               target="_blank"
               href="/contacts/new"
-              >お問い合わせフォーム</a
-            >までお願いいたします。
+            >お問い合わせフォーム</a>までお願いいたします。
           </p>
-          <div class="my-20 text-center">以上</div>
+          <div class="my-20 text-center">
+            以上
+          </div>
         </div>
       </div>
     </v-card>

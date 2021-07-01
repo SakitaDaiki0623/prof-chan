@@ -8,5 +8,5 @@ class ProfileBlock < ApplicationRecord
   has_one  :address_block, dependent: :destroy
   belongs_to :user
 
-  after_create  :create_address_block
+  after_create :create_address_block
 end

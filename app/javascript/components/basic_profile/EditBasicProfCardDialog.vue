@@ -11,9 +11,15 @@
       class="shadow rounded-2xl py-5 px-10"
       color="brown lighten-4"
     >
-      <div class="top-sub-title text-2xl text-center">基本情報</div>
+      <div class="top-sub-title text-2xl text-center">
+        基本情報
+      </div>
       <v-row>
-        <v-col cols="12" sm="12" class="text-2xl">
+        <v-col
+          cols="12"
+          sm="12"
+          class="text-2xl"
+        >
           <v-row justify="end">
             <v-btn
               id="cancel-basic-prof-card-button"
@@ -26,15 +32,22 @@
             </v-btn>
           </v-row>
           <!-- FORM -->
-          <div id="profile-basic-form" class="pa-6">
-            <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <div
+            id="profile-basic-form"
+            class="pa-6"
+          >
+            <ValidationObserver
+              ref="observer"
+              v-slot="{ invalid }"
+            >
               <form
                 @submit.prevent="hundleUpdateBasicProfile(editBasicProfile)"
               >
                 <div>
-                  <label class="form-label-text-block" for="profile_gender"
-                    >性別</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_gender"
+                  >性別</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="性別"
@@ -56,9 +69,10 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label class="form-label-text-block" for="profile_height"
-                    >身長</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_height"
+                  >身長</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="身長"
@@ -70,14 +84,15 @@
                       class="input-form-basic-block"
                       type="number"
                       name="profile[height]"
-                    />
+                    >
                     <span class="red--text text-sm">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label class="form-label-text-block" for="profile_blood_type"
-                    >血液型</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_blood_type"
+                  >血液型</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="血液型"
@@ -102,8 +117,7 @@
                   <label
                     class="form-label-text-block"
                     for="profile_prefecture_id"
-                    >出身地</label
-                  >
+                  >出身地</label>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="出身地"
@@ -125,9 +139,10 @@
                   </ValidationProvider>
                 </div>
                 <div>
-                  <label class="form-label-text-block" for="profile_birthday"
-                    >生年月日</label
-                  >
+                  <label
+                    class="form-label-text-block"
+                    for="profile_birthday"
+                  >生年月日</label>
                   <v-menu
                     ref="menu"
                     v-model="birthMenu"
@@ -148,14 +163,14 @@
                           type="date"
                           class="input-form-basic-block"
                           name="profile[birthday]"
-                        />
+                        >
                         <v-btn
                           v-bind="attrs"
-                          v-on="on"
                           tile
                           small
                           color="brown"
                           class="white--text"
+                          v-on="on"
                         >
                           モーダルで入力する
                         </v-btn>
@@ -171,10 +186,10 @@
                       :day-format="(date) => new Date(date).getDate()"
                       :max="maxDate"
                       :min="minDate"
-                      @change="saveBirthDate"
                       year-icon="mdi-calendar-blank"
                       prev-icon="mdi-skip-previous"
                       next-icon="mdi-skip-next"
+                      @change="saveBirthDate"
                     />
                   </v-menu>
                 </div>
@@ -182,8 +197,7 @@
                   <label
                     class="form-label-text-block"
                     for="profile_day_of_joinning"
-                    >Slack参加日</label
-                  >
+                  >Slack参加日</label>
                   <v-menu
                     ref="menu"
                     v-model="joinedMenu"
@@ -204,14 +218,14 @@
                           type="date"
                           name="profile[day_of_joinning]"
                           class="input-form-basic-block"
-                        />
+                        >
                         <v-btn
                           v-bind="attrs"
-                          v-on="on"
                           tile
                           small
                           color="brown"
                           class="white--text"
+                          v-on="on"
                         >
                           モーダルで入力する
                         </v-btn>
@@ -225,10 +239,10 @@
                       header-color="brown darken-2"
                       locale="ja-jp"
                       :day-format="(date) => new Date(date).getDate()"
-                      @change="saveJoinedDate"
                       year-icon="mdi-calendar-blank"
                       prev-icon="mdi-skip-previous"
                       next-icon="mdi-skip-next"
+                      @change="saveJoinedDate"
                     />
                   </v-menu>
                 </div>

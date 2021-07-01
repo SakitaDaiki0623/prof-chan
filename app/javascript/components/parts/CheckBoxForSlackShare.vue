@@ -1,7 +1,12 @@
 <template>
   <div v-if="isProviderSlack && notSharedYet">
-    <v-checkbox v-model="check" label="slackに投稿しますか?"></v-checkbox>
-    <div class="text-sm">※Slackへの投稿は1日に1回のみです。</div>
+    <v-checkbox
+      v-model="check"
+      label="slackに投稿しますか?"
+    />
+    <div class="text-sm">
+      ※Slackへの投稿は1日に1回のみです。
+    </div>
   </div>
 </template>
 

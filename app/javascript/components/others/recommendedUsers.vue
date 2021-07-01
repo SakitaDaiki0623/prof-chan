@@ -1,92 +1,159 @@
 <template>
-  <div class="bg" v-if="isBlocksZero">
+  <div
+    v-if="isBlocksZero"
+    class="bg"
+  >
     <v-row
       justify="center"
       align-content="center"
       class="border-2 border-brown-500 border-dashed"
     >
-      <v-col cols="12" sm="8" align-self="center">
+      <v-col
+        cols="12"
+        sm="8"
+        align-self="center"
+      >
         <div
           class="ext-4xl bordertext-xl text-center bg-brown-50 pa-10 ma-5 rounded-full md:t-brown-500 border-4 border-dashed"
         >
-          <v-icon medium> mdi-star-box </v-icon>
+          <v-icon medium>
+            mdi-star-box
+          </v-icon>
           よくブックマークされるあなたのブロック
-          <v-icon medium> mdi-star-box </v-icon>
+          <v-icon medium>
+            mdi-star-box
+          </v-icon>
           <div class="text-sm">
             よくブックマークされるブロックは共通の話題になりそう
           </div>
         </div>
       </v-col>
-      <v-col cols="12" sm="4">
-        <img src="../../images/prof_open_happy.png" class="max-w-xs mx-auto" />
+      <v-col
+        cols="12"
+        sm="4"
+      >
+        <img
+          src="../../images/prof_open_happy.png"
+          class="max-w-xs mx-auto"
+        >
       </v-col>
     </v-row>
 
     <!-- Favorite Block -->
     <v-row
+      v-if="favoriteBlock"
       class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      v-if="favoriteBlock"
     >
-      <v-col cols="12" md="5">
-        <FavoriteBlockCard :favorite-block="favoriteBlock"
-      /></v-col>
-      <v-col cols="12" md="5" class="pa-5" align-self="center">
+      <v-col
+        cols="12"
+        md="5"
+      >
+        <FavoriteBlockCard
+          :favorite-block="favoriteBlock"
+        />
+      </v-col>
+      <v-col
+        cols="12"
+        md="5"
+        class="pa-5"
+        align-self="center"
+      >
         <BookmarkUserList :block="favoriteBlock" />
       </v-col>
     </v-row>
     <!-- Question Block -->
     <v-row
+      v-if="questionBlock"
       class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      v-if="questionBlock"
     >
-      <v-col cols="12" md="5">
-        <QuestionBlockCard :question-block="questionBlock"
-      /></v-col>
-      <v-col cols="12" md="5" class="pa-5" align-self="center">
+      <v-col
+        cols="12"
+        md="5"
+      >
+        <QuestionBlockCard
+          :question-block="questionBlock"
+        />
+      </v-col>
+      <v-col
+        cols="12"
+        md="5"
+        class="pa-5"
+        align-self="center"
+      >
         <BookmarkUserList :block="questionBlock" />
       </v-col>
     </v-row>
     <!-- Ranking Block -->
     <v-row
+      v-if="rankingBlock"
       class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      v-if="rankingBlock"
     >
-      <v-col cols="12" md="5">
-        <RankingBlockCard :ranking-block="rankingBlock"
-      /></v-col>
-      <v-col cols="12" md="5" class="pa-5" align-self="center">
+      <v-col
+        cols="12"
+        md="5"
+      >
+        <RankingBlockCard
+          :ranking-block="rankingBlock"
+        />
+      </v-col>
+      <v-col
+        cols="12"
+        md="5"
+        class="pa-5"
+        align-self="center"
+      >
         <BookmarkUserList :block="rankingBlock" />
       </v-col>
     </v-row>
     <!-- YesOrNo Block -->
     <v-row
+      v-if="yesOrNoBlock"
       class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      v-if="yesOrNoBlock"
     >
-      <v-col cols="12" md="5">
-        <YesOrNoBlockCard :yes-or-no-block="yesOrNoBlock"
-      /></v-col>
-      <v-col cols="12" md="5" class="pa-5" align-self="center">
+      <v-col
+        cols="12"
+        md="5"
+      >
+        <YesOrNoBlockCard
+          :yes-or-no-block="yesOrNoBlock"
+        />
+      </v-col>
+      <v-col
+        cols="12"
+        md="5"
+        class="pa-5"
+        align-self="center"
+      >
         <BookmarkUserList :block="yesOrNoBlock" />
       </v-col>
     </v-row>
     <!-- Text Block -->
     <v-row
+      v-if="textBlock"
       class="bg-brown-100 border-2 border-brown-500 border-dashed"
       justify="center"
       align-content="center"
-      v-if="textBlock"
     >
-      <v-col cols="12" md="5"> <TextBlockCard :text-block="textBlock" /></v-col>
-      <v-col cols="12" md="5" class="pa-5" align-self="center">
+      <v-col
+        cols="12"
+        md="5"
+      >
+        <TextBlockCard :text-block="textBlock" />
+      </v-col>
+      <v-col
+        cols="12"
+        md="5"
+        class="pa-5"
+        align-self="center"
+      >
         <BookmarkUserList :block="textBlock" />
       </v-col>
     </v-row>

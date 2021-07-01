@@ -6,18 +6,25 @@
           v-bind="attrs"
           color="brown lighten-3"
           class="white--text text-2xl"
-          v-on="on"
           x-large
+          v-on="on"
         >
           ブックマークした人
         </v-btn>
       </template>
 
-      <v-card width="500px" max-height="500px" color="brown">
+      <v-card
+        width="500px"
+        max-height="500px"
+        color="brown"
+      >
         <v-list color="brown lighten-3">
-          <v-list-item v-for="user in block.users" :key="user.id">
+          <v-list-item
+            v-for="user in block.users"
+            :key="user.id"
+          >
             <v-list-item-avatar color="white">
-              <v-img :src="user.image.url"></v-img>
+              <v-img :src="user.image.url" />
             </v-list-item-avatar>
             <v-list-item-title class="white--text">
               {{ user.name }}
