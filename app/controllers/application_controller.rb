@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include ErrorRenderable
   before_action :authenticate_user!
 
+  # CSRF
   protect_from_forgery with: :exception
 
   rescue_from Exception, with: :notify_500
