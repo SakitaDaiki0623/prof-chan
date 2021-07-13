@@ -104,5 +104,4 @@ https://drive.google.com/file/d/1KOV9rxuvCUenZRAJKHCQqWX77uQjO_N7/view?usp=shari
 
 #### インフラ構成図
 
-[![Image from Gyazo](https://i.gyazo.com/77d2babccb1468a167c3e362c4d89eff.png)](https://gyazo.com/77d2babccb1468a167c3e362c4d89eff)
-https://drive.google.com/file/d/1lCmn-IeardJ3zwkcgTyybtmjb9wh80Hf/view?usp=sharing
+![](./infra.drawio.svg)
