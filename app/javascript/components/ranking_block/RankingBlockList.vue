@@ -8,7 +8,7 @@
     <div class="corner-title top-sub-title">
       <span
         class="green--text text--lighten-3 px-2 bg-white rounded-full"
-      >R</span> My Best 3
+      >R</span> My Best 3 コーナー
     </div>
     <v-row
       v-show="isThisEditPage"
