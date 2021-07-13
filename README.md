@@ -104,4 +104,4 @@ https://drive.google.com/file/d/1KOV9rxuvCUenZRAJKHCQqWX77uQjO_N7/view?usp=shari
 
 #### インフラ構成図
 
-![](./infra.png)
+![](./profchan-infra)
