@@ -6,7 +6,8 @@
     class="mb-10 pa-5"
   >
     <div class="corner-title top-sub-title">
-      <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span>質問コーナー
+      <span class="red--text text--lighten-3 rounded-full px-2 bg-white">Q</span
+      >質問コーナー
     </div>
     <v-row
       v-show="isThisEditPage"
@@ -14,11 +15,7 @@
       justify="center"
       align-content="center"
     >
-      <v-col
-        cols="12"
-        sm="12"
-        align="center"
-      >
+      <v-col cols="12" sm="12" align="center">
         <v-btn
           id="add-question-block-btn"
           tile
@@ -26,17 +23,11 @@
           class="ma-2 white--text"
           @click="openQuestionFormatDialog"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>
+          <v-icon left> mdi-plus </v-icon>
           クエスチョンブロックを追加する
         </v-btn>
       </v-col>
-      <v-col
-        cols="12"
-        sm="8"
-        align="right"
-      >
+      <v-col cols="12" sm="8" align="right">
         <ProgressBar
           :percentage-for-blocks="percentageMyQuestionBlocksLengt"
           :block-color="questionBlockColor"
@@ -96,27 +87,31 @@
             :question-block="questionBlock"
             :is-this-edit-page="isThisEditPage"
             :question-block-color="questionBlockColor"
+            :question-items="questionItems"
+            @retrieve-question-block="retrieveQuestionBlock"
+            @update-question-block="updateQuestionBlock"
+            @add-question-item="addQuestionItem"
+            @update-question-item="updateQuestionItem"
+            @retrieve-question-item="retrieveQuestionItem"
           />
         </v-col>
       </transition-group>
 
-      <NoBlockContainer
-        v-else
-        block-name="クエスチョン"
-      />
+      <NoBlockContainer v-else block-name="クエスチョン" />
     </div>
 
     <QuestionFormatDialog
       :is-shown-question-format-dialog="isShownQuestionFormatDialog"
       :question-block-color="questionBlockColor"
       @close-question-format-dialog="closeQuestionFormatDialog"
+      @add-question-block="addQuestionBlock"
     />
   </v-card>
 </template>
 
 <script>
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 import QuestionFormatDialog from "./QuestionFormatDialog";
 import QuestionBlockCard from "./QuestionBlockCard";
@@ -145,6 +140,8 @@ export default {
     return {
       isShownQuestionFormatDialog: false,
       questionBlockColor: "red lighten-3", // question block color
+      questionBlocks: [],
+      questionItems: [],
 
       page: 1,
       displayBlocks: [],
@@ -153,7 +150,6 @@ export default {
     };
   },
   computed: {
-    ...mapState("questionBlocks", ["questionBlocks"]),
     ...mapState("users", ["currentUser"]),
 
     isMyQuestionBlocksLengthNotZero() {
@@ -179,10 +175,6 @@ export default {
     this.pageFirstRead();
   },
   methods: {
-    ...mapActions({
-      fetchQuestionBlocks: "questionBlocks/fetchQuestionBlocks",
-      fetchQuestionItems: "questionBlocks/fetchQuestionItems",
-    }),
     openQuestionFormatDialog() {
       this.isShownQuestionFormatDialog = true;
     },
@@ -200,6 +192,103 @@ export default {
       await this.fetchQuestionItems();
       this.length = Math.ceil(this.myQuestionBlocks.length / this.pageSize);
       this.displayBlocks = this.myQuestionBlocks.slice(0, this.pageSize);
+    },
+    async fetchQuestionBlocks() {
+      await axios.get("/api/v1/question_blocks").then((response) => {
+        this.questionBlocks = response.data;
+      });
+    },
+    async fetchQuestionItems() {
+      await axios.get("/api/v1/question_items").then((response) => {
+        this.questionItems = response.data;
+      });
+    },
+    addQuestionBlock(questionBlock) {
+      this.questionBlocks.push(questionBlock);
+      questionBlock.question_items.forEach((questionItem) =>
+        this.questionItems.push(questionItem)
+      );
+    },
+
+    retrieveQuestionBlock(block) {
+      const index = this.questionBlocks.findIndex((questionBlock) => {
+        return questionBlock.id == block.id;
+      });
+      this.questionBlocks.splice(index, 1);
+
+      // 従属アイテムの削除
+      this.questionItems = this.questionItems.filter(
+        (questionItem) => questionItem.question_block.id !== block.id
+      );
+    },
+
+    updateQuestionBlock(block) {
+      const index = this.questionBlocks.findIndex((questionBlock) => {
+        return questionBlock.id == block.id;
+      });
+      this.questionBlocks.splice(index, 1, block);
+    },
+
+    addQuestionItem(questionItem) {
+      this.questionItems.push(questionItem);
+
+      // 作成したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      const questionBlockIndex = this.questionBlocks.findIndex(
+        (questionBlock) => questionBlock.id == questionItem.question_block.id
+      );
+
+      this.questionBlocks[questionBlockIndex].question_items.push(questionItem);
+    },
+
+    updateQuestionItem(block) {
+      const questionItemsIndex = this.questionItems.findIndex(
+        (questionItem) => {
+          return questionItem.id == block.id;
+        }
+      );
+      this.questionItems.splice(questionItemsIndex, 1, block);
+
+      // 更新したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      const questionBlockIndex = this.questionBlocks.findIndex(
+        (questionBlock) => questionBlock.id == block.question_block.id
+      );
+
+      // そのクエスチョンブロック内の更新したアイテムのインデックス番号を取得
+      const questionBlockItemsIndex = this.questionBlocks
+        .find((questionBlock) => questionBlock.id == block.question_block.id)
+        .question_items.findIndex(
+          (questionItem) => questionItem.id == block.id
+        );
+
+      this.questionBlocks[questionBlockIndex].question_items.splice(
+        questionBlockItemsIndex,
+        1,
+        block
+      );
+    },
+
+    retrieveQuestionItem(block) {
+      const index = this.questionItems.findIndex((questionItem) => {
+        return questionItem.id == block.id;
+      });
+      this.questionItems.splice(index, 1);
+
+      // 削除したアイテムを持つクエスチョンブロックのインデックス番号を取得
+      const questinBlockIndex = this.questionBlocks.findIndex(
+        (questionBlock) => questionBlock.id == block.question_block.id
+      );
+
+      // そのクエスチョンブロック内の削除したアイテムのインデックス番号を取得
+      const questionBlockItemsIndex = this.questionBlocks
+        .find((questionBlock) => questionBlock.id == block.question_block.id)
+        .question_items.findIndex(
+          (questionItem) => questionItem.id == block.id
+        );
+
+      this.questionBlocks[questinBlockIndex].question_items.splice(
+        questionBlockItemsIndex,
+        1
+      );
     },
   },
 };

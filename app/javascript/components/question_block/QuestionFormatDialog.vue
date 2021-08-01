@@ -6,10 +6,7 @@
     @input="$emit('input', $event.target.isShownQuestionFormatDialog)"
   >
     <v-card :color="questionBlockColor">
-      <v-row
-        justify="end"
-        class="mr-2 mt-2"
-      >
+      <v-row justify="end" class="mr-2 mt-2">
         <v-btn
           :color="questionBlockColor"
           @click="hundleCloseQuestioniFormatDialog"
@@ -21,15 +18,9 @@
         クエスチョンブロック
       </p>
 
-      <div
-        id="question-block-form"
-        class="pa-10 note-box"
-      >
+      <div id="question-block-form" class="pa-10 note-box">
         <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-btn
               id="input-yes-or-no-title-button"
               type="submit"
@@ -41,16 +32,11 @@
               class="white--text py-2"
               @click="inputTitleRandomly"
             >
-              <v-icon left>
-                mdi-plus
-              </v-icon>ランダムに入力
+              <v-icon left> mdi-plus </v-icon>ランダムに入力
             </v-btn>
           </v-col>
           <v-spacer />
-          <v-col
-            cols="12"
-            sm="6"
-          >
+          <v-col cols="12" sm="6">
             <v-btn
               id="add-question-item-button"
               type="submit"
@@ -63,9 +49,7 @@
               :disabled="questionItemNum >= 3"
               @click="addQuestionItemNum"
             >
-              <v-icon left>
-                mdi-plus
-              </v-icon>
+              <v-icon left> mdi-plus </v-icon>
               質問と答えを追加する
             </v-btn>
             <v-btn
@@ -80,17 +64,12 @@
               :disabled="questionItemNum <= 1"
               @click="deleteQuestionItemNum"
             >
-              <v-icon left>
-                mdi-minus
-              </v-icon>
+              <v-icon left> mdi-minus </v-icon>
               質問と答えを減らす
             </v-btn>
           </v-col>
         </v-row>
-        <ValidationObserver
-          ref="observer"
-          v-slot="{ invalid }"
-        >
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
           <form
             @submit.prevent="
               hundleCreateQuestionBlock(
@@ -102,10 +81,9 @@
             "
           >
             <div>
-              <label
-                class="form-label-text-block"
-                for="question_block_title"
-              >タイトル</label>
+              <label class="form-label-text-block" for="question_block_title"
+                >タイトル</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="タイトル"
@@ -117,7 +95,7 @@
                   class="input-form-question-block"
                   name="question_block[question_block_title]"
                   type="text"
-                >
+                />
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
@@ -150,9 +128,7 @@
                 label="slackに投稿しますか?"
                 :color="questionBlockColor"
               />
-              <div class="text-sm">
-                ※Slackへの投稿は1日に1回のみです。
-              </div>
+              <div class="text-sm">※Slackへの投稿は1日に1回のみです。</div>
             </div>
 
             <div class="text-center pa-10">
@@ -166,9 +142,7 @@
                 :color="questionBlockColor"
                 class="white--text"
               >
-                <v-icon left>
-                  mdi-plus
-                </v-icon>
+                <v-icon left> mdi-plus </v-icon>
                 クエスチョンブロックを作成！
               </v-btn>
             </div>
@@ -314,14 +288,11 @@ export default {
       return this.currentUser.provider == "slack" ? true : false;
     },
     notSharedYet() {
-      return this.currentUser.share_right.question == "active"
-        ? true
-        : false;
+      return this.currentUser.share_right.question == "active" ? true : false;
     },
   },
   methods: {
     ...mapActions({
-      createQuestionBlock: "questionBlocks/createQuestionBlock",
       updateCurrentUserQuestionShareRight:
         "users/updateCurrentUserQuestionShareRight",
     }),
@@ -353,7 +324,7 @@ export default {
         question_item_content3: questionItem3.content,
         question_item_answer3: questionItem3.answer,
       };
-      this.createQuestionBlock(params);
+      await this.createQuestionBlock(params);
       if (this.isProviderSlack && this.check && this.notSharedYet) {
         await this.postToSlackAfterCreate(params);
         this.updateCurrentUserQuestionShareRight();
@@ -363,6 +334,11 @@ export default {
         type: "success",
         message: "クエスチョンブロックを作成したよ！",
         color: this.questionBlockColor,
+      });
+    },
+    async createQuestionBlock(params) {
+      await axios.post("/api/v1/question_blocks", params).then((response) => {
+        this.$emit("add-question-block", response.data);
       });
     },
     async postToSlackAfterCreate(params) {
