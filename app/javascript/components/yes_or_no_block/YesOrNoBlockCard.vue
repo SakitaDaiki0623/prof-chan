@@ -20,6 +20,20 @@
         >
           <v-icon> mdi-delete </v-icon>
         </v-btn>
+        <EditYesOrNoFormatDialog
+          :is-shown-edit-yes-or-no-format-dialog="
+            isShownEditYesOrNoFormatDialog
+          "
+          :edit-yes-or-no-block="editYesOrNoBlock"
+          :yes-or-no-block-color="yesOrNoBlockColor"
+          :yes-or-no-items="yesOrNoItems"
+          @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
+          @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
+          @update-yes-or-no-block="$listeners['update-yes-or-no-block']"
+          @add-yes-or-no-item="$listeners['add-yes-or-no-item']"
+          @update-yes-or-no-item="$listeners['update-yes-or-no-item']"
+          @retrieve-yes-or-no-item="$listeners['retrieve-yes-or-no-item']"
+        />
       </v-row>
       <v-row v-else>
         <v-spacer />
@@ -55,18 +69,6 @@
         </div>
       </template>
     </v-card>
-    <EditYesOrNoFormatDialog
-      :is-shown-edit-yes-or-no-format-dialog="isShownEditYesOrNoFormatDialog"
-      :edit-yes-or-no-block="editYesOrNoBlock"
-      :yes-or-no-block-color="yesOrNoBlockColor"
-      :yes-or-no-items="yesOrNoItems"
-      @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
-      @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
-      @update-yes-or-no-block="$listeners['update-yes-or-no-block']"
-      @add-yes-or-no-item="$listeners['add-yes-or-no-item']"
-      @update-yes-or-no-item="$listeners['update-yes-or-no-item']"
-      @retrieve-yes-or-no-item="$listeners['retrieve-yes-or-no-item']"
-    />
   </div>
 </template>
 

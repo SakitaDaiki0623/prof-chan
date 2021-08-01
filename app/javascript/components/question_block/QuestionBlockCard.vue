@@ -20,6 +20,20 @@
         >
           <v-icon> mdi-delete </v-icon>
         </v-btn>
+        <EditQuestionFormatDialog
+          :is-shown-edit-question-format-dialog="
+            isShownEditQuestionFormatDialog
+          "
+          :edit-question-block="editQuestionBlock"
+          :question-block-color="questionBlockColor"
+          :question-items="questionItems"
+          @close-question-block-format-dialog="closeEditQuestionFormatDialog"
+          @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
+          @update-question-block="$listeners['update-question-block']"
+          @add-question-item="$listeners['add-question-item']"
+          @update-question-item="$listeners['update-question-item']"
+          @retrieve-question-item="$listeners['retrieve-question-item']"
+        />
       </v-row>
       <v-row v-else>
         <v-spacer />
@@ -48,18 +62,6 @@
         </div>
       </template>
     </v-card>
-    <EditQuestionFormatDialog
-      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
-      :edit-question-block="editQuestionBlock"
-      :question-block-color="questionBlockColor"
-      :question-items="questionItems"
-      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
-      @update-question-block="$listeners['update-question-block']"
-      @add-question-item="$listeners['add-question-item']"
-      @update-question-item="$listeners['update-question-item']"
-      @retrieve-question-item="$listeners['retrieve-question-item']"
-    />
   </div>
 </template>
 
