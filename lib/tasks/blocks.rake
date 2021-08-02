@@ -44,14 +44,8 @@ namespace :blocks do
       token_test_result = ''
       access_token = ''
       team.users.each do |user|
-        encrypted_access_token = user.authentication.access_token
-        key_len = ActiveSupport::MessageEncryptor.key_len
-        secret = Rails.application.key_generator.generate_key('salt', key_len)
-        crypt = ActiveSupport::MessageEncryptor.new(secret)
-        while encrypted_access_token.is_a?(String)
-          encrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
-        end
-        access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
+        raw_access_token = user.authentication.access_token
+        access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
         token_test_result = access_token.post('api/auth.test').parsed
         break if token_test_result.dig('ok')
       end
