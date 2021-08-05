@@ -1,53 +1,30 @@
 <template>
-  <div
-    :id="yesOrNoBlockItemId"
-    class="ma-1"
-  >
+  <div :id="yesOrNoBlockItemId" class="ma-1">
     <!-- Item Form -->
-    <v-row
-      v-show="!isTheItemEditing"
-      align="center"
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        md="10"
-      >
-        <v-card
-          class="pa-5 rounded-lg"
-          outlined
-        >
+    <v-row v-show="!isTheItemEditing" align="center" justify="center">
+      <v-col cols="12" md="10">
+        <v-card class="pa-5 rounded-lg" outlined>
           <v-row>
-            <v-col
-              cols="12"
-              sm="6"
-            >
+            <v-col cols="12" sm="6">
               {{ yesOrNoItem.content }}
             </v-col>
-            <v-col
-              v-if="yesOrNoItem.answer"
-              cols="12"
-              sm="6"
-            >
-              <span class="rounded-full border-brown-500 border-2 pa-2">YES</span>
+            <v-col v-if="yesOrNoItem.answer" cols="12" sm="6">
+              <span class="rounded-full border-brown-500 border-2 pa-2"
+                >YES</span
+              >
               / NO
             </v-col>
-            <v-col
-              v-else
-              cols="12"
-              sm="6"
-            >
+            <v-col v-else cols="12" sm="6">
               YES /
-              <span class="rounded-full border-brown-500 border-2 pa-2">NO</span>
+              <span class="rounded-full border-brown-500 border-2 pa-2"
+                >NO</span
+              >
             </v-col>
           </v-row>
         </v-card>
       </v-col>
 
-      <v-col
-        cols="12"
-        md="1"
-      >
+      <v-col cols="12" md="1">
         <v-btn
           :id="'edit-yes-or-no-item-button-' + yesOrNoItem.id"
           tile
@@ -58,10 +35,7 @@
           <v-icon> mdi-pencil </v-icon>
         </v-btn>
       </v-col>
-      <v-col
-        cols="12"
-        md="1"
-      >
+      <v-col cols="12" md="1">
         <v-btn
           :id="'delete-yes-or-no-item-button-' + yesOrNoItem.id"
           tile
@@ -77,20 +51,13 @@
 
     <!-- Item Form -->
     <div v-show="isTheItemEditing">
-      <ValidationObserver
-        ref="observer"
-        v-slot="{ invalid }"
-      >
+      <ValidationObserver ref="observer" v-slot="{ invalid }">
         <form>
           <v-row>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <label
-                for="yes_or_no_item_content"
-                class="form-label-text-block"
-              >質問</label>
+            <v-col cols="12" md="6">
+              <label for="yes_or_no_item_content" class="form-label-text-block"
+                >質問</label
+              >
               <ValidationProvider
                 v-slot="{ errors }"
                 :name="yesOrNoNameForValidation"
@@ -103,25 +70,18 @@
                   name="yes_or_no_item[yes_or_no_item_content]"
                   type="text"
                   @input="editYesOrNoItem.content = $event.target.value"
-                >
+                />
                 <span class="red--text text-sm">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
+            <v-col cols="12" md="6">
               <label
                 for="yes_or_no_item_answer"
                 class="form-label-text-block inline-block"
               >
                 答え
               </label>
-              <v-radio-group
-                v-model="editYesOrNoItem.answer"
-                mandatory
-                row
-              >
+              <v-radio-group v-model="editYesOrNoItem.answer" mandatory row>
                 <v-radio
                   label="YES"
                   :value="true"
@@ -138,10 +98,7 @@
             </v-col>
           </v-row>
           <v-row justify="end">
-            <v-col
-              cols="12"
-              md="1"
-            >
+            <v-col cols="12" md="1">
               <v-btn
                 :id="'update-yes-or-no-item-button-' + editYesOrNoItem.id"
                 tile
@@ -153,10 +110,7 @@
                 更新
               </v-btn>
             </v-col>
-            <v-col
-              cols="12"
-              md="1"
-            >
+            <v-col cols="12" md="1">
               <v-btn
                 :id="
                   'cancel-yes-or-no-item-update-button-' + editYesOrNoItem.id
@@ -177,8 +131,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-
+import axios from "axios";
 export default {
   props: {
     yesOrNoItem: {
@@ -230,10 +183,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      patchYesOrNoItem: "yesOrNoBlocks/patchYesOrNoItem",
-      deleteYesOrNoItem: "yesOrNoBlocks/deleteYesOrNoItem",
-    }),
     showEditYesOrNoItemForm() {
       this.$emit("show-edit-yes-or-no-item-form");
     },
@@ -259,6 +208,14 @@ export default {
       });
     },
 
+    patchYesOrNoItem(yesOrNoItem) {
+      axios
+        .patch(`/api/v1/yes_or_no_items/${yesOrNoItem.id}`, yesOrNoItem)
+        .then((response) => {
+          this.$emit("update-yes-or-no-item", response.data);
+        });
+    },
+
     // 削除
     hundleDeleteYesOrNoItem(yesOrNoItem) {
       this.deleteYesOrNoItem(yesOrNoItem);
@@ -267,6 +224,14 @@ export default {
         message: "Yes or No アイテムを削除したよ！",
         color: this.yesOrNoBlockColor,
       });
+    },
+
+    deleteYesOrNoItem(yesOrNoItem) {
+      axios
+        .delete(`/api/v1/yes_or_no_items/${yesOrNoItem.id}`, yesOrNoItem)
+        .then((response) => {
+          this.$emit("retrieve-yes-or-no-item", response.data);
+        });
     },
   },
 };

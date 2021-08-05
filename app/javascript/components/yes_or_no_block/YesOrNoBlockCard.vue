@@ -1,14 +1,7 @@
 <template>
   <div>
-    <v-card
-      class="rounded-2xl pa-5 note-box"
-      outlined
-      color="orange lighten-4"
-    >
-      <v-row
-        v-if="isThisEditPage"
-        justify="end"
-      >
+    <v-card class="rounded-2xl pa-5 note-box" outlined color="orange lighten-4">
+      <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-yes-or-no-block-button-' + yesOrNoBlock.id"
           tile
@@ -27,6 +20,20 @@
         >
           <v-icon> mdi-delete </v-icon>
         </v-btn>
+        <EditYesOrNoFormatDialog
+          :is-shown-edit-yes-or-no-format-dialog="
+            isShownEditYesOrNoFormatDialog
+          "
+          :edit-yes-or-no-block="editYesOrNoBlock"
+          :yes-or-no-block-color="yesOrNoBlockColor"
+          :yes-or-no-items="yesOrNoItems"
+          @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
+          @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
+          @update-yes-or-no-block="$listeners['update-yes-or-no-block']"
+          @add-yes-or-no-item="$listeners['add-yes-or-no-item']"
+          @update-yes-or-no-item="$listeners['update-yes-or-no-item']"
+          @retrieve-yes-or-no-item="$listeners['retrieve-yes-or-no-item']"
+        />
       </v-row>
       <v-row v-else>
         <v-spacer />
@@ -40,58 +47,36 @@
       </p>
       <template v-for="yes_or_no_item in yesOrNoBlock.yes_or_no_items">
         <div :key="yes_or_no_item.id">
-          <v-card
-            class="pa-2 ma-2"
-            outlined
-            color="white"
-          >
+          <v-card class="pa-2 ma-2" outlined color="white">
             <v-row align="center">
-              <v-col
-                cols="12"
-                sm="7"
-              >
+              <v-col cols="12" sm="7">
                 {{ yes_or_no_item.content }}
               </v-col>
-              <v-col
-                v-if="yes_or_no_item.answer"
-                cols="12"
-                sm="5"
-              >
-                <span
-                  class="rounded-full border-brown-500 border-2 pa-2"
-                >YES</span>
+              <v-col v-if="yes_or_no_item.answer" cols="12" sm="5">
+                <span class="rounded-full border-brown-500 border-2 pa-2"
+                  >YES</span
+                >
                 / NO
               </v-col>
-              <v-col
-                v-else
-                cols="12"
-                sm="5"
-              >
+              <v-col v-else cols="12" sm="5">
                 YES /
-                <span
-                  class="rounded-full border-brown-500 border-2 pa-2"
-                >NO</span>
+                <span class="rounded-full border-brown-500 border-2 pa-2"
+                  >NO</span
+                >
               </v-col>
             </v-row>
           </v-card>
         </div>
       </template>
     </v-card>
-    <EditYesOrNoFormatDialog
-      :is-shown-edit-yes-or-no-format-dialog="isShownEditYesOrNoFormatDialog"
-      :edit-yes-or-no-block="editYesOrNoBlock"
-      :yes-or-no-block-color="yesOrNoBlockColor"
-      @close-yes-or-no-block-format-dialog="closeEditYesOrNoFormatDialog"
-      @close-yes-or-no-block-edit-dialog="closeYesOrNoBlockEditDialog"
-    />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 import EditYesOrNoFormatDialog from "./EditYesOrNoFormatDialog";
 import YesOrNoBlockLikeButton from "../likes/YesOrNoBlockLikeButton";
-
-import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -101,6 +86,10 @@ export default {
   props: {
     yesOrNoBlock: {
       type: Object,
+      requred: true,
+    },
+    yesOrNoItems: {
+      type: Array,
       requred: true,
     },
     isThisEditPage: {
@@ -126,9 +115,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      deleteYesOrNoBlock: "yesOrNoBlocks/deleteYesOrNoBlock",
-    }),
     openEditYesOrNoFormatDialog(yesOrNoBlock) {
       this.editYesOrNoBlock = Object.assign({}, yesOrNoBlock);
       this.isShownEditYesOrNoFormatDialog = true;
@@ -147,6 +133,14 @@ export default {
         message: "Yes or No ブロックを削除したよ！",
         color: this.yesOrNoBlockColor,
       });
+    },
+
+    deleteYesOrNoBlock(yesOrNoBlock) {
+      axios
+        .delete(`/api/v1/yes_or_no_blocks/${yesOrNoBlock.id}`, yesOrNoBlock)
+        .then((response) => {
+          this.$emit("retrieve-yes-or-no-block", response.data);
+        });
     },
   },
 };

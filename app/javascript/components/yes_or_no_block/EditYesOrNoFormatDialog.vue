@@ -6,10 +6,7 @@
     @input="$emit('input', $event.target.isShownEditYesOrNoFormatDialog)"
   >
     <v-card :color="yesOrNoBlockColor">
-      <v-row
-        justify="end"
-        class="mr-2 mt-2"
-      >
+      <v-row justify="end" class="mr-2 mt-2">
         <v-btn
           :color="yesOrNoBlockColor"
           @click="hundleCloseYesOrNoBlockEditDialog"
@@ -22,22 +19,13 @@
       </p>
 
       <div class="pa-10 note-box">
-        <v-row
-          v-show="!isShownForm"
-          align="center"
-        >
-          <v-col
-            cols="12"
-            md="10"
-          >
+        <v-row v-show="!isShownForm" align="center">
+          <v-col cols="12" md="10">
             <p class="text-2xl font-bold pt-3">
               {{ editYesOrNoBlock.title }}
             </p>
           </v-col>
-          <v-col
-            cols="12"
-            md="1"
-          >
+          <v-col cols="12" md="1">
             <v-btn
               :id="'edit-yes-or-no-block-title-button-' + editYesOrNoBlock.id"
               tile
@@ -52,16 +40,12 @@
 
         <!-- タイトル編集フォーム -->
         <div v-show="isShownForm">
-          <ValidationObserver
-            ref="observer"
-            v-slot="{ invalid }"
-          >
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form>
               <div>
-                <label
-                  class="form-label-text-block"
-                  for="yes_or_no_block_title"
-                >タイトル</label>
+                <label class="form-label-text-block" for="yes_or_no_block_title"
+                  >タイトル</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -76,23 +60,16 @@
                     name="yes_or_no_block[yes_or_no_block_title]"
                     type="text"
                     @input="editYesOrNoBlockForForm.title = $event.target.value"
-                  >
+                  />
                   <span class="red--text text-sm">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
-              <v-row
-                justify="end"
-                align="center"
-                class="pt-3"
-              >
-                <v-col
-                  cols="12"
-                  md="1"
-                >
+              <v-row justify="end" align="center" class="pt-3">
+                <v-col cols="12" md="1">
                   <v-btn
                     :id="
                       'update-yes-or-no-item-button-' +
-                        editYesOrNoBlockForForm.id
+                      editYesOrNoBlockForForm.id
                     "
                     tile
                     small
@@ -105,14 +82,11 @@
                     更新
                   </v-btn>
                 </v-col>
-                <v-col
-                  cols="12"
-                  md="1"
-                >
+                <v-col cols="12" md="1">
                   <v-btn
                     :id="
                       'cancel-yes-or-no-item-update-button-' +
-                        editYesOrNoBlockForForm.id
+                      editYesOrNoBlockForForm.id
                     "
                     tile
                     small
@@ -138,6 +112,8 @@
           :yes-or-no-block-color="yesOrNoBlockColor"
           @show-edit-yes-or-no-item-form="showTheFirstEditYesOrNoItemForm"
           @hide-edit-yes-or-no-item-form="hideTheFirstEditYesOrNoItemForm"
+          @update-yes-or-no-item="$listeners['update-yes-or-no-item']"
+          @retrieve-yes-or-no-item="$listeners['retrieve-yes-or-no-item']"
         />
         <EditYesOrNoBlockItem
           v-if="yesOrNoItemLength >= 2"
@@ -150,6 +126,8 @@
           :yes-or-no-block-color="yesOrNoBlockColor"
           @show-edit-yes-or-no-item-form="showTheSecondEditYesOrNoItemForm"
           @hide-edit-yes-or-no-item-form="hideTheSecondEditYesOrNoItemForm"
+          @update-yes-or-no-item="$listeners['update-yes-or-no-item']"
+          @retrieve-yes-or-no-item="$listeners['retrieve-yes-or-no-item']"
         />
         <EditYesOrNoBlockItem
           v-if="yesOrNoItemLength >= 3"
@@ -162,12 +140,15 @@
           :yes-or-no-block-color="yesOrNoBlockColor"
           @show-edit-yes-or-no-item-form="showTheThirdEditYesOrNoItemForm"
           @hide-edit-yes-or-no-item-form="hideTheThirdEditYesOrNoItemForm"
+          @update-yes-or-no-item="$listeners['update-yes-or-no-item']"
+          @retrieve-yes-or-no-item="$listeners['retrieve-yes-or-no-item']"
         />
 
         <IndividualCreateYesOrNoBlockItem
           v-if="yesOrNoItemLength < 3"
           ref="IndividualCreateYesOrNoBlockItem"
           :parent-yes-or-no-block-id="parentYesOrNoBlockId"
+          @add-yes-or-no-item="$listeners['add-yes-or-no-item']"
         />
 
         <div class="mt-3 font-weight-bold text-sm">
@@ -209,6 +190,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    yesOrNoItems: {
+      type: Array,
+      requred: true,
+    },
     editYesOrNoBlock: {
       type: Object,
       required: true,
@@ -235,9 +220,6 @@ export default {
     };
   },
   computed: {
-    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
-    ...mapState("yesOrNoBlocks", ["yesOrNoItems"]),
-
     editYesOrNoBlockForForm() {
       return Object.assign({}, this.editYesOrNoBlock);
     },
@@ -279,9 +261,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      patchYesOrNoBlock: "yesOrNoBlocks/patchYesOrNoBlock",
-    }),
     hundleEditYesOrNoBlockTitle(editYesOrNoBlock) {
       if (editYesOrNoBlock.title == "") return;
       this.patchYesOrNoBlock(editYesOrNoBlock);
@@ -292,6 +271,14 @@ export default {
         message: "Yes or No ブロックのタイトルを更新したよ！",
         color: this.YesOrNoBlockColor,
       });
+    },
+
+    patchYesOrNoBlock(yesOrNoBlock) {
+      axios
+        .patch(`/api/v1/yes_or_no_blocks/${yesOrNoBlock.id}`, yesOrNoBlock)
+        .then((response) => {
+          this.$emit("update-yes-or-no-block", response.data);
+        });
     },
 
     addYesOrNoItemNum() {
