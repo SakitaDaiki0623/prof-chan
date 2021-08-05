@@ -6,21 +6,13 @@
     class="mb-10 pa-5"
   >
     <div class="corner-title top-sub-title">
-      <span
-        class="yellow--text text--darken-3 rounded-full px-2 bg-white"
-      >Y</span>
+      <span class="yellow--text text--darken-3 rounded-full px-2 bg-white"
+        >Y</span
+      >
       Yes or No コーナー
     </div>
-    <v-row
-      v-show="isThisEditPage"
-      justify="center"
-      class="py-5"
-    >
-      <v-col
-        cols="12"
-        sm="12"
-        align="center"
-      >
+    <v-row v-show="isThisEditPage" justify="center" class="py-5">
+      <v-col cols="12" sm="12" align="center">
         <v-btn
           id="add-yes-or-no-block-btn"
           tile
@@ -28,17 +20,11 @@
           class="ma-2 white--text"
           @click="openYesOrNoFormatDialog"
         >
-          <v-icon left>
-            mdi-plus
-          </v-icon>
+          <v-icon left> mdi-plus </v-icon>
           Yes or No ブロックを追加する
         </v-btn>
       </v-col>
-      <v-col
-        cols="12"
-        sm="8"
-        align="right"
-      >
+      <v-col cols="12" sm="8" align="right">
         <ProgressBar
           :percentage-for-blocks="percentageMyYesOrNoBlocksLengt"
           :block-color="yesOrNoBlockColor"
@@ -94,19 +80,23 @@
             :yes-or-no-block="yesOrNoBlock"
             :is-this-edit-page="isThisEditPage"
             :yes-or-no-block-color="yesOrNoBlockColor"
+            :yes-or-no-items="yesOrNoItems"
+            @retrieve-yes-or-no-block="retrieveYesOrNoBlock"
+            @update-yes-or-no-block="updateYesOrNoBlock"
+            @add-yes-or-no-item="addYesOrNoItem"
+            @update-yes-or-no-item="updateYesOrNoItem"
+            @retrieve-yes-or-no-item="retrieveYesOrNoItem"
           />
         </v-col>
       </transition-group>
-      <NoBlockContainer
-        v-else
-        block-name="Yes or No "
-      />
+      <NoBlockContainer v-else block-name="Yes or No " />
     </div>
 
     <YesOrNoFormatDialog
       :is-shown-yes-or-no-format-dialog="isShownYesOrNoFormatDialog"
       :yes-or-no-block-color="yesOrNoBlockColor"
       @close-yes-or-no-format-dialog="closeYesOrNoFormatDialog"
+      @add-yes-or-no-block="addYesOrNoBlock"
     />
   </v-card>
 </template>
@@ -142,6 +132,8 @@ export default {
     return {
       isShownYesOrNoFormatDialog: false,
       yesOrNoBlockColor: "orange lighten-3", // block color
+      yesOrNoBlocks: [],
+      yesOrNoItems: [],
 
       page: 1,
       displayBlocks: [],
@@ -150,7 +142,6 @@ export default {
     };
   },
   computed: {
-    ...mapState("yesOrNoBlocks", ["yesOrNoBlocks"]),
     ...mapState("users", ["currentUser"]),
 
     percentageMyYesOrNoBlocksLengt() {
@@ -179,10 +170,6 @@ export default {
     this.pageFirstRead();
   },
   methods: {
-    ...mapActions({
-      fetchYesOrNoBlocks: "yesOrNoBlocks/fetchYesOrNoBlocks",
-      fetchYesOrNoItems: "yesOrNoBlocks/fetchYesOrNoItems",
-    }),
     openYesOrNoFormatDialog() {
       this.isShownYesOrNoFormatDialog = true;
     },
@@ -200,6 +187,99 @@ export default {
       await this.fetchYesOrNoItems();
       this.length = Math.ceil(this.myYesOrNoBlocks.length / this.pageSize);
       this.displayBlocks = this.myYesOrNoBlocks.slice(0, this.pageSize);
+    },
+
+    async fetchYesOrNoBlocks() {
+      await axios.get("/api/v1/yes_or_no_blocks").then((response) => {
+        this.yesOrNoBlocks = response.data;
+      });
+    },
+    async fetchYesOrNoItems() {
+      await axios.get("/api/v1/yes_or_no_items").then((response) => {
+        this.yesOrNoItems = response.data;
+      });
+    },
+
+    addYesOrNoBlock(yesOrNoBlock) {
+      this.yesOrNoBlocks.push(yesOrNoBlock);
+
+      // 従属アイテムの追加
+      yesOrNoBlock.yes_or_no_items.forEach((yesOrNoItem) =>
+        this.yesOrNoItems.push(yesOrNoItem)
+      );
+    },
+    retrieveYesOrNoBlock(yesOrNoBlock) {
+      const index = this.yesOrNoBlocks.findIndex((yesOrNoBlock) => {
+        return yesOrNoBlock.id == yesOrNoBlock.id;
+      });
+      this.yesOrNoBlocks.splice(index, 1);
+
+      // 従属アイテムの削除
+      this.yesOrNoItems = this.yesOrNoItems.filter(
+        (yesOrNoItem) => yesOrNoItem.yes_or_no_block.id !== yesOrNoBlock.id
+      );
+    },
+    updateYesOrNoBlock(block) {
+      const index = this.yesOrNoBlocks.findIndex((yesOrNoBlock) => {
+        return yesOrNoBlock.id == block.id;
+      });
+      this.yesOrNoBlocks.splice(index, 1, block);
+    },
+
+    addYesOrNoItem(yesOrNoItem) {
+      this.yesOrNoItems.push(yesOrNoItem);
+
+      // 作成したアイテムを持つYes or No ブロックのインデックス番号を取得
+      const yesOrNoBlockIndex = this.yesOrNoBlocks.findIndex(
+        (yesOrNoBlock) => yesOrNoBlock.id == yesOrNoItem.yes_or_no_block.id
+      );
+
+      this.yesOrNoBlocks[yesOrNoBlockIndex].yes_or_no_items.push(yesOrNoItem);
+    },
+
+    updateYesOrNoItem(block) {
+      const yesOrNoItemsIndex = this.yesOrNoItems.findIndex((yesOrNoItem) => {
+        return yesOrNoItem.id == block.id;
+      });
+      this.yesOrNoItems.splice(yesOrNoItemsIndex, 1, block);
+
+      // 更新したアイテムを持つYes or No ブロックのインデックス番号を取得
+      const yesOrNoBlockIndex = this.yesOrNoBlocks.findIndex(
+        (yesOrNoBlock) => yesOrNoBlock.id == block.yes_or_no_block.id
+      );
+
+      // そのYes or No ブロック内の更新したアイテムのインデックス番号を取得
+      const yesOrNoBlockItemsIndex = this.yesOrNoBlocks
+        .find((yesOrNoBlock) => yesOrNoBlock.id == block.yes_or_no_block.id)
+        .yes_or_no_items.findIndex((yesOrNoItem) => yesOrNoItem.id == block.id);
+
+      this.yesOrNoBlocks[yesOrNoBlockIndex].yes_or_no_items.splice(
+        yesOrNoBlockItemsIndex,
+        1,
+        block
+      );
+    },
+
+    retrieveYesOrNoItem(block) {
+      const index = this.yesOrNoItems.findIndex((yesOrNoItem) => {
+        return yesOrNoItem.id == block.id;
+      });
+      this.yesOrNoItems.splice(index, 1);
+
+      // 削除したアイテムを持つYes or No ブロックのインデックス番号を取得
+      const yesOrNoBlockIndex = this.yesOrNoBlocks.findIndex(
+        (yesOrNoBlock) => yesOrNoBlock.id == block.yes_or_no_block.id
+      );
+
+      // そのYes or No ブロック内の削除したアイテムのインデックス番号を取得
+      const yesOrNoBlockItemsIndex = this.yesOrNoBlocks
+        .find((yesOrNoBlock) => yesOrNoBlock.id == block.yes_or_no_block.id)
+        .yes_or_no_items.findIndex((yesOrNoItem) => yesOrNoItem.id == block.id);
+
+      this.yesOrNoBlocks[yesOrNoBlockIndex].yes_or_no_items.splice(
+        yesOrNoBlockItemsIndex,
+        1
+      );
     },
   },
 };

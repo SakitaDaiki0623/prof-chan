@@ -22,11 +22,11 @@ module Api
       end
 
       def show
+        authorize @profile
         if @profile.valid?
           render json: @profile, serializer: ProfileSerializer
         else
-          render json: { title: 'Profile Not Found' },
-                 status: 404
+          render json: { title: 'Profile Not Found' }, status: 404
         end
       end
 

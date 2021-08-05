@@ -1,16 +1,9 @@
 module Slack
   class ApplicationController < ApplicationController
-    skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
 
-    def set_access_token(encrypted_access_token)
-      key_len = ActiveSupport::MessageEncryptor.key_len
-      secret = Rails.application.key_generator.generate_key('salt', key_len)
-      crypt = ActiveSupport::MessageEncryptor.new(secret)
-      while encrypted_access_token.is_a?(String)
-        encrypted_access_token = crypt.decrypt_and_verify(encrypted_access_token)
-      end
-      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], encrypted_access_token)
+    def set_access_token(raw_access_token)
+      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
       access_token
     end
 

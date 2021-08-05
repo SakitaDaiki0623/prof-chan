@@ -9,10 +9,6 @@ import { flash } from "./modules/flash";
 import { isNotFound } from "./modules/isNotFound";
 import { activeHash } from "./modules/activeHash";
 
-// Blocks
-import { questionBlocks } from "./modules/questionBlocks";
-import { yesOrNoBlocks } from "./modules/yesOrNoBlocks";
-
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
 
@@ -22,21 +18,10 @@ export default new Vuex.Store({
     flash,
     isNotFound,
     activeHash,
-
-    // Blocks
-    questionBlocks,
-    yesOrNoBlocks,
   },
   plugins: [
     createPersistedState({
-      // ストレージのキーを指定。デフォルトではvuex
       key: "profChan",
-
-      // 管理対象のステートを指定。pathsを書かない時は`modules`に書いたモジュールに含まれるステート全て。`[]`の時はどれも保存されない
-      // paths: ["auth.isLoggedIn", "master.dataSelected"],
-      // paths: ["users.currentUser"],
-
-      // ストレージの種類を指定する。デフォルトではローカルストレージ
       storage: window.sessionStorage,
     }),
   ],

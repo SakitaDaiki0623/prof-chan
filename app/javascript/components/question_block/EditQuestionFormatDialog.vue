@@ -6,10 +6,7 @@
     @input="$emit('input', $event.target.isShownEditQuestionFormatDialog)"
   >
     <v-card :color="questionBlockColor">
-      <v-row
-        justify="end"
-        class="mr-2 mt-2"
-      >
+      <v-row justify="end" class="mr-2 mt-2">
         <v-btn
           :color="questionBlockColor"
           @click="hundleCloseQuestionBlockEditDialog"
@@ -22,22 +19,13 @@
       </p>
 
       <div class="pa-10 note-box">
-        <v-row
-          v-show="!isShownForm"
-          align="center"
-        >
-          <v-col
-            cols="12"
-            md="10"
-          >
+        <v-row v-show="!isShownForm" align="center">
+          <v-col cols="12" md="10">
             <p class="text-2xl font-bold pt-3">
               {{ editQuestionBlock.title }}
             </p>
           </v-col>
-          <v-col
-            cols="12"
-            md="1"
-          >
+          <v-col cols="12" md="1">
             <v-btn
               :id="'edit-question-block-title-button-' + editQuestionBlock.id"
               tile
@@ -52,16 +40,12 @@
 
         <!-- タイトル編集フォーム -->
         <div v-show="isShownForm">
-          <ValidationObserver
-            ref="observer"
-            v-slot="{ invalid }"
-          >
+          <ValidationObserver ref="observer" v-slot="{ invalid }">
             <form>
               <div>
-                <label
-                  class="form-label-text-block"
-                  for="question_block_title"
-                >タイトル</label>
+                <label class="form-label-text-block" for="question_block_title"
+                  >タイトル</label
+                >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="タイトル"
@@ -78,23 +62,16 @@
                     @input="
                       editQuestionBlockForForm.title = $event.target.value
                     "
-                  >
+                  />
                   <span class="red--text text-sm">{{ errors[0] }}</span>
                 </ValidationProvider>
               </div>
-              <v-row
-                justify="end"
-                align="center"
-                class="pt-3"
-              >
-                <v-col
-                  cols="12"
-                  md="1"
-                >
+              <v-row justify="end" align="center" class="pt-3">
+                <v-col cols="12" md="1">
                   <v-btn
                     :id="
                       'update-question-item-button-' +
-                        editQuestionBlockForForm.id
+                      editQuestionBlockForForm.id
                     "
                     tile
                     small
@@ -107,14 +84,11 @@
                     更新
                   </v-btn>
                 </v-col>
-                <v-col
-                  cols="12"
-                  md="1"
-                >
+                <v-col cols="12" md="1">
                   <v-btn
                     :id="
                       'cancel-question-item-update-button-' +
-                        editQuestionBlockForForm.id
+                      editQuestionBlockForForm.id
                     "
                     tile
                     small
@@ -140,6 +114,8 @@
           :question-block-color="questionBlockColor"
           @show-edit-question-item-form="showTheFirstEditQuestionItemForm"
           @hide-edit-question-item-form="hideTheFirstEditQuestionItemForm"
+          @update-question-item="$listeners['update-question-item']"
+          @retrieve-question-item="$listeners['retrieve-question-item']"
         />
         <EditQuestionBlockItem
           v-if="questionItemLength >= 2"
@@ -152,6 +128,8 @@
           :question-block-color="questionBlockColor"
           @show-edit-question-item-form="showTheSecondEditQuestionItemForm"
           @hide-edit-question-item-form="hideTheSecondEditQuestionItemForm"
+          @update-question-item="$listeners['update-question-item']"
+          @retrieve-question-item="$listeners['retrieve-question-item']"
         />
         <EditQuestionBlockItem
           v-if="questionItemLength >= 3"
@@ -164,12 +142,15 @@
           :question-block-color="questionBlockColor"
           @show-edit-question-item-form="showTheThirdEditQuestionItemForm"
           @hide-edit-question-item-form="hideTheThirdEditQuestionItemForm"
+          @update-question-item="$listeners['update-question-item']"
+          @retrieve-question-item="$listeners['retrieve-question-item']"
         />
 
         <IndividualCreateQuestionBlockItem
           v-if="questionItemLength < 3"
           ref="IndividualCreateQuestionBlockItem"
           :parent-question-block-id="parentQuestionBlockId"
+          @add-question-item="$listeners['add-question-item']"
         />
 
         <div class="mt-3 font-weight-bold text-sm">
@@ -196,7 +177,6 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
 
 import EditQuestionBlockItem from "../question_block/EditQuestionBlockItem";
 import IndividualCreateQuestionBlockItem from "../question_block/IndividualCreateQuestionBlockItem";
@@ -210,6 +190,10 @@ export default {
     isShownEditQuestionFormatDialog: {
       type: Boolean,
       required: true,
+    },
+    questionItems: {
+      type: Array,
+      requred: true,
     },
     editQuestionBlock: {
       type: Object,
@@ -237,9 +221,6 @@ export default {
     };
   },
   computed: {
-    ...mapState("questionBlocks", ["questionBlocks"]),
-    ...mapState("questionBlocks", ["questionItems"]),
-
     editQuestionBlockForForm() {
       return Object.assign({}, this.editQuestionBlock);
     },
@@ -281,9 +262,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      patchQuestionBlock: "questionBlocks/patchQuestionBlock",
-    }),
     hundleEditQuestionBlockTitle(editQuestionBlock) {
       if (editQuestionBlock.title == "") return;
       this.patchQuestionBlock(editQuestionBlock);
@@ -294,6 +272,13 @@ export default {
         message: "クエスチョンブロックのタイトルを更新したよ！",
         color: this.questionBlockColor,
       });
+    },
+    patchQuestionBlock(questionBlock) {
+      axios
+        .patch(`/api/v1/question_blocks/${questionBlock.id}`, questionBlock)
+        .then((response) => {
+          this.$emit("update-question-block", response.data);
+        });
     },
 
     addQuestionItemNum() {
@@ -315,14 +300,14 @@ export default {
 
     hundleCloseQuestionBlockEditDialog() {
       this.revertItemStateBeforeEdit();
+      requestAnimationFrame(() => {
+        this.$refs.observer.reset();
+      });
       this.closeEditQuestionFormatDialog();
 
       if (this.questionItemLength < 3) {
         this.$refs.IndividualCreateQuestionBlockItem.resetQuestionItem();
       }
-      requestAnimationFrame(() => {
-        this.$refs.observer.reset();
-      });
     },
 
     showEditQuestionBlockTitleForm() {

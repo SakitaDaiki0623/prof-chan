@@ -1,14 +1,7 @@
 <template>
   <div>
-    <v-card
-      class="rounded-2xl pa-5 note-box"
-      outlined
-      color="red lighten-4"
-    >
-      <v-row
-        v-if="isThisEditPage"
-        justify="end"
-      >
+    <v-card class="rounded-2xl pa-5 note-box" outlined color="red lighten-4">
+      <v-row v-if="isThisEditPage" justify="end">
         <v-btn
           :id="'edit-question-block-button-' + questionBlock.id"
           tile
@@ -27,6 +20,20 @@
         >
           <v-icon> mdi-delete </v-icon>
         </v-btn>
+        <EditQuestionFormatDialog
+          :is-shown-edit-question-format-dialog="
+            isShownEditQuestionFormatDialog
+          "
+          :edit-question-block="editQuestionBlock"
+          :question-block-color="questionBlockColor"
+          :question-items="questionItems"
+          @close-question-block-format-dialog="closeEditQuestionFormatDialog"
+          @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
+          @update-question-block="$listeners['update-question-block']"
+          @add-question-item="$listeners['add-question-item']"
+          @update-question-item="$listeners['update-question-item']"
+          @retrieve-question-item="$listeners['retrieve-question-item']"
+        />
       </v-row>
       <v-row v-else>
         <v-spacer />
@@ -42,22 +49,11 @@
         <div :key="question_item.id">
           <div class="rounded-lg">
             <v-row>
-              <label
-                for="question_item_content"
-                class="mx-5 text-xl"
-              >
+              <label for="question_item_content" class="mx-5 text-xl">
                 {{ question_item.content }}
               </label>
-              <v-col
-                cols="12"
-                sm="12"
-                class="mb-2"
-              >
-                <v-card
-                  class="pa-2"
-                  outlined
-                  color="white"
-                >
+              <v-col cols="12" sm="12" class="mb-2">
+                <v-card class="pa-2" outlined color="white">
                   {{ question_item.answer }}
                 </v-card>
               </v-col>
@@ -66,21 +62,13 @@
         </div>
       </template>
     </v-card>
-    <EditQuestionFormatDialog
-      :is-shown-edit-question-format-dialog="isShownEditQuestionFormatDialog"
-      :edit-question-block="editQuestionBlock"
-      :question-block-color="questionBlockColor"
-      @close-question-block-format-dialog="closeEditQuestionFormatDialog"
-      @close-question-block-edit-dialog="closeQuestionBlockEditDialog"
-    />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import EditQuestionFormatDialog from "./EditQuestionFormatDialog";
 import QuestionBlockLikeButton from "../likes/QuestionBlockLikeButton";
-
-import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -90,6 +78,10 @@ export default {
   props: {
     questionBlock: {
       type: Object,
+      requred: true,
+    },
+    questionItems: {
+      type: Array,
       requred: true,
     },
     isThisEditPage: {
@@ -109,15 +101,12 @@ export default {
       editQuestionBlock: {},
     };
   },
-    computed: {
+  computed: {
     isThisNotTopPage() {
       return this.$route.path == `/top` ? false : true;
     },
   },
   methods: {
-    ...mapActions({
-      deleteQuestionBlock: "questionBlocks/deleteQuestionBlock",
-    }),
     openEditQuestionFormatDialog(questionBlock) {
       this.editQuestionBlock = Object.assign({}, questionBlock);
       this.isShownEditQuestionFormatDialog = true;
@@ -128,14 +117,21 @@ export default {
     closeQuestionBlockEditDialog(editQuestionBlock) {
       this.editQuestionBlock = editQuestionBlock;
     },
-    hundleDeleteQuestionBlock(QuestionBlock) {
+    hundleDeleteQuestionBlock(questionBlock) {
       if (!confirm("削除してよろしいですか?")) return;
-      this.deleteQuestionBlock(QuestionBlock);
+      this.deleteQuestionBlock(questionBlock);
       this.$store.dispatch("flash/setFlash", {
         type: "success",
         message: "クエスチョンブロックを削除したよ！",
         color: "red lighten-3",
       });
+    },
+    async deleteQuestionBlock(questionBlock) {
+      await axios
+        .delete(`/api/v1/question_blocks/${questionBlock.id}`, questionBlock)
+        .then((response) => {
+          this.$emit("retrieve-question-block", response.data);
+        });
     },
   },
 };
