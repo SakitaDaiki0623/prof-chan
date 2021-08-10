@@ -12,7 +12,7 @@
     .col-start-1.col-span-12.border-2.border-white-500.border-dashed.p-10.mb-5
       .border-2.border-dashed.border-brown-300.p-3.rounded-full
         .inline-block.hover:opacity-50
-          = link_to image_tag("https://platform.slack-edge.com/img/sign_in_with_slack.png"), agreement_path, class: 'inline-block', id: 'agreement-path-button'
+          = link_to image_tag("https://platform.slack-edge.com/img/add_to_slack.png"), agreement_path, class: 'inline-block', id: 'agreement-path-button'
         .my-3.text-white.md:text-xl
           | 本サービスの正規ログイン方法です。
           br
@@ -35,7 +35,7 @@
     .grid.grid-cols-12.gap-10.bg-brown-400.md:p-20
       .col-start-1.col-span-12.mt-20.md:mt-0
         .text-2xl.inline.p-5.text-white.font-bold.border-t-8.border-b-8.border-white.md:text-4xl
-          | Sign In with Slackをしてみよう！
+          | Add to Slackをしてみよう！
       .col-start-1.col-span-12.p-10.mx-auto.text-center.lg:col-span-6
         .text-2xl.rounded-md.p-5.border-2.border-white.border-dashed.text-white
           | 社内で「slack」をご利用の場合、slackと連携することで社内の人とのみプロフィールを共有することができます。
@@ -44,7 +44,7 @@
         .text-md.p-5.text-white.border-b-2.border-white.border-dotted.md:text-xl
           | ※お試しログイン版はアプリをご利用する全ての人にプロフィールを公開します。
       .col-start-2.col-span-3.p-10.lg:col-start-8.md:col-start-4
-        = image_tag "https://platform.slack-edge.com/img/sign_in_with_slack.png",  class: " pointer-events-none max-w-xl mx-auto"
+        = image_tag "https://platform.slack-edge.com/img/add_to_slack.png",  class: " pointer-events-none max-w-xl mx-auto"
         = image_tag  "prof_open_happy.png", class: 'max-w-xs mx-auto'
 
 
