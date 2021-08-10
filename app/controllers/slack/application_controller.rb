@@ -1,6 +1,7 @@
 module Slack
   class ApplicationController < ApplicationController
     skip_before_action :authenticate_user!
+    skip_before_action :verify_authenticity_token
 
     def set_access_token(raw_access_token)
       access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
