@@ -57,8 +57,7 @@
             <div class="text-white text-2xl text-center">
               こちらはお試しログイン版の画面です。<br>
               全てのユーザのプロフを閲覧することができます。<br>
-              社内でのみプロフを公開したい場合は、ホーム画面に戻り「Sign in with
-              slack」をご利用ください。
+              社内でのみプロフを公開したい場合は、ホーム画面に戻り「Add to Slack」をご利用ください。
             </div>
           </div>
           <v-col
@@ -70,10 +69,10 @@
             ><img
               height="40"
               width="172"
-              src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+              src="https://platform.slack-edge.com/img/add_to_slack.png"
               srcset="
-                  https://platform.slack-edge.com/img/sign_in_with_slack.png    1x,
-                  https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x
+                  https://platform.slack-edge.com/img/add_to_slack.png    1x,
+                  https://platform.slack-edge.com/img/add_to_slack@2x.png 2x
                 "
             ></a>
           </v-col>
