@@ -117,7 +117,7 @@ Rails.application.routes.draw do
   namespace :slack do
     namespace :settings do
       post 'activate_share_right',   to: 'share#activate'
-      post 'inactivate_share_right', to: 'share#inactivate'
+      post 'deactivate_share_right', to: 'share#deactivate'
     end
     namespace :post do
       post 'random_block', to: 'direct_post#random_block'

@@ -1,5 +1,5 @@
 class Slack::Settings::ShareController < Slack::ApplicationController
-  before_action :set_user_team_token, only: %i[activate inactivate]
+  before_action :set_user_team_token, only: %i[activate deactivate]
 
   def activate
     if @team.share_right_inactive?
@@ -12,13 +12,13 @@ class Slack::Settings::ShareController < Slack::ApplicationController
     end
   end
 
-  def inactivate
+  def deactivate
     if @team.share_right_active?
       @team.share_right_inactive!
-      @encoded_msg = inactivate_msg(@user)
+      @encoded_msg = deactivate_msg(@user)
       @access_token.post("api/chat.postMessage?channel=#{@channel_id}&blocks=#{@encoded_msg}&text=#{@encoded_text}&pretty=1").parsed
     else
-      @encoded_msg = already_inactivated_msg(@user)
+      @encoded_msg = already_deactivated_msg(@user)
       @access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{@encoded_msg}&text=#{@encoded_text}&pretty=1").parsed
     end
   end
@@ -46,13 +46,13 @@ class Slack::Settings::ShareController < Slack::ApplicationController
     encoded_msg
   end
 
-  def inactivate_msg(user)
+  def deactivate_msg(user)
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}>が毎日18時の投稿をOFFにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を元に戻す時は `/prof_activate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
 
-  def already_inactivated_msg(_user)
+  def already_deactivated_msg(_user)
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_deactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
