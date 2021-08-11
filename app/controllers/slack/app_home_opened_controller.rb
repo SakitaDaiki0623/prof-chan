@@ -11,16 +11,28 @@ module Slack
 
     def views_publish
       team = Team.find_by(workspace_id: params[:team_id])
-      user = User.find_by(uid: params[:event][:user])
-      return if team.nil? || user.nil? || team.workspace_id != user.team.workspace_id
-
-      access_token = set_access_token(user.authentication.access_token)
-      publish_to_home_tab(team, user, access_token)
+      return if team.nil?
+      user_id = params[:event][:user]
+      users = team.users
+      access_token = try_set_access_token_from(users)
+      publish_to_home_tab(team, user_id, access_token)
     end
 
-    def publish_to_home_tab(team, user, access_token)
+    def try_set_access_token_from(users)
+      valid_access_token = {}
+      users.each do |user|
+        access_token = set_access_token(user.authentication.access_token)
+        unless access_token.expired?
+          valid_access_token = access_token
+          break
+        end
+      end
+      return valid_access_token
+    end
+
+    def publish_to_home_tab(team, user_id, access_token)
       encoded_msg = encoded_home_tab_block_msg
-      access_token.post("api/views.publish?user_id=#{user.uid}&view=#{encoded_msg}&pretty=1").parsed
+      access_token.post("api/views.publish?user_id=#{user_id}&view=#{encoded_msg}&pretty=1").parsed
     end
 
     def encoded_home_tab_block_msg
