@@ -35,7 +35,7 @@ class Slack::Settings::ShareController < Slack::ApplicationController
   end
 
   def activate_msg(_user)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を停止する時は `/prof_inactivate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を停止する時は `/prof_deactivate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
@@ -53,7 +53,7 @@ class Slack::Settings::ShareController < Slack::ApplicationController
   end
 
   def already_inactivated_msg(_user)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_inactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_deactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
   end
