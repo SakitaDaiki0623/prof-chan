@@ -17,6 +17,9 @@ gem "omniauth-rails_csrf_protection"
 # Slack API
 gem 'slack-ruby-client'
 
+# OGP
+gem 'meta-tags'
+
 # 権限
 gem "pundit"
 gem "administrate"
