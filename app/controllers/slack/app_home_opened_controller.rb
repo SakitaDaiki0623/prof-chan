@@ -1,21 +1,30 @@
+require 'slack-ruby-client'
 module Slack
   class AppHomeOpenedController < Slack::ApplicationController
     def respond
-      # render json: params[:challenge], status: 200
-      if params[:event][:type] == 'app_home_opened'
-        views_publish
-      elsif params[:event][:type] == 'message' && params[:event][:text].present?
+      if params[:challenge].present?
+        render json: params[:challenge], status: 200
+      elsif params[:event][:type] == 'app_home_opened'
+        app_home_publish
+      else params[:event][:type] == 'message' && params[:event][:text].present?
         send_help_msg
       end
     end
 
-    def views_publish
+    def app_home_publish
       team = Team.find_by(workspace_id: params[:team_id])
-      return if team.nil?
-      user_id = params[:event][:user]
       users = team.users
       access_token = try_set_access_token_from(users)
-      publish_to_home_tab(team, user_id, access_token)
+      Slack.configure do |config|
+        config.token = access_token
+        fail 'Missing API token' unless config.token
+      end
+      client = Slack::Web::Client.new
+      test_res = client.auth_test
+      return unless test_res.dig("ok")
+      user_id = params[:event][:user]
+      view = initial_home_view
+      res = client.views_publish(user_id: user_id, view: view)
     end
 
     def try_set_access_token_from(users)
@@ -23,7 +32,7 @@ module Slack
       users.each do |user|
         access_token = set_access_token(user.authentication.access_token)
         unless access_token.expired?
-          valid_access_token = access_token
+          valid_access_token = user.authentication.access_token.dig("access_token")
           break
         end
       end
@@ -35,21 +44,80 @@ module Slack
       access_token.post("api/views.publish?user_id=#{user_id}&view=#{encoded_msg}&pretty=1").parsed
     end
 
-    def encoded_home_tab_block_msg
-      msg = "{ 'type': 'home', 'blocks': [ { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '*投稿機能について*\n --------------------------------------------- \n :eight_spoked_asterisk:  各ブロックの投稿 \n 各ブロックを1日に一度投稿することができるよ:star:\nみんなに共有したいことを投稿してみよう！\n --------------------------------------------- \n:sparkle:  毎日18時の自動投稿 \n毎日18時にチーム内の各ブロックを投稿するよ:star: \n あなたのブロックが選ばれたら嬉しいな！' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '*Slashコマンドについて*\n本アプリでは以下のコマンドがSlack内で利用できるよ:hamster:' } }, { 'type': 'section', 'fields': [ { 'type': 'mrkdwn', 'text': ':information_source: `/prof_help` \nDMでヘルプメッセージを送るよ' }, { 'type': 'mrkdwn', 'text': ':postbox: `/prof_random_block` \n DMでランダムにブロックを1つ送るよ' } ] }, { 'type': 'section', 'fields': [ { 'type': 'mrkdwn', 'text': ':ok_hand: `/prof_activate_share` \n毎日18時の投稿を有効するよ' }, { 'type': 'mrkdwn', 'text': ':raised_back_of_hand: `/prof_deactivate_share` \n 毎日18時の投稿を止めるよ' } ] }, { 'type': 'divider' } ] }"
-      encoded_msg = ERB::Util.url_encode(msg)
-      encoded_msg
+    def initial_home_view
+      view =
+      {
+        "type": "home",
+        "blocks": [
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*投稿機能について*\n --------------------------------------------- \n :eight_spoked_asterisk:  各ブロックの投稿 \n 各ブロックを1日に一度投稿することができるよ:star:\nみんなに共有したいことを投稿してみよう！\n --------------------------------------------- \n:sparkle:  毎日18時の自動投稿 \n毎日18時にチーム内の各ブロックを投稿するよ:star: \n あなたのブロックが選ばれたら嬉しいな！"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Slashコマンドについて*\n本アプリでは以下のコマンドがSlack内で利用できるよ:hamster:"
+            }
+          },
+          {
+            "type": "section",
+            "fields": [
+              {
+                "type": "mrkdwn",
+                "text": ":information_source: `/prof_help` \nDMでヘルプメッセージを送るよ"
+              },
+              {
+                "type": "mrkdwn",
+                "text": ":postbox: `/prof_random_block` \n DMでランダムにブロックを1つ送るよ"
+              }
+            ]
+          },
+          {
+            "type": "section",
+            "fields": [
+              {
+                "type": "mrkdwn",
+                "text": ":ok_hand: `/prof_activate_share` \n毎日18時の投稿を有効するよ"
+              },
+              {
+                "type": "mrkdwn",
+                "text": ":raised_back_of_hand: `/prof_deactivate_share` \n 毎日18時の投稿を止めるよ"
+              }
+            ]
+          },
+          {
+            "type": "divider"
+          }
+        ]
+      }.to_json
+      view
     end
 
     def send_help_msg
+      p "====================start send_help_msg===================="
       team = Team.find_by(workspace_id: params[:team_id])
-      user = User.find_by(uid: params[:event][:user])
-      return if team.nil? || user.nil? || team.workspace_id != user.team.workspace_id
-
-      access_token = set_access_token(user.authentication.access_token)
-      encoded_text = get_encoded_help_text
-      encoded_msg = get_encoded_help_block_msg
-      access_token.post("api/chat.postMessage?channel=#{user.uid}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+      users = team.users
+      access_token = try_set_access_token_from(users)
+      Slack.configure do |config|
+        config.token = access_token
+        fail 'Missing API token' unless config.token
+      end
+      client = Slack::Web::Client.new
+      test_res = client.auth_test
+      return unless test_res.dig("ok")
+      user_id = params[:event][:user]
+      text = get_encoded_help_block_msg
+      client.chat_postMessage(channel: user_id, text: text)
     end
 
     def get_encoded_help_text
@@ -59,9 +127,8 @@ module Slack
     end
 
     def get_encoded_help_block_msg
-      msg = "[ { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '本アプリでは以下のコマンドがSlack内で利用できるよ:hamster:' } }, { 'type': 'section', 'fields': [ { 'type': 'mrkdwn', 'text': ':information_source: `/prof_help` \nDMでヘルプメッセージを送るよ' }, { 'type': 'mrkdwn', 'text': ':postbox: `/prof_random_block` \n DMでランダムにブロックを1つ送るよ' } ] }, { 'type': 'section', 'fields': [ { 'type': 'mrkdwn', 'text': ':ok_hand: `/prof_activate_share` \n毎日18時の投稿を有効するよ' }, { 'type': 'mrkdwn', 'text': ':raised_back_of_hand: `/prof_deactivate_share` \n 毎日18時の投稿を止めるよ' } ] }, { 'type': 'divider' } ]"
-      encoded_msg = ERB::Util.url_encode(msg)
-      encoded_msg
+      msg = "お困りの際はホームタブを確認してね!!!! :hamster:"
+      msg
     end
   end
 end
