@@ -24,7 +24,7 @@ module Slack
           encoded_msg = convert_block_msg(block)
           post_direct_message(encoded_text, encoded_msg, @uid, @access_token)
         else
-          text = "まだあなた以外のブロックが作成されていないよ、、、:cry: \n プロフちゃんをもっと社内に広めよう！"
+          text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
           encoded_text = ERB::Util.url_encode(text)
           post_no_block(encoded_text, @uid, @access_token)
         end
