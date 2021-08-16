@@ -1,4 +1,4 @@
-require 'slack-ruby-client'
+
 module Slack
   class AppHomeOpenedController < Slack::ApplicationController
     def respond
@@ -15,28 +15,10 @@ module Slack
       team = Team.find_by(workspace_id: params[:team_id])
       users = team.users
       access_token = try_set_access_token_from(users)
-      Slack.configure do |config|
-        config.token = access_token
-        fail 'Missing API token' unless config.token
-      end
-      client = Slack::Web::Client.new
-      test_res = client.auth_test
-      return unless test_res.dig("ok")
+      client = set_client(access_token)
       user_id = params[:event][:user]
       view = initial_home_view
       res = client.views_publish(user_id: user_id, view: view)
-    end
-
-    def try_set_access_token_from(users)
-      valid_access_token = {}
-      users.each do |user|
-        access_token = set_access_token(user.authentication.access_token)
-        unless access_token.expired?
-          valid_access_token = user.authentication.access_token.dig("access_token")
-          break
-        end
-      end
-      return valid_access_token
     end
 
     def publish_to_home_tab(team, user_id, access_token)
@@ -108,15 +90,9 @@ module Slack
       team = Team.find_by(workspace_id: params[:team_id])
       users = team.users
       access_token = try_set_access_token_from(users)
-      Slack.configure do |config|
-        config.token = access_token
-        fail 'Missing API token' unless config.token
-      end
-      client = Slack::Web::Client.new
-      test_res = client.auth_test
-      return unless test_res.dig("ok")
+      client = set_client(access_token)
       user_id = params[:event][:user]
-      text = get_encoded_help_block_msg
+      text = get_help_msg
       client.chat_postMessage(channel: user_id, text: text)
     end
 
@@ -126,7 +102,7 @@ module Slack
       encoded_text
     end
 
-    def get_encoded_help_block_msg
+    def get_help_msg
       msg = "お困りの際はホームタブを確認してね!!!! :hamster:"
       msg
     end

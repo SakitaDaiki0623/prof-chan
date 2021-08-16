@@ -1,13 +1,19 @@
 module Slack
   module Post
     class DirectPostController < Slack::ApplicationController
-      before_action :set_user_and_token, only: %i[help random_block]
+      before_action :set_user, only: %i[help random_block]
 
       def help
-        text = 'ヘルプメッセージを送信しました:hamster:'
-        encoded_text = ERB::Util.url_encode(text)
-        encoded_msg = get_encoded_help_message
-        post_direct_message(encoded_text, encoded_msg, @uid, @access_token)
+        if @user.nil?
+          send_please_login_msg
+        else
+          uid = @user.uid
+          access_token = set_access_token(@user.authentication.access_token)
+          text = 'ヘルプメッセージを送信しました:hamster:'
+          encoded_text = ERB::Util.url_encode(text)
+          encoded_msg = get_encoded_help_message
+          post_direct_message(encoded_text, encoded_msg, uid, access_token)
+        end
       end
 
       def get_encoded_help_message
@@ -17,16 +23,22 @@ module Slack
       end
 
       def random_block
-        block = pick_up_block(@user)
-        if block.present?
-          text = 'ランダムにブロックを送信:hamster:'
-          encoded_text = ERB::Util.url_encode(text)
-          encoded_msg = convert_block_msg(block)
-          post_direct_message(encoded_text, encoded_msg, @uid, @access_token)
+        if @user.nil?
+          send_please_login_msg
         else
-          text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
-          encoded_text = ERB::Util.url_encode(text)
-          post_no_block(encoded_text, @uid, @access_token)
+          block = pick_up_block(@user)
+          uid = @user.uid
+          access_token = set_access_token(@user.authentication.access_token)
+          if block.present?
+            text = 'ランダムにブロックを送信:hamster:'
+            encoded_text = ERB::Util.url_encode(text)
+            encoded_msg = convert_block_msg(block)
+            post_direct_message(encoded_text, encoded_msg, uid, access_token)
+          else
+            text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
+            encoded_text = ERB::Util.url_encode(text)
+            post_no_block(encoded_text, uid, access_token)
+          end
         end
       end
 
@@ -61,12 +73,8 @@ module Slack
         access_token.post("api/chat.postMessage?channel=#{channel_id}&text=#{encoded_text}&pretty=1").parsed
       end
 
-      def set_user_and_token
+      def set_user
         @user = User.find_by(uid: params[:user_id])
-        return if @user.nil?
-
-        @uid = @user.uid
-        @access_token = set_access_token(@user.authentication.access_token)
       end
     end
   end
