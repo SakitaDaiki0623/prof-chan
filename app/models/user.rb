@@ -91,7 +91,7 @@ class User < ApplicationRecord
 
     if Team.exists?(workspace_id: workspace_id)
       team = Team.find_by(workspace_id: workspace_id)
-      team.update!(image: team_info.dig('image_230'), share_channel_name: channel.dig('name'))
+      team.update!(image: team_info.dig('image_230'), share_channel_name: channel.dig('name'), share_channel_id: channel.dig('id'))
     else
       name = team_info.dig('name')
       image = team_info.dig('image_230')
