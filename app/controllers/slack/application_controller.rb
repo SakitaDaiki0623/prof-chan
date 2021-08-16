@@ -1,3 +1,5 @@
+require 'slack-ruby-client'
+
 module Slack
   class ApplicationController < ApplicationController
     skip_before_action :authenticate_user!
@@ -6,6 +8,18 @@ module Slack
     def set_access_token(raw_access_token)
       access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
       access_token
+    end
+
+    def try_set_access_token_from(users)
+      valid_access_token = {}
+      users.each do |user|
+        access_token = set_access_token(user.authentication.access_token)
+        unless access_token.expired?
+          valid_access_token = user.authentication.access_token.dig("access_token")
+          break
+        end
+      end
+      return valid_access_token
     end
 
     def convert_favorite_msg(favorite_block)
@@ -64,6 +78,30 @@ module Slack
     def encode_msg(msg)
       encoded_msg = ERB::Util.url_encode(msg)
       encoded_msg
+    end
+
+    def set_client(token)
+      Slack.configure do |config|
+        config.token = token
+        fail 'Missing API token' unless config.token
+      end
+      client = Slack::Web::Client.new
+      test_res = client.auth_test
+      return unless test_res.dig("ok")
+      return client
+    end
+
+    def get_please_login_message
+      text = ":warning: *Slackログインが必要です！！*:warning: \n Slashコマンドを利用するにはアプリでSlackログインをする必要があります。このワークスペースを指定して本サービスにSlackログインをするとSlashコマンドがご利用できます \n :arrow_right:   <https://www.prof-chan.com/agreement/|ログインページ>で今すぐログイン！"
+    end
+
+    def send_please_login_msg
+      uid = params[:user_id]
+      team = Team.find_by(workspace_id: params[:team_id])
+      access_token_for_client = try_set_access_token_from(team.users)
+      client = set_client(access_token_for_client)
+      text = get_please_login_message
+      client.chat_postMessage(channel: uid, text: text)
     end
   end
 end

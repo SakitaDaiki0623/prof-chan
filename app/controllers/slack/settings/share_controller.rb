@@ -1,37 +1,48 @@
 class Slack::Settings::ShareController < Slack::ApplicationController
-  before_action :set_user_team_token, only: %i[activate deactivate]
+  before_action :set_user, only: %i[activate deactivate]
 
   def activate
-    if @team.share_right_inactive?
-      @team.share_right_active!
-      @encoded_msg = activate_msg(@user)
-      @access_token.post("api/chat.postMessage?channel=#{@channel_id}&blocks=#{@encoded_msg}&text=#{@encoded_text}&pretty=1").parsed
+    if @user.nil?
+      send_please_login_msg
     else
-      @encoded_msg = already_activated_msg(@user)
-      @access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{@encoded_msg}&text=#{@encoded_text}&pretty=1").parsed
+      @team = Team.find_by(workspace_id: params[:team_id])
+      channel_id = @team.share_channel_id
+      access_token = set_access_token(@user.authentication.access_token)
+      if @team.share_right_inactive?
+        text = "<#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:"
+        encoded_text = ERB::Util.url_encode(text)
+        @team.share_right_active!
+        encoded_msg = activate_msg(@user)
+        access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+      else
+        text = "既に18時の投稿はONだよ:hamster:"
+        encoded_text = ERB::Util.url_encode(text)
+        encoded_msg = already_activated_msg(@user)
+        access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+      end
     end
   end
 
   def deactivate
-    if @team.share_right_active?
-      @team.share_right_inactive!
-      @encoded_msg = deactivate_msg(@user)
-      @access_token.post("api/chat.postMessage?channel=#{@channel_id}&blocks=#{@encoded_msg}&text=#{@encoded_text}&pretty=1").parsed
+    if @user.nil?
+      send_please_login_msg
     else
-      @encoded_msg = already_deactivated_msg(@user)
-      @access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{@encoded_msg}&text=#{@encoded_text}&pretty=1").parsed
+      @team = Team.find_by(workspace_id: params[:team_id])
+      channel_id = @team.share_channel_id
+      access_token = set_access_token(@user.authentication.access_token)
+      if @team.share_right_active?
+        text = "<#{@user.uid}>が毎日18時の投稿をOFFにしたよ:hamster:"
+        encoded_text = ERB::Util.url_encode(text)
+        @team.share_right_inactive!
+        encoded_msg = deactivate_msg(@user)
+        access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+      else
+        text = "既に18時の投稿はOFFだよ:hamster:"
+        encoded_text = ERB::Util.url_encode(text)
+        encoded_msg = already_deactivated_msg(@user)
+        access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+      end
     end
-  end
-
-  def set_user_team_token
-    @team = Team.find_by(workspace_id: params[:team_id])
-    @user = User.find_by(uid: params[:user_id])
-    return unless @team.workspace_id == @user.team.workspace_id
-
-    @text = "<#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:"
-    @encoded_text = ERB::Util.url_encode(@text)
-    @channel_id = @team.share_channel_id
-    @access_token = set_access_token(@user.authentication.access_token)
   end
 
   def activate_msg(_user)
@@ -56,5 +67,9 @@ class Slack::Settings::ShareController < Slack::ApplicationController
     msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{@user.uid}> \n  `/prof_deactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_msg
+  end
+
+  def set_user
+    @user = User.find_by(uid: params[:user_id])
   end
 end
