@@ -6,9 +6,10 @@ module Slack
         render json: params[:challenge], status: 200
       elsif params[:event][:type] == 'app_home_opened'
         app_home_publish
-      elsif params[:event][:type] == 'message' && params[:event][:text].present?
-        send_help_msg
+      # elsif params[:event][:type] == 'message' && params[:event][:text].present?
+      #   send_help_msg
       else
+        p "vacant_app_home_request"
         return
       end
     end
