@@ -9,7 +9,7 @@ module ApplicationHelper
     {
       title:       "社内プロフィール共有サービス 【プロフちゃん】",
       description: "フルリモート体制の会社員に贈る、雑談のきっかけとなる話題を社内共有するサービスです。",
-      keywords:    "remote_work,covid,profile_note", #キーワードを「,」で区切る
+      keywords:    "remote_work,covid,profile_note,prof_chan", #キーワードを「,」で区切る
       icon: [
         { href: image_url('prof_normal.png') },
       ],
