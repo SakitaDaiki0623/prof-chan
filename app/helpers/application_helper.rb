@@ -28,7 +28,7 @@ module ApplicationHelper
       twitter: {
         site: '@profchanjp',
         card: 'summary_large_image',
-        image: image_url("ogp_image.png") # ツイッター専用にイメージを設定する場合
+        image: image_url("twitter_ogp_image.png") # ツイッター専用にイメージを設定する場合
       },
       fb: {
         app_id: '***************'
