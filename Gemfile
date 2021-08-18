@@ -5,6 +5,7 @@ ruby '2.7.3'
 
 gem 'rails', '6.0.3.5'
 
+
 # Assets
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
