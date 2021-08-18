@@ -40,7 +40,7 @@ gem 'parser', '< 2.6.6.0'
 gem 'whenever', require: false
 
 # Database
-gem 'mysql2', '>= 0.4.4'
+gem 'pg', '>= 0.18', '< 2.0'
 gem 'redis-rails'
 
 # Model

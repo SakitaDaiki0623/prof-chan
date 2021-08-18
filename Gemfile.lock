@@ -254,7 +254,6 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    mysql2 (0.5.3)
     newrelic_rpm (7.1.0)
     nio4r (2.5.7)
     nokogiri (1.11.5)
@@ -282,6 +281,7 @@ GEM
     parallel (1.20.1)
     parser (2.6.5.0)
       ast (~> 2.4.0)
+    pg (1.2.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -536,10 +536,10 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.2)
   meta-tags
-  mysql2 (>= 0.4.4)
   newrelic_rpm
   omniauth-rails_csrf_protection
   parser (< 2.6.6.0)
+  pg (>= 0.18, < 2.0)
   pry
   pry-byebug
   pry-doc
