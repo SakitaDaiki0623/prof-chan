@@ -16,7 +16,7 @@ class Slack::Settings::ShareController < Slack::ApplicationController
         res = access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
         p res
       else
-        text = "既に18時の投稿はONだよ:hamster:"
+        text = '既に18時の投稿はONだよ:hamster:'
         encoded_text = ERB::Util.url_encode(text)
         encoded_msg = already_activated_msg(@user)
         access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
@@ -39,7 +39,7 @@ class Slack::Settings::ShareController < Slack::ApplicationController
         res = access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
         p res
       else
-        text = "既に18時の投稿はOFFだよ:hamster:"
+        text = '既に18時の投稿はOFFだよ:hamster:'
         encoded_text = ERB::Util.url_encode(text)
         encoded_msg = already_deactivated_msg(@user)
         access_token.post("api/chat.postMessage?channel=#{@user.uid}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed

@@ -15,11 +15,11 @@ module Slack
       users.each do |user|
         access_token = set_access_token(user.authentication.access_token)
         unless access_token.expired?
-          valid_access_token = user.authentication.access_token.dig("access_token")
+          valid_access_token = user.authentication.access_token.dig('access_token')
           break
         end
       end
-      return valid_access_token
+      valid_access_token
     end
 
     def convert_favorite_msg(favorite_block)
@@ -83,12 +83,13 @@ module Slack
     def set_client(token)
       Slack.configure do |config|
         config.token = token
-        fail 'Missing API token' unless config.token
+        raise 'Missing API token' unless config.token
       end
       client = Slack::Web::Client.new
       test_res = client.auth_test
-      return unless test_res.dig("ok")
-      return client
+      return unless test_res.dig('ok')
+
+      client
     end
 
     def get_please_login_message
