@@ -9,11 +9,10 @@ module SlackApiActivatable
     user = User.find_by(uid: info.dig('user', 'id'))
     channels = get_channel_list(access_token).dig('channels')
     channel = channels.select { |c| c.dig('id') == channel_id }[0]
-
     return channel if team.present? && user.present? && channel.present?
-
     if channel.nil?
-      created_channel = create_channel_flow(info, channels, access_token)
+      general_channel = channels.select { |c| c.dig('name') == "general" }[0]
+      created_channel = create_channel_flow(info, channels, access_token, general_channel)
       created_channel
     elsif user.nil? && channel.present?
       invite_user_flow(info, channel, access_token)
@@ -21,10 +20,11 @@ module SlackApiActivatable
     end
   end
 
-  def create_channel_flow(info, channels, access_token)
+  def create_channel_flow(info, channels, access_token, general_channel)
     created_channel = create_channel_in_team(channels, access_token)
     invite_result = try_invite_user(info, created_channel, access_token)
     if invite_result.dig('ok')
+      post_app_installed_message_to_general(access_token, general_channel)
       post_messages(info, created_channel, access_token)
     elsif invite_result.dig('ok') == false && invite_result.dig('error') == 'not_in_channel'
       invite_bot_result = try_invite_bot(created_channel, access_token)
@@ -106,10 +106,26 @@ module SlackApiActivatable
     access_token.post("api/chat.postMessage?channel=#{user_id}&blocks=#{encoded_mgs}&text=#{encoded_text}&pretty=1").parsed
   end
 
+  def post_app_installed_message_to_general(access_token, general_channel)
+    try_invite_bot(general_channel, access_token)
+    channel_id = general_channel.dig('id')
+    text = "プロフちゃんがインストールされました:hamster:"
+    encoded_text = URI.encode_www_form_component(text)
+    encoded_mgs = get_block_kit_app_installed_message
+    access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_mgs}&text=#{encoded_text}&pretty=1").parsed
+  end
+
+  # Block Kit message
+
   def get_block_kit_welcome_msg(info)
     user_id = info.dig('user', 'id')
     user_image = info.dig('user', 'image_192')
     message = "[ { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '@here \n <@#{user_id}>さんがプロフちゃんを始めました！:hamster:\n プロフを確認して気になる話題を探してみよう！:star: \n 共通の話題があると嬉しいな！' }, 'accessory': { 'type': 'image', 'image_url': '#{user_image}', 'alt_text': 'alt text for image' } }, { 'type': 'divider' } ]"
+    ERB::Util.url_encode(message)
+  end
+
+  def get_block_kit_app_installed_message
+    message = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': 'Slack App プロフちゃんがインストールされました:hamster:' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '*本アプリについて*\n社内で特別な社員プロフィールを共有できるSlackと連携したアプリです:hamster:\n みんなが知らない趣味や特殊な項目を入力してみましょう！\n <https://www.prof-chan.com/|プロフちゃん公式サイト>' } }, { 'type': 'divider' } ]"
     ERB::Util.url_encode(message)
   end
 
