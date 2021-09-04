@@ -11,13 +11,18 @@ module SlackApiActivatable
     channel = channels.select { |c| c.dig('id') == channel_id }[0]
     return channel if team.present? && user.present? && channel.present?
     if channel.nil?
-      general_channel = channels.select { |c| c.dig('name') == "general" }[0]
+      general_channel = get_general_channel(channels)
       created_channel = create_channel_flow(info, channels, access_token, general_channel)
       created_channel
     elsif user.nil? && channel.present?
       invite_user_flow(info, channel, access_token)
       channel
     end
+  end
+
+  def get_general_channel(channels)
+    channel = channels.select { |c| c.dig('is_general') == true }[0]
+    channel
   end
 
   def create_channel_flow(info, channels, access_token, general_channel)
