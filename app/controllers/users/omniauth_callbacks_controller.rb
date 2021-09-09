@@ -2,17 +2,9 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     skip_before_action :authenticate_user!, only: %i[slack failure]
-    include SlackApiActivatable
 
     def slack
-      bot_token = request.env['omniauth.strategy'].access_token
-      hash_token = bot_token.to_hash
-      access_token = get_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], hash_token)
-      user_token = bot_token.user_token
-      user_info = get_user_info(user_token)
-
-      channel = check_channel(user_info, request.env['omniauth.auth'], access_token)
-      @user = User.from_omniauth(request.env['omniauth.auth'], user_info, hash_token, channel)
+      @user = User.from_omniauth(auth, bot_token)
 
       if @user.persisted?
         sign_in_and_redirect @user, event: :authentication
@@ -24,6 +16,16 @@ module Users
     def failure
       flash[:alert] = 'Slack認証に失敗しました。'
       redirect_to root_path
+    end
+
+    private
+
+    def auth
+      request.env['omniauth.auth']
+    end
+
+    def bot_token
+      request.env['omniauth.strategy'].access_token
     end
   end
 end
