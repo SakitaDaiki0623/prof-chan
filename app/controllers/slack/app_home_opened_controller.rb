@@ -5,8 +5,6 @@ module Slack
         render json: params[:challenge], status: 200
       elsif params[:event][:type] == 'app_home_opened'
         app_home_publish
-      # elsif params[:event][:type] == 'message' && params[:event][:text].present?
-      #   send_help_msg
       else
         p 'vacant_app_home_request'
         nil
@@ -21,11 +19,6 @@ module Slack
       user_id = params[:event][:user]
       view = initial_home_view
       res = client.views_publish(user_id: user_id, view: view)
-    end
-
-    def publish_to_home_tab(_team, user_id, access_token)
-      encoded_msg = encoded_home_tab_block_msg
-      access_token.post("api/views.publish?user_id=#{user_id}&view=#{encoded_msg}&pretty=1").parsed
     end
 
     def initial_home_view

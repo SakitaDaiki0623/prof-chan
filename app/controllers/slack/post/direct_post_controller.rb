@@ -12,7 +12,7 @@ module Slack
           text = 'ヘルプメッセージを送信しました:hamster:'
           encoded_text = ERB::Util.url_encode(text)
           encoded_msg = get_encoded_help_message
-          SlackApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
+          Slack::ApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
         end
       end
 
@@ -33,7 +33,7 @@ module Slack
             text = 'ランダムにブロックを送信:hamster:'
             encoded_text = ERB::Util.url_encode(text)
             encoded_msg = convert_block_msg(block)
-            SlackApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
+            Slack::ApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
           else
             text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
             encoded_text = ERB::Util.url_encode(text)
