@@ -1,7 +1,7 @@
 module Slack
   class LoginMethod
-    def self.check_channel(info, _auth, hash_token)
-      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], hash_token)
+    def self.check_channel(info, hash_token)
+      access_token = Slack::AccessToken.set_access_token(hash_token)
       team = Team.find_by(workspace_id: info.dig('team', 'id'))
       channel_id = team.share_channel_id if team.present?
       user = User.find_by(uid: info.dig('user', 'id'))
@@ -111,9 +111,6 @@ module Slack
       channel_id = general_channel.dig('id')
       text = 'プロフちゃんがインストールされました:hamster:'
       encoded_text = URI.encode_www_form_component(text)
-
-      binding.pry
-
       encoded_msg = Slack::BlockKitMessage.app_installed_msg
       Slack::ApiMethod.chat_post_message(access_token, channel_id, encoded_msg, encoded_text)
     end

@@ -46,8 +46,8 @@ module PostMessageModule
   end
 
   def set_access_token
-    raw_access_token = current_user.authentication.access_token
-    access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
+    hash_token = current_user.authentication.access_token
+    access_token = Slack::AccessToken.set_access_token(hash_token)
     access_token
   end
 

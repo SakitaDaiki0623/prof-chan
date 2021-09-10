@@ -5,8 +5,8 @@ module Slack
     skip_before_action :authenticate_user!
     skip_before_action :verify_authenticity_token
 
-    def set_access_token(raw_access_token)
-      access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
+    def set_access_token(hash_token)
+      access_token = Slack::AccessToken.set_access_token(hash_token)
       access_token
     end
 
@@ -94,6 +94,7 @@ module Slack
 
     def get_please_login_message
       text = ":warning: *Slackログインが必要です！！*:warning: \n Slashコマンドを利用するにはアプリでSlackログインをする必要があります。このワークスペースを指定して本サービスにSlackログインをするとSlashコマンドがご利用できます \n :arrow_right:   <https://www.prof-chan.com/agreement/|ログインページ>で今すぐログイン！"
+      text
     end
 
     def send_please_login_msg

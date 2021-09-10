@@ -44,8 +44,8 @@ namespace :blocks do
       token_test_result = ''
       access_token = ''
       team.users.each do |user|
-        raw_access_token = user.authentication.access_token
-        access_token = OmniAuth::Slack.build_access_token(ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'], raw_access_token)
+        hash_token = user.authentication.access_token
+        access_token = Slack::AccessToken.set_access_token(hash_token)
         token_test_result = access_token.post('api/auth.test').parsed
         break if token_test_result.dig('ok')
       end
