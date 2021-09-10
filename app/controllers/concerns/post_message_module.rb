@@ -59,6 +59,6 @@ module PostMessageModule
     channel_id = current_user.team.share_channel_id
     encoded_msg = ERB::Util.url_encode(msg)
     encoded_text = ERB::Util.url_encode(text)
-    access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
+    SlackApiMethod.chat_post_message(access_token, channel_id, encoded_msg, encoded_text)
   end
 end

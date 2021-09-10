@@ -7,12 +7,12 @@ module Slack
         if @user.nil?
           send_please_login_msg
         else
-          uid = @user.uid
+          user_id = @user.uid
           access_token = set_access_token(@user.authentication.access_token)
           text = 'ヘルプメッセージを送信しました:hamster:'
           encoded_text = ERB::Util.url_encode(text)
           encoded_msg = get_encoded_help_message
-          post_direct_message(encoded_text, encoded_msg, uid, access_token)
+          SlackApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
         end
       end
 
@@ -27,13 +27,13 @@ module Slack
           send_please_login_msg
         else
           block = pick_up_block(@user)
-          uid = @user.uid
+          user_id = @user.uid
           access_token = set_access_token(@user.authentication.access_token)
           if block.present?
             text = 'ランダムにブロックを送信:hamster:'
             encoded_text = ERB::Util.url_encode(text)
             encoded_msg = convert_block_msg(block)
-            post_direct_message(encoded_text, encoded_msg, uid, access_token)
+            SlackApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
           else
             text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
             encoded_text = ERB::Util.url_encode(text)
@@ -63,10 +63,6 @@ module Slack
         msg = convert_yes_or_no_msg(block) if block.class == YesOrNoBlock
         msg = convert_text_msg(block) if block.class == TextBlock
         msg
-      end
-
-      def post_direct_message(encoded_text, encoded_msg, channel_id, access_token)
-        access_token.post("api/chat.postMessage?channel=#{channel_id}&blocks=#{encoded_msg}&text=#{encoded_text}&pretty=1").parsed
       end
 
       def post_no_block(encoded_text, channel_id, access_token)
