@@ -13,13 +13,13 @@ class Slack::Settings::ShareController < Slack::ApplicationController
         text = "<#{@user.uid}>が毎日18時の投稿をONにしたよ:hamster:"
         encoded_text = ERB::Util.url_encode(text)
         encoded_msg = activate_msg(@user)
-        Slack::ApiMethod.chat_post_message(access_token, channel_id, encoded_msg, encoded_text)
+        Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: channel_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
       else
         text = '既に18時の投稿はONだよ:hamster:'
         user_id = @user.uid
         encoded_text = ERB::Util.url_encode(text)
         encoded_msg = already_activated_msg(@user)
-        Slack::ApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
+        Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: channel_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
       end
     end
   end
@@ -36,13 +36,13 @@ class Slack::Settings::ShareController < Slack::ApplicationController
         text = "<#{@user.uid}>が毎日18時の投稿をOFFにしたよ:hamster:"
         encoded_text = ERB::Util.url_encode(text)
         encoded_msg = deactivate_msg(@user)
-        Slack::ApiMethod.chat_post_message(access_token, channel_id, encoded_msg, encoded_text)
+        Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: channel_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
       else
         text = '既に18時の投稿はOFFだよ:hamster:'
         user_id = @user.uid
         encoded_text = ERB::Util.url_encode(text)
         encoded_msg = already_deactivated_msg(@user)
-        Slack::ApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
+        Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: channel_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
       end
     end
   end

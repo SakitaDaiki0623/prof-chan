@@ -11,15 +11,9 @@ module Slack
           access_token = set_access_token(@user.authentication.access_token)
           text = 'ヘルプメッセージを送信しました:hamster:'
           encoded_text = ERB::Util.url_encode(text)
-          encoded_msg = get_encoded_help_message
-          Slack::ApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
+          encoded_msg = Slack::BlockKitMessage.help_msg
+          Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: user_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
         end
-      end
-
-      def get_encoded_help_message
-        msg = '[ { "type": "section", "text": { "type": "mrkdwn", "text": ":hamster:プロフちゃんの使い方" } }, { "type": "divider" }, { "type": "section", "fields": [ { "type": "mrkdwn", "text": ":information_source: `/prof_help` \nDMでヘルプメッセージを送るよ" }, { "type": "mrkdwn", "text": ":postbox: `/prof_random_block` \n DMでランダムにブロックを1つ送るよ" } ] }, { "type": "section", "fields": [ { "type": "mrkdwn", "text": ":ok_hand: `/prof_activate_share` \n毎日18時の投稿を有効するよ" }, { "type": "mrkdwn", "text": ":raised_back_of_hand: `/prof_deactivate_share` \n 毎日18時の投稿を止めるよ" } ] } ]'
-        encoded_msg = encode_msg(msg)
-        encoded_msg
       end
 
       def random_block
@@ -33,7 +27,7 @@ module Slack
             text = 'ランダムにブロックを送信:hamster:'
             encoded_text = ERB::Util.url_encode(text)
             encoded_msg = convert_block_msg(block)
-            Slack::ApiMethod.chat_post_message(access_token, user_id, encoded_msg, encoded_text)
+            Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: channel_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
           else
             text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
             encoded_text = ERB::Util.url_encode(text)
@@ -41,6 +35,8 @@ module Slack
           end
         end
       end
+
+      private
 
       def pick_up_block(user)
         favorite_block = FavoriteBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: user.team.workspace_id }).where.not(users: { id: user.id }).sample
