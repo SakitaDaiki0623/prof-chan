@@ -2,7 +2,6 @@ module Api
   module V1
     class QuestionBlocksController < ApiController
       before_action :set_question_block, only: %i[update destroy]
-      include PostMessageModule
 
       def index
         @question_blocks = QuestionBlock.by_team(current_user)
@@ -60,7 +59,7 @@ module Api
       def post_to_slack_after_create
         @question_block_item_register = QuestionBlockItemRegister.new(set_params)
         if @question_block_item_register.valid?
-          post_questioin_block(@question_block_item_register)
+          post_question_block(@question_block_item_register)
           render json: @question_block_item_register, status: :no_content
         else
           render json: @question_block_item_register.errors, status: :bad_request
