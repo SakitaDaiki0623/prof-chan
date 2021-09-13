@@ -1,18 +1,18 @@
 module SlackActivatable
   def get_channel(user_identity:, hash_token:)
-    access_token = Slack::AccessToken.set_access_token(hash_token)
+    access_token = Slack::AccessToken.make_access_token(hash_token)
     team = Team.find_by(workspace_id: workspace_id_from(user_identity: user_identity))
     user = User.find_by(uid: uid_from(user_identity: user_identity))
     channel_id = team.share_channel_id if team.present?
     channels = Slack::ApiMethod.conversations_list(access_token)
     channel = get_same_id_channel(channels: channels, channel_id: channel_id)
-    return channel if check_all_presence(team, user, channel)
+    return channel if all_present?(team, user, channel)
 
-    channel = get_channel_by_either_method(user_identity: user_identity, channels: channels, access_token: access_token, channel: channel, user: user)
+    channel = get_channel_by_either_method(user_identity: user_identity, channels: channels, access_token: access_token, channel: channel)
     channel
   end
 
-  def check_all_presence(*args)
+  def all_present?(*args)
     expected_result = true
     args.each do |arg|
       if arg.blank?
@@ -45,19 +45,17 @@ module SlackActivatable
     user_identity.dig('team')
   end
 
-  # channel関係
-
   def get_general_channel(channels)
-    channel = channels.select { |channel| is_channel_general?(channel) }[0]
+    channel = channels.select { |c| channel_general?(c) }[0]
     channel
   end
 
-  def is_channel_general?(channel)
+  def channel_general?(channel)
     channel.dig('is_general')
   end
 
   def get_same_id_channel(channels:, channel_id:)
-    channel = channels.select { |channel| channel_id(channel) == channel_id }[0]
+    channel = channels.select { |c| channel_id(c) == channel_id }[0]
     channel
   end
 
@@ -66,7 +64,7 @@ module SlackActivatable
   end
 
   def get_same_name_channel(channels:, channel_name:)
-    channel = channels.select { |channel| channel_name(channel) == channel_name }[0]
+    channel = channels.select { |c| channel_name(c) == channel_name }[0]
     channel
   end
 
@@ -80,7 +78,7 @@ module SlackActivatable
 
   # =========================
 
-  def get_channel_by_either_method(user_identity:, channels:, access_token:, channel:, user:)
+  def get_channel_by_either_method(user_identity:, channels:, access_token:, channel:)
     if channel.nil?
       created_channel = create_channel_flow(user_identity: user_identity, channels: channels, access_token: access_token, general_channel: get_general_channel(channels))
       created_channel

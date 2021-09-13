@@ -7,12 +7,10 @@ module Slack
         if @user.nil?
           send_please_login_msg
         else
-          user_id = @user.uid
           access_token = set_access_token(@user.authentication.access_token)
           text = 'ヘルプメッセージを送信しました:hamster:'
-          encoded_text = ERB::Util.url_encode(text)
           encoded_msg = Slack::BlockKitMessage.help_msg
-          Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: user_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
+          Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: @user.uid, encoded_msg: encoded_msg, encoded_text: ERB::Util.url_encode(text))
         end
       end
 
@@ -21,7 +19,6 @@ module Slack
           send_please_login_msg
         else
           block = pick_up_block(@user)
-          user_id = @user.uid
           access_token = set_access_token(@user.authentication.access_token)
           if block.present?
             text = 'ランダムにブロックを送信:hamster:'
@@ -39,17 +36,18 @@ module Slack
       private
 
       def pick_up_block(user)
-        favorite_block = FavoriteBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: user.team.workspace_id }).where.not(users: { id: user.id }).sample
-        question_block = QuestionBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: user.team.workspace_id }).where.not(users: { id: user.id }).sample
-        ranking_block = RankingBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: user.team.workspace_id }).where.not(users: { id: user.id }).sample
-        yes_or_no_block = YesOrNoBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: user.team.workspace_id }).where.not(users: { id: user.id }).sample
-        text_block = TextBlock.all.includes(profile_block: { user: :team }).where(teams: { workspace_id: user.team.workspace_id }).where.not(users: { id: user.id }).sample
-        blocks = []
-        [favorite_block, question_block, ranking_block, yes_or_no_block, text_block].each do |block|
-          blocks.push(block) if block.present?
-        end
+        favorite_block = FavoriteBlock.random_other_user_block(user)
+        question_block = QuestionBlock.random_other_user_block(user)
+        ranking_block = RankingBlock.random_other_user_block(user)
+        yes_or_no_block = YesOrNoBlock.random_other_user_block(user)
+        text_block = TextBlock.random_other_user_block(user)
+        blocks = get_present_blocks(favorite_block, question_block, ranking_block, yes_or_no_block, text_block)
         block = blocks.sample
         block
+      end
+
+      def get_present_blocks(*blocks)
+        blocks.select(&:present?)
       end
 
       def convert_block_msg(block)

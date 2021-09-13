@@ -45,7 +45,7 @@ namespace :blocks do
       access_token = ''
       team.users.each do |user|
         hash_token = user.authentication.access_token
-        access_token = Slack::AccessToken.set_access_token(hash_token)
+        access_token = Slack::AccessToken.make_access_token(hash_token)
         token_test_result = access_token.post('api/auth.test').parsed
         break if token_test_result.dig('ok')
       end

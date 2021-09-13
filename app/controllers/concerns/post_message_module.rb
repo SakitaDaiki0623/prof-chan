@@ -1,26 +1,14 @@
 module PostMessageModule
   def post_question_block(register)
     text = "<@#{current_user.uid}>さんがクエスチョンブロックを作成したよ:hamster:\n :star2:*#{register.question_title}*:star2:"
-    post_text = if register.question_item_content3.present? && register.question_item_answer3.present?
-                  " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}*\n"
-                elsif register.question_item_content2.present? && register.question_item_answer2.present?
-                  " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*"
-                else
-                  " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*"
-                end
+    post_text = get_question_post_text(register)
     msg = Slack::BlockKitMessage.question_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)
     post_block(text, msg)
   end
 
   def post_yes_or_no_block(register)
     text = "<@#{current_user.uid}>さんがYes or No ブロックを作成したよ:hamster:\n :star2:*#{register.yes_or_no_title}* :star2:"
-    post_text = if register.yes_or_no_item_content3.present?
-                  " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
-                elsif register.yes_or_no_item_content2.present?
-                  " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
-                else
-                  " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
-                end
+    post_text = get_yes_or_no_post_text(register)
     msg = Slack::BlockKitMessage.yes_or_no_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)
     post_block(text, msg)
   end
@@ -43,7 +31,7 @@ module PostMessageModule
 
   def set_access_token
     hash_token = current_user.authentication.access_token
-    access_token = Slack::AccessToken.set_access_token(hash_token)
+    access_token = Slack::AccessToken.make_access_token(hash_token)
     access_token
   end
 
@@ -57,5 +45,25 @@ module PostMessageModule
 
   def user_profile_link
     ":hamster:<https://www.prof-chan.com/profiles/#{current_user.profile.public_uid}/|#{current_user.name}さんのプロフページ>:hamster:"
+  end
+
+  def get_question_post_text(register)
+    if register.question_item_content3.present? && register.question_item_answer3.present?
+      " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*\n#{register.question_item_content3}\n :arrow_right:* #{register.question_item_answer3}*\n"
+    elsif register.question_item_content2.present? && register.question_item_answer2.present?
+      " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*\n #{register.question_item_content2}\n :arrow_right:* #{register.question_item_answer2}*"
+    else
+      " #{register.question_item_content1}\n :arrow_right:* #{register.question_item_answer1}*"
+    end
+  end
+
+  def get_yes_or_no_post_text(register)
+    if register.yes_or_no_item_content3.present?
+      " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*\n#{register.yes_or_no_item_content3}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer3)}*\n"
+    elsif register.yes_or_no_item_content2.present?
+      " #{register.yes_or_no_item_content1}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer1)}*\n #{register.yes_or_no_item_content2}\n :arrow_right:* #{translate_boolean(register.yes_or_no_item_answer2)}*"
+    else
+      " #{register.yes_or_no_item_content1}\n :arrow_right: *#{translate_boolean(register.yes_or_no_item_answer1)}*"
+    end
   end
 end

@@ -1,6 +1,5 @@
 module Slack
   class BlockKitMessage
-
     # Slack_login ========================
     def self.welcome_msg(user_identity)
       user_id = user_identity.dig('user', 'id')
@@ -29,8 +28,8 @@ module Slack
 
     # Post_to_slack ========================
     def self.question_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)
-    msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
-    encode_string(msg)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+      encode_string(msg)
     end
 
     def self.yes_or_no_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)

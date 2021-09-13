@@ -6,7 +6,7 @@ module Slack
     skip_before_action :verify_authenticity_token
 
     def set_access_token(hash_token)
-      access_token = Slack::AccessToken.set_access_token(hash_token)
+      access_token = Slack::AccessToken.make_access_token(hash_token)
       access_token
     end
 

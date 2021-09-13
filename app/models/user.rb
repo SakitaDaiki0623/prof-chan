@@ -52,7 +52,7 @@ class User < ApplicationRecord
     find_or_create_by(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = 'ゲストユーザー'
-      user.image = File.open(File.join(Rails.root, 'app/assets/images/prof_normal.png'))
+      user.image = File.open(Rails.root.join('app/assets/images/prof_normal.png'))
     end
   end
 
