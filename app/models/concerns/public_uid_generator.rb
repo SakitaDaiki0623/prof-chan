@@ -1,7 +1,7 @@
 module PublicUidGenerator
 
-  def self.included(uuid)
-    uuid.before_create :generate_public_uid
+  def self.included(profile)
+    profile.before_create :generate_public_uid
   end
 
   def generate_public_uid
