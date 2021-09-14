@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include SlackActivatable
+
   after_create do
     create_profile_block if profile_block.blank?
     create_share_right if share_right.blank?
@@ -50,7 +52,7 @@ class User < ApplicationRecord
     find_or_create_by(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = 'ゲストユーザー'
-      user.image = File.open(File.join(Rails.root, 'app/assets/images/prof_normal.png'))
+      user.image = File.open(Rails.root.join('app/assets/images/prof_normal.png'))
     end
   end
 
@@ -66,13 +68,16 @@ class User < ApplicationRecord
     self.team = default_team
   end
 
-  def self.from_omniauth(auth, user_info, hash_token, channel)
+  def self.from_omniauth(auth, bot_token)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.info.authed_user.id)
+    hash_token = bot_token.to_hash
+    user_identity = Slack::ApiMethod.users_identity(bot_token)
+    channel = user.get_channel(user_identity: user_identity, hash_token: hash_token)
     user.password = Devise.friendly_token[0, 20]
-    user.name = user_info.dig('user', 'name')
-    user.remote_image_url = user_info.dig('user', 'image_192')
+    user.name = user.user_name_from(user_identity: user_identity)
+    user.remote_image_url = user.user_image_from(user_identity: user_identity)
     user.check_authentication_existence(hash_token)
-    user.check_team_existence(user_info.dig('team'), channel)
+    user.check_team_existence(user.team_from(user_identity: user_identity), channel)
     user.save!
     user
   end

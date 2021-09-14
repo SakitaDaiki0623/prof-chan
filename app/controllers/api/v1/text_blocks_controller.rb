@@ -2,7 +2,6 @@ module Api
   module V1
     class TextBlocksController < ApiController
       before_action :set_text_block, only: %i[update destroy]
-      include PostMessageModule
 
       def index
         @text_blocks = TextBlock.by_team(current_user)

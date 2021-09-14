@@ -2,7 +2,6 @@ module Api
   module V1
     class YesOrNoBlocksController < ApiController
       before_action :set_yes_or_no_block, only: %i[update destroy]
-      include PostMessageModule
 
       def index
         @yes_or_no_blocks = YesOrNoBlock.by_team(current_user)
