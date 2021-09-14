@@ -1,4 +1,5 @@
 class Profile < ApplicationRecord
+
   belongs_to :user
 
   enum gender: { male: 0, female: 1 }
@@ -22,8 +23,6 @@ class Profile < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
-
-  generate_public_uid generator: PublicUid::Generators::HexStringSecureRandom.new(10)
 
   def to_param
     public_uid
