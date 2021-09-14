@@ -1,4 +1,5 @@
 class Profile < ApplicationRecord
+  include PublicUidGenerator
 
   belongs_to :user
 
