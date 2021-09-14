@@ -185,7 +185,6 @@ GEM
     fog-xml (0.1.3)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
-    foreman (0.87.2)
     formatador (0.2.5)
     ginjo-omniauth-slack (2.5.0)
       omniauth-oauth2 (>= 1.4.0)
@@ -530,7 +529,6 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fog-aws
-  foreman
   ginjo-omniauth-slack
   html2slim
   jbuilder (~> 2.7)
