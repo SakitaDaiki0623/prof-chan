@@ -28,27 +28,27 @@ module Slack
 
     # Post_to_slack ========================
     def self.favorite_block_msg_when_post_to_slack(text, block, user, user_profile_link)
-      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' },  { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' },  { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
       encode_string(msg)
     end
 
-    def self.question_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)
-      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+    def self.question_block_msg_when_post_to_slack(text, post_text, user, user_profile_link)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
       encode_string(msg)
     end
 
-    def self.yes_or_no_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)
-      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+    def self.yes_or_no_block_msg_when_post_to_slack(text, post_text, user, user_profile_link)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
       encode_string(msg)
     end
 
-    def self.ranking_block_msg_when_post_to_slack(text, block, current_user, user_profile_link)
-      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+    def self.ranking_block_msg_when_post_to_slack(text, block, user, user_profile_link)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': ':first_place_medal: #{block.first_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:second_place_medal: #{block.second_place}\n- - - - - - - - - - - - - - - - - - - - - -\n:third_place_medal: #{block.third_place}' }, 'accessory': { 'type': 'image', 'image_url': '#{user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
       encode_string(msg)
     end
 
-    def self.text_block_msg_when_post_to_slack(text, block, current_user, user_profile_link)
-      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+    def self.text_block_msg_when_post_to_slack(text, block, user, user_profile_link)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
       encode_string(msg)
     end
 
