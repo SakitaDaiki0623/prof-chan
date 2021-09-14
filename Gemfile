@@ -5,7 +5,6 @@ ruby '2.7.3'
 
 gem 'rails', '6.0.3.5'
 
-
 # Assets
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
@@ -47,7 +46,6 @@ gem 'redis-rails'
 # Model
 gem 'enum_help'
 gem 'active_hash'
-gem 'public_uid'
 
 # UI/UX
 gem 'rails-i18n'
