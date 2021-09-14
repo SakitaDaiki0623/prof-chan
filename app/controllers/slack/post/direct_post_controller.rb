@@ -7,10 +7,7 @@ module Slack
         if @user.nil?
           send_please_login_msg
         else
-          access_token = set_access_token(@user.authentication.access_token)
-          text = 'ヘルプメッセージを送信しました:hamster:'
-          encoded_msg = Slack::BlockKitMessage.help_msg
-          Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: @user.uid, encoded_msg: encoded_msg, encoded_text: ERB::Util.url_encode(text))
+          Slack::SlashCommand::Help.post_help_msg(@user)
         end
       end
 
@@ -18,50 +15,11 @@ module Slack
         if @user.nil?
           send_please_login_msg
         else
-          block = pick_up_block(@user)
-          access_token = set_access_token(@user.authentication.access_token)
-          if block.present?
-            text = 'ランダムにブロックを送信:hamster:'
-            encoded_text = ERB::Util.url_encode(text)
-            encoded_msg = convert_block_msg(block)
-            Slack::ApiMethod.chat_post_message(access_token: access_token, channel_id: channel_id, encoded_msg: encoded_msg, encoded_text: encoded_text)
-          else
-            text = "あなた以外のプロフィールに作成されたブロック（favoriteブロック、クエスチョンブロック、ランキングブロック、Yes or No ブロックブロック、テキストブロック）が1つもないよ、、、:cry: \n 他の社員にもっとブロックを作成してもらえるように頼んでみよう！:hamster:"
-            encoded_text = ERB::Util.url_encode(text)
-            post_no_block(encoded_text, uid, access_token)
-          end
+          Slack::SlashCommand::RandomBlock.post_random_block(@user)
         end
       end
 
       private
-
-      def pick_up_block(user)
-        favorite_block = FavoriteBlock.random_other_user_block(user)
-        question_block = QuestionBlock.random_other_user_block(user)
-        ranking_block = RankingBlock.random_other_user_block(user)
-        yes_or_no_block = YesOrNoBlock.random_other_user_block(user)
-        text_block = TextBlock.random_other_user_block(user)
-        blocks = get_present_blocks(favorite_block, question_block, ranking_block, yes_or_no_block, text_block)
-        block = blocks.sample
-        block
-      end
-
-      def get_present_blocks(*blocks)
-        blocks.select(&:present?)
-      end
-
-      def convert_block_msg(block)
-        msg = convert_favorite_msg(block) if block.class == FavoriteBlock
-        msg = convert_question_msg(block) if block.class == QuestionBlock
-        msg = convert_ranking_msg(block) if block.class == RankingBlock
-        msg = convert_yes_or_no_msg(block) if block.class == YesOrNoBlock
-        msg = convert_text_msg(block) if block.class == TextBlock
-        msg
-      end
-
-      def post_no_block(encoded_text, channel_id, access_token)
-        access_token.post("api/chat.postMessage?channel=#{channel_id}&text=#{encoded_text}&pretty=1").parsed
-      end
 
       def set_user
         @user = User.find_by(uid: params[:user_id])

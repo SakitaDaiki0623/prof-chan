@@ -27,6 +27,11 @@ module Slack
     end
 
     # Post_to_slack ========================
+    def self.favorite_block_msg_when_post_to_slack(text, block, user, user_profile_link)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{block.profile_block.user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' },  { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+      encode_string(msg)
+    end
+
     def self.question_block_msg_when_post_to_slack(text, post_text, current_user, user_profile_link)
       msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{post_text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
       encode_string(msg)
@@ -44,6 +49,27 @@ module Slack
 
     def self.text_block_msg_when_post_to_slack(text, block, current_user, user_profile_link)
       msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{text}' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{block.text}' }, 'accessory': { 'type': 'image', 'image_url': '#{current_user.image}', 'alt_text': 'computer thumbnail' } }, { 'type': 'divider' }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '#{user_profile_link}' } }, { 'type': 'divider' } ]"
+      encode_string(msg)
+    end
+
+    # Share Right ==============================
+    def self.activate_msg(user)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}>が毎日18時の投稿をONにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を停止する時は `/prof_deactivate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+      encode_string(msg)
+    end
+
+    def self.already_activated_msg(user)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}> \n  `/prof_activate_share` が実行されましたが既に18時の投稿はONになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+      encode_string(msg)
+    end
+
+    def self.deactivate_msg(user)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}>が毎日18時の投稿をOFFにしたよ:hamster:' } }, { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '投稿機能を元に戻す時は `/prof_activate_share` コマンドを使用してね' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
+      encode_string(msg)
+    end
+
+    def self.already_deactivated_msg(user)
+      msg = "[ { 'type': 'section', 'text': { 'type': 'mrkdwn', 'text': '<@#{user.uid}> \n  `/prof_deactivate_share` が実行されましたが既に18時の投稿はOFFになっています。:hamster:' } }, { 'type': 'divider' }, { 'type': 'divider' } ]"
       encode_string(msg)
     end
 
